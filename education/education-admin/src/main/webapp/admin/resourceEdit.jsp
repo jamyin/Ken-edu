@@ -65,7 +65,7 @@
 					<td><input name="name" type="text" placeholder="请输入菜单名称" class="easyui-validatebox span2" data-options="required:true" value="${menuDto.name}"></td>
 				    <th >所属导航</th>
 				    <td><select id="tabType" name="tabType" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:55" >
-					 	    <option value="1" <c:if test="${1 == menuDto.tabType}">selected="selected"</c:if> >赛事流程菜单</option>
+					 	    <option value="1" <c:if test="${1 == menuDto.tabType}">selected="selected"</c:if> >教委菜单</option>
 						    <option value="0" <c:if test="${0 == menuDto.tabType}">selected="selected"</c:if> >系统菜单</option>
 					   </select></td>
 				</tr>
