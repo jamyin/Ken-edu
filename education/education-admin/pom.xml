@@ -104,9 +104,9 @@
               <groupId>org.aspectj</groupId>
               <artifactId>aspectjweaver</artifactId>
           </dependency>
-          <dependency>
+         <dependency>
             <groupId>com.ssic</groupId>
-		    <artifactId>game-common</artifactId>
+		    <artifactId>education-common</artifactId>
 		    <version>0.0.1-SNAPSHOT</version>     
          </dependency>   
          <!-- liubo项目文件 -->   
@@ -178,7 +178,7 @@
         
   	</dependencies>
  		<build>
-		    <finalName>game-admin</finalName>
+		    <finalName>education-admin</finalName>
 	         <resources>
 				<resource>
 					<directory>src/main/java</directory>
