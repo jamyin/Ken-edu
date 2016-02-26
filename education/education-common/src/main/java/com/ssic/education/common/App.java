@@ -1,4 +1,4 @@
-package org.education.common;
+package com.ssic.education.common;
 
 /**
  * Hello world!
