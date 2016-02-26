@@ -36,35 +36,9 @@
 	
 	
 
+
 	
-	jQuery.ajax({
-		url:'${pageContext.request.contextPath}/ProjectController/findAll',
-		type:'POST',
-		dataType:'json',
-		async:false,
-		success:function(data){
-			var myObject =data;
-			//var a= "<option value=\'-1\'>请选择</option>";
-			var a='';
-            for (var i = 0; i < myObject.length; i++) {
-				 a+="<option value=\'"+myObject[i].id+"\'>"+myObject[i].projName+"</option>";
-				 console.log(a);
-            }
-            $("#projId").html(a);
-		}
-	});
-	
-	//级联下拉框
-	$("#projId").combobox({
-        onSelect:function(n,o){
-        	$("#depts").combobox('reload',"${pageContext.request.contextPath}/projectUsersController/findAll?projId="+n.value);
-        	$("#depts").combobox("setValue",'请选择部门ID');
-        }
-     });
-	$('#depts').combobox({  
-	    valueField:'id',  
-	    textField:'deptId'  
-	})  
+
 	
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
