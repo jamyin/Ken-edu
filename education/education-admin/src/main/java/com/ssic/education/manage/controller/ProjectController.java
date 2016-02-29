@@ -40,7 +40,7 @@ public class ProjectController
     @RequestMapping("/manager")
     public String manager()
     {
-        return "education/project";
+        return "education/project/project";
         //return "education/projectTest";
     }
 
@@ -48,7 +48,7 @@ public class ProjectController
     public String addPage(HttpServletRequest request)
     {
 
-        return "education/projectAdd";
+        return "education/project/projectAdd";
     }
 
     @RequestMapping("/editProject")
@@ -64,7 +64,7 @@ public class ProjectController
         }
         request.setAttribute("pDto", pDto);
 
-        return "education/projectEdit";
+        return "education/project/projectEdit";
     }
 
     @ResponseBody
@@ -203,7 +203,7 @@ public class ProjectController
             //	            u.setUserIds(userPer);
             request.setAttribute("role", u);
         }
-        return "education/ProjectGrant";
+        return "education/project/ProjectGrant";
     }*/
 
  /*   *//**

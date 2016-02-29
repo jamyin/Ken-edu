@@ -5,7 +5,7 @@
 <html>
 <head>
 <title>项目管理</title>
-<jsp:include page="../inc.jsp"></jsp:include>
+<jsp:include page="../../inc.jsp"></jsp:include>
 	<c:if 
 	    test="${fn:contains(sessionInfo.resourceList, '/projectController/addPage')}">
 			<script type="text/javascript">
