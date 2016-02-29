@@ -208,7 +208,7 @@
 					    
 						<th>项目名称</th>
 						<td><input name="projName" placeholder="可以查询项目名称" class="span2" style="width:279px;"/></td>
-						<th>描述</th>
+						<th>项目描述</th>
 						<td><input name="describes" placeholder="可以查询描述" class="span2" style="width:279px;"/></td>
 					</tr>
 				</table>

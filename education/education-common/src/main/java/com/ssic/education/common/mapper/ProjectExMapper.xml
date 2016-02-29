@@ -58,10 +58,10 @@
 			and id = #{project.id}
 		</if>
 		<if test="project.projName!=null and project.projName!=''">
-			and proj_name = #{project.projName}
+			and proj_name like '%' #{project.projName} '%'
 		</if>
 		<if test="project.describes!= null and project.describes!='' ">
-		    and describes = #{project.describes}
+		    and describes like '%' #{project.describes} '%'
 		</if>
 	</sql>
 
