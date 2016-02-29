@@ -4,13 +4,13 @@
 <script type="text/javascript">
 	var layout_west_tree;
 	var layout_west_tree_url = '';
-	var layout_west_race_tree;
-	var layout_west_race_tree_url = '';
+	var layout_west_education_tree;
+	var layout_west_education_tree_url = '';
 	var sessionInfo_userId = '${sessionInfo.id}';
 	if (sessionInfo_userId) {
 
 		layout_west_tree_url = '${pageContext.request.contextPath}/resourceController/tree?tabType=0';
-		layout_west_race_tree_url = '${pageContext.request.contextPath}/resourceController/tabTree?tabType=1';
+		layout_west_education_tree_url = '${pageContext.request.contextPath}/resourceController/tabTree?tabType=1';
 
 	}
 	$(function() {
@@ -55,9 +55,9 @@
 				});
 
 		//赛事树
-		layout_west_race_tree = $('#layout_west_race_tree').tree(
+		layout_west_education_tree = $('#layout_west_education_tree').tree(
 				{
-					url : layout_west_race_tree_url,
+					url : layout_west_education_tree_url,
 					parentField : 'pid',
 					//lines : true,
 					onClick : function(node) {
@@ -156,31 +156,31 @@
 		data-options="border:false,isonCls:'anchor',tools : [ {
 				iconCls : 'database_refresh',
 				handler : function() {
-					$('#layout_west_race_tree').tree('reload');
+					$('#layout_west_education_tree').tree('reload');
 				}
 			}, {
 				iconCls : 'resultset_next',
 				handler : function() {
-					var node = $('layout_west_race_tree').tree('getSelected');
+					var node = $('#layout_west_education_tree').tree('getSelected');
 					if (node) {
-						$('layout_west_race_tree').tree('expandAll', node.target);
+						$('#layout_west_education_tree').tree('expandAll', node.target);
 					} else {
-						$('layout_west_race_tree').tree('expandAll');
+						$('#layout_west_education_tree').tree('expandAll');
 					}
 				}
 			}, {
 				iconCls : 'resultset_previous',
 				handler : function() {
-					var node = $('layout_west_race_tree').tree('getSelected');
+					var node = $('#layout_west_education_tree').tree('getSelected');
 					if (node) {
-						$('layout_west_race_tree').tree('collapseAll', node.target);
+						$('#layout_west_education_tree').tree('collapseAll', node.target);
 					} else {
-						$('layout_west_race_tree').tree('collapseAll');
+						$('#layout_west_education_tree').tree('collapseAll');
 					}
 				}
 			} ]">
 		<div class="well well-small">
-			<ul id="layout_west_race_tree"></ul>
+			<ul id="layout_west_education_tree"></ul>
 		</div>
 	</div>
 </div>

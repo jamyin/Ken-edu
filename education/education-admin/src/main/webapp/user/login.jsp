@@ -127,8 +127,8 @@
 														}
 													});
 										}
-										if (!layout_west_race_tree_url) {
-											layout_west_race_tree
+										if (!layout_west_education_tree_url) {
+											layout_west_education_tree
 													.tree({
 														url : '${pageContext.request.contextPath}/resourceController/tabTree?tabType=1',
 														onBeforeLoad : function(
