@@ -9,94 +9,90 @@
 	var sessionInfo_userId = '${sessionInfo.id}';
 	if (sessionInfo_userId) {
 
-		layout_west_tree_url = '${pageContext.request.contextPath}/resourceController/tree?tabType=0';
-		layout_west_education_tree_url = '${pageContext.request.contextPath}/resourceController/tabTree?tabType=1';
+		layout_west_tree_url = '${pageContext.request.contextPath}/resourceController/tabTree?tabName=系统管理';
+		//layout_west_education_tree_url = '${pageContext.request.contextPath}/resourceController/tabTree?tabType=1';
 
 	}
 	$(function() {
-		layout_west_tree = $('#layout_west_tree').tree(
-				{
-					url : layout_west_tree_url,
-					parentField : 'pid',
-					//lines : true,
-					onClick : function(node) {
-						if (node.attributes && node.attributes.url) {
-							var url;
-							if (node.attributes.url.indexOf('/') == 0) {/*如果url第一位字符是"/"，那么代表打开的是本地的资源*/
-								url = '${pageContext.request.contextPath}'
-										+ node.attributes.url;
-								if (url.indexOf('/druidController') == -1) {/*如果不是druid相关的控制器连接，那么进行遮罩层屏蔽*/
-									parent.$.messager.progress({
-										title : '提示',
-										text : '数据处理中，请稍后....'
-									});
-								}
-							} else {/*打开跨域资源*/
-								url = node.attributes.url;
-							}
-							addTab({
-								url : url,
-								title : node.text,
-								iconCls : node.iconCls
-							});
-						}
-					},
-					onBeforeLoad : function(node, param) {
-						if (layout_west_tree_url) {//只有刷新页面才会执行这个方法
-							parent.$.messager.progress({
-								title : '提示',
-								text : '数据处理中，请稍后....'
-							});
-						}
-					},
-					onLoadSuccess : function(node, data) {
-						parent.$.messager.progress('close');
-					}
-				});
+		
+		   $.ajax({  
+	            type: 'POST',
+	            dataType: "json",
+	            url:'${pageContext.request.contextPath}/resourceController/getAccordionList',
+	            success: function(data){
+	                $.each(data,function(i,n){
+	                    $('#left_accordion').accordion('add',{
+	                        title: n.tabName,
+	                        selected: true,
+	                        collapsible:true,
+	                        content:'<div style="padding:10px" class="well well-small"><ul name="'+n.tabName+'"></ul></div>',
+	                    });
+	                    
+	                    
+	                });
+	                
+	                $('#left_accordion').accordion({
+	    	            onSelect: function(title,index){
+	    	            	    loadTree(title);
+	    	            }
+	    	        }); 
+	                
+	                var pp = $('#left_accordion').accordion('getSelected'); // 获取选择的面板 
+	                if (pp){    
+	                	var index = $('#left_accordion').accordion('getPanelIndex', pp);
+						$('#left_accordion').accordion('unselect', index);
 
-		//赛事树
-		layout_west_education_tree = $('#layout_west_education_tree').tree(
-				{
-					url : layout_west_education_tree_url,
-					parentField : 'pid',
-					//lines : true,
-					onClick : function(node) {
-						if (node.attributes && node.attributes.url) {
-							var url;
-							if (node.attributes.url.indexOf('/') == 0) {/*如果url第一位字符是"/"，那么代表打开的是本地的资源*/
-								url = '${pageContext.request.contextPath}'
-										+ node.attributes.url;
-								if (url.indexOf('/druidController') == -1) {/*如果不是druid相关的控制器连接，那么进行遮罩层屏蔽*/
-									parent.$.messager.progress({
-										title : '提示',
-										text : '数据处理中，请稍后....'
-									});
-								}
-							} else {/*打开跨域资源*/
-								url = node.attributes.url;
-							}
-							addTab({
-								url : url,
-								title : node.text,
-								iconCls : node.iconCls
-							});
-						}
-					},
-					onBeforeLoad : function(node, param) {
-						if (layout_west_tree_url) {//只有刷新页面才会执行这个方法
-							parent.$.messager.progress({
-								title : '提示',
-								text : '数据处理中，请稍后....'
-							});
-						}
-					},
-					onLoadSuccess : function(node, data) {
-						parent.$.messager.progress('close');
-					}
-				});
+	                }
+	            }
+	        }); 
+		 
+		 
+		
 
 	});
 
+	function loadTree(title){
+	  
+        $("ul[name='"+title+"']").tree({
+        	parentField : 'pid',
+            url: '${pageContext.request.contextPath}/resourceController/tabTree?tabName='+title,
+            onClick : function(node) {
+            	
+				if (node.attributes && node.attributes.url) {
+					var url;
+					if (node.attributes.url.indexOf('/') == 0) {/*如果url第一位字符是"/"，那么代表打开的是本地的资源*/
+						url = '${pageContext.request.contextPath}'
+								+ node.attributes.url;
+						if (url.indexOf('/druidController') == -1) {/*如果不是druid相关的控制器连接，那么进行遮罩层屏蔽*/
+							parent.$.messager.progress({
+								title : '提示',
+								text : '数据处理中，请稍后....'
+							});
+						}
+					} else {/*打开跨域资源*/
+						url = node.attributes.url;
+					}
+					addTab({
+						url : url,
+						title : node.text,
+						iconCls : node.iconCls
+					});
+				}
+			},
+			onBeforeLoad : function(node, param) {
+				//只有刷新页面才会执行这个方法
+					parent.$.messager.progress({
+						title : '提示',
+						text : '数据处理中，请稍后....'
+					});
+				
+			},
+			onLoadSuccess : function(node, data) {
+				parent.$.messager.progress('close');
+			}
+        });
+	}
+	
 	function addTab(params) {
 		var iframe = '<iframe src="'
 				+ params.url
@@ -118,9 +114,9 @@
 		}
 	}
 </script>
-<div class="easyui-accordion" data-options="fit:true,border:false">
+<div class="easyui-accordion" id="left_accordion" data-options="fit:true,border:false">
 
-	<div title="系统菜单" style="padding: 5px;"
+<!-- 	<div title="系统菜单" style="padding: 5px;"
 		data-options="border:false,isonCls:'anchor',tools : [ {
 				iconCls : 'database_refresh',
 				handler : function() {
@@ -150,37 +146,6 @@
 		<div class="well well-small">
 			<ul id="layout_west_tree"></ul>
 		</div>
-	</div>
-	
-		<div title="教委菜单" style="padding: 5px;"
-		data-options="border:false,isonCls:'anchor',tools : [ {
-				iconCls : 'database_refresh',
-				handler : function() {
-					$('#layout_west_education_tree').tree('reload');
-				}
-			}, {
-				iconCls : 'resultset_next',
-				handler : function() {
-					var node = $('#layout_west_education_tree').tree('getSelected');
-					if (node) {
-						$('#layout_west_education_tree').tree('expandAll', node.target);
-					} else {
-						$('#layout_west_education_tree').tree('expandAll');
-					}
-				}
-			}, {
-				iconCls : 'resultset_previous',
-				handler : function() {
-					var node = $('#layout_west_education_tree').tree('getSelected');
-					if (node) {
-						$('#layout_west_education_tree').tree('collapseAll', node.target);
-					} else {
-						$('#layout_west_education_tree').tree('collapseAll');
-					}
-				}
-			} ]">
-		<div class="well well-small">
-			<ul id="layout_west_education_tree"></ul>
-		</div>
-	</div>
+	</div> -->
+
 </div>

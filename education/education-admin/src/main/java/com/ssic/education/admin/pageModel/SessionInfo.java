@@ -16,6 +16,8 @@ public class SessionInfo implements java.io.Serializable {
 	private String userAccount;//用户账号
 	private String password;//密码
 	private String tabType;//tab页面类型
+	private String tabId;//tab页面名称
+	private String tabName;//tab页面名称
 
 	private List<String> resourceList;// 用户可以访问的资源地址列表
 
@@ -81,6 +83,25 @@ public class SessionInfo implements java.io.Serializable {
     {
         this.tabType = tabType;
     }
+
+	public String getTabId() {
+		return tabId;
+	}
+
+	public void setTabId(String tabId) {
+		this.tabId = tabId;
+	}
+
+	public String getTabName() {
+		return tabName;
+	}
+
+	public void setTabName(String tabName) {
+		this.tabName = tabName;
+	}
+
+	
+
 
 	
 	

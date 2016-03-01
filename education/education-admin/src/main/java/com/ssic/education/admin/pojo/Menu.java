@@ -6,38 +6,37 @@ import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 
-
 public class Menu implements Serializable {
 
 	@Getter
-    @Setter
+	@Setter
 	private String id;
 	@Getter
-    @Setter
+	@Setter
 	private Date createTime;
 	@Getter
-    @Setter
+	@Setter
 	private String icon;
 	@Getter
 	@Setter
 	private Integer isRight;
 	@Getter
-    @Setter
+	@Setter
 	private String name;
 	@Getter
-    @Setter
+	@Setter
 	private Integer no;
 	@Getter
 	@Setter
 	private String pjNo;
 	@Getter
-    @Setter
+	@Setter
 	private String remark;
 	@Getter
-    @Setter
+	@Setter
 	private Integer seq;
 	@Getter
-    @Setter
+	@Setter
 	private String url;
 	@Getter
 	@Setter
@@ -49,8 +48,13 @@ public class Menu implements Serializable {
 	@Setter
 	private Integer stat;
 	@Getter
-    @Setter
-    private Integer tabType;
- 
-   
+	@Setter
+	private Integer tabType;
+	@Getter
+	@Setter
+	private String tabId;
+	@Getter
+	@Setter
+	private String tabName;
+
 }

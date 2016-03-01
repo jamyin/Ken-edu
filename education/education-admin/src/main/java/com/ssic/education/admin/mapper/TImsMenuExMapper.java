@@ -21,15 +21,11 @@ public interface TImsMenuExMapper {
 
 	void updateMenu(@Param("menu") Menu menu);
 
-    
-    /**     
-     * findByRoleIdList：一句话描述方法功能
-     * @param roles
-     * @return
-     * @exception	
-     * @author Administrator
-     * @date 2015年7月31日 下午5:56:59	 
-     */
-    List<Menu> findByUserId(@Param("userId")String userId);
+	
+	List<Menu> findByUserId(@Param("userId") String userId);
+
+	List<Menu> findByUserIdAndTabId(@Param("userId") String userId, @Param("tabId") String tabId);
+
+
 
 }

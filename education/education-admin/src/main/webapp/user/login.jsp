@@ -96,7 +96,7 @@
 		 }); */
 	});
 	function loginFun() {
-		if (layout_west_tree) {//当west功能菜单树加载成功后再执行登录
+		//当west功能菜单树加载成功后再执行登录
 
 			loginTabs = $('#loginTabs').tabs('getSelected');//当前选中的tab
 			var form = loginTabs.find('form');//选中的tab里面的form
@@ -113,34 +113,7 @@
 								form.serialize(),
 								function(result) {
 									if (result.success) {
-										if (!layout_west_tree_url) {
-											layout_west_tree
-													.tree({
-														url : '${pageContext.request.contextPath}/resourceController/tree',
-														onBeforeLoad : function(
-																node, param) {
-															parent.$.messager
-																	.progress({
-																		title : '提示',
-																		text : '数据处理中，请稍后....'
-																	});
-														}
-													});
-										}
-										if (!layout_west_education_tree_url) {
-											layout_west_education_tree
-													.tree({
-														url : '${pageContext.request.contextPath}/resourceController/tabTree?tabType=1',
-														onBeforeLoad : function(
-																node, param) {
-															parent.$.messager
-																	.progress({
-																		title : '提示',
-																		text : '数据处理中，请稍后....'
-																	});
-														}
-													});
-										}
+								
 								/* 	if(!layout_west_virus_url){
 											layout_west_virus_url = ' ${pageContext.request.contextPath}/virusController/manager';
 										}
@@ -163,7 +136,7 @@
 									parent.$.messager.progress('close');
 								}, "JSON");
 			}
-		}
+		
 	}
 </script>
 <div id="loginDialog" title="用户登录"

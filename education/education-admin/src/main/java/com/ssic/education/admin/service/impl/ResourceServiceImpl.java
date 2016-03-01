@@ -10,18 +10,19 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssic.education.admin.dao.AdminTabDao;
 import com.ssic.education.admin.dao.ResourceDao;
 import com.ssic.education.admin.dao.ResourceTypeDao;
 import com.ssic.education.admin.dao.TImsMenuDao;
 import com.ssic.education.admin.dao.TImsMenuTypeDao;
 import com.ssic.education.admin.dao.UserDao;
+import com.ssic.education.admin.dto.AdminTabDto;
 import com.ssic.education.admin.dto.TImsMenuDto;
 import com.ssic.education.admin.model.Tresource;
 import com.ssic.education.admin.pageModel.Resource;
 import com.ssic.education.admin.pageModel.SessionInfo;
 import com.ssic.education.admin.pageModel.Tree;
 import com.ssic.education.admin.service.ResourceServiceI;
-
 
 @Service
 public class ResourceServiceImpl implements ResourceServiceI {
@@ -35,24 +36,24 @@ public class ResourceServiceImpl implements ResourceServiceI {
 	@Autowired
 	private UserDao userDao;
 
-	
 	@Autowired
 	private TImsMenuDao menuDao;
 	@Autowired
 	private TImsMenuTypeDao menuTypeDao;
-	
+	@Autowired
+	private AdminTabDao adminTabDao;
+
 	public List<Tree> tree(SessionInfo sessionInfo) {
-	
+
 		List<Tree> lt = new ArrayList<Tree>();
 
-		List<TImsMenuDto> menuDtoList=	menuDao.treeGrid(sessionInfo);
+		List<TImsMenuDto> menuDtoList = menuDao.treeGrid(sessionInfo);
 
 		if (menuDtoList != null && menuDtoList.size() > 0) {
 			for (TImsMenuDto menuDto : menuDtoList) {
 				// 菜单类型的资源
-                if (menuDto.getMenuTypeId().equals("0")
-                    && menuDto.getTabType().equals(0))
-                {
+				if (menuDto.getMenuTypeId().equals("0")
+						&& menuDto.getTabType().equals(0)) {
 					Tree tree = new Tree();
 					BeanUtils.copyProperties(menuDto, tree);
 					if (!StringUtils.isEmpty(menuDto.getPid())) {
@@ -66,12 +67,11 @@ public class ResourceServiceImpl implements ResourceServiceI {
 					lt.add(tree);
 				}
 			}
-		}		
+		}
 
 		return lt;
 	}
 
-	
 	public List<Tree> allTree(SessionInfo sessionInfo) {
 		List<Tresource> l = null;
 		List<Tree> lt = new ArrayList<Tree>();
@@ -80,61 +80,60 @@ public class ResourceServiceImpl implements ResourceServiceI {
 		Map<String, Object> params = new HashMap<String, Object>();
 		if (sessionInfo != null) {
 			params.put("userId", sessionInfo.getId());// 查自己有权限的资源
-			
-		 list_menu =menuDao.treeGrid(sessionInfo);
-		//	l = resourceDao.find("select distinct t from Tresource t join fetch t.tresourcetype type join fetch t.troles role join role.tusers user where user.id = :userId order by t.seq", params);
+
+			list_menu = menuDao.treeGrid(sessionInfo);
+			// l =
+			// resourceDao.find("select distinct t from Tresource t join fetch t.tresourcetype type join fetch t.troles role join role.tusers user where user.id = :userId order by t.seq",
+			// params);
 		}
-		//else {
-		//	l = resourceDao.find("select distinct t from Tresource t join fetch t.tresourcetype type order by t.seq", params);
-		//}
-		
+		// else {
+		// l =
+		// resourceDao.find("select distinct t from Tresource t join fetch t.tresourcetype type order by t.seq",
+		// params);
+		// }
+
 		if (list_menu != null && list_menu.size() > 0) {
 			for (TImsMenuDto menuDto : list_menu) {
- 			        Tree tree = new Tree();
-					BeanUtils.copyProperties(menuDto, tree);
-					if (!StringUtils.isEmpty(menuDto.getPid())) {
-						tree.setPid(menuDto.getPid());
-					}
- 					tree.setText(menuDto.getName());
-					// 设置借点url属性
-					Map<String, Object> attr = new HashMap<String, Object>();
-					tree.setIconCls("status_online");
-					lt.add(tree);
+				Tree tree = new Tree();
+				BeanUtils.copyProperties(menuDto, tree);
+				if (!StringUtils.isEmpty(menuDto.getPid())) {
+					tree.setPid(menuDto.getPid());
+				}
+				tree.setText(menuDto.getName());
+				// 设置借点url属性
+				Map<String, Object> attr = new HashMap<String, Object>();
+				tree.setIconCls("status_online");
+				lt.add(tree);
 			}
 		}
 
-		
 		return lt;
 	}
 
-
 	public List<TImsMenuDto> treeGrid(SessionInfo sessionInfo) {
-		List<TImsMenuDto> lr=	menuDao.treeGrid(sessionInfo);
-	    return lr;
+		List<TImsMenuDto> lr = menuDao.treeGrid(sessionInfo);
+		return lr;
 	}
 
-	
 	public void add(TImsMenuDto menuDto, SessionInfo sessionInfo) {
-		menuDao.insertBy(menuDto,sessionInfo);
+		menuDao.insertBy(menuDto, sessionInfo);
 	}
 
-	
 	public void delete(String id) {
 		if (id != null) {
 			menuDao.deleteById(id);
 		}
 	}
 
-//	private void del(Tresource t) {
-//		if (t.getTresources() != null && t.getTresources().size() > 0) {
-//			for (Tresource r : t.getTresources()) {
-//				del(r);
-//			}
-//		}
-//		resourceDao.delete(t);
-//	}
+	// private void del(Tresource t) {
+	// if (t.getTresources() != null && t.getTresources().size() > 0) {
+	// for (Tresource r : t.getTresources()) {
+	// del(r);
+	// }
+	// }
+	// resourceDao.delete(t);
+	// }
 
-	
 	public void edit(TImsMenuDto menuDto) {
 		menuDao.editMenu(menuDto);
 
@@ -161,12 +160,13 @@ public class ResourceServiceImpl implements ResourceServiceI {
 		return false;
 	}
 
-	
 	public Resource get(String id) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("id", id);
 		Tresource t = new Tresource();
-		//Tresource t = resourceDao.get("from Tresource t left join fetch t.tresource resource left join fetch t.tresourcetype resourceType where t.id = :id", params);
+		// Tresource t =
+		// resourceDao.get("from Tresource t left join fetch t.tresource resource left join fetch t.tresourcetype resourceType where t.id = :id",
+		// params);
 		Resource r = new Resource();
 		BeanUtils.copyProperties(t, r);
 		if (t.getTresource() != null) {
@@ -181,83 +181,78 @@ public class ResourceServiceImpl implements ResourceServiceI {
 		return r;
 	}
 
-
 	public void add(Resource resource, SessionInfo sessionInfo) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
+	/**
+	 * (non-Javadoc)
+	 * 
+	 * @see com.ssic.game.admin.service.ResourceServiceI#tabTree(com.ssic.game.admin.pageModel.SessionInfo)
+	 */
+	@Override
+	public List<Tree> tabTree(SessionInfo sessionInfo) {
+		List<Tree> lt = new ArrayList<Tree>();
+		AdminTabDto tabDto = adminTabDao
+				.findByTabName(sessionInfo.getTabName());
+		sessionInfo.setTabId(tabDto.getId());
+		List<TImsMenuDto> menuDtoList = menuDao.tabTreeGrid(sessionInfo);
 
-    
-     /** 
-     * (non-Javadoc)   
-     * @see com.ssic.game.admin.service.ResourceServiceI#tabTree(com.ssic.game.admin.pageModel.SessionInfo)   
-     */
-    @Override
-    public List<Tree> tabTree(SessionInfo sessionInfo)
-    {
-        List<Tree> lt = new ArrayList<Tree>();
+		if (menuDtoList != null && menuDtoList.size() > 0) {
+			for (TImsMenuDto menuDto : menuDtoList) {
+				// 菜单类型的资源
+				if (!StringUtils.isEmpty(menuDto.getTabId())
+						&& menuDto.getMenuTypeId().equals("0")) {
+					Tree tree = new Tree();
+					BeanUtils.copyProperties(menuDto, tree);
+					if (!StringUtils.isEmpty(menuDto.getPid())) {
+						tree.setPid(menuDto.getPid());
+					}
+					tree.setText(menuDto.getName());
+					// 设置借点url属性
+					Map<String, Object> attr = new HashMap<String, Object>();
+					attr.put("url", menuDto.getUrl());
+					tree.setAttributes(attr);
+					lt.add(tree);
+				}
+			}
+		}
 
-        List<TImsMenuDto> menuDtoList=  menuDao.treeGrid(sessionInfo);
+		return lt;
+	}
 
-        if (menuDtoList != null && menuDtoList.size() > 0) {
-            for (TImsMenuDto menuDto : menuDtoList) {
-                // 菜单类型的资源
-                if (menuDto.getMenuTypeId().equals("0")
-                    && menuDto.getTabType().equals(1))
-                {
-                    Tree tree = new Tree();
-                    BeanUtils.copyProperties(menuDto, tree);
-                    if (!StringUtils.isEmpty(menuDto.getPid())) {
-                        tree.setPid(menuDto.getPid());
-                    }
-                    tree.setText(menuDto.getName());
-                    // 设置借点url属性
-                    Map<String, Object> attr = new HashMap<String, Object>();
-                    attr.put("url", menuDto.getUrl());
-                    tree.setAttributes(attr);
-                    lt.add(tree);
-                }
-            }
-        }       
+	/**
+	 * (non-Javadoc)
+	 * 
+	 * @see com.ssic.game.admin.service.ResourceServiceI#allsTree(com.ssic.game.admin.pageModel.SessionInfo)
+	 */
+	@Override
+	public List<Tree> allsTree(SessionInfo sessionInfo) {
+		List<Tree> lt = new ArrayList<Tree>();
 
-        return lt;
-    }
+		List<TImsMenuDto> menuDtoList = menuDao.treeGrid(sessionInfo);
 
+		if (menuDtoList != null && menuDtoList.size() > 0) {
+			for (TImsMenuDto menuDto : menuDtoList) {
+				// 菜单类型的资源
+				if (menuDto.getMenuTypeId().equals("0")) {
+					Tree tree = new Tree();
+					BeanUtils.copyProperties(menuDto, tree);
+					if (!StringUtils.isEmpty(menuDto.getPid())) {
+						tree.setPid(menuDto.getPid());
+					}
+					tree.setText(menuDto.getName());
+					// 设置借点url属性
+					Map<String, Object> attr = new HashMap<String, Object>();
+					attr.put("url", menuDto.getUrl());
+					tree.setAttributes(attr);
+					lt.add(tree);
+				}
+			}
+		}
 
-    
-     /** 
-     * (non-Javadoc)   
-     * @see com.ssic.game.admin.service.ResourceServiceI#allsTree(com.ssic.game.admin.pageModel.SessionInfo)   
-     */
-    @Override
-    public List<Tree> allsTree(SessionInfo sessionInfo)
-    {
-        List<Tree> lt = new ArrayList<Tree>();
-
-        List<TImsMenuDto> menuDtoList=  menuDao.treeGrid(sessionInfo);
-
-        if (menuDtoList != null && menuDtoList.size() > 0) {
-            for (TImsMenuDto menuDto : menuDtoList) {
-                // 菜单类型的资源
-                if (menuDto.getMenuTypeId().equals("0"))
-                {
-                    Tree tree = new Tree();
-                    BeanUtils.copyProperties(menuDto, tree);
-                    if (!StringUtils.isEmpty(menuDto.getPid())) {
-                        tree.setPid(menuDto.getPid());
-                    }
-                    tree.setText(menuDto.getName());
-                    // 设置借点url属性
-                    Map<String, Object> attr = new HashMap<String, Object>();
-                    attr.put("url", menuDto.getUrl());
-                    tree.setAttributes(attr);
-                    lt.add(tree);
-                }
-            }
-        }       
-
-        return lt;
-    }
+		return lt;
+	}
 
 }

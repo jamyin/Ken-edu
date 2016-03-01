@@ -1,12 +1,14 @@
 /**
- * easyloader - jQuery EasyUI
+ * jQuery EasyUI 1.4.4
  * 
- * Copyright (c) 2009-2013 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2015 www.jeasyui.com. All rights reserved.
  *
- * Licensed under the GPL or commercial licenses
+ * Licensed under the freeware license: http://www.jeasyui.com/license_freeware.php
  * To use it on other terms please contact us: info@jeasyui.com
- * http://www.gnu.org/licenses/gpl.txt
- * http://www.jeasyui.com/license_commercial.php
+ *
+ */
+/**
+ * easyloader - jQuery EasyUI
  * 
  */
 (function(){
@@ -52,6 +54,11 @@
 			css:'propertygrid.css',
 			dependencies:['datagrid']
 		},
+		datalist:{
+			js:'jquery.datalist.js',
+			css:'datalist.css',
+			dependencies:['datagrid']
+		},
 		panel: {
 			js:'jquery.panel.js',
 			css:'panel.css'
@@ -69,7 +76,7 @@
 		messager:{
 			js:'jquery.messager.js',
 			css:'messager.css',
-			dependencies:['linkbutton','window','progressbar']
+			dependencies:['linkbutton','dialog','progressbar']
 		},
 		layout:{
 			js:'jquery.layout.js',
@@ -88,15 +95,19 @@
 			css:'tabs.css',
 			dependencies:['panel','linkbutton']
 		},
-		splitbutton:{
-			js:'jquery.splitbutton.js',
-			css:'splitbutton.css',
-			dependencies:['linkbutton','menu']
-		},
 		menubutton:{
 			js:'jquery.menubutton.js',
 			css:'menubutton.css',
 			dependencies:['linkbutton','menu']
+		},
+		splitbutton:{
+			js:'jquery.splitbutton.js',
+			css:'splitbutton.css',
+			dependencies:['menubutton']
+		},
+		switchbutton:{
+			js:'jquery.switchbutton.js',
+			css:'switchbutton.css'
 		},
 		accordion:{
 			js:'jquery.accordion.js',
@@ -107,10 +118,20 @@
 			js:'jquery.calendar.js',
 			css:'calendar.css'
 		},
+		textbox:{
+			js:'jquery.textbox.js',
+			css:'textbox.css',
+			dependencies:['validatebox','linkbutton']
+		},
+		filebox:{
+			js:'jquery.filebox.js',
+			css:'filebox.css',
+			dependencies:['textbox']
+		},
 		combo:{
 			js:'jquery.combo.js',
 			css:'combo.css',
-			dependencies:['panel','validatebox']
+			dependencies:['panel','textbox']
 		},
 		combobox:{
 			js:'jquery.combobox.js',
@@ -132,17 +153,17 @@
 		},
 		numberbox:{
 			js:'jquery.numberbox.js',
-			dependencies:['validatebox']
+			dependencies:['textbox']
 		},
 		searchbox:{
 			js:'jquery.searchbox.js',
 			css:'searchbox.css',
-			dependencies:['menubutton']
+			dependencies:['menubutton','textbox']
 		},
 		spinner:{
 			js:'jquery.spinner.js',
 			css:'spinner.css',
-			dependencies:['validatebox']
+			dependencies:['textbox']
 		},
 		numberspinner:{
 			js:'jquery.numberspinner.js',
@@ -172,6 +193,9 @@
 		},
 		parser:{
 			js:'jquery.parser.js'
+		},
+		mobile:{
+			js:'jquery.mobile.js'
 		}
 	};
 	

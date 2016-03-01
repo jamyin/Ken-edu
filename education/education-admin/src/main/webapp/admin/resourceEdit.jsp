@@ -39,9 +39,9 @@
 				result = $.parseJSON(result);
 				if (result.success) {
 					parent.$.modalDialog.openner_treeGrid.treegrid('reload');//之所以能在这里调用到parent.$.modalDialog.openner_treeGrid这个对象，是因为resource.jsp页面预定义好了
-					parent.layout_west_tree.tree('reload');
+					
 				    parent.$.modalDialog.handler.dialog('close');
-					parent.layout_west_race_tree.tree('reload');
+			
 			        parent.$.messager.show({
 							title : '提示',
 							msg : result.msg
@@ -64,9 +64,10 @@
 				    <th>菜单名称</th>
 					<td><input name="name" type="text" placeholder="请输入菜单名称" class="easyui-validatebox span2" data-options="required:true" value="${menuDto.name}"></td>
 				    <th >所属导航</th>
-				    <td><select id="tabType" name="tabType" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:55" >
-					 	    <option value="1" <c:if test="${1 == menuDto.tabType}">selected="selected"</c:if> >教委菜单</option>
-						    <option value="0" <c:if test="${0 == menuDto.tabType}">selected="selected"</c:if> >系统菜单</option>
+				    <td><select id="tabId" name="tabId" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:55" >
+					 	  	<c:forEach items="${tabList}" var="tab">
+								<option value="${tab.id}" <c:if test="${tab.id == menuDto.tabId}">selected="selected"</c:if>>${tab.tabName}</option>
+							</c:forEach>
 					   </select></td>
 				</tr>
 				<tr>

@@ -8,20 +8,22 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssic.education.admin.dao.TImsMenuDao;
+import com.ssic.education.admin.dto.AdminTabDto;
 import com.ssic.education.admin.dto.TImsMenuDto;
 import com.ssic.education.admin.pageModel.Json;
 import com.ssic.education.admin.pageModel.Resource;
 import com.ssic.education.admin.pageModel.SessionInfo;
 import com.ssic.education.admin.pageModel.Tree;
+import com.ssic.education.admin.service.AdminTabServiceI;
 import com.ssic.education.admin.service.ResourceServiceI;
 import com.ssic.education.admin.service.ResourceTypeServiceI;
 import com.ssic.education.admin.util.ConfigUtil;
-
 
 /**
  * 资源控制器
@@ -38,9 +40,12 @@ public class ResourceController extends BaseController {
 
 	@Autowired
 	private ResourceTypeServiceI resourceTypeService;
-	
+
 	@Autowired
 	private TImsMenuDao menuDao;
+
+	@Autowired
+	private AdminTabServiceI adminTabService;
 
 	/**
 	 * 获得资源树(资源类型为菜单类型)
@@ -52,37 +57,42 @@ public class ResourceController extends BaseController {
 	 */
 	@RequestMapping("/tree")
 	@ResponseBody
-	public List<Tree> tree(HttpSession session,String tabType) {
-		SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ConfigUtil.SESSIONINFONAME);
-		if(StringUtils.isEmpty(tabType)){
-		    sessionInfo.setTabType(String.valueOf(0));
-		}else{
-		    sessionInfo.setTabType(tabType);
+	public List<Tree> tree(HttpSession session, String tabType) {
+		SessionInfo sessionInfo = (SessionInfo) session
+				.getAttribute(ConfigUtil.SESSIONINFONAME);
+		if (StringUtils.isEmpty(tabType)) {
+			sessionInfo.setTabType(String.valueOf(0));
+		} else {
+			sessionInfo.setTabType(tabType);
 		}
 		return resourceService.tree(sessionInfo);
 	}
-	
-	
+
 	@RequestMapping("/tabTree")
-    @ResponseBody
-    public List<Tree> tabTree(HttpSession session,String tabType) {
-        SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ConfigUtil.SESSIONINFONAME);
-        if(StringUtils.isEmpty(tabType)){
-            sessionInfo.setTabType(String.valueOf(1));
-        }else{
-            sessionInfo.setTabType(tabType);
-        }
-        return resourceService.tabTree(sessionInfo);
-    }
-	
-	
-	   @RequestMapping("/allsTree")
-	    @ResponseBody
-	    public List<Tree> allsTree(HttpSession session,String tabType) {
-	        SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ConfigUtil.SESSIONINFONAME);
-	         return resourceService.allsTree(sessionInfo);
-	    }
-	   
+	@ResponseBody
+	public List<Tree> tabTree(HttpSession session, String tabName) {
+		SessionInfo sessionInfo = (SessionInfo) session
+				.getAttribute(ConfigUtil.SESSIONINFONAME);
+
+		if (StringUtils.isEmpty(tabName)) {
+			sessionInfo.setTabName(tabName);
+		} else {
+			sessionInfo.setTabName(tabName);
+		}
+		List<Tree> listTree = resourceService.tabTree(sessionInfo);
+
+		return listTree;
+
+	}
+
+	@RequestMapping("/allsTree")
+	@ResponseBody
+	public List<Tree> allsTree(HttpSession session, String tabType) {
+		SessionInfo sessionInfo = (SessionInfo) session
+				.getAttribute(ConfigUtil.SESSIONINFONAME);
+		return resourceService.allsTree(sessionInfo);
+	}
+
 	/**
 	 * 获得资源树(包括所有资源类型)
 	 * 
@@ -94,8 +104,45 @@ public class ResourceController extends BaseController {
 	@RequestMapping("/allTree")
 	@ResponseBody
 	public List<Tree> allTree(HttpSession session) {
-		SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ConfigUtil.SESSIONINFONAME);
+		SessionInfo sessionInfo = (SessionInfo) session
+				.getAttribute(ConfigUtil.SESSIONINFONAME);
 		return resourceService.allTree(sessionInfo);
+	}
+
+	/**
+	 * 获得左侧折叠tab
+	 * 
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("/getAccordionList")
+	@ResponseBody
+	public List<AdminTabDto> getAccordionList(HttpSession session) {
+		/*
+		 * List<AdminTabDto> tabList = (List<AdminTabDto>) session
+		 * .getAttribute("accordionList");
+		 */
+		List<AdminTabDto> listTab = adminTabService.findAll();
+		if (!CollectionUtils.isEmpty(listTab)) {
+			return listTab;
+		}
+		return null;
+	}
+
+	/**
+	 * 获得左侧折叠tab
+	 * 
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("/getTabModules")
+	@ResponseBody
+	public List<AdminTabDto> getTabModules(String tabName) {
+		List<AdminTabDto> listTab = adminTabService.findAll();
+		if (!CollectionUtils.isEmpty(listTab)) {
+			return listTab;
+		}
+		return null;
 	}
 
 	/**
@@ -115,7 +162,10 @@ public class ResourceController extends BaseController {
 	 */
 	@RequestMapping("/addPage")
 	public String addPage(HttpServletRequest request) {
-		request.setAttribute("menuTypeList", resourceTypeService.getMenuTypeList());
+		request.setAttribute("menuTypeList",
+				resourceTypeService.getMenuTypeList());
+		List<AdminTabDto> listTab = adminTabService.findAll();
+		request.setAttribute("tabList", listTab);
 		Resource r = new Resource();
 		r.setId(UUID.randomUUID().toString());
 		request.setAttribute("menuType", r);
@@ -130,7 +180,8 @@ public class ResourceController extends BaseController {
 	@RequestMapping("/add")
 	@ResponseBody
 	public Json add(TImsMenuDto menuDto, HttpSession session) {
-		SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ConfigUtil.SESSIONINFONAME);
+		SessionInfo sessionInfo = (SessionInfo) session
+				.getAttribute(ConfigUtil.SESSIONINFONAME);
 		Json j = new Json();
 		resourceService.add(menuDto, sessionInfo);
 		j.setSuccess(true);
@@ -145,7 +196,10 @@ public class ResourceController extends BaseController {
 	 */
 	@RequestMapping("/editPage")
 	public String editPage(HttpServletRequest request, String id) {
-		request.setAttribute("menuTypeList", resourceTypeService.getMenuTypeList());
+		request.setAttribute("menuTypeList",
+				resourceTypeService.getMenuTypeList());
+		List<AdminTabDto> listTab = adminTabService.findAll();
+		request.setAttribute("tabList", listTab);
 		TImsMenuDto r = menuDao.findById(id);
 		request.setAttribute("menuDto", r);
 		return "admin/resourceEdit";
@@ -177,7 +231,8 @@ public class ResourceController extends BaseController {
 	@RequestMapping("/treeGrid")
 	@ResponseBody
 	public List<TImsMenuDto> treeGrid(HttpSession session) {
-		SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ConfigUtil.SESSIONINFONAME);
+		SessionInfo sessionInfo = (SessionInfo) session
+				.getAttribute(ConfigUtil.SESSIONINFONAME);
 		return resourceService.treeGrid(sessionInfo);
 	}
 
