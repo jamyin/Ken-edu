@@ -34,7 +34,7 @@
 				}
 				return isValid;
 			},
-			success : function(result) {
+			 success : function(result) {
 				parent.$.messager.progress('close');
 				result = $.parseJSON(result);
 				if (result.success) {
