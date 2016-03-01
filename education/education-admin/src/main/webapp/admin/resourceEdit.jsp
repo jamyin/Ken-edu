@@ -42,7 +42,7 @@
 					
 				    parent.$.modalDialog.handler.dialog('close');
 			
-			        parent.$.messager.show({
+			         parent.$.messager.show({
 							title : '提示',
 							msg : result.msg
 						});
