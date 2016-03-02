@@ -66,7 +66,7 @@
 				    <th>菜单名称</th>
 					<td><input name="name" type="text" placeholder="请输入菜单名称" class="easyui-validatebox span2" data-options="required:true" value=""></td>
 				    <th >所属导航</th>
-				    <td><select id="tabId" name="tabId" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:55" >
+				    <td><select id="tabId" name="tabId" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'" >
 					 <c:forEach items="${tabList}" var="tab">
 							<option value="${tab.id}">${tab.tabName}</option>
 					</c:forEach>
