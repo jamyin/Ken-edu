@@ -35,6 +35,6 @@
    <import resource="redis-persistence.xml" /> 
    <import resource="spring-druid.xml" /> 
    <import resource="redis-persistence.xml" /> 
-   <import resource="mongodb.xml" /> 
+   <!-- <import resource="mongodb.xml" /> -->
 </beans>
 

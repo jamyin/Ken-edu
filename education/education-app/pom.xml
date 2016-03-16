@@ -18,7 +18,6 @@
 	</properties>
 
 	<dependencies>
-
 		<dependency>
 			<groupId>com.ssic</groupId>
 			<artifactId>ssic-datasource</artifactId>
@@ -27,7 +26,6 @@
 			<groupId>com.ssic</groupId>
 			<artifactId>ssic-base-redis</artifactId>
 		</dependency>
-		<!-- 亲加云新文档 -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
@@ -44,6 +42,38 @@
 			<groupId>com.ssic</groupId>
 			<artifactId>gotyeapiclient</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>	
+		</dependency>
+	 	<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+		</dependency>
+		<dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+        </dependency>
+        <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+		</dependency>
+		<dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+        </dependency>
 	</dependencies>
 
 	<build>

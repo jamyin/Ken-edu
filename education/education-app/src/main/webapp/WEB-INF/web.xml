@@ -54,7 +54,7 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
     <listener>
-		<listener-class>com.ssic.game.app.listener.InitApplicationContext</listener-class>
+		<listener-class>com.ssic.education.app.listener.InitApplicationContext</listener-class>
 	</listener>
 	
      <!-- Processes application requests -->
