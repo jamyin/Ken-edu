@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssic.education.common.mapper.SchoolSupplierExMapper">
+
+	<select id="findExByPage" resultType="com.ssic.education.common.dto.SchoolSupplierDto">
+		SELECT
+		a.id as id,
+		a.proj_id as projId,
+		b.proj_name as projName,
+		a.supplier_name as supplierName,
+		a.supplier_address as supplierAddress,
+		a.food_license as foodLicense,
+		a.business_license as businessLicense,
+		a.corporation as corporation,
+		a.contact_way as contactWay,
+		a.certificate_icon as certificateIcon,
+		a.longitude as longitude,
+		a.latitude as latitude,
+		a.create_time as createTime
+		FROM
+		t_edu_school_supplier a,
+		t_edu_project b
+		WHERE
+		a.proj_id = b.id
+		AND a.stat = 1
+		AND b.stat = 1
+		<if test="schoolSupplier.id!=null and schoolSupplier.id!='' ">
+		AND a.id = #{schoolSupplier.id}
+		</if>
+		<if test="schoolSupplier.projId!=null and schoolSupplier.projId!='' ">
+		AND a.proj_id = #{schoolSupplier.projId}
+		</if>
+		<if test="schoolSupplier.projName!=null and schoolSupplier.projName!='' ">
+		AND b.proj_name = #{schoolSupplier.projName}
+		</if>
+		<if test="schoolSupplier.supplierName!=null and schoolSupplier.supplierName!='' ">
+		AND a.supplier_name = #{schoolSupplier.supplierName}
+		</if>
+		ORDER BY a.create_time DESC
+		<if test="phdto.beginRow!=0 and phdto.rows!=0">
+		 LIMIT #{phdto.beginRow} , #{phdto.rows}
+		</if>
+	</select>
+
+    <select id="findExCountByPage" resultType="Integer">
+    SELECT
+		count(1) 
+		FROM
+		t_edu_school_supplier a,
+		t_edu_project b
+		WHERE
+		a.proj_id = b.id
+		AND a.stat = 1
+		AND b.stat = 1
+		<if test="schoolSupplier.id!=null and schoolSupplier.id!='' ">
+		AND a.id = #{schoolSupplier.id}
+		</if>
+		<if test="schoolSupplier.projId!=null and schoolSupplier.projId!='' ">
+		AND a.proj_id = #{schoolSupplier.projId}
+		</if>
+		<if test="schoolSupplier.projName!=null and schoolSupplier.projName!='' ">
+		AND b.proj_name = #{schoolSupplier.projName}
+		</if>
+		<if test="schoolSupplier.supplierName!=null and schoolSupplier.supplierName!='' ">
+		AND a.supplier_name = #{schoolSupplier.supplierName}
+		</if>
+		ORDER BY a.create_time DESC
+		<if test="phdto.beginRow!=0 and phdto.rows!=0">
+		 LIMIT #{phdto.beginRow} , #{phdto.rows}
+		</if>
+    </select>
+
+
+</mapper>
