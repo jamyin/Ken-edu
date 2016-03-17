@@ -16,6 +16,7 @@
 <script type="text/javascript">
 	var dataGrid;
 	var treeGrid;
+    var editRow = undefined; //定义全局变量：当前编辑的行
 	$(function() {
 		dataGrid = $('#dataGrid').datagrid({
 			url : '${pageContext.request.contextPath}/projectController/dataGrid',
@@ -30,7 +31,7 @@
 			sortName : 'name',
 			sortOrder : 'asc',
 			checkOnSelect : false,
-			selectOnCheck : false,
+			selectOnCheck : true,
 			nowrap : false,
 			frozenColumns : [ [ {
 				field : 'id',
@@ -41,16 +42,45 @@
 			}, {
 				field : 'projName',
 				title : '项目名称',
-				width : 210
+				width : 210,
+				 editor: { type: 'validatebox', options: { required: true}}
 			} ] ],
 			columns : [ [ {
 				field : 'describes',
 				title : '描述',
-				width : 300
+				width : 300,
+				 editor: { type: 'validatebox', options: { required: true}}
+			},	{
+				field : 'createTime',
+				title : '创建时间',
+				width : 240,
+				formatter : function(value, row, index) {
+					var unixTimestamp = new Date(value);
+					return '<font style="font-style: normal;font-weight: bolder;">'
+							+ (unixTimestamp
+									.toLocaleString())
+							+ '</font>';
+				}
+
+			},{
+				field : 'lastUpdateTime',
+				title : '更新时间',
+				width : 240,
+				formatter : function(value, row, index) {
+					var unixTimestamp = new Date(value);
+					if(value!=null){
+					return '<font style="font-style: normal;font-weight: bolder;">'
+							+ (unixTimestamp
+									.toLocaleString())
+							+ '</font>';}else{
+								return '';
+							}
+				}
+
 			},{
 				field : 'userNames',
 				title : '项目所有用户',
-				width : 700
+				width : 400
 			},
 			{
 				field : 'action',
@@ -69,12 +99,91 @@
 					return str;
 				}
 			} ] ],
-			toolbar : '#toolbar',
+			queryParams: { action: 'query' }, //查询参数
+			//toolbar : '#toolbar',
+			    toolbar: [{ text: '添加', iconCls: 'pencil_add', handler: function () {//添加列表的操作按钮添加，修改，删除等
+                    //添加时先判断是否有开启编辑的行，如果有则把开户编辑的那行结束编辑
+                    if (editRow != undefined) {
+                    	dataGrid.datagrid("endEdit", editRow);
+                    }
+                    //添加时如果没有正在编辑的行，则在datagrid的第一行插入一行
+                    if (editRow == undefined) {
+                    	dataGrid.datagrid("insertRow", {
+                            index: 0, // index start with 0
+                            row: {
+
+                            }
+                        });
+                        //将新插入的那一行开户编辑状态
+                        dataGrid.datagrid("beginEdit", 0);
+                        //给当前编辑的行赋值
+                        editRow = 0;
+                    }
+
+                }
+                }, '-',
+                 { text: '删除', iconCls: 'l-btn-icon delete', handler: function () {
+                     //删除时先获取选择行
+                     var rows = dataGrid.datagrid("getSelections");
+                     //选择要删除的行
+                     if (rows.length > 0) {
+                              var ids = [];
+                                 for (var i = 0; i < rows.length; i++) {
+                                     ids.push(rows[i].ID);
+                                     deleteFun(rows[i].ID);
+                                 }
+                     }
+                     else {
+                         $.messager.alert("提示", "请选择要删除的行", "error");
+                     }
+                 }
+                 }, 
+                  '-',
+                 { text: '保存', iconCls: 'icon-ok', handler: function () {
+                     //保存时结束当前编辑的行，自动触发onAfterEdit事件如果要与后台交互可将数据通过Ajax提交后台
+                     dataGrid.datagrid("endEdit", editRow);
+                 }
+                 }, '-',
+                 { text: '取消编辑', iconCls: 'pencil_delete', handler: function () {
+                     //取消当前编辑行把当前编辑行罢undefined回滚改变的数据,取消选择的行
+                	 cancelEdit();
+                 }
+                 },'-',
+                 { text: '搜索', iconCls: 'icon-search', handler: function () {
+                     editRow = undefined;
+                	 searchFun();
+                 }
+                 }, '-'],
+                onAfterEdit: function (rowIndex, rowData, changes) {
+                    //endEdit该方法触发此事件
+                    var a= $.isEmptyObject(changes);
+                   if(a==false){
+               		parent.$.messager.confirm('询问', '您是否要提交刚才编辑的内容？', function(b) {
+            			if (b) {
+                	     //如果不是空数组（做过修改）, 则提交到后台
+                	     insertOrEdit(rowData);
+                        }
+               		});
+                   }
+                   cancelEdit();
+              	
+                },
+                onDblClickRow: function (rowIndex, rowData) {
+                //双击开启编辑行
+        
+                    if (editRow != undefined) {
+                     	dataGrid.datagrid("endEdit", editRow);
+                 }
+                    if (editRow == undefined) {
+                    	dataGrid.datagrid("beginEdit", rowIndex);
+                        editRow = rowIndex;
+                    }
+                },
 			onLoadSuccess : function() {
 				$('#searchForm table').show();
 				parent.$.messager.progress('close');
 
-				$(this).datagrid('tooltip');
+				//$(this).datagrid('tooltip');
 			},
 			onRowContextMenu : function(e, rowIndex, rowData) {
 				e.preventDefault();
@@ -88,7 +197,11 @@
 		});
 	});
 
-
+function cancelEdit(){
+    editRow = undefined;
+    dataGrid.datagrid("rejectChanges");
+    dataGrid.datagrid("unselectAll");
+}
 
 	function deleteFun(id) {
 		if (id == undefined) {//点击右键菜单才会触发这个
@@ -97,7 +210,7 @@
 		} else {//点击操作里面的删除图标会触发这个
 			dataGrid.datagrid('unselectAll').datagrid('uncheckAll');
 		}
-		parent.$.messager.confirm('询问', '您是否要删除当前任务节点？', function(b) {
+		parent.$.messager.confirm('询问', '您是否要删除当前项目？', function(b) {
 			if (b) {
 				var currentUserId = '${sessionInfo.id}';/*当前登录用户的ID*/
 				if (currentUserId != id) {
@@ -163,7 +276,22 @@
 		});
 	}
 
-
+function insertOrEdit(rowData){
+    $.post('${pageContext.request.contextPath}/projectController/insertOrEdit',{
+		"id":               rowData.id,
+		"projName": rowData.projName,
+		"describes":  rowData.describes
+	}, function(result) {
+		if (result.success) {
+			parent.$.messager.alert('提示', result.msg, 'info');
+			dataGrid.datagrid('reload');
+		}else {
+			parent.$.messager.alert('错误', result.msg, 'error');
+		}
+		parent.$.messager.progress('close');
+	}, 'JSON');
+    editRow = undefined;
+}
 	
 
 
