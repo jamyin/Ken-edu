@@ -78,7 +78,7 @@
 			}, {
 				field : 'action',
 				title : '操作',
-				width : 70,
+				width : 100,
 				formatter : function(value, row, index) {
 					var str = '';
 					if ($.canEdit) {
@@ -92,6 +92,8 @@
 					if ($.canDelete) {
 						str += $.formatString('<img onclick="deleteFun(\'{0}\');" src="{1}" title="删除"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/cancel.png');
 					}
+					str += '&nbsp;';
+					str += $.formatString('<img onclick="grantProjectFun(\'{0}\');" src="{1}" title="授权项目"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/key.png');
 					return str;
 				}
 			} ] ],
@@ -219,6 +221,30 @@
 			});
 		}
 	}
+	
+	//赋权项目
+	function grantProjectFun(id) {
+	if (id != undefined) {
+		treeGrid.treegrid('select', id);
+	}
+	var node = treeGrid.treegrid('getSelected');
+	if (node) {
+		parent.$.modalDialog({
+			title : '项目授权',
+			width : 300,
+			height : 500,
+			href : '${pageContext.request.contextPath}/roleProjectController/grantProjectPage?id=' + node.id,
+			buttons : [ {
+				text : '授权',
+				handler : function() {
+					parent.$.modalDialog.openner_treeGrid = treeGrid;//因为添加成功之后，需要刷新这个treeGrid，所以先预定义好
+					var f = parent.$.modalDialog.handler.find('#form');
+					f.submit();
+				}
+			} ]
+		});
+	}
+}
 </script>
 </head>
 <body>
