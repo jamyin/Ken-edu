@@ -16,7 +16,20 @@
 		a.certificate_icon as certificateIcon,
 		a.longitude as longitude,
 		a.latitude as latitude,
-		a.create_time as createTime
+		a.create_time as createTime,
+		(
+		SELECT
+			GROUP_CONCAT(c.school_code)
+		FROM
+			t_edu_school c,
+			t_edu_school_supplier_rel d
+		WHERE
+			c.id = d.school_id
+		AND d.supplier_id = a.id
+		AND c.stat = 1
+		AND d.stat = 1
+		AND d.stat = 1
+	    ) as schoolCodes 
 		FROM
 		t_edu_school_supplier a,
 		t_edu_project b
@@ -70,5 +83,8 @@
 		</if>
     </select>
 
-
+    <update id="deleteSchoolSupplierRel" parameterType="String">
+         update t_edu_school_supplier_rel a set a.stat=0 where a.supplier_id = #{supplierId}
+    </update>
+    
 </mapper>

@@ -12,5 +12,11 @@ public interface  ISchoolSupplierService {
 	
 	Integer findCountByPage(SchoolSupplierDto schoolSupplierDto,PageHelper ph);
 	
+	Integer insertSchoolSupplier(SchoolSupplierDto schoolSupplierDto);
 	
+	void deleteschoolSupplier(String id);
+	
+	List<SchoolSupplierDto> findBy(SchoolSupplierDto schoolSupplierDto);
+	
+	void updateschoolSupplier(SchoolSupplierDto schoolSupplierDto);
 }

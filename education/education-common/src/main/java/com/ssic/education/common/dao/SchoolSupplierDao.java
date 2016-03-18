@@ -86,6 +86,7 @@ public class SchoolSupplierDao {
 	
 	//学校加工商统一插入
 	public int insertSchoolSupplier(SchoolSupplier param){
+		param.setStat(DataStatus.ENABLED);
 		return  schoolSupplierMapper.insert(param);
 	}
 	
@@ -107,6 +108,11 @@ public class SchoolSupplierDao {
 	//级联项目表查询条数,当phdto.beginRow!=0 and phdto.rows!=0 开始分页
 	public Integer findExCountByPage(SchoolSupplierDto schoolSupplier,PageHelperDto phdto){
 		return schoolSupplierExMapper.findExCountByPage(schoolSupplier, phdto);
+	}
+	
+	//删除加工商学校关系
+	public void deleteSchoolSupplierRel(String supplierId){
+		schoolSupplierExMapper.deleteSchoolSupplierRel(supplierId);
 	}
 	
 }

@@ -58,5 +58,8 @@ public class SchoolSupplierDto implements Serializable{
 	    @Getter
 	    @Setter
 	    private String projName;
+	    @Getter
+	    @Setter
+	    private String schoolCodes;
 	
 }

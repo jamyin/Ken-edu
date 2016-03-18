@@ -13,4 +13,6 @@ public interface SchoolSupplierExMapper {
 	
 	Integer findExCountByPage(@Param("schoolSupplier")SchoolSupplierDto schoolSupplier,@Param("phdto")PageHelperDto phdto);
 	
+	void deleteSchoolSupplierRel(@Param("supplierId") String supplierId);
+	
 }
