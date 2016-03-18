@@ -6,12 +6,21 @@
 <head>
 <title>学校加工商管理</title>
 <jsp:include page="../../inc.jsp"></jsp:include>
-	<c:if 
-	    test="${fn:contains(sessionInfo.resourceList, '/schoolSupplierController/addPage')}">
-			<script type="text/javascript">
-		$.canAddDept= true;
+<c:if test="${fn:contains(sessionInfo.resourceList, '/schoolSupplierController/editPage')}">
+	<script type="text/javascript">
+		$.canEdit = true;
 	</script>
-		</c:if>
+</c:if>
+<c:if test="${fn:contains(sessionInfo.resourceList, '/schoolSupplierController/delete')}">
+	<script type="text/javascript">
+		$.canDelete = true;
+	</script>
+</c:if>
+<c:if test="${fn:contains(sessionInfo.resourceList, '/schoolSupplierController/grantPage')}">
+	<script type="text/javascript">
+		$.canGrant = true;
+	</script>
+</c:if>
 
 <script type="text/javascript">
 	var dataGrid;
@@ -77,6 +86,10 @@
 				field : 'latitude',
 				title : '纬度',
 				width : 300
+			},{
+				field : 'schoolCodes',
+				title : '所属学校',
+				width : 500
 			},
 			{
 				field : 'action',
@@ -84,21 +97,18 @@
 				width : 350,
 				formatter : function(value, row, index) {
 					var str = '';
-					
+					if ($.canEdit) {
 						str += $.formatString('<img onclick="editFun(\'{0}\');" src="{1}" title="编辑"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
-					
-						str += '&nbsp;';
-						str += $.formatString('<img onclick="grantFun(\'{0}\');" src="{1}" title="添加流程"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil_add.png');
-				
-				     	str += '&nbsp;';
-				
-						str += $.formatString('<img onclick="adduserFun(\'{0}\');" src="{1}" title="用户授权"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/key.png');
-						
 						str += '&nbsp;&nbsp;';
-						
-						if($.canAddDept){
-						str += $.formatString('<img onclick="addDeptFun(\'{0}\');" src="{1}" title="添加部门"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/book_add.png');
-						 }
+					}
+					if ($.canGrant) {
+						str += $.formatString('<img onclick="grantFun(\'{0}\');" src="{1}" title="配置学校"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/key.png');
+						str += '&nbsp;&nbsp;';
+					}
+					if ($.canDelete) {
+						str += $.formatString('<img onclick="deleteFun(\'{0}\');" src="{1}" title="删除"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/cancel.png');
+						str += '&nbsp;&nbsp;';
+					}	
 					return str;
 				}
 			} ] ],
@@ -146,7 +156,6 @@
 		});
 	}
 	
-
 	function deleteFun(id) {
 		if (id == undefined) {//点击右键菜单才会触发这个
 			var rows = dataGrid.datagrid('getSelections');
@@ -154,7 +163,7 @@
 		} else {//点击操作里面的删除图标会触发这个
 			dataGrid.datagrid('unselectAll').datagrid('uncheckAll');
 		}
-		parent.$.messager.confirm('询问', '您是否要删除当前任务节点？', function(b) {
+		parent.$.messager.confirm('询问', '您是否要删除当前加工商？', function(b) {
 			if (b) {
 				var currentUserId = '${sessionInfo.id}';/*当前登录用户的ID*/
 				if (currentUserId != id) {
@@ -162,7 +171,7 @@
 						title : '提示',
 						text : '数据处理中，请稍后....'
 					});
-					$.post('${pageContext.request.contextPath}/ProjectController/delete', {
+					$.post('${pageContext.request.contextPath}/schoolSupplierController/deleteschoolSupplier', {
 						id : id
 					}, function(result) {
 						if (result.success) {
@@ -179,7 +188,6 @@
 	}
 
 
-
 	function editFun(id) {
 		if (id == undefined) {
 			var rows = dataGrid.datagrid('getSelections');
@@ -189,9 +197,9 @@
 		}
 		parent.$.modalDialog({
 			title : '编辑项目',
-			width : 400,
-			height : 200,
-			href : '${pageContext.request.contextPath}/ProjectController/editProject?id=' + id,
+			width : 800,
+			height : 600,
+			href : '${pageContext.request.contextPath}/schoolSupplierController/editSchoolSupplierPage?supplierId=' + id,
 			buttons : [ {
 				text : '编辑',
 				handler : function() {

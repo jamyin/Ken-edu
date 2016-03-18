@@ -7,7 +7,7 @@
 		$('#form')
 				.form(
 						{
-							url : '${pageContext.request.contextPath}/schoolSupplierController/insertSchoolSupplier',
+							url : '${pageContext.request.contextPath}/schoolSupplierController/updateSchoolSupplier',
 							onSubmit : function() {
 								/*var age = $("#age").val();
 								if(age==''||isNaN(age)){
@@ -50,10 +50,17 @@
 		success : function(data) {
 			var myObject = data;
 			//var a= "<option value=\'-1\'>请选择</option>";
+			var pid = $("#pid").val();
+			
 			var a = '';
 			for (var i = 0; i < myObject.length; i++) {
-				a += "<option value=\'"+myObject[i].id+"\'>"
-						+ myObject[i].projName + "</option>";
+				if(myObject[i].id==pid){
+					a += "<option value=\'"+myObject[i].id+"\' selected>"
+					+ myObject[i].projName + "</option>";
+				}else{
+					a += "<option value=\'"+myObject[i].id+"\'>"
+					+ myObject[i].projName + "</option>";	
+				}
 				console.log(a);
 			}
 			$("#projId").html(a);
@@ -68,35 +75,37 @@
 			<div data-options="region:'center',border:false" title=""
 				style="overflow: hidden;">
 				<form id="form" method="post">
+				<input id="pid" name="pid"  type="hidden" value="${schoolSuppDto.projId}" />
+				<input id="id" name="id" type="hidden" value="${schoolSuppDto.id}"/>
 					<table class="table table-hover table-condensed">
 						<tr>
 							  <th>项目</th>
-						      <td><select id="projId" name="projId"   data-options="editable:false" class="easyui-validatebox span2"></select>
+						      <td><select id="projId" name="projId"   data-options="editable:false" class="easyui-validatebox span2" ></select>
 							  </td>
 							<th>供应商名称</th>
-							<td><input name="supplierName" type="text" placeholder="请输入供应商名称"  id="supplierName"
+							<td><input name="supplierName" type="text" placeholder="请输入供应商名称"  id="supplierName" value="${schoolSuppDto.supplierName}"
 								class="easyui-validatebox span2"></td>
 
 						</tr>
 						<tr>
 							<th>供应商地址</th>
-							<td><input name="supplierAddress" type="text" placeholder="请输入供应商地址" id="supplierAddress"
+							<td><input name="supplierAddress" type="text" placeholder="请输入供应商地址" id="supplierAddress" value="${schoolSuppDto.supplierAddress}"
 								class="easyui-validatebox span2" data-options="required:true"></td>
 							<th>餐饮许可证</th>
-							<td><input name="foodLicense" type="text" placeholder="请输入餐饮许可证" id="foodLicense"
+							<td><input name="foodLicense" type="text" placeholder="请输入餐饮许可证" id="foodLicense" value="${schoolSuppDto.foodLicense}"
 								class="easyui-validatebox span2" data-options="required:true"></td>
 						</tr>
 						<tr>
 							<th>工商营业执照</th>
-							<td><input name="businessLicense" type="text" placeholder="请输入工商营业执照" id="businessLicense"
+							<td><input name="businessLicense" type="text" placeholder="请输入工商营业执照" id="businessLicense" value="${schoolSuppDto.businessLicense}"
 								class="easyui-validatebox span2" data-options="required:true"></td>
 							<th>法人代表</th>
-							<td><input name="corporation" type="text" placeholder="请输入法人代表" id="corporation"
+							<td><input name="corporation" type="text" placeholder="请输入法人代表" id="corporation" value="${schoolSuppDto.corporation}"
 								class="easyui-validatebox span2" data-options="required:true"></td>
 						</tr>
 						<tr>
 							<th>联系方式</th>
-						    <td><input name="contactWay" type="text" placeholder="请输入联系方式" id="contactWay"
+						    <td><input name="contactWay" type="text" placeholder="请输入联系方式" id="contactWay" value="${schoolSuppDto.contactWay}"
 								class="easyui-validatebox span2" data-options="required:true"></td>
 							<th>&nbsp;</th>
 							<td>&nbsp;</td>
