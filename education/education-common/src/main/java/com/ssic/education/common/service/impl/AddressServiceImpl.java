@@ -196,7 +196,7 @@ public class AddressServiceImpl implements IAddressService {
 					addressResult.setPid(addressResult.getParentId());
 					addressResult.setPname(addredto.getAddressName());
 				}
-				if (addressResult.getAddressCode().length() == 8) {// 如果区域编码的长度为8，则为叶子节点
+				if (addressResult.getAddressCode().length() == 4) {// 如果区域编码的长度为8，则为叶子节点
 					addressResult.setIsLeaf(1);
 				} else {
 					addressResult.setIsLeaf(0);

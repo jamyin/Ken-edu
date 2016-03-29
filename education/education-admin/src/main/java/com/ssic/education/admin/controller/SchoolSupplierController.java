@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.http.HttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,9 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ssic.base.datasource.DataSourceHolderUtil;
 import com.ssic.education.admin.pageModel.DataGrid;
 import com.ssic.education.admin.pageModel.Json;
+import com.ssic.education.common.pageModel.PageHelper;
 import com.ssic.education.admin.service.ISchoolSupplierService;
 import com.ssic.education.common.dto.SchoolSupplierDto;
-import com.ssic.education.common.pageModel.PageHelper;
 import com.ssic.util.StringUtils;
 import com.ssic.util.UUIDGenerator;
 
@@ -38,7 +37,7 @@ public class SchoolSupplierController {
 		DataGrid dataGrid = new DataGrid();
 		List<SchoolSupplierDto> listdto = schoolSupplierService.findByPage(schoolSupplierDto,ph); 
 		Integer count = schoolSupplierService.findCountByPage(schoolSupplierDto,ph);
-		dataGrid.setRows(listdto);
+		dataGrid.setRows(listdto);	
 		dataGrid.setTotal(count.longValue());
 		return dataGrid;
 	}

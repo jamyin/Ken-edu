@@ -183,6 +183,19 @@
 																'<img onclick="deleteFun(\'{0}\');" src="{1}" title="删除"/>',
 																row.id,
 																'${pageContext.request.contextPath}/style/images/extjs_icons/cancel.png');
+												
+												if ( row.isLeaf == 1) {
+
+													str += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+											
+													str += $
+															.formatString(
+																	'<img onclick="addSchoolFun(\'{0}\');" src="{1}" title="添加学校"/>',
+																	row.id,
+																	'${pageContext.request.contextPath}/style/images/extjs_icons/brick_add.png');
+													str += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+										
+												}
 								        	return str;
 										}
 									} ] ],
@@ -205,13 +218,13 @@
 						});
 	});
 
-	function addMeetingFun(addressId) {
+	function addSchoolFun(addressId) {
 		parent.$
 				.modalDialog({
-					title : '添加会议室',
+					title : '添加学校',
 					width : 700,
 					height : 500,
-					href : '${pageContext.request.contextPath}/meetingAddressController/addMeetingAddress?addressId='
+					href : '${pageContext.request.contextPath}/schoolController/addSchool?addressId='
 							+ addressId,
 					buttons : [ {
 						text : '添加',
