@@ -73,8 +73,7 @@
         <aop:aspect id="c" ref="manyDataSourceAspect">
             <aop:pointcut id="tx" expression="execution(* com.ssic..mapper.*.*(..))"/>
             <aop:before pointcut-ref="tx" method="before"/>
-        </aop:aspect>
-     
+        </aop:aspect>     
     </aop:config>
 	
 	<tx:annotation-driven transaction-manager="transactionManager"  />
