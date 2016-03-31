@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.ssic.education.admin.dto.TImsUsersDto;
 import com.ssic.education.admin.pageModel.PageHelper;
 import com.ssic.education.admin.pojo.Users;
+import com.ssic.education.common.dto.ProjectDto;
 
 public interface TImsUsersExMapper {
 
@@ -25,4 +26,6 @@ public interface TImsUsersExMapper {
 	void updateDelByDept(@Param("deptId")String id);
 	
 	void addImsUsers(@Param("users")Users users);
+
+	List<ProjectDto> findByUserId(String userId);
 }

@@ -84,4 +84,17 @@ select users.id as id, age as age,createdatetime as createdatetime,gender as gen
 		
 	 </sql>
 	 
+	 	 <select id="findByUserId" resultType="com.ssic.education.common.dto.ProjectDto" parameterType="java.lang.String">
+	 	select id as id,
+	 	proj_name as projName,
+	 	describes as describes,
+	 	stat as stat,
+	 	last_update_time as lastUpdateTime,
+	 	create_time as createTime
+	 	from t_edu_project
+	 	where id in (select proj_id from t_admin_role_project where role_id in (select role_id from t_admin_users_role where user_id=#{userId} and stat=1) and stat = 1)
+	 	and stat = 1
+	 	order by create_time desc
+	 </select>
+	 
 </mapper>

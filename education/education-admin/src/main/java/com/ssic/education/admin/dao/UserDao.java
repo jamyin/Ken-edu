@@ -13,6 +13,7 @@ import com.ssic.education.admin.pageModel.DataGrid;
 import com.ssic.education.admin.pageModel.PageHelper;
 import com.ssic.education.admin.pojo.Users;
 import com.ssic.education.admin.util.MD5Util;
+import com.ssic.education.common.dto.ProjectDto;
 import com.ssic.util.BeanUtils;
 import com.ssic.util.StringUtils;
 import com.ssic.util.UUIDGenerator;
@@ -134,5 +135,27 @@ public class UserDao {
 
 			tImsUsersExMapper.addImsUsers(users);
 		}
+	}
+	
+	/**
+	 * 通过userId查找项目信息	 
+	 * @author 朱振	
+	 * @date 2015年10月26日 下午5:54:16	
+	 * @version 1.0
+	 * @param userId
+	 * @return
+	 * <p>修改人：朱振</p>
+	 * <p>修改时间：2015年10月26日 下午5:54:16</p>
+	 * <p>修改备注：</p>
+	 */
+	public List<ProjectDto> findProjectByUserId(String userId)
+	{
+	    if(StringUtils.isEmpty(userId))
+	    {
+
+	        return null;
+	    }
+	    
+	    return tImsUsersExMapper.findByUserId(userId);
 	}
 }

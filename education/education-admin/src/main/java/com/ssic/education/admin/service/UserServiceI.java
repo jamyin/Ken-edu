@@ -2,6 +2,8 @@ package com.ssic.education.admin.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.ssic.education.admin.dto.TImsUsersDto;
 import com.ssic.education.admin.model.Tuser;
 import com.ssic.education.admin.pageModel.DataGrid;
@@ -9,6 +11,7 @@ import com.ssic.education.admin.pageModel.PageHelper;
 import com.ssic.education.admin.pageModel.SessionInfo;
 import com.ssic.education.admin.pageModel.Tree;
 import com.ssic.education.admin.pageModel.User;
+import com.ssic.education.common.dto.ProjectDto;
 
 
 /**
@@ -148,4 +151,28 @@ public interface UserServiceI {
 	public int vailUserAccount(TImsUsersDto userDto);
 	public TImsUsersDto getUser(String id);
 	public String findUserRole(String userId);
+	
+	/**
+	 * 根据session获取用户所属项目的信息<BR>	 
+	 * @author 朱振	
+	 * @date 2015年10月26日 下午5:34:11	
+	 * @version 1.0
+	 * @param session
+	 * @return
+	 * <p>修改人：朱振</p>
+	 * <p>修改时间：2015年10月26日 下午5:34:11</p>
+	 * <p>修改备注：</p>
+	 */
+	public List<ProjectDto> getProjectBySession(HttpSession session);
+	
+	/**
+	 * 
+	 * getProjectsBySession:根据session获取用户所属项目id集合
+	 * @param session
+	 * @return
+	 * @exception	
+	 * @author zhuzhen
+	 * @date 2015年11月25日 下午4:15:33
+	 */
+	public String getProjectIdsBySession(HttpSession session);
 }
