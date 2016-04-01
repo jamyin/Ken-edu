@@ -4,12 +4,17 @@
 package com.ssic.education.app.dao.test;
 
 import java.util.List;
+
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
+
 import com.ssic.education.app.test.BaseTestCase;
 import com.ssic.education.common.dao.AddressDao;
+import com.ssic.education.common.dto.AddressStatistic;
 import com.ssic.education.common.pojo.Address;
 import com.ssic.util.UUIDGenerator;
 import com.ssic.util.constants.DataStatus;
@@ -34,6 +39,15 @@ public class AddressDaoTest extends BaseTestCase {
     private AddressDao addressDao;
     
     @Test
+    public void getAddressStatisticTest() {
+	List<AddressStatistic> statisitics = addressDao.getAddressStatistic("310000", 1);
+	Assert.isTrue(CollectionUtils.isNotEmpty(statisitics));
+	for(AddressStatistic statistic : statisitics) {
+	    logger.info(statistic);
+	}
+    }
+    
+    //@Test
     public void getAddressByParentCodeTest() {
 	List<Address> addressList = addressDao.getAddressByParentCode("310000");
 	for(Address address : addressList) {

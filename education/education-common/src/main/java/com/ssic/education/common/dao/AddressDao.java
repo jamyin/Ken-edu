@@ -4,6 +4,7 @@
 package com.ssic.education.common.dao;
 
 import java.util.List;
+
 import lombok.Getter;
 
 import org.apache.log4j.Logger;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ssic.education.common.dto.AddressDto;
+import com.ssic.education.common.dto.AddressStatistic;
 import com.ssic.education.common.dto.PageHelperDto;
 import com.ssic.education.common.mapper.AddressExMapper;
 import com.ssic.education.common.mapper.AddressMapper;
@@ -47,14 +49,27 @@ public class AddressDao extends MyBatisBaseDao<Address> {
 	@Getter
 	private AddressExMapper exMapper;
 	
-	    public List<Address> getAddressByParentCode(String parentCode){
-		AddressExample example = new AddressExample();
-		Criteria criteria = example.createCriteria();
-		criteria.andParentCodeEqualTo(parentCode);
-		criteria.andStatEqualTo(DataStatus.ENABLED);
-		return mapper.selectByExample(example);
-	    }
+        public List<Address> getAddressByParentCode(String parentCode){
+            AddressExample example = new AddressExample();
+            Criteria criteria = example.createCriteria();
+            criteria.andParentCodeEqualTo(parentCode);
+            criteria.andStatEqualTo(DataStatus.ENABLED);
+            return mapper.selectByExample(example);
+        }
 
+        /**
+         * getAddressStatistic：一句话描述方法功能
+         * @param parentCode
+         * @param level
+         * @return
+         * @exception	
+         * @author rkzhang
+         * @date 2016年4月1日 下午4:49:58
+         */
+        public List<AddressStatistic> getAddressStatistic(String parentCode, Integer level) {
+            return exMapper.getAddressStatistic(parentCode, level);
+        }
+        
 	/**
 	 * findAllBy：一句话描述方法功能
 	 * 

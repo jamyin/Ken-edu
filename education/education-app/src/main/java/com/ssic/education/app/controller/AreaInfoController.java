@@ -46,7 +46,7 @@ public class AreaInfoController {
     @ResponseBody
     public Response<List<District>> getDistrictSchoolStatistic(@PathVariable("parentDistrictCode")String parentDistrictCode, @PathVariable("schoolLevel")Integer schoolLevel) {	
 	
-	return areaInfoService.getSubDistricetByParentCode(parentDistrictCode);
+	return areaInfoService.getSubDistricetSchoolStatistic(parentDistrictCode, schoolLevel);
     }
     
 }

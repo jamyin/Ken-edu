@@ -31,6 +31,33 @@
   		select t1.id as id from t_edu_address t1 where t1.address_code like #{cityId}"%" and t1.stat = 1;
   	</select>
 	
-	
+	<select id="getAddressStatistic" resultType="com.ssic.education.common.dto.AddressStatistic">
+  		select address.address_code as addressCode, address.address_name as addressName, 
+		address.longitude as longitude, address.latitude as latitude, statistic.num as schoolNum 
+		from (
+			select address_code, address_name, longitude, latitude from t_edu_address address 
+			where 
+			 <if test="parentCode != null" >
+		        parent_code = #{parentCode} and 
+		     </if>
+			stat = 1 
+		) address 
+		LEFT JOIN
+		(
+			select address.address_code, address.address_name, IFNULL(0,count(*)) num from t_edu_address address
+			LEFT JOIN t_edu_school school on address.address_code = school.address_code 			
+			<if test="level != null" >
+		        and level = #{level} 
+		    </if>
+			and school.stat = 1
+			where 
+			 <if test="parentCode != null" >
+		        parent_code = #{parentCode} and 
+		     </if>
+			address.stat = 1 
+			group by address.address_code, address.address_name
+		) statistic
+		on address.address_code = statistic.address_code and address.address_name = statistic.address_name
+  	</select>
 
 </mapper>

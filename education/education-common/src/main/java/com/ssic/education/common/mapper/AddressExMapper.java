@@ -81,6 +81,6 @@ public interface AddressExMapper
      * @author rkzhang
      * @date 2016年4月1日 上午11:14:04
      */
-    List<AddressStatistic> getAddressByParentCode(@Param("parentCode")String parentCode);
+    List<AddressStatistic> getAddressStatistic(@Param("parentCode")String parentCode, @Param("level")Integer level);
 }
 

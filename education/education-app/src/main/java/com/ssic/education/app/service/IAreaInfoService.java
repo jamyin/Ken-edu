@@ -36,6 +36,18 @@ public interface IAreaInfoService {
      */
     Response<List<District>> getSubDistricetByParentCode(String parentDistrictCode);
 
+    
+    /**     
+     * getSubDistricetSchoolStatistic：一句话描述方法功能
+     * @param parentDistrictCode
+     * @param schoolLevel
+     * @return
+     * @exception	
+     * @author rkzhang
+     * @date 2016年4月1日 下午5:12:34	 
+     */
+    Response<List<District>> getSubDistricetSchoolStatistic(String parentDistrictCode, Integer schoolLevel);
+
 
 }
 

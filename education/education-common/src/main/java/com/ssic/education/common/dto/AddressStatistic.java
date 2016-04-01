@@ -55,7 +55,7 @@ public class AddressStatistic {
 	 */
 	@Getter
 	@Setter
-	private Float schoolNum;
+	private Integer schoolNum;
 	
 }
 

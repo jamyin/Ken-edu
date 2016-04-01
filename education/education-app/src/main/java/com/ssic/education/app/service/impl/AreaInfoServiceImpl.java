@@ -5,9 +5,11 @@ package com.ssic.education.app.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.google.common.base.Objects;
 import com.ssic.education.app.dto.Coordinate;
 import com.ssic.education.app.dto.District;
@@ -64,6 +66,18 @@ public class AreaInfoServiceImpl implements IAreaInfoService {
 	
 	return null;
     }
+    
+    /** 
+     * (non-Javadoc)   
+     * @see com.ssic.education.app.service.IAreaInfoService#getSubDistricetSchoolStatistic(java.lang.String, java.lang.Integer)   
+     */
+    @Override
+    public Response<List<District>> getSubDistricetSchoolStatistic(String parentDistrictCode, Integer schoolLevel) {
+
+
+	return null;
+    }
+
 
     
     /**     
@@ -87,5 +101,7 @@ public class AreaInfoServiceImpl implements IAreaInfoService {
 	return null;
     }
 
+
+    
 }
 
