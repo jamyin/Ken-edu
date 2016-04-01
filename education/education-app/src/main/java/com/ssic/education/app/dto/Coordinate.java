@@ -28,14 +28,14 @@ public class Coordinate implements Serializable{
 
     @Getter
     @Setter
-    private Double x;
+    private Float x;
     
     @Getter
     @Setter
-    private Double y;
+    private Float y;
 
    
-    public Coordinate(Double x, Double y) {
+    public Coordinate(Float x, Float y) {
 	this.x = x;
 	this.y = y;
     }

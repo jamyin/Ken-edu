@@ -53,8 +53,8 @@ public class AddressDaoTest extends BaseTestCase {
 	address.setParentCode(null);
 	address.setProjId("");
 	address.setStat(DataStatus.ENABLED);
-	address.setLatitude("23.7");
-	address.setLongitude("11.1");
+	address.setLatitude(23.7f);
+	address.setLongitude(11.1f);
 	addressDao.insertSelective(address);
 	
 	address.setId(UUIDGenerator.getUUID());

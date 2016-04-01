@@ -42,9 +42,9 @@ public class AreaInfoController {
      * @author rkzhang
      * @date 2016年3月15日 下午4:41:00	 
      */
-    @RequestMapping("/search/{parentDistrictCode}")
+    @RequestMapping("/search/{parentDistrictCode}/{schoolLevel}")
     @ResponseBody
-    public Response<List<District>> getDistrictList(@PathVariable("parentDistrictCode")String parentDistrictCode) {	
+    public Response<List<District>> getDistrictSchoolStatistic(@PathVariable("parentDistrictCode")String parentDistrictCode, @PathVariable("schoolLevel")Integer schoolLevel) {	
 	
 	return areaInfoService.getSubDistricetByParentCode(parentDistrictCode);
     }

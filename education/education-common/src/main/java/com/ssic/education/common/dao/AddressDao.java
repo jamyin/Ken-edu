@@ -47,7 +47,6 @@ public class AddressDao extends MyBatisBaseDao<Address> {
 	@Getter
 	private AddressExMapper exMapper;
 	
-	
 	    public List<Address> getAddressByParentCode(String parentCode){
 		AddressExample example = new AddressExample();
 		Criteria criteria = example.createCriteria();
