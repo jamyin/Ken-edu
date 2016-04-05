@@ -47,14 +47,14 @@ public class AddressDaoTest extends BaseTestCase {
 	}
     }
     
-    //@Test
+    @Test
     public void getAddressByParentCodeTest() {
 	List<Address> addressList = addressDao.getAddressByParentCode("310000");
 	for(Address address : addressList) {
 	    logger.info(address);  
 	}
     }
-    
+
     public void prepareData() {
 	Address address = new Address();
 	String shId = UUIDGenerator.getUUID();

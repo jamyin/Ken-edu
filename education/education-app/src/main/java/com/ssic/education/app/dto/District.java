@@ -46,13 +46,5 @@ public class District {
    @Setter
    private Coordinate coordinate;
    
-   
-     /**   
-     * number: 学校数量
-     */   
-   @Getter
-   @Setter
-   private Integer number;
-   
 }
 

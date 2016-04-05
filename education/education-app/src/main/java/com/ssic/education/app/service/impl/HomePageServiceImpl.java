@@ -5,19 +5,22 @@ package com.ssic.education.app.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.common.base.Objects;
+import com.ssic.education.app.constants.SchoolLevel;
 import com.ssic.education.app.dto.Coordinate;
 import com.ssic.education.app.dto.District;
-import com.ssic.education.app.service.IAreaInfoService;
+import com.ssic.education.app.exception.AppException;
+import com.ssic.education.app.service.IHomePageService;
 import com.ssic.education.common.dao.AddressDao;
+import com.ssic.education.common.dto.AddressStatistic;
 import com.ssic.education.common.pojo.Address;
 import com.ssic.util.StringUtils;
-import com.ssic.util.constants.DataStatus;
 import com.ssic.util.model.Response;
 
 /**		
@@ -33,14 +36,14 @@ import com.ssic.util.model.Response;
  * <p>修改备注：</p>
  */
 @Service
-public class AreaInfoServiceImpl implements IAreaInfoService {
+public class HomePageServiceImpl implements IHomePageService {
     
     @Autowired
     private AddressDao addressDao;
 
      /** 
      * (non-Javadoc)   
-     * @see com.ssic.education.app.service.IAreaInfoService#getSubDistricetByParentCode(java.lang.String)   
+     * @see com.ssic.education.app.service.IHomePageService#getSubDistricetByParentCode(java.lang.String)   
      */
     @Override
     public Response<List<District>> getSubDistricetByParentCode(String parentDistrictCode) {
@@ -49,14 +52,11 @@ public class AreaInfoServiceImpl implements IAreaInfoService {
 	response.setData(districts);
 	
 	if(StringUtils.isEmpty(parentDistrictCode)) {
-	    response.setStatus(DataStatus.HTTP_FAILE);
-	    response.setMessage("parent district code can not be null or empty");
-	    return response;
+	    throw new AppException(1, "parent district code can not be null or empty");
 	}
 	
 	List<Address> addresses = addressDao.getAddressByParentCode(parentDistrictCode);
 	if(CollectionUtils.isEmpty(addresses)) { 
-	    response.setStatus(DataStatus.HTTP_SUCCESS);
 	    return response;
 	}
 	
@@ -64,20 +64,46 @@ public class AreaInfoServiceImpl implements IAreaInfoService {
 	    districts.add(changeToDistrict(address));
 	}
 	
-	return null;
+	return response;
     }
     
     /** 
      * (non-Javadoc)   
-     * @see com.ssic.education.app.service.IAreaInfoService#getSubDistricetSchoolStatistic(java.lang.String, java.lang.Integer)   
+     * @see com.ssic.education.app.service.IHomePageService#getSubDistricetSchoolStatistic(java.lang.String, java.lang.Integer)   
      */
     @Override
-    public Response<List<District>> getSubDistricetSchoolStatistic(String parentDistrictCode, Integer schoolLevel) {
-
-
-	return null;
+    public Response<List<AddressStatistic>> getSubDistricetSchoolStatistic(String parentDistrictCode, Integer schoolLevel) {
+	Response<List<AddressStatistic>> response = new Response<>();
+	List<AddressStatistic> districts = new ArrayList<>();
+	response.setData(districts);
+	
+	if(StringUtils.isEmpty(parentDistrictCode)) {
+	    throw new AppException(1, "parent district code can not be null or empty");
+	}
+	
+	if(!SchoolLevel.validateSchoolLevelValue(schoolLevel)){
+	    throw new AppException(2, "invalid school level number");
+	}
+	
+	List<AddressStatistic> statistics = addressDao.getAddressStatistic(parentDistrictCode, schoolLevel);
+	
+	if(CollectionUtils.isEmpty(statistics)) { 
+	    return response;
+	}
+	response.setData(statistics);
+	return response;
     }
 
+    /** 
+    * (non-Javadoc)   
+    * @see com.ssic.education.app.service.IHomePageService#getSchoolLevel()   
+    */
+   @Override
+   public Response<Map<Integer, String>> getSchoolLevel() {
+       Response<Map<Integer, String>> response = new Response<>();
+       response.setData(SchoolLevel.getAll());
+       return response;
+   }
 
     
     /**     
@@ -98,10 +124,8 @@ public class AreaInfoServiceImpl implements IAreaInfoService {
 	distict.setDistrictName(address.getAddressName());
 	distict.setCoordinate(new Coordinate(address.getLongitude(), address.getLatitude()));
 	
-	return null;
+	return distict;
     }
 
-
-    
 }
 

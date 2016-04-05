@@ -41,14 +41,14 @@ public class AddressStatistic {
 	 */
 	@Getter
 	@Setter
-	private Float longitude;
+	private Float x;
 	
 	/**
 	 * 纬度
 	 */
 	@Getter
 	@Setter
-	private Float latitude;
+	private Float y;
 	
 	/**
 	 * 学校数量

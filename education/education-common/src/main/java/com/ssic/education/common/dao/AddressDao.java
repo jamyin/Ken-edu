@@ -58,9 +58,9 @@ public class AddressDao extends MyBatisBaseDao<Address> {
         }
 
         /**
-         * getAddressStatistic：一句话描述方法功能
-         * @param parentCode
-         * @param level
+         * getAddressStatistic 根据地区编号统计下属地区指定级别的学校数量
+         * @param parentCode 父节点地区编码
+         * @param level 学校级别
          * @return
          * @exception	
          * @author rkzhang

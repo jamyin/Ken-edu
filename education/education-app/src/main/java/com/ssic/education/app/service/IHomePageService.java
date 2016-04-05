@@ -4,10 +4,12 @@
 package com.ssic.education.app.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
 import com.ssic.education.app.dto.District;
+import com.ssic.education.common.dto.AddressStatistic;
 import com.ssic.util.model.Response;
 
 /**		
@@ -23,7 +25,7 @@ import com.ssic.util.model.Response;
  * <p>修改备注：</p>
  */
 @Service
-public interface IAreaInfoService {
+public interface IHomePageService {
 
     
     /**     
@@ -38,7 +40,7 @@ public interface IAreaInfoService {
 
     
     /**     
-     * getSubDistricetSchoolStatistic：一句话描述方法功能
+     * getSubDistricetSchoolStatistic：获取父地区编码下所有地区信息以及学校信息统计
      * @param parentDistrictCode
      * @param schoolLevel
      * @return
@@ -46,7 +48,18 @@ public interface IAreaInfoService {
      * @author rkzhang
      * @date 2016年4月1日 下午5:12:34	 
      */
-    Response<List<District>> getSubDistricetSchoolStatistic(String parentDistrictCode, Integer schoolLevel);
+    Response<List<AddressStatistic>> getSubDistricetSchoolStatistic(String parentDistrictCode, Integer schoolLevel);
+
+
+    
+    /**     
+     * getSchoolLevel：获取所有学校列表信息
+     * @return
+     * @exception	
+     * @author rkzhang
+     * @date 2016年4月5日 下午3:45:11	 
+     */
+    Response<Map<Integer, String>> getSchoolLevel();
 
 
 }

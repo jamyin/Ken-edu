@@ -33,7 +33,7 @@
 	
 	<select id="getAddressStatistic" resultType="com.ssic.education.common.dto.AddressStatistic">
   		select address.address_code as addressCode, address.address_name as addressName, 
-		address.longitude as longitude, address.latitude as latitude, statistic.num as schoolNum 
+		address.longitude as x, address.latitude as y, statistic.num as schoolNum 
 		from (
 			select address_code, address_name, longitude, latitude from t_edu_address address 
 			where 
