@@ -3,12 +3,14 @@
  */
 package com.ssic.education.app.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
 import com.ssic.education.app.dto.District;
+import com.ssic.education.app.dto.School;
 import com.ssic.education.common.dto.AddressStatistic;
 import com.ssic.util.model.Response;
 
@@ -60,6 +62,18 @@ public interface IHomePageService {
      * @date 2016年4月5日 下午3:45:11	 
      */
     Response<Map<Integer, String>> getSchoolLevel();
+
+
+    
+    /**     
+     * getSchoolList：获取学校及其对应供应商信息
+     * @param lastUpdateTime
+     * @return
+     * @exception	
+     * @author rkzhang
+     * @date 2016年4月7日 上午11:48:21	 
+     */
+    Response<List<School>> getSchoolList(Date lastUpdateTime);
 
 
 }

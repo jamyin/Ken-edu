@@ -1,18 +1,12 @@
 package com.ssic.education.common.dao;
 
+import java.util.Date;
 import java.util.List;
-
-
-
-
-
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import com.ssic.education.common.dto.PageHelperDto;
 import com.ssic.education.common.dto.SchoolSupplierDto;
+import com.ssic.education.common.dto.SchoolSupplierRel;
 import com.ssic.education.common.mapper.SchoolSupplierExMapper;
 import com.ssic.education.common.mapper.SchoolSupplierMapper;
 import com.ssic.education.common.pojo.SchoolSupplier;
@@ -113,6 +107,10 @@ public class SchoolSupplierDao {
 	//删除加工商学校关系
 	public void deleteSchoolSupplierRel(String supplierId){
 		schoolSupplierExMapper.deleteSchoolSupplierRel(supplierId);
+	}
+	
+	public List<SchoolSupplierRel> findSchoolSupplierRel(Date lastUpdateTime) {
+	    return schoolSupplierExMapper.findSchoolSupplierRel(lastUpdateTime);
 	}
 	
 }

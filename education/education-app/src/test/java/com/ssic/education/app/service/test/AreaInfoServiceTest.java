@@ -15,6 +15,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ssic.education.app.dto.District;
+import com.ssic.education.app.dto.School;
 import com.ssic.education.app.service.IHomePageService;
 import com.ssic.education.app.test.BaseTestCase;
 import com.ssic.education.common.dto.AddressStatistic;
@@ -37,12 +38,12 @@ public class AreaInfoServiceTest extends BaseTestCase {
     protected static final Logger logger = LoggerFactory.getLogger(AreaInfoServiceTest.class);
     
     @Autowired
-    private IHomePageService areaInfoService;
+    private IHomePageService homePageService;
     
     @Test
     public void getSubDistricetSchoolStatisticTest() {
 	logger.info(" ----- test getSubDistricetSchoolStatisticTest ----- ");
-	Response<List<AddressStatistic>> response = areaInfoService.getSubDistricetSchoolStatistic("310000", 1);
+	Response<List<AddressStatistic>> response = homePageService.getSubDistricetSchoolStatistic("310000", 1);
 	Assert.assertNotNull(response);
 	Assert.assertTrue(CollectionUtils.isNotEmpty(response.getData()));
 	
@@ -54,7 +55,7 @@ public class AreaInfoServiceTest extends BaseTestCase {
     @Test
     public void getDistrictTest() {
 	logger.info(" ----- test getDistrictTest ----- ");
-	Response<List<District>> response = areaInfoService.getSubDistricetByParentCode("310000");
+	Response<List<District>> response = homePageService.getSubDistricetByParentCode("310000");
 	Assert.assertNotNull(response);
 	Assert.assertTrue(CollectionUtils.isNotEmpty(response.getData()));
 	
@@ -67,7 +68,7 @@ public class AreaInfoServiceTest extends BaseTestCase {
     @Test
     public void getSchoolLevelTest() {
 	logger.info(" ----- test getSchoolLevelTest ----- ");
-	Response<Map<Integer, String>> response = areaInfoService.getSchoolLevel();
+	Response<Map<Integer, String>> response = homePageService.getSchoolLevel();
 	Assert.assertNotNull(response);
 	Assert.assertTrue(MapUtils.isNotEmpty(response.getData()));
 	
@@ -76,6 +77,17 @@ public class AreaInfoServiceTest extends BaseTestCase {
 	}
     }
     
+    @Test
+    public void getSchoolList() {
+	logger.info(" ----- test getSchoolList ----- ");
+	Response<List<School>> response = homePageService.getSchoolList(null);
+	Assert.assertNotNull(response);
+	Assert.assertTrue(CollectionUtils.isNotEmpty(response.getData()));
+	
+	for(School school : response.getData()) {
+	     logger.info(school.toString());
+	}
+    }
     
 }
 

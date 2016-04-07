@@ -87,4 +87,20 @@
          update t_edu_school_supplier_rel a set a.stat=0 where a.supplier_id = #{supplierId}
     </update>
     
+    <select id="findSchoolSupplierRel" resultType="com.ssic.education.common.dto.SchoolSupplierRel">
+   		select * from (
+			select school.id schoolId, school.school_name schoolName, school.school_district schoolDistrict, school.longitude x, 
+			school.latitude y, school.index_key indexKey, supplier.id supplierId, supplier.supplier_name supplierName,
+			IFNULL(school.last_update_time, IFNULL(school.create_time, NULL)) lastUpdateTime, IFNULL(supplier.certificate_icon is not null,FALSE) verified
+			from t_edu_school school
+			left join t_edu_school_supplier_rel rel on school.id = rel.school_id and rel.stat = 1 
+			left join t_edu_school_supplier supplier on rel.supplier_id = supplier.id and supplier.stat = 1
+			where school.stat = 1
+		) result
+		where 1=1 
+		<if test="lastUpdateTime != null">
+			and lastUpdateTime > #{lastUpdateTime} 
+		</if>
+    </select>
+    
 </mapper>
