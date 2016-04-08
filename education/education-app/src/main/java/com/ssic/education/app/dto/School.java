@@ -3,6 +3,7 @@
  */
 package com.ssic.education.app.dto;
 
+import java.util.Date;
 import java.util.List;
 
 import lombok.Getter;
@@ -47,6 +48,10 @@ public class School {
     @Getter
     @Setter
     private String indexKey;
+    
+    @Getter
+    @Setter
+    private Date lastUpdateTime;
     
     @Getter
     @Setter

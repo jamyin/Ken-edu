@@ -54,6 +54,14 @@ public class HomePageController {
     }
     
     
+    /**     
+     * getDistrict：根据地区父节点获取其子节点的所有地区信息
+     * @param parentDistrictCode
+     * @return
+     * @exception	
+     * @author rkzhang
+     * @date 2016年4月7日 下午7:15:11	 
+     */
     @RequestMapping("/district/{parentDistrictCode}")
     @ResponseBody
     public Response<List<District>> getDistrict(@PathVariable("parentDistrictCode")String parentDistrictCode) {	
@@ -61,19 +69,36 @@ public class HomePageController {
 	return homePageService.getSubDistricetByParentCode(parentDistrictCode);
     }
     
+    
+    /**     
+     * getSchoolLevel：获取所有学校等级信息
+     * @return
+     * @exception	
+     * @author rkzhang
+     * @date 2016年4月7日 下午7:15:15	 
+     */
     @RequestMapping("/school-level")
     @ResponseBody
     public Response<Map<Integer, String>> getSchoolLevel() {	
 	
 	return homePageService.getSchoolLevel();
     }
+   
     
-    @RequestMapping("/school-list/{lastUpdateTime}")
+    /**     
+     * getSchoolList：获取学校信息列表
+     * @param lastUpdateTime 最后修改时间，如果有最后修改时间就增量获取于最后修改时间之后有修改的记录。
+     * @return
+     * @exception	
+     * @author rkzhang
+     * @date 2016年4月7日 下午7:15:19	 
+     */
+    @RequestMapping("/school-list")
     @ResponseBody
-    public Response<List<School>> getSchoolList(@PathVariable("lastUpdateTime")@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")Date lastUpdateTime) {	
+    public Response<List<School>> getSchoolList(@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")Date lastUpdateTime) {	
 	
 	return homePageService.getSchoolList(lastUpdateTime);
     }
-    
+  
 }
 

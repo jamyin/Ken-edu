@@ -13,7 +13,7 @@
           http://www.springframework.org/schema/util/spring-util-3.0.xsd"
 	default-autowire="byType">
 
-	<context:component-scan base-package="com.ssic.game.app.controller.*" />
+	<context:component-scan base-package="com.ssic.education.app.controller" />
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
 		p:prefix="/" p:suffix=".jsp" />
