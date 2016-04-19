@@ -38,7 +38,7 @@ public class HomePageController {
     private IHomePageService homePageService;
     
     /**     
-     * getDistrictSchoolStatistic：根据地区编码获取其下一级地区信息
+     * getDistrictSchoolStatistic：根据地区编码获取其下一级地区信息，地区对应的学校
      * @param parentDistrictCode
      * @param schoolLevel -1 全部  0 幼儿园，1 小学，2 初中，3 高中，4 大学 
      * @return
