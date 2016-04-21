@@ -39,6 +39,10 @@ public class School {
     
     @Getter
     @Setter
+    private String districtCode;
+    
+    @Getter
+    @Setter
     private Float x;
     
     @Getter

@@ -38,6 +38,10 @@ public class SchoolSupplierRel {
     
     @Getter
     @Setter
+    private String districtCode;
+    
+    @Getter
+    @Setter
     private Float x;
     
     @Getter
