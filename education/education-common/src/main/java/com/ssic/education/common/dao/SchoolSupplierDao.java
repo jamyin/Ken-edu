@@ -2,6 +2,7 @@ package com.ssic.education.common.dao;
 
 import java.util.Date;
 import java.util.List;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.ssic.education.common.dto.PageHelperDto;
@@ -13,15 +14,22 @@ import com.ssic.education.common.pojo.SchoolSupplier;
 import com.ssic.education.common.pojo.SchoolSupplierExample;
 import com.ssic.education.common.pojo.SchoolSupplierExample.Criteria;
 import com.ssic.util.StringUtils;
+import com.ssic.util.base.MyBatisBaseDao;
 import com.ssic.util.constants.DataStatus;
 
 @Repository
-public class SchoolSupplierDao {
+public class SchoolSupplierDao extends MyBatisBaseDao<SchoolSupplier> {
 
+	
+	 /**   
+	 * schoolSupplierMapper: （一句话描述这个变量表示什么）      
+	 */   
 	@Autowired
-	private SchoolSupplierMapper schoolSupplierMapper;
+	@Getter
+	private SchoolSupplierMapper mapper;
+	
 	@Autowired
-    private SchoolSupplierExMapper schoolSupplierExMapper ;
+	private SchoolSupplierExMapper schoolSupplierExMapper ;
 	
 	
 	//学校加工商统一查询
@@ -39,7 +47,7 @@ public class SchoolSupplierDao {
 		 }
 		 criteria.andStatEqualTo(DataStatus.ENABLED);
 		 example.setOrderByClause("  id desc  ");
-		 return schoolSupplierMapper.selectByExample(example);
+		 return mapper.selectByExample(example);
 	}
 	
 	//分页查询
@@ -57,7 +65,7 @@ public class SchoolSupplierDao {
 		 }
 		 criteria.andStatEqualTo(DataStatus.ENABLED);
 		 example.setOrderByClause("  id desc  limit "+phdto.getBeginRow()+","+phdto.getRows());
-		 return schoolSupplierMapper.selectByExample(example);
+		 return mapper.selectByExample(example);
 	}
 	
 	//分页查询返回条数
@@ -75,24 +83,24 @@ public class SchoolSupplierDao {
 		 }
 		 criteria.andStatEqualTo(DataStatus.ENABLED);
 		 example.setOrderByClause("  id desc  limit "+phdto.getBeginRow()+","+phdto.getRows());
-		return schoolSupplierMapper.countByExample(example);
+		return mapper.countByExample(example);
 	}
 	
 	//学校加工商统一插入
 	public int insertSchoolSupplier(SchoolSupplier param){
 		param.setStat(DataStatus.ENABLED);
-		return  schoolSupplierMapper.insert(param);
+		return  mapper.insert(param);
 	}
 	
 	//学校加工商同意更新
 	public int updateSchoolSupplier(SchoolSupplier param){
-		return schoolSupplierMapper.updateByPrimaryKeySelective(param);
+		return mapper.updateByPrimaryKeySelective(param);
 	}
 	
 	//学校加工商同意删除
 	public int deleteSchoolSupplier(SchoolSupplier param){
 		param.setStat(DataStatus.DISABLED);
-		return schoolSupplierMapper.updateByPrimaryKeySelective(param);
+		return mapper.updateByPrimaryKeySelective(param);
 	}
 	
 	//级联项目表查询,当phdto.beginRow!=0 and phdto.rows!=0 开始分页
