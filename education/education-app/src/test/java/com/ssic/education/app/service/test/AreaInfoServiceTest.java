@@ -18,7 +18,7 @@ import com.ssic.education.app.dto.District;
 import com.ssic.education.app.dto.School;
 import com.ssic.education.app.service.IHomePageService;
 import com.ssic.education.app.test.BaseTestCase;
-import com.ssic.education.common.dto.AddressStatistic;
+import com.ssic.test.common.dto.AddressStatistic;
 import com.ssic.util.model.Response;
 
 /**		

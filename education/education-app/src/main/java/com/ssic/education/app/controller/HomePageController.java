@@ -6,16 +6,18 @@ package com.ssic.education.app.controller;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.ssic.education.app.dto.District;
 import com.ssic.education.app.dto.School;
 import com.ssic.education.app.service.IHomePageService;
-import com.ssic.education.common.dto.AddressStatistic;
+import com.ssic.test.common.dto.AddressStatistic;
 import com.ssic.util.model.Response;
 
 /**		

@@ -13,7 +13,7 @@ import com.ssic.education.admin.pageModel.DataGrid;
 import com.ssic.education.admin.pageModel.PageHelper;
 import com.ssic.education.admin.pojo.Users;
 import com.ssic.education.admin.util.MD5Util;
-import com.ssic.education.common.dto.ProjectDto;
+import com.ssic.test.common.dto.ProjectDto;
 import com.ssic.util.BeanUtils;
 import com.ssic.util.StringUtils;
 import com.ssic.util.UUIDGenerator;

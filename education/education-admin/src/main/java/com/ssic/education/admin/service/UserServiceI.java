@@ -11,7 +11,7 @@ import com.ssic.education.admin.pageModel.PageHelper;
 import com.ssic.education.admin.pageModel.SessionInfo;
 import com.ssic.education.admin.pageModel.Tree;
 import com.ssic.education.admin.pageModel.User;
-import com.ssic.education.common.dto.ProjectDto;
+import com.ssic.test.common.dto.ProjectDto;
 
 
 /**

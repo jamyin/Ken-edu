@@ -11,11 +11,11 @@ import org.springframework.stereotype.Service;
 import com.ssic.education.admin.pageModel.PageHelper;
 import com.ssic.education.admin.pageModel.Role;
 import com.ssic.education.admin.pageModel.Tree;
-import com.ssic.education.common.dao.ProjectDao;
-import com.ssic.education.common.dto.PageHelperDto;
-import com.ssic.education.common.dto.ProjectDto;
-import com.ssic.education.common.dto.ProjectUsersDto;
 import com.ssic.education.manage.service.ProjectService;
+import com.ssic.test.common.dao.ProjectDao;
+import com.ssic.test.common.dto.PageHelperDto;
+import com.ssic.test.common.dto.ProjectDto;
+import com.ssic.test.common.dto.ProjectUsersDto;
 
 @Service
 public class ProjectServiceImpl implements ProjectService

@@ -4,10 +4,11 @@
 package com.ssic.education.app.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import com.ssic.education.app.dto.SupplierInfo;
 import com.ssic.education.app.service.ISchoolProducerService;
-import com.ssic.education.common.dao.SchoolSupplierDao;
-import com.ssic.education.common.pojo.SchoolSupplier;
+import com.ssic.test.common.dao.SchoolSupplierDao;
+import com.ssic.test.common.pojo.SchoolSupplier;
 import com.ssic.util.BeanUtils;
 import com.ssic.util.model.Response;
 

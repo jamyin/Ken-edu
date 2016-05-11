@@ -13,8 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 
 import com.ssic.education.app.test.BaseTestCase;
-import com.ssic.education.common.dao.SchoolSupplierDao;
-import com.ssic.education.common.dto.SchoolSupplierRel;
+import com.ssic.test.common.dao.SchoolSupplierDao;
+import com.ssic.test.common.dto.SchoolSupplierRel;
 
 /**		
  * <p>Title: SchoolSupplierDaoTest </p>

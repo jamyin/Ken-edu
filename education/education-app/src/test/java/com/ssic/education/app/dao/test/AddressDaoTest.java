@@ -13,9 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 
 import com.ssic.education.app.test.BaseTestCase;
-import com.ssic.education.common.dao.AddressDao;
-import com.ssic.education.common.dto.AddressStatistic;
-import com.ssic.education.common.pojo.Address;
+import com.ssic.test.common.dao.AddressDao;
+import com.ssic.test.common.dto.AddressStatistic;
+import com.ssic.test.common.pojo.Address;
 import com.ssic.util.UUIDGenerator;
 import com.ssic.util.constants.DataStatus;
 
