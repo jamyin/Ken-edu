@@ -252,6 +252,19 @@
 	    <groupId>org.apache.poi</groupId>
 	    <artifactId>poi-ooxml-schemas</artifactId>
        </dependency>
+       
+		<dependency>
+			<groupId>de.odysseus.staxon</groupId>
+			<artifactId>staxon</artifactId>
+			<version>1.2</version>
+		</dependency>       
+       
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.1</version>
+		</dependency>       
+       
 	</dependencies>
 	
 	<build>
