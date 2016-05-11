@@ -9,7 +9,7 @@
 	var sessionInfo_userId = '${sessionInfo.id}';
 	if (sessionInfo_userId) {
 
-		layout_west_tree_url = '${pageContext.request.contextPath}/resourceController/tabTree?tabName=系统管理';
+		layout_west_tree_url = '${pageContext.request.contextPath}/resourceController/tabTree?tabName=系统模块';
 		//layout_west_education_tree_url = '${pageContext.request.contextPath}/resourceController/tabTree?tabType=1';
 
 	}

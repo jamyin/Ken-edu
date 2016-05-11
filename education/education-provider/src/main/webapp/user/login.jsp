@@ -126,7 +126,7 @@
 												.html(
 														$
 																.formatString(
-																		'[<strong>{0}</strong>]，欢迎你登录:[IMS赛事智能管理系统]',
+																		'[<strong>{0}</strong>]，欢迎你登录:[团餐供应商管理系统]',
 																		result.obj.userAccount,
 																		result.obj.ip));
 									} else {
