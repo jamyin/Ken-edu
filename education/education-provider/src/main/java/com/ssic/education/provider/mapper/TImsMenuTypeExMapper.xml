@@ -4,11 +4,11 @@
 	 <select id="findAll" resultType="com.ssic.education.provider.dto.TImsMenuTypeDto" >
 		select id as id,
 		       name as name
- 		 from t_admin_menu_type menuType where 1=1
+ 		 from t_pro_admin_menu_type menuType where 1=1
 		<!-- <include refid="where_clause_1" /> -->
 	 </select>
 	 <select id="findCountBy" resultType="Integer">
-	 	select count(*) from t_admin_users users
+	 	select count(*) from t_pro_admin_users users
 	 	where users.isDelete=0 
 	 	<include refid="where_clause_1" />
 	 </select>
@@ -44,7 +44,7 @@
 		id AS id,
 		name AS name
 		FROM
-		t_admin_menu_type type where type.id=#{menuTypeId} 
+		t_pro_admin_menu_type type where type.id=#{menuTypeId} 
 	</select> 
 	 
 </mapper>

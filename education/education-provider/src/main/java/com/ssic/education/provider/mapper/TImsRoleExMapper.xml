@@ -14,7 +14,7 @@
 		seq AS seq,
 		pid AS pid
 		FROM
-		t_admin_role where 1=1
+		t_pro_admin_role where 1=1
 		<include refid="where_clause_1" />
 	</select>
 
@@ -61,12 +61,12 @@
 		tresources1_.menu_id AS
 		r_m_menu_id
 		FROM
-		t_admin_role trole0_
-		LEFT OUTER JOIN t_admin_role_menu
+		t_pro_admin_role trole0_
+		LEFT OUTER JOIN t_pro_admin_role_menu
 		tresources1_ ON trole0_.id =
 		tresources1_.role_id
 		LEFT OUTER JOIN
-		t_admin_menu tresource2_ ON tresources1_.menu_id =
+		t_pro_admin_menu tresource2_ ON tresources1_.menu_id =
 		tresource2_.id
 		WHERE
 		trole0_.id =#{role.id}
@@ -87,13 +87,13 @@
 		seq,
 		c.pid AS pid
 		FROM
-		t_admin_role c
+		t_pro_admin_role c
 		WHERE
 		c.id IN (
 		SELECT DISTINCT
 		b.role_id
 		FROM
-		t_admin_users_role b
+		t_pro_admin_users_role b
 		WHERE
 		b.user_id = #{user_id} and b.stat
 		= '1'
@@ -118,7 +118,7 @@
 		seq AS seq,
 		pid AS pid
 		FROM
-		t_admin_role where id=#{roleId}
+		t_pro_admin_role where id=#{roleId}
 	</select>
 
 	<select id="findByPid" resultType="com.ssic.education.provider.pojo.ProRole">
@@ -135,7 +135,7 @@
 		seq AS seq,
 		pid AS pid
 		FROM
-		t_admin_role
+		t_pro_admin_role
 		where pid=#{pid}
 	</select>
 
@@ -151,7 +151,7 @@
 		url,
 		pid,
 		menu_type_id,
-		stat from t_admin_menu where pid = #{pid} and stat = '1'
+		stat from t_pro_admin_menu where pid = #{pid} and stat = '1'
 
 	</select>
 
@@ -201,17 +201,17 @@
 		tresources1_.menu_id AS
 		r_menu_id
 		FROM
-		t_admin_role trole0_
-		LEFT OUTER JOIN t_admin_role_menu
+		t_pro_admin_role trole0_
+		LEFT OUTER JOIN t_pro_admin_role_menu
 		tresources1_ ON trole0_.id = tresources1_.role_id
 		LEFT OUTER JOIN
-		t_admin_menu tresource2_ ON tresources1_.menu_id =
+		t_pro_admin_menu tresource2_ ON tresources1_.menu_id =
 		tresource2_.id
 		INNER
-		JOIN t_admin_users_role tusers3_ ON trole0_.id =
+		JOIN t_pro_admin_users_role tusers3_ ON trole0_.id =
 		tusers3_.role_id
 		INNER
-		JOIN t_admin_users tuser4_ ON tusers3_.user_id =
+		JOIN t_pro_admin_users tuser4_ ON tusers3_.user_id =
 		tuser4_.id
 		WHERE 1=1 and
 		tusers3_.stat = '1' and tresources1_.stat = '1'
@@ -228,13 +228,13 @@
 
 	<insert id="inUserRole" parameterType="com.ssic.education.provider.dto.TImsUsersRoleDto">
 		INSERT INTO
-		t_admin_users_role (id, user_id, role_id, stat)
+		t_pro_admin_users_role (id, user_id, role_id, stat)
 		VALUES
 		(#{userRole.id},#{userRole.user_id},#{userRole.role_id},'1')
 	</insert>
 
 	<insert id="insertRole" parameterType="com.ssic.education.provider.dto.TImsRoleDto">
-		INSERT INTO t_admin_role (
+		INSERT INTO t_pro_admin_role (
 		id,
 		create_time,
 		role_name,
@@ -259,7 +259,7 @@
 	</insert>
 
 	<update id="updateRole" parameterType="com.ssic.education.provider.dto.TImsRoleDto">
-		UPDATE t_admin_role set
+		UPDATE t_pro_admin_role set
 		<if test="role.role_name != null">
 			role_name = #{role.role_name} ,
 		</if>
@@ -290,12 +290,12 @@
 
 	<update id="updateUserRole" parameterType="com.ssic.education.provider.dto.TImsUsersRoleDto">
 		update
-		t_admin_users_role b set b.stat = #{userRole.stat} where b.role_id =
+		t_pro_admin_users_role b set b.stat = #{userRole.stat} where b.role_id =
 		#{userRole.role_id}
 	</update>
 
 	<update id="updateRoleStat" parameterType="com.ssic.education.provider.dto.TImsRoleDto">
-		UPDATE t_admin_role set
+		UPDATE t_pro_admin_role set
 
 		<if test="role.stat != null">
 			stat = #{role.stat}
@@ -307,12 +307,12 @@
 
 	<update id="updateRoleMenu" parameterType="com.ssic.education.provider.dto.TImsRoleMenuDto">
 
-		update t_admin_role_menu a set a.stat = #{roleMenu.stat} where a.role_id =
+		update t_pro_admin_role_menu a set a.stat = #{roleMenu.stat} where a.role_id =
 		#{roleMenu.role_id}
 	</update>
 
 	<insert id="insertRoleMenu" parameterType="com.ssic.education.provider.dto.TImsRoleMenuDto">
-		insert into t_admin_role_menu (id,role_id,menu_id,stat)
+		insert into t_pro_admin_role_menu (id,role_id,menu_id,stat)
 		VALUES(#{roleMenu.id},#{roleMenu.role_id},#{roleMenu.menu_id},#{roleMenu.stat})
 	</insert>
 </mapper>
