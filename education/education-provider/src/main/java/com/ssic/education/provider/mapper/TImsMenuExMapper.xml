@@ -24,20 +24,20 @@
 		SELECT DISTINCT
 		c.menu_id
 		FROM
-		t_admin_role_menu c
+		t_pro_admin_role_menu c
 		WHERE
 		c.stat = 1
 		AND c.role_id IN (
 		SELECT DISTINCT
 		a.role_id
 		FROM
-		t_admin_users_role a
+		t_pro_admin_users_role a
 		WHERE
 		a.user_id = (
 		SELECT
 		id
 		FROM
-		t_admin_users
+		t_pro_admin_users
 		WHERE
 		id = #{userId}
 		AND stat = 1
@@ -73,20 +73,20 @@
 		SELECT DISTINCT
 		c.menu_id
 		FROM
-		t_admin_role_menu c
+		t_pro_admin_role_menu c
 		WHERE
 		c.stat = 1
 		AND c.role_id IN (
 		SELECT DISTINCT
 		a.role_id
 		FROM
-		t_admin_users_role a
+		t_pro_admin_users_role a
 		WHERE
 		a.user_id = (
 		SELECT
 		id
 		FROM
-		t_admin_users
+		t_pro_admin_users
 		WHERE
 		id = #{userId}
 		AND stat = 1
