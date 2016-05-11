@@ -7,7 +7,7 @@
        http://www.springframework.org/schema/beans 
        http://www.springframework.org/schema/beans/spring-beans.xsd 
        http://www.springframework.org/schema/aop  
-       http://www.springframework.org/schema/aop/spring-aop.xsd         
+       http://www.springframework.org/schema/aop/spring-aop.xsd        
        http://www.springframework.org/schema/tx 
        http://www.springframework.org/schema/tx/spring-tx.xsd">
 	
@@ -63,7 +63,7 @@
     </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com/ssic/**/mapper" />
+        <property name="basePackage" value="com/ssic/education/**/mapper" />
     </bean>
 
 	<!-- 配置数据库注解aop -->
@@ -71,9 +71,9 @@
     <bean id="manyDataSourceAspect" class="com.ssic.base.datasource.DataSourceAspect" />
     <aop:config>
         <aop:aspect id="c" ref="manyDataSourceAspect">
-            <aop:pointcut id="tx" expression="execution(* com.ssic..mapper.*.*(..))"/>
+            <aop:pointcut id="tx" expression="execution(* com.ssic.education..mapper.*.*(..))"/>
             <aop:before pointcut-ref="tx" method="before"/>
-        </aop:aspect>     
+        </aop:aspect>
     </aop:config>
 	
 	<tx:annotation-driven transaction-manager="transactionManager"  />
