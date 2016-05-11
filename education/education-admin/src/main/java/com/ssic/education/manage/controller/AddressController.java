@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssic.education.admin.pageModel.Json;
 import com.ssic.education.admin.service.UserServiceI;
-import com.ssic.education.common.dto.AddressDto;
-import com.ssic.education.common.dto.ProjectDto;
-import com.ssic.education.common.pageModel.Tree;
-import com.ssic.education.common.pojo.Address;
-import com.ssic.education.common.service.IAddressService;
+import com.ssic.test.common.dto.AddressDto;
+import com.ssic.test.common.dto.ProjectDto;
+import com.ssic.test.common.pageModel.Tree;
+import com.ssic.test.common.pojo.Address;
+import com.ssic.test.common.service.IAddressService;
 import com.ssic.util.StringUtils;
 
 /**

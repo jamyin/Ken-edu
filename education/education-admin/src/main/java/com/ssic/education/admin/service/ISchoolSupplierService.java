@@ -2,8 +2,8 @@ package com.ssic.education.admin.service;
 
 import java.util.List;
 
-import com.ssic.education.common.dto.SchoolSupplierDto;
-import com.ssic.education.common.pageModel.PageHelper;
+import com.ssic.test.common.dto.SchoolSupplierDto;
+import com.ssic.test.common.pageModel.PageHelper;
 
 public interface  ISchoolSupplierService {
 

@@ -28,7 +28,7 @@ import com.ssic.education.admin.pageModel.Tree;
 import com.ssic.education.admin.pageModel.User;
 import com.ssic.education.admin.service.UserServiceI;
 import com.ssic.education.admin.util.MD5Util;
-import com.ssic.education.common.dto.ProjectDto;
+import com.ssic.test.common.dto.ProjectDto;
 
 @Service
 public class UserServiceImpl implements UserServiceI {

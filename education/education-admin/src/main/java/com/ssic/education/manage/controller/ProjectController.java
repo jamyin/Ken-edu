@@ -17,8 +17,8 @@ import com.ssic.education.admin.pageModel.Json;
 import com.ssic.education.admin.pageModel.PageHelper;
 import com.ssic.education.admin.pageModel.Role;
 import com.ssic.education.admin.pageModel.Tree;
-import com.ssic.education.common.dto.ProjectDto;
 import com.ssic.education.manage.service.ProjectService;
+import com.ssic.test.common.dto.ProjectDto;
 import com.ssic.util.UUIDGenerator;
 
 @Controller

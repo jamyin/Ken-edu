@@ -14,7 +14,7 @@ import com.ssic.education.admin.mapper.RoleProjectMapper;
 import com.ssic.education.admin.pojo.RoleProject;
 import com.ssic.education.admin.pojo.RoleProjectExample;
 import com.ssic.education.admin.pojo.RoleProjectExample.Criteria;
-import com.ssic.education.common.dto.PageHelperDto;
+import com.ssic.test.common.dto.PageHelperDto;
 import com.ssic.util.StringUtils;
 import com.ssic.util.base.MyBatisBaseDao;
 import com.ssic.util.constants.DataStatus;

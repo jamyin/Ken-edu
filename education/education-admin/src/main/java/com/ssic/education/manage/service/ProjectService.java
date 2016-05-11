@@ -5,7 +5,7 @@ import java.util.List;
 import com.ssic.education.admin.pageModel.PageHelper;
 import com.ssic.education.admin.pageModel.Role;
 import com.ssic.education.admin.pageModel.Tree;
-import com.ssic.education.common.dto.ProjectDto;
+import com.ssic.test.common.dto.ProjectDto;
 
 
 public interface ProjectService {

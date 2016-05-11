@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ssic.education.admin.service.ISchoolSupplierService;
-import com.ssic.education.common.dao.SchoolSupplierDao;
-import com.ssic.education.common.dto.PageHelperDto;
-import com.ssic.education.common.dto.SchoolSupplierDto;
-import com.ssic.education.common.pageModel.PageHelper;
-import com.ssic.education.common.pojo.SchoolSupplier;
+import com.ssic.test.common.dao.SchoolSupplierDao;
+import com.ssic.test.common.dto.PageHelperDto;
+import com.ssic.test.common.dto.SchoolSupplierDto;
+import com.ssic.test.common.pageModel.PageHelper;
+import com.ssic.test.common.pojo.SchoolSupplier;
 import com.ssic.util.BeanUtils;
 
 @Service

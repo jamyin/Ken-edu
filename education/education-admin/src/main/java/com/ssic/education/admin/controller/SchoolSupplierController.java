@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ssic.base.datasource.DataSourceHolderUtil;
 import com.ssic.education.admin.pageModel.DataGrid;
 import com.ssic.education.admin.pageModel.Json;
-import com.ssic.education.common.pageModel.PageHelper;
 import com.ssic.education.admin.service.ISchoolSupplierService;
-import com.ssic.education.common.dto.SchoolSupplierDto;
+import com.ssic.test.common.dto.SchoolSupplierDto;
+import com.ssic.test.common.pageModel.PageHelper;
 import com.ssic.util.StringUtils;
 import com.ssic.util.UUIDGenerator;
 
