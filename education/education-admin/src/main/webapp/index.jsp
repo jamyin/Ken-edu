@@ -131,6 +131,5 @@
 		<div title="closeOther" data-options="iconCls:'delete'">关闭其他</div>
 		<div title="closeAll" data-options="iconCls:'delete'">关闭所有</div>
 	</div>
-
 </body>
 </html>
