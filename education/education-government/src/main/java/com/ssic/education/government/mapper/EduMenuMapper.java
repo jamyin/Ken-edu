@@ -1,9 +1,11 @@
 package com.ssic.education.government.mapper;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.ssic.education.government.pojo.EduMenu;
 import com.ssic.education.government.pojo.EduMenuExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface EduMenuMapper {
     /**
