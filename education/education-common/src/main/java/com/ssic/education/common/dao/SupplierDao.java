@@ -56,7 +56,10 @@ public class SupplierDao extends MyBatisBaseDao<ProSupplier> {
 		if (null != proSupplierDto) {
         	if (StringUtils.isNotEmpty(proSupplierDto.getId())){
         		criteria.andIdEqualTo(proSupplierDto.getId().trim());
-        	}		
+        	}
+        	if (StringUtils.isNotEmpty(proSupplierDto.getArea())){
+        		criteria.andAreaEqualTo(proSupplierDto.getArea().trim());
+        	}
         	if (StringUtils.isNotBlank(proSupplierDto.getSupplierName())){
         		criteria.andSupplierNameLike("%"+proSupplierDto.getSupplierName().trim()+"%");
         	}	

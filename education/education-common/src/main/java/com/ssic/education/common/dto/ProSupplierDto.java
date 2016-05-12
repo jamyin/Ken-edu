@@ -49,6 +49,18 @@ public class ProSupplierDto {
 
 	@Setter
 	@Getter
+    private String province;     //省
+
+	@Setter
+	@Getter
+    private String city;		 //市
+
+	@Setter
+	@Getter
+    private String area;         //区
+	
+	@Setter
+	@Getter
     private Date createTime;
 
 	@Setter
