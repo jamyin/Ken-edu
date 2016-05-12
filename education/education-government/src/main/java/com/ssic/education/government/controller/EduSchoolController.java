@@ -36,20 +36,37 @@ public class EduSchoolController extends BaseController{
 	@Autowired
 	private ProPackagesService proPackagesService;
 	
-	
+	/**
+	 * 
+	  @Name:  list 
+	  @Author: pengpeng
+	  @Date: 2016年5月12日 下午6:18:03 
+	  @Description: 学校列表
+	  @param dto
+	  @param page
+	  @return
+	 */
 	@RequestMapping(value = "/list")
 	public ModelAndView list(EduSchoolDto dto, PageQuery page) {
-		ModelAndView mv = new ModelAndView();
+		ModelAndView mv = getModelAndView();
 		PageResult<EduSchoolDto> result = eduSchoolService.list(dto, page);
 		mv.setViewName("/edu/school/list");
 		mv.addObject("pageList", result);
 		return mv;
 	}
 	
-	
+	/**
+	 * 
+	  @Name:  details 
+	  @Author: pengpeng
+	  @Date: 2016年5月12日 下午6:18:42 
+	  @Description: 学校餐详情
+	  @param dto
+	  @return
+	 */
 	@RequestMapping(value = "/details")
 	public ModelAndView details(ProPackagesDto dto) {
-		ModelAndView mv = new ModelAndView();
+		ModelAndView mv = getModelAndView();
 		EduSchoolDto eduSchoolDto = eduSchoolService.findById(dto.getCustomerId());
 		List<ProPackagesDto> proPackagesDtos = proPackagesService.getProPackages(dto);
 		mv.setViewName("/edu/school/details");

@@ -19,6 +19,11 @@ import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.mybatis.MyBatisBaseDao;
 import com.ssic.education.utils.util.BeanUtils;
 
+/**
+ * 
+ * @author pengpeng
+ * @Date: 2016年5月12日 下午5:36:42
+ */
 @Repository
 public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 

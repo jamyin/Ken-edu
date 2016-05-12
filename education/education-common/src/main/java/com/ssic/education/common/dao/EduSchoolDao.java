@@ -17,6 +17,11 @@ import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.mybatis.MyBatisBaseDao;
 import com.ssic.education.utils.util.BeanUtils;
 
+/**
+ * 
+ * @author pengpeng
+ * @Date: 2016年5月12日 下午5:36:21
+ */
 @Repository
 public class EduSchoolDao extends MyBatisBaseDao<EduSchool>{
 

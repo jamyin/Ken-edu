@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.ssic.education.common.dao.ProSupplierDao;
 import com.ssic.education.common.dto.ProSupplierDto;
+import com.ssic.education.common.pojo.ProSupplier;
 import com.ssic.education.common.service.ProSupplierService;
 import com.ssic.education.utils.util.BeanUtils;
 
@@ -15,7 +16,11 @@ public class ProSupplierServiceImpl implements ProSupplierService{
 	private ProSupplierDao proSupplierDao;
 	
 	public ProSupplierDto findById(String id) {
-		return BeanUtils.createBeanByTarget(proSupplierDao.selectByPrimaryKey(id), ProSupplierDto.class);
+		ProSupplier proSupplier =  proSupplierDao.selectByPrimaryKey(id);
+		if (null != proSupplier) {
+			return BeanUtils.createBeanByTarget(proSupplier, ProSupplierDto.class);
+		}
+		return null;
 	}
 	
 }
