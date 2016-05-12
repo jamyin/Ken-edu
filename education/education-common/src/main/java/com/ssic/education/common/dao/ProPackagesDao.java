@@ -16,6 +16,7 @@ import com.ssic.education.common.pojo.ProPackages;
 import com.ssic.education.common.pojo.ProPackagesExample;
 import com.ssic.education.government.dto.ProDishesDto;
 import com.ssic.education.government.dto.ProPackagesDto;
+import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.mybatis.MyBatisBaseDao;
 import com.ssic.education.utils.util.BeanUtils;
 
@@ -45,13 +46,15 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 		if (null != dto.getSupplyDate()) {
 			criteria.andSupplyDateEqualTo(dto.getSupplyDate());
 		}
+		criteria.andStatEqualTo(DataStatus.ENABLED);
 		List<ProPackagesDto> proPackagesDtos =BeanUtils.createBeanListByTarget(mapper.selectByExample(example), ProPackagesDto.class);
 		for (ProPackagesDto proPackagesDto : proPackagesDtos) {
 			ProDishesExample exampleDis = new ProDishesExample();
 			ProDishesExample.Criteria criteriaDis = exampleDis.createCriteria();
 			if (StringUtils.isNotBlank(proPackagesDto.getId())) {
 				criteriaDis.andPackageIdEqualTo(proPackagesDto.getId());
-			}			
+			}	
+			criteriaDis.andStatEqualTo(DataStatus.ENABLED);
 			List<ProDishesDto> proDishesDtos = BeanUtils.createBeanListByTarget(disMapper.selectByExample(exampleDis), ProDishesDto.class);
 			proPackagesDto.setProDishesDtos(proDishesDtos);
 		}
