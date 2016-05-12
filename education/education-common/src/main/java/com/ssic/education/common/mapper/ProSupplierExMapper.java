@@ -1,4 +1,4 @@
-package com.ssic.education.provider.mapper;
+package com.ssic.education.common.mapper;
 
 import org.apache.ibatis.annotations.Param;
 
