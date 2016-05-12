@@ -2,11 +2,13 @@ package com.ssic.education.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssic.education.common.dto.ProSupplierDto;
 import com.ssic.education.app.service.ISupplierService;
+import com.ssic.util.StringUtils;
 import com.ssic.util.constants.DataStatus;
 import com.ssic.util.model.PageQuery;
 import com.ssic.util.model.PageResult;
@@ -48,6 +50,34 @@ public class SupplierController {
     		result.setMessage("未查到相关记录！");
     		return result;
     	}
+    }
+    
+    /**
+    * @Title: findSupplierDetail
+    * @Description: 根据Id查询供应商详细信息
+    * @author Ken Yin  
+    * @date 2016年5月12日 下午5:10:49
+    * @return Response<ProSupplierDto>    返回类型
+     */
+    @RequestMapping("/findSupplierDetail/{id}")
+    @ResponseBody
+    public Response<ProSupplierDto> findSupplierDetail(@PathVariable("id")String id) {
+    	Response<ProSupplierDto> result = new Response<ProSupplierDto>();
+    	if(StringUtils.isEmpty(id)){
+    		result.setStatus(DataStatus.HTTP_FAILE);
+    		result.setMessage("参数id为空！");
+    		return result;
+    	}
+    	ProSupplierDto supplier = supplierService.findSupplierDetail(id);
+    	if(supplier != null){
+    		result.setStatus(DataStatus.HTTP_SUCCESS);
+    		result.setMessage("查询成功！");
+    		result.setData(supplier);
+    		return result;
+    	}
+    	result.setStatus(DataStatus.HTTP_FAILE);
+		result.setMessage("未查到相关记录！");
+		return result;
     }
 }
 

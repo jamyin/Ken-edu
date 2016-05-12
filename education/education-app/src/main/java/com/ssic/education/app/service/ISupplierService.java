@@ -20,5 +20,8 @@ public interface ISupplierService {
 	//查询所有供应商-带分页
 	PageResult<ProSupplierDto> findSupplierList(ProSupplierDto proSupplierDto, PageQuery query);
 
+	//根据Id查询供应商详细信息
+	ProSupplierDto findSupplierDetail(String id);
+
 }
 

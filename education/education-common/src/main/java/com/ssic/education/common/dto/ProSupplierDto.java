@@ -1,6 +1,7 @@
 package com.ssic.education.common.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -70,4 +71,8 @@ public class ProSupplierDto {
 	@Setter
 	@Getter
     private Integer stat;
+
+	@Setter
+	@Getter
+    private List<ProLicenseDto> proLicenseDtoList;
 }

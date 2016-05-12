@@ -14,3 +14,20 @@
 	</select>
 
 </mapper>
+
+
+<select id="findSupplierDetail" resultType="com.ssic.education.common.dto.ProSupplierDto" parameterType="java.lang.String">
+	SELECT
+			a.id,a.supplier_name AS supplierName,a.asddress,a.provinces,a.city,a.area,a.supplier_type AS supplierType,a.business_license AS businessLicense,a.organization_code AS organizationCode,a.corporation,a.contact_way AS contactWay,a.longitude,a.latitude,a.create_time AS createTime,a.last_update_time AS lastUpdateTime,a.stat,
+			b.lic_name AS licName,b.lic_no AS licNo,b.lic_type AS licType,b.lic_end_date AS licEndDate,b.lic_pic AS licPic 
+ 	FROM
+		t_pro_supplier a
+	LEFT JOIN 
+	    t_pro_license b
+	ON a.id = b.relation_id
+	WHERE 
+		a.id = #{id} AND a.stat = 1 AND b.stat = 1
+	ORDER BY a.create_time DESC
+</select>
+
+</mapper>
