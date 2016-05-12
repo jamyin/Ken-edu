@@ -2,6 +2,7 @@ package com.ssic.education.government.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * 
@@ -14,6 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value="wares")
 public class WaresController extends BaseController{
 
-	
+	@RequestMapping(value="list")
+	public ModelAndView list(){
+		ModelAndView mv = new ModelAndView();
+		
+		
+		return mv;
+	}
 
 }
