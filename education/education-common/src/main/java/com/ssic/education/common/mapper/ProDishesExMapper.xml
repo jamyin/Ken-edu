@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ssic.education.common.mapper.ProDishesExMapper" >
-	<select id="selectWaresByContact" resultType="com.ssic.education.government.dto.ProWaresDto" parameterType="com.ssic.education.government.dto.ProDishesDto">
+	<select id="selectWaresByContact" resultType="com.ssic.education.government.dto.ProWaresDto" parameterType="com.ssic.education.common.dto.ProDishesDto">
 	   SELECT a.id,a.wares_name as waresName,a.spec,a.shelf_life as shelfLife,a.unit, a.supplier_id as supplierId,a.way,a.wares_type as waresType,a.custom_code as customCode,
 	   a.bar_code as barCode,a.en_name as enName,a.place,a.dishes,a.last_update_time as lastUpdateTime,a.create_time as createTime,a.stat,
 	   FROM t_pro_wares a 
@@ -12,7 +12,7 @@
        limit  #{page.startNum}, #{page.pageSize}
 	</select>
 	
-	<select id="countWares" resultType="java.lang.Long" parameterType="com.ssic.education.government.dto.ProDishesDto">
+	<select id="countWares" resultType="java.lang.Long" parameterType="com.ssic.education.common.dto.ProDishesDto">
 	   SELECT count(*) 
 	   FROM t_pro_wares a 
 	   LEFT JOIN t_pro_dishes b on a.wares_id = a.id 
