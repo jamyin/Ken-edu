@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.ssic.education.provider.mapper.ProWaresExMapper">
+
+
+<select id="findWares" resultType="com.ssic.education.provider.dto.ProWaresDto">
+					SELECT
+				a.id AS id,
+				a.wares_name AS waresName,
+				a.spec AS spec,
+				a.shelf_life AS shelfLife,
+				a.unit AS unit,
+				b.supplier_name AS supplierName,
+				a.way AS way,
+				a.wares_type AS waresType,
+				a.custom_code AS customCode,
+				a.bar_code AS barCode,
+				a.en_name AS enName,
+				a.place AS place,
+				a.dishes AS dishes,
+				a.image AS waresImage,
+				a.supplier_id  AS supplierId
+			FROM
+				t_pro_wares a,
+				t_pro_supplier b
+			WHERE
+			a.supplier_id = b.id
+			AND a.stat = 1
+			AND b.stat = 1
+
+		order by a.crate_time desc
+	<!-- 	limit #{page.beginRow},#{page.rows} -->
+	</select>
+
+</mapper>
