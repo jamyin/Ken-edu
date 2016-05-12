@@ -11,7 +11,7 @@
 		$('#form')
 				.form(
 						{
-							url : '${pageContext.request.contextPath}/waresController/insertWares?id='+$("#id").val(),
+							url : '${pageContext.request.contextPath}/waresController/insertWares',
 							onSubmit : function() {
 								
 								parent.$.messager.progress({
@@ -66,31 +66,31 @@
 		<div class="easyui-layout" data-options="fit:true,border:false">
 			<div data-options="region:'center',border:false" title=""
 				style="overflow: hidden;">
-				<form id="form" method="post">
+				<form id="form" method="post"  enctype="multipart/form-data">
 				   <input id="id" name="id" type="hidden" value="${id}" />
 					<table class="table table-hover table-condensed">
 						<tr>
 
 							<th>商品名称</th>
-							<td><input name="waresName" type="text" id="userAccount"
+							<td><input name="waresName" type="text" id="waresName"
 								placeholder="请输入商品名称" class="easyui-validatebox span2"
 								data-options="required:true" ></td>
 							<th>规格</th>
-							<td><input name="spec" type="text" placeholder="请输入邮箱"  id="email"
+							<td><input name="spec" type="text" placeholder="请输入规格<"  id="spec"
 								class="easyui-validatebox span2"></td>
 
 						</tr>
 						<tr>
 							<th>保质期</th>
-							<td><input name="shelfLife" type="text" placeholder="请输入员工姓名" id="name"
+							<td><input name="shelfLife" type="text" placeholder="请输入保质期" id="shelfLife"
 								class="easyui-validatebox span2" data-options="required:true"></td>
 							<th>保质期单位</th>
-							<td><input name="unit" type="text" placeholder="请输入员工编号" id="userNo"
+							<td><input name="unit" type="text" placeholder="请输入单位" id="unit"
 								class="easyui-validatebox span2" data-options="required:true"></td>
 						</tr>
 						<tr>
 							<th>供应商名称</th>
-							<td><input name="supplierName" type="text" placeholder="请输入年龄" id="age"
+							<td><input name="supplierName" type="text" placeholder="请输入供应商名称" id="supplierName"
 								class="easyui-validatebox span2" data-options="required:true"></td>
 							<th>商品方向</th>
 							<td><select name="way" class="easyui-combobox" id="way"
@@ -100,7 +100,7 @@
 						</tr>
 						<tr>
 							<th>企业自定义代码</th>
-						    <td><input name="customCode" type="text" placeholder="请输入手机号" id="phone"
+						    <td><input name="customCode" type="text" placeholder="请输入自定义代码" id="customCode"
 								class="easyui-validatebox span2" data-options="required:true"></td>
 							<th>产地</th>
 							<td><input name="place" type="text" id="place"
@@ -109,7 +109,7 @@
 						</tr>
 						<tr>
 							<th>备注</th>
-							<td><input name="remark" type="text" placeholder="请输入年龄" id="remark"
+							<td><input name="remark" type="text" placeholder="请输入备注" id="remark"
 								class="easyui-validatebox span2" data-options="required:true"></td>
 							<th>是否是菜肴</th>
 							<td><select name="dishes" class="easyui-combobox" id="dishes"
@@ -120,7 +120,10 @@
 						<tr>
 							<th>图片</th>
 							<td>	<input type="file" name="imgUrl"  id="imgUrl" onchange="setImagePreview(this,'minImg');" accept="image/*" />	</td>
-						
+							<th>条形码</th>
+							<td><input name="barCode" type="text" id="barCode"
+								placeholder="请输入条形码" class="easyui-validatebox span2"
+								data-options="required:true"></td>
 						</tr>
 					</table>
 			
