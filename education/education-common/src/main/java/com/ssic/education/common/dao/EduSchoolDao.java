@@ -50,6 +50,4 @@ public class EduSchoolDao extends MyBatisBaseDao<EduSchool>{
 		return mapper.countByExample(example);
 	}
 	
-	
-	
 }
