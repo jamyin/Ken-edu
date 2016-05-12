@@ -45,7 +45,7 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 		if (null != dto.getSupplyDate()) {
 			criteria.andSupplyDateEqualTo(dto.getSupplyDate());
 		}
-		criteria.andStatEqualTo(DataStatus.ENABLED);
+//		criteria.andStatEqualTo(DataStatus.ENABLED);
 		List<ProPackagesDto> proPackagesDtos =BeanUtils.createBeanListByTarget(mapper.selectByExample(example), ProPackagesDto.class);
 		for (ProPackagesDto proPackagesDto : proPackagesDtos) {
 			ProDishesExample exampleDis = new ProDishesExample();
@@ -53,7 +53,7 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 			if (StringUtils.isNotBlank(proPackagesDto.getId())) {
 				criteriaDis.andPackageIdEqualTo(proPackagesDto.getId());
 			}	
-			criteriaDis.andStatEqualTo(DataStatus.ENABLED);
+//			criteriaDis.andStatEqualTo(DataStatus.ENABLED);
 			List<ProDishesDto> proDishesDtos = BeanUtils.createBeanListByTarget(disMapper.selectByExample(exampleDis), ProDishesDto.class);
 			proPackagesDto.setProDishesDtos(proDishesDtos);
 		}
