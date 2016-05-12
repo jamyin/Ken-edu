@@ -6,6 +6,7 @@ import lombok.Getter;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.ssic.education.common.dto.ProDishesDto;
 import com.ssic.education.common.dto.ProPackagesDto;
@@ -17,7 +18,7 @@ import com.ssic.education.common.pojo.ProPackagesExample;
 import com.ssic.education.utils.mybatis.MyBatisBaseDao;
 import com.ssic.education.utils.util.BeanUtils;
 
-
+@Repository
 public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 
 	@Getter
