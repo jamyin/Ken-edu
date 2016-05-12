@@ -7,7 +7,7 @@
     <artifactId>education</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>education-government</artifactId>
+ 	 <artifactId>education-government</artifactId>
   <packaging>war</packaging>
   <name>education-government Maven Webapp</name>
   <url>http://maven.apache.org</url>
@@ -77,6 +77,11 @@
         <dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.ssic</groupId>
+			<artifactId>education-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	  </dependencies>
 	  
