@@ -9,6 +9,8 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ssic.education.utils.constants.SessionConstants;
+
 
 public class BaseController {
 	
@@ -33,6 +35,14 @@ public class BaseController {
 	public HttpServletRequest getRequest() {
 		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
 		return request;
+	}
+	
+	public void setSession(String userId){
+		getRequest().getSession().setAttribute(SessionConstants.LOGIN_USER_INFO,userId);
+	}
+	
+	public void removeSession(){
+		getRequest().getSession().removeAttribute(SessionConstants.LOGIN_USER_INFO);
 	}
 	
 	public static void logBefore(Logger logger, String interfaceName){
