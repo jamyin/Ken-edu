@@ -13,11 +13,12 @@ import org.springframework.stereotype.Repository;
 
 
 
+
+import com.ssic.education.common.mapper.ProSupplierExMapper;
 import com.ssic.education.common.mapper.ProWaresMapper;
 import com.ssic.education.common.pojo.ProWares;
 import com.ssic.education.provider.dto.PageHelperDto;
 import com.ssic.education.provider.dto.ProWaresDto;
-import com.ssic.education.provider.mapper.ProSupplierExMapper;
 import com.ssic.education.provider.mapper.ProWaresExMapper;
 import com.ssic.education.utils.util.BeanUtils;
 
