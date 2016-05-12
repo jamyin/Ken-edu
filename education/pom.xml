@@ -18,6 +18,7 @@
     <module>education-provider</module>
     <module>education-user</module>
     <module>education-user-api</module>
+    <module>education-government-user</module>
   </modules>
   
     <properties>	
@@ -390,7 +391,7 @@
 					<version>${ssic-base-redis.version}</version>
 				</dependency>
 				
-					<!-- 汉字转拼�?-->
+					<!-- 汉字转拼�??-->
 				 <dependency>
 	                <groupId>com.belerweb</groupId>
 	                <artifactId>pinyin4j</artifactId>

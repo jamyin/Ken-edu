@@ -11,7 +11,7 @@
 /**
  * 此类描述的是：
  * @author: cwftalus@163.com
- * @version: 2016年5月12日 下午2:20:03 
+ * @version: 2016年5月12日 下午3:54:53 
  */
 
-package com.ssic.education.government.service.impl;
+package com.ssic.education.government;

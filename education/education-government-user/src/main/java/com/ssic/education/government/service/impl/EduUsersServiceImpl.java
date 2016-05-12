@@ -13,8 +13,6 @@ public class EduUsersServiceImpl implements EduUsersService {
 	@Autowired
 	private EduUsersDao eduUsersDao;
 	
-
-	@Override
 	public EduUsersDto checkUser(EduUsersDto usersDto) {
 		// TODO Auto-generated method stub
 		return eduUsersDao.checkUser(usersDto);
