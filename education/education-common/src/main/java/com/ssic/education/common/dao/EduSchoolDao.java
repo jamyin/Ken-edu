@@ -6,6 +6,7 @@ import lombok.Getter;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.ssic.education.common.mapper.EduSchoolMapper;
 import com.ssic.education.common.pojo.EduSchool;
@@ -15,7 +16,7 @@ import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.mybatis.MyBatisBaseDao;
 import com.ssic.education.utils.util.BeanUtils;
 
-
+@Repository
 public class EduSchoolDao extends MyBatisBaseDao<EduSchool>{
 
 	@Autowired
