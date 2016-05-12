@@ -61,7 +61,7 @@ public class RoleServiceImpl implements RoleServiceI {
 		//插入role
 		TImsRoleDto roleDto = new TImsRoleDto();
 		roleDto.setId(role.getId());
-		roleDto.setRole_name(role.getName());
+		roleDto.setRoleName(role.getName());
 		roleDto.setRemark(role.getRemark());
 		roleDto.setSeq(role.getSeq());
 		roleDto.setPid(role.getPid());
@@ -104,7 +104,7 @@ public class RoleServiceImpl implements RoleServiceI {
 		//r.setPname(ram.getRole_name());
 		if (roleDto != null) {
 			BeanUtils.copyProperties(roleDto, r);
-			r.setName(roleDto.getRole_name());
+			r.setName(roleDto.getRoleName());
 			if (roleDto.getPid()!= null) {
 				r.setPid(roleDto.getPid());
 			//	TImsRoleDto roleDto2 = new TImsRoleDto();
@@ -113,7 +113,7 @@ public class RoleServiceImpl implements RoleServiceI {
 					 roleDto2 = imsRoleDao.findByPid(roleDto.getPid());
 				}
 				
-				r.setPname(roleDto2.getRole_name());
+				r.setPname(roleDto2.getRoleName());
 			}
 			//Set<Tresource> s = t.getTresources();
 			if (rMenuDtoList != null && !rMenuDtoList.isEmpty()) {
@@ -145,7 +145,7 @@ public class RoleServiceImpl implements RoleServiceI {
 			
 			//开始修改角色表
 			TImsRoleDto roDto = new TImsRoleDto();
-			roDto.setRole_name(role.getName());
+			roDto.setRoleName(role.getName());
 			roDto.setSeq(role.getSeq());
 			roDto.setRemark(role.getRemark());
 			roDto.setPid(role.getPid());
@@ -237,7 +237,7 @@ public class RoleServiceImpl implements RoleServiceI {
 			 for(TImsRoleDto mdot : roles ){
 				 Trole tr_dto = new Trole();
 				 tr_dto.setId(mdot.getId());
-				 tr_dto.setName(mdot.getRole_name());
+				 tr_dto.setName(mdot.getRoleName());
 				 tr_dto.setRemark(mdot.getRemark());
 				 tr_dto.setSeq(mdot.getSeq());
 				 tr_dto.setPjNo(mdot.getPid());
@@ -354,7 +354,7 @@ public class RoleServiceImpl implements RoleServiceI {
 					if (!StringUtils.isEmpty(roleDto.getPid())) {
 						tree.setPid(roleDto.getPid());
 					}
-					tree.setText(roleDto.getRole_name());
+					tree.setText(roleDto.getRoleName());
 					// 设置借点url属性
 					Map<String, Object> attr = new HashMap<String, Object>();
 					tree.setIconCls("status_online");

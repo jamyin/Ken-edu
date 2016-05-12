@@ -2,6 +2,7 @@ package com.ssic.education.provider.pageModel;
 
 public class Role implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private String id;
 	private String pid;
 	private String pname;
@@ -12,6 +13,22 @@ public class Role implements java.io.Serializable {
 
 	private String resourceIds;
 	private String resourceNames;
+
+
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**   
+	 * @param name the name to set   
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public String getIconCls() {
 		return iconCls;
@@ -59,14 +76,6 @@ public class Role implements java.io.Serializable {
 
 	public void setPname(String pname) {
 		this.pname = pname;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public String getRemark() {

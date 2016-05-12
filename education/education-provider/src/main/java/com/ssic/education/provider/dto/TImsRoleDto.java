@@ -22,7 +22,7 @@ public class TImsRoleDto implements Serializable{
      private Date create_time;
      @Getter
      @Setter
-     private String role_name;
+     private String roleName;
      @Getter
      @Setter
      private Integer no;
