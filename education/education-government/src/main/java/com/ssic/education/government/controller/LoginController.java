@@ -27,16 +27,21 @@ public class LoginController extends BaseController{
 		if(Objects.equal(getRequest().getMethod().toString(), RequestMethod.GET.toString())){
 			mv.setViewName("/login");	
 		}else{
-			EduUsersDto eduUser = eduUsersService.checkUser(usersDto);
+			EduUsersDto eduUser = eduUsersService.checkUser(usersDto);			
 			if(Objects.equal(eduUser, null)){
 				return new ModelAndView("redirect:/login.htm");
-			}			
+			}
+			setSession(eduUser.getId());
 			return new ModelAndView("redirect:/main.htm");  
 		}
 		return mv;
 	}
 	
-	
+	@RequestMapping(value="login_out")
+	public ModelAndView loginOut(EduUsersDto usersDto) {
+		removeSession();
+		return new ModelAndView("redirect:/login.htm");
+	}
 	
 
 }
