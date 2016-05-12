@@ -9,16 +9,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ssic.education.common.dto.EduSchoolDto;
+import com.ssic.education.common.dto.ProPackagesDto;
 import com.ssic.education.common.service.EduSchoolService;
 import com.ssic.education.common.service.ProPackagesService;
-import com.ssic.education.government.dto.EduSchoolDto;
-import com.ssic.education.government.dto.ProPackagesDto;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 
+/**
+ * 
+  @Author: pengpeng
+  @Date: 2016年5月12日 下午2:55:24 
+  @Description: 
+ */
 @Controller
 @RequestMapping(value = "/edu/school")
-public class EduSchoolController {
+public class EduSchoolController extends BaseController{
 	
 	protected static final Log logger = LogFactory.getLog(EduSchoolController.class);
 	
@@ -29,6 +35,7 @@ public class EduSchoolController {
 	
 	@Autowired
 	private ProPackagesService proPackagesService;
+	
 	
 	@RequestMapping(value = "/list")
 	public ModelAndView list(EduSchoolDto dto, PageQuery page) {
