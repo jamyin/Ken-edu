@@ -1,7 +1,6 @@
 package com.ssic.education.common.service;
 
-import com.ssic.education.common.dao.EduSchoolDao;
-import com.ssic.education.government.dto.EduSchoolDto;
+import com.ssic.education.common.dto.EduSchoolDto;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 

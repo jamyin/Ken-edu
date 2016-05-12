@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssic.education.common.dao.ProPackagesDao;
+import com.ssic.education.common.dto.ProPackagesDto;
 import com.ssic.education.common.service.ProPackagesService;
-import com.ssic.education.government.dto.ProPackagesDto;
 
 @Service
 public class ProPackagesServiceImpl implements ProPackagesService{

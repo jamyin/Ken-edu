@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssic.education.common.dao.EduSchoolDao;
+import com.ssic.education.common.dto.EduSchoolDto;
 import com.ssic.education.common.pojo.EduSchool;
 import com.ssic.education.common.service.EduSchoolService;
-import com.ssic.education.government.dto.EduSchoolDto;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 import com.ssic.education.utils.util.BeanUtils;

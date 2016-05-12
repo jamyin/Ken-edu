@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.ssic.education.app.dto.ProWaresDto;
 import com.ssic.education.app.dto.SupplierInfo;
 import com.ssic.util.model.Response;
 
@@ -38,7 +40,6 @@ public class SchoolProducerController {
     @RequestMapping("/supplier/{id}")
     @ResponseBody
     public Response<SupplierInfo> getSupplierInfo(@PathVariable("id")String id) {
-	
 	return null;
     }
 

@@ -7,14 +7,13 @@ import lombok.Getter;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.ssic.education.common.dto.ProDishesDto;
+import com.ssic.education.common.dto.ProPackagesDto;
 import com.ssic.education.common.mapper.ProDishesMapper;
 import com.ssic.education.common.mapper.ProPackagesMapper;
-import com.ssic.education.common.pojo.ProDishes;
 import com.ssic.education.common.pojo.ProDishesExample;
 import com.ssic.education.common.pojo.ProPackages;
 import com.ssic.education.common.pojo.ProPackagesExample;
-import com.ssic.education.government.dto.ProDishesDto;
-import com.ssic.education.government.dto.ProPackagesDto;
 import com.ssic.education.utils.mybatis.MyBatisBaseDao;
 import com.ssic.education.utils.util.BeanUtils;
 
