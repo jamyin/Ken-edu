@@ -41,4 +41,12 @@ public class WaresServiceImpl implements IWaresService {
 
 
 
+	@Override
+	public List<ProWaresDto> findWares(ProWaresDto proWaresDto) {
+		// TODO Auto-generated method stub
+		return dao.findWares(proWaresDto);
+	}
+
+
+
 }
