@@ -87,7 +87,7 @@ public class SupplierController {
     
     /**
      * @Title: findSupplierWares
-     * @Description: 根据供应商Id查询对应的商品和原料
+     * @Description: 根据供应商Id查询对应的商品和原料(dishes:false-原料,true-成品)
      * @author Ken Yin  
      * @date 2016年5月12日 下午5:10:49
      * @return Response<ProSupplierDto>    返回类型
