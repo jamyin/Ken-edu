@@ -11,10 +11,6 @@ public interface ProSupplierService {
 	
 	public ProSupplierDto findById(String id);
 
-	public List<ProSupplierDto> findAllProSupplier();
-
-	ProSupplierDto findProSupplierById(String id);
-
 	/**
 	 * <p>Description: 根据参数查询供应商 </p>
 	 * <p>Company: 上海天坊信息科技有限公司</p>
@@ -38,5 +34,4 @@ public interface ProSupplierService {
 	 */
 	PageResult<ProSupplierDto> querySupplierByParams(ProSupplierDto params, PageQuery query);
 
-	public void updataProSupplier(ProSupplierDto psd);
 }

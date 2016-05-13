@@ -10,17 +10,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssic.education.common.dto.ProSupplierDto;
-import com.ssic.education.common.government.service.ProSupplierService;
+import com.ssic.education.common.provider.service.ISupplierService;
 import com.ssic.education.provider.pageModel.DataGrid;
 import com.ssic.education.provider.pageModel.Json;
 import com.ssic.education.provider.pageModel.PageHelper;
+
+
 
 @Controller
 @RequestMapping("/proSupplierController")
 public class ProSupplierController {
 
 	@Autowired
-	private ProSupplierService proSupplierService;
+	private ISupplierService supplierService;
 
 	@RequestMapping("/manager")
 	public String manager(HttpServletRequest request) {
@@ -38,7 +40,7 @@ public class ProSupplierController {
 	@ResponseBody
 	public DataGrid dataGrid(ProSupplierDto proSupplierDto, PageHelper ph) {
 		DataGrid dataGrid = new DataGrid();
-		List<ProSupplierDto> list = proSupplierService.findAllProSupplier();
+		List<ProSupplierDto> list = supplierService.findAllProSupplier();
 		dataGrid.setRows(list);
 		return dataGrid;
 	}
@@ -52,7 +54,7 @@ public class ProSupplierController {
 	 */
 	@RequestMapping("/editPage")
 	public String editPage(HttpServletRequest request, String id) {
-		ProSupplierDto ps = proSupplierService.findProSupplierById(id);
+		ProSupplierDto ps = supplierService.findProSupplierById(id);
 		request.setAttribute("ProSupplie", ps);
 		return "supplier/supplierEdit";
 	}
@@ -115,12 +117,12 @@ public class ProSupplierController {
 			j.setMsg("区不能为空");
 			j.setSuccess(false);
 		}
-		ProSupplierDto ps = proSupplierService.findProSupplierById(psd.getId());
+		ProSupplierDto ps = supplierService.findProSupplierById(psd.getId());
 		if(ps==null){
 			j.setMsg("不存在的供应商");
 			j.setSuccess(false);
 		}
-		proSupplierService.updataProSupplier(psd);
+		supplierService.updataProSupplier(psd);
 		j.setMsg("修改信息成功");
     	j.setSuccess(true);
 		return j;
