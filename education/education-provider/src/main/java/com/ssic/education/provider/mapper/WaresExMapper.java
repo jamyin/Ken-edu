@@ -8,7 +8,7 @@ import com.ssic.education.provider.dto.PageHelperDto;
 import com.ssic.education.provider.dto.ProWaresDto;
 import com.ssic.education.provider.pageModel.PageHelper;
 
-public interface ProWaresExMapper {
+public interface WaresExMapper {
 
  List<ProWaresDto> findWares(@Param("warseDto")ProWaresDto waresDto,@Param("page") PageHelperDto ph);
 
