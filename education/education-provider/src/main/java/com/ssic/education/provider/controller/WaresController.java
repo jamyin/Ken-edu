@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ssic.base.datasource.DataSourceHolderUtil;
 import com.ssic.education.common.dto.ImageInfoDto;
+import com.ssic.education.common.pojo.ProWares;
 import com.ssic.education.common.service.ICreateImageService;
 import com.ssic.education.provider.dto.PageHelperDto;
 import com.ssic.education.provider.dto.ProWaresDto;
@@ -24,6 +25,7 @@ import com.ssic.education.provider.pageModel.Json;
 import com.ssic.education.provider.pageModel.PageHelper;
 import com.ssic.education.provider.service.ICreatePhdtoService;
 import com.ssic.education.provider.service.IWaresService;
+import com.ssic.education.utils.util.BeanUtils;
 import com.ssic.education.utils.util.PropertiesUtils;
 import com.ssic.util.UUIDGenerator;
 
@@ -193,7 +195,18 @@ public class WaresController  extends BaseController {
 	 
 	 
 	 
-	 
+	  @RequestMapping("/updateWares")
+	    @ResponseBody
+	    public Json updateWares(ProWaresDto waresDto){
+	    	Json json = new Json();
+	    	
+	    	ProWares proWares =new ProWares();
+	    	BeanUtils.copyProperties(waresDto, proWares);
+	    	waresService.updateImsUsers(proWares);    	
+	    	json.setMsg("修改信息成功");
+	    	json.setSuccess(true);
+	    	return json;
+	    }
 	 
 	 
 }

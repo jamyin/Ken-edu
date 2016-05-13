@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssic.education.common.pojo.ProWares;
 import com.ssic.education.provider.dao.WaresDao;
 import com.ssic.education.provider.dto.PageHelperDto;
 import com.ssic.education.provider.dto.ProWaresDto;
@@ -53,6 +54,14 @@ public class WaresServiceImpl implements IWaresService {
 	public void deleteWares(ProWaresDto waresDto) {
 		// TODO Auto-generated method stub
 		dao.deleteWares(waresDto);
+	}
+
+
+
+	@Override
+	public void updateImsUsers(ProWares proWares) {
+		// TODO Auto-generated method stub
+		dao.updateImsUsers(proWares);
 	}
 
 

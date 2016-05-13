@@ -61,6 +61,12 @@ public class WaresDao {
 	}
 
 
+	public void updateImsUsers(ProWares proWares) {
+		// TODO Auto-generated method stub
+		mapper.updateByPrimaryKey(proWares);
+	}
+
+
 	
 
 }
