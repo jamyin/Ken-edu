@@ -1,12 +1,13 @@
 package com.ssic.education.common.dto;
 
-import java.util.Date;
-import java.util.List;
-
 import lombok.Getter;
 import lombok.Setter;
 
-public class ProSupplierDto {
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
+
+public class ProSupplierDto implements Serializable {
 	
 	@Setter
 	@Getter
@@ -18,7 +19,7 @@ public class ProSupplierDto {
 
 	@Setter
 	@Getter
-    private String asddress;
+    private String address;
 
 	@Setter
 	@Getter
@@ -75,4 +76,12 @@ public class ProSupplierDto {
 	@Setter
 	@Getter
     private List<ProLicenseDto> proLicenseDtoList;
+
+	@Setter
+	@Getter
+	private List<EduSchoolDto> schools;	// 供应学校
+
+	private String schoolIds;	// 供应学校id(用,分割)
+
+	private String schoolNames; // 供应学校名称(用,分割)
 }
