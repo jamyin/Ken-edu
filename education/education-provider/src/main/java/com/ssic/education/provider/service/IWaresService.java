@@ -16,6 +16,8 @@ public interface IWaresService {
 
 	List<ProWaresDto> findWares(ProWaresDto proWaresDto);
 
+	void deleteWares(ProWaresDto waresDto);
+
 
 
 }

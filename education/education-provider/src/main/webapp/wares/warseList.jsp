@@ -88,6 +88,18 @@ else
 							}
 				}
 			},{
+				field : 'remark',
+				title : '备注',
+				width : 120,
+				formatter : function(value, row, index) {
+					if(value!=null){
+					return '<font style="font-style: normal;font-weight: bolder;">'
+							+ value + '</font>';
+					}else{
+					return "";
+							}
+				}
+			},{
 				field : 'supplierName',
 				title : '供应商名称',
 				width : 150,
@@ -251,7 +263,7 @@ else
 						title : '提示',
 						text : '数据处理中，请稍后....'
 					});
-					$.post('${pageContext.request.contextPath}/imsUserController/deleteUser', {
+					$.post('${pageContext.request.contextPath}/waresController/deleteWares', {
 						id : id
 					}, function(result) {
 						if (result.success) {
@@ -320,23 +332,7 @@ else
 
 
 
-	function grantFun(id) {
-		dataGrid.datagrid('unselectAll').datagrid('uncheckAll');
-		parent.$.modalDialog({
-			title : '用户授权',
-			width : 500,
-			height : 300,
-			href : '${pageContext.request.contextPath}/imsUserController/grantPage?ids=' + id,
-			buttons : [ {
-				text : '授权',
-				handler : function() {
-					parent.$.modalDialog.openner_dataGrid = dataGrid;//因为授权成功之后，需要刷新这个dataGrid，所以先预定义好
-					var f = parent.$.modalDialog.handler.find('#form');
-					f.submit();
-				}
-			} ]
-		});
-	}
+
 
 	function searchFun() {
 		dataGrid.datagrid('load', $.serializeObject($('#searchForm')));
@@ -348,23 +344,7 @@ else
 	}
 	
 	
-	function editPwdFun(id) {
-		dataGrid.datagrid('unselectAll').datagrid('uncheckAll');
-		parent.$.modalDialog({
-			title : '编辑用户密码',
-			width : 500,
-			height : 200,
-			href : '${pageContext.request.contextPath}/imsUserController/editPwdPage?id=' + id,
-			buttons : [ {
-				text : '编辑',
-				handler : function() {
-					parent.$.modalDialog.openner_dataGrid = dataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
-					var f = parent.$.modalDialog.handler.find('#form');
-					f.submit();
-				}
-			} ]
-		});
-	}
+	
 	
 	function upLoadFun(id) {
 		if (id == undefined) {
@@ -399,17 +379,7 @@ else
 					<tr>
 						<th>商品名称</th>
 						<td><input name="waresName" placeholder="可以商品名称" class="easyui-validatebox"  style="width: 215px;"/></td>
-						 <th>供应商名称</th>
-					    <td><input name="supplierName" placeholder="可以查询供应商名称" class="easyui-validatebox"  style="width: 215px;"/></td>
-					</tr>
-					<tr>
-					     <th>产地</th>
-					     <td><input name="place" placeholder="可以查询产地" class="easyui-validatebox"  style="width: 215px;"/></td>
-					     <th>商品条形码</th>
-					     <td><input name="barCode" placeholder="可以查询条形码" class="easyui-validatebox"  style="width: 215px;"/></td>
-					</tr>
-					<tr>
-					    <th>商品方向</th>
+						  <th>商品方向</th>
 					    <td>
 					       <select id="way" name="way"  class="easyui-combobox" style="height: 27px;">
 					          <option value="">请选择</option>
@@ -417,9 +387,13 @@ else
 					          <option value="1">产出品</option>
 					       </select>
 					    </td>
-					    <th>企业自定义代码</th>
-					    <td><input name="customCode" placeholder="可以查询企业自定义代码" class="easyui-validatebox"  style="width: 215px;"/></td>
 					</tr>
+					<tr>
+					     <th>产地</th>
+					     <td><input name="place" placeholder="可以查询产地" class="easyui-validatebox"  style="width: 215px;"/></td>
+					     <th>商品条形码</th>
+					     <td><input name="barCode" placeholder="可以查询条形码" class="easyui-validatebox"  style="width: 215px;"/></td>
+					</tr>				
 				</table>
 			</form>
 		</div>

@@ -30,4 +30,9 @@ public class ProSupplierServiceImpl implements ProSupplierService{
 		return proSupplierDao.findAllProSupplier();
 	}
 	
+	@Override
+	public ProSupplierDto findProSupplierById(String id) {
+		return proSupplierDao.findProSupplierById(id);
+	}
+	
 }

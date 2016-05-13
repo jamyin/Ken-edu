@@ -29,4 +29,6 @@ public interface ProWaresExMapper {
 	 * @date 2016年5月12日 下午4:46:27
 	 */
 	List<ProWaresDto> findWarseBySupplier(@Param("supplierId") String supplierId);
+	
+	
 }

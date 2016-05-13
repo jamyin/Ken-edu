@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="com.ssic.education.provider.mapper.ProWaresExMapper">
+<mapper namespace="com.ssic.education.provider.mapper.WaresExMapper">
 
 
 <select id="findWares" resultType="com.ssic.education.provider.dto.ProWaresDto">
@@ -20,6 +20,7 @@
 				a.place AS place,
 				a.dishes AS dishes,
 				a.image AS image,
+				a.remark AS remark,
 				a.supplier_id  AS supplierId
 			FROM
 				t_pro_wares a,
@@ -28,8 +29,9 @@
 			a.supplier_id = b.id
 			AND a.stat = 1
 			AND b.stat = 1
-
+	<include refid="where_findWares"></include>
 		order by a.crate_time desc
+		limit #{page.beginRow},#{page.rows}
 	<!-- 	limit #{page.beginRow},#{page.rows} -->
 	</select>
 	<select id="findWaresById" resultType="com.ssic.education.provider.dto.ProWaresDto">
@@ -57,7 +59,31 @@
 			AND a.stat = 1
 			AND b.stat = 1
 			AND a.id=#{proWaresDto.id}
-		order by a.crate_time desc
+			
+			order by a.crate_time desc
 	</select>
+	
+	
+	
+	<sql id="where_findWares">
+		<if test="warseDto.waresName!=null and  warseDto.waresName!=''">
+			AND a.wares_name = #{warseDto.waresName}
+		</if>
+		<if test="warseDto.barCode!=null and warseDto.barCode!='' ">
+			AND a.bar_code = #{warseDto.barCode}
+		</if>
+		<if test="warseDto.way!=null and warseDto.way!='' ">
+			and a.way = #{warseDto.way}
+		</if>
+		<if test="warseDto.place!=null and warseDto.place!=''">
+			and a.place =#{warseDto.place}
+		</if>		
+	</sql>
+	
+	
+	
+	
+	
+	
 
 </mapper>

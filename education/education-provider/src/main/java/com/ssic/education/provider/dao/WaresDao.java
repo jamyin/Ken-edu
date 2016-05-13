@@ -6,22 +6,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-
-
-
-
-
-
-
-
-
-
 import com.ssic.education.common.mapper.ProSupplierExMapper;
 import com.ssic.education.common.mapper.ProWaresMapper;
 import com.ssic.education.common.pojo.ProWares;
 import com.ssic.education.provider.dto.PageHelperDto;
 import com.ssic.education.provider.dto.ProWaresDto;
-import com.ssic.education.provider.mapper.ProWaresExMapper;
+import com.ssic.education.provider.mapper.WaresExMapper;
 import com.ssic.education.utils.util.BeanUtils;
 
 
@@ -30,7 +20,7 @@ public class WaresDao {
 	@Autowired
 	private ProWaresMapper  mapper;
 	@Autowired
-	private ProWaresExMapper  exmapper;
+	private WaresExMapper  exmapper;
 	@Autowired
 	private ProSupplierExMapper supMapper;
 
@@ -61,6 +51,13 @@ public class WaresDao {
 	public List<ProWaresDto> findWares(ProWaresDto proWaresDto) {
 		return	exmapper.findWaresById(proWaresDto);
 		
+	}
+
+
+	public void deleteWares(ProWaresDto waresDto) {
+		// TODO Auto-generated method stub
+		String id=	waresDto.getId();
+		mapper.deleteByPrimaryKey(id);
 	}
 
 
