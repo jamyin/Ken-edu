@@ -1,9 +1,11 @@
 package com.ssic.education.provider.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 
 
 
@@ -43,6 +45,9 @@ public class WaresDao {
 		
 		ProWares wares = new ProWares();
 		 BeanUtils.copyProperties(pro,wares);
+		 wares.setStat(1);
+		 wares.setCrateTime(new Date());
+		 wares.setLastUpdateTime(new Date());
 		mapper.insertSelective(wares);
 	}
 
@@ -50,6 +55,12 @@ public class WaresDao {
 	public String findSupplierIdByName(String supplierName) {
 		// TODO Auto-generated method stub
 		return supMapper.findSupplierIdByName(supplierName);
+	}
+
+
+	public List<ProWaresDto> findWares(ProWaresDto proWaresDto) {
+		return	exmapper.findWaresById(proWaresDto);
+		
 	}
 
 

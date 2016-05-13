@@ -12,5 +12,7 @@ public interface ProWaresExMapper {
 
  List<ProWaresDto> findWares(@Param("warseDto")ProWaresDto waresDto,@Param("page") PageHelperDto ph);
 
+List<ProWaresDto> findWaresById(@Param("proWaresDto")ProWaresDto proWaresDto);
+
 
 }

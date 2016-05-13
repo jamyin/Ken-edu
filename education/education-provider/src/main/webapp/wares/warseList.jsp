@@ -68,11 +68,11 @@ else
 				title : '商品图片',
 				width : 150,
 				formatter : function(value, row, index) {
-					  if(row.waresImage==null||row.waresImage==""){
+					  if(row.image==null || row.image==""){
 			        	   return "";
 			           }else{
 			        	 
-			        	   return "<img src="+row.waresImage+" />";
+			        	   return "<img src="+row.image+" />";
 			           }
 				}
 			}, {
@@ -279,7 +279,7 @@ else
 			title : '编辑用户',
 			width :768,
 			height : 480,
-			href : '${pageContext.request.contextPath}/imsUserController/edit?id=' + id,
+			href : '${pageContext.request.contextPath}/waresController/editWares?id='+ id,
 			buttons : [ {
 				text : '编辑',
 				handler : function() {
