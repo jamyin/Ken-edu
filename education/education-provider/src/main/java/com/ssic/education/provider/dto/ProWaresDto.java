@@ -18,8 +18,10 @@ public class ProWaresDto {
 		
 		@Getter
 		@Setter
-	    private String waresImage;//图片路径
-		
+	     private String image;//图片路径
+		@Getter
+		@Setter
+		private String 	remark;//备注
 		@Getter
 		@Setter
 	    private String spec;

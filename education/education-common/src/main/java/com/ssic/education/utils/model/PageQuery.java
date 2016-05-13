@@ -1,10 +1,10 @@
 package com.ssic.education.utils.model;
 
-import java.io.Serializable;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.io.Serializable;
 
 @ToString
 public class PageQuery implements Serializable{
@@ -37,7 +37,7 @@ public class PageQuery implements Serializable{
 	
 	@Setter
 	@Getter
-	private int pageSize;
+	private int pageSize = 10; // 默认查询10条数据
 	
 	@Setter
 	@Getter

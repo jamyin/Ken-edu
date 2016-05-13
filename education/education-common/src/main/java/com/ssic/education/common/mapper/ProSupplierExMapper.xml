@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.ssic.education.common.mapper.ProSupplierExMapper">
-
+ 
 
 <select id="findSupplierIdByName" resultType="String">
 			SELECT
@@ -11,6 +11,64 @@
 			t_pro_supplier a
 		WHERE
 	a.supplier_name = #{supplierName}
+	</select>
+	
+	<select id="findAllProSupplier" resultType="com.ssic.education.common.dto.ProSupplierDto">
+			SELECT
+			id,
+			supplier_name supplierName,
+			asddress,
+			provinces province,
+			city,
+			area,
+			supplier_type supplierType,
+			business_license businessLicense,
+			organization_code organizationCode,
+			corporation,
+			contact_way contactWay,
+			longitude,
+			latitude,
+			create_time createTime,
+			last_update_time lastUpdateTime,
+			stat
+		FROM
+			t_pro_supplier
+	</select>
+
+<select id="findSupplierDetail" resultType="com.ssic.education.common.dto.ProSupplierDto" parameterType="java.lang.String">
+	SELECT
+			a.id,a.supplier_name AS supplierName,a.asddress,a.provinces,a.city,a.area,a.supplier_type AS supplierType,a.business_license AS businessLicense,a.organization_code AS organizationCode,a.corporation,a.contact_way AS contactWay,a.longitude,a.latitude,a.create_time AS createTime,a.last_update_time AS lastUpdateTime,a.stat,
+			b.lic_name AS licName,b.lic_no AS licNo,b.lic_type AS licType,b.lic_end_date AS licEndDate,b.lic_pic AS licPic 
+ 	FROM
+		t_pro_supplier a
+	LEFT JOIN 
+	    t_pro_license b
+	ON a.id = b.relation_id
+	WHERE 
+		a.id = #{id} AND a.stat = 1 AND b.stat = 1
+	ORDER BY a.create_time DESC
+</select>
+	<select id="findProSupplierById" resultType="com.ssic.education.common.dto.ProSupplierDto">
+			SELECT
+			id,
+			supplier_name supplierName,
+			asddress,
+			provinces province,
+			city,
+			area,
+			supplier_type supplierType,
+			business_license businessLicense,
+			organization_code organizationCode,
+			corporation,
+			contact_way contactWay,
+			longitude,
+			latitude,
+			create_time createTime,
+			last_update_time lastUpdateTime,
+			stat
+		FROM
+			t_pro_supplier
+			where id=#{id}
 	</select>
 
 </mapper>

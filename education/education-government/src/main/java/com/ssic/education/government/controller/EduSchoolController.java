@@ -11,8 +11,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ssic.education.common.dto.EduSchoolDto;
 import com.ssic.education.common.dto.ProPackagesDto;
-import com.ssic.education.common.service.EduSchoolService;
-import com.ssic.education.common.service.ProPackagesService;
+import com.ssic.education.common.government.service.EduSchoolService;
+import com.ssic.education.common.government.service.ProPackagesService;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 
