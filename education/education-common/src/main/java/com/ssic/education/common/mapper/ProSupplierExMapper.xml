@@ -48,5 +48,27 @@
 		a.id = #{id} AND a.stat = 1 AND b.stat = 1
 	ORDER BY a.create_time DESC
 </select>
+	<select id="findProSupplierById" resultType="com.ssic.education.common.dto.ProSupplierDto">
+			SELECT
+			id,
+			supplier_name supplierName,
+			asddress,
+			provinces province,
+			city,
+			area,
+			supplier_type supplierType,
+			business_license businessLicense,
+			organization_code organizationCode,
+			corporation,
+			contact_way contactWay,
+			longitude,
+			latitude,
+			create_time createTime,
+			last_update_time lastUpdateTime,
+			stat
+		FROM
+			t_pro_supplier
+			where id=#{id}
+	</select>
 
 </mapper>

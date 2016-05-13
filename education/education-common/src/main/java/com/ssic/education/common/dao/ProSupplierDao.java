@@ -32,4 +32,8 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 		return exMapper.findAllProSupplier();
 	}
 
+	public ProSupplierDto findProSupplierById(String id) {
+		return exMapper.findProSupplierById(id);
+	}
+
 }

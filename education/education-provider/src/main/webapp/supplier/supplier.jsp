@@ -49,7 +49,25 @@
 				title : '供应商地址',
 				width : 60,
 				sortable : true
-			}, {
+			}, 
+			{
+				field : 'province',
+				title : '省',
+				width : 50,
+				sortable : true
+			},
+			{
+				field : 'city',
+				title : '市',
+				width : 50,
+				sortable : true
+			},
+			{
+				field : 'area',
+				title : '区',
+				width : 50,
+				sortable : true
+			},{
 				field : 'supplierType',
 				title : '供应商类型',
 				width : 50,
@@ -57,23 +75,23 @@
 			}, {
 				field : 'businessLicense',
 				title : '工商执照号',
-				width : 100,
+				width : 50,
 				sortable : true
 			}, {
 				field : 'organizationCode',
 				title : '组织机构代码',
-				width : 100,
+				width : 50,
 				sortable : true
 			}, {
 				field : 'corporation',
 				title : '法人代表',
-				width : 150,
+				width : 50,
 				sortable : true
 			},
 			{
 				field : 'contactWay',
 				title : '联系方式',
-				width : 100,
+				width : 50,
 				sortable : true
 			},
 			{
@@ -212,8 +230,8 @@
 		parent.$.modalDialog({
 			title : '编辑用户',
 			width : 500,
-			height : 300,
-			href : '${pageContext.request.contextPath}/userController/editPage?id=' + id,
+			height : 500,
+			href : '${pageContext.request.contextPath}/proSupplierController/editPage?id=' + id,
 			buttons : [ {
 				text : '编辑',
 				handler : function() {
