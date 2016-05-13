@@ -1,5 +1,7 @@
 package com.ssic.education.common.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,11 @@ public class ProSupplierServiceImpl implements ProSupplierService{
 			return BeanUtils.createBeanByTarget(proSupplier, ProSupplierDto.class);
 		}
 		return null;
+	}
+
+	@Override
+	public List<ProSupplierDto> findAllProSupplier() {
+		return proSupplierDao.findAllProSupplier();
 	}
 	
 }
