@@ -49,4 +49,12 @@ public class WaresServiceImpl implements IWaresService {
 
 
 
+	@Override
+	public void deleteWares(ProWaresDto waresDto) {
+		// TODO Auto-generated method stub
+		dao.deleteWares(waresDto);
+	}
+
+
+
 }

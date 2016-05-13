@@ -55,10 +55,16 @@ public class WaresController  extends BaseController {
 		
 	
 		DataGrid dataGrid = new DataGrid();
-		PageHelperDto phdto =
-	            createPhdtoService.getNewPhDto(ph.getOrder(), ph.getPage(), ph.getRows(), ph.getSort());
+		PageHelperDto phdto = new PageHelperDto();
+        phdto.setOrder(ph.getOrder());
+        phdto.setPage(ph.getPage());
+        phdto.setRows(ph.getRows());
+        phdto.setSort(ph.getSort());
+        phdto.setBeginRow((ph.getPage() - 1) * ph.getRows());
+		
 		 	
 	        List<ProWaresDto> pdtoList=	waresService.findAllWares(waresDto,phdto);
+	        //查询数量
 	        dataGrid.setRows(pdtoList);
 	        dataGrid.setTotal(Long.valueOf(pdtoList.size()));
 	        return dataGrid;
@@ -168,8 +174,22 @@ public class WaresController  extends BaseController {
 	    	return "wares/editWares";
 	    }
 	 
-	 
-	 
+	 /**
+	  * 删除商品数据
+	  * @param waresDto
+	  * @return
+	  */
+	 @RequestMapping("deleteWares")
+	    @ResponseBody
+	    public Json deleteWares(ProWaresDto waresDto)
+	    {
+	        Json j = new Json();
+	        DataSourceHolderUtil.setToMaster();
+	        waresService.deleteWares(waresDto);
+	        j.setMsg("删除用户成功");
+	        j.setSuccess(true);
+	        return j;
+	    }
 	 
 	 
 	 

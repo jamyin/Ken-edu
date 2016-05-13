@@ -154,7 +154,7 @@
 						</tr>
 						<tr>
 							<th>图片</th>
-							<td>	<input type="file" name="imgUrl"  id="imgUrl"  accept="image/*" />	</td>
+							<td><img src="${wdto.image}"/></td>
 							<th>条形码</th>
 							<td><input name="barCode" type="text" id="barCode"
 								placeholder="请输入条形码" class="easyui-validatebox span2"
