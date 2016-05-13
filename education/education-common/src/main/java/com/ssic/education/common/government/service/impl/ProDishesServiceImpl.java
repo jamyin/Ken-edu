@@ -18,9 +18,9 @@ public class ProDishesServiceImpl implements ProDishesService{
 	@Autowired
 	private ProDishesDao proDishesDao;
 	
-	public PageResult<ProWaresDto> findPage(ProDishesDto proDishesDto,PageQuery page){
-		List<ProWaresDto> results = proDishesDao.findPage(proDishesDto, page);
-		page.setTotal(proDishesDao.count(proDishesDto));
+	public PageResult<ProWaresDto> findPage(ProWaresDto proWaresDto,PageQuery page){
+		List<ProWaresDto> results = proDishesDao.findPage(proWaresDto, page);
+		page.setTotal(proDishesDao.count(proWaresDto));
 		return new PageResult<>(page, results);
 	}
 }

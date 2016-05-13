@@ -26,7 +26,7 @@ public class EduSchoolServiceImpl implements EduSchoolService{
 	
 	public EduSchoolDto findById (String id) {
 		EduSchool eduSchool = eduSchoolDao.selectByPrimaryKey(id);
-		return BeanUtils.createBeanByTarget(eduSchool, EduSchool.class);
+		return BeanUtils.createBeanByTarget(eduSchool, EduSchoolDto.class);
 	}
 
 	public List<EduSchoolDto> queryAll(){

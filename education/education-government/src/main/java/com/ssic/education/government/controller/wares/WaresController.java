@@ -23,7 +23,7 @@ import com.ssic.education.utils.model.PageResult;
  */
 
 @Controller
-@RequestMapping(value="wares")
+@RequestMapping(value="/pro/wares")
 public class WaresController extends BaseController {
 
 	protected static final Log logger = LogFactory.getLog(ProSupplierController.class);

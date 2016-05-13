@@ -67,9 +67,9 @@ public class ProSupplierController extends BaseController {
 	public ModelAndView qualificationsDetails(String id,PageQuery page) {
 		ModelAndView mv = getModelAndView();
 		ProSupplierDto proSupplierDto = proSupplierService.findById(id);
-		ProDishesDto proDishesDto =new ProDishesDto();
-		proDishesDto.setSupplierId(id);
-		PageResult<ProWaresDto> proWaresDtos = proDishesService.findPage(proDishesDto, page);
+		ProWaresDto proWaresDto =new ProWaresDto();
+		proWaresDto.setSupplierId(id);
+		PageResult<ProWaresDto> proWaresDtos = proDishesService.findPage(proWaresDto, page);
 		PageResult<ProSupplierDto> proSupplierDtos = proLedgerService.findPage(id, page);
 		mv.setViewName("qualificationsDetails");
 		mv.addObject("ProSupplierDto", proSupplierDto);

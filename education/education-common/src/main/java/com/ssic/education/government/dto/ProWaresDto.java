@@ -62,7 +62,7 @@ public class ProWaresDto implements Serializable{
 
 	@Getter
 	@Setter
-    private Date crateTime;
+    private Date createTime;;
 
 	@Getter
 	@Setter

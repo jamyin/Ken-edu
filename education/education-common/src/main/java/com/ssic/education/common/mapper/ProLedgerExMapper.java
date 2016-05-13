@@ -9,7 +9,7 @@ import com.ssic.education.utils.model.PageQuery;
 
 public interface ProLedgerExMapper {
 
-	public List<ProSupplierDto> selectSupplierByContact(@Param("receiverId") String receiverId,@Param("page") PageQuery page);
+	public List<ProSupplierDto> selectSupplierByReceiverId(@Param("receiverId") String receiverId,@Param("page") PageQuery page);
 	
 	long countSupplier(@Param("receiverId") String receiverId);
 }

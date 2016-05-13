@@ -65,7 +65,7 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger>{
 	}
 	
 	public List<ProSupplierDto> findPage(String id,PageQuery page) {
-		return exMapper.selectSupplierByContact(id, page);
+		return exMapper.selectSupplierByReceiverId(id, page);
 	}
 	
 	public long count(String id) {

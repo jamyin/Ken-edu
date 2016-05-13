@@ -30,11 +30,11 @@ public class ProDishesDao extends MyBatisBaseDao<ProDishes>{
 	@Autowired
 	private ProDishesExMapper exMapper;
 	
-	public List<ProWaresDto> findPage(ProDishesDto proDishesDto,PageQuery page) {
-		return exMapper.selectWaresByContact(proDishesDto, page);
+	public List<ProWaresDto> findPage(ProWaresDto proWaresDto,PageQuery page) {
+		return exMapper.selectWaresByContact(proWaresDto, page);
 	}
 	
-	public long count(ProDishesDto proDishesDto) {
-		return exMapper.countWares(proDishesDto);
+	public long count(ProWaresDto proWaresDto) {
+		return exMapper.countWares(proWaresDto);
 	}
 }

@@ -7,6 +7,6 @@ import com.ssic.education.utils.model.PageResult;
 
 public interface ProDishesService {
 	
-	public PageResult<ProWaresDto> findPage(ProDishesDto proDishesDto,PageQuery page);
+	public PageResult<ProWaresDto> findPage(ProWaresDto proWaresDto,PageQuery page);
 
 }

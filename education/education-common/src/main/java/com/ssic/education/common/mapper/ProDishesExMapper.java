@@ -10,8 +10,8 @@ import com.ssic.education.utils.model.PageQuery;
 
 public interface ProDishesExMapper {
 	
-	List<ProWaresDto> selectWaresByContact(@Param("proDishesDto") ProDishesDto proDishesDto,@Param("page") PageQuery page);
+	List<ProWaresDto> selectWaresByContact(@Param("proWaresDto") ProWaresDto proWaresDto,@Param("page") PageQuery page);
 	
-	Long countWares(@Param("proDishesDto") ProDishesDto proDishesDto);
+	Long countWares(@Param("proWaresDto") ProWaresDto proWaresDto);
 	
 }
