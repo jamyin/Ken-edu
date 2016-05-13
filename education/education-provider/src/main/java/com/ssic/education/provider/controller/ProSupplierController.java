@@ -36,11 +36,23 @@ public class ProSupplierController {
 	@RequestMapping("/dataGrid")
 	@ResponseBody
 	public DataGrid dataGrid(ProSupplierDto proSupplierDto, PageHelper ph) {
-
 		DataGrid dataGrid = new DataGrid();
-		List<ProSupplierDto> list=proSupplierService.findAllProSupplier();
+		List<ProSupplierDto> list = proSupplierService.findAllProSupplier();
 		dataGrid.setRows(list);
 		return dataGrid;
-
+	}
+	
+	/**
+	 * 修改供应商
+	 * 
+	 * @param proSupplierDto
+	 * @param ph
+	 * @return ming
+	 */
+	@RequestMapping("/editPage")
+	public String editPage(HttpServletRequest request, String id) {
+		ProSupplierDto ps = proSupplierService.findProSupplierById(id);
+		request.setAttribute("ProSupplie", ps);
+		return "supplier/supplierEdit";
 	}
 }

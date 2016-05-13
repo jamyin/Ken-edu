@@ -10,4 +10,6 @@ public interface ProSupplierService {
 	public ProSupplierDto findById(String id);
 
 	public List<ProSupplierDto> findAllProSupplier();
+
+	ProSupplierDto findProSupplierById(String id);
 }
