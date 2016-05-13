@@ -35,6 +35,15 @@ public class ProSupplierController extends BaseController {
 	@Autowired
 	private ProLedgerService proLedgerService;
 
+	/**
+	 * <p>Description: 供应商资质分页查询接口 </p>
+	 * <p>Company: 上海天坊信息科技有限公司</p>
+	 * @param 
+	 * @return 
+	 * @author wangxiang
+	 * @date 2016/5/13 13:54
+	 * @version 1.0
+	 */
 	@RequestMapping(value = "query")
 	public ModelAndView queryIndex(ProSupplierDto params, PageQuery query){
 		ModelAndView mv = getModelAndView();
