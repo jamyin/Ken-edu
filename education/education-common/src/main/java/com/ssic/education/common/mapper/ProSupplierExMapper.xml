@@ -13,9 +13,6 @@
 	a.supplier_name = #{supplierName}
 	</select>
 
-</mapper>
-
-
 <select id="findSupplierDetail" resultType="com.ssic.education.common.dto.ProSupplierDto" parameterType="java.lang.String">
 	SELECT
 			a.id,a.supplier_name AS supplierName,a.asddress,a.provinces,a.city,a.area,a.supplier_type AS supplierType,a.business_license AS businessLicense,a.organization_code AS organizationCode,a.corporation,a.contact_way AS contactWay,a.longitude,a.latitude,a.create_time AS createTime,a.last_update_time AS lastUpdateTime,a.stat,
