@@ -14,6 +14,8 @@ public interface IWaresService {
 
 	String findSupplierIdByName(String supplierName);
 
+	List<ProWaresDto> findWares(ProWaresDto proWaresDto);
+
 
 
 }
