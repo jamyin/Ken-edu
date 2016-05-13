@@ -51,7 +51,7 @@ public class ProSupplierDto implements Serializable {
 
 	@Setter
 	@Getter
-    private String province;     //省
+    private String provinces;     //省
 
 	@Setter
 	@Getter
