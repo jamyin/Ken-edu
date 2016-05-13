@@ -6,13 +6,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ssic.education.common.dto.ProSupplierDto;
 import com.ssic.education.app.service.ISupplierService;
+import com.ssic.education.common.dto.ProSupplierDto;
+import com.ssic.education.common.government.service.ProWaresService;
+import com.ssic.education.government.dto.ProWaresDto;
+import com.ssic.education.utils.model.PageQuery;
+import com.ssic.education.utils.model.PageResult;
+import com.ssic.education.utils.model.Response;
 import com.ssic.util.StringUtils;
 import com.ssic.util.constants.DataStatus;
-import com.ssic.util.model.PageQuery;
-import com.ssic.util.model.PageResult;
-import com.ssic.util.model.Response;
 
 /**
 * @ClassName: SupplierController
@@ -27,6 +29,9 @@ public class SupplierController {
 	
 	@Autowired
 	private ISupplierService supplierService;
+	
+	@Autowired
+	private ProWaresService proWaresService;
     
    /**
     * @Title: findSupplierList
@@ -79,5 +84,34 @@ public class SupplierController {
 		result.setMessage("未查到相关记录！");
 		return result;
     }
+    
+    /**
+     * @Title: findSupplierWares
+     * @Description: 根据供应商Id查询对应的商品和原料(dishes:false-原料,true-成品)
+     * @author Ken Yin  
+     * @date 2016年5月12日 下午5:10:49
+     * @return Response<ProSupplierDto>    返回类型
+      */
+     @RequestMapping("/findSupplierWares")
+     @ResponseBody
+     public Response<PageResult<ProWaresDto>> findSupplierWares(ProWaresDto dto, PageQuery query) {
+    	Response<PageResult<ProWaresDto>> result = new Response<PageResult<ProWaresDto>>();
+     	if(dto == null ){
+     		result.setStatus(DataStatus.HTTP_FAILE);
+     		result.setMessage("查询参数为空！");
+     		return result;
+     	}
+     	PageResult<ProWaresDto> wares = proWaresService.queryWaresByParams(dto, query);
+     	if(wares.getResults() != null && wares.getResults().size() > 0){
+     		result.setStatus(DataStatus.HTTP_SUCCESS);
+     		result.setMessage("查询成功！");
+     		result.setData(wares);
+     		return result;
+     	}
+     	result.setStatus(DataStatus.HTTP_FAILE);
+ 		result.setMessage("未查到相关记录！");
+ 		return result;
+     }
+    
 }
 
