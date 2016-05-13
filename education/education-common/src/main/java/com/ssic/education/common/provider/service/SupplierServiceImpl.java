@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ssic.education.common.dao.ProSupplierDao;
 import com.ssic.education.common.dto.ProSupplierDto;
+import com.ssic.education.common.pojo.ProSupplier;
 
 @Service
 public class SupplierServiceImpl implements ISupplierService{
@@ -25,8 +26,18 @@ public class SupplierServiceImpl implements ISupplierService{
 	}
 
 	@Override
-	public void updataProSupplier(ProSupplierDto psd) {
-		proSupplierDao.updataProSupplier(psd);
+	public void updataProSupplier(ProSupplier ps) {
+		proSupplierDao.updataProSupplier(ps);
+	}
+
+	@Override
+	public int deleteSupplier(String id) {
+		return proSupplierDao.deleteSupplierById(id);
+	}
+
+	@Override
+	public int saveSupplier(ProSupplier ps) {
+		return proSupplierDao.saveSupplier(ps);
 	}
 	
 }

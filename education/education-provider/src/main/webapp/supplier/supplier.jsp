@@ -147,7 +147,7 @@
 		} else {//点击操作里面的删除图标会触发这个
 			dataGrid.datagrid('unselectAll').datagrid('uncheckAll');
 		}
-		parent.$.messager.confirm('询问', '您是否要删除当前用户？', function(b) {
+		parent.$.messager.confirm('询问', '您是否要删除当前供应商？', function(b) {
 			if (b) {
 				var currentUserId = '${sessionInfo.id}';/*当前登录用户的ID*/
 				if (currentUserId != id) {
@@ -155,7 +155,7 @@
 						title : '提示',
 						text : '数据处理中，请稍后....'
 					});
-					$.post('${pageContext.request.contextPath}/userController/delete', {
+					$.post('${pageContext.request.contextPath}/proSupplierController/deleteSupplier', {
 						id : id
 					}, function(result) {
 						if (result.success) {
@@ -174,52 +174,6 @@
 		});
 	}
 
-	function batchDeleteFun() {
-		var rows = dataGrid.datagrid('getChecked');
-		var ids = [];
-		if (rows.length > 0) {
-			parent.$.messager.confirm('确认', '您是否要删除当前选中的项目？', function(r) {
-				if (r) {
-					parent.$.messager.progress({
-						title : '提示',
-						text : '数据处理中，请稍后....'
-					});
-					var currentUserId = '${sessionInfo.id}';/*当前登录用户的ID*/
-					var flag = false;
-					for ( var i = 0; i < rows.length; i++) {
-						if (currentUserId != rows[i].id) {
-							ids.push(rows[i].id);
-						} else {
-							flag = true;
-						}
-					}
-					$.getJSON('${pageContext.request.contextPath}/userController/batchDelete', {
-						ids : ids.join(',')
-					}, function(result) {
-						if (result.success) {
-							dataGrid.datagrid('load');
-							dataGrid.datagrid('uncheckAll').datagrid('unselectAll').datagrid('clearSelections');
-						}
-						if (flag) {
-							parent.$.messager.show({
-								title : '提示',
-								msg : '不可以删除自己！'
-							});
-						} else {
-							parent.$.messager.alert('提示', result.msg, 'info');
-						}
-						parent.$.messager.progress('close');
-					});
-				}
-			});
-		} else {
-			parent.$.messager.show({
-				title : '提示',
-				msg : '请勾选要删除的记录！'
-			});
-		}
-	}
-
 	function editFun(id) {
 		if (id == undefined) {
 			var rows = dataGrid.datagrid('getSelections');
@@ -228,7 +182,7 @@
 			dataGrid.datagrid('unselectAll').datagrid('uncheckAll');
 		}
 		parent.$.modalDialog({
-			title : '编辑用户',
+			title : '编辑供应商',
 			width : 500,
 			height : 500,
 			href : '${pageContext.request.contextPath}/proSupplierController/editPage?id=' + id,
@@ -245,10 +199,10 @@
 
 	function addFun() {
 		parent.$.modalDialog({
-			title : '添加用户',
+			title : '添加供应商',
 			width : 700,
 			height : 500,
-			href : '${pageContext.request.contextPath}/userController/addPage',
+			href : '${pageContext.request.contextPath}/proSupplierController/addSupplier',
 			buttons : [ {
 				text : '添加',
 				handler : function() {

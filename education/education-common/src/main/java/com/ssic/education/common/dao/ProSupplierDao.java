@@ -38,11 +38,20 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 		return exMapper.findProSupplierById(id);
 	}
 
-	public void updataProSupplier(ProSupplierDto psd) {
-		ProSupplier ps = new ProSupplier();
-		BeanUtils.copyProperties(psd, ps);
+	public void updataProSupplier(ProSupplier ps) {
+		ps.setCreateTime(null);
 		ps.setLastUpdateTime(new Date());
 		mapper.updateByPrimaryKeySelective(ps);
+	}
+
+	public int deleteSupplierById(String id) {
+		return mapper.deleteByPrimaryKey(id);
+	}
+
+	public int saveSupplier(ProSupplier ps) {
+		ps.setCreateTime(new Date());
+		ps.setLastUpdateTime(ps.getCreateTime());
+		return mapper.insert(ps);
 	}
 
 }
