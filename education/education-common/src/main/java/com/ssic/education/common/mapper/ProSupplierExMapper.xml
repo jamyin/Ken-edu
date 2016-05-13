@@ -17,8 +17,8 @@
 			SELECT
 			id,
 			supplier_name supplierName,
-			asddress,
-			provinces province,
+			address,
+			provinces,
 			city,
 			area,
 			supplier_type supplierType,
@@ -52,8 +52,8 @@
 			SELECT
 			id,
 			supplier_name supplierName,
-			asddress,
-			provinces province,
+			address,
+			provinces,
 			city,
 			area,
 			supplier_type supplierType,

@@ -1,5 +1,6 @@
 package com.ssic.education.common.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import lombok.Getter;
@@ -12,6 +13,7 @@ import com.ssic.education.common.mapper.ProSupplierExMapper;
 import com.ssic.education.common.mapper.ProSupplierMapper;
 import com.ssic.education.common.pojo.ProSupplier;
 import com.ssic.education.utils.mybatis.MyBatisBaseDao;
+import com.ssic.education.utils.util.BeanUtils;
 
 /**
  * 
@@ -34,6 +36,13 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 
 	public ProSupplierDto findProSupplierById(String id) {
 		return exMapper.findProSupplierById(id);
+	}
+
+	public void updataProSupplier(ProSupplierDto psd) {
+		ProSupplier ps = new ProSupplier();
+		BeanUtils.copyProperties(psd, ps);
+		ps.setLastUpdateTime(new Date());
+		mapper.updateByPrimaryKeySelective(ps);
 	}
 
 }

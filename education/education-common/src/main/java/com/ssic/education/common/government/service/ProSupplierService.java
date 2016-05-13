@@ -37,4 +37,6 @@ public interface ProSupplierService {
 	 * @version 1.0
 	 */
 	PageResult<ProSupplierDto> querySupplierByParams(ProSupplierDto params, PageQuery query);
+
+	public void updataProSupplier(ProSupplierDto psd);
 }

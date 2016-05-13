@@ -63,5 +63,10 @@ public class ProSupplierServiceImpl implements ProSupplierService{
 	public ProSupplierDto findProSupplierById(String id) {
 		return proSupplierDao.findProSupplierById(id);
 	}
+
+	@Override
+	public void updataProSupplier(ProSupplierDto psd) {
+		proSupplierDao.updataProSupplier(psd);
+	}
 	
 }

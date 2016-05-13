@@ -45,13 +45,13 @@
 				sortable : true
 			} ] ],
 			columns : [ [ {
-				field : 'asddress',
+				field : 'address',
 				title : '供应商地址',
 				width : 60,
 				sortable : true
 			}, 
 			{
-				field : 'province',
+				field : 'provinces',
 				title : '省',
 				width : 50,
 				sortable : true

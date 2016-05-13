@@ -4,7 +4,7 @@
 	$(function() {
 		parent.$.messager.progress('close');
 		$('#form').form({
-			url : '${pageContext.request.contextPath}/proSupplierController/edit',
+			url : '${pageContext.request.contextPath}/proSupplierController/proSupplierEdit',
 			onSubmit : function() {
 				parent.$.messager.progress({
 					title : '提示',
@@ -42,7 +42,7 @@
 				</tr>
 				<tr>
 					<th>供应商地址</th>
-					<td><input name="asddress" type="text" placeholder="请输入供应商地址" class="easyui-validatebox span2" data-options="required:true" value="${ProSupplie.asddress}" ></td>
+					<td><input name="address" type="text" placeholder="请输入供应商地址" class="easyui-validatebox span2" data-options="required:true" value="${ProSupplie.address}" ></td>
 					
 					<th>供应商类型</th>
 					<td><input name="supplierType" type="text" placeholder="请输入供应商类型" class="easyui-validatebox span2"  value="${ProSupplie.supplierType}" ></td>
@@ -67,7 +67,7 @@
 				</tr>
 				<tr>
 					<th>省</th>
-						<td><input name="province" type="text" placeholder="请输入省" class="easyui-validatebox span2" data-options="required:true" value="${ProSupplie.province}" ></td>
+						<td><input name="provinces" type="text" placeholder="请输入省" class="easyui-validatebox span2" data-options="required:true" value="${ProSupplie.provinces}" ></td>
 					<th>市</th>
 						<td><input name="city" type="text" placeholder="请输入市" class="easyui-validatebox span2" data-options="required:true" value="${ProSupplie.city}" ></td>
 				</tr>
