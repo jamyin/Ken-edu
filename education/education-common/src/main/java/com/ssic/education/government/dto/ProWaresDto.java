@@ -1,11 +1,12 @@
 package com.ssic.education.government.dto;
 
-import java.util.Date;
-
 import lombok.Getter;
 import lombok.Setter;
 
-public class ProWaresDto {
+import java.io.Serializable;
+import java.util.Date;
+
+public class ProWaresDto implements Serializable{
 	
 	@Getter
 	@Setter
