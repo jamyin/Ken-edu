@@ -1,4 +1,4 @@
-package com.ssic.education.common.service;
+package com.ssic.education.common.government.service;
 
 import com.ssic.education.common.dto.ProSupplierDto;
 import com.ssic.education.utils.model.PageQuery;
@@ -7,7 +7,13 @@ import com.ssic.education.utils.model.PageResult;
 import java.util.List;
 
 
-public interface ProSupplierServicewx {
+public interface ProSupplierService {
+	
+	public ProSupplierDto findById(String id);
+
+	public List<ProSupplierDto> findAllProSupplier();
+
+	ProSupplierDto findProSupplierById(String id);
 
 	/**
 	 * <p>Description: 根据参数查询供应商 </p>

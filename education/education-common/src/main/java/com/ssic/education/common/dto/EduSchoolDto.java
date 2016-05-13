@@ -1,11 +1,12 @@
 package com.ssic.education.common.dto;
 
-import java.util.Date;
-
 import lombok.Getter;
 import lombok.Setter;
 
-public class EduSchoolDto {
+import java.io.Serializable;
+import java.util.Date;
+
+public class EduSchoolDto implements Serializable {
 	
 	@Getter
 	@Setter

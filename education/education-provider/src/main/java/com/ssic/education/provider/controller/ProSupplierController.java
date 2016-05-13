@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssic.education.common.dto.ProSupplierDto;
-import com.ssic.education.common.service.ProSupplierService;
+import com.ssic.education.common.government.service.ProSupplierService;
 import com.ssic.education.provider.pageModel.DataGrid;
 import com.ssic.education.provider.pageModel.PageHelper;
 

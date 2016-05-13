@@ -60,6 +60,10 @@ public class ProSupplierDto implements Serializable {
 	@Setter
 	@Getter
     private String area;         //区
+
+	@Setter
+	@Getter
+	private String areaName;
 	
 	@Setter
 	@Getter
@@ -81,7 +85,11 @@ public class ProSupplierDto implements Serializable {
 	@Getter
 	private List<EduSchoolDto> schools;	// 供应学校
 
+	@Setter
+	@Getter
 	private String schoolIds;	// 供应学校id(用,分割)
 
+	@Setter
+	@Getter
 	private String schoolNames; // 供应学校名称(用,分割)
 }
