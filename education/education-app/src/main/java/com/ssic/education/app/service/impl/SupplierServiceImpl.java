@@ -8,9 +8,10 @@ import com.ssic.education.app.service.ISupplierService;
 import com.ssic.education.common.dao.SupplierDao;
 import com.ssic.education.common.dto.ProSupplierDto;
 import com.ssic.education.common.pojo.ProSupplier;
+import com.ssic.education.utils.model.PageQuery;
+import com.ssic.education.utils.model.PageResult;
 import com.ssic.util.BeanUtils;
-import com.ssic.util.model.PageQuery;
-import com.ssic.util.model.PageResult;
+
 
 /**	
 * @ClassName: SupplierServiceImpl

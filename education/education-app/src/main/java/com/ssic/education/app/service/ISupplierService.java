@@ -3,8 +3,8 @@ package com.ssic.education.app.service;
 import org.springframework.stereotype.Service;
 
 import com.ssic.education.common.dto.ProSupplierDto;
-import com.ssic.util.model.PageQuery;
-import com.ssic.util.model.PageResult;
+import com.ssic.education.utils.model.PageQuery;
+import com.ssic.education.utils.model.PageResult;
 
 /**
  * 供应商接口
