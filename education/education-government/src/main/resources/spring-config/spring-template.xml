@@ -28,6 +28,7 @@
                 <!--模板的编码格式 -->
                 <prop key="locale">zh_CN</prop>
                 <!-- 本地化设置-->
+                <prop key="classic_compatible">true</prop><!-- 此属性可以防止模板解析空值时的错误  -->
             </props>
         </property>
     </bean>
