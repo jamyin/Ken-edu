@@ -13,7 +13,9 @@ import com.ssic.education.common.pojo.ProLicenseExample;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.ListResult;
 import com.ssic.education.utils.mybatis.MyBatisBaseDao;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class ProLicenseDao extends MyBatisBaseDao<ProLicense>{
 
 	@Getter

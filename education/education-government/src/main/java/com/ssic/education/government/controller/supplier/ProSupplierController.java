@@ -30,15 +30,12 @@ public class ProSupplierController extends BaseController {
 	
 	protected static final Log logger = LogFactory.getLog(ProSupplierController.class);
 	private static final int PAGESIZE_WARES = 4;
-	private static final int PAGESIZE_SUPPLIER = 4;
+	private static final int PAGESIZE_SUPPLIER = 5;
 
 	@Autowired
 	private ProSupplierService proSupplierService;
 	@Autowired
-	private ProDishesService proDishesService;
-	@Autowired
 	private ProLedgerService proLedgerService;
-	
 	@Autowired
 	private ProWaresService proWaresService;
 

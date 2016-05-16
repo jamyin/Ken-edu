@@ -36,8 +36,9 @@ public class WaresController extends BaseController {
 	/**
 	 * <p>Description: 成品/原料分页查询接口 </p>
 	 * <p>Company: 上海天坊信息科技有限公司</p>
-	 * @param
-	 * @return
+	 * @param params 查询参数
+	 * @param query  分页参数
+	 * @return ModelAndView
 	 * @author wangxiang
 	 * @date 2016/5/13 14:32
 	 * @version 1.0
@@ -46,12 +47,9 @@ public class WaresController extends BaseController {
 	public ModelAndView waresPage(ProWaresDto params, PageQuery query){
 		ModelAndView mv = getModelAndView();
 		PageResult<ProWaresDto> datas = proWaresService.queryWaresByParams(params, query);
-		mv.addObject("datas", datas);
-		if(params.getDishes()){
-			mv.setViewName("");// 成品页
-		}else {
-			mv.setViewName("");// 原料页
-		}
+		mv.addObject("pageList", datas);
+		mv.addObject("params", params);
+		mv.setViewName("wares/list");
 		return mv;
 	}
 
