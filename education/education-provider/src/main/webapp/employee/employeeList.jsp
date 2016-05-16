@@ -37,7 +37,7 @@ else
 	var dataGrid;
 	$(function() {
 		dataGrid = $('#dataGrid').propertygrid({
-			url : '${pageContext.request.contextPath}/waresController/dataGrid',
+			url : '${pageContext.request.contextPath}/employeeController/dataGrid',
 			fit : true,
 			fitColumns : true,
 			//rownumbers : true ,
@@ -67,20 +67,8 @@ else
 				width : 150,
 				hidden: true
 			}, */  {
-				field : 'waresImage',
-				title : '商品图片',
-				width : 150,
-				formatter : function(value, row, index) {
-					  if(row.image==null || row.image==""){
-			        	   return "";
-			           }else{
-			        	 
-			        	   return "<img src="+row.image+" />";
-			           }
-				}
-			}, {
-				field : 'waresName',
-				title : '商品名称',
+				field : 'name',
+				title : '名称',
 				width : 120,
 				formatter : function(value, row, index) {
 					if(value!=null){
@@ -91,8 +79,19 @@ else
 							}
 				}
 			}, {
-				field : 'spec',
-				title : '规格',
+				field : 'gender',
+				title : '性别',
+				width : 150,
+				formatter : function(value, row, index) {
+					 if(value==1){
+							return '<font style="font-style: normal;font-weight: bolder;">男</font>';
+					 }else if(value==2){
+							return '<font style="font-style: normal;font-weight: bolder;">女</font>';
+					 }
+				}
+			},{
+				field : 'idType',
+				title : '身份证类型',
 				width : 150,
 				formatter : function(value, row, index) {
 					if(value!=null){
@@ -103,20 +102,8 @@ else
 							}
 				}
 			},{
-				field : 'supplierName',
-				title : '供应商名称',
-				width : 150,
-				formatter : function(value, row, index) {
-					if(value!=null){
-					return '<font style="font-style: normal;font-weight: bolder;">'
-							+ value + '</font>';
-					}else{
-					return "";
-							}
-				}
-			},{
-				field : 'shelfLife',
-				title : '保质期',
+				field : 'idCode',
+				title : '身份证号码',
 				width : 150,
 				formatter : function(value, row, index) {
 					if(value!=null){
@@ -127,8 +114,8 @@ else
 							}
 				}
 			},{
-				field : 'unit',
-				title : '保质期单位',
+				field : 'mobile',
+				title : '手机号码',
 				width : 150,
 				formatter : function(value, row, index) {
 					if(value!=null){
@@ -139,16 +126,16 @@ else
 							}
 				}
 			}, {
-				field : 'waresTypeName',
-				title : '商品分类',
+				field : 'position',
+				title : '岗位',
 				width : 100,
 				formatter : function(value, row, index) {
 					return	'<font style="font-style: normal;font-weight: bolder;word-wrap:break-word;white-space:normal;">'
 					+ value + '</font>'
 				}
-			},/*{
-				field : 'remark',
-				title : '备注',
+			},{
+				field : 'workNum',
+				title : '工号',
 				width : 120,
 				formatter : function(value, row, index) {
 					if(value!=null){
@@ -158,9 +145,9 @@ else
 					return "";
 							}
 				}
-			},*/{
-				field : 'customCode',
-				title : '企业自定义代码',
+			},{
+				field : 'healthCode',
+				title : '健康证号码',
 				width : 150,
 				formatter : function(value, row, index) {
 					if(value!=null){
@@ -171,8 +158,8 @@ else
 							}
 				}
 			} ,{
-				field : 'barCode',
-				title : '商品条形码',
+				field : 'healthCodeDateString',
+				title : '健康证号码失效期',
 				width : 150,
 				formatter : function(value, row, index) {
 					if(value!=null){
@@ -183,8 +170,8 @@ else
 							}
 				}
 			},{
-				field : 'enName',
-				title : '英文名',
+				field : 'trainCode',
+				title : '培训证号码',
 				width : 110,
 				formatter : function(value, row, index) {
 					if(value!=null){
@@ -195,8 +182,20 @@ else
 							}
 				}
 			},{
-				field : 'place',
-				title : '产地',
+				field : 'trainLevel',
+				title : '培训证等级',
+				width : 110,
+				formatter : function(value, row, index) {
+					if(value!=null){
+					return '<font style="font-style: normal;font-weight: bolder;">'
+							+ value + '</font>';
+					}else{
+					return "";
+							}
+				}
+			},{
+				field : 'trainCodeDateString',
+				title : '培训证号码失效期',
 				width : 110,
 				formatter : function(value, row, index) {
 					if(value!=null){
@@ -218,11 +217,6 @@ else
 					}
 					str += '&nbsp;';
 					
-					
-					if ($.canImage) {
-						str += $.formatString('<img onclick="imageFun(\'{0}\');" src="{1}" title="上传图片"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
-					}
-					str += '&nbsp;';
 					if ($.canDelete) {
 						str += $.formatString('<img onclick="deleteFun(\'{0}\');" src="{1}" title="删除"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/cancel.png');
 					}
@@ -308,46 +302,13 @@ else
 		});
 	}
 
-	
-	function imageFun(id) {
-		if (id == undefined) {
-			var rows = dataGrid.datagrid('getSelections');
-			id = rows[0].id;
-		} else {
-			dataGrid.datagrid('unselectAll').datagrid('uncheckAll');
-		}
-		parent.$.modalDialog({
-			title : '上传图片',
-			width :768,
-			height : 480,
-			href : '${pageContext.request.contextPath}/waresController/updateImage?id='+ id,
-			buttons : [ {
-				text : '编辑',
-				handler : function() {
-					parent.$.modalDialog.openner_dataGrid = dataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
-					var f = parent.$.modalDialog.handler.find('#formEdit');
-					f.submit();
-					var f2 = parent.$.modalDialog.handler.find('#projectFormEdit');
-					f2.submit();
-				}
-			} ]
-		});
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	function addFun() {
 		parent.$.modalDialog({
 			title : '添加用户',
 			width :768,
 			height : 480,
-			href : '${pageContext.request.contextPath}/waresController/addWares',
+			href : '${pageContext.request.contextPath}/employeeController/addEmployee',
 			buttons : [ {
 				text : '添加',
 				handler : function() {
@@ -368,9 +329,6 @@ else
 	}
 
 
-
-
-
 	function searchFun() {
 		dataGrid.datagrid('load', $.serializeObject($('#searchForm')));
 	}
@@ -379,33 +337,7 @@ else
 		$("#gender").val("");
 		dataGrid.datagrid('load', {});
 	}
-	
-	
-	
-	
-	function upLoadFun(id) {
-		if (id == undefined) {
-			var rows = dataGrid.datagrid('getSelections');
-			id = rows[0].id;
-		} else {
-			dataGrid.datagrid('unselectAll').datagrid('uncheckAll');
-		}
-		parent.$.modalDialog({
-			title : '上传图片',
-			width : 700,
-			height : 300,
-			href : '${pageContext.request.contextPath}/waresController/upLoadImage?id=' + id,
-			buttons : [ {
-				text : '上传',
-				handler : function() {
-					parent.$.modalDialog.openner_dataGrid = dataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
-					var f = parent.$.modalDialog.handler.find('#form');
-					f.submit ();
-				}
-			} ]
-		});
-	}
-	
+
 </script>
 </head>
 <body>
@@ -414,22 +346,20 @@ else
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">
 					<tr>
-						<th>商品名称</th>
-						<td><input name="waresName" placeholder="可以商品名称" class="easyui-validatebox"  style="width: 215px;"/></td>
-						  <th>商品方向</th>
+						<th>姓名</th>
+						<td><input name="name" placeholder="可以查询姓名" class="easyui-validatebox"  style="width: 215px;"/></td>
+						  <th>性别</th>
 					    <td>
-					       <select id="way" name="way"  class="easyui-combobox" style="height: 27px;">
+					       <select id="gender" name="gender"  class="easyui-combobox" style="height: 27px;">
 					          <option value="">请选择</option>
-					          <option value="0">采购品</option>
-					          <option value="1">产出品</option>
+					          <option value="1">男</option>
+					          <option value="2">女</option>
 					       </select>
 					    </td>
 					</tr>
-					<tr>
-					     <th>产地</th>
-					     <td><input name="place" placeholder="可以查询产地" class="easyui-validatebox"  style="width: 215px;"/></td>
-					     <th>商品条形码</th>
-					     <td><input name="barCode" placeholder="可以查询条形码" class="easyui-validatebox"  style="width: 215px;"/></td>
+					<tr>					   
+					     <th>工号</th>
+					     <td><input name="barCode" placeholder="可以查询工号" class="easyui-validatebox"  style="width: 215px;"/></td>
 					</tr>				
 				</table>
 			</form>

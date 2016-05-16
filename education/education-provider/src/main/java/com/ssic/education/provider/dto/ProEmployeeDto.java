@@ -5,78 +5,79 @@ import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 
-public class ProWaresDto {
+public class ProEmployeeDto {
 		@Getter
 		@Setter
-	   private String id;
-		@Getter
-		@Setter
-	    private String waresName;
-		@Getter
-		@Setter
-	    private String supplierName;//供应商名称
-		
-		@Getter
-		@Setter
-	     private String image;//图片路径
-		@Getter
-		@Setter
-		private String 	remark;//备注
-		@Getter
-		@Setter
-	    private String spec;
-
-		@Getter
-		@Setter
-	    private Integer shelfLife;
-
-		@Getter
-		@Setter
-	    private String unit;
+		private String id;
 
 		@Getter
 		@Setter
 	    private String supplierId;
+		@Getter
+		@Setter
+	    private String supplierName;//供应商名称
+		@Getter
+		@Setter
+	    private String name;
 
 		@Getter
 		@Setter
-	    private Integer way;
-		@Getter
-		@Setter
-	    private Integer waresType;
-		@Getter
-		@Setter
-	    private String waresTypeName;
-		@Getter
-		@Setter
-	    private String customCode;
-		@Getter
-		@Setter
-	    private String barCode;
+	    private Byte gender;
 
 		@Getter
 		@Setter
-	    private String enName;
+	    private Short idType;
 
 		@Getter
 		@Setter
-	    private String place;
+	    private String idCode;
+
+		@Getter
+		@Setter
+	    private String mobile;
+		@Getter
+		@Setter
+	   
+	    private Short position;
+
+		@Getter
+		@Setter
+	    private String workNum;
+
+		@Getter
+		@Setter
+	    private String healthCode;
 		@Getter
 		@Setter
 	    
-	    private Boolean dishes;
+	    private Date healthCodeDate;
+		@Getter
+		@Setter
+	    
+	    private String healthCodeDateString;
 
 		@Getter
 		@Setter
-	    private Date createTime;
+	    private String trainCode;
 
+		@Getter
+		@Setter
+	    private Short trainLevel;
+		@Getter
+		@Setter
+	    private Date trainCodeDate;
+		@Getter
+		@Setter
+	    private String  trainCodeDateString;
+		@Getter
+		@Setter
+	 
+	    private Date createTime;
 		@Getter
 		@Setter
 	    private Date lastUpdateTime;
-
 		@Getter
 		@Setter
-	    private Integer stat;
-
-	    
+	 
+	    private Short stat;
 }

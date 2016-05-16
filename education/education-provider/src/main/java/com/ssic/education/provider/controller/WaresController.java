@@ -25,6 +25,7 @@ import com.ssic.education.provider.pageModel.Json;
 import com.ssic.education.provider.pageModel.PageHelper;
 import com.ssic.education.provider.service.ICreatePhdtoService;
 import com.ssic.education.provider.service.IWaresService;
+import com.ssic.education.provider.util.ProductClass;
 import com.ssic.education.utils.util.BeanUtils;
 import com.ssic.education.utils.util.PropertiesUtils;
 import com.ssic.util.UUIDGenerator;
@@ -56,21 +57,23 @@ public class WaresController  extends BaseController {
 	public DataGrid dataGrid(ProWaresDto waresDto ,PageHelper ph) {
 		
 	
-		DataGrid dataGrid = new DataGrid();
-		PageHelperDto phdto = new PageHelperDto();
-        phdto.setOrder(ph.getOrder());
-        phdto.setPage(ph.getPage());
-        phdto.setRows(ph.getRows());
-        phdto.setSort(ph.getSort());
-        phdto.setBeginRow((ph.getPage() - 1) * ph.getRows());
-		
-		 	
+			DataGrid dataGrid = new DataGrid();
+			PageHelperDto phdto = new PageHelperDto();
+	        phdto.setOrder(ph.getOrder());
+	        phdto.setPage(ph.getPage());
+	        phdto.setRows(ph.getRows());
+	        phdto.setSort(ph.getSort());
+	        phdto.setBeginRow((ph.getPage() - 1) * ph.getRows());		 	
 	        List<ProWaresDto> pdtoList=	waresService.findAllWares(waresDto,phdto);
+	       for (ProWaresDto proWaresDto : pdtoList) {
+	    	   
+	    	   String name = ProductClass.getName(proWaresDto.getWaresType());
+	    	   proWaresDto.setWaresTypeName(name);
+		}
 	        //查询数量
 	        dataGrid.setRows(pdtoList);
 	        dataGrid.setTotal(Long.valueOf(pdtoList.size()));
-	        return dataGrid;
-		
+	        return dataGrid;		
 	}
 	/**
 	 * 添加商品
@@ -93,7 +96,7 @@ public class WaresController  extends BaseController {
 	 @RequestMapping("/insertWares")
 	    @ResponseBody
 	    //MultipartFile imgUrl, String  productionName, String  productionMethod,ImageInfoDto image,HttpServletRequest request, HttpServletResponse response
-	    public Json insertWares(@RequestParam(value = "imgUrl") MultipartFile file,ProWaresDto pro,ImageInfoDto image,HttpServletRequest request, HttpServletResponse response){  
+	    public Json insertWares(ProWaresDto pro){  
 	    	 Json j = new Json();
 	    	 if (pro.getWaresName()==null ||  pro.getWaresName().equals(""))
 	         {
@@ -149,9 +152,7 @@ public class WaresController  extends BaseController {
 	         DataSourceHolderUtil.setToMaster();
 	         String supplierId=waresService.findSupplierIdByName(pro.getSupplierName());
 	         pro.setSupplierId(supplierId);
-	         Map<String, Object> map = createImageServiceImpl.createImage(image, file, request, response);
-	         String imageurl = (String) map.get("image_url");
-	         pro.setImage(imageurl);
+	        
 	         waresService.insertWares(pro);
 	    	 j.setMsg("新增商品成功");
 	    	 j.setSuccess(true);
@@ -177,6 +178,26 @@ public class WaresController  extends BaseController {
 	    }
 	 
 	 /**
+	  * 跳转到上传图片页面
+	  * @param request
+	  * @param id
+	  * @return
+	  */
+	 @RequestMapping("/updateImage")
+	    public String updateImage(HttpServletRequest request,String id){
+		 ProWaresDto proWaresDto=new ProWaresDto();
+		 proWaresDto.setId(id);
+	        List<ProWaresDto> list = waresService.findWares(proWaresDto);
+	        if (list != null && list.size() > 0)
+	        {
+	        	proWaresDto = list.get(0);
+	        }
+	        request.setAttribute("wdto", proWaresDto);
+	        request.setAttribute("id", id);
+	    	return "wares/updateImage";
+	    }
+	 
+	 /**
 	  * 删除商品数据
 	  * @param waresDto
 	  * @return
@@ -194,14 +215,20 @@ public class WaresController  extends BaseController {
 	    }
 	 
 	 
-	 
+	 /**
+	  * 修改商品信息
+	  * @param waresDto
+	  * @return
+	  */
 	  @RequestMapping("/updateWares")
 	    @ResponseBody
-	    public Json updateWares(ProWaresDto waresDto){
+	    public Json updateWares(@RequestParam(value = "imgUrl") MultipartFile file,ProWaresDto pro,ImageInfoDto image,HttpServletRequest request, HttpServletResponse response){
 	    	Json json = new Json();
-	    	
+	    	 Map<String, Object> map = createImageServiceImpl.createImage(image, file, request, response);
+	         String imageurl = (String) map.get("image_url");
+	         pro.setImage(imageurl);
 	    	ProWares proWares =new ProWares();
-	    	BeanUtils.copyProperties(waresDto, proWares);
+	    	BeanUtils.copyProperties(pro, proWares);
 	    	waresService.updateImsUsers(proWares);    	
 	    	json.setMsg("修改信息成功");
 	    	json.setSuccess(true);
