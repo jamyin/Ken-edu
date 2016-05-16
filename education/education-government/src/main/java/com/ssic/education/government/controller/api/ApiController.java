@@ -49,7 +49,7 @@ public class ApiController extends BaseController {
     @ResponseBody
     public Response<List<EduAreaDto>> areas(){
         Response<List<EduAreaDto>> response = new Response<List<EduAreaDto>>();
-        List<EduAreaDto> datas = areaService.queryAll();
+        List<EduAreaDto> datas = queryAllareas();
         response.setData(datas);
         return response;
     }
@@ -66,7 +66,7 @@ public class ApiController extends BaseController {
     @ResponseBody
     public Response<List<EduSchoolDto>> schools(){
         Response<List<EduSchoolDto>> response = new Response<List<EduSchoolDto>>();
-        List<EduSchoolDto> datas = schoolService.queryAll();
+        List<EduSchoolDto> datas = queryAllschools();
         response.setData(datas);
         return response;
     }

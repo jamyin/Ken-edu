@@ -47,8 +47,11 @@ public class ProSupplierController extends BaseController {
 	public ModelAndView search(ProSupplierDto params, PageQuery query){
 		ModelAndView mv = getModelAndView();
 		PageResult<ProSupplierDto> datas = proSupplierService.querySupplierByParams(params, query);
-		mv.setViewName("supplier/search_supplier");
 		mv.addObject("pageList", datas);
+		mv.addObject("params", params);
+		mv.addObject("areas", queryAllareas());
+		mv.addObject("schools", queryAllschools());
+		mv.setViewName("supplier/search_supplier");
 		return mv;
 	}
 

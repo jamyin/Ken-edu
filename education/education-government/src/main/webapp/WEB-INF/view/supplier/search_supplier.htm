@@ -15,24 +15,34 @@
                 <label for="area">区县:</label>
                 <select name="area" panelheight="auto" id="area">
                     <option value="">请选择区县</option>
+                    <#if areas??>
+                        <#list areas as area>
+                            <option <#if params.area == area.addressCode>selected="true"</#if> value="${(area.addressCode)!}">${(area.addressName)!}</option>
+                        </#list>
+                    </#if>
                 </select>
             </li>
             <li class="search">
                 <label for="schoolIds">供应学校:</label>
                 <select class="" name="schoolIds" id="schoolIds">
                     <option value="">请选择学校</option>
+                    <#if schools??>
+                        <#list schools as school>
+                            <option <#if params.schoolIds == school.id>selected="true"</#if> value="${(school.id)!}">${(school.schoolName)!}</option>
+                        </#list>
+                    </#if>
                 </select>
             </li>
             <li class="search">
                 <label for="supplierName">供应商名称:</label>
-                <input type="text" name="supplierName" id="supplierName" value="">
+                <input type="text" name="supplierName" id="supplierName" value="${(params.supplierName)!}">
             </li>
             <li class="search">
                 <label for="address">单位地址:</label>
-                <input type="text" name="name" id="address" value="">
+                <input type="text" name="address" id="address" value="${(params.address)!}">
             </li>
         </ul>
-        <input class="search-bt" type="button" name="name" value="搜索">
+        <input class="search-bt" type="button" value="搜索">
     </div>
 
     <table class="result">
@@ -66,72 +76,6 @@
     $(function () {
         $(".nav").find("a").removeClass("cur");
         $(".nav").find("a:eq(1)").addClass("cur");
-
-        // ajax添加地区
-        $.ajax({
-            type: "POST",
-            url: "/api/areas.htm",
-            data: '',
-            datatype: "json",// "xml", "html", "script", "json", "jsonp", "text".
-            beforeSend: function () {
-            },
-            success: function (data) {// 成功返回之后调用的函数
-                var jsondata = null;//eval('(' + data + ')');
-                if (data instanceof Object) {
-                    jsondata = data;
-                } else {
-                    jsondata = eval('(' + data + ')');
-                }
-                if (jsondata.status == 200) {
-//                    console.log(jsondata.data);
-                    $.each(jsondata.data, function () {
-                        var val = this.addressCode;
-                        var name = this.addressName;
-                        appendArea(val, name);
-                    });
-                } else {
-
-                }
-            },
-            complete: function (XMLHttpRequest, textStatus) {// 调用执行后调用的函数
-
-            },
-            error: function () {// 调用出错执行的函数
-            }
-        });
-
-        // ajax添加学校
-        $.ajax({
-            type: "POST",
-            url: "/api/schools.htm",
-            data: '',
-            datatype: "json",// "xml", "html", "script", "json", "jsonp", "text".
-            beforeSend: function () {
-            },
-            success: function (data) {// 成功返回之后调用的函数
-                var jsondata = null;//eval('(' + data + ')');
-                if (data instanceof Object) {
-                    jsondata = data;
-                } else {
-                    jsondata = eval('(' + data + ')');
-                }
-                if (jsondata.status == 200) {
-                    console.log(jsondata.data);
-                    $.each(jsondata.data, function () {
-                        var val = this.id;
-                        var name = this.schoolName;
-                        appendSchool(val, name);
-                    });
-                } else {
-
-                }
-            },
-            complete: function (XMLHttpRequest, textStatus) {// 调用执行后调用的函数
-
-            },
-            error: function () {// 调用出错执行的函数
-            }
-        });
 
         // 跳转指定页
        $('#jump_btn').on('click',function(){
