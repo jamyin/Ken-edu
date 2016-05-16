@@ -3,6 +3,7 @@ package com.ssic.education.app.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.ssic.education.app.dto.EduAreaDto;
 import com.ssic.education.app.service.IAreaService;
@@ -17,7 +18,8 @@ import com.ssic.util.BeanUtils;
 * @date 2016年5月12日 上午11:55:50
 *
  */
-public class AreaServiceImpl implements IAreaService {
+@Service
+public class AreasServiceImpl implements IAreaService {
 
     @Autowired
     private AreaDao areaDao;
