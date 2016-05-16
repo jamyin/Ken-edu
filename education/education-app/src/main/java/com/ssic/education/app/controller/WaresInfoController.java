@@ -1,8 +1,18 @@
 package com.ssic.education.app.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.ssic.education.app.dto.WaresInfoDto;
+import com.ssic.education.app.service.IWaresInfoService;
+import com.ssic.education.common.dto.ProSupplierDto;
+import com.ssic.education.utils.model.PageQuery;
 import com.ssic.util.model.Response;
 
 /**		
@@ -18,11 +28,12 @@ import com.ssic.util.model.Response;
  * <p>修改备注：</p>
  */
 @Controller
-@RequestMapping(value = "/waresInfo")
+@RequestMapping(value = "/wares")
 public class WaresInfoController {
-	//@Autowired
-	//private IProWaresService proWaresService;
+	@Autowired
+	private IWaresInfoService waresInfoService;
 
+	// @RequestMapping(value = "/person/profile/{id}/{name}/{status}", method = RequestMethod.GET) 
 	/**
 	 * getWaresList： 食品列表：根据供应商id查食品列表 原料列表：根据供应商id查原料列表
 	 * @return
@@ -30,9 +41,28 @@ public class WaresInfoController {
 	 * @author SeanYoung
 	 * @date 2016年5月13日 下午3:32:09
 	 */
-	public Response<?> getWaresList() {
-		//TODO 定义接口待实现
-		return null;
+	@RequestMapping(value = "/list/{supplierId}", method = RequestMethod.GET)
+	@ResponseBody
+	public Response<List<WaresInfoDto>> getWaresList(@PathVariable("supplierId") String supplierId) {
+		Response<List<WaresInfoDto>> result = new Response<List<WaresInfoDto>>();
+		List<WaresInfoDto> waresInfoList = waresInfoService.getWaresBySupplierId(supplierId);
+		result.setData(waresInfoList);
+		return result;
+	}
+
+	/**
+	 * getWaresPageList： 食品列表：根据供应商id查食品列表 
+	 * 原料列表：根据供应商id查原料列表 
+	 * 分页查询
+	 * @return
+	 * @exception	
+	 * @author SeanYoung
+	 * @date 2016年5月13日 下午3:32:09
+	 */
+	@RequestMapping(value = "/warespagelist", method = RequestMethod.POST)
+	@ResponseBody
+	public Response<List<WaresInfoDto>> getWaresPageList(@PathVariable("supplierId") String supplierId, PageQuery query) {
+		return waresInfoService.getWaresBySupplierId(supplierId, query);
 	}
 
 	/**
@@ -40,7 +70,7 @@ public class WaresInfoController {
 	 * @return
 	 * @exception	
 	 * @author SeanYoung
-	 * @date 2016年5月13日 上午11:55:28
+	 * @date 2016年5月13日 上午11:55:28	
 	 */
 	public Response<?> getDishesInfo() {
 		//TODO 定义接口待实现

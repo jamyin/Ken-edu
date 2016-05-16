@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProWaresDto {
+public class WaresInfoDto {
 	private String id;
 
 	private String waresName;
