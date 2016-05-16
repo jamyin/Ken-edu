@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.ssic.education.app.dto.WaresInfoDto;
+import com.ssic.education.app.dto.WaresRelatedDto;
 
 /**
  * 		
@@ -29,5 +30,7 @@ public interface WaresInfoExMapper {
 	 * @date 2016年5月12日 下午4:46:27
 	 */
 	List<WaresInfoDto> findWarseBySupplier(@Param("supplierId") String supplierId);
+
+	WaresRelatedDto findWarseById(@Param("id") String id);
 
 }

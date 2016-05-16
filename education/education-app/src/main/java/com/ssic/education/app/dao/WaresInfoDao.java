@@ -1,12 +1,14 @@
 package com.ssic.education.app.dao;
 
 import com.ssic.education.app.dto.WaresInfoDto;
+import com.ssic.education.app.dto.WaresRelatedDto;
 import com.ssic.education.app.mapper.WaresInfoExMapper;
 import com.ssic.education.common.mapper.ProWaresMapper;
 import com.ssic.education.utils.mybatis.MyBatisBaseDao;
 
 import lombok.Getter;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -38,5 +40,9 @@ public class WaresInfoDao extends MyBatisBaseDao<WaresInfoDto> {
 
 	public List<WaresInfoDto> findWarseBySupplier(String supplierId) {
 		return WareInfoMapper.findWarseBySupplier(supplierId);
+	}
+
+	public WaresRelatedDto findWarseById(String id) {
+		return WareInfoMapper.findWarseById(id);
 	}
 }

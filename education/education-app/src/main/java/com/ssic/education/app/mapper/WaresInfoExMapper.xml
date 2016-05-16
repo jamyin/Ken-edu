@@ -21,8 +21,39 @@
 		<result column="image" property="image" jdbcType="VARCHAR" />
 		<result column="remark" property="remark" jdbcType="VARCHAR" />
 	</resultMap>
+	<resultMap id="WaresRelated" type="com.ssic.education.app.dto.WaresRelatedDto">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="wares_name" property="waresName" jdbcType="VARCHAR" />
+		<result column="spec" property="spec" jdbcType="VARCHAR" />
+		<result column="shelf_life" property="shelfLife" jdbcType="INTEGER" />
+		<result column="unit" property="unit" jdbcType="VARCHAR" />
+		<result column="supplier_id" property="supplierId" jdbcType="VARCHAR" />
+		<result column="way" property="way" jdbcType="INTEGER" />
+		<result column="wares_type" property="waresType" jdbcType="INTEGER" />
+		<result column="custom_code" property="customCode" jdbcType="VARCHAR" />
+		<result column="bar_code" property="barCode" jdbcType="VARCHAR" />
+		<result column="en_name" property="enName" jdbcType="VARCHAR" />
+		<result column="place" property="place" jdbcType="VARCHAR" />
+		<result column="dishes" property="dishes" jdbcType="BIT" />
+		<result column="crate_time" property="crateTime" jdbcType="TIMESTAMP" />
+		<result column="last_update_time" property="lastUpdateTime" jdbcType="TIMESTAMP" />
+		<result column="stat" property="stat" jdbcType="INTEGER" />
+		<result column="image" property="image" jdbcType="VARCHAR" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<association property="supplier" javaType="com.ssic.education.app.dto.ProSupplierDto" />
+		<association property="ledgerList" javaType="com.ssic.education.app.dto.LedgerInfoDto" />
+	</resultMap>
 
-	<select id="findWarseBySupplier" resultMap="BaseResultMap" parameterType="java.lang.String">
+	<select id="findWarseBySupplier" parameterType="java.lang.String" resultMap="BaseResultMap">
 		select * from t_pro_wares where supplier_id=#{supplierId}
+	</select>
+	<select id="findWarseById" parameterType="java.lang.String" resultMap="WaresRelated">
+		select * from t_pro_wares where id=#{id}
+	</select>
+	<select id="getSupplierById" parameterType="java.lang.String" resultType="com.ssic.education.app.dto.ProSupplierDto">
+		SELECT * from t_pro_supplier where supplier_id=#{supplierId}
+	</select>
+	<select id="getLedgerById" parameterType="java.lang.String" resultType="com.ssic.education.app.dto.LedgerInfoDto">
+		SELECT * from t_pro_ledger where supplier_id=#{supplierId} and wares_id=#{wares_id}
 	</select>
 </mapper>
