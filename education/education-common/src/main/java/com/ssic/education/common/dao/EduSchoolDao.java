@@ -60,7 +60,7 @@ public class EduSchoolDao extends MyBatisBaseDao<EduSchool> {
                 criteria.andAreaEqualTo(dto.getArea().trim());
             }
             if (StringUtils.isNotBlank(dto.getCommitteeId())) {
-                criteria.andCommitteeIdEqualTo(dto.getCommitteeId().trim())
+                criteria.andCommitteeIdEqualTo(dto.getCommitteeId().trim());
             }
         }
 
