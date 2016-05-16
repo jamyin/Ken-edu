@@ -16,43 +16,54 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * 
  * @author pengpeng
  * @Date: 2016年5月12日 下午5:36:21
  */
 @Repository
-public class EduSchoolDao extends MyBatisBaseDao<EduSchool>{
+public class EduSchoolDao extends MyBatisBaseDao<EduSchool> {
 
-	@Autowired
-	@Getter
-	private EduSchoolMapper mapper;	
-	
-	public List<EduSchoolDto> findPage(EduSchoolDto dto, PageQuery page) {
-		EduSchoolExample example = new EduSchoolExample();
-		EduSchoolExample.Criteria criteria = example.createCriteria();
-		assemblyParams(dto, criteria);
-		if (null != page) {
-			example.setOrderByClause("stat desc,create_time desc limit "+page.getStartNum() +"," + page.getPageSize());
-		}else{
-			example.setOrderByClause("create_time desc");
-		}
-		return BeanUtils.createBeanListByTarget(mapper.selectByExample(example), EduSchoolDto.class);
-	}
+    @Autowired
+    @Getter
+    private EduSchoolMapper mapper;
 
-	public long count(EduSchoolDto dto) {
-		EduSchoolExample example = new EduSchoolExample();
-		EduSchoolExample.Criteria criteria = example.createCriteria();
-		assemblyParams(dto, criteria);
-		return mapper.countByExample(example);
-	}
+    public List<EduSchoolDto> findPage(EduSchoolDto dto, PageQuery page) {
+        EduSchoolExample example = new EduSchoolExample();
+        EduSchoolExample.Criteria criteria = example.createCriteria();
+        assemblyParams(dto, criteria);
+        if (null != page) {
+            example.setOrderByClause("stat desc,create_time desc limit " + page.getStartNum() + "," + page.getPageSize());
+        } else {
+            example.setOrderByClause("create_time desc");
+        }
+        return BeanUtils.createBeanListByTarget(mapper.selectByExample(example), EduSchoolDto.class);
+    }
 
-	private void assemblyParams(EduSchoolDto dto, EduSchoolExample.Criteria criteria) {
-		if (null != dto){
-			if (null != dto.getLevel()) {
-				criteria.andLevelEqualTo(dto.getLevel());
-			}
-		}
+    public long count(EduSchoolDto dto) {
+        EduSchoolExample example = new EduSchoolExample();
+        EduSchoolExample.Criteria criteria = example.createCriteria();
+        assemblyParams(dto, criteria);
+        return mapper.countByExample(example);
+    }
 
-		criteria.andStatEqualTo(DataStatus.ENABLED);
-	}
+    private void assemblyParams(EduSchoolDto dto, EduSchoolExample.Criteria criteria) {
+        if (null != dto) {
+            if (StringUtils.isNotBlank(dto.getAddress())) {
+                criteria.andAddressEqualTo(dto.getAddress().trim());
+            }
+            if (StringUtils.isNotBlank(dto.getSchoolName())) {
+                criteria.andSchoolNameLike("%" + dto.getSchoolName().trim() + "%");
+            }
+            if (null != dto.getLevel()) {
+                criteria.andLevelEqualTo(dto.getLevel());
+            }
+            if (StringUtils.isNotBlank(dto.getArea())) {
+                criteria.andAreaEqualTo(dto.getArea().trim());
+            }
+            if (StringUtils.isNotBlank(dto.getCommitteeId())) {
+                criteria.andCommitteeIdEqualTo(dto.getCommitteeId().trim())
+            }
+        }
+
+        criteria.andStatEqualTo(DataStatus.ENABLED);
+    }
 }
