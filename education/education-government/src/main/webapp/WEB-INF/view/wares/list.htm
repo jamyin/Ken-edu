@@ -15,14 +15,14 @@
           <input type="hidden" name="supplierId" value="${(params.supplierId)!}"/>
           <input type="hidden" name="currPage" id="currPage" value="1"/>
           <input class="search" type="button" id="search_btn">
-          <input class="search_text" type="text" name="waresName" placeholder="请输入关键字" value="${(params.waresName)!}>
+          <input class="search_text" type="text" name="waresName" placeholder="请输入关键字" value="${(params.waresName)!}">
         </span>
       </h1>
     </form>
     <div class="item-list">
       <ul>
         <#if pageList??>
-          <#list pageList as data>
+          <#list pageList.results as data>
               <li>
                 <img src="${(data.image)!}" alt="" />
                 <div>${(data.waresName)!}</div>
