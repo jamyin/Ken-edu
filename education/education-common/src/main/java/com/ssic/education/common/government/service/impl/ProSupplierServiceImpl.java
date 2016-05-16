@@ -61,6 +61,9 @@ public class ProSupplierServiceImpl implements ProSupplierService{
 		if (null != proSupplierDto) {
 			proSupplierDto.setProLicenseDtoList(proLicenseDtos);
 			return proSupplierDto;
+//		ProSupplier proSupplier = proSupplierDao.selectByPrimaryKey(id);
+//		if (null != proSupplier) {
+//			return BeanUtils.createBeanByTarget(proSupplier, ProSupplierDto.class);
 		}
 		return null;
 	}

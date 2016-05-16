@@ -47,6 +47,25 @@ public class EduUsersDao extends MyBatisBaseDao<EduUsers>{
 			return null;	
 		}
 		return BeanUtils.createBeanByTarget(results.get(0), EduUsersDto.class);
+	}
+
+	public boolean validateAccount(EduUsersDto usersDto) {
+		EduUsersExample example = new EduUsersExample();
+		EduUsersExample.Criteria criteria = example.createCriteria();
+		
+		criteria.andUserAccountEqualTo(usersDto.getUserAccount());	
+
+		List<EduUsers> results = mapper.selectByExample(example);
+		if(results!=null && results.size()>0){//有值
+			return false;
+		}else{
+			return true;
+		}
+	}
+
+	public void save(EduUsersDto usersDto) {
+		EduUsers record = BeanUtils.createBeanByTarget(usersDto, EduUsers.class);
+		mapper.insertSelective(record);
 	}	
 
 
