@@ -7,49 +7,60 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class EduSchoolDto implements Serializable {
-	
-	@Getter
-	@Setter
-    private String id;
-	
-	@Getter
-	@Setter
-    private String schoolName;
 
 	@Getter
 	@Setter
-    private String mobileNo;
+	private String id;
 
 	@Getter
 	@Setter
-    private String address;
+	private String committeeId;
 
 	@Getter
 	@Setter
-    private String longitude;
+	private String schoolName;
 
 	@Getter
 	@Setter
-    private String latitude;
+	private String mobileNo;
 
 	@Getter
 	@Setter
-    private Byte level;
+	private String address;
 
 	@Getter
 	@Setter
-    private String addressCode;
+	private String longitude;
 
 	@Getter
 	@Setter
-    private Date createTime;
+	private String latitude;
 
 	@Getter
 	@Setter
-    private Date lastUpdateTime;
+	private Byte level;
 
 	@Getter
 	@Setter
-    private Integer stat;
+	private String province;
 
+	@Getter
+	@Setter
+	private String city;
+
+	@Getter
+	@Setter
+	private String area;
+
+	@Getter
+	@Setter
+	private Date createTime;
+
+	@Getter
+	@Setter
+	private Date lastUpdateTime;
+
+	@Getter
+	@Setter
+	private Integer stat;
 }
