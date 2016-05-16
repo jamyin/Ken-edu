@@ -44,7 +44,7 @@ public class AreaController {
     		result.setData(areaList);
     		return result;
     	}else{
-    		result.setStatus(DataStatus.HTTP_FAILE);
+    		result.setStatus(DataStatus.HTTP_SUCCESS);
     		result.setMessage("未查到相关记录！");
     		return result;
     	}
