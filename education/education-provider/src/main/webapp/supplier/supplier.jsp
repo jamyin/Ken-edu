@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>用户管理</title>
+<title>供应商管理</title>
 <jsp:include page="../inc.jsp"></jsp:include>
 <c:if test="${fn:contains(sessionInfo.resourceList, '/userController/editPage')}">
 	<script type="text/javascript">
@@ -228,17 +228,21 @@
 		<div data-options="region:'north',title:'查询条件',border:false" style="height: 160px; overflow: hidden;">
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">
+					<!--<tr>
+						<th>供应商编码</th>
+						<td><input class="span2" name="searchName" /></td>
+					</tr>-->
 					<tr>
-						<th>登录名</th>
-						<td><input name="searchName" placeholder="可以模糊查询登录名" class="span2" /></td>
+						<th>名称</th>
+						<td><input class="span2" name="supplierName" /></td>
 					</tr>
 					<tr>
-						<th>创建时间</th>
-						<td><input class="span2" name="createdatetimeStart" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" />至<input class="span2" name="createdatetimeEnd" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" /></td>
+						<th>地址</th>
+						<td><input class="span2" name="address" /></td>
 					</tr>
 					<tr>
-						<th>最后修改时间</th>
-						<td><input class="span2" name="modifydatetimeStart" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" />至<input class="span2" name="modifydatetimeEnd" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" /></td>
+						<th>供应商类别</th>
+						<td><input class="span2" name="supplierType" /></td>
 					</tr>
 				</table>
 			</form>

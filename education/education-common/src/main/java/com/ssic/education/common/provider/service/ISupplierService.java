@@ -2,15 +2,14 @@ package com.ssic.education.common.provider.service;
 
 import com.ssic.education.common.dto.ProSupplierDto;
 import com.ssic.education.common.pojo.ProSupplier;
-import com.ssic.education.utils.model.PageQuery;
-import com.ssic.education.utils.model.PageResult;
-
-import java.util.List;
+import com.ssic.education.common.provider.service.dto.SupplierDto;
+import com.ssic.education.common.provider.utils.DataGrid;
+import com.ssic.education.common.provider.utils.PageHelper;
 
 
 public interface ISupplierService {
 
-	List<ProSupplierDto> findAllProSupplier();
+	DataGrid findProSupplier(SupplierDto supplierDto,PageHelper ph);
 
 	ProSupplierDto findProSupplierById(String id);
 
