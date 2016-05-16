@@ -16,7 +16,7 @@ import com.ssic.education.utils.util.BeanUtils;
 
 
 @Repository
-public class WaresDao {
+public class WaresDao{
 	@Autowired
 	private ProWaresMapper  mapper;
 	@Autowired
@@ -36,7 +36,7 @@ public class WaresDao {
 		ProWares wares = new ProWares();
 		 BeanUtils.copyProperties(pro,wares);
 		 wares.setStat(1);
-		 wares.setCrateTime(new Date());
+		 wares.setCreateTime(new Date());
 		 wares.setLastUpdateTime(new Date());
 		mapper.insertSelective(wares);
 	}

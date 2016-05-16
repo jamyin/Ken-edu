@@ -51,7 +51,7 @@ public class SupplierController {
     		result.setData(supplierList);
     		return result;
     	}else{
-    		result.setStatus(DataStatus.HTTP_FAILE);
+    		result.setStatus(DataStatus.HTTP_SUCCESS);
     		result.setMessage("未查到相关记录！");
     		return result;
     	}
@@ -80,7 +80,7 @@ public class SupplierController {
     		result.setData(supplier);
     		return result;
     	}
-    	result.setStatus(DataStatus.HTTP_FAILE);
+    	result.setStatus(DataStatus.HTTP_SUCCESS);
 		result.setMessage("未查到相关记录！");
 		return result;
     }
@@ -108,7 +108,7 @@ public class SupplierController {
      		result.setData(wares);
      		return result;
      	}
-     	result.setStatus(DataStatus.HTTP_FAILE);
+     	result.setStatus(DataStatus.HTTP_SUCCESS);
  		result.setMessage("未查到相关记录！");
  		return result;
      }

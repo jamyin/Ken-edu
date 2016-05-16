@@ -101,7 +101,7 @@ public class WaresController  extends BaseController {
 	             j.setSuccess(false);
 	             return j;
 	         }
-	         if (pro.getShelfLife()==null || pro.getShelfLife().equals("") )
+	        /* if (pro.getShelfLife()==null || pro.getShelfLife().equals("") )
 	         {
 	             j.setMsg("保质期不能为空");
 	             j.setSuccess(false);
@@ -112,7 +112,7 @@ public class WaresController  extends BaseController {
 	             j.setMsg("单位不能为空");
 	             j.setSuccess(false);
 	             return j;
-	         }
+	         }*/
 	         if (pro.getSpec()==null || pro.getSpec().equals(""))
 	         {
 	             j.setSuccess(false);
@@ -120,7 +120,7 @@ public class WaresController  extends BaseController {
 	             return j;
 	         }
 
-	         if (pro.getWay()==null || pro.getWay().equals(""))
+	         /*if (pro.getWay()==null || pro.getWay().equals(""))
 	         {
 	             j.setSuccess(false);
 	             j.setMsg("商品方向不能为空");
@@ -138,11 +138,11 @@ public class WaresController  extends BaseController {
 	             j.setSuccess(false);
 	             j.setMsg("商品条形码不能为空");
 	             return j;
-	         }
-	         if (pro.getPlace()==null || pro.getPlace().equals(""))
+	         }*/
+	         if (pro.getWaresType()==null || pro.getWaresType().equals(""))
 	         {
 	             j.setSuccess(false);
-	             j.setMsg("产地不能为空");
+	             j.setMsg("商品类型不能为空");
 	             return j;
 	         }	       
 	       

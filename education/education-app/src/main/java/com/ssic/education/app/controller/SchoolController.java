@@ -45,7 +45,7 @@ public class SchoolController {
     		result.setData(schoolList);
     		return result;
     	}else{
-    		result.setStatus(DataStatus.HTTP_FAILE);
+    		result.setStatus(DataStatus.HTTP_SUCCESS);
     		result.setMessage("未查到相关记录！");
     		return result;
     	}
@@ -68,7 +68,7 @@ public class SchoolController {
     		result.setData(schoolDetialList);
     		return result;
     	}else{
-    		result.setStatus(DataStatus.HTTP_FAILE);
+    		result.setStatus(DataStatus.HTTP_SUCCESS);
     		result.setMessage("未查到相关记录！");
     		return result;
     	}
