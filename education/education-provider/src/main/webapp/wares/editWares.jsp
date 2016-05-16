@@ -9,7 +9,7 @@
 
 		$('#form').form(
 						{																	
-							url : '${pageContext.request.contextPath}/waresController/updateWares'+$("#id").val(),
+							url : '${pageContext.request.contextPath}/waresController/updateWares?id='+$("#id").val(),
 							onSubmit : function() {
 								var isValid = $(this).form('validate');
 								var error_message = '';
@@ -32,15 +32,6 @@
 									error_message = error_message +'单位不能为空,'; 
 								}
 								
-								var phone = $("#supplierName").val();
-								if(phone==''){
-									error_message = error_message +'供应商名称不能为空不能为空,';
-								}
-								
-								var nameEn = $("#customCode").val();
-								if(nameEn==''){
-									error_message = error_message +'企业自定义代码不能为空,';
-								}
 								
 							
 								if(error_message!=''){
@@ -90,7 +81,7 @@
 			<div data-options="region:'center',border:false" title=""
 				style="overflow: hidden;">
 				<form id="form" method="post"  enctype="multipart/form-data">
-				   <input id="id" name="id" type="hidden" value="${wdto.id}" />
+				   <input id="id" name="id" type="hidden" value="${id}" />
 					<table class="table table-hover table-condensed">
 						<tr>
 
@@ -133,7 +124,7 @@
 						<tr>
 							<th>备注</th>
 							<td><input name="remark" type="text" placeholder="请输入备注" id="remark"
-								class="easyui-validatebox span2" data-options="required:true" value="${wdto.remark}"></td>
+								class="easyui-validatebox span2" data-options="required:true"  value="${wdto.remark}"></td>
 							<th>是否是菜肴</th>
 							<td><select name="dishes" class="easyui-combobox" id="dishes"
 								data-options="width:140,height:29,editable:false,panelHeight:'auto'" 

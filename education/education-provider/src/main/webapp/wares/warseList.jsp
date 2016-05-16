@@ -87,10 +87,10 @@ else
 					return "";
 							}
 				}
-			},{
-				field : 'remark',
-				title : '备注',
-				width : 120,
+			}, {
+				field : 'spec',
+				title : '规格',
+				width : 150,
 				formatter : function(value, row, index) {
 					if(value!=null){
 					return '<font style="font-style: normal;font-weight: bolder;">'
@@ -102,18 +102,6 @@ else
 			},{
 				field : 'supplierName',
 				title : '供应商名称',
-				width : 150,
-				formatter : function(value, row, index) {
-					if(value!=null){
-					return '<font style="font-style: normal;font-weight: bolder;">'
-							+ value + '</font>';
-					}else{
-					return "";
-							}
-				}
-			}, {
-				field : 'spec',
-				title : '规格',
 				width : 150,
 				formatter : function(value, row, index) {
 					if(value!=null){
@@ -158,6 +146,18 @@ else
 							return '<font style="font-style: normal;font-weight: bolder;">产出品</font>';
 					 }
 				}
+			}/* ,{
+				field : 'remark',
+				title : '备注',
+				width : 120,
+				formatter : function(value, row, index) {
+					if(value!=null){
+					return '<font style="font-style: normal;font-weight: bolder;">'
+							+ value + '</font>';
+					}else{
+					return "";
+							}
+				}
 			},{
 				field : 'customCode',
 				title : '企业自定义代码',
@@ -170,7 +170,7 @@ else
 					return "";
 							}
 				}
-			},{
+			} */,{
 				field : 'barCode',
 				title : '商品条形码',
 				width : 150,

@@ -29,7 +29,7 @@ import com.gotye.entity.User;
 public class ParseExcelUtil {
 
 	public FileInputStream fis;
-	public HSSFWorkbook workBook;
+	public HSSFWorkbook workBook;  
 	public HSSFSheet sheet;
 	public ParseXMLUtil parseXmlUtil;
 	public StringBuffer errorString;

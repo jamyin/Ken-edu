@@ -75,22 +75,27 @@
 								placeholder="请输入商品名称" class="easyui-validatebox span2"
 								data-options="required:true" ></td>
 							<th>规格</th>
-							<td><input name="spec" type="text" placeholder="请输入规格<"  id="spec"
-								class="easyui-validatebox span2"></td>
+							<td><input name="spec" type="text" placeholder="请输入规格"  id="spec"
+								class="easyui-validatebox span2"  data-options="required:true"></td>
 
 						</tr>
 						<tr>
 							<th>保质期</th>
 							<td><input name="shelfLife" type="text" placeholder="请输入保质期" id="shelfLife"
-								class="easyui-validatebox span2" data-options="required:true"></td>
+								class="easyui-validatebox span2" ></td>
 							<th>保质期单位</th>
-							<td><input name="unit" type="text" placeholder="请输入单位" id="unit"
-								class="easyui-validatebox span2" data-options="required:true"></td>
+							<td><select id="unit" class="easyui-combobox" name="unit"  data-options="width:140,height:29,editable:false,panelHeight:'auto'"
+								data-options="required:true">
+							    <option value="年">年</option>   
+							    <option value="月">月</option>   
+							    <option value="日">日</option>   							  
+							    <option value="小时">小时</option>   							  
+							</select></td>
 						</tr>
 						<tr>
 							<th>供应商名称</th>
 							<td><input name="supplierName" type="text" placeholder="请输入供应商名称" id="supplierName"
-								class="easyui-validatebox span2" data-options="required:true"></td>
+								class="easyui-validatebox span2" ></td>
 							<th>商品方向</th>
 							<td><select name="way" class="easyui-combobox" id="way"
 								data-options="width:140,height:29,editable:false,panelHeight:'auto'"
@@ -100,16 +105,37 @@
 						<tr>
 							<th>企业自定义代码</th>
 						    <td><input name="customCode" type="text" placeholder="请输入自定义代码" id="customCode"
-								class="easyui-validatebox span2" data-options="required:true"></td>
+								class="easyui-validatebox span2" ></td>
 							<th>产地</th>
 							<td><input name="place" type="text" id="place"
 								placeholder="请输入产地" class="easyui-validatebox span2"
-								data-options="required:true"></td>
+								></td>
 						</tr>
 						<tr>
-							<th>备注</th>
-							<td><input name="remark" type="text" placeholder="请输入备注" id="remark"
-								class="easyui-validatebox span2" data-options="required:true"></td>
+							<th>商品分类</th>
+							<td><select id="waresType" class="easyui-combobox" name="waresType"  data-options="width:140,height:29,editable:false,panelHeight:'auto'"
+								data-options="required:true">
+							    <option value="1">畜产品及其制品</option>   
+							    <option value="2">禽及其产品、制品</option>   
+							    <option value="3">蔬菜</option>   
+							    <option value="4">乳及乳制品</option>   
+							    <option value="5">油脂及其制品</option>   
+							    <option value="6">水产及其制品</option>   
+							    <option value="7">冷冻饮品</option>   
+							    <option value="8">水果</option>   
+							    <option value="9">粮食和粮食制品</option>   
+							    <option value="10">豆类及其制品</option>   
+							    <option value="11">食用菌和藻类</option>   
+							    <option value="12">可可和巧克力制品及糖果</option>   
+							    <option value="13">焙烤食品</option>   
+							    <option value="14">甜味料</option>   
+							    <option value="15">调味品</option>   
+							    <option value="16">特殊膳食用食品</option>   
+							    <option value="17">饮料类</option>   
+							    <option value="18">酒类</option>   
+							    <option value="19">添加剂类</option>   
+							    <option value="20">其他类</option>   
+							</select> </td>
 							<th>是否是菜肴</th>
 							<td><select name="dishes" class="easyui-combobox" id="dishes"
 								data-options="width:140,height:29,editable:false,panelHeight:'auto'"
@@ -117,13 +143,17 @@
 									<option value="1">否</option></select></td>
 						</tr>
 						<tr>
-							<th>图片</th>
-							<td>	<input type="file" name="imgUrl"  id="imgUrl"  accept="image/*" />	</td>
+							<th>英文名</th>
+							<td>	<input name="enName" type="text" id="enName"
+								placeholder="请输入英文名" class="easyui-validatebox span2"
+								></td>
 							<th>条形码</th>
 							<td><input name="barCode" type="text" id="barCode"
 								placeholder="请输入条形码" class="easyui-validatebox span2"
-								data-options="required:true"></td>
+								></td>
+								
 						</tr>
+						
 					</table>
 			
 				</form>

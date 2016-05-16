@@ -30,7 +30,7 @@
 			AND a.stat = 1
 			AND b.stat = 1
 	<include refid="where_findWares"></include>
-		order by a.crate_time desc
+		order by a.create_time desc
 		limit #{page.beginRow},#{page.rows}
 	<!-- 	limit #{page.beginRow},#{page.rows} -->
 	</select>
@@ -50,6 +50,7 @@
 				a.place AS place,
 				a.dishes AS dishes,
 				a.image AS image,
+				a.remark AS remark,
 				a.supplier_id  AS supplierId
 			FROM
 				t_pro_wares a,
@@ -60,7 +61,7 @@
 			AND b.stat = 1
 			AND a.id=#{proWaresDto.id}
 			
-			order by a.crate_time desc
+			order by a.create_time desc
 	</select>
 	
 	
