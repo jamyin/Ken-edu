@@ -81,7 +81,7 @@ public class ViewProSupplierDao extends MyBatisBaseDao<ViewProSupplier> {
 				criteria.andAddressLike("%"+proSupplierDto.getAddress().trim()+"%");
 			}
 			if (StringUtils.isNotBlank(proSupplierDto.getSchoolIds())){
-				criteria.andSchoolIdsLike("%"+proSupplierDto.getAddress().trim()+"%");
+				criteria.andSchoolIdsLike("%"+proSupplierDto.getSchoolIds().trim()+"%");
 			}
 		}
 	}
