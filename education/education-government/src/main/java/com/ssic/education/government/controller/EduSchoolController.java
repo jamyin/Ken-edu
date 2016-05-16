@@ -50,7 +50,7 @@ public class EduSchoolController extends BaseController{
 	public ModelAndView list(EduSchoolDto dto, PageQuery page) {
 		ModelAndView mv = getModelAndView();
 		PageResult<EduSchoolDto> result = eduSchoolService.list(dto, page);
-		mv.setViewName("/school/list");
+		mv.setViewName("/school/school_list");
 		mv.addObject("pageList", result);
 		return mv;
 	}
