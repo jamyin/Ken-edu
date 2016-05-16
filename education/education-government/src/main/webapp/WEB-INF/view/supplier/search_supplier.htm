@@ -91,7 +91,6 @@
         // 跳转指定页
         $('#jump_btn').on('click', function () {
             var jump_num = $('#jump_num').val();
-//           console.log(jump_num);
             if (jump_num != '') {
                 var reg = /^[-+]?\d*$/;
                 if (!reg.test(jump_num)) {
@@ -116,14 +115,6 @@
     function gotoPage(page) {
         $("currPage").val(page);
         $("#myform").submit();
-    }
-
-    function appendArea(val, name) {
-        $("#area").append("<option value='" + val + "'>" + name + "</option>");
-    }
-
-    function appendSchool(val, name) {
-        $("#schoolIds").append("<option value='" + val + "'>" + name + "</option>");
     }
 </script>
 </body>
