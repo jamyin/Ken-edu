@@ -1,4 +1,4 @@
-package com.ssic.education.government.controller;
+package com.ssic.education.government.controller.users;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.common.base.Objects;
+import com.ssic.education.government.controller.BaseController;
 import com.ssic.education.government.dto.EduUsersDto;
 import com.ssic.education.government.service.EduUsersService;
 /**

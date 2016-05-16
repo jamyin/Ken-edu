@@ -47,7 +47,7 @@ public class SchoolDao extends MyBatisBaseDao<EduSchool> {
 		EduSchoolExample example = new EduSchoolExample();
 		EduSchoolExample.Criteria criteria = example.createCriteria();
         assemblyParams(eduSchoolDto, criteria);
-        if(null != query){
+        if(query != null && query.getPageSize() > 0){
         	example.setOrderByClause("create_time DESC limit "+query.getStartNum() +"," + query.getPageSize());
 		}
 		List<EduSchool> list = mapper.selectByExample(example);
