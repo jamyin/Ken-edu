@@ -3,6 +3,7 @@ package com.ssic.education.app.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.ssic.education.app.service.ISupplierService;
 import com.ssic.education.common.dao.SupplierDao;
@@ -20,7 +21,8 @@ import com.ssic.util.BeanUtils;
 * @date 2016年5月12日 下午2:20:58
 *
  */
-public class SupplierServiceImpl implements ISupplierService{
+@Service
+public class SuppliersServiceImpl implements ISupplierService{
 
     @Autowired
     private SupplierDao supplierDao;

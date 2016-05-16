@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ssic.education.common.dto.EduSchoolDto;
+import com.ssic.education.common.mapper.EduSchoolExMapper;
 import com.ssic.education.common.mapper.EduSchoolMapper;
 import com.ssic.education.common.pojo.EduSchool;
 import com.ssic.education.common.pojo.EduSchoolExample;
@@ -30,6 +31,10 @@ public class SchoolDao extends MyBatisBaseDao<EduSchool> {
 	@Getter
 	@Autowired
 	private EduSchoolMapper mapper;
+	
+	@Getter
+	@Autowired
+	private EduSchoolExMapper mappers;
 	
 	/**
 	* @Title: findSchoolList
@@ -76,6 +81,14 @@ public class SchoolDao extends MyBatisBaseDao<EduSchool> {
 		EduSchoolExample.Criteria criteria = example.createCriteria();
         assemblyParams(eduSchoolDto, criteria);  
         return mapper.countByExample(example);
+	}
+
+	public List<EduSchool> findSchoolDetialList(String id, PageQuery query) {
+		return null;
+	}
+
+	public int selectSchoolDetialAccount(String id) {
+		return 0;
 	}
 
 }
