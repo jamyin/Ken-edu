@@ -1,7 +1,5 @@
 package com.ssic.education.app.service;
 
-import org.springframework.stereotype.Service;
-
 import com.ssic.education.common.dto.ProSupplierDto;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
@@ -14,7 +12,6 @@ import com.ssic.education.utils.model.PageResult;
 * @date 2016年5月12日 下午1:54:31
 *
  */
-@Service
 public interface ISupplierService {
 
 	//查询所有供应商-带分页
