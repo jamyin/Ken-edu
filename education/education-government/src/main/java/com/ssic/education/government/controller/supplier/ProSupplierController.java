@@ -1,6 +1,5 @@
 package com.ssic.education.government.controller.supplier;
 
-import com.ssic.education.common.dto.ProDishesDto;
 import com.ssic.education.common.dto.ProSupplierDto;
 import com.ssic.education.common.government.service.ProDishesService;
 import com.ssic.education.common.government.service.ProLedgerService;
