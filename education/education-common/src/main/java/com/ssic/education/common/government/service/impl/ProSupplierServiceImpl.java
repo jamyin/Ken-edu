@@ -47,7 +47,7 @@ public class ProSupplierServiceImpl implements ProSupplierService{
 	}
 	
 	public ProSupplierDto findById(String id) {
-		ProSupplier proSupplier =  proSupplierDao.selectByPrimaryKey(id);
+		ProSupplier proSupplier = proSupplierDao.selectByPrimaryKey(id);
 		if (null != proSupplier) {
 			return BeanUtils.createBeanByTarget(proSupplier, ProSupplierDto.class);
 		}

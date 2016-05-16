@@ -1,5 +1,7 @@
 package com.ssic.education.government.dto;
 
+import com.ssic.education.utils.constants.WaresMaterialEnum;
+import com.ssic.education.utils.constants.WaresProdutEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -37,8 +39,22 @@ public class ProWaresDto implements Serializable{
     private Integer way;
 
 	@Getter
-	@Setter
     private Integer waresType;
+
+	public void setWaresType(Integer waresType) {
+		this.waresType = waresType;
+		if(null != this.getDishes()){
+			if (this.getDishes()){
+				setWaresTypeStr(WaresProdutEnum.getValueByIndex(waresType));
+			}else{
+				setWaresTypeStr(WaresMaterialEnum.getValueByIndex(waresType));
+			}
+		}
+	}
+
+	@Getter
+	@Setter
+	private String waresTypeStr;
 
 	@Getter
 	@Setter
@@ -57,8 +73,18 @@ public class ProWaresDto implements Serializable{
     private String place;
 
 	@Getter
-	@Setter
     private Boolean dishes;
+
+	public void setDishes(Boolean dishes) {
+		this.dishes = dishes;
+		if(null != this.getWaresType()){
+			if (this.getDishes()){
+				setWaresTypeStr(WaresProdutEnum.getValueByIndex(waresType));
+			}else{
+				setWaresTypeStr(WaresMaterialEnum.getValueByIndex(waresType));
+			}
+		}
+	}
 
 	@Getter
 	@Setter

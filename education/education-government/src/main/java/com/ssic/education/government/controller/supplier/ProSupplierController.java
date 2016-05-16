@@ -1,5 +1,6 @@
 package com.ssic.education.government.controller.supplier;
 
+import com.ssic.education.common.dto.ProLicenseDto;
 import com.ssic.education.common.dto.ProSupplierDto;
 import com.ssic.education.common.government.service.ProDishesService;
 import com.ssic.education.common.government.service.ProLedgerService;
@@ -26,7 +27,9 @@ import org.springframework.web.servlet.ModelAndView;
 public class ProSupplierController extends BaseController {
 	
 	protected static final Log logger = LogFactory.getLog(ProSupplierController.class);
-	
+	private static final int PAGESIZE_WARES = 4;
+	private static final int PAGESIZE_SUPPLIER = 4;
+
 	@Autowired
 	private ProSupplierService proSupplierService;
 	@Autowired
@@ -56,28 +59,63 @@ public class ProSupplierController extends BaseController {
 	}
 
 	/**
-	 * 
+	 * 供应商资质详情
 	  @Name:  qualificationsDetails 
 	  @Author: pengpeng
 	  @Date: 2016年5月12日 下午6:19:37 
 	  @Description: 供应商详情
 	  @param id
-	  @param page
 	  @return
 	 */
-	@RequestMapping(value = "/qualificationsDetails")
-	public ModelAndView qualificationsDetails(String id,PageQuery page) {
+	@RequestMapping(value = "/detail")
+	public ModelAndView qualificationsDetails(String id) {
 		ModelAndView mv = getModelAndView();
-		ProSupplierDto proSupplierDto = proSupplierService.findById(id);
-		ProWaresDto proWaresDto =new ProWaresDto();
-		proWaresDto.setSupplierId(id);
-		PageResult<ProWaresDto> proWaresDtos = proDishesService.findPage(proWaresDto, page);
-		PageResult<ProSupplierDto> proSupplierDtos = proLedgerService.findPage(id, page);
-		mv.setViewName("qualificationsDetails");
-		mv.addObject("ProSupplierDto", proSupplierDto);
-		mv.addObject("proWaresDtos", proWaresDtos);
-		mv.addObject("proSupplierDtos", proSupplierDtos);
+		ProSupplierDto supplier = proSupplierService.findById(id);
+		PageQuery query = new PageQuery();
+		PageResult<ProWaresDto> mWares = queryWares(id, query, false);
+		PageResult<ProWaresDto> pWares = queryWares(id, query, true);
+		PageResult<ProSupplierDto> mSuppliers = queryMaterialSupplier(id, query);
+		mv.addObject("supplier", supplier);
+		mv.addObject("mWares", mWares);
+		mv.addObject("pWares", pWares);
+		mv.addObject("mSuppliers", mSuppliers);
+		mv.setViewName("supplier/supplier_qualification");
 		return mv;
 	}
 
+	/**
+	 * <p>Description: 根据供应商查询分页查询商品信息 </p>
+	 *
+	 * @param supplierId 供应商id
+	 * @param query 分页参数
+	 * @param dishes false-原料,true-成品
+	 * @return PageResult<ProWaresDto>
+	 * @author wangxiang
+	 * @date 16/5/16 下午2:10
+	 * @version 1.0
+	 */
+	private PageResult<ProWaresDto> queryWares(String supplierId, PageQuery query, boolean dishes){
+		query.setPageSize(PAGESIZE_WARES);
+		ProWaresDto params = new ProWaresDto();
+		params.setSupplierId(supplierId);
+		params.setDishes(dishes);
+		PageResult<ProWaresDto> results = proDishesService.findPage(params, query);
+		return results;
+	}
+
+	/**		
+	 * <p>Description: 根据供应商id分页查询原料供应商 </p>
+	 * 
+	 * @param supplierId 供应商id
+	 * @param query 分页参数
+	 * @return PageResult<ProSupplierDto>
+	 * @author wangxiang	
+	 * @date 16/5/16 下午2:22
+	 * @version 1.0
+	 */
+	private PageResult<ProSupplierDto> queryMaterialSupplier(String supplierId, PageQuery query){
+		query.setPageSize(PAGESIZE_SUPPLIER);
+		PageResult<ProSupplierDto> results = proLedgerService.findPage(supplierId, query);
+		return results;
+	}
 }

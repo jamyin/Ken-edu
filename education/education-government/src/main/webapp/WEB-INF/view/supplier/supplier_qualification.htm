@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <#include "/common/head.htm" />
+    <link rel="stylesheet" href="/static/css/supplier_qualification.css" media="screen" charset="utf-8">
+</head>
+<body>
+<#include "/common/nav.htm" />
+
+<div class="wrapperA">
+    <h1 class="con-tt">${(supplier.supplierName)!}</h1>
+
+    <div class="con-bd">
+        <img class="con-img" src="/static/img/sample-meat_200X200.png" alt=""/>
+        <ul>
+            <li><label>单位名称:</label><span>${(supplier.supplierName)!}</span></li>
+            <li><label>单位地址:</label><span>${(supplier.address)!}</span></li>
+            <li><label>工商执照:</label><span>${(supplier.businessLicense)!}</span></li>
+            <li><label>食品生产证号:</label><span>${(supplier.foodProduceCode)!}</span></li>
+            <li><label>食品流通证号:</label><span>${(supplier.foodCirculationCode)!}</span></li>
+            <li><label>食品经营许可证号码:</label><span>${(supplier.businessCode)!}</span></li>
+            <li><label>餐饮服务证号:</label><span>${(supplier.foodServiceCode)!}</span></li>
+            <li><label>法定代表人:</label><span>${(supplier.corporation)!}</span></li>
+            <li><label>联系方式:</label><span>${(supplier.contactWay)!}</span></li>
+        </ul>
+    </div>
+
+    <h1 class="con-tt">成品列表 <a class="more" href="/products_list.html">更多 &gt;&gt; </a></h1>
+
+    <div class="item-list">
+        <ul>
+            <#if pWares??>
+                <#list pWares.results as wares>
+                    <li>
+                        <img src="${(wares.image)!}" alt=""/>
+                        <div>${(wares.waresName)!}</div>
+                        <div>分类:<span>${(wares.waresTypeStr)!}</span></div>
+                        <div>规格:<span>${(wares.spec)!}</span></div>
+                    </li>
+                </#list>
+            </#if>
+        </ul>
+    </div>
+
+    <h1 class="con-tt">原料列表 <a class="more" href="/material_list.html">更多 &gt;&gt; </a></h1>
+
+    <div class="item-list">
+        <ul>
+            <#if mWares??>
+                <#list mWares.results as wares>
+                    <li>
+                        <img src="${(wares.image)!}" alt=""/>
+                        <div>${(wares.waresName)!}</div>
+                        <div>分类:<span>${(wares.waresTypeStr)!}</span></div>
+                        <div>规格:<span>${(wares.spec)!}</span></div>
+                    </li>
+                </#list>
+            </#if>
+        </ul>
+    </div>
+
+
+    <h1 class="con-tt">供应商列表 <a class="more" href="/supplier_list.html">更多 &gt;&gt; </a></h1>
+    <table class="sulplier_items">
+        <tr>
+            <th>原料供应商名称</th>
+            <th>单位地址</th>
+            <th>详情</th>
+        </tr>
+        <#if mSuppliers??>
+            <#list mSuppliers.results as sup>
+                <tr>
+                    <td>${(sup.supplierName)!}</td>
+                    <td>${(sup.address)!}</td>
+                    <td>详情</td>
+                </tr>
+            </#list>
+        </#if>
+    </table>
+</div>
+<#include "/common/footer.htm" />
+
+<script type="text/javascript">
+    $(function () {
+        // debugger;
+        $(".nav").find("a").removeClass("cur");
+        $(".nav").find("a:eq(1)").addClass("cur");
+    })
+</script>
+</body>
+</html>
