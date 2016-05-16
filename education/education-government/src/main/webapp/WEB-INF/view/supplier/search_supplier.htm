@@ -1,117 +1,172 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <#include "/common/head.htm" />
-  <link rel="stylesheet" href="/static/css/search_supplier.css" media="screen" charset="utf-8"/>
+    <#include "/common/head.htm" />
+    <link rel="stylesheet" href="/static/css/search_supplier.css" media="screen" charset="utf-8"/>
 </head>
 <body>
 <#include "/common/nav.htm" />
 
-  <div class="wrapperA">
+<div class="wrapperA">
     <div class="search-bar">
-      <h1 class="con-tt">供应商资质查询</h1>
-      <ul>
-        <li class="search">
-          <label for="">区县:</label>
-          <select class="" name="" panelheight="auto">
-            <option value="option">徐汇区</option>
-            <option value="option">杨浦区</option>
-            <option value="option">嘉定</option>
-          </select>
-        </li>
-        <li class="search">
-          <label for="">供应学校:</label>
-          <select class="" name="">
-            <option value="option">嘉定一中</option>
-            <option value="option">嘉定二中</option>
-            <option value="option">嘉定三中</option>
-          </select>
-        </li>
-        <li class="search">
-          <label for="">供应商名称:</label>
-          <input type="text" name="name" value="">
-        </li>
-        <li class="search">
-          <label for="">单位地址:</label>
-          <input type="text" name="name" value="">
-        </li>
-      </ul>
-      <input class="search-bt" type="button" name="name" value="搜索">
+        <h1 class="con-tt">供应商资质查询</h1>
+        <ul>
+            <li class="search">
+                <label for="area">区县:</label>
+                <select name="area" panelheight="auto" id="area">
+                    <option value="">请选择区县</option>
+                </select>
+            </li>
+            <li class="search">
+                <label for="schoolIds">供应学校:</label>
+                <select class="" name="schoolIds" id="schoolIds">
+                    <option value="">请选择学校</option>
+                </select>
+            </li>
+            <li class="search">
+                <label for="supplierName">供应商名称:</label>
+                <input type="text" name="supplierName" id="supplierName" value="">
+            </li>
+            <li class="search">
+                <label for="address">单位地址:</label>
+                <input type="text" name="name" id="address" value="">
+            </li>
+        </ul>
+        <input class="search-bt" type="button" name="name" value="搜索">
     </div>
 
     <table class="result">
-      <tr>
-        <th>
-          区县
-        </th>
-        <th>
-          单位名称
-        </th>
-        <th>
-          单位地址
-        </th>
-        <th>
-          供应学校
-        </th>
-        <th>
-          详情
-        </th>
-      </tr>
-      <tr>
-        <td>
-          静安
-        </td>
-        <td>
-          上海程联餐饮公司
-        </td>
-        <td>
-          静安区静安寺街道
-        </td>
-        <td>
-          静安小学...
-        </td>
-        <td>
-          <a href="/supplier_qualification.html">详情</a>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          静安
-        </td>
-        <td>
-          上海程联餐饮公司
-        </td>
-        <td>
-          静安区静安寺街道
-        </td>
-        <td>
-          静安小学...
-        </td>
-        <td class="more">
-          详情
-        </td>
-      </tr>
+        <tr>
+            <th>区县</th>
+            <th>单位名称</th>
+            <th>单位地址</th>
+            <th>供应学校</th>
+            <th>详情</th>
+        </tr>
+        <#if pageList??>
+            <#list pageList.results as data>
+                <tr>
+                    <td>${(data.areaName)!}</td>
+                    <td>${(data.supplierName)!}</td>
+                    <td>${(data.address)!}</td>
+                    <td>${(data.schoolNames)!}</td>
+                    <td>
+                        <a href="/supplier_qualification.html">详情</a>
+                    </td>
+                </tr>
+            </#list>
+        </#if>
     </table>
 
-    <div class="page">
-      <a href="#">上一页</a>
-      <a class="pageno" href="#">1</a>
-      <a class="pageno cur" href="#">2</a>
-      <a class="pageno" href="#">3</a>
-      <a class="pageno" href="#">4</a>
-      <a class="pageno" href="#">5</a>
-      <a href="#">下一页</a>
-      <input class="page_to_go" type="text" name="name" value="">
-      <input class="page_jump" type="button" name="name" value="跳转">
-    </div>
-  </div>
+    <#include "/common/page.htm" />
+</div>
 <#include "/common/footer.htm" />
 
-  <script type="text/javascript">
-    $(function(){
-      $(".nav").find("a").removeClass("cur");
-      $(".nav").find("a:eq(1)").addClass("cur");
-    })
-  </script>
+<script type="text/javascript">
+    $(function () {
+        $(".nav").find("a").removeClass("cur");
+        $(".nav").find("a:eq(1)").addClass("cur");
+
+        // ajax添加地区
+        $.ajax({
+            type: "POST",
+            url: "/api/areas.htm",
+            data: '',
+            datatype: "json",// "xml", "html", "script", "json", "jsonp", "text".
+            beforeSend: function () {
+            },
+            success: function (data) {// 成功返回之后调用的函数
+                var jsondata = null;//eval('(' + data + ')');
+                if (data instanceof Object) {
+                    jsondata = data;
+                } else {
+                    jsondata = eval('(' + data + ')');
+                }
+                if (jsondata.status == 200) {
+//                    console.log(jsondata.data);
+                    $.each(jsondata.data, function () {
+                        var val = this.addressCode;
+                        var name = this.addressName;
+                        appendArea(val, name);
+                    });
+                } else {
+
+                }
+            },
+            complete: function (XMLHttpRequest, textStatus) {// 调用执行后调用的函数
+
+            },
+            error: function () {// 调用出错执行的函数
+            }
+        });
+
+        // ajax添加学校
+        $.ajax({
+            type: "POST",
+            url: "/api/schools.htm",
+            data: '',
+            datatype: "json",// "xml", "html", "script", "json", "jsonp", "text".
+            beforeSend: function () {
+            },
+            success: function (data) {// 成功返回之后调用的函数
+                var jsondata = null;//eval('(' + data + ')');
+                if (data instanceof Object) {
+                    jsondata = data;
+                } else {
+                    jsondata = eval('(' + data + ')');
+                }
+                if (jsondata.status == 200) {
+                    console.log(jsondata.data);
+                    $.each(jsondata.data, function () {
+                        var val = this.id;
+                        var name = this.schoolName;
+                        appendSchool(val, name);
+                    });
+                } else {
+
+                }
+            },
+            complete: function (XMLHttpRequest, textStatus) {// 调用执行后调用的函数
+
+            },
+            error: function () {// 调用出错执行的函数
+            }
+        });
+
+        // 跳转指定页
+       $('#jump_btn').on('click',function(){
+           var jump_num = $('#jump_num').val();
+//           console.log(jump_num);
+           if(jump_num != ''){
+               var reg=/^[-+]?\d*$/;
+               if(!reg.test(jump_num)){
+                   alert("对不起，您输入的跳转页数格式不正确!");//请将“整数类型”要换成你要验证的那个属性名称！
+                   return;
+               }
+               if (jump_num > ${(pageList.totalPage)!}){
+                   alert("对不起，您输入的跳转页数大于总页数!");
+                   return;
+               }
+           }else{
+               alert("对不起，您输入的跳转页数!");
+               return;
+           }
+           gotoPage(jump_num);
+       });
+
+    });
+
+    function gotoPage(page){
+        window.location.href = '/pro/supplier/search.htm?currPage='+page;
+    }
+
+    function appendArea(val, name) {
+        $("#area").append("<option value='" + val + "'>" + name + "</option>");
+    }
+
+    function appendSchool(val, name) {
+        $("#schoolIds").append("<option value='" + val + "'>" + name + "</option>");
+    }
+</script>
 </body>
 </html>

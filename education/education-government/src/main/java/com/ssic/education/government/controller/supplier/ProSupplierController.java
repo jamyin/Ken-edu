@@ -37,21 +37,21 @@ public class ProSupplierController extends BaseController {
 	/**
 	 * <p>Description: 供应商资质分页查询接口 </p>
 	 * <p>Company: 上海天坊信息科技有限公司</p>
-	 * @param 
-	 * @return 
+	 * @param params
+	 * @return ModelAndView
 	 * @author wangxiang
 	 * @date 2016/5/13 13:54
 	 * @version 1.0
 	 */
-	@RequestMapping(value = "query")
-	public ModelAndView queryIndex(ProSupplierDto params, PageQuery query){
+	@RequestMapping(value = "search")
+	public ModelAndView search(ProSupplierDto params, PageQuery query){
 		ModelAndView mv = getModelAndView();
 		PageResult<ProSupplierDto> datas = proSupplierService.querySupplierByParams(params, query);
 		mv.setViewName("supplier/search_supplier");
-		mv.addObject("datas", datas);
+		mv.addObject("pageList", datas);
 		return mv;
 	}
-	
+
 	/**
 	 * 
 	  @Name:  qualificationsDetails 
