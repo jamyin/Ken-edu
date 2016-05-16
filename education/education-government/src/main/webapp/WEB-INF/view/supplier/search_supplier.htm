@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <#include "/common/head.htm" />
+  <link rel="stylesheet" href="/static/css/search_supplier.css" media="screen" charset="utf-8"/>
+</head>
+<body>
+<#include "/common/nav.htm" />
+
+  <div class="wrapperA">
+    <div class="search-bar">
+      <h1 class="con-tt">供应商资质查询</h1>
+      <ul>
+        <li class="search">
+          <label for="">区县:</label>
+          <select class="" name="" panelheight="auto">
+            <option value="option">徐汇区</option>
+            <option value="option">杨浦区</option>
+            <option value="option">嘉定</option>
+          </select>
+        </li>
+        <li class="search">
+          <label for="">供应学校:</label>
+          <select class="" name="">
+            <option value="option">嘉定一中</option>
+            <option value="option">嘉定二中</option>
+            <option value="option">嘉定三中</option>
+          </select>
+        </li>
+        <li class="search">
+          <label for="">供应商名称:</label>
+          <input type="text" name="name" value="">
+        </li>
+        <li class="search">
+          <label for="">单位地址:</label>
+          <input type="text" name="name" value="">
+        </li>
+      </ul>
+      <input class="search-bt" type="button" name="name" value="搜索">
+    </div>
+
+    <table class="result">
+      <tr>
+        <th>
+          区县
+        </th>
+        <th>
+          单位名称
+        </th>
+        <th>
+          单位地址
+        </th>
+        <th>
+          供应学校
+        </th>
+        <th>
+          详情
+        </th>
+      </tr>
+      <tr>
+        <td>
+          静安
+        </td>
+        <td>
+          上海程联餐饮公司
+        </td>
+        <td>
+          静安区静安寺街道
+        </td>
+        <td>
+          静安小学...
+        </td>
+        <td>
+          <a href="/supplier_qualification.html">详情</a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          静安
+        </td>
+        <td>
+          上海程联餐饮公司
+        </td>
+        <td>
+          静安区静安寺街道
+        </td>
+        <td>
+          静安小学...
+        </td>
+        <td class="more">
+          详情
+        </td>
+      </tr>
+    </table>
+
+    <div class="page">
+      <a href="#">上一页</a>
+      <a class="pageno" href="#">1</a>
+      <a class="pageno cur" href="#">2</a>
+      <a class="pageno" href="#">3</a>
+      <a class="pageno" href="#">4</a>
+      <a class="pageno" href="#">5</a>
+      <a href="#">下一页</a>
+      <input class="page_to_go" type="text" name="name" value="">
+      <input class="page_jump" type="button" name="name" value="跳转">
+    </div>
+  </div>
+<#include "/common/footer.htm" />
+
+  <script type="text/javascript">
+    $(function(){
+      $(".nav").find("a").removeClass("cur");
+      $(".nav").find("a:eq(1)").addClass("cur");
+    })
+  </script>
+</body>
+</html>

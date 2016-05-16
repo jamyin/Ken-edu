@@ -1,0 +1,48 @@
+.top_head {
+  text-align: center;
+  margin: 100px 0 20px; }
+  .top_head img {
+    display: inline-block;
+    width: 50px; }
+  .top_head h1 {
+    display: inline-block;
+    position: relative;
+    top: -16px;
+    margin-left: 1rem;
+    font-size: 2rem;
+    font-weight: bold; }
+
+.login_wrap {
+  width: 300px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 20px 0;
+  box-sizing: border-box; }
+  .login_wrap section label {
+    position: relative; }
+    .login_wrap section label img {
+      position: absolute;
+      top: -5px;
+      left: 8px;
+      display: inline-block;
+      width: 16px; }
+  .login_wrap section input {
+    border: 1px solid #555;
+    display: inline-block;
+    width: 80%;
+    margin: 0 auto 6px;
+    padding: 0.5rem;
+    text-indent: 3rem; }
+  .login_wrap section #name-error, .login_wrap section #password-error {
+    display: block;
+    padding-bottom: 5px;
+    color: #a94442; }
+  .login_wrap input[type="submit"] {
+    border: 1px solid #555;
+    border-radius: 2px;
+    padding: 0.5rem 4rem;
+    margin-top: 2rem; }
+    .login_wrap input[type="submit"]:hover {
+      background: #ccc; }

@@ -1,0 +1,75 @@
+html {
+  font-size: 10px; }
+
+.header a {
+  font-size: 14px; }
+
+.main_wrap {
+  width: 600px;
+  margin: 1rem auto; }
+  .main_wrap .bread {
+    padding: 1rem 0;
+    color: #333; }
+  .main_wrap .content_wrap {
+    margin-bottom: 1rem;
+    width: 400px;
+    float: left;
+    min-height: 400px;
+    border: 1px solid #ccc;
+    box-sizing: border-box; }
+    .main_wrap .content_wrap .head {
+      border-bottom: 1px solid #ccc;
+      padding: 1rem 0;
+      text-indent: 1rem; }
+    .main_wrap .content_wrap h1 {
+      font-size: 1.4rem;
+      text-align: center;
+      margin: 0.6rem; }
+    .main_wrap .content_wrap .date {
+      text-align: center; }
+    .main_wrap .content_wrap .content {
+      margin: 1.4rem 1.6rem; }
+  .main_wrap .sidebar {
+    width: 190px;
+    float: right; }
+
+.panel {
+  border: 1px solid #ccc;
+  padding-bottom: 1rem;
+  min-height: 100px;
+  margin-bottom: 1rem; }
+  .panel dt {
+    background: #69bd82;
+    border-bottom: 1px solid #ccc;
+    text-indent: 1.4rem;
+    padding: 0.8rem 0; }
+    .panel dt a {
+      color: #fff;
+      float: right;
+      margin-right: 0.6rem; }
+  .panel dd {
+    margin: 1.6rem 2.4rem; }
+    .panel dd a {
+      color: #333; }
+    .panel dd span {
+      float: right; }
+
+.panel_sidebar {
+  border: 1px solid #ccc;
+  padding-bottom: 0.6rem;
+  margin-bottom: 1rem; }
+  .panel_sidebar dt {
+    background: #69bd82;
+    border-bottom: 1px solid #ccc;
+    text-indent: 1rem;
+    padding: 0.4rem 0; }
+    .panel_sidebar dt a {
+      color: #fff;
+      float: right;
+      margin-right: 0.6rem; }
+  .panel_sidebar dd {
+    margin: 1rem 1.2rem; }
+    .panel_sidebar dd a {
+      color: #333; }
+    .panel_sidebar dd span {
+      float: right; }
