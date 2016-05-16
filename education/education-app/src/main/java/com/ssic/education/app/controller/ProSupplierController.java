@@ -1,5 +1,8 @@
 package com.ssic.education.app.controller;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 /**		
  * <p>Title: ProSupplierController </p>
  * <p>Description: 类描述</p>
@@ -12,6 +15,8 @@ package com.ssic.education.app.controller;
  * <p>修改时间：2016年5月12日 上午10:57:58</p>
  * <p>修改备注：</p>
  */
+@Controller
+@RequestMapping(value = "/wares")
 public class ProSupplierController {
 
 }

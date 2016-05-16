@@ -1,15 +1,11 @@
 package com.ssic.education.app.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ssic.education.app.dto.ProWaresDto;
-import com.ssic.education.app.service.IProWaresService;
+import com.ssic.education.common.dto.ProWaresDto;
 import com.ssic.util.model.Response;
 
 /**		
@@ -27,13 +23,33 @@ import com.ssic.util.model.Response;
 @Controller
 @RequestMapping(value = "/wares")
 public class ProWaresController {
-	@Autowired
-	private IProWaresService proWaresService;
+	//@Autowired
+	//private IProWaresService proWaresService;
 
-	@RequestMapping("/list")
+	/**
+	 * getWaresInfo：菜品信息：根据菜品id查菜品信息（需要批次信息和供应商信息）
+	 * @return
+	 * @exception	
+	 * @author Administrator
+	 * @date 2016年5月13日 上午11:55:28
+	 */
+	@RequestMapping("/dishesInfo/{id}")
 	@ResponseBody
-	public Response<List<ProWaresDto>> getwareslist() {
-		List<ProWaresDto> list = new ArrayList<ProWaresDto>();
+	public Response<ProWaresDto> getDishesInfo() {
+		return null;
+	}
+
+	/**
+	 * 
+	 * getMaterialInfo：根据原料id查原料信息（需带出批次列表）
+	 * @return
+	 * @exception	
+	 * @author Administrator
+	 * @date 2016年5月13日 下午12:00:30
+	 */
+	@RequestMapping("/materialInfo/{id}")
+	@ResponseBody
+	public Response<ProWaresDto> getMaterialInfo() {
 		return null;
 	}
 }
