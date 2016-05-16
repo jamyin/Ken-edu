@@ -5,10 +5,12 @@ import com.ssic.education.common.dto.ProSupplierDto;
 import com.ssic.education.common.government.service.ProDishesService;
 import com.ssic.education.common.government.service.ProLedgerService;
 import com.ssic.education.common.government.service.ProSupplierService;
+import com.ssic.education.common.government.service.ProWaresService;
 import com.ssic.education.government.controller.BaseController;
 import com.ssic.education.government.dto.ProWaresDto;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +38,9 @@ public class ProSupplierController extends BaseController {
 	private ProDishesService proDishesService;
 	@Autowired
 	private ProLedgerService proLedgerService;
+	
+	@Autowired
+	private ProWaresService proWaresService;
 
 	/**
 	 * <p>Description: 供应商资质分页查询接口 </p>
@@ -99,7 +104,7 @@ public class ProSupplierController extends BaseController {
 		ProWaresDto params = new ProWaresDto();
 		params.setSupplierId(supplierId);
 		params.setDishes(dishes);
-		PageResult<ProWaresDto> results = proDishesService.findPage(params, query);
+		PageResult<ProWaresDto> results = proWaresService.queryWaresByParams(params, query);
 		return results;
 	}
 

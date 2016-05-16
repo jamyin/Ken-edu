@@ -1,14 +1,19 @@
 package com.ssic.education.common.government.service.impl;
 
+import com.ssic.education.common.dao.ProLicenseDao;
 import com.ssic.education.common.dao.ProSupplierDao;
 import com.ssic.education.common.dao.ViewProSupplierDao;
+import com.ssic.education.common.dto.ProLicenseDto;
 import com.ssic.education.common.dto.ProSupplierDto;
 import com.ssic.education.common.government.service.ProSupplierService;
+import com.ssic.education.common.pojo.ProLicense;
 import com.ssic.education.common.pojo.ProSupplier;
 import com.ssic.education.common.pojo.ViewProSupplierWithBLOBs;
+import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 import com.ssic.education.utils.util.BeanUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +26,8 @@ public class ProSupplierServiceImpl implements ProSupplierService{
 	private ProSupplierDao proSupplierDao;
 	@Autowired
 	private ViewProSupplierDao viewProSupplierDao;
+	@Autowired
+	private ProLicenseDao proLicenseDao;
 
 	@Override
 	public List<ProSupplierDto> querySupplierByParams(ProSupplierDto params) {
@@ -47,9 +54,16 @@ public class ProSupplierServiceImpl implements ProSupplierService{
 	}
 	
 	public ProSupplierDto findById(String id) {
-		ProSupplier proSupplier = proSupplierDao.selectByPrimaryKey(id);
-		if (null != proSupplier) {
-			return BeanUtils.createBeanByTarget(proSupplier, ProSupplierDto.class);
+		ProSupplier proSupplier =  proSupplierDao.selectByPrimaryKey(id);
+		List<ProLicense> proLicenses = proLicenseDao.findById(id,DataStatus.DISABLED);
+		ProSupplierDto proSupplierDto = BeanUtils.createBeanByTarget(proSupplier, ProSupplierDto.class);
+		List<ProLicenseDto> proLicenseDtos = BeanUtils.createBeanListByTarget(proLicenses, ProLicenseDto.class);		
+		if (null != proSupplierDto) {
+			proSupplierDto.setProLicenseDtoList(proLicenseDtos);
+			return proSupplierDto;
+//		ProSupplier proSupplier = proSupplierDao.selectByPrimaryKey(id);
+//		if (null != proSupplier) {
+//			return BeanUtils.createBeanByTarget(proSupplier, ProSupplierDto.class);
 		}
 		return null;
 	}
