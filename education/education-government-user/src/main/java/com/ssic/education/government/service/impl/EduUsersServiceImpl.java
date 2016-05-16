@@ -18,4 +18,14 @@ public class EduUsersServiceImpl implements EduUsersService {
 		return eduUsersDao.checkUser(usersDto);
 	}
 
+	public boolean validateAccount(EduUsersDto usersDto) {
+		// TODO Auto-generated method stub
+		return eduUsersDao.validateAccount(usersDto);
+	}
+
+	public void save(EduUsersDto usersDto) {
+		// TODO Auto-generated method stub
+		eduUsersDao.save(usersDto);
+	}
+
 }
