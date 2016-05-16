@@ -13,8 +13,8 @@
 	a.supplier_name = #{supplierName}
 	</select>
 	
-	<select id="findAllProSupplier" resultType="com.ssic.education.common.dto.ProSupplierDto">
-			SELECT
+	<select id="findProSupplier" resultType="com.ssic.education.common.provider.service.dto.SupplierDto">
+		SELECT
 			id,
 			supplier_name supplierName,
 			address,
@@ -33,6 +33,12 @@
 			stat
 		FROM
 			t_pro_supplier
+		WHERE
+			stat = 1
+		<include refid="where_findSupplier"></include>
+		<if test="ph.rows!=0 and ph!=null">
+			limit #{ph.beginRow},#{ph.rows}
+		</if>
 	</select>
 
 <select id="findSupplierDetail" resultType="com.ssic.education.common.dto.ProSupplierDto" parameterType="java.lang.String">
@@ -48,7 +54,7 @@
 		a.id = #{id} AND a.stat = 1 AND b.stat = 1
 	ORDER BY a.create_time DESC
 </select>
-	<select id="findProSupplierById" resultType="com.ssic.education.common.dto.ProSupplierDto">
+	<select id="findProSupplierById" resultType="com.ssic.education.common.provider.service.dto.SupplierDto">
 			SELECT
 			id,
 			supplier_name supplierName,
@@ -70,5 +76,16 @@
 			t_pro_supplier
 			where id=#{id}
 	</select>
+	<sql id="where_findSupplier">
+		<if test="supplierDto.supplierName!=null and  supplierDto.supplierName!=''">
+			AND supplier_name = #{supplierDto.supplierName}
+		</if>
+		<if test="supplierDto.address!=null and supplierDto.address!='' ">
+			AND address = #{supplierDto.address}
+		</if>
+		<if test="supplierDto.supplierType!=null and supplierDto.supplierType!='' ">
+			AND supplierType = #{supplierDto.supplierType}
+		</if>	
+	</sql>
 
 </mapper>

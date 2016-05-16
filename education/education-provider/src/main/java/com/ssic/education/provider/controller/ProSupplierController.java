@@ -1,8 +1,5 @@
 package com.ssic.education.provider.controller;
 
-import java.util.List;
-import java.util.UUID;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +10,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ssic.education.common.dto.ProSupplierDto;
 import com.ssic.education.common.pojo.ProSupplier;
 import com.ssic.education.common.provider.service.ISupplierService;
-import com.ssic.education.provider.pageModel.DataGrid;
+import com.ssic.education.common.provider.service.dto.SupplierDto;
+import com.ssic.education.common.provider.utils.DataGrid;
+import com.ssic.education.common.provider.utils.PageHelper;
 import com.ssic.education.provider.pageModel.Json;
-import com.ssic.education.provider.pageModel.PageHelper;
 import com.ssic.education.utils.util.UUIDGenerator;
 
 @Controller
@@ -39,11 +37,9 @@ public class ProSupplierController {
 	 */
 	@RequestMapping("/dataGrid")
 	@ResponseBody
-	public DataGrid dataGrid(ProSupplierDto proSupplierDto, PageHelper ph) {
+	public DataGrid dataGrid(SupplierDto supplierDto, PageHelper ph) {
 		DataGrid dataGrid = new DataGrid();
-		List<ProSupplierDto> list = supplierService.findAllProSupplier();
-		dataGrid.setRows(list);
-		return dataGrid;
+		return supplierService.findProSupplier(supplierDto,ph);
 	}
 
 	/**
