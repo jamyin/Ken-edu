@@ -1,5 +1,7 @@
 package com.ssic.education.app.controller;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -59,9 +61,10 @@ public class SchoolController {
      */
     @RequestMapping("/findSchoolDetialList/{id}")
     @ResponseBody
-    public Response<PageResult<EduSchoolDto>> findSchoolDetialList(@PathVariable("id")String id, PageQuery query) {
+    public Response<PageResult<EduSchoolDto>> findSchoolDetialList(@PathVariable("id")String id,
+    		@PathVariable("supplyDate")Date supplyDate,@PathVariable("grade")String grade, @PathVariable("supplyPhase")String supplyPhase, PageQuery query) {
     	Response<PageResult<EduSchoolDto>> result = new Response<PageResult<EduSchoolDto>>();
-    	PageResult<EduSchoolDto> schoolDetialList = schoolService.findSchoolDetialList(id, query);
+    	PageResult<EduSchoolDto> schoolDetialList = schoolService.findSchoolDetialList(id,supplyDate,grade,supplyPhase, query);
     	if(schoolDetialList.getResults() != null && schoolDetialList.getResults().size() >0 ){
     		result.setStatus(DataStatus.HTTP_SUCCESS);
     		result.setMessage("查询成功！");

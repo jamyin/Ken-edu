@@ -7,11 +7,10 @@ import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.ssic.education.common.dto.ProSupplierDto;
 import com.ssic.education.common.mapper.ProSupplierExMapper;
 import com.ssic.education.common.mapper.ProSupplierMapper;
 import com.ssic.education.common.pojo.ProSupplier;
-import com.ssic.education.common.provider.service.dto.SupplierDto;
+import com.ssic.education.common.provider.dto.SupplierDto;
 import com.ssic.education.common.provider.utils.DataGrid;
 import com.ssic.education.common.provider.utils.PageHelper;
 import com.ssic.education.utils.mybatis.MyBatisBaseDao;
@@ -41,14 +40,14 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 		return dataGrid;
 	}
 
-	public ProSupplierDto findProSupplierById(String id) {
+	public SupplierDto findProSupplierById(String id) {
 		return exMapper.findProSupplierById(id);
 	}
 
-	public void updataProSupplier(ProSupplier ps) {
+	public void updataProSupplier(SupplierDto ps) {
 		ps.setCreateTime(null);
 		ps.setLastUpdateTime(new Date());
-		mapper.updateByPrimaryKeySelective(ps);
+		exMapper.updateByPrimaryKeySelective(ps);
 	}
 
 	public int deleteSupplierById(String id) {
@@ -61,10 +60,11 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 		return mapper.updateByPrimaryKeySelective(ps);
 	}
 
-	public int saveSupplier(ProSupplier ps) {
+	public int saveSupplier(SupplierDto ps) {
 		ps.setCreateTime(new Date());
 		ps.setLastUpdateTime(ps.getCreateTime());
-		return mapper.insert(ps);
+		ps.setStat(1);
+		return exMapper.insert(ps);
 	}
 
 }

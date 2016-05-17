@@ -92,4 +92,25 @@ public class ProSupplierDto implements Serializable {
 	@Setter
 	@Getter
 	private String schoolNames; // 供应学校名称(用,分割)
+	
+	/*以下为供应商资质信息*/
+	@Setter
+	@Getter
+	private String licName;
+	
+	@Setter
+	@Getter
+	private String licNo;
+	
+	@Setter
+	@Getter
+    private Integer licType;
+	
+	@Setter
+	@Getter
+    private Date licEndDate;
+	
+	@Setter
+	@Getter
+	private String licPic;
 }

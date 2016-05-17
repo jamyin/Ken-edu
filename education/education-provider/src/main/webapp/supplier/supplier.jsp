@@ -184,7 +184,7 @@
 		parent.$.modalDialog({
 			title : '编辑供应商',
 			width : 500,
-			height : 500,
+			height : 800,
 			href : '${pageContext.request.contextPath}/proSupplierController/editPage?id=' + id,
 			buttons : [ {
 				text : '编辑',
@@ -201,7 +201,7 @@
 		parent.$.modalDialog({
 			title : '添加供应商',
 			width : 700,
-			height : 500,
+			height : 800,
 			href : '${pageContext.request.contextPath}/proSupplierController/addSupplier',
 			buttons : [ {
 				text : '添加',

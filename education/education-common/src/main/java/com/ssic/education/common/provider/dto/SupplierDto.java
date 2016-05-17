@@ -1,9 +1,11 @@
-package com.ssic.education.common.provider.service.dto;
+package com.ssic.education.common.provider.dto;
 
 import java.util.Date;
 
 import lombok.Getter;
 import lombok.Setter;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class SupplierDto {
 
@@ -49,6 +51,7 @@ public class SupplierDto {
 
 	@Setter
 	@Getter
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date foodServiceCodeDate;
 
 	@Setter
@@ -57,6 +60,7 @@ public class SupplierDto {
 
 	@Setter
 	@Getter
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date foodBusinessCodeDate;
 
 	@Setter
@@ -65,6 +69,7 @@ public class SupplierDto {
 
 	@Setter
 	@Getter
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date foodCirculationCodeDate;
 
 	@Setter
@@ -73,6 +78,7 @@ public class SupplierDto {
 
 	@Setter
 	@Getter
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date foodProduceCodeDate;
 
 	@Setter

@@ -1,5 +1,6 @@
 package com.ssic.education.common.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import lombok.Getter;
@@ -83,12 +84,13 @@ public class SchoolDao extends MyBatisBaseDao<EduSchool> {
         return mapper.countByExample(example);
 	}
 
-	public List<EduSchool> findSchoolDetialList(String id, PageQuery query) {
-		return null;
+	public List<EduSchool> findSchoolDetialList(String id,Date supplyDate,String grade,String supplyPhase,
+			PageQuery query) {
+		return mappers.findSchoolDetialList(id, query);
 	}
 
-	public int selectSchoolDetialAccount(String id) {
-		return 0;
+	public int selectSchoolDetialAccount(String id,Date supplyDate,String grade,String supplyPhase) {
+		return mappers.findSchoolDetialListAccount(id);
 	}
 
 }

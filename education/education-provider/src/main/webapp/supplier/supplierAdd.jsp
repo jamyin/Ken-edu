@@ -76,6 +76,36 @@
 					<th>区</th>
 						<td><input name="area" type="text" placeholder="请输入区" class="easyui-validatebox span2" data-options="required:true" ></td>
 				</tr>
+								<tr>
+					<th>餐饮服务证号</th>
+						<td><input name="foodServiceCode" type="text" class="easyui-validatebox span2" data-options="required:true" ></td>
+					<th>餐饮服务证号失效日期</th>
+						<td><input name="foodServiceCodeDate" class="easyui-validatebox span2" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly"></td>
+				</tr>
+				<tr>
+					<th>食品经营许可证号</th>
+						<td><input name="foodBusinessCode" type="text" class="easyui-validatebox span2" data-options="required:true" ></td>
+					<th>食品经营许可证号失效日期</th>
+						<td><input name="foodBusinessCodeDate" class="easyui-validatebox span2" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly"></td>
+				</tr>
+				<tr>
+					<th>食品流通证号</th>
+						<td><input name="foodCirculationCode" type="text" class="easyui-validatebox span2" data-options="required:true" ></td>
+					<th>食品流通证号失效日期</th>
+						<td><input name="foodCirculationCodeDate" class="easyui-validatebox span2" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly"></td>
+				</tr>
+				<tr>
+					<th>食品生产证号</th>
+						<td><input name="foodProduceCode" type="text" class="easyui-validatebox span2" data-options="required:true" ></td>
+					<th>食品生产证号失效日期</th>
+						<td><input name="foodProduceCodeDate" class="easyui-validatebox span2" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" ></td>
+				</tr>
+				<tr>
+					<th>供应商编码</th>
+						<td><input name="code" type="text" class="easyui-validatebox span2" data-options="required:true" value="${ProSupplie.code}" ></td>
+					<th>供应商简称</th>
+						<td><input name="abbr" type="text" class="easyui-validatebox span2" data-options="required:true" value="${ProSupplie.abbr}" ></td>
+				</tr>
 			</table>
 		</form>
 	</div>

@@ -8,9 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssic.education.common.dto.ProSupplierDto;
-import com.ssic.education.common.pojo.ProSupplier;
+import com.ssic.education.common.provider.dto.SupplierDto;
 import com.ssic.education.common.provider.service.ISupplierService;
-import com.ssic.education.common.provider.service.dto.SupplierDto;
 import com.ssic.education.common.provider.utils.DataGrid;
 import com.ssic.education.common.provider.utils.PageHelper;
 import com.ssic.education.provider.pageModel.Json;
@@ -51,7 +50,7 @@ public class ProSupplierController {
 	 */
 	@RequestMapping("/editPage")
 	public String editPage(HttpServletRequest request, String id) {
-		ProSupplierDto ps = supplierService.findProSupplierById(id);
+		SupplierDto ps = supplierService.findProSupplierById(id);
 		request.setAttribute("ProSupplie", ps);
 		return "supplier/supplierEdit";
 	}
@@ -59,19 +58,19 @@ public class ProSupplierController {
 	/**
 	 * 修改供应商
 	 * 
-	 * @param proSupplierDto
+	 * @param SupplierDto
 	 * @return ming
 	 */
 	@RequestMapping(value = "/proSupplierEdit")
 	@ResponseBody
-	public Json updataProSupplier(ProSupplier ps) {
+	public Json updataProSupplier(SupplierDto ps) {
 		Json j = null;
 		j=checkSupplier(ps);
 		if(j!=null){
 			return j;
 		}
 		j = new Json();
-		ProSupplierDto p = supplierService.findProSupplierById(ps.getId());
+		SupplierDto p = supplierService.findProSupplierById(ps.getId());
 		if (p == null) {
 			j.setMsg("不存在的供应商");
 			j.setSuccess(false);
@@ -115,7 +114,7 @@ public class ProSupplierController {
 	 */
 	@RequestMapping("/saveSupplier")
 	@ResponseBody
-	public Json saveSupplier(ProSupplier ps) {
+	public Json saveSupplier(SupplierDto ps) {
 		Json j=null;
 		j=checkSupplier(ps);
 		if(j!=null){
@@ -129,7 +128,7 @@ public class ProSupplierController {
 		return j;
 	}
 	
-	private Json checkSupplier(ProSupplier ps){
+	private Json checkSupplier(SupplierDto ps){
 		if (ps.getSupplierName() == null || ps.getSupplierName().equals("")) {
 			Json j=new Json();
 			j.setMsg("供应商名称不能为空");

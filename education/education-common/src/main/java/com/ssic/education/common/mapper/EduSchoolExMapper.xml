@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssic.education.common.mapper.EduSchoolExMapper">
+
+	<resultMap id="schoolResultMap" type="com.ssic.education.common.dto.EduSchoolDto" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="committee_id" property="committeeId" jdbcType="VARCHAR" />
+    <result column="school_name" property="schoolName" jdbcType="VARCHAR" />
+    <result column="school_thum" property="schoolThum" jdbcType="VARCHAR" />
+    <result column="mobile_no" property="mobileNo" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="longitude" property="longitude" jdbcType="VARCHAR" />
+    <result column="latitude" property="latitude" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="TINYINT" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="last_update_time" property="lastUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="stat" property="stat" jdbcType="INTEGER" />
+    <collection property="packagesDtoList" resultMap="packagesResultMap" />
+    </resultMap>
+  
+
+	<resultMap id="packagesResultMap" type="com.ssic.education.common.dto.ProPackagesDto" >
+   <!--  <id column="id" property="id" jdbcType="VARCHAR" />  -->
+    <result column="package_name" property="packageName" jdbcType="VARCHAR" />
+    <result column="supplier_id" property="supplierId" jdbcType="VARCHAR" />
+    <result column="customer_type" property="customerType" jdbcType="SMALLINT" />
+    <result column="customer_id" property="customerId" jdbcType="VARCHAR" />
+    <result column="grade" property="grade" jdbcType="SMALLINT" />
+    <result column="supply_date" property="supplyDate" jdbcType="TIMESTAMP" />
+    <result column="supply_phase" property="supplyPhase" jdbcType="SMALLINT" />
+    <result column="carete_time" property="careteTime" jdbcType="TIMESTAMP" />
+    <result column="last_update_time" property="lastUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="stat" property="stat" jdbcType="INTEGER" />
+    </resultMap>
+  
+	<select id="findSchoolDetialList" resultMap="schoolResultMap">
+		SELECT a.id,a.school_name AS schoolName,a.`school_thum` AS schoolThum, a.`mobile_no` mobile_no AS mobileNo,
+	       b.id AS packageId, b.package_name AS packageName,  b.grade, b.supply_date AS supplyDate, b.supply_phase AS supplyPhase,
+	       d.wares_name AS waresName, d.wares_type AS waresType, d.spec, d.image, d.remark 
+		FROM t_edu_school  a 
+		LEFT JOIN t_pro_packages b ON a.id = b.customer_id 
+		LEFT JOIN  t_pro_dishes c ON	b.id = c.`package_id` 
+		LEFT JOIN t_pro_wares d ON c.wares_id = d.id 
+		WHERE a.id= #{id} AND a.stat= 1 AND b.stat= 1 AND c.stat= 1 AND d.stat= 1;
+	<include refid="where_conditions"></include>
+		ORDER BY a.create_time desc
+        LIMIT  #{page.startNum}, #{page.pageSize}
+	</select>
+
+	<select id="findSchoolDetialListAccount" resultType="java.lang.Integer">
+		SELECT count(*) 
+		FROM t_edu_school  a 
+		LEFT JOIN t_pro_packages b ON a.id = b.customer_id 
+		LEFT JOIN  t_pro_dishes c ON	b.id = c.`package_id` 
+		LEFT JOIN t_pro_wares d ON c.wares_id = d.id 
+		WHERE a.id= #{id} AND a.stat= 1 AND b.stat= 1 AND c.stat= 1 AND d.stat= 1;
+	<include refid="where_conditions"></include>
+	</select>
+	
+	<sql id="where_conditions">
+		<if test="supplyDate!=null">
+			AND b.supply_date = #{supplyDate}
+		</if>
+		<if test="grade!=null and grade!='' ">
+			AND b.grade = #{grade}
+		</if>
+		<if test="supplyPhase!=null and supplyPhase!='' ">
+			AND b.supply_phase = #{supplyPhase}
+		</if>	
+	</sql>
+</mapper>
