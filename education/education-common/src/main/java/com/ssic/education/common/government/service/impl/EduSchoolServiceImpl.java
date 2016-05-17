@@ -7,6 +7,8 @@ import com.ssic.education.common.pojo.EduSchool;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 import com.ssic.education.utils.util.BeanUtils;
+
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,8 +27,14 @@ public class EduSchoolServiceImpl implements EduSchoolService{
 	}
 	
 	public EduSchoolDto findById (String id) {
-		EduSchool eduSchool = eduSchoolDao.selectByPrimaryKey(id);
-		return BeanUtils.createBeanByTarget(eduSchool, EduSchoolDto.class);
+		if (StringUtils.isNotBlank(id)) {
+			EduSchool eduSchool = eduSchoolDao.selectByPrimaryKey(id);
+			if (null != eduSchool) {
+				return BeanUtils.createBeanByTarget(eduSchool, EduSchoolDto.class);
+			}
+		}
+		
+		return null;
 	}
 
 	public List<EduSchoolDto> queryAll(){

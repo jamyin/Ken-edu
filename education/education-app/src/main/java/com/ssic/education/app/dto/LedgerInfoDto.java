@@ -23,6 +23,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class LedgerInfoDto {
 
+	private String id;
+
 	private String waresId;
 
 	private String name;
@@ -32,6 +34,8 @@ public class LedgerInfoDto {
 	private Integer actionType;
 
 	private Date actionDate;
+	
+	private String supplierId;
 
 	private String supplierCode;
 

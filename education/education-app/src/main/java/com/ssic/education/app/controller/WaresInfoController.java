@@ -34,7 +34,6 @@ public class WaresInfoController {
 	@Autowired
 	private IWaresInfoService waresInfoService;
 
-	// @RequestMapping(value = "/person/profile/{id}/{name}/{status}", method = RequestMethod.GET) 
 	/**
 	 * getWaresList： 食品列表：根据供应商id查食品列表 原料列表：根据供应商id查原料列表
 	 * @return
@@ -52,29 +51,15 @@ public class WaresInfoController {
 	}
 
 	/**
-	 * getWaresPageList： 食品列表：根据供应商id查食品列表 
-	 * 原料列表：根据供应商id查原料列表 
-	 * 分页查询
-	 * @return
-	 * @exception	
-	 * @author SeanYoung
-	 * @date 2016年5月13日 下午3:32:09
-	 */
-	@RequestMapping(value = "/warespagelist", method = RequestMethod.POST)
-	@ResponseBody
-	public Response<List<WaresInfoDto>> getWaresPageList(@PathVariable("supplierId") String supplierId, PageQuery query) {
-		return waresInfoService.getWaresBySupplierId(supplierId, query);
-	}
-
-	/**
 	 * getWaresInfo：菜品信息：根据菜品id查菜品信息（需要批次信息和供应商信息）
 	 * @return
 	 * @exception	
 	 * @author SeanYoung
 	 * @date 2016年5月13日 上午11:55:28	
 	 */
-	@RequestMapping(value = "/infoById/{id}", method = RequestMethod.GET)
-	public Response<WaresRelatedDto> getWaresInfoById(@PathVariable("id") String id) {
+	@RequestMapping(value = "/dishesInfo/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public Response<WaresRelatedDto> getDishesInfoById(@PathVariable("id") String id) {
 		Response<WaresRelatedDto> result = new Response<WaresRelatedDto>();
 		WaresRelatedDto waresInfoList = waresInfoService.findWarseById(id);
 		result.setData(waresInfoList);
@@ -88,8 +73,12 @@ public class WaresInfoController {
 	 * @author SeanYoung
 	 * @date 2016年5月13日 下午12:00:30
 	 */
-	public Response<?> getMaterialInfo() {
-		//TODO 定义接口待实现
-		return null;
+	@RequestMapping(value = "/materialInfo/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public Response<WaresRelatedDto> getMaterialInfoById(@PathVariable("id") String id) {
+		Response<WaresRelatedDto> result = new Response<WaresRelatedDto>();
+		WaresRelatedDto waresInfoList = waresInfoService.findWarseById(id);
+		result.setData(waresInfoList);
+		return result;
 	}
 }

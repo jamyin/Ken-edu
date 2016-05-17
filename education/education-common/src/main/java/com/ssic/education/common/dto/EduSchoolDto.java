@@ -24,6 +24,7 @@ public class EduSchoolDto implements Serializable {
 	private String id;
 	private String committeeId;
 	private String schoolName;
+	private String schoolThum;
 	private String mobileNo;
 	private String address;
 	private String longitude;
