@@ -4,10 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssic.education.common.dao.ProSupplierDao;
-import com.ssic.education.common.dto.ProSupplierDto;
-import com.ssic.education.common.pojo.ProSupplier;
+import com.ssic.education.common.provider.dto.SupplierDto;
 import com.ssic.education.common.provider.service.ISupplierService;
-import com.ssic.education.common.provider.service.dto.SupplierDto;
 import com.ssic.education.common.provider.utils.DataGrid;
 import com.ssic.education.common.provider.utils.PageHelper;
 
@@ -23,12 +21,12 @@ public class SupplierServiceImpl implements ISupplierService{
 	}
 	
 	@Override
-	public ProSupplierDto findProSupplierById(String id) {
+	public SupplierDto findProSupplierById(String id) {
 		return proSupplierDao.findProSupplierById(id);
 	}
 
 	@Override
-	public void updataProSupplier(ProSupplier ps) {
+	public void updataProSupplier(SupplierDto ps) {
 		proSupplierDao.updataProSupplier(ps);
 	}
 
@@ -38,7 +36,7 @@ public class SupplierServiceImpl implements ISupplierService{
 	}
 
 	@Override
-	public int saveSupplier(ProSupplier ps) {
+	public int saveSupplier(SupplierDto ps) {
 		return proSupplierDao.saveSupplier(ps);
 	}
 	

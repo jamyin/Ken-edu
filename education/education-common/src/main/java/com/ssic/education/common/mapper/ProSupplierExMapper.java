@@ -5,10 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.ssic.education.common.dto.ProSupplierDto;
-import com.ssic.education.common.dto.ProSupplierDto;
-import com.ssic.education.common.provider.service.dto.SupplierDto;
+import com.ssic.education.common.provider.dto.SupplierDto;
 import com.ssic.education.common.provider.utils.PageHelper;
-import com.ssic.education.utils.model.PageQuery;
 
 public interface ProSupplierExMapper {
 
@@ -18,7 +16,10 @@ public interface ProSupplierExMapper {
 
 	ProSupplierDto findSupplierDetail(String id);
 
-	ProSupplierDto findProSupplierById(String id);
+	SupplierDto findProSupplierById(String id);
 
-
+	int updateByPrimaryKeySelective(SupplierDto record);
+	
+	int insert(SupplierDto record);
+	
 }
