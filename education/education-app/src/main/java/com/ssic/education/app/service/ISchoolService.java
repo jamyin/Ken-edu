@@ -1,5 +1,7 @@
 package com.ssic.education.app.service;
 
+import java.util.Date;
+
 import com.ssic.education.common.dto.EduSchoolDto;
 import com.ssic.util.model.PageQuery;
 import com.ssic.util.model.PageResult;
@@ -17,7 +19,7 @@ public interface ISchoolService {
 	PageResult<EduSchoolDto> findSchoolList(EduSchoolDto eduSchoolDto,
 			PageQuery query);
 	//根据学校id查学校信息（需要带出当天全部年级菜单）
-	PageResult<EduSchoolDto> findSchoolDetialList(String id, PageQuery query);
+	PageResult<EduSchoolDto> findSchoolDetialList(String id, Date supplyDate, String grade, String supplyPhase, PageQuery query);
 
 
 }

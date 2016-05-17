@@ -1,66 +1,46 @@
 package com.ssic.education.common.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+/**
+* @ClassName: EduSchoolDto
+* @Description: TODO(这里用一句话描述这个类的作用)
+* @author Ken Yin
+* @date 2016年5月17日 上午10:05:56
+*
+ */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class EduSchoolDto implements Serializable {
-
-	@Getter
-	@Setter
+	private static final long serialVersionUID = 1L;
+	
 	private String id;
-
-	@Getter
-	@Setter
 	private String committeeId;
-
-	@Getter
-	@Setter
 	private String schoolName;
-
-	@Getter
-	@Setter
 	private String mobileNo;
-
-	@Getter
-	@Setter
 	private String address;
-
-	@Getter
-	@Setter
 	private String longitude;
-
-	@Getter
-	@Setter
 	private String latitude;
-
-	@Getter
-	@Setter
 	private Byte level;
-
-	@Getter
-	@Setter
 	private String province;
-
-	@Getter
-	@Setter
 	private String city;
-
-	@Getter
-	@Setter
 	private String area;
-
-	@Getter
-	@Setter
 	private Date createTime;
-
-	@Getter
-	@Setter
 	private Date lastUpdateTime;
-
-	@Getter
-	@Setter
 	private Integer stat;
+	private List<ProPackagesDto> packagesDtoList;
+	
+	private String waresName;
+	private Integer waresType;
+	private String spec;
+	private String image;
+	private String remark;
+	
 }
