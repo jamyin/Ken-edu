@@ -7,7 +7,7 @@ import com.ssic.education.utils.model.PageResult;
 
 public interface ProLedgerService {
 
-	public PageResult<ProSupplierDto> findPage(String id,PageQuery page);
+	public PageResult<ProSupplierDto> findPage(ProSupplierDto dto,PageQuery page);
 	
 	public PageResult<ProLedgerDto> findLedgerPage(ProLedgerDto proLedgerDto,PageQuery page);
 	

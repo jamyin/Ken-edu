@@ -9,10 +9,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ssic.education.common.dto.EduAreaDto;
 import com.ssic.education.common.dto.EduSchoolDto;
 import com.ssic.education.common.dto.ProPackagesDto;
+import com.ssic.education.common.government.service.AreaService;
 import com.ssic.education.common.government.service.EduSchoolService;
 import com.ssic.education.common.government.service.ProPackagesService;
+import com.ssic.education.utils.constants.SchoollevelEnum;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 
@@ -36,6 +39,9 @@ public class EduSchoolController extends BaseController{
 	@Autowired
 	private ProPackagesService proPackagesService;
 	
+	@Autowired
+	private AreaService areaService;
+	
 	/**
 	 * 
 	  @Name:  list 
@@ -50,8 +56,11 @@ public class EduSchoolController extends BaseController{
 	public ModelAndView list(EduSchoolDto dto, PageQuery page) {
 		ModelAndView mv = getModelAndView();
 		PageResult<EduSchoolDto> result = eduSchoolService.list(dto, page);
+		List<EduAreaDto> areaDtos = areaService.queryAll();
 		mv.setViewName("/school/school_list");
 		mv.addObject("pageList", result);
+		mv.addObject("areaDtos", areaDtos);
+		mv.addObject("level", SchoollevelEnum.values());
 		return mv;
 	}
 	

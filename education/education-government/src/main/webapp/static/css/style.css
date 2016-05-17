@@ -69,5 +69,31 @@ a.forgot{width:100px;color:#999;position:absolute;left:50%;top:50%;margin:160px 
 .track_box .info{width:100%;overflow:hidden;line-height:26px;font-size:14px}
 .track_box .info p.driver{padding-left:40px;background:url(../img/driver.png) no-repeat left center;font-weight:bold;line-height:40px;font-size:16px}
 
+/*menu*/
+.menu_box{width:898px;border:1px #d3d3d3 solid;overflow:hidden;background:#fff;padding:36px 50px;margin:0 0 30px}
+.menu_box > img{width:388px;height:auto;display:block;float:left}
+.menu_box .info{width:400px;overflow:hidden;font-size:14px;padding:0 30px;line-height:26px;}
+.menu_box .subbar{width:100%;overflow:hidden;height:20px;line-height:20px;margin-bottom:10px}
+.menu_box .subbar p.lef{float:left;display:block;}
+.menu_box .subbar p.rig{float:right;display:block}
+.menu_box .menu_list{width:100%;overflow:hidden;}
+.menu_box .menu_list .control{width:100%;height:40px;background:#97caeb;text-align:center;}
+.menu_box .menu_list .control a{width:40px;height:40px;line-height:40px;display:block;float:left;font-size:24px;color:#fff}
+.menu_box .menu_list .control span{width:818px;height:40px;line-height:40px;display:block;float:left;color:#fff}
+.menu_box .menu_list .control a.rbtn{float:right}
+.menu_box .menu_list .title{width:896px;border:1px #c8c8c8 solid;height:40px;border-top:0}
+.menu_box .menu_list .title label{display:block;height:40px;line-height:40px;float:left;text-align:center;border-right:1px #c8c8c8 solid;font-weight:bold}
+.menu_box .menu_list .title label.ct1{width:200px;}
+.menu_box .menu_list .title label.ct2{width:200px;}
+.menu_box .menu_list .title label.ct3{width:494px;border-right:0}
+.menu_box .menu_list .row{width:896px;border:1px #c8c8c8 solid;border-top:0;overflow:hidden}
+.menu_box .menu_list .row label{width:200px;display:block;height:100%;float:left;text-align:center;font-weight:bold}
+.menu_box .menu_list .row ul{width:695px;overflow:hidden;float:left;border-left:1px #c8c8c8 solid;}
+.menu_box .menu_list .row ul li{width:695px;height:36px;border-bottom:1px #c8c8c8 dashed}
+.menu_box .menu_list .row ul li span{width:123px;height:36px;line-height:36px;display:block;float:left;text-align:center}
+.menu_box .menu_list .row ul li span.name{width:200px;border-right:1px #c8c8c8 solid;font-weight:bold}
+
+
+
 
 .footer.login{position:absolute;bottom:0}

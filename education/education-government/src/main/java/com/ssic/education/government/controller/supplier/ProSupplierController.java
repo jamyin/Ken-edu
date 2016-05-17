@@ -70,13 +70,13 @@ public class ProSupplierController extends BaseController {
 	  @return
 	 */
 	@RequestMapping(value = "/detail")
-	public ModelAndView qualificationsDetails(String id) {
+	public ModelAndView qualificationsDetails(ProSupplierDto dto,String supplierName) {
 		ModelAndView mv = getModelAndView();
-		ProSupplierDto supplier = proSupplierService.findById(id);
+		ProSupplierDto supplier = proSupplierService.findById(dto.getId());
 		PageQuery query = new PageQuery();
-		PageResult<ProWaresDto> mWares = queryWares(id, query, false);
-		PageResult<ProWaresDto> pWares = queryWares(id, query, true);
-		PageResult<ProSupplierDto> mSuppliers = queryMaterialSupplier(id, query);
+		PageResult<ProWaresDto> mWares = queryWares(dto.getId(), query, false);
+		PageResult<ProWaresDto> pWares = queryWares(dto.getId(), query, true);
+		PageResult<ProSupplierDto> mSuppliers = queryMaterialSupplier(dto, query);
 		mv.addObject("supplier", supplier);
 		mv.addObject("mWares", mWares);
 		mv.addObject("pWares", pWares);
@@ -115,9 +115,9 @@ public class ProSupplierController extends BaseController {
 	 * @date 16/5/16 下午2:22
 	 * @version 1.0
 	 */
-	private PageResult<ProSupplierDto> queryMaterialSupplier(String supplierId, PageQuery query){
+	private PageResult<ProSupplierDto> queryMaterialSupplier(ProSupplierDto dto, PageQuery query){
 		query.setPageSize(PAGESIZE_SUPPLIER);
-		PageResult<ProSupplierDto> results = proLedgerService.findPage(supplierId, query);
+		PageResult<ProSupplierDto> results = proLedgerService.findPage(dto, query);
 		return results;
 	}
 }

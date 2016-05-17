@@ -24,8 +24,11 @@
 	</select>
 	
 	<sql id="where_supplier_bypage">
-		<if test="receiverId != null and receiverId != ''">
-			and b.receiver_id = #{receiverId}
+		<if test="proSupplierDto.id != null and proSupplierDto.id != ''">
+			and b.receiver_id = #{proSupplierDto.id}
+	   </if>
+	   	<if test="proSupplierDto.supplierName != null and proSupplierDto.supplierName != ''">
+			and a.supplier_name like "%"#{proSupplierDto.supplierName}"%"
 	   </if>
 	</sql>
 </mapper>

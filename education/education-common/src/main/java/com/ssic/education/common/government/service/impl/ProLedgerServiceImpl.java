@@ -20,9 +20,9 @@ public class ProLedgerServiceImpl implements ProLedgerService{
 	@Autowired
 	private ProLedgerDao proLedgerDao;
 	
-	public PageResult<ProSupplierDto> findPage(String id,PageQuery page) {
-		List<ProSupplierDto> results = proLedgerDao.findPage(id, page);
-		page.setTotal(proLedgerDao.count(id));
+	public PageResult<ProSupplierDto> findPage(ProSupplierDto dto,PageQuery page) {
+		List<ProSupplierDto> results = proLedgerDao.findPage(dto, page);
+		page.setTotal(proLedgerDao.count(dto));
 		return new PageResult<>(page, results);
 	}
 	

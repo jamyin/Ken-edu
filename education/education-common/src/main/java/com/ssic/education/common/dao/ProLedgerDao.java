@@ -64,12 +64,12 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger>{
 		return mapper.countByExample(example);
 	}
 	
-	public List<ProSupplierDto> findPage(String id,PageQuery page) {
-		return exMapper.selectSupplierByReceiverId(id, page);
+	public List<ProSupplierDto> findPage(ProSupplierDto dto,PageQuery page) {
+		return exMapper.selectSupplierByReceiverId(dto, page);
 	}
 	
-	public long count(String id) {
-		return exMapper.countSupplier(id);
+	public long count(ProSupplierDto dto) {
+		return exMapper.countSupplier(dto);
 	}
 	
 }
