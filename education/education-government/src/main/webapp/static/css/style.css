@@ -92,7 +92,7 @@ a.forgot{width:100px;color:#999;position:absolute;left:50%;top:50%;margin:160px 
 .menu_box .menu_list .row ul li{width:695px;height:36px;border-bottom:1px #c8c8c8 dashed}
 .menu_box .menu_list .row ul li span{width:123px;height:36px;line-height:36px;display:block;float:left;text-align:center}
 .menu_box .menu_list .row ul li span.name{width:200px;border-right:1px #c8c8c8 solid;font-weight:bold}
-
+.menu_box #date{background:none;color:#fff;font-size:16px;text-align:center;cursor:pointer;background:url(../img/calendar.png) no-repeat 5px center}
 
 
 
