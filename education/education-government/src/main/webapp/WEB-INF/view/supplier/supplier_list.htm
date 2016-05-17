@@ -9,32 +9,33 @@
 
   <div class="wrapperA">
 
-
-    <h1 class="con-tt">成品列表
+    <h1 class="con-tt">
+      <span class="title">供应商列表</span>
       <span>
-        <input type="hidden" name="supplierId" value="${(params.supplierId)!}"/>
-        <input class="search" type="button">
-        <input class="search_text" type="text" name="supplierName" value="${(params.supplierName)!}" placeholder="请输入关键字">
+         <input type="hidden" name="supplierId" value="${(params.supplierId)!}"/>
+          <input class="search" type="button">
+          <input class="search_text" type="text" name="supplierName" value="${(params.supplierName)!}" placeholder="请输入关键字">
       </span>
     </h1>
 
-    <table class="sulplier_items">
-      <tr>
-        <th>原料供应商名称</th>
-        <th>单位地址</th>
-        <th>详情</th>
-      </tr>
-      <#if pageList??>
-        <#list pageList as data>
-          <tr>
-            <td>${(data.supplierName)!}</td>
-            <td>${(data.address)!}</td>
-            <td>详情</td>
-          </tr>
-        </#list>
-      </#if>
-      </tr>
-    </table>
+    <div class="wrapperB">
+      <ul class="sulplier_ul">
+        <li class="head">
+          <span class="name">原料供应商名称</span>
+          <span class="place">单位地址</span>
+          <span class="detail">详情</span>
+        </li>
+        <#if pageList??>
+          <#list pageList.results as data>
+            <li>
+              <span class="name">${(data.supplierName)!}</span>
+              <span class="place">${(data.address)!}</span>
+              <span class="detail">详情 &gt;</span>
+            </li>
+          </#list>
+        </#if>
+      </ul>
+    </div>
 
     <#include "/common/page.htm" />
   </div>
