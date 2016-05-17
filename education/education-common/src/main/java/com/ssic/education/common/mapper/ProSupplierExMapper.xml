@@ -59,7 +59,7 @@
 		parameterType="java.lang.String">
 		SELECT
 		a.id,a.supplier_name AS
-		supplierName,a.asddress,a.provinces,a.city,a.area,a.supplier_type
+		supplierName,a.address,a.provinces,a.city,a.area,a.supplier_type
 		AS
 		supplierType,a.business_license AS
 		businessLicense,a.organization_code
