@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssic.education.app.dto.WaresInfoDto;
+import com.ssic.education.app.dto.WaresRelatedDto;
 import com.ssic.education.app.service.IWaresInfoService;
 import com.ssic.education.common.dto.ProSupplierDto;
 import com.ssic.education.utils.model.PageQuery;
@@ -72,9 +73,12 @@ public class WaresInfoController {
 	 * @author SeanYoung
 	 * @date 2016年5月13日 上午11:55:28	
 	 */
-	public Response<?> getDishesInfo() {
-		//TODO 定义接口待实现
-		return null;
+	@RequestMapping(value = "/infoById/{id}", method = RequestMethod.GET)
+	public Response<WaresRelatedDto> getWaresInfoById(@PathVariable("id") String id) {
+		Response<WaresRelatedDto> result = new Response<WaresRelatedDto>();
+		WaresRelatedDto waresInfoList = waresInfoService.findWarseById(id);
+		result.setData(waresInfoList);
+		return result;
 	}
 
 	/**

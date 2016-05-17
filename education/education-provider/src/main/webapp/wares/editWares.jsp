@@ -1,15 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <script type="text/javascript">
 
 	$(function() {
 		parent.$.messager.progress('close');
-
-
 		$('#form').form(
 						{																	
-							url : '${pageContext.request.contextPath}/waresController/updateWares?id='+$("#id").val(),
+							url : '${pageContext.request.contextPath}/waresController/updateWares',
 							onSubmit : function() {
 								var isValid = $(this).form('validate');
 								var error_message = '';
@@ -67,20 +66,12 @@
 						});
 
 	});
-
-	//级联下拉框
-	$("#projId").combobox(
-			{
-				onSelect : function(n, o) {
-					initDept(n.value);
-				}
-			});
 	
 </script>
 		<div class="easyui-layout" data-options="fit:true,border:false">
 			<div data-options="region:'center',border:false" title=""
 				style="overflow: hidden;">
-				<form id="form" method="post"  enctype="multipart/form-data">
+				<form id="form" method="post"  enctype="multipart/form-data" >
 				   <input id="id" name="id" type="hidden" value="${id}" />
 					<table class="table table-hover table-condensed">
 						<tr>
@@ -92,7 +83,6 @@
 							<th>规格</th>
 							<td><input name="spec" type="text" placeholder="请输入规格"  id="spec"
 								class="easyui-validatebox span2"  value="${wdto.spec}"></td>
-
 						</tr>
 						<tr>
 							<th>保质期</th>

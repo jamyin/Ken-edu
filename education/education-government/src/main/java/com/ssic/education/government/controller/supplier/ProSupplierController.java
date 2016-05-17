@@ -85,6 +85,25 @@ public class ProSupplierController extends BaseController {
 		return mv;
 	}
 
+	/**		
+	 * <p>Description: 原料供应商分页查询列表 </p>
+	 * 
+	 * @param supplierId 供应商id
+	 * @param query 分页查询参数
+	 * @return ModelAndView
+	 * @author wangxiang	
+	 * @date 16/5/16 下午4:16
+	 * @version 1.0
+	 */
+	@RequestMapping(value = "/list")
+	public ModelAndView list(ProSupplierDto dto, PageQuery query) {
+		ModelAndView mv = getModelAndView();
+		PageResult<ProSupplierDto> mSuppliers = queryMaterialSupplier(dto, query);
+		mv.addObject("pageList", mSuppliers);
+		mv.setViewName("supplier/supplier_list");
+		return mv;
+	} 
+
 	/**
 	 * <p>Description: 根据供应商查询分页查询商品信息 </p>
 	 *

@@ -65,7 +65,7 @@
 		<div class="easyui-layout" data-options="fit:true,border:false">
 			<div data-options="region:'center',border:false" title=""
 				style="overflow: hidden;">
-				<form id="form" method="post"  enctype="multipart/form-data">
+				<form id="form" method="post"  >
 				   <input id="id" name="id" type="hidden" value="${id}" />
 					<table class="table table-hover table-condensed">
 						<tr>
@@ -152,8 +152,7 @@
 								placeholder="请输入条形码" class="easyui-validatebox span2"
 								></td>
 								
-						</tr>
-						
+						</tr>					
 					</table>
 			
 				</form>

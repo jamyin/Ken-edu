@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <#include "/common/head.htm" />
+  <link rel="stylesheet" href="/static/css/supplier_list.css" media="screen" charset="utf-8">
+</head>
+<body>
+<#include "/common/nav.htm" />
+
+  <div class="wrapperA">
+
+
+    <h1 class="con-tt">成品列表
+      <span>
+        <input type="hidden" name="supplierId" value="${(params.supplierId)!}"/>
+        <input class="search" type="button">
+        <input class="search_text" type="text" name="supplierName" value="${(params.supplierName)!}" placeholder="请输入关键字">
+      </span>
+    </h1>
+
+    <table class="sulplier_items">
+      <tr>
+        <th>原料供应商名称</th>
+        <th>单位地址</th>
+        <th>详情</th>
+      </tr>
+      <#if pageList??>
+        <#list pageList as data>
+          <tr>
+            <td>${(data.supplierName)!}</td>
+            <td>${(data.address)!}</td>
+            <td>详情</td>
+          </tr>
+        </#list>
+      </#if>
+      </tr>
+    </table>
+
+    <#include "/common/page.htm" />
+  </div>
+<#include "/common/footer.htm" />
+
+  <script type="text/javascript">
+    $(function(){
+      // debugger;
+      $(".nav").find("a").removeClass("cur");
+      $(".nav").find("a:eq(1)").addClass("cur");
+
+      $(".search-bt").on('click', function (){
+        $("#myform").submit();
+      });
+
+      // 跳转指定页
+      $('#jump_btn').on('click', function () {
+        var jump_num = $('#jump_num').val();
+        if (jump_num != '') {
+          var reg = /^[-+]?\d*$/;
+          if (!reg.test(jump_num)) {
+            alert("对不起，您输入的跳转页数格式不正确!");//请将“整数类型”要换成你要验证的那个属性名称！
+            return;
+          }
+        <#if pageList?? && pageList.total gt 0>
+          if (jump_num > ${(pageList.totalPage)!}) {
+            alert("对不起，您输入的跳转页数大于总页数!");
+            return;
+          }
+        </#if>
+        } else {
+          alert("对不起，您输入的跳转页数!");
+          return;
+        }
+        gotoPage(jump_num);
+      });
+    })
+
+    function gotoPage(page) {
+      $("currPage").val(page);
+      $("#myform").submit();
+    }
+  </script>
+</body>
+</html>
