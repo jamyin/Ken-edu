@@ -55,4 +55,8 @@ public class ProPackagesDto {
 	@Setter
 	@Getter
 	private List<ProDishesDto> proDishesDtos;
+	
+	@Getter
+	@Setter
+	private List<ProPackagesDto> proPackagesDtos;
 }

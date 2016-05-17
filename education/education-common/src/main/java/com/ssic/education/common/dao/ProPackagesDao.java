@@ -2,6 +2,7 @@ package com.ssic.education.common.dao;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Repository;
 
 import com.ssic.education.common.dto.ProDishesDto;
 import com.ssic.education.common.dto.ProPackagesDto;
+import com.ssic.education.common.mapper.EduSchoolExMapper;
+import com.ssic.education.common.mapper.EduSchoolMapper;
 import com.ssic.education.common.mapper.ProDishesMapper;
 import com.ssic.education.common.mapper.ProPackagesMapper;
 import com.ssic.education.common.pojo.ProDishesExample;
@@ -22,6 +25,8 @@ import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.mybatis.MyBatisBaseDao;
 import com.ssic.education.utils.util.BeanUtils;
 import com.ssic.education.utils.util.DateUtils;
+
+import freemarker.core._RegexBuiltins.matchesBI;
 
 /**
  * 
@@ -34,6 +39,9 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 	@Getter
 	@Autowired
 	private ProPackagesMapper mapper;
+	
+	@Autowired
+	private EduSchoolExMapper schoolMapper;
 	
 	@Getter
 	@Autowired
@@ -75,6 +83,16 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 			List<ProDishesDto> proDishesDtos = BeanUtils.createBeanListByTarget(disMapper.selectByExample(exampleDis), ProDishesDto.class);
 			proPackagesDto.setProDishesDtos(proDishesDtos);
 		}
-		return proPackagesDtos;
+		List<ProPackagesDto> propackagesDtos = schoolMapper.getPackagesById(dto.getCustomerId(), dto.getSupplierId());		
+		for (ProPackagesDto propackagesDto:propackagesDtos) {
+			ArrayList<ProPackagesDto> proArrayList = new ArrayList<ProPackagesDto>();
+			for (ProPackagesDto proPackagesDto : proPackagesDtos) {
+				if (propackagesDto.getSupplyPhase() == proPackagesDto.getSupplyPhase()) {
+					proArrayList.add(proPackagesDto);
+				}
+			}
+			propackagesDto.setProPackagesDtos(proArrayList);
+		}
+		return propackagesDtos;
 	}
 }

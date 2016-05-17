@@ -82,4 +82,19 @@
 		</if>
 		group by b.supplier_id
 	</select>
+	
+	<select id="getPackagesById" resultMap="packagesResultMap">
+		select a.id,a.package_name,a.supplier_id,a.customer_type,a.customer_id,a.grade,a.supply_date,
+		a.supply_phase,a.carete_time,a.last_update_time,a.stat
+		from t_pro_packages a 
+		where a.stat = 1 
+		<if test="customerId!=null and customerId!='' ">
+			AND a.customer_id = #{customerId}
+		</if>
+		<if test="supplierId!=null and supplierId!='' ">
+			AND a.supplier_id = #{supplierId}
+		</if>
+		group by a.supply_phase
+		ORDER BY a.supply_phase asc		
+	</select>
 </mapper>
