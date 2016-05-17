@@ -1,13 +1,17 @@
 package com.ssic.education.app.controller;
 
 import java.util.Date;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ssic.education.app.constants.ProductClass;
+import com.ssic.education.app.constants.SchoolLevel;
 import com.ssic.education.app.service.ISchoolService;
 import com.ssic.education.common.dto.EduSchoolDto;
 import com.ssic.util.constants.DataStatus;
@@ -52,6 +56,21 @@ public class SchoolController {
     		return result;
     	}
     }
+    
+    /**
+    * @Title: getDishesType
+    * @Description: 学校年级列表
+    * @author Ken Yin  
+    * @date 2016年5月17日 下午2:50:36
+    * @return Response<Map<Integer,String>>    返回类型
+     */
+	@RequestMapping(value = "/classList", method = RequestMethod.GET)
+	@ResponseBody
+	public Response<Map<Integer, String>> getClassType() {
+		Response<Map<Integer, String>> result = new Response<Map<Integer, String>>();
+		result.setData(SchoolLevel.getAll());
+		return result;
+	}
     /**
     * @Title: findSchoolDetialList
     * @Description: 根据学校id查学校信息（需要带出当天全部年级菜单）
