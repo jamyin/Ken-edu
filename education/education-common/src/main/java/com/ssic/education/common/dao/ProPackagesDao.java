@@ -48,11 +48,7 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 	private ProDishesMapper disMapper;
 	
 	public List<ProPackagesDto> getProPackages(ProPackagesDto dto) throws ParseException  {
-		SimpleDateFormat sdf=new SimpleDateFormat(DateUtils.YMD_DASH);  
-		String str=sdf.format(new Date()); 
-		SimpleDateFormat sdfh=new SimpleDateFormat(DateUtils.YMD_DASH_DATE_TIME);  
-		Date startDate = sdfh.parse(str+" 00:00:00");
-		Date endDate = sdfh.parse(str+" 23:59:59");
+		
 		ProPackagesExample example = new ProPackagesExample();
 		ProPackagesExample.Criteria criteria = example.createCriteria();
 		if (StringUtils.isNotBlank(dto.getSupplierId())) {
@@ -64,11 +60,16 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 		if (StringUtils.isNotBlank(dto.getCustomerId())) {
 			criteria.andCustomerIdEqualTo(dto.getCustomerId());
 		}
-		if (null != dto.getSupplyDate()) {
-			criteria.andSupplyDateEqualTo(dto.getSupplyDate());
-		}
+		SimpleDateFormat sdf=new SimpleDateFormat(DateUtils.YMD_DASH);  
+		String str=sdf.format(new Date()); 
+		SimpleDateFormat sdfh=new SimpleDateFormat(DateUtils.YMD_DASH_DATE_TIME);  
+		Date startDate = sdfh.parse(str+" 00:00:00");
+		Date endDate = sdfh.parse(str+" 23:59:59");
 		if (null == dto.getSupplyDate()) {
 			criteria.andSupplyDateBetween(startDate, endDate);
+		}
+		if (StringUtils.isNotBlank(dto.getSupplyDate())) {			
+			criteria.andSupplyDateBetween(sdfh.parse(dto.getSupplyDate()+" 00:00:00"),sdfh.parse(dto.getSupplyDate()+" 23:59:59"));
 		}
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		example.setOrderByClause("supply_phase asc");
@@ -83,7 +84,13 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 			List<ProDishesDto> proDishesDtos = BeanUtils.createBeanListByTarget(disMapper.selectByExample(exampleDis), ProDishesDto.class);
 			proPackagesDto.setProDishesDtos(proDishesDtos);
 		}
-		List<ProPackagesDto> propackagesDtos = schoolMapper.getPackagesById(dto.getCustomerId(), dto.getSupplierId());		
+		List<ProPackagesDto> propackagesDtos = new ArrayList<ProPackagesDto>();
+		if (StringUtils.isNotBlank(dto.getSupplyDate())) {
+			propackagesDtos = schoolMapper.getPackagesById(dto.getCustomerId(), dto.getSupplierId(),sdfh.parse(dto.getSupplyDate()+" 00:00:00"),sdfh.parse(dto.getSupplyDate()+" 23:59:59"));	
+		}else {
+			propackagesDtos = schoolMapper.getPackagesById(dto.getCustomerId(), dto.getSupplierId(),startDate,endDate);	
+		}
+			
 		for (ProPackagesDto propackagesDto:propackagesDtos) {
 			ArrayList<ProPackagesDto> proArrayList = new ArrayList<ProPackagesDto>();
 			for (ProPackagesDto proPackagesDto : proPackagesDtos) {

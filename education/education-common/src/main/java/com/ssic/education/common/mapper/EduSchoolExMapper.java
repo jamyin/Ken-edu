@@ -1,5 +1,6 @@
 package com.ssic.education.common.mapper;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -18,5 +19,5 @@ public interface EduSchoolExMapper {
 
 	List<ProSupplierDto> getSupplierBySchoolId(@Param("schoolId") String schoolId);
 	
-	List<ProPackagesDto> getPackagesById(@Param("customerId") String customerId,@Param("supplierId") String supplierId);
+	List<ProPackagesDto> getPackagesById(@Param("customerId") String customerId,@Param("supplierId") String supplierId,@Param("startDate") Date startDate,@Param("endDate") Date endDate);
 }

@@ -1,9 +1,12 @@
 package com.ssic.education.government.controller;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +24,7 @@ import com.ssic.education.common.government.service.ProPackagesService;
 import com.ssic.education.utils.constants.SchoollevelEnum;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
+import com.ssic.education.utils.util.DateUtils;
 
 /**
  * 
@@ -84,6 +88,12 @@ public class EduSchoolController extends BaseController{
 		List<ProSupplierDto> proSupplierDtos = eduSchoolService.getSupplier(dto.getCustomerId());
 		List<ProPackagesDto> proPackagesDtos = proPackagesService.getProPackages(dto);
 		mv.setViewName("/school/menu");
+		SimpleDateFormat sdf=new SimpleDateFormat(DateUtils.YMD_DASH);  
+		String str=sdf.format(new Date()); 
+		if (StringUtils.isBlank(dto.getSupplyDate())) {
+			dto.setSupplyDate(str);
+		}
+		mv.addObject("dto", dto);
 		mv.addObject("eduSchoolDto", eduSchoolDto);
 		mv.addObject("proSupplierDtos", proSupplierDtos);
 		mv.addObject("level", SchoollevelEnum.values());
