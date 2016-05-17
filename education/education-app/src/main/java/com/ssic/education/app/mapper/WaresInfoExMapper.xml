@@ -40,8 +40,8 @@
 		<result column="stat" property="stat" jdbcType="INTEGER" />
 		<result column="image" property="image" jdbcType="VARCHAR" />
 		<result column="remark" property="remark" jdbcType="VARCHAR" />
-		<association property="supplier" javaType="com.ssic.education.app.dto.ProSupplierDto" />
-		<association property="ledgerList" javaType="com.ssic.education.app.dto.LedgerInfoDto" />
+		<association property="supplier" column="supplier_id" javaType="com.ssic.education.app.dto.ProSupplierDto" />
+		<association property="ledgerList" column="id" javaType="com.ssic.education.app.dto.LedgerInfoDto" />
 	</resultMap>
 
 	<select id="findWarseBySupplier" parameterType="java.lang.String" resultMap="BaseResultMap">
