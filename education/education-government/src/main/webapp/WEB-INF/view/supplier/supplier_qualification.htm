@@ -8,7 +8,7 @@
 <#include "/common/nav.htm" />
 
 <div class="wrapperA">
-    <h1 class="con-tt">${(supplier.supplierName)!}</h1>
+    <h1 class="con-tt"><span class="title">${(supplier.supplierName)!}</span></h1>
 
     <div class="con-bd">
         <img class="con-img" src="/static/img/sample-meat_200X200.png" alt=""/>
@@ -25,7 +25,7 @@
         </ul>
     </div>
 
-    <h1 class="con-tt">成品列表 <a class="more" href="/pro/wares/waresPages.htm?supplierId=${(supplier.id)!}&dishes=true">更多 &gt;&gt; </a></h1>
+    <h1 class="con-tt"><span class="title">成品列表</span> <a class="more" href="/pro/wares/waresPages.htm?supplierId=${(supplier.id)!}&dishes=true">更多 &gt;&gt; </a></h1>
 
     <div class="item-list">
         <ul>
@@ -33,7 +33,7 @@
                 <#list pWares.results as wares>
                     <li>
                         <img src="${(wares.image)!}" alt=""/>
-                        <div>${(wares.waresName)!}</div>
+                        <div class="name">${(wares.waresName)!}</div>
                         <div>分类:<span>${(wares.waresTypeStr)!}</span></div>
                         <div>规格:<span>${(wares.spec)!}</span></div>
                     </li>
@@ -42,7 +42,7 @@
         </ul>
     </div>
 
-    <h1 class="con-tt">原料列表 <a class="more" href="/pro/wares/waresPages.htm?supplierId=${(supplier.id)!}&dishes=false">更多 &gt;&gt; </a></h1>
+    <h1 class="con-tt"><span class="title">原料列表</span> <a class="more" href="/pro/wares/waresPages.htm?supplierId=${(supplier.id)!}&dishes=false">更多 &gt;&gt; </a></h1>
 
     <div class="item-list">
         <ul>
@@ -50,7 +50,7 @@
                 <#list mWares.results as wares>
                     <li>
                         <img src="${(wares.image)!}" alt=""/>
-                        <div>${(wares.waresName)!}</div>
+                        <div class="name">${(wares.waresName)!}</div>
                         <div>分类:<span>${(wares.waresTypeStr)!}</span></div>
                         <div>规格:<span>${(wares.spec)!}</span></div>
                     </li>
@@ -60,23 +60,25 @@
     </div>
 
 
-    <h1 class="con-tt">供应商列表 <a class="more" href="/pro/supplier/list.htm?supplierId=${(supplier.id)!}">更多 &gt;&gt; </a></h1>
-    <table class="sulplier_items">
-        <tr>
-            <th>原料供应商名称</th>
-            <th>单位地址</th>
-            <th>详情</th>
-        </tr>
-        <#if mSuppliers??>
-            <#list mSuppliers.results as sup>
-                <tr>
-                    <td>${(sup.supplierName)!}</td>
-                    <td>${(sup.address)!}</td>
-                    <td>详情</td>
-                </tr>
-            </#list>
-        </#if>
-    </table>
+    <h1 class="con-tt"><span class="title">供应商列表</span> <a class="more" href="/pro/supplier/list.htm?supplierId=${(supplier.id)!}">更多 &gt;&gt; </a></h1>
+    <div class="wrapperB">
+        <ul class="sulplier_ul">
+            <li class="head">
+                <span class="name">原料供应商名称</span>
+                <span class="place">单位地址</span>
+                <span class="detail">详情</span>
+            </li>
+            <#if mSuppliers??>
+                <#list mSuppliers.results as sup>
+                    <li>
+                        <span class="name">${(sup.supplierName)!}</span>
+                        <span class="place">${(sup.address)!}</span>
+                        <span class="detail"><a href="/pro/supplier/detail.htm?id=${(sup.id)!}">详情</a> &gt;</span>
+                    </li>
+                </#list>
+            </#if>
+        </ul>
+    </div>
 </div>
 <#include "/common/footer.htm" />
 

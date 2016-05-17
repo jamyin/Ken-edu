@@ -8,72 +8,75 @@
 <#include "/common/nav.htm" />
 
 <div class="wrapperA">
-    <div class="search-bar">
-        <form action="/pro/supplier/search.htm" method="post" id="myform">
-            <input type="hidden" name="currPage" id="currPage" value="1"/>
-            <h1 class="con-tt">供应商资质查询</h1>
-            <ul>
-                <li class="search">
-                    <label for="area">区县:</label>
-                    <select name="area" panelheight="auto" id="area">
-                        <option value="">请选择区县</option>
-                        <#if areas??>
-                            <#list areas as area>
-                                <option
-                                <#if params.area == area.addressCode>selected="true"</#if>
-                                value="${(area.addressCode)!}">${(area.addressName)!}</option>
-                            </#list>
-                        </#if>
-                    </select>
-                </li>
-                <li class="search">
-                    <label for="schoolIds">供应学校:</label>
-                    <select class="" name="schoolIds" id="schoolIds">
-                        <option value="">请选择学校</option>
-                        <#if schools??>
-                            <#list schools as school>
-                                <option
-                                <#if params.schoolIds == school.id>selected="true"</#if>
-                                value="${(school.id)!}">${(school.schoolName)!}</option>
-                            </#list>
-                        </#if>
-                    </select>
-                </li>
-                <li class="search">
-                    <label for="supplierName">供应商名称:</label>
-                    <input type="text" name="supplierName" id="supplierName" value="${(params.supplierName)!}">
-                </li>
-                <li class="search">
-                    <label for="address">单位地址:</label>
-                    <input type="text" name="address" id="address" value="${(params.address)!}">
-                </li>
-            </ul>
-            <input class="search-bt" type="button" value="搜索">
-        </form>
-    </div>
+    <h1 class="con-tt"><span class="title">供应商资质查询</span></h1>
 
-    <table class="result">
-        <tr>
-            <th>区县</th>
-            <th>单位名称</th>
-            <th>单位地址</th>
-            <th>供应学校</th>
-            <th>详情</th>
-        </tr>
-        <#if pageList??>
-            <#list pageList.results as data>
-                <tr>
-                    <td>${(data.areaName)!}</td>
-                    <td>${(data.supplierName)!}</td>
-                    <td>${(data.address)!}</td>
-                    <td>${(data.schoolNames)!}</td>
-                    <td>
-                        <a href="/pro/supplier/detail.htm?id=${(data.id)!}">详情</a>
-                    </td>
-                </tr>
-            </#list>
-        </#if>
-    </table>
+    <div class="wrapperB">
+        <div class="search-bar">
+            <form action="/pro/supplier/search.htm" method="post" id="myform">
+                <input type="hidden" name="currPage" id="currPage" value="1"/>
+                <ul>
+                    <li class="search">
+                        <label for="area">区县:</label>
+                        <select name="area" panelheight="auto" id="area">
+                            <option value="">请选择区县</option>
+                            <#if areas??>
+                                <#list areas as area>
+                                    <option
+                                    <#if params.area == area.addressCode>selected="true"</#if>
+                                    value="${(area.addressCode)!}">${(area.addressName)!}</option>
+                                </#list>
+                            </#if>
+                        </select>
+                    </li>
+                    <li class="search">
+                        <label for="schoolIds">供应学校:</label>
+                        <select class="" name="schoolIds" id="schoolIds">
+                            <option value="">请选择学校</option>
+                            <#if schools??>
+                                <#list schools as school>
+                                    <option
+                                    <#if params.schoolIds == school.id>selected="true"</#if>
+                                    value="${(school.id)!}">${(school.schoolName)!}</option>
+                                </#list>
+                            </#if>
+                        </select>
+                    </li>
+                    <li class="search">
+                        <label for="supplierName">供应商名称:</label>
+                        <input type="text" name="supplierName" id="supplierName" value="${(params.supplierName)!}">
+                    </li>
+                    <li class="search">
+                        <label for="address">单位地址:</label>
+                        <input type="text" name="address" id="address" value="${(params.address)!}">
+                    </li>
+                </ul>
+                <input class="search-bt" type="button" value="搜索">
+            </form>
+        </div>
+
+        <ul class="result-ul">
+            <li class="head">
+                <span class="r_count">区县</span>
+                <span class="r_name">单位名称</span>
+                <span class="r_addr">单位地址</span>
+                <span class="r_school">供应学校</span>
+                <span class="detail">详情</span>
+            </li>
+            <#if pageList??>
+                <#list pageList.results as data>
+                    <li>
+                        <span class="r_count">${(data.areaName)!}</span>
+                        <span class="r_name">${(data.supplierName)!}</span>
+                        <span class="r_addr">${(data.address)!}</span>
+                        <span class="r_school">${(data.schoolNames)!}</span>
+                        <span class="detail">
+                            <a href="/pro/supplier/detail.htm?id=${(data.id)!}">详情</a>
+                        </span>
+                    </li>
+                </#list>
+            </#if>
+        </ul>
+    </div>
 
     <#include "/common/page.htm" />
 </div>
@@ -84,7 +87,7 @@
         $(".nav").find("a").removeClass("cur");
         $(".nav").find("a:eq(1)").addClass("cur");
 
-        $(".search-bt").on('click', function (){
+        $(".search-bt").on('click', function () {
             $("#myform").submit();
         });
 
@@ -97,12 +100,12 @@
                     alert("对不起，您输入的跳转页数格式不正确!");//请将“整数类型”要换成你要验证的那个属性名称！
                     return;
                 }
-                <#if pageList?? && pageList.total gt 0>
+            <#if pageList?? &&pageList.total gt 0 >
                 if (jump_num > ${(pageList.totalPage)!}) {
                     alert("对不起，您输入的跳转页数大于总页数!");
                     return;
                 }
-                </#if>
+            </#if>
             } else {
                 alert("对不起，您输入的跳转页数!");
                 return;

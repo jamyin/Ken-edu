@@ -9,7 +9,7 @@
 
   <div class="wrapperA">
     <form action="/pro/wares/waresPages.htm" method="post" id="myform">
-      <h1 class="con-tt"><#if params.dishes>成品<#else>原料</#if>列表
+      <h1 class="con-tt"><span class="title"><#if params.dishes>成品<#else>原料</#if>列表</span>
         <span>
           <input type="hidden" name="dishes" value="${(params.dishes)!}"/>
           <input type="hidden" name="supplierId" value="${(params.supplierId)!}"/>
@@ -25,7 +25,7 @@
           <#list pageList.results as data>
               <li>
                 <img src="${(data.image)!}" alt="" />
-                <div>${(data.waresName)!}</div>
+                <div class="name">${(data.waresName)!}</div>
                 <div>分类:<span>${(data.waresTypeStr)!}</span></div>
                 <div>规格:<span>${(data.spec)!}</span></div>
               </li>
