@@ -1,5 +1,7 @@
 package com.ssic.education.government.controller;
 
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -12,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ssic.education.common.dto.EduAreaDto;
 import com.ssic.education.common.dto.EduSchoolDto;
 import com.ssic.education.common.dto.ProPackagesDto;
+import com.ssic.education.common.dto.ProSupplierDto;
 import com.ssic.education.common.government.service.AreaService;
 import com.ssic.education.common.government.service.EduSchoolService;
 import com.ssic.education.common.government.service.ProPackagesService;
@@ -75,12 +78,14 @@ public class EduSchoolController extends BaseController{
 	  @return
 	 */
 	@RequestMapping(value = "/details")
-	public ModelAndView details(ProPackagesDto dto) {
+	public ModelAndView details(ProPackagesDto dto) throws ParseException{
 		ModelAndView mv = getModelAndView();
 		EduSchoolDto eduSchoolDto = eduSchoolService.findById(dto.getCustomerId());
+		List<ProSupplierDto> proSupplierDtos = eduSchoolService.getSupplier(dto.getCustomerId());
 		List<ProPackagesDto> proPackagesDtos = proPackagesService.getProPackages(dto);
 		mv.setViewName("/school/menu");
 		mv.addObject("eduSchoolDto", eduSchoolDto);
+		mv.addObject("proSupplierDtos", proSupplierDtos);
 		mv.addObject("level", SchoollevelEnum.values());
 		mv.addObject("proPackagesDtos", proPackagesDtos);
 		return mv;

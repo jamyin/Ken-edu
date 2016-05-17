@@ -2,6 +2,7 @@ package com.ssic.education.common.government.service.impl;
 
 import com.ssic.education.common.dao.EduSchoolDao;
 import com.ssic.education.common.dto.EduSchoolDto;
+import com.ssic.education.common.dto.ProSupplierDto;
 import com.ssic.education.common.government.service.EduSchoolService;
 import com.ssic.education.common.pojo.EduSchool;
 import com.ssic.education.utils.model.PageQuery;
@@ -37,6 +38,10 @@ public class EduSchoolServiceImpl implements EduSchoolService{
 		return null;
 	}
 
+	public List<ProSupplierDto> getSupplier(String schoolId) {
+		return eduSchoolDao.getSupplier(schoolId);
+	}
+	
 	public List<EduSchoolDto> queryAll(){
 		return eduSchoolDao.findPage(null, null);
 	}

@@ -1,5 +1,6 @@
 package com.ssic.education.common.government.service.impl;
 
+import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ public class ProPackagesServiceImpl implements ProPackagesService{
 	@Autowired
 	private ProPackagesDao proPackagesDao;
 	
-	public List<ProPackagesDto> getProPackages(ProPackagesDto dto){
+	public List<ProPackagesDto> getProPackages(ProPackagesDto dto) throws ParseException{
 		return proPackagesDao.getProPackages(dto);
 	}	
 }

@@ -71,4 +71,15 @@
 			AND b.supply_phase = #{supplyPhase}
 		</if>	
 	</sql>
+	
+	<select id="getSupplierBySchoolId" resultType="com.ssic.education.common.dto.ProSupplierDto">
+		select a.id,a.supplier_name AS supplierName
+		from t_pro_supplier a 
+		left join t_edu_school_supplier b on a.id = b.supplier_id
+		where a.stat = 1 and b.stat = 1		
+		<if test="schoolId!=null and schoolId!='' ">
+			AND b.school_id = #{schoolId}
+		</if>
+		group by b.supplier_id
+	</select>
 </mapper>

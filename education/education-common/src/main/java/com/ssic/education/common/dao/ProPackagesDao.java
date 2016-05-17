@@ -1,5 +1,8 @@
 package com.ssic.education.common.dao;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import lombok.Getter;
@@ -18,6 +21,7 @@ import com.ssic.education.common.pojo.ProPackagesExample;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.mybatis.MyBatisBaseDao;
 import com.ssic.education.utils.util.BeanUtils;
+import com.ssic.education.utils.util.DateUtils;
 
 /**
  * 
@@ -35,7 +39,12 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 	@Autowired
 	private ProDishesMapper disMapper;
 	
-	public List<ProPackagesDto> getProPackages(ProPackagesDto dto) {
+	public List<ProPackagesDto> getProPackages(ProPackagesDto dto) throws ParseException  {
+		SimpleDateFormat sdf=new SimpleDateFormat(DateUtils.YMD_DASH);  
+		String str=sdf.format(new Date()); 
+		SimpleDateFormat sdfh=new SimpleDateFormat(DateUtils.YMD_DASH_DATE_TIME);  
+		Date startDate = sdfh.parse(str+" 00:00:00");
+		Date endDate = sdfh.parse(str+" 23:59:59");
 		ProPackagesExample example = new ProPackagesExample();
 		ProPackagesExample.Criteria criteria = example.createCriteria();
 		if (StringUtils.isNotBlank(dto.getSupplierId())) {
@@ -50,15 +59,19 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 		if (null != dto.getSupplyDate()) {
 			criteria.andSupplyDateEqualTo(dto.getSupplyDate());
 		}
+		if (null == dto.getSupplyDate()) {
+			criteria.andSupplyDateBetween(startDate, endDate);
+		}
 		criteria.andStatEqualTo(DataStatus.ENABLED);
-		List<ProPackagesDto> proPackagesDtos =BeanUtils.createBeanListByTarget(mapper.selectByExample(example), ProPackagesDto.class);
+		example.setOrderByClause("supply_phase asc");
+		List<ProPackagesDto> proPackagesDtos =BeanUtils.createBeanListByTarget(mapper.selectByExample(example), ProPackagesDto.class);		
 		for (ProPackagesDto proPackagesDto : proPackagesDtos) {
 			ProDishesExample exampleDis = new ProDishesExample();
 			ProDishesExample.Criteria criteriaDis = exampleDis.createCriteria();
 			if (StringUtils.isNotBlank(proPackagesDto.getId())) {
 				criteriaDis.andPackageIdEqualTo(proPackagesDto.getId());
 			}	
-//			criteriaDis.andStatEqualTo(DataStatus.ENABLED);
+			criteriaDis.andStatEqualTo(DataStatus.ENABLED);
 			List<ProDishesDto> proDishesDtos = BeanUtils.createBeanListByTarget(disMapper.selectByExample(exampleDis), ProDishesDto.class);
 			proPackagesDto.setProDishesDtos(proDishesDtos);
 		}
