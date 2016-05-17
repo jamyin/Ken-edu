@@ -60,6 +60,7 @@ public class EduSchoolController extends BaseController{
 		mv.setViewName("/school/school_list");
 		mv.addObject("pageList", result);
 		mv.addObject("areaDtos", areaDtos);
+		mv.addObject("dto", dto);
 		mv.addObject("level", SchoollevelEnum.values());
 		return mv;
 	}
@@ -78,8 +79,9 @@ public class EduSchoolController extends BaseController{
 		ModelAndView mv = getModelAndView();
 		EduSchoolDto eduSchoolDto = eduSchoolService.findById(dto.getCustomerId());
 		List<ProPackagesDto> proPackagesDtos = proPackagesService.getProPackages(dto);
-		mv.setViewName("/edu/school/details");
+		mv.setViewName("/school/menu");
 		mv.addObject("eduSchoolDto", eduSchoolDto);
+		mv.addObject("level", SchoollevelEnum.values());
 		mv.addObject("proPackagesDtos", proPackagesDtos);
 		return mv;
 	}

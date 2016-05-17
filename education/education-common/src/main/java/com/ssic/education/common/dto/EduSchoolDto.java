@@ -22,6 +22,10 @@ public class EduSchoolDto implements Serializable {
 
 	@Getter
 	@Setter
+	private String schoolThum;
+	
+	@Getter
+	@Setter
 	private String mobileNo;
 
 	@Getter
