@@ -1,8 +1,11 @@
 package com.ssic.education.provider.controller;
 
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +19,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ssic.base.datasource.DataSourceHolderUtil;
 import com.ssic.education.common.dto.ImageInfoDto;
+import com.ssic.education.common.pojo.ProLicense;
 import com.ssic.education.common.pojo.ProWares;
+import com.ssic.education.common.provider.dto.SupplierDto;
+import com.ssic.education.common.provider.service.ISupplierService;
 import com.ssic.education.common.service.ICreateImageService;
 import com.ssic.education.provider.dto.PageHelperDto;
 import com.ssic.education.provider.dto.ProWaresDto;
@@ -24,6 +30,7 @@ import com.ssic.education.provider.pageModel.DataGrid;
 import com.ssic.education.provider.pageModel.Json;
 import com.ssic.education.provider.pageModel.PageHelper;
 import com.ssic.education.provider.service.ICreatePhdtoService;
+import com.ssic.education.provider.service.IProLicenseService;
 import com.ssic.education.provider.service.IWaresService;
 import com.ssic.education.provider.util.ProductClass;
 import com.ssic.education.utils.util.BeanUtils;
@@ -39,6 +46,12 @@ public class WaresController  extends BaseController {
 	  private ICreatePhdtoService createPhdtoService;
 	 @Autowired
 	    private   ICreateImageService  createImageServiceImpl;
+	 
+	 	@Autowired
+	    private   IProLicenseService   proLicenseServiceImpl;
+	 	@Autowired
+		private ISupplierService supplierService;
+	 
 	 @RequestMapping("/manager")
 	    public String manager(HttpServletRequest request)
 	    {
@@ -95,7 +108,7 @@ public class WaresController  extends BaseController {
 	  */
 	 @RequestMapping("/insertWares")
 	    @ResponseBody
-	    //MultipartFile imgUrl, String  productionName, String  productionMethod,ImageInfoDto image,HttpServletRequest request, HttpServletResponse response
+	    //
 	    public Json insertWares(ProWaresDto pro){  
 	    	 Json j = new Json();
 	    	 if (pro.getWaresName()==null ||  pro.getWaresName().equals(""))
@@ -104,18 +117,7 @@ public class WaresController  extends BaseController {
 	             j.setSuccess(false);
 	             return j;
 	         }
-	        /* if (pro.getShelfLife()==null || pro.getShelfLife().equals("") )
-	         {
-	             j.setMsg("保质期不能为空");
-	             j.setSuccess(false);
-	             return j;
-	         }
-	         if (pro.getUnit() == null || pro.getUnit().equals(""))
-	         {
-	             j.setMsg("单位不能为空");
-	             j.setSuccess(false);
-	             return j;
-	         }*/
+	
 	         if (pro.getSpec()==null || pro.getSpec().equals(""))
 	         {
 	             j.setSuccess(false);
@@ -123,25 +125,7 @@ public class WaresController  extends BaseController {
 	             return j;
 	         }
 
-	         /*if (pro.getWay()==null || pro.getWay().equals(""))
-	         {
-	             j.setSuccess(false);
-	             j.setMsg("商品方向不能为空");
-	             return j;
-	         }
-	         if (pro.getCustomCode()==null || pro.getCustomCode().equals(""))
-	         {
-	             j.setSuccess(false);
-	             j.setMsg("企业自定义代码不能为空");
-	             return j;
-	         }	
-	         
-	         if (pro.getBarCode()==null || pro.getBarCode().equals(""))
-	         {
-	             j.setSuccess(false);
-	             j.setMsg("商品条形码不能为空");
-	             return j;
-	         }*/
+
 	         if (pro.getWaresType()==null || pro.getWaresType().equals(""))
 	         {
 	             j.setSuccess(false);
@@ -222,11 +206,11 @@ public class WaresController  extends BaseController {
 	  */
 	  @RequestMapping("/updateWares")
 	    @ResponseBody
-	    public Json updateWares(@RequestParam(value = "imgUrl") MultipartFile file,ProWaresDto pro,ImageInfoDto image,HttpServletRequest request, HttpServletResponse response){
+	    public Json updateWares(ProWaresDto pro){
 	    	Json json = new Json();
-	    	 Map<String, Object> map = createImageServiceImpl.createImage(image, file, request, response);
-	         String imageurl = (String) map.get("image_url");
-	         pro.setImage(imageurl);
+	    	 String supplierId=waresService.findSupplierIdByName(pro.getSupplierName());
+	         pro.setSupplierId(supplierId);
+	         pro.setStat(1);
 	    	ProWares proWares =new ProWares();
 	    	BeanUtils.copyProperties(pro, proWares);
 	    	waresService.updateImsUsers(proWares);    	
@@ -234,6 +218,88 @@ public class WaresController  extends BaseController {
 	    	json.setSuccess(true);
 	    	return json;
 	    }
-	 
-	 
+	 /**
+	  * 上传图片
+	  */
+	  @RequestMapping("/insterImage")
+	    @ResponseBody
+	    public Json updateImage(String id,@RequestParam(value = "spImgUrl") MultipartFile spImgUrl,@RequestParam(value = "jcImgUrl") MultipartFile jcImgUrl,@RequestParam(value = "scImgUrl") MultipartFile scImgUrl,ImageInfoDto image,HttpServletRequest request, HttpServletResponse response){
+	    	Json json = new Json();
+	    	   ProLicense  license =new ProLicense();
+	    	 Map<String, Object> map1 = createImageServiceImpl.createImage(image, spImgUrl, request, response);
+	    	 Map<String, Object> map2 = createImageServiceImpl.createImage(image, jcImgUrl, request, response);
+	    	 Map<String, Object> map3 = createImageServiceImpl.createImage(image, scImgUrl, request, response);
+	         //如果已经有图片则更新image_url			      
+	         String imageurl1 = (String) map1.get("image_url");
+	         String imageurl2 = (String) map2.get("image_url");
+	         String imageurl3 = (String) map3.get("image_url");
+	         List<String> list =new ArrayList<String>();
+	         if(imageurl1!=null && imageurl1!=""){
+	        	 license.setLicName("商品图片");
+	        	 license.setLicPic(imageurl1);
+	        	 license.setRelationId(id);
+	  	         license.setStat(1);
+	  	         license.setCreateTime(new Date());
+	  	         license.setLastUpdateTime(new Date());
+	  	         license.setCerSource((short) 2);
+	  	       String uuid = UUID.randomUUID().toString();
+	        	 license.setId(uuid);
+	        	 proLicenseServiceImpl.updateImage(license);
+	         } 
+	         if(imageurl2!=null && imageurl2!=""){
+	        	 license.setLicName("检测检验报告");
+	        	 license.setLicPic(imageurl2);
+	        	   license.setRelationId(id);
+	  	         license.setStat(1);
+	  	         license.setCreateTime(new Date());
+	  	         license.setLastUpdateTime(new Date());
+	  	         license.setCerSource((short) 2);
+	  	       String uuid = UUID.randomUUID().toString();
+	        	 license.setId(uuid);
+	        	 proLicenseServiceImpl.updateImage(license);
+	         }  
+	         if(imageurl3!=null && imageurl3!=""){
+	        	 license.setLicName("生产许可证");
+	        	 license.setLicPic(imageurl3);
+	        	 license.setRelationId(id);
+	  	         license.setStat(1);
+	  	         license.setCreateTime(new Date());
+	  	         license.setLastUpdateTime(new Date());
+	  	         license.setCerSource((short) 2);
+	  	       String uuid = UUID.randomUUID().toString();
+	        	 license.setId(uuid);
+	        	 proLicenseServiceImpl.updateImage(license);
+			}      
+	     
+	    	json.setMsg("上传图片成功");
+	    	json.setSuccess(true);
+	    	return json;
+	    }
+	  
+	  
+	  	/**
+		  * 查看图片
+		  */
+		 @RequestMapping("/lookImage")
+		    public String lookImage(HttpServletRequest request,String id){
+			 	ProLicense  license =new ProLicense();
+			 	license.setRelationId(id);
+			 	license.setCerSource((short)2);
+		        List<ProLicense> ProLicenseList = proLicenseServiceImpl.lookImage(license);		   
+		        request.setAttribute("ProLicenseList", ProLicenseList);		      
+		    	return "wares/lookImage";
+		    }
+	 /* *//**
+	   * lookSupplier
+	   *//*
+		 @RequestMapping("/lookSupplier")
+		    public String lookSupplier(HttpServletRequest request,String id){
+			 ProWaresDto dto =new ProWaresDto();
+			 dto.setId(id);
+		        List<SupplierDto> SupplierDtoList = supplierService.lookSupplier(id);		   
+		        request.setAttribute("SupplierDtoList", SupplierDtoList);		      
+		    	return "wares/lookSupplier";
+		    }*/
+	  
+	  
 }

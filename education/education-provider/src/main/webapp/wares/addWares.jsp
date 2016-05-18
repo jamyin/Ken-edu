@@ -43,24 +43,9 @@
 											'error');
 								}
 							}
-						});
-		
-		
-	
-	
-		
+						});			
 	});
 
-
-		
-		
-	
-	
-	
-
-
-	
-	
 </script>
 		<div class="easyui-layout" data-options="fit:true,border:false">
 			<div data-options="region:'center',border:false" title=""
