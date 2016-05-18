@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <#include "/common/head.htm" />
+        <link rel="stylesheet" href="/static/css/style.css">
+        <script src="/static/js/jquery-ui.min.js"></script>
+    	<link href="/static/css/jquery-ui.min.css" rel="stylesheet" />
+    </head>
+<body>
+<#include "/common/nav.htm" />
+	
+	<div class="wrapper">
+		<div class="page_title"><span>学   校</span></div>
+		<div class="menu_box">
+			<img src="${(eduSchoolDto.schoolThum)!}" border="0">
+			<div class="info">
+				<p>名称：${(eduSchoolDto.schoolName)!}</p>
+				<p>地址：${(eduSchoolDto.address)!}</p>
+				<#if level??>
+					<#list level as level>
+						<#if level.index == eduSchoolDto.level>
+							<p>级别：${(level.value)!}</p>
+						</#if>
+					</#list>
+				</#if>				
+			</div>
+		</div>
+		<div class="page_title"><span>菜   谱</span></div>
+		<div class="menu_box">
+			<div class="subbar">
+				<p class="lef">学校名称：${(eduSchoolDto.schoolName)!}</p><p class="rig">供应商名称：<#if proSupplierDtos??>
+					<#list proSupplierDtos as supplier>
+						${(supplier.supplierName)!}
+					</#list>
+				</#if></p>
+			</div>
+			<div class="menu_list">
+					<div class="control">
+						<a class="lbtn" href="###"><</a>
+						<span><input id="date" type="text" value="" onchange="changeDate()"></span>
+						<a class="rbtn" href="###">></a>
+					</div>
+					<div class="title">
+						<label class="ct1">用餐时段</label>
+						<label class="ct2">套餐名</label>
+						<label class="ct3">成品菜</label>
+					</div>
+					<#if (proPackagesDtos??) &&(proPackagesDtos?size>0)>
+						<#list proPackagesDtos as proPackages>
+							<div class="lunch row">
+							<#if proPackages.supplyPhase??>
+								<label class=""><#if proPackages.supplyPhase == 1>午餐</#if><#if proPackages.supplyPhase == 3>晚餐</#if></label>
+								<ul>
+									<#if proPackages.proPackagesDtos??>
+										<#list proPackages.proPackagesDtos as packages>
+											<li><span class="name">${(packages.packageName)!}</span>
+											<#if packages.proDishesDtos??>
+												<#list packages.proDishesDtos as proDishes>
+													<span>${(proDishes.waresName)!}</span>
+												</#list>
+											</#if>
+											</li>
+										</#list>										
+									</#if>
+								</ul>
+							</#if>
+							</div>
+						</#list>
+					<#else>
+						<div class="lunch row" style="color: red;font-size:24px; text-align:center;">暂无数据</div>				
+					</#if>
+					
+					<!-- <div class="lunch row">
+						<label class="">午餐</label>
+						<ul>
+							<li><span class="name">糖醋小排套擦</span><span>糖醋小排</span><span>番茄炒蛋</span><span>开胃冬瓜</span><span>照烧土豆</span></li>
+							<li><span class="name">南乳肉套餐</span><span>南乳肉</span><span>照烧鸡肉串</span><span>花菜鸡片</span><span>白菜粉丝</span></li>
+							<li><span class="name">红烧肉套餐</span><span>红烧肉</span><span>干椒鸡翅尖</span><span>香干芹菜</span><span>双色瓜条</span></li>
+							<li><span class="name">蜜汁叉烧套餐</span><span>蜜汁叉烧</span><span>三色鸡丁</span><span>西芹木耳</span><span>清炒黄瓜条</span></li>
+						</ul>
+					</div>
+					<div class="lunch row">
+						<label class="">晚餐</label>
+						<ul>
+							<li><span class="name">糖醋小排套擦</span><span>糖醋小排</span><span>番茄炒蛋</span><span>开胃冬瓜</span><span>照烧土豆</span></li>
+							<li><span class="name">南乳肉套餐</span><span>南乳肉</span><span>照烧鸡肉串</span><span>花菜鸡片</span><span>白菜粉丝</span></li>
+							<li><span class="name">红烧肉套餐</span><span>红烧肉</span><span>干椒鸡翅尖</span><span>香干芹菜</span><span>双色瓜条</span></li>
+							<li><span class="name">蜜汁叉烧套餐</span><span>蜜汁叉烧</span><span>三色鸡丁</span><span>西芹木耳</span><span>清炒黄瓜条</span></li>
+						</ul>
+					</div> -->
+			</div>
+		</div>
+		<div class="page_title"><span>成品菜资料</span></div>
+		<div class="menu_box">
+			<img src="/static/img/school.jpg" border="0">
+			<div class="info">
+				<p>名称：糖醋小排</p>
+				<p>分类：大荤</p>
+				<p>原料：排骨</p>
+				<p>规格：150g</p>
+				<p>保质期：3天</p>
+				<p>营养配比：热量320KJ/781-800千卡</p>
+				<p>供应商名称：上海联程餐饮有限公司</p>
+			</div>
+		</div>
+	</div>
+	<#include "/common/footer.htm" />
+	
+<script>
+	$(function(){
+		var supplyDate = '${(dto.supplyDate)!}';
+		if (null != supplyDate && '' != supplyDate) {
+			$('#date').val(supplyDate);
+		} else{
+		}
+		fix_table()
+	});
+	
+	function fix_table(){
+		var Cell_Count = $('.row').length
+		
+		for(var i=0;i<Cell_Count;i++){
+		$('.row').eq(i).find('label').css('height',$('.row').eq(i).height()+'px').css('line-height',$('.row').eq(i).height()+'px')
+		$('.row').eq(i).find('ul li:last-child').css('border-color','#fff')
+		
+		}
+		
+	}
+	
+	function changeDate(){
+		var date = $('#date').val();
+		window.location.href = '/edu/school/details.htm?customerId=${(dto.customerId)!}&supplierId=${(dto.supplierId)!}&supplyDate='+date;
+	}
+	
+	  // 日历
+	$(function( factory ) {
+		if ( typeof define === "function" && define.amd ) {
+	
+			// AMD. Register as an anonymous module.
+			define([ "../jquery.ui.datepicker" ], factory );
+		} else {
+	
+			// Browser globals
+			factory( jQuery.datepicker );
+		}
+	  }(function( datepicker ) {
+		datepicker.regional['zh-TW'] = {
+			closeText: '關閉',
+			prevText: '<上月',
+			nextText: '下月>',
+			currentText: '今天',
+			monthNames: ['一月','二月','三月','四月','五月','六月',
+			'七月','八月','九月','十月','十一月','十二月'],
+			monthNamesShort: ['一月','二月','三月','四月','五月','六月',
+			'七月','八月','九月','十月','十一月','十二月'],
+			dayNames: ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'],
+			dayNamesShort: ['周日','周一','周二','周三','周四','周五','周六'],
+			dayNamesMin: ['日','一','二','三','四','五','六'],
+			weekHeader: '周',
+			dateFormat: 'yy-mm-dd',
+			firstDay: 1,
+			isRTL: false,
+			showMonthAfterYear: true,
+			yearSuffix: '年'};
+		datepicker.setDefaults(datepicker.regional['zh-TW']);
+	
+		return datepicker.regional['zh-TW'];		
+	
+	  } 
+	  ));
+	
+	  $( "#date" ).datepicker( $.datepicker.regional[ "fr" ] );
+	
+	  // 日历 end
+</script>
+	
+</body>
+</html>

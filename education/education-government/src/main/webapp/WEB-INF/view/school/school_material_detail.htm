@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <#include "/common/head.htm" />
+          <link rel="stylesheet" href="/static/css/style.css">
+        <link rel="stylesheet" href="/static/css/dish_detail.css">
+    </head>
+    <body>
+        <!-- <div class="header">
+    		<div class="wrap">
+    			<a class="logo" href="index.html">上海市中小学校校生午餐综合管理平台</a>
+    			<div class="p_status">
+    				<a class="p_center" href="pcenter.html">个人中心</a>  |  <a class="logout" href="###">退出</a>
+    			</div>
+    		</div>
+    	</div>
+        <div class="nav">
+    		<div class="wrap">
+    			<a class="cur" href="index.html">首页</a>
+    			<a class="" href="index.html">安全追溯</a>
+    			<a class="" href="index.html">菜谱</a>
+    			<a class="" href="index.html">健康宣教</a>
+    			<a class="" href="index.html">通告公示</a>
+    			<a class="" href="index.html">任务传达</a>
+    			<a class="" href="index.html">发布</a>
+    		</div>
+    	</div> -->
+    	<#include "/common/nav.htm" />
+        <div class="main_wrap">
+
+            <h2><#if proWaresDto.dishes == false>原料详情  </#if>
+            <#if proWaresDto.dishes == true>成品菜详情 </#if></h2>
+            <div class="ngfjgf">
+                <img src="${(proWaresDto.image)!}" />
+                <ul class="detail_list">
+                    <li>
+                        <span class="key">名称:</span>
+                        <span class="val">${(proWaresDto.waresName)!}</span>
+                    </li>
+                    <li>
+                        <span class="key">分类:</span>
+                        <span class="val">${(proWaresDto.waresTypeStr)!}</span>
+                    </li>
+                    <li>
+                        <span class="key">规格:</span>
+                        <span class="val">${(proWaresDto.spec)!}</span>
+                    </li>
+                    <li>
+                        <span class="key">保质期:</span>
+                        <span class="val">${(proWaresDto.shelfLife)!}${(proWaresDto.unit)!}</span>
+                    </li>
+                    <li>
+                        <span class="key">营养:</span>
+                        <ul class="nutrition">
+                            <li>热量320KJ/</li>
+                            <li>热量320KJ/</li>
+                            <li>热量320KJ/</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="panel">
+                <h2>批次</h2>
+                <ul class="list">
+                <#if proLedgerDtos??>
+	                <#list proLedgerDtos.results as proLedger>
+	                	<li>
+	                       	 批次：<a href="#">${(proLedger.batchNo)!}</a>
+	                        <span class="import">进货日期：${(proLedger.productionDate?string("yyyy-MM-dd"))!}</span>
+	                        <a class="date" href="#">运送轨迹>></a>
+                   		 </li>
+	                </#list>
+                </#if>
+                    <!-- <li>
+                      	批次：<a href="#">20160315</a>
+                        <span class="import">生产日期：2016.03.15</span>
+                        <a class="date" href="#">运送轨迹>></a>
+                    </li>
+                    <li>
+                       	 批次：<a href="#">20160315</a>
+                        <span class="import">生产日期：2016.03.15</span>
+                        <a class="date" href="#">运送轨迹>></a>
+                    </li>
+                    <li>
+                       	 批次：<a href="#">20160315</a>
+                        <span class="import">生产日期：2016.03.15</span>
+                        <a class="date" href="#">运送轨迹>></a>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+       <#include "/common/footer.htm" />
+    </body>
+</html>

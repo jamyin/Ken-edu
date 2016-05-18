@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <#include "/common/head.htm" />
+  <link rel="stylesheet" href="/static/css/school_list.css" media="screen" charset="utf-8">
+</head>
+<body>
+<!--  <div class="header">
+  <div class="wrap">
+    <a class="logo" href="index.html">上海市中小学校校生午餐综合管理平台</a>
+    <div class="p_status">
+      <a class="p_center" href="pcenter.html">个人中心</a>  |  <a class="logout" href="###">退出</a>
+    </div>
+  </div>
+</div>
+ <div class="nav">
+  <div class="wrap">
+    <a class="cur" href="index.html">首页</a>
+    <a class="" href="search_supplier.html">安全追溯</a>
+    <a class="" href="index.html">菜谱</a>
+    <a class="" href="index.html">健康宣教</a>
+    <a class="" href="index.html">通告公示</a>
+    <a class="" href="index.html">任务传达</a>
+    <a class="" href="index.html">发布</a>
+  </div>
+</div> -->
+<#include "/common/nav.htm" />
+
+   <div class="wrapperA">
+    <h1 class="con-tt">
+      <span class="title">学校</span>
+      <span>
+        <input class="search" type="button" name="name" value="">
+        <input class="search_text" type="text" name="name" value="" placeholder="请输入关键字">
+      </span>
+    </h1>
+    <div class="wrapperB">
+      <div class="search-bar-school">
+      <form action="/edu/school/list.htm" method="post" id="myform">
+       <input type="hidden" name="currPage" id="currPage" value="1"/>
+      <ul>
+        <li class="search">
+          <label for="">区县:</label>
+          <select class="" name="province" id="province" panelheight="auto">
+          	<option value="">请选择区县</option>
+          	<#if areaDtos??>
+          		<#list areaDtos as area>
+          			<option <#if area.addressCode == dto.province>selected="true"</#if> value="${(area.addressCode)!}">${(area.addressName)!}</option>
+          		</#list>
+          	</#if>
+           <!--  <option value="option">徐汇区</option>
+            <option value="option">杨浦区</option>
+            <option value="option">嘉定</option> -->
+          </select>
+        </li>
+        <li class="search">
+          <label for="">级别:</label>
+          <select class="" name="level" id="level">
+          	<option value="">请选择级别</option>
+          	<#if level??>
+          		<#list level as level>
+          			<option <#if level.index == dto.level>selected="true"</#if> value="${(level.index)!}">${(level.value)!}</option>
+          		</#list>
+          	</#if>
+            <!-- <option value="option">小学</option>
+            <option value="option">初中</option>
+            <option value="option">高中</option> -->
+          </select>
+        </li>
+      </ul>
+      <input class="search-bt" type="button" name="name" value="搜索">
+       </form>
+    </div>
+
+    <table class="school-list">
+      <tr>
+        <th> 学校名称  </th>
+        <th>  学校地址</th>
+        <th>     级别 </th>
+        <th>   详情  </th>
+      </tr>
+      <#if pageList??>
+		   <#list pageList.results as data>
+		   	  <tr>
+		        <td>${(data.schoolName)!}</td>
+		        <td>${(data.address)!}</td>
+		    	<#if level??>
+	        		<#list level as level>
+	        			<#if level.index == data.level>
+	        				<td>${(level.value)!}</td>
+	        			</#if>
+	        		</#list>
+		        </#if>
+		        <td>  <a href="#">详情</a> </td>
+		      </tr>		
+		   </#list>
+      </#if>
+    </table>
+	<#include "/common/page.htm" />
+	</div>
+  </div>
+<#include "/common/footer.htm" />
+
+  <script type="text/javascript">
+    $(function(){
+      // debugger;
+      $(".nav").find("a").removeClass("cur");
+      $(".nav").find("a:eq(1)").addClass("cur");
+      
+      $('.search-bt').on('click', function() {
+    	  $("#myform").submit();
+      })
+      
+   	  // 跳转指定页
+      $('#jump_btn').on('click', function () {
+          var jump_num = $('#jump_num').val();
+          if (jump_num != '') {
+              var reg = /^[-+]?\d*$/;
+              if (!reg.test(jump_num)) {
+                  alert("对不起，您输入的跳转页数格式不正确!");//请将“整数类型”要换成你要验证的那个属性名称！
+                  return;
+              }
+              <#if pageList?? && pageList.total gt 0>
+              if (jump_num > ${(pageList.totalPage)!}) {
+                  alert("对不起，您输入的跳转页数大于总页数!");
+                  return;
+              }
+              </#if>
+          } else {
+              alert("对不起，您输入的跳转页数!");
+              return;
+          }
+          gotoPage(jump_num);
+      });
+    })
+    
+    function gotoPage(page) {
+        $("#currPage").val(page);
+        $("#myform").submit();
+    }
+  </script>
+</body>
+</html>
