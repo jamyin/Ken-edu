@@ -25,6 +25,9 @@ public class TImsUsersDto implements Serializable
     private Date createdatetime;
     @Getter
     @Setter
+    private String sourceId;
+    @Getter
+    @Setter
     private String deptId;
     @Getter
     @Setter
@@ -109,5 +112,27 @@ public class TImsUsersDto implements Serializable
     @Getter
     @Setter
     private String deptIds;
+
+	@Override
+	public String toString() {
+		return "TImsUsersDto [id=" + id + ", age=" + age + ", createdatetime="
+				+ createdatetime + ", sourceId=" + sourceId + ", deptId="
+				+ deptId + ", gender=" + gender + ", isAdmin=" + isAdmin
+				+ ", isDelete=" + isDelete + ", modifydatetime="
+				+ modifydatetime + ", name=" + name + ", pjNo=" + pjNo
+				+ ", postNo=" + postNo + ", password=" + password
+				+ ", qjyAccount=" + qjyAccount + ", userAccount=" + userAccount
+				+ ", userImage=" + userImage + ", userNo=" + userNo
+				+ ", createdatetimeStart=" + createdatetimeStart
+				+ ", createdatetimeEnd=" + createdatetimeEnd
+				+ ", modifydatetimeStart=" + modifydatetimeStart
+				+ ", modifydatetimeEnd=" + modifydatetimeEnd + ", searchName="
+				+ searchName + ", roleIds=" + roleIds + ", roleNames="
+				+ roleNames + ", email=" + email + ", deptName=" + deptName
+				+ ", userTable=" + userTable + ", projectIds=" + projectIds
+				+ ", deptIds=" + deptIds + "]";
+	}
+    
+    
 
 }
