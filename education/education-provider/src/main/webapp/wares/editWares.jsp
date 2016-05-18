@@ -6,7 +6,7 @@
 
 	$(function() {
 		parent.$.messager.progress('close');
-		$('#form').form(
+		$('#formEdit').form(
 						{																	
 							url : '${pageContext.request.contextPath}/waresController/updateWares',
 							onSubmit : function() {
@@ -52,10 +52,10 @@
 							success : function(result) {
 								parent.$.messager.progress('close');
 								result = $.parseJSON(result);
-								
+								console.log(result);
 								if (result.success) {
 									parent.$.modalDialog.openner_dataGrid
-											.datagrid('reload');//之所以能在这里调用到parent.$.modalDialog.openner_dataGrid这个对象，是因为user.jsp页面预定义好了
+											.datagrid('reload');//之所以能在这里调用到parent.$.modalDialog.openner_dataGrid这个对象，
 									parent.$.modalDialog.handler
 											.dialog('close');
 								} else {
@@ -71,11 +71,10 @@
 		<div class="easyui-layout" data-options="fit:true,border:false">
 			<div data-options="region:'center',border:false" title=""
 				style="overflow: hidden;">
-				<form id="form" method="post"  enctype="multipart/form-data" >
+				<form id="formEdit" method="post" >
 				   <input id="id" name="id" type="hidden" value="${id}" />
 					<table class="table table-hover table-condensed">
 						<tr>
-
 							<th>商品名称</th>
 							<td><input name="waresName" type="text" id="waresName"
 								placeholder="请输入商品名称" class="easyui-validatebox span2"
@@ -112,9 +111,10 @@
 								data-options="required:true" value="${wdto.place}"></td>
 						</tr>
 						<tr>
-							<th>备注</th>
-							<td><input name="remark" type="text" placeholder="请输入备注" id="remark"
-								class="easyui-validatebox span2" data-options="required:true"  value="${wdto.remark}"></td>
+							<th>条形码</th>
+							<td><input name="barCode" type="text" id="barCode"
+								placeholder="请输入条形码" class="easyui-validatebox span2"
+								data-options="required:true" value="${wdto.barCode}"></td>
 							<th>是否是菜肴</th>
 							<td><select name="dishes" class="easyui-combobox" id="dishes"
 								data-options="width:140,height:29,editable:false,panelHeight:'auto'" 
@@ -123,17 +123,10 @@
 									<option value="0">否</option></c:if>
 				                <c:if test="${wdto.dishes==false}"><option value="0">是</option>
 									</c:if></select>
-									
-									
+								
 									</td>
-						</tr>
-						<tr>
-							<th>图片</th>
-							<td>	<img src="${wdto.image}"/>	</td>
-							<th>条形码</th>
-							<td><input name="barCode" type="text" id="barCode"
-								placeholder="请输入条形码" class="easyui-validatebox span2"
-								data-options="required:true" value="${wdto.barCode}"></td>
+										
+							
 						</tr>
 					</table>
 			

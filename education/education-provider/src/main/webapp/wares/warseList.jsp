@@ -31,7 +31,9 @@ else
 		$.canImage = true;
 	</script>
 
-
+	<script type="text/javascript">
+		$.lookImage = true;
+	</script>
 
 <script type="text/javascript">
 	var dataGrid;
@@ -66,7 +68,7 @@ else
 				title : '员工编号',
 				width : 150,
 				hidden: true
-			}, */  {
+			}, */  /* {
 				field : 'waresImage',
 				title : '商品图片',
 				width : 150,
@@ -78,7 +80,7 @@ else
 			        	   return "<img src="+row.image+" />";
 			           }
 				}
-			}, {
+			}, */ {
 				field : 'waresName',
 				title : '商品名称',
 				width : 120,
@@ -222,6 +224,18 @@ else
 					if ($.canImage) {
 						str += $.formatString('<img onclick="imageFun(\'{0}\');" src="{1}" title="上传图片"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
 					}
+					
+					str += '&nbsp;';
+				
+					if ($.lookImage) {
+						str += $.formatString('<img onclick="lookImage(\'{0}\');" src="{1}" title="查看图片"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
+					}
+					
+					str += '&nbsp;';
+
+					if ($.lookImage) {
+						str += $.formatString('<img onclick="lookSupplier(\'{0}\');" src="{1}" title="查看供应商"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
+					}	
 					str += '&nbsp;';
 					if ($.canDelete) {
 						str += $.formatString('<img onclick="deleteFun(\'{0}\');" src="{1}" title="删除"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/cancel.png');
@@ -307,7 +321,48 @@ else
 			} ]
 		});
 	}
-
+	
+	function lookSupplier(id) {
+		if (id == undefined) {
+			var rows = dataGrid.datagrid('getSelections');
+			id = rows[0].id;
+		} else {
+			dataGrid.datagrid('unselectAll').datagrid('uncheckAll');
+		}
+		parent.$.modalDialog({
+			title : '查看供应商',
+			width :768,
+			height : 480,
+			href : '${pageContext.request.contextPath}/waresController/lookSupplier?id='+ id,
+			buttons : [ {
+				text : '编辑',
+				handler : function() {
+					parent.$.modalDialog.openner_dataGrid = dataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
+					var f = parent.$.modalDialog.handler.find('#formEdit');
+					f.submit();
+					var f2 = parent.$.modalDialog.handler.find('#projectFormEdit');
+					f2.submit();
+				}
+			} ]
+		});
+	}
+	
+	
+	function lookImage(id) {
+		if (id == undefined) {
+			var rows = dataGrid.datagrid('getSelections');
+			id = rows[0].id;
+		} else {
+			dataGrid.datagrid('unselectAll').datagrid('uncheckAll');
+		}
+		parent.$.modalDialog({
+			title : '查看图片',
+			width :768,
+			height : 480,
+			href : '${pageContext.request.contextPath}/waresController/lookImage?id='+ id,
+	
+		});
+	}
 	
 	function imageFun(id) {
 		if (id == undefined) {
@@ -325,7 +380,7 @@ else
 				text : '编辑',
 				handler : function() {
 					parent.$.modalDialog.openner_dataGrid = dataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
-					var f = parent.$.modalDialog.handler.find('#formEdit');
+					var f = parent.$.modalDialog.handler.find('#formEditImage');
 					f.submit();
 					var f2 = parent.$.modalDialog.handler.find('#projectFormEdit');
 					f2.submit();
@@ -333,14 +388,6 @@ else
 			} ]
 		});
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	function addFun() {
 		parent.$.modalDialog({

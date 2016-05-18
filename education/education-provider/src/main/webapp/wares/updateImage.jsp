@@ -8,10 +8,9 @@
 		parent.$.messager.progress('close');
 
 
-		$('#form')
-				.form(
+		$('#formEditImage').form(
 						{			
-							url : '${pageContext.request.contextPath}/waresController/updateWares',
+							url : '${pageContext.request.contextPath}/waresController/insterImage',
 							onSubmit : function() {
 								
 								parent.$.messager.progress({
@@ -52,17 +51,19 @@
 		<div class="easyui-layout" data-options="fit:true,border:false">
 			<div data-options="region:'center',border:false" title=""
 				style="overflow: hidden;">
-				<form id="form" method="post"  enctype="multipart/form-data">
+				<form id="formEditImage" method="post"  enctype="multipart/form-data">
 				   <input id="id" name="id" type="hidden" value="${id}" />
 					<table class="table table-hover table-condensed">
+						<tr>							
+							<th>商品图片</th>
+							<td>	<input type="file" name="spImgUrl"  id="spImgUrl"  accept="image/*" />	</td>
+						</tr>
 						<tr>
 
-							<th>商品名称</th>
-							<td><input name="waresName" type="text" id="waresName"
-								placeholder="请输入商品名称" class="easyui-validatebox span2"    value="${wdto.waresName}"
-								data-options="required:true" ></td>
-							<th>图片</th>
-							<td>	<input type="file" name="imgUrl"  id="imgUrl"  accept="image/*" />	</td>
+							<th>检测检验报告</th>
+							<td><input type="file" name="jcImgUrl"  id="jcImgUrl"  accept="image/*" /></td>
+							<th>生产许可证</th>
+							<td>	<input type="file" name="scImgUrl"  id="jcImgUrl"  accept="image/*" />	</td>
 						</tr>
 			</table>
 			
