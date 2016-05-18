@@ -7,6 +7,8 @@ import com.ssic.education.common.pojo.ProWares;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 import com.ssic.education.utils.util.BeanUtils;
+
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +21,13 @@ public class ProWaresServiceImpl implements ProWaresService {
     private ProWaresDao proWaresDao;
 
     public ProWaresDto findById(String id) {
-        ProWares proWares = proWaresDao.selectByPrimaryKey(id);
-        if (null != proWares) {
-            return BeanUtils.createBeanByTarget(proWares, ProWaresDto.class);
-        }
+    	if (StringUtils.isNotBlank(id)) {
+    		ProWares proWares = proWaresDao.selectByPrimaryKey(id);
+            if (null != proWares) {
+                return BeanUtils.createBeanByTarget(proWares, ProWaresDto.class);
+            }
+    	}
+        
         return null;
     }
 

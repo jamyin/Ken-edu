@@ -1,75 +1,118 @@
-html {
-  font-size: 10px; }
+.yellow_head {
+  border-left: 3px #eeca5a solid; }
+
+.green_head {
+  border-left: 3px #60ac62 solid; }
+
+.blue_head {
+  border-left: 3px #68b2e7 solid; }
 
 .header a {
   font-size: 14px; }
 
 .main_wrap {
-  width: 600px;
-  margin: 1rem auto; }
+  width: 1000px;
+  margin: 30px auto; }
   .main_wrap .bread {
     padding: 1rem 0;
     color: #333; }
   .main_wrap .content_wrap {
     margin-bottom: 1rem;
-    width: 400px;
+    width: 590px;
     float: left;
     min-height: 400px;
-    border: 1px solid #ccc;
     box-sizing: border-box; }
     .main_wrap .content_wrap .head {
-      border-bottom: 1px solid #ccc;
-      padding: 1rem 0;
-      text-indent: 1rem; }
-    .main_wrap .content_wrap h1 {
-      font-size: 1.4rem;
-      text-align: center;
-      margin: 0.6rem; }
-    .main_wrap .content_wrap .date {
-      text-align: center; }
+      padding: 10px;
+      background: #60ac62;
+      color: #fff;
+      font-size: 16px;
+      display: inline-block; }
     .main_wrap .content_wrap .content {
-      margin: 1.4rem 1.6rem; }
+      padding: 24px;
+      background: #fff;
+      border: 1px #d3d3d3 solid; }
+      .main_wrap .content_wrap .content h1 {
+        font-size: 1.4rem;
+        text-align: center;
+        margin: 0.6rem; }
+      .main_wrap .content_wrap .content .date {
+        text-align: center;
+        color: 919090; }
+      .main_wrap .content_wrap .content .text {
+        margin-top: 30px;
+        line-height: 2em; }
+        .main_wrap .content_wrap .content .text img {
+          display: inline-block;
+          max-width: 100%; }
   .main_wrap .sidebar {
-    width: 190px;
+    width: 380px;
     float: right; }
 
 .panel {
-  border: 1px solid #ccc;
-  padding-bottom: 1rem;
-  min-height: 100px;
-  margin-bottom: 1rem; }
-  .panel dt {
-    background: #69bd82;
-    border-bottom: 1px solid #ccc;
-    text-indent: 1.4rem;
-    padding: 0.8rem 0; }
-    .panel dt a {
-      color: #fff;
-      float: right;
-      margin-right: 0.6rem; }
-  .panel dd {
-    margin: 1.6rem 2.4rem; }
-    .panel dd a {
-      color: #333; }
-    .panel dd span {
-      float: right; }
+  position: relative; }
+  .panel h2 {
+    padding: 10px;
+    background: #60ac62;
+    color: #fff;
+    font-size: 16px;
+    display: inline-block; }
+    .panel h2 .more {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      line-height: 20px;
+      color: #9c9c9c;
+      font-size: 14px; }
+  .panel .list {
+    padding: 24px;
+    background: #fff;
+    border: 1px #d3d3d3 solid;
+    padding: 60px 80px; }
+    .panel .list li {
+      line-height: 24px;
+      overflow: hidden;
+      padding-left: 10px;
+      border-bottom: 1px solid #ccc;
+      height: 42px;
+      line-height: 42px;
+      background: url(../img/dot.png) no-repeat 0 center; }
+      .panel .list li a {
+        color: #333; }
+      .panel .list li .date {
+        float: right;
+        margin-right: 0.6rem; }
 
-.panel_sidebar {
-  border: 1px solid #ccc;
-  padding-bottom: 0.6rem;
-  margin-bottom: 1rem; }
-  .panel_sidebar dt {
-    background: #69bd82;
-    border-bottom: 1px solid #ccc;
-    text-indent: 1rem;
-    padding: 0.4rem 0; }
-    .panel_sidebar dt a {
-      color: #fff;
-      float: right;
-      margin-right: 0.6rem; }
-  .panel_sidebar dd {
-    margin: 1rem 1.2rem; }
-    .panel_sidebar dd a {
-      color: #333; }
-    .panel_sidebar dd span {
+.sidebar .head {
+  position: relative;
+  width: 100%;
+  height: 20px;
+  text-indent: 7px;
+  font-size: 16px;
+  line-height: 20px; }
+  .sidebar .head a {
+    position: absolute;
+    right: 0;
+    top: 0;
+    line-height: 20px;
+    color: #9c9c9c;
+    font-size: 14px; }
+
+.sidebar .list {
+  background: #fff;
+  border: 1px #d3d3d3 solid;
+  margin-top: 10px;
+  padding: 10px 24px 10px 10px;
+  overflow: hidden;
+  margin-bottom: 30px; }
+  .sidebar .list li {
+    height: 24px;
+    line-height: 24px;
+    overflow: hidden;
+    padding-left: 10px;
+    background: url(../img/dot.png) no-repeat 0 center; }
+    .sidebar .list li a {
+      color: #333;
+      font-size: 14px; }
+    .sidebar .list li span {
       float: right; }

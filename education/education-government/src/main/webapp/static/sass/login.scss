@@ -1,0 +1,76 @@
+// myscss
+@mixin clearfix {
+    display: inline-block;
+    &:after {
+        content: ".";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+    * html & { height: 1px }
+}
+.top_head {
+    text-align: center;
+    margin: 100px 0 20px;
+
+    img {
+        display: inline-block;
+        width: 50px;
+    }
+    h1 {
+        display: inline-block;
+        position: relative;
+        top: -16px;
+        margin-left: 1rem;
+        font-size: 2rem;
+        font-weight: bold;
+    }
+}
+.login_wrap {
+    width: 300px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px 0;
+    box-sizing: border-box;
+
+    section {
+
+        label {
+            position: relative;
+
+            img {
+                position: absolute;
+                top: -5px;
+                left: 8px;
+                display: inline-block;
+                width: 16px;
+            }
+        }
+        input {
+            border: 1px solid #555;
+            display: inline-block;
+            width: 80%;
+            margin: 0 auto 6px;
+            padding: 0.5rem;
+            text-indent: 3rem;
+
+        }
+        #name-error,#password-error {
+            display: block;
+            padding-bottom: 5px;
+            color: #a94442;
+        }
+    }
+    input[type="submit"] {
+        border: 1px solid #555;
+        border-radius: 2px;
+        padding: 0.5rem 4rem;
+        margin-top: 2rem;
+        &:hover {
+            background: #ccc;
+        }
+    }
+}

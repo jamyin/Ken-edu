@@ -1,0 +1,231 @@
+$color:#60ac62;
+@mixin block_head {
+    padding: 10px;
+    background: #60ac62;
+    color: #fff;
+    font-size: 16px;
+    display: inline-block;
+}
+@mixin content_wrap {
+    padding: 24px;
+    background: #fff;
+    border: 1px #d3d3d3 solid;
+}
+@mixin block_body {
+    width: 898px;
+    border: 1px #d3d3d3 solid;
+    overflow: hidden;
+    background: #fff;
+    padding: 36px 50px;
+    margin: 0 0 30px;
+    box-sizing: border-box;
+    width: 100%;
+}
+@mixin clearfix {
+    display: inline-block;
+    &:after {
+        content: ".";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+    * html & { height: 1px }
+}
+.panel {
+    position: relative;
+
+    h2 {
+        @include block_head;
+
+        .more {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            line-height: 20px;
+            color: #9c9c9c;
+            font-size: 14px;
+        }
+    }
+
+    .list {
+        @include content_wrap;
+        padding: 60px 80px;
+
+        li {
+            line-height: 24px;
+            overflow: hidden;
+            padding-left: 10px;
+            border-bottom: 1px solid #ccc;
+            height: 42px;
+            line-height: 42px;
+            background: url(../img/dot.png) no-repeat 0 center;
+            position: relative;
+
+            a {
+                color: #333;
+            }
+            .date {
+                float: right;
+                margin-right: 0.6rem;
+            }
+            .import {
+                position: relative;
+                left: 25%;
+            }
+        }
+    }
+}
+
+.detail_list {
+    @include clearfix;
+
+    li {
+        margin-top: 10px ;
+
+        .key {
+            text-align: right;
+            display: inline-block;
+            width: 80px;
+            float: left;
+        }
+        .val {
+            text-align: left;
+            // width: 150px;
+            margin-left: 20px;
+            display: inline-block;
+        }
+        .nutrition {
+            display: inline-block;
+            margin-top: -10px;
+            margin-left: 20px;
+        }
+    }
+
+}
+.main_wrap {
+    width: 1000px;
+    margin: 40px auto ;
+
+    h2 {
+        @include block_head;
+    }
+    .ngfjgf {
+        @include clearfix;
+        @include block_body;
+
+        img {
+            display: inline-block;
+            width: 300px;
+            margin-right: 20px;
+            float: left;
+        }
+        .detail_list {
+            display: inline-block;
+            float: left;
+        }
+    }
+
+    .idhfef {
+        @include block_body;
+
+        li {
+            line-height: 30px;
+
+            span {
+                float: right;
+            }
+        }
+    }
+
+    .bguybguybg {
+        @include block_body;
+
+
+
+        li {
+            line-height: 30px;
+
+            span {
+            }
+            a {
+                display: inline-block;
+                width: 30%;
+
+                &:last-child {
+                    text-align: right;
+                }
+            }
+        }
+    }
+
+    .vcbhouw {
+        @include block_body;
+
+        .inf {
+            display: inline-block;
+            width: 170px;
+            float: left;
+
+            img {
+                width: 100%;
+                display: block;
+            }
+            .key {
+                width: 50px;
+            }
+            .val {
+                width: 100px;
+            }
+        }
+        .cominfo {
+            border: 1px solid #bbb;
+            margin-left: 30px;
+            float: left;
+            width: 320px;
+            font-size: 10px;
+
+            h3 {
+                background: #bbb;
+                line-height: 30px;
+                font-size: 14px;
+                text-indent: 10px;
+            }
+            .content {
+                @include clearfix;
+                padding: 15px 0;
+                width: 100%;
+
+                .status {
+                    text-align: center;
+                    padding-top: 16px;
+                    padding-bottom: 16px;
+                    width: 20%;
+                    float: left;
+                }
+                .info {
+                    vertical-align: middle;
+                    width: 50%;
+                    float: left;
+                    li {
+                        line-height: 16px;
+
+                        .key {
+                            display: inline-block;
+                            width: 70px;
+                            text-align: right;
+                        }
+                    }
+                }
+                .trace {
+                    padding-top: 16px;
+                    padding-bottom: 16px;
+                    text-align: center;
+                    width: 20%;
+                    float: left;
+                }
+            }
+        }
+    }
+
+}
