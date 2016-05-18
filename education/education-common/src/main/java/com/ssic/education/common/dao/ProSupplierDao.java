@@ -1,12 +1,14 @@
 package com.ssic.education.common.dao;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Getter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ssic.education.common.dto.ProSupplierDto;
 import com.ssic.education.common.mapper.ProSupplierExMapper;
 import com.ssic.education.common.mapper.ProSupplierMapper;
 import com.ssic.education.common.pojo.ProSupplier;
@@ -67,4 +69,8 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 		return exMapper.insert(ps);
 	}
 
+	public List<SupplierDto> lookRelatingWares(ProSupplierDto dto) {
+		// TODO Auto-generated method stub
+		return exMapper.lookRelatingWares(dto);
+	}
 }

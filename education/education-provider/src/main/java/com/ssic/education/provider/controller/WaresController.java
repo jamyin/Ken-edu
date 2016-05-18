@@ -3,6 +3,7 @@ package com.ssic.education.provider.controller;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -10,12 +11,20 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+
+
+
+
+
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ssic.base.datasource.DataSourceHolderUtil;
 import com.ssic.education.common.dto.ImageInfoDto;
@@ -34,7 +43,8 @@ import com.ssic.education.provider.service.IProLicenseService;
 import com.ssic.education.provider.service.IWaresService;
 import com.ssic.education.provider.util.ProductClass;
 import com.ssic.education.utils.util.BeanUtils;
-import com.ssic.education.utils.util.PropertiesUtils;
+import com.ssic.education.utils.util.ObjectExcelView;
+import com.ssic.education.utils.util.PageData;
 import com.ssic.util.UUIDGenerator;
 
 @Controller
@@ -304,5 +314,59 @@ public class WaresController  extends BaseController {
 		    	return "wares/lookSupplier";
 		    }
 	  
-	  
+		 
+		  @RequestMapping(value="/excel")
+		  @ResponseBody
+		    public ModelAndView exportExcel(ProWaresDto proWaresDto, HttpServletRequest request){
+			  proWaresDto.setSupplierId("1");
+			  PageHelperDto phdto = new PageHelperDto();
+		        ModelAndView mv = this.getModelAndView();
+		        PageData pd = new PageData();
+		        pd = this.getPageData();		      		
+		        try{
+		                Map<String,Object> dataMap = new HashMap<String,Object>();
+		                List<String> titles = new ArrayList<String>();
+		                titles.add("名称");        
+		                titles.add("规格");   
+		                titles.add("生产企业");
+		                titles.add("保质期");
+		                titles.add("保质期单位");
+		                titles.add("商品分类");
+		                titles.add("企业自定义代码");
+		                titles.add("商品条形码");
+		                titles.add("英文名");
+		                titles.add("产地");
+		                dataMap.put("titles", titles);
+		               
+		                List<ProWaresDto> expList=	waresService.findAllWares(proWaresDto, phdto);
+		             
+		                List<PageData> varList = new ArrayList<PageData>();
+		               if(!CollectionUtils.isEmpty(expList)){
+		            	   for(int i=0;i<expList.size();i++){
+			                    PageData vpd = new PageData();	                  
+			                    vpd.put("var1", expList.get(i).getWaresName());       
+			                    vpd.put("var2", expList.get(i).getSpec());     
+			                    vpd.put("var3", expList.get(i).getSupplierName());   
+			                    vpd.put("var4", expList.get(i).getShelfLife()); 
+			                    vpd.put("var5", expList.get(i).getUnit()); 			                  
+			                    vpd.put("var6", expList.get(i).getWaresType());      
+			                    vpd.put("var7", expList.get(i).getCustomCode());   
+			                    vpd.put("var8", expList.get(i).getBarCode());
+			                    vpd.put("var9", expList.get(i).getEnName());
+			                    vpd.put("var10", expList.get(i).getPlace());
+			                    varList.add(vpd);
+			                }
+		               }
+		                dataMap.put("varList", varList);
+		                ObjectExcelView erv = new ObjectExcelView();                    //执行excel操作
+		               
+		                mv = new ModelAndView(erv,dataMap);
+		           
+		        } catch(Exception e){
+		         
+		        }
+		        return mv;
+		    }
+		 
+		 
 }

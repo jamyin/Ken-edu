@@ -3,14 +3,21 @@ package com.ssic.education.provider.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ssic.education.provider.util.StringEscapeEditor;
+import com.ssic.education.utils.util.PageData;
 
 
 /**
@@ -53,5 +60,30 @@ public class BaseController {
 	public String redirectJsp(@PathVariable String folder, @PathVariable String jspName) {
 		return  folder + "/" + jspName;
 	}
-
+	/**
+     * 得到PageData
+     */
+    public PageData getPageData(){
+        return new PageData(this.getRequest());
+    }
+    
+    /**
+     * 得到ModelAndView
+     */
+    public ModelAndView getModelAndView(){
+        return new ModelAndView();
+    }
+    /**
+     * 得到request对象
+     */
+    public HttpServletRequest getRequest() {
+        HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
+        
+        return request;
+    }
+    
+    public static void logAfter(Logger logger){
+        logger.info("end");
+        logger.info("");
+    }
 }

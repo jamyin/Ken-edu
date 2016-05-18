@@ -21,5 +21,7 @@ public interface ProSupplierExMapper {
 	int updateByPrimaryKeySelective(SupplierDto record);
 	
 	int insert(SupplierDto record);
+
+	List<SupplierDto> lookRelatingWares(@Param("dto") ProSupplierDto dto);
 	
 }

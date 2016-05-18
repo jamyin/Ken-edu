@@ -24,6 +24,7 @@ import com.ssic.education.common.provider.service.ISupplierService;
 import com.ssic.education.common.provider.utils.DataGrid;
 import com.ssic.education.common.provider.utils.PageHelper;
 import com.ssic.education.common.service.ICreateImageService;
+import com.ssic.education.provider.dto.ProWaresDto;
 import com.ssic.education.provider.pageModel.Json;
 import com.ssic.education.provider.service.IProLicenseService;
 import com.ssic.education.utils.util.UUIDGenerator;
@@ -194,6 +195,25 @@ public class ProSupplierController {
 		return null;
 	}
 	
+	/**
+	 * 查看关联产品
+	 */
+	 /**
+	  * 查看该商品供应商
+	  * @param request
+	  * @param id 商品ID
+	  * @return
+	  */
+	 @RequestMapping("/lookRelatingWares")
+	    public DataGrid lookRelatingWares(HttpServletRequest request,String id){
+		 ProSupplierDto dto =new ProSupplierDto();
+		 dto.setId(id);
+		 DataGrid dataGrid = new DataGrid();
+	        List<SupplierDto> SupplierDtoList = supplierService.lookRelatingWares(dto);		   
+	        dataGrid.setRows(SupplierDtoList);;
+	        return dataGrid;
+	    }
+
 	/**
 	  * 上传图片
 	  */
