@@ -23,12 +23,12 @@
 				a.remark AS remark,
 				a.supplier_id  AS supplierId
 			FROM
-				t_pro_wares a,
-				t_pro_supplier b
+				t_pro_wares a,				
 			WHERE
-			a.supplier_id = b.id
+			a.supplier_id = #{warseDto.supplierId}
 			AND a.stat = 1
-			AND b.stat = 1
+			AND b.stat = 1	
+			AND a.way=0		
 	<include refid="where_findWares"></include>
 		order by a.create_time desc
 		limit #{page.beginRow},#{page.rows}
