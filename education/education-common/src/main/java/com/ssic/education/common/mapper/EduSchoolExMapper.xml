@@ -64,7 +64,7 @@
 	
 	<sql id="where_conditions">
 		<if test="eduSchoolDto.supplyDate != null">
-			AND b.supply_date = #{eduSchoolDto.supplyDate}
+			AND DATE_FORMAT(b.supply_date, '%Y%m%d') = #{eduSchoolDto.supplyDate}
 		</if>
 		<if test="eduSchoolDto.grade!=null and eduSchoolDto.grade!='' ">
 			AND b.grade = #{eduSchoolDto.grade}
