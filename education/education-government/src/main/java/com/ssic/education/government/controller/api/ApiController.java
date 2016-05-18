@@ -2,13 +2,10 @@ package com.ssic.education.government.controller.api;
 
 import com.ssic.education.common.dto.EduAreaDto;
 import com.ssic.education.common.dto.EduSchoolDto;
-import com.ssic.education.common.government.service.AreaService;
-import com.ssic.education.common.government.service.EduSchoolService;
 import com.ssic.education.government.controller.BaseController;
 import com.ssic.education.utils.model.Response;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,11 +28,6 @@ import java.util.List;
 @RequestMapping(value = "api")
 public class ApiController extends BaseController {
     protected static final Log logger = LogFactory.getLog(ApiController.class);
-
-    @Autowired
-    private AreaService areaService;
-    @Autowired
-    private EduSchoolService schoolService;
 
     /**
      * <p>Description: 返回地区接口 </p>
