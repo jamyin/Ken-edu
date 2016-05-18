@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.ssic.education.common.dto.EduSchoolDto;
 import com.ssic.education.common.dto.ProPackagesDto;
 import com.ssic.education.common.dto.ProSupplierDto;
 import com.ssic.education.common.pojo.EduSchool;
@@ -13,9 +14,9 @@ import com.ssic.util.model.PageQuery;
 
 public interface EduSchoolExMapper {
 
-	List<EduSchool> findSchoolDetialList(@Param("id") String id,@Param("query")  PageQuery query);
+	List<EduSchool> findSchoolDetialList(@Param("id") String id, @Param("eduSchoolDto") EduSchoolDto eduSchoolDto, @Param("query")  PageQuery query);
 
-	int findSchoolDetialListAccount(@Param("id") String id);
+	int findSchoolDetialListAccount(@Param("id") String id, @Param("eduSchoolDto") EduSchoolDto eduSchoolDto);
 
 	List<ProSupplierDto> getSupplierBySchoolId(@Param("schoolId") String schoolId);
 	

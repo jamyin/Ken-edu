@@ -1,6 +1,5 @@
 package com.ssic.education.app.service.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,11 +37,11 @@ public class SchoolsServiceImpl implements ISchoolService{
 	}
 
 	@Override
-	public PageResult<EduSchoolDto> findSchoolDetialList(String id,Date supplyDate,String grade,String supplyPhase,
+	public PageResult<EduSchoolDto> findSchoolDetialList(String id,EduSchoolDto eduSchoolDto,
 			PageQuery query) {
-		List<EduSchool> list = schoolDao.findSchoolDetialList(id,supplyDate,grade,supplyPhase, query);
+		List<EduSchool> list = schoolDao.findSchoolDetialList(id,eduSchoolDto, query);
 		List<EduSchoolDto> dtoList = BeanUtils.createBeanListByTarget(list, EduSchoolDto.class);
-		int total = schoolDao.selectSchoolDetialAccount(id,supplyDate,grade,supplyPhase);
+		int total = schoolDao.selectSchoolDetialAccount(id,eduSchoolDto);
 		query.setTotal(total);
 		return new PageResult<EduSchoolDto>(query, dtoList);
 	}

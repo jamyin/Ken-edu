@@ -44,4 +44,8 @@ public class EduSchoolDto implements Serializable {
 	private String image;
 	private String remark;
 	
+	private String supplyDate;       
+	private String grade; 		   //年级
+	private String supplyPhase;    //供应阶段:早中晚餐
+	
 }

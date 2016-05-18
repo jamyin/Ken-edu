@@ -1,6 +1,5 @@
 package com.ssic.education.app.controller;
 
-import java.util.Date;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ssic.education.app.constants.ProductClass;
 import com.ssic.education.app.constants.SchoolLevel;
 import com.ssic.education.app.service.ISchoolService;
 import com.ssic.education.common.dto.EduSchoolDto;
+import com.ssic.util.StringUtils;
 import com.ssic.util.constants.DataStatus;
 import com.ssic.util.model.PageQuery;
 import com.ssic.util.model.PageResult;
@@ -71,6 +70,7 @@ public class SchoolController {
 		result.setData(SchoolLevel.getAll());
 		return result;
 	}
+	
     /**
     * @Title: findSchoolDetialList
     * @Description: 根据学校id查学校信息（需要带出当天全部年级菜单）
@@ -80,10 +80,14 @@ public class SchoolController {
      */
     @RequestMapping("/findSchoolDetialList/{id}")
     @ResponseBody
-    public Response<PageResult<EduSchoolDto>> findSchoolDetialList(@PathVariable("id")String id,
-    		@PathVariable("supplyDate")Date supplyDate,@PathVariable("grade")String grade, @PathVariable("supplyPhase")String supplyPhase, PageQuery query) {
+    public Response<PageResult<EduSchoolDto>> findSchoolDetialList(@PathVariable("id")String id,EduSchoolDto eduSchoolDto, PageQuery query) {
     	Response<PageResult<EduSchoolDto>> result = new Response<PageResult<EduSchoolDto>>();
-    	PageResult<EduSchoolDto> schoolDetialList = schoolService.findSchoolDetialList(id,supplyDate,grade,supplyPhase, query);
+    	if(StringUtils.isEmpty(id)){
+     		result.setStatus(DataStatus.HTTP_FAILE);
+     		result.setMessage("查询Id为空");
+     		return result;
+     	}
+    	PageResult<EduSchoolDto> schoolDetialList = schoolService.findSchoolDetialList(id,eduSchoolDto, query);
     	if(schoolDetialList.getResults() != null && schoolDetialList.getResults().size() >0 ){
     		result.setStatus(DataStatus.HTTP_SUCCESS);
     		result.setMessage("查询成功！");
