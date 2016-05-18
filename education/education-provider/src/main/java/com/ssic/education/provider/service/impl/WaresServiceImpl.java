@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssic.education.common.pojo.ProWares;
+import com.ssic.education.common.provider.dto.SupplierDto;
 import com.ssic.education.provider.dao.WaresDao;
 import com.ssic.education.provider.dto.PageHelperDto;
 import com.ssic.education.provider.dto.ProWaresDto;
@@ -62,6 +63,14 @@ public class WaresServiceImpl implements IWaresService {
 	public void updateImsUsers(ProWares proWares) {
 		// TODO Auto-generated method stub
 		dao.updateImsUsers(proWares);
+	}
+
+
+
+	@Override
+	public List<SupplierDto> lookSupplier(ProWaresDto dto) {
+		// TODO Auto-generated method stub
+		return dao.lookSupplier(dto);
 	}
 
 
