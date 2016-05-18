@@ -89,8 +89,7 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 			propackagesDtos = schoolMapper.getPackagesById(dto.getCustomerId(), dto.getSupplierId(),sdfh.parse(dto.getSupplyDate()+" 00:00:00"),sdfh.parse(dto.getSupplyDate()+" 23:59:59"));	
 		}else {
 			propackagesDtos = schoolMapper.getPackagesById(dto.getCustomerId(), dto.getSupplierId(),startDate,endDate);	
-		}
-			
+		}			
 		for (ProPackagesDto propackagesDto:propackagesDtos) {
 			ArrayList<ProPackagesDto> proArrayList = new ArrayList<ProPackagesDto>();
 			for (ProPackagesDto proPackagesDto : proPackagesDtos) {

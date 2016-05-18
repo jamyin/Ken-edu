@@ -66,7 +66,7 @@
                 <#if proLedgerDtos??>
 	                <#list proLedgerDtos.results as proLedger>
 	                	<li>
-	                       	 批次：<a href="#">${(proLedger.batchNo)!}</a>
+	                       	 批次：<a href="/pro/wares/ledgerDetails.htm?waresId=${(proWaresDto.id)!}&ledgerId=${(proLedger.id)!}">${(proLedger.batchNo)!}</a>
 	                        <span class="import">进货日期：${(proLedger.productionDate?string("yyyy-MM-dd"))!}</span>
 	                        <a class="date" href="#">运送轨迹>></a>
                    		 </li>

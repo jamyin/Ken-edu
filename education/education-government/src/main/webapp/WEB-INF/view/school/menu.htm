@@ -30,7 +30,7 @@
 			<div class="subbar">
 				<p class="lef">学校名称：${(eduSchoolDto.schoolName)!}</p><p class="rig">供应商名称：<#if proSupplierDtos??>
 					<#list proSupplierDtos as supplier>
-						${(supplier.supplierName)!}
+						<a href="/pro/supplier/detail.htm?id=${(supplier.id)!}">${(supplier.supplierName)!}</a>
 					</#list>
 				</#if></p>
 			</div>
