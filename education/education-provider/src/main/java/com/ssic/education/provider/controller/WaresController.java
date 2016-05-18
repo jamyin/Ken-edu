@@ -68,7 +68,7 @@ public class WaresController  extends BaseController {
 	@RequestMapping("/dataGrid")
     @ResponseBody
 	public DataGrid dataGrid(ProWaresDto waresDto ,PageHelper ph) {
-		
+			waresDto.setSupplierId("1");
 	
 			DataGrid dataGrid = new DataGrid();
 			PageHelperDto phdto = new PageHelperDto();
@@ -289,17 +289,20 @@ public class WaresController  extends BaseController {
 		        request.setAttribute("ProLicenseList", ProLicenseList);		      
 		    	return "wares/lookImage";
 		    }
-	 /* *//**
-	   * lookSupplier
-	   *//*
+		 /**
+		  * 查看该商品供应商
+		  * @param request
+		  * @param id 商品ID
+		  * @return
+		  */
 		 @RequestMapping("/lookSupplier")
 		    public String lookSupplier(HttpServletRequest request,String id){
 			 ProWaresDto dto =new ProWaresDto();
 			 dto.setId(id);
-		        List<SupplierDto> SupplierDtoList = supplierService.lookSupplier(id);		   
+		        List<SupplierDto> SupplierDtoList = waresService.lookSupplier(dto);		   
 		        request.setAttribute("SupplierDtoList", SupplierDtoList);		      
 		    	return "wares/lookSupplier";
-		    }*/
+		    }
 	  
 	  
 }

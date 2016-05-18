@@ -23,9 +23,10 @@
 				a.remark AS remark,
 				a.supplier_id  AS supplierId
 			FROM
-				t_pro_wares a,				
+				t_pro_wares a,
+				t_pro_supplier b				
 			WHERE
-			a.supplier_id = #{warseDto.supplierId}
+			b.id = #{warseDto.supplierId}
 			AND a.stat = 1
 			AND b.stat = 1	
 			AND a.way=0		
@@ -63,6 +64,28 @@
 			
 			order by a.create_time desc
 	</select>
+	
+	<select id="lookSupplier"   resultType="com.ssic.education.provider.dto.ProWaresDto">
+	
+					SELECT
+					b.supplier_name AS supplierName,
+					c.address AS address,
+					c.corporation AS corporation,
+					c.contact_way AS contactWay
+				FROM
+				  t_pro_wares a ,
+				t_pro_ledger b,
+				t_pro_supplier c
+				WHERE
+				b.wares_id=#{dto.id}
+				 AND
+				b.supplier_id=c.id
+				AND b.action_type=0
+				AND a.stat=1 
+				AND  b.stat=1
+	</select>
+	
+	
 	
 	
 	
