@@ -83,15 +83,18 @@ a.forgot{width:100px;color:#999;position:absolute;left:50%;top:50%;margin:160px 
 .menu_box .menu_list .control a.rbtn{float:right}
 .menu_box .menu_list .title{width:896px;border:1px #c8c8c8 solid;height:40px;border-top:0}
 .menu_box .menu_list .title label{display:block;height:40px;line-height:40px;float:left;text-align:center;border-right:1px #c8c8c8 solid;font-weight:bold}
-.menu_box .menu_list .title label.ct1{width:200px;}
-.menu_box .menu_list .title label.ct2{width:200px;}
-.menu_box .menu_list .title label.ct3{width:494px;border-right:0}
-.menu_box .menu_list .row{width:896px;border:1px #c8c8c8 solid;border-top:0;overflow:hidden}
-.menu_box .menu_list .row label{width:200px;display:block;height:100%;float:left;text-align:center;font-weight:bold}
-.menu_box .menu_list .row ul{width:695px;overflow:hidden;float:left;border-left:1px #c8c8c8 solid;}
-.menu_box .menu_list .row ul li{width:695px;height:36px;border-bottom:1px #c8c8c8 dashed}
-.menu_box .menu_list .row ul li span{width:123px;height:36px;line-height:36px;display:block;float:left;text-align:center}
-.menu_box .menu_list .row ul li span.name{width:200px;border-right:1px #c8c8c8 solid;font-weight:bold}
+.menu_box .menu_list .title label.ct1{width:150px;}
+.menu_box .menu_list .title label.ct2{width:150px;}
+.menu_box .menu_list .title label.ct3{width:393px;}
+.menu_box .menu_list .title label.ct4{width:200px;border-right:0}
+.menu_box .menu_list .row{width:896px;border:1px #c8c8c8 solid;border-top:0;overflow:hidden;cursor:pointer}
+.menu_box .menu_list .row label{width:150px;display:block;height:100%;float:left;text-align:center;font-weight:bold}
+.menu_box .menu_list .row ul{width:745px;overflow:hidden;float:left;border-left:1px #c8c8c8 solid;}
+.menu_box .menu_list .row ul li{width:745px;height:36px;border-bottom:1px #c8c8c8 dashed}
+.menu_box .menu_list .row ul li.cur{background:#f3f3f3}
+.menu_box .menu_list .row ul li span{width:393px;height:36px;line-height:36px;display:block;float:left;text-align:center;}
+.menu_box .menu_list .row ul li span.name{width:150px;border-right:1px #c8c8c8 solid;font-weight:bold;}
+.menu_box .menu_list .row ul li span.nutrition{width:200px;border-left:1px #c8c8c8 solid}
 .menu_box #date{background:none;color:#fff;font-size:16px;text-align:center;cursor:pointer;background:url(../img/calendar.png) no-repeat 5px center}
 
 

@@ -53,7 +53,7 @@
 								<ul>
 									<#if proPackages.proPackagesDtos??>
 										<#list proPackages.proPackagesDtos as packages>
-											<li><span class="name">${(packages.packageName)!}</span>
+											<li><span class="name"><#if packages.type == 0>国内班</#if><#if packages.type == 1>国际班</#if></span>
 											<#if packages.proDishesDtos??>
 												<#list packages.proDishesDtos as proDishes>
 													<span>${(proDishes.waresName)!}</span>
