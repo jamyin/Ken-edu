@@ -4,12 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.common.base.Objects;
 import com.ssic.education.government.controller.BaseController;
 import com.ssic.education.government.dto.EduUsersDto;
 import com.ssic.education.government.service.EduUsersService;
+import com.ssic.education.utils.constants.DataStatus;
+import com.ssic.education.utils.model.Response;
 
 /**
  * 
@@ -49,4 +52,28 @@ public class UserController extends BaseController{
 		return mv;
 	}
 
+	@RequestMapping(value = "/userInfo")
+	public ModelAndView getUserInfo(EduUsersDto usersDto) {
+		ModelAndView mv = getModelAndView();
+		EduUsersDto usersdto = eduUsersService.getUserInfo(usersDto);
+		mv.setViewName("/userInfo");
+		mv.addObject("userInfo", usersdto);
+		mv.setViewName("/userInfo");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/update")
+	@ResponseBody
+	public Response<String> update(EduUsersDto usersDto) {
+		Response<String> res = new Response<String>();
+		Integer result = eduUsersService.update(usersDto);
+		if (result == DataStatus.ENABLED) {
+			res.setStatus(DataStatus.HTTP_SUCCESS);
+			res.setMessage("更新成功！");
+		}if (result == DataStatus.DISABLED) {
+			res.setStatus(DataStatus.HTTP_FAILE);
+			res.setMessage("更新成功！");
+		}
+		return res;
+	}
 }

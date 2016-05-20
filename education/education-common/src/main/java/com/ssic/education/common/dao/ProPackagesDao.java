@@ -13,12 +13,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ssic.education.common.dto.ProDishesDto;
+import com.ssic.education.common.dto.ProNutritionalDto;
 import com.ssic.education.common.dto.ProPackagesDto;
 import com.ssic.education.common.mapper.EduSchoolExMapper;
 import com.ssic.education.common.mapper.EduSchoolMapper;
 import com.ssic.education.common.mapper.ProDishesMapper;
+import com.ssic.education.common.mapper.ProNutritionalMapper;
 import com.ssic.education.common.mapper.ProPackagesMapper;
 import com.ssic.education.common.pojo.ProDishesExample;
+import com.ssic.education.common.pojo.ProNutritionalExample;
 import com.ssic.education.common.pojo.ProPackages;
 import com.ssic.education.common.pojo.ProPackagesExample;
 import com.ssic.education.utils.constants.DataStatus;
@@ -42,6 +45,9 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 	
 	@Autowired
 	private EduSchoolExMapper schoolMapper;
+	
+	@Autowired
+	private ProNutritionalMapper nuMapper;
 	
 	@Getter
 	@Autowired
@@ -83,6 +89,14 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 			criteriaDis.andStatEqualTo(DataStatus.ENABLED);
 			List<ProDishesDto> proDishesDtos = BeanUtils.createBeanListByTarget(disMapper.selectByExample(exampleDis), ProDishesDto.class);
 			proPackagesDto.setProDishesDtos(proDishesDtos);
+			ProNutritionalExample exampleNu = new ProNutritionalExample();
+			ProNutritionalExample.Criteria criteriaNu = exampleNu.createCriteria();
+			if (StringUtils.isNotBlank(proPackagesDto.getId())) {
+				criteriaNu.andPackageIdEqualTo(proPackagesDto.getId());
+			}
+			criteriaNu.andStatEqualTo(DataStatus.ENABLED);
+			List<ProNutritionalDto> proNutritionalDtos = BeanUtils.createBeanListByTarget(nuMapper.selectByExample(exampleNu), ProNutritionalDto.class);
+			proPackagesDto.setProNutritionalDtos(proNutritionalDtos);
 		}
 		List<ProPackagesDto> propackagesDtos = new ArrayList<ProPackagesDto>();
 		if (StringUtils.isNotBlank(dto.getSupplyDate())) {
