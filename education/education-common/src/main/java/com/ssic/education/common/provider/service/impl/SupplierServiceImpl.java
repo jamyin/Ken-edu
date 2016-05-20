@@ -7,10 +7,13 @@ import org.springframework.stereotype.Service;
 
 import com.ssic.education.common.dao.ProSupplierDao;
 import com.ssic.education.common.dto.ProSupplierDto;
+import com.ssic.education.common.pojo.ProSupplier;
 import com.ssic.education.common.provider.dto.SupplierDto;
 import com.ssic.education.common.provider.service.ISupplierService;
 import com.ssic.education.common.provider.utils.DataGrid;
 import com.ssic.education.common.provider.utils.PageHelper;
+import com.ssic.education.utils.util.UUIDGenerator;
+import com.ssic.util.BeanUtils;
 
 @Service
 public class SupplierServiceImpl implements ISupplierService{
@@ -47,6 +50,15 @@ public class SupplierServiceImpl implements ISupplierService{
 	public List<SupplierDto> lookRelatingWares(ProSupplierDto dto) {
 		// TODO Auto-generated method stub
 		return proSupplierDao.lookRelatingWares(dto);
+	}
+
+	@Override
+	public String saveOrUpdateSupplier(SupplierDto ps) {
+		// TODO Auto-generated method stub
+		ps.setId(UUIDGenerator.getUUID());
+		ProSupplier proSupplier = BeanUtils.createBeanByTarget(ps, ProSupplier.class);
+		proSupplierDao.insertSelective(proSupplier);
+		return ps.getId();
 	}
 	
 }

@@ -56,11 +56,13 @@ else
 			selectOnCheck : false,
 			//singleSelect:true,
 			nowrap : false,
+			resizable:true,
+			height:"200px",
 			frozenColumns : [ [{
 				field : 'id',
 				title : '编号',
 				width : 150,
-				hidden:true
+				hidden:true,
 			
 			}  ] ],
 			columns : [ [ /*  {
@@ -84,6 +86,7 @@ else
 				field : 'waresName',
 				title : '商品名称',
 				width : 120,
+				
 				formatter : function(value, row, index) {
 					if(value!=null){
 					return '<font style="font-style: normal;font-weight: bolder;">'
@@ -493,7 +496,7 @@ else
 			</form>
 		</div>
 		<div data-options="region:'center',border:false">
-			<table id="dataGrid" title="聚运动用户表单" data-options="collapsible:true"></table>
+			<table id="dataGrid" title="采购品表单" data-options="collapsible:true" ></table>
 		</div>
 	</div>
 	<div id="toolbar" style="display: none;">
