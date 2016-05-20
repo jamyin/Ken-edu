@@ -31,7 +31,7 @@
     <result column="grade" property="grade" jdbcType="SMALLINT" />
     <result column="supply_date" property="supplyDate" jdbcType="TIMESTAMP" />
     <result column="supply_phase" property="supplyPhase" jdbcType="SMALLINT" />
-    <result column="carete_time" property="careteTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="last_update_time" property="lastUpdateTime" jdbcType="TIMESTAMP" />
     <result column="stat" property="stat" jdbcType="INTEGER" />
     </resultMap>
@@ -87,7 +87,7 @@
 	
 	<select id="getPackagesById" resultMap="packagesResultMap">
 		select a.id,a.package_name,a.supplier_id,a.customer_type,a.customer_id,a.grade,a.supply_date,
-		a.supply_phase,a.carete_time,a.last_update_time,a.stat
+		a.supply_phase,a.create_time,a.last_update_time,a.stat
 		from t_pro_packages a 
 		where a.stat = 1 
 		<if test="customerId!=null and customerId!='' ">

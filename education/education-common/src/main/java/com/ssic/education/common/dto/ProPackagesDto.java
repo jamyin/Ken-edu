@@ -46,7 +46,7 @@ public class ProPackagesDto {
 
 	@Getter
 	@Setter
-    private Date careteTime;
+    private Date createTime;
 
 	@Getter
 	@Setter
@@ -63,4 +63,9 @@ public class ProPackagesDto {
 	@Getter
 	@Setter
 	private List<ProPackagesDto> proPackagesDtos;
+	
+	
+	@Getter
+	@Setter
+	private List<ProNutritionalDto> proNutritionalDtos;
 }
