@@ -46,7 +46,7 @@
 	                    <div class="item col-xs-12">
 	                        <span class="intelligent-label f-fl"><b class="ftx04">*</b>单位名称：</span>    
 	                        <div class="f-fl item-ifo">
-	                            <input name="supplierName" type="text" maxlength="20" class="txt03 f-r3 required" tabindex="1" data-valid="isNonEmpty||between:3-20||isUname" data-error="单位名称||用户名长度3-20位||只能输入中文、字母、数字、下划线，且以中文或字母开头" id="adminNo" />                            <span class="ie8 icon-close close hide"></span>
+	                            <input name="supplierName" type="text" maxlength="20" class="txt03 f-r3 required" tabindex="1" data-valid="isNonEmpty||between:3-20||isUname" data-error="单位名称不能为空||用户名长度3-20位||只能输入中文、字母、数字、下划线，且以中文或字母开头" id="adminNo" />                            <span class="ie8 icon-close close hide"></span>
 	                            <label class="icon-sucessfill blank hide"></label>
 	                            <label class="focus"><span>中文、字母、数字、下划线的组合，以中文或字母开头</span></label>
 	                            <label class="focus valid"></label>
@@ -64,7 +64,7 @@
 	                    <div class="item col-xs-12">
 	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>联系人：</span>    
 	                        <div class="f-fl item-ifo">
-	                            <input name="corporation" type="text" maxlength="20" class="txt03 f-r3" tabindex="1" data-valid="isUname" data-error="只能输入中文、字母、数字、下划线，且以中文或字母开头" id="adminNo" />                            <span class="ie8 icon-close close hide"></span>
+	                            <input name="corporation" type="text" maxlength="20" class="txt03 f-r3" tabindex="2" data-valid="isUname" data-error="只能输入中文、字母、数字、下划线，且以中文或字母开头" id="adminNo" />                            <span class="ie8 icon-close close hide"></span>
 	                            <label class="icon-sucessfill blank hide"></label>
 	                            <label class="focus"><span>中文、字母、数字、下划线的组合，以中文或字母开头</span></label>
 	                            <label class="focus valid"></label>
@@ -73,7 +73,7 @@
 	                    <div class="item col-xs-12">
 	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>手机：</span>    
 	                        <div class="f-fl item-ifo">
-	                            <input name="contactWay" type="text" class="txt03 f-r3" keycodes="tel" tabindex="2" data-valid="isPhone" data-error="手机号码不能为空||手机号码格式不正确" maxlength="11" id="phone" /> 
+	                            <input name="contactWay" type="text" class="txt03 f-r3" keycodes="tel" tabindex="3" data-valid="isPhone" data-error="手机号码不能为空||手机号码格式不正确" maxlength="11" id="phone" /> 
 	                            <span class="ie8 icon-close close hide"></span>                           
 	                            <label class="icon-sucessfill blank hide"></label>
 	                            <label class="focus">请填写11位有效的手机号码</label>
@@ -109,7 +109,7 @@
 		                    <div class="item col-xs-12">
 		                        <span class="intelligent-label f-fl"><b class="ftx04">*</b>用户名：</span>    
 		                        <div class="f-fl item-ifo">
-		                            <input name="userAccount" type="text" maxlength="20" class="txt03 f-r3 required" tabindex="1" data-valid="isNonEmpty||between:3-20||isUname" data-error="用户名不能为空||用户名长度3-20位||只能输入中文、字母、数字、下划线，且以中文或字母开头" id="adminNo" />                            <span class="ie8 icon-close close hide"></span>
+		                            <input name="userAccount" type="text" maxlength="20" class="txt03 f-r3 required" tabindex="4" data-valid="isNonEmpty||between:3-20||isUname" data-error="用户名不能为空||用户名长度3-20位||只能输入中文、字母、数字、下划线，且以中文或字母开头" id="adminNo" />                            <span class="ie8 icon-close close hide"></span>
 		                            <label class="icon-sucessfill blank hide"></label>
 		                            <label class="focus"><span>3-20位，中文、字母、数字、下划线的组合，以中文或字母开头</span></label>
 		                            <label class="focus valid"></label>
@@ -118,7 +118,7 @@
 		                    <div class="item col-xs-12">
 		                        <span class="intelligent-label f-fl"><b class="ftx04">*</b>密码：</span>    
 		                        <div class="f-fl item-ifo">
-		                            <input name="password" type="password" id="password" maxlength="20" class="txt03 f-r3 required" tabindex="3" style="ime-mode:disabled;" onpaste="return  false" autocomplete="off" data-valid="isNonEmpty||between:6-20||level:2" data-error="密码不能为空||密码长度6-20位||该密码太简单，有被盗风险，建议字母+数字的组合" /> 
+		                            <input name="password" type="password" id="password" maxlength="20" class="txt03 f-r3 required" tabindex="5" style="ime-mode:disabled;" onpaste="return  false" autocomplete="off" data-valid="isNonEmpty||between:6-20||level:2" data-error="密码不能为空||密码长度6-20位||该密码太简单，有被盗风险，建议字母+数字的组合" /> 
 		                            <span class="ie8 icon-close close hide" style="right:55px"></span>
 		                            <span class="showpwd" data-eye="password"></span>                        
 		                            <label class="icon-sucessfill blank hide"></label>
@@ -134,7 +134,7 @@
 		                    <div class="item col-xs-12">
 		                        <span class="intelligent-label f-fl"><b class="ftx04">*</b>确认密码：</span>    
 		                        <div class="f-fl item-ifo">
-		                            <input type="password" maxlength="20" class="txt03 f-r3 required" tabindex="4" style="ime-mode:disabled;" onpaste="return  false" autocomplete="off" data-valid="isNonEmpty||between:6-16||isRepeat:password" data-error="密码不能为空||密码长度6-16位||两次密码输入不一致" id="rePassword" />
+		                            <input type="password" maxlength="20" class="txt03 f-r3 required" tabindex="6" style="ime-mode:disabled;" onpaste="return  false" autocomplete="off" data-valid="isNonEmpty||between:6-16||isRepeat:password" data-error="密码不能为空||密码长度6-16位||两次密码输入不一致" id="rePassword" />
 		                            <span class="ie8 icon-close close hide" style="right:55px"></span>
 		                            <span class="showpwd" data-eye="rePassword"></span>
 		                            <label class="icon-sucessfill blank hide"></label>
@@ -192,28 +192,6 @@ $(function(){
 			}
 		});		
 		
-	});
-	//第二页的确定按钮
-	$("#btn_part2").click(function(){			
-		if(!verifyCheck._click()) return;
-		$(".part2").hide();
-		$(".part3").show();	
-	});	
-	//第三页的确定按钮
-	$("#btn_part3").click(function(){			
-		if(!verifyCheck._click()) return;
-		$(".part3").hide();
-		$(".part4").show();
-		$(".step li").eq(2).addClass("on");
-		countdown({
-			maxTime:10,
-			ing:function(c){
-				$("#times").text(c);
-			},
-			after:function(){
-				window.location.href="my.html";		
-			}
-		});		
 	});	
 });
 function showoutc(){$(".m-sPopBg,.m-sPopCon").show();}
