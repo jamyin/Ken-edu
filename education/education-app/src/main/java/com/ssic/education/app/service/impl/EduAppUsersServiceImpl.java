@@ -3,7 +3,7 @@ package com.ssic.education.app.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ssic.education.app.dao.EduAppUsersDao;
+import com.ssic.education.app.dao.AppUsersDao;
 import com.ssic.education.app.dto.EduAppUserDto;
 import com.ssic.education.app.dto.EduUsersInfoDto;
 import com.ssic.education.app.service.IEduAppUsersService;
@@ -13,7 +13,7 @@ import com.ssic.education.app.util.MD5Util;
 public class EduAppUsersServiceImpl implements IEduAppUsersService {
 
 	@Autowired
-	private EduAppUsersDao eduUsersDao;
+	private AppUsersDao eduUsersDao;
 
 	@Override
 	public EduAppUserDto appLogin(EduUsersInfoDto user) {

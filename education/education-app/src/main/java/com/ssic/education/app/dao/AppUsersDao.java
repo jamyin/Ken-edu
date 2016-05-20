@@ -9,9 +9,8 @@ import com.ssic.education.app.dto.EduAppUserDto;
 import com.ssic.education.app.dto.EduUsersInfoDto;
 import com.ssic.education.app.mapper.AppUsersMapper;
 
-
 @Repository
-public class EduAppUsersDao  {
+public class AppUsersDao {
 
 	@Autowired
 	@Getter
