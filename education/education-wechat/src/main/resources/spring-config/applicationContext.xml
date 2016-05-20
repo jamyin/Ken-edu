@@ -17,7 +17,7 @@
   
  <!-- <util:properties id="app" location="classpath:application.properties"/> --> 
   
-  	<context:component-scan base-package="com.ssic.game.app.controller.*" />
+  	<context:component-scan base-package="com.ssic.education.wechat.controller" />
   	
   <bean id="placeholderConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
     <property name="locations">
@@ -34,7 +34,8 @@
    <import resource="persistence.xml" /> 
    <import resource="redis-persistence.xml" /> 
    <import resource="spring-druid.xml" /> 
-   <import resource="redis-persistence.xml" /> 
-   <import resource="mongodb.xml" /> 
+   <import resource="redis-persistence.xml" />
+   <import resource="spring-template.xml" />  
+   <!-- <import resource="mongodb.xml" />  -->
 </beans>
 
