@@ -222,13 +222,13 @@ else
 					
 					
 					if ($.canImage) {
-						str += $.formatString('<img onclick="imageFun(\'{0}\');" src="{1}" title="上传图片"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
+						str += $.formatString('<img onclick="imageFun(\'{0}\');" src="{1}" title="上传图片"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/photoAndPic/photo_add.png');
 					}
 					
 					str += '&nbsp;';
 				
 					if ($.lookImage) {
-						str += $.formatString('<img onclick="lookImage(\'{0}\');" src="{1}" title="查看图片"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
+						str += $.formatString('<img onclick="lookImage(\'{0}\');" src="{1}" title="查看图片"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/photoAndPic/photo.png');
 					}
 					
 					str += '&nbsp;';
@@ -239,7 +239,7 @@ else
 					str += '&nbsp;';
  */
 					if ($.editImage) {
-						str += $.formatString('<img onclick="editImage(\'{0}\');" src="{1}" title="修改图片"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
+						str += $.formatString('<img onclick="editImage(\'{0}\');" src="{1}" title="修改图片"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/photoAndPic/picture_edit.png');
 					}	
 					str += '&nbsp;';
 					if ($.canDelete) {
