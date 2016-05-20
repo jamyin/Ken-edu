@@ -192,6 +192,20 @@ public class WaresController  extends BaseController {
 	    }
 	 
 	 /**
+	  * 跳转到修改图片页面
+	  * @param request
+	  * @param id
+	  * @return
+	  */
+	 @RequestMapping("/editImage")
+	    public String editImage(HttpServletRequest request,String id){
+		 
+	        request.setAttribute("id", id);
+	    	return "wares/editImage";
+	    }
+	 
+	 
+	 /**
 	  * 删除商品数据
 	  * @param waresDto
 	  * @return
@@ -286,7 +300,48 @@ public class WaresController  extends BaseController {
 	    	return json;
 	    }
 	  
-	  
+	  /**
+		  * 修改图片
+		  */
+		  @RequestMapping("/alterImage")
+		    @ResponseBody
+		    public Json alterImage(String id,@RequestParam(value = "spImgUrl") MultipartFile spImgUrl,@RequestParam(value = "jcImgUrl") MultipartFile jcImgUrl,@RequestParam(value = "scImgUrl") MultipartFile scImgUrl,ImageInfoDto image,HttpServletRequest request, HttpServletResponse response){
+		    	Json json = new Json();
+		    	   ProLicense  license =new ProLicense();
+		    	 Map<String, Object> map1 = createImageServiceImpl.createImage(image, spImgUrl, request, response);
+		    	 Map<String, Object> map2 = createImageServiceImpl.createImage(image, jcImgUrl, request, response);
+		    	 Map<String, Object> map3 = createImageServiceImpl.createImage(image, scImgUrl, request, response);
+		         //如果已经有图片则更新image_url			      
+		         String imageurl1 = (String) map1.get("image_url");
+		         String imageurl2 = (String) map2.get("image_url");
+		         String imageurl3 = (String) map3.get("image_url");
+		         List<String> list =new ArrayList<String>();
+		         if(imageurl1!=null && imageurl1!=""){
+		        	 license.setLicName("商品图片");
+		        	 license.setRelationId(id);
+		        	 license.setCerSource((short)2);
+		        	 license.setLicPic(imageurl1);
+		        	 proLicenseServiceImpl.alterImage(license);
+		         } 
+		         if(imageurl2!=null && imageurl2!=""){
+		        	 license.setLicName("检测检验报告");
+		        	 license.setRelationId(id);
+		        	 license.setCerSource((short)2);
+		        	 license.setLicPic(imageurl1);
+		        	 proLicenseServiceImpl.alterImage(license);
+		         }  
+		         if(imageurl3!=null && imageurl3!=""){
+		        	 license.setLicName("生产许可证");
+		        	 license.setRelationId(id);
+		        	 license.setCerSource((short)2);
+		        	 license.setLicPic(imageurl3);
+		        	 proLicenseServiceImpl.alterImage(license);
+				}      
+		     
+		    	json.setMsg("修改图片成功");
+		    	json.setSuccess(true);
+		    	return json;
+		    }
 	  	/**
 		  * 查看图片
 		  */

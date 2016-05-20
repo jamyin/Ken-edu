@@ -32,8 +32,10 @@
 			AND a.way=0		
 	<include refid="where_findWares"></include>
 		order by a.create_time desc
-		
-	<!-- 	limit #{page.beginRow},#{page.rows} -->
+		<if test="page.rows!=0 and page.rows!=null">
+				limit #{page.beginRow},#{page.rows}
+		</if>
+	
 	</select>
 	<select id="findWaresById" resultType="com.ssic.education.provider.dto.ProWaresDto">
 				SELECT
@@ -63,6 +65,7 @@
 			AND a.id=#{proWaresDto.id}
 			
 			order by a.create_time desc
+			
 	</select>
 	
 	<select id="lookSupplier"   resultType="com.ssic.education.provider.dto.ProWaresDto">
@@ -93,15 +96,13 @@
 		<if test="warseDto.waresName!=null and  warseDto.waresName!=''">
 			AND a.wares_name = #{warseDto.waresName}
 		</if>
-		<if test="warseDto.barCode!=null and warseDto.barCode!='' ">
-			AND a.bar_code = #{warseDto.barCode}
+		<if test="warseDto.customCode!=null and warseDto.customCode!='' ">
+			AND a.custom_code = #{warseDto.customCode}
 		</if>
-		<if test="warseDto.way!=null and warseDto.way!='' ">
-			and a.way = #{warseDto.way}
+		<if test="warseDto.waresType!=null and warseDto.waresType!='' ">
+			and a.wares_type = #{warseDto.waresType}
 		</if>
-		<!-- <if test="warseDto.place!=null and warseDto.place!=''">
-			and a.place =#{warseDto.place}
-		</if>	 -->	
+		
 	</sql>
 	
 	

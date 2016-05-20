@@ -2,6 +2,7 @@ package com.ssic.education.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,13 +26,16 @@ import com.ssic.util.model.Response;
  */
 @Controller
 @RequestMapping(value = "/user")
-public class UserController {
+public class UserController extends BaseController {
 	@Autowired
 	private IEduAppUsersService userService;
 
-	@RequestMapping(value = "/applogin", method = RequestMethod.POST)
+	@RequestMapping(value = "/applogin/{id}/{pwd}", method = RequestMethod.GET)
 	@ResponseBody
-	public Response<EduAppUserDto> getMaterialInfo(EduUsersInfoDto user) {
+	public Response<EduAppUserDto> applogin(@PathVariable("id") String id, @PathVariable("pwd") String pwd) {
+		EduUsersInfoDto user = new EduUsersInfoDto();
+		user.setUserAccount(id);
+		user.setPassword(pwd);
 		Response<EduAppUserDto> result = new Response<EduAppUserDto>();
 		EduAppUserDto userdto = userService.appLogin(user);
 		userdto.setTonke("asdagasdgdfgdfhgdf454");

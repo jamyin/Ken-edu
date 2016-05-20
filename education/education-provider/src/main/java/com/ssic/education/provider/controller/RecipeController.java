@@ -49,44 +49,44 @@ public class RecipeController extends BaseController {
 		return packages;
 	}
 
-	@Autowired
-	private IRecipeService recipeService;
-
-	/**
-	 * list：请求菜谱list界面
-	 * @return
-	 * @exception	
-	 * @author Administrator
-	 * @date 2016年5月18日 下午1:55:49
-	 */
-	@RequestMapping(value = "?")
-	public ModelAndView list(ProPackagesDto dto, PageQuery page) {
-		return null;
-	}
-
-	/**
-	 * 查询当前学校套餐列表
-	 * getPackegesList：一句话描述方法功能
-	 * @return
-	 * @exception	
-	 * @author SeanYoung
-	 * @date 2016年5月18日 上午10:17:19
-	 */
-	@RequestMapping(value = "?")
-	public Response<List<ProPackagesDto>> getApiList(ProPackagesDto dto, PageQuery page) {
-		return null;
-	}
-
-	/**
-	 * 查询当前学校套餐列表
-	 * getPackegesList：一句话描述方法功能
-	 * @return
-	 * @exception	
-	 * @author SeanYoung
-	 * @date 2016年5月18日 上午10:17:19
-	 */
-	@RequestMapping(value = "?")
-	public DataGrid getgridList(ProPackagesDto dto, PageQuery page) {
-		return null;
-	}
+//	@Autowired
+//	private IRecipeService recipeService;
+//
+//	/**
+//	 * list：请求菜谱list界面
+//	 * @return
+//	 * @exception	
+//	 * @author Administrator
+//	 * @date 2016年5月18日 下午1:55:49
+//	 */
+//	@RequestMapping(value = "?")
+//	public ModelAndView list(ProPackagesDto dto, PageQuery page) {
+//		return null;
+//	}
+//
+//	/**
+//	 * 查询当前学校套餐列表
+//	 * getPackegesList：一句话描述方法功能
+//	 * @return
+//	 * @exception	
+//	 * @author SeanYoung
+//	 * @date 2016年5月18日 上午10:17:19
+//	 */
+//	@RequestMapping(value = "?")
+//	public Response<List<ProPackagesDto>> getApiList(ProPackagesDto dto, PageQuery page) {
+//		return null;
+//	}
+//
+//	/**
+//	 * 查询当前学校套餐列表
+//	 * getPackegesList：一句话描述方法功能
+//	 * @return
+//	 * @exception	
+//	 * @author SeanYoung
+//	 * @date 2016年5月18日 上午10:17:19
+//	 */
+//	@RequestMapping(value = "?")
+//	public DataGrid getgridList(ProPackagesDto dto, PageQuery page) {
+//		return null;
+//	}
 }

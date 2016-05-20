@@ -23,5 +23,10 @@ public class ProLicenseServiceImpl implements IProLicenseService {
 		// TODO Auto-generated method stub
 		return dao.lookImage(license);
 	}
+	@Override
+	public void alterImage(ProLicense license) {
+		// TODO Auto-generated method stub
+		dao.alterImage(license);
+	}
 
 }
