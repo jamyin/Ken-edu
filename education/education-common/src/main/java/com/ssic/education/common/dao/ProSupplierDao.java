@@ -16,6 +16,7 @@ import com.ssic.education.common.provider.dto.SupplierDto;
 import com.ssic.education.common.provider.utils.DataGrid;
 import com.ssic.education.common.provider.utils.PageHelper;
 import com.ssic.education.utils.mybatis.MyBatisBaseDao;
+import com.ssic.util.BeanUtils;
 
 /**
  * 

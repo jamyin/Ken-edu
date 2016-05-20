@@ -1,0 +1,28 @@
+package com.ssic.education.provider.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.ssic.education.provider.dao.ProUsersDao;
+import com.ssic.education.provider.dto.ProUsersDto;
+import com.ssic.education.provider.pojo.ProUsers;
+import com.ssic.education.provider.service.IProUsersService;
+import com.ssic.education.utils.util.BeanUtils;
+import com.ssic.education.utils.util.UUIDGenerator;
+
+@Repository
+public class ProUsersServiceImpl implements IProUsersService {
+
+	@Autowired
+	private ProUsersDao proUsersDao;
+
+	@Override
+	public String saveProUsers(ProUsersDto proUsersDto) {
+		// TODO Auto-generated method stub
+		proUsersDto.setId(UUIDGenerator.getUUID());
+		ProUsers proUsers = BeanUtils.createBeanByTarget(proUsersDto, ProUsers.class);
+		proUsersDao.insertSelective(proUsers);
+		return proUsersDto.getId();
+	}
+
+}
