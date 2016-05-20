@@ -37,38 +37,40 @@
     </resultMap>
   
 	<select id="findSchoolDetialList" resultMap="schoolResultMap">
-		SELECT a.id,a.school_name AS schoolName,a.`school_thum` AS schoolThum, a.`mobile_no` mobile_no AS mobileNo,
+		SELECT a.id,a.school_name AS schoolName,a.school_thum AS schoolThum, a.mobile_no AS mobileNo,
 	       b.id AS packageId, b.package_name AS packageName,  b.grade, b.supply_date AS supplyDate, b.supply_phase AS supplyPhase,
 	       d.wares_name AS waresName, d.wares_type AS waresType, d.spec, d.image, d.remark 
 		FROM t_edu_school  a 
 		LEFT JOIN t_pro_packages b ON a.id = b.customer_id 
 		LEFT JOIN  t_pro_dishes c ON	b.id = c.`package_id` 
 		LEFT JOIN t_pro_wares d ON c.wares_id = d.id 
-		WHERE a.id= #{id} AND a.stat= 1 AND b.stat= 1 AND c.stat= 1 AND d.stat= 1;
+		WHERE a.id= #{id} AND a.stat= 1 AND b.stat= 1 AND c.stat= 1 AND d.stat= 1
 	<include refid="where_conditions"></include>
 		ORDER BY a.create_time desc
-        LIMIT  #{page.startNum}, #{page.pageSize}
+		<if test="query != null">
+        LIMIT  #{query.startNum}, #{query.pageSize}
+        </if>
 	</select>
 
 	<select id="findSchoolDetialListAccount" resultType="java.lang.Integer">
 		SELECT count(*) 
 		FROM t_edu_school  a 
 		LEFT JOIN t_pro_packages b ON a.id = b.customer_id 
-		LEFT JOIN  t_pro_dishes c ON	b.id = c.`package_id` 
+		LEFT JOIN  t_pro_dishes c ON	b.id = c.package_id 
 		LEFT JOIN t_pro_wares d ON c.wares_id = d.id 
-		WHERE a.id= #{id} AND a.stat= 1 AND b.stat= 1 AND c.stat= 1 AND d.stat= 1;
+		WHERE a.id= #{id} AND a.stat= 1 AND b.stat= 1 AND c.stat= 1 AND d.stat= 1
 	<include refid="where_conditions"></include>
 	</select>
 	
 	<sql id="where_conditions">
-		<if test="supplyDate!=null">
-			AND b.supply_date = #{supplyDate}
+		<if test="eduSchoolDto.supplyDate != null">
+			AND DATE_FORMAT(b.supply_date, '%Y%m%d') = #{eduSchoolDto.supplyDate}
 		</if>
-		<if test="grade!=null and grade!='' ">
-			AND b.grade = #{grade}
+		<if test="eduSchoolDto.grade!=null and eduSchoolDto.grade!='' ">
+			AND b.grade = #{eduSchoolDto.grade}
 		</if>
-		<if test="supplyPhase!=null and supplyPhase!='' ">
-			AND b.supply_phase = #{supplyPhase}
+		<if test="eduSchoolDto.supplyPhase!=null and eduSchoolDto.supplyPhase!='' ">
+			AND b.supply_phase = #{eduSchoolDto.supplyPhase}
 		</if>	
 	</sql>
 	

@@ -1,9 +1,12 @@
 package com.ssic.education.common.provider.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssic.education.common.dao.ProSupplierDao;
+import com.ssic.education.common.dto.ProSupplierDto;
 import com.ssic.education.common.provider.dto.SupplierDto;
 import com.ssic.education.common.provider.service.ISupplierService;
 import com.ssic.education.common.provider.utils.DataGrid;
@@ -38,6 +41,12 @@ public class SupplierServiceImpl implements ISupplierService{
 	@Override
 	public int saveSupplier(SupplierDto ps) {
 		return proSupplierDao.saveSupplier(ps);
+	}
+
+	@Override
+	public List<SupplierDto> lookRelatingWares(ProSupplierDto dto) {
+		// TODO Auto-generated method stub
+		return proSupplierDao.lookRelatingWares(dto);
 	}
 	
 }

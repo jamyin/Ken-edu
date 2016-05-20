@@ -3,7 +3,7 @@
 <mapper namespace="com.ssic.education.provider.mapper.TImsUsersExMapper">
 	<select id="findBy" resultType="com.ssic.education.provider.dto.TImsUsersDto">
 		select users.id as id, age as age,createdatetime as
-		createdatetime,gender as gender,isAdmin as isAdmin,isDelete as
+		createdatetime,source_id as sourceId,gender as gender,isAdmin as isAdmin,isDelete as
 		isDelete,modifydatetime as modifydatetime,name,
 		users.pj_no as
 		pjNo,post_no as postNo,password as password,qjy_account as

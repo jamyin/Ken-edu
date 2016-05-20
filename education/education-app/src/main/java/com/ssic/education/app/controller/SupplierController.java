@@ -70,7 +70,7 @@ public class SupplierController {
     	Response<ProSupplierDto> result = new Response<ProSupplierDto>();
     	if(StringUtils.isEmpty(id)){
     		result.setStatus(DataStatus.HTTP_FAILE);
-    		result.setMessage("参数id为空！");
+    		result.setMessage("查询Id为空");
     		return result;
     	}
     	ProSupplierDto supplier = supplierService.findSupplierDetail(id);
@@ -96,13 +96,13 @@ public class SupplierController {
      @ResponseBody
      public Response<PageResult<ProWaresDto>> findSupplierWares(ProWaresDto dto, PageQuery query) {
     	Response<PageResult<ProWaresDto>> result = new Response<PageResult<ProWaresDto>>();
-     	if(dto == null ){
+     	if(dto.getId() == null ){
      		result.setStatus(DataStatus.HTTP_FAILE);
-     		result.setMessage("查询参数为空！");
+     		result.setMessage("查询Id为空");
      		return result;
      	}
      	PageResult<ProWaresDto> wares = proWaresService.queryWaresByParams(dto, query);
-     	if(wares.getResults() != null && wares.getResults().size() > 0){
+     	if(wares != null && wares.getResults().size() > 0){
      		result.setStatus(DataStatus.HTTP_SUCCESS);
      		result.setMessage("查询成功！");
      		result.setData(wares);

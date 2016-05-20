@@ -96,7 +96,7 @@ public class WaresController extends BaseController {
 		ModelAndView mv = getModelAndView();
 		ProWaresDto proWaresDto = proWaresService.findById(waresId);
 		ProLedgerDto proLedgerDto = proLedgerService.findById(ledgerId);
-		mv.setViewName("");
+		mv.setViewName("/school/school_material_batch");
 		mv.addObject("proWaresDto", proWaresDto);
 		mv.addObject("proLedgerDto", proLedgerDto);
 		return mv;

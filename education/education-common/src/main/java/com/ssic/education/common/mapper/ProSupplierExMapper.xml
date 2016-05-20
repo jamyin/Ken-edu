@@ -124,7 +124,7 @@
 			AND address = #{supplierDto.address}
 		</if>
 		<if test="supplierDto.supplierType!=null and supplierDto.supplierType!='' ">
-			AND supplierType = #{supplierDto.supplierType}
+			AND supplier_type = #{supplierDto.supplierType}
 		</if>
 	</sql>
 
@@ -252,4 +252,31 @@
 		</set>
 		where id = #{id,jdbcType=VARCHAR}
 	</update>
+	
+	<select id="lookRelatingWares"  resultType="com.ssic.education.common.dto.ProSupplierDto"  parameterType="com.ssic.education.common.dto.ProSupplierDto">
+	
+					SELECT
+				
+					a.wares_name AS waresName,
+				a.spec AS spec
+				
+				FROM
+				
+					t_pro_wares a
+				WHERE
+					a.supplier_id =#{dto.id} 
+					AND
+				a.way=0
+				AND a.stat=1 
+					
+	
+	
+	
+	</select>
+	
+	
+	
+	
+	
+	
 </mapper>

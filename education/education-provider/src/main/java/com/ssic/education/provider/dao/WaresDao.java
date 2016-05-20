@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.ssic.education.common.mapper.ProSupplierExMapper;
 import com.ssic.education.common.mapper.ProWaresMapper;
 import com.ssic.education.common.pojo.ProWares;
+import com.ssic.education.common.provider.dto.SupplierDto;
 import com.ssic.education.provider.dto.PageHelperDto;
 import com.ssic.education.provider.dto.ProWaresDto;
 import com.ssic.education.provider.mapper.WaresExMapper;
@@ -64,6 +65,12 @@ public class WaresDao{
 	public void updateImsUsers(ProWares proWares) {
 		// TODO Auto-generated method stub
 		mapper.updateByPrimaryKey(proWares);
+	}
+
+
+	public List<SupplierDto> lookSupplier(ProWaresDto dto) {
+		// TODO Auto-generated method stub
+		return exmapper.lookSupplier(dto);
 	}
 
 

@@ -56,11 +56,13 @@ else
 			selectOnCheck : false,
 			//singleSelect:true,
 			nowrap : false,
+			resizable:true,
+			height:"200px",
 			frozenColumns : [ [{
 				field : 'id',
 				title : '编号',
 				width : 150,
-				hidden:true
+				hidden:true,
 			
 			}  ] ],
 			columns : [ [ /*  {
@@ -84,6 +86,7 @@ else
 				field : 'waresName',
 				title : '商品名称',
 				width : 120,
+				
 				formatter : function(value, row, index) {
 					if(value!=null){
 					return '<font style="font-style: normal;font-weight: bolder;">'
@@ -452,6 +455,17 @@ else
 			} ]
 		});
 	}
+	//导出excel
+	function toExcel(){
+		/* var userName = $("#userName").val();
+		var userAccount = $("#userAccount").val();
+		var projectid = $("#projectid").combo('getValue');
+		var deptid = $("#deptid").combo('getValue');
+		var timeStar = $("#timeStar").combo('getValue');
+		var timeEnd = $("#timeEnd").combo('getValue');
+		var address = $("#address").val();	*/
+		window.location.href='${pageContext.request.contextPath}/waresController/excel.do?waresName=&spec=&supplierName=&shelfLife=&unit=&waresType=&customCode=&barCode=&enName=&place='
+	}
 	
 </script>
 </head>
@@ -482,7 +496,7 @@ else
 			</form>
 		</div>
 		<div data-options="region:'center',border:false">
-			<table id="dataGrid" title="聚运动用户表单" data-options="collapsible:true"></table>
+			<table id="dataGrid" title="采购品表单" data-options="collapsible:true" ></table>
 		</div>
 	</div>
 	<div id="toolbar" style="display: none;">
@@ -492,6 +506,7 @@ else
 		</c:if>-->
 	
 		<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_add',plain:true" onclick="searchFun();">过滤条件</a><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_delete',plain:true" onclick="cleanFun();">清空条件</a>
+		<a class="btn btn-mini btn-light" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="icon-download-alt"></i>导出</a>
 	</div>
 
 </body>

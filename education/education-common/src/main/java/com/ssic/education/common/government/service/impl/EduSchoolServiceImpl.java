@@ -39,7 +39,10 @@ public class EduSchoolServiceImpl implements EduSchoolService{
 	}
 
 	public List<ProSupplierDto> getSupplier(String schoolId) {
-		return eduSchoolDao.getSupplier(schoolId);
+		if (StringUtils.isNotBlank(schoolId)) {
+			return eduSchoolDao.getSupplier(schoolId);
+		}
+		return null;
 	}
 	
 	public List<EduSchoolDto> queryAll(){

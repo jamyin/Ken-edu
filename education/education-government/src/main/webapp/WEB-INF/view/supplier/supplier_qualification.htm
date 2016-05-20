@@ -31,12 +31,14 @@
         <ul>
             <#if pWares??>
                 <#list pWares.results as wares>
-                    <li>
-                        <img src="${(wares.image)!}" alt=""/>
-                        <div class="name">${(wares.waresName)!}</div>
-                        <div>分类:<span>${(wares.waresTypeStr)!}</span></div>
-                        <div>规格:<span>${(wares.spec)!}</span></div>
-                    </li>
+                	<a href="/pro/wares/details.htm?id=${(wares.id)!}">
+	                    <li>
+	                        <img src="${(wares.image)!}" alt=""/>
+	                        <div class="name">${(wares.waresName)!}</div>
+	                        <div>分类:<span>${(wares.waresTypeStr)!}</span></div>
+	                        <div>规格:<span>${(wares.spec)!}</span></div>
+	                    </li>
+                    </a>
                 </#list>
             </#if>
         </ul>
@@ -48,12 +50,14 @@
         <ul>
             <#if mWares??>
                 <#list mWares.results as wares>
-                    <li>
-                        <img src="${(wares.image)!}" alt=""/>
-                        <div class="name">${(wares.waresName)!}</div>
-                        <div>分类:<span>${(wares.waresTypeStr)!}</span></div>
-                        <div>规格:<span>${(wares.spec)!}</span></div>
-                    </li>
+	                <a href="/pro/wares/details.htm?id=${(wares.id)!}">
+	                    <li>
+	                        <img src="${(wares.image)!}" alt=""/>
+	                        <div class="name">${(wares.waresName)!}</div>
+	                        <div>分类:<span>${(wares.waresTypeStr)!}</span></div>
+	                        <div>规格:<span>${(wares.spec)!}</span></div>
+	                    </li>
+	                </a>
                 </#list>
             </#if>
         </ul>

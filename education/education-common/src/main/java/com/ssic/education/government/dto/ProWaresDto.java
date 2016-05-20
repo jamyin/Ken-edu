@@ -24,6 +24,10 @@ public class ProWaresDto implements Serializable{
 
 	@Getter
 	@Setter
+	private String image;
+	
+	@Getter
+	@Setter
     private Integer shelfLife;
 
 	@Getter

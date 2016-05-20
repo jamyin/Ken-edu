@@ -23,12 +23,14 @@
       <ul>
         <#if pageList??>
           <#list pageList.results as data>
-              <li>
-                <img src="${(data.image)!}" alt="" />
-                <div class="name">${(data.waresName)!}</div>
-                <div>分类:<span>${(data.waresTypeStr)!}</span></div>
-                <div>规格:<span>${(data.spec)!}</span></div>
-              </li>
+	          <a href="/pro/wares/details.htm?id=${(data.id)!}">
+	              <li>
+	                <img src="${(data.image)!}" alt="" />
+	                <div class="name">${(data.waresName)!}</div>
+	                <div>分类:<span>${(data.waresTypeStr)!}</span></div>
+	                <div>规格:<span>${(data.spec)!}</span></div>
+	              </li>
+	           </a>
           </#list>
         </#if>
       </ul>

@@ -22,6 +22,10 @@ public class ProPackagesDto {
 
 	@Getter
 	@Setter
+	private Integer type;
+	
+	@Getter
+	@Setter
     private Short customerType;
 
 	@Getter

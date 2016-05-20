@@ -18,6 +18,10 @@ public class ProLedgerDto implements Serializable {
 
 	@Getter
 	@Setter
+	private String name;
+	
+	@Getter
+	@Setter
     private String spce;
 
 	@Getter
