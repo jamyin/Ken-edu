@@ -11,6 +11,12 @@
 <link href="reg/css/index.css" rel="stylesheet">
 <script src="reg/js/jquery-1.11.1.min.js"></script>
 <script src="reg/js/register.js"></script>
+
+<link href="reg/uploadify/uploadify.css" rel="stylesheet" type="text/css" />
+<!-- <script type="text/javascript" src="${base}/plugins/uploadify/jquery-1.3.2.min.js"></script> -->
+	<script type="text/javascript" src="reg/uploadify/swfobject.js"></script>
+<script type="text/javascript" src="reg/uploadify/jquery.uploadify.v2.1.4.min.js"></script>	
+
 </head>
 <body class="bgf4">
 <div class="login-box f-mt10 f-pb50">
@@ -78,8 +84,13 @@
 	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>区教委：</span>    
 	                        <div class="" id="committeeList" style="float: right;margin-left:90px;"></div>
 	                    </div>	                    
-
-	                    <div class="item col-xs-12" style="margin-top:60px;">
+						<div class="item col-xs-12" style="margin-top:60px;">
+	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>工商执照：</span>    
+	                       <div class="f-fl item-ifo">
+	      						<input multiple type="file" id="id-input-file-3"/>
+	                        </div>
+	                    </div>	
+	                    <div class="item col-xs-12" >
 	                        <span class="intelligent-label f-fl"><b class="ftx04">*</b>用户名：</span>    
 	                        <div class="f-fl item-ifo">
 	                            <input name="userAccount" type="text" maxlength="20" class="txt03 f-r3 required" tabindex="4" data-valid="isNonEmpty||between:3-20||isUname" data-error="用户名不能为空||用户名长度3-20位||只能输入中文、字母、数字、下划线，且以中文或字母开头" id="adminNo" />                            <span class="ie8 icon-close close hide"></span>
@@ -145,6 +156,53 @@
 </div>
 <script>
 $(function(){
+	
+	//图片上传
+	$("#id-input-file-3").uploadify({
+        'uploader': 'reg/uploadify/uploadify.swf',
+        'script':"/file/upload.htm",
+        'cancelImg': 'reg/uploadify/cancel.png',
+        'queueID': 'fileQueue',
+        'auto': true,
+        //'multi':true,
+        'buttonText': 'select',
+        'simUploadLimit' : 1,
+        'sizeLimit':1024*1024*10,
+        'queueSizeLimit' : 1,
+        'fileDesc' : 'pictures',
+        'fileExt': '*.gif;*.png;*.jpg',
+        onComplete: function(event, queueID, fileObj, response, data) {
+            var dataObj = eval("("+response+")");
+            if(dataObj.status == 200){
+            	parent.layer.msg('图片上传成功', {
+					shade: [0.9, '#000'],
+				    icon: 6,
+				    time: 800 //2秒关闭（如果不配置，默认是3秒）
+				}, function(){
+					$("#img_show").attr("src",'${imgurl}'+dataObj.filePath);
+					$("#pic").val(dataObj.filePath);
+				});                
+           		//console.log(dataObj.filePath);
+				//$("[name=logo]").val(dataObj.filePath);
+            }else{
+            	layer.alert("对不起," + fileObj.name + "上传失败!<br/>请选择小于10M的图片", {
+    				shade: [0.9, '#000'],
+    			    icon: 3,
+    			    time: 3000 //2秒关闭（如果不配置，默认是3秒）
+    			}); 
+            }
+        },
+        onSelect:function(){
+        },
+        onError: function(event, queueID, fileObj) {
+        	layer.alert("对不起," + fileObj.name + "上传失败!<br/>请选择小于10M的图片", {
+				shade: [0.9, '#000'],
+			    icon: 3,
+			    time: 3000 //2秒关闭（如果不配置，默认是3秒）
+			}); 
+        }
+    });	
+	
 	//第一页的确定按钮
 	$("#btn_part1").click(function(){
 		if(!verifyCheck._click()) return;
