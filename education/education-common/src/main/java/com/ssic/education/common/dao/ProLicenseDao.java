@@ -50,4 +50,10 @@ public class ProLicenseDao extends MyBatisBaseDao<ProLicense>{
 		// TODO Auto-generated method stub
 		return exmapper.lookImage(license);
 	}
+
+	public void alterImage(ProLicense license) {
+		// TODO Auto-generated method stub
+		
+		exmapper.alterImage(license);
+	}
 }
