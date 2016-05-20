@@ -25,6 +25,7 @@ import com.ssic.education.common.pojo.ProNutritionalExample;
 import com.ssic.education.common.pojo.ProPackages;
 import com.ssic.education.common.pojo.ProPackagesExample;
 import com.ssic.education.utils.constants.DataStatus;
+import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.mybatis.MyBatisBaseDao;
 import com.ssic.education.utils.util.BeanUtils;
 import com.ssic.education.utils.util.DateUtils;
@@ -114,5 +115,43 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 			propackagesDto.setProPackagesDtos(proArrayList);
 		}
 		return propackagesDtos;
+	}
+	
+	public List<ProPackagesDto> fingPackagesPage(ProPackagesDto dto,PageQuery page) {
+		ProPackagesExample example = new ProPackagesExample();
+		ProPackagesExample.Criteria criteria = example.createCriteria();
+		criteria.andStatEqualTo(DataStatus.ENABLED);
+		if (null != page) {
+            example.setOrderByClause("stat desc,create_time desc limit " + page.getStartNum() + "," + page.getPageSize());
+        } else {
+            example.setOrderByClause("create_time desc");
+        }
+		List<ProPackagesDto> proPackagesDtos =BeanUtils.createBeanListByTarget(mapper.selectByExample(example), ProPackagesDto.class);
+		for (ProPackagesDto proPackagesDto : proPackagesDtos) {
+			ProDishesExample exampleDis = new ProDishesExample();
+			ProDishesExample.Criteria criteriaDis = exampleDis.createCriteria();
+			if (StringUtils.isNotBlank(proPackagesDto.getId())) {
+				criteriaDis.andPackageIdEqualTo(proPackagesDto.getId());
+			}	
+			criteriaDis.andStatEqualTo(DataStatus.ENABLED);
+			List<ProDishesDto> proDishesDtos = BeanUtils.createBeanListByTarget(disMapper.selectByExample(exampleDis), ProDishesDto.class);
+			proPackagesDto.setProDishesDtos(proDishesDtos);
+			ProNutritionalExample exampleNu = new ProNutritionalExample();
+			ProNutritionalExample.Criteria criteriaNu = exampleNu.createCriteria();
+			if (StringUtils.isNotBlank(proPackagesDto.getId())) {
+				criteriaNu.andPackageIdEqualTo(proPackagesDto.getId());
+			}
+			criteriaNu.andStatEqualTo(DataStatus.ENABLED);
+			List<ProNutritionalDto> proNutritionalDtos = BeanUtils.createBeanListByTarget(nuMapper.selectByExample(exampleNu), ProNutritionalDto.class);
+			proPackagesDto.setProNutritionalDtos(proNutritionalDtos);
+		}
+		return proPackagesDtos;
+	}
+	
+	public long fingPackagesCount(ProPackagesDto dto) {
+		ProPackagesExample example = new ProPackagesExample();
+		ProPackagesExample.Criteria criteria = example.createCriteria();
+		criteria.andStatEqualTo(DataStatus.ENABLED);
+		return mapper.countByExample(example);
 	}
 }
