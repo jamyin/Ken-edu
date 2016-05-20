@@ -1,5 +1,10 @@
 package com.ssic.education.provider.service;
 
+import java.util.List;
+
+import com.ssic.education.provider.dto.ProPackagesDto;
+import com.ssic.education.utils.model.PageQuery;
+
 /**		
  * <p>Title: IRecipeService </p>
  * <p>Description: 类描述</p>
@@ -13,6 +18,7 @@ package com.ssic.education.provider.service;
  * <p>修改备注：</p>
  */
 public interface IRecipeService {
+	public List<ProPackagesDto> findPackageBySchool();
 
+	public List<ProPackagesDto> findAllPackage(ProPackagesDto dto, PageQuery page);
 }
-
