@@ -24,7 +24,7 @@ public class EduCommitteeDao extends MyBatisBaseDao<EduCommittee> {
 		 EduCommitteeExample example = new  EduCommitteeExample();
 		//EduAreaExample.Criteria criteria = example.createCriteria();
         //assemblyParams(eduAreaDto, criteria);
-        example.setOrderByClause("address_code ASC");
+        example.setOrderByClause("name ASC");
 		return mapper.selectByExample(example);
 	}
 	
