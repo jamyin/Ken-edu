@@ -1,7 +1,9 @@
 package com.ssic.education.common.government.service.impl;
 
 import com.ssic.education.common.dao.EduSchoolDao;
+import com.ssic.education.common.dao.ProLicenseDao;
 import com.ssic.education.common.dto.EduSchoolDto;
+import com.ssic.education.common.dto.ProLicenseDto;
 import com.ssic.education.common.dto.ProSupplierDto;
 import com.ssic.education.common.government.service.EduSchoolService;
 import com.ssic.education.common.pojo.EduSchool;
@@ -20,6 +22,9 @@ public class EduSchoolServiceImpl implements EduSchoolService{
 
 	@Autowired
 	private EduSchoolDao eduSchoolDao;
+	
+	@Autowired
+	private ProLicenseDao proLicenseDao;
 	
 	public PageResult<EduSchoolDto> list(EduSchoolDto dto, PageQuery page) {
 		List<EduSchoolDto> results = eduSchoolDao.findPage(dto, page);
@@ -47,5 +52,14 @@ public class EduSchoolServiceImpl implements EduSchoolService{
 	
 	public List<EduSchoolDto> queryAll(){
 		return eduSchoolDao.findPage(null, null);
+	}
+	
+	public Integer updateSchool(EduSchoolDto dto) {
+		EduSchool eduSchool = BeanUtils.createBeanByTarget(dto, EduSchool.class);
+		return eduSchoolDao.updateByPrimaryKeySelective(eduSchool);
+	}
+	
+	public List<ProLicenseDto> getProLicenseBySchId(ProLicenseDto dto) {
+		return BeanUtils.createBeanListByTarget(proLicenseDao.findById(dto.getId(), dto.getCerSource().intValue()), ProLicenseDto.class);
 	}
 }

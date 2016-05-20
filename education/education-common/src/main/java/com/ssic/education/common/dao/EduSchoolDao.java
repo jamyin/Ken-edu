@@ -80,6 +80,9 @@ public class EduSchoolDao extends MyBatisBaseDao<EduSchool> {
             if (StringUtils.isNotBlank(dto.getCommitteeId())) {
                 criteria.andCommitteeIdEqualTo(dto.getCommitteeId().trim());
             }
+            if (null != dto.getReviewed()) {
+            	criteria.andReviewedEqualTo(dto.getReviewed());
+            }
         }
 
         criteria.andStatEqualTo(DataStatus.ENABLED);
