@@ -103,8 +103,8 @@ public class CreateImageServiceImpl implements ICreateImageService{
         String fileName = FileUtils.getUploadFileName(myfile.getOriginalFilename());
         FileUtils.copyInputStreamToFile(myfile.getInputStream(), new File(realPath +"/" + context, fileName));  
         logger.info("上传目录：  "+realPath +"/" + context);
-        image.setUrl("/upload/images/" + context + "/" + fileName);
-        logger.info("上传目录2：  "+"/upload/images/" + context + "/" + fileName);
+        image.setUrl("/upload/" + context + "/" + fileName);
+        logger.info("上传目录2：  "+"/upload/" + context + "/" + fileName);
 	}
 	public void create(ImageInfoDto imageInfo) {
 		ImageInfo image = BeanUtils.createBeanByTarget(imageInfo, ImageInfo.class);
