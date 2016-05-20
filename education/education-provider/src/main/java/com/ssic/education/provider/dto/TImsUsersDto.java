@@ -37,6 +37,9 @@ public class TImsUsersDto implements Serializable
     private Integer isAdmin;
     @Getter
     @Setter
+    private Integer user_type;
+    @Getter
+    @Setter
     private Integer isDelete;
     @Getter
     @Setter
