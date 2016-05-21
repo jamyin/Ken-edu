@@ -30,4 +30,8 @@
 		<if test="user.password != null and user.password!=''">AND u.password = #{user.password}</if>
 		<if test="user.userAccount!=null and user.userAccount!=''">AND u.user_account = #{user.userAccount}</if>
 	</select>
+
+	<update id="updatePwd" parameterType="com.ssic.education.app.dto.EduUsersInfoDto">
+		UPDATE t_edu_users u SET u.password =#{user.password} WHERE u.user_account=#{user.userAccount}
+	</update>
 </mapper>

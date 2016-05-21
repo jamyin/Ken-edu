@@ -50,19 +50,19 @@ else
 			idField : 'id',
 			pageSize : 10,
 			pageList : [ 10, 20, 30, 40, 50 ],
-			sortName : 'name',
+			sortName : 'waresName',
 			sortOrder : 'asc',
 			checkOnSelect : false,
 			selectOnCheck : false,
 			nowrap : false,
-			frozenColumns : [ [{
+			frozenColumns : [[{
 				field : 'id',
 				title : '编号',
 				width : 150,
 				hidden:true,
 			
-			}  ] ],
-			columns : [ [ /*  {
+			}]],
+			columns : [[  /*  {
 				field : 'userNo',
 				title : '员工编号',
 				width : 150,
@@ -247,7 +247,7 @@ else
 					}
 					return str;
 				}
-			} ] ],
+			} ]] ,
 			toolbar : '#toolbar',
 			onLoadSuccess : function() {
 				$('#searchForm table').show();
