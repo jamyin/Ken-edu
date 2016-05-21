@@ -113,4 +113,8 @@ public class ProSupplierDto implements Serializable {
 	@Setter
 	@Getter
 	private String licPic;
+	
+	@Setter
+	@Getter
+	private Integer source;
 }

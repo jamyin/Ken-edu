@@ -36,7 +36,7 @@
     </h1>
     <div class="wrapperB">
       <div class="search-bar-school">
-      <form action="/edu/school/list.htm" method="post" id="myform">
+      <form action="/edu/school/list.htm?source=0" method="post" id="myform">
        <input type="hidden" name="currPage" id="currPage" value="1"/>
       <ul>
         <li class="search">
@@ -105,7 +105,7 @@
     $(function(){
       // debugger;
       $(".nav").find("a").removeClass("cur");
-      $(".nav").find("a:eq(1)").addClass("cur");
+      $(".nav").find("a:eq(2)").addClass("cur");
       
       $('.search-bt').on('click', function() {
     	  $("#myform").submit();

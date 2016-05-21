@@ -11,7 +11,7 @@
 				a.spec AS spec,
 				a.shelf_life AS shelfLife,
 				a.unit AS unit,
-				b.supplier_name AS supplierName,
+				a.manufacturer as manufacturer,
 				a.way AS way,
 				a.wares_type AS waresType,
 				a.custom_code AS customCode,
@@ -20,15 +20,13 @@
 				a.place AS place,
 				a.dishes AS dishes,
 				a.image AS image,
-				a.remark AS remark,
-				a.supplier_id  AS supplierId
+				a.remark AS remark				
 			FROM
-				t_pro_wares a,
-				t_pro_supplier b				
-			WHERE
-			b.id = #{warseDto.supplierId}
+				t_pro_wares a				
+			WHERE			
+			a.supplier_id = #{warseDto.supplierId}
 			AND a.stat = 1
-			AND b.stat = 1	
+			
 			AND a.way=0		
 	<include refid="where_findWares"></include>
 		order by a.create_time desc
@@ -44,7 +42,7 @@
 				a.spec AS spec,
 				a.shelf_life AS shelfLife,
 				a.unit AS unit,
-				b.supplier_name AS supplierName,
+				a.manufacturer as manufacturer,
 				a.way AS way,
 				a.wares_type AS waresType,
 				a.custom_code AS customCode,

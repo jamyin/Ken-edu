@@ -28,9 +28,9 @@
 		<div class="page_title"><span>菜   谱</span></div>
 		<div class="menu_box">
 			<div class="subbar">
-				<p class="lef">学校名称：${(eduSchoolDto.schoolName)!}</p><p class="rig">供应商名称：<#if proSupplierDtos??>
+				<p class="lef">经营单位：${(eduSchoolDto.schoolName)!}</p><p class="rig">委托经营单位：<#if proSupplierDtos??>
 					<#list proSupplierDtos as supplier>
-						<a href="/pro/supplier/detail.htm?id=${(supplier.id)!}">${(supplier.supplierName)!}</a>
+						<a href="/pro/supplier/detail.htm?id=${(supplier.id)!}&source=1">${(supplier.supplierName)!}</a>
 					</#list>
 				</#if></p>
 			</div>
@@ -121,6 +121,11 @@
 	
 <script>
 	$(function(){
+		
+		// debugger;
+	      $(".nav").find("a").removeClass("cur");
+	      $(".nav").find("a:eq(2)").addClass("cur");
+	      
 		var supplyDate = '${(dto.supplyDate)!}';
 		if (null != supplyDate && '' != supplyDate) {
 			$('#date').val(supplyDate);

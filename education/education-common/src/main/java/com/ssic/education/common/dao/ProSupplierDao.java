@@ -12,11 +12,13 @@ import com.ssic.education.common.dto.ProSupplierDto;
 import com.ssic.education.common.mapper.ProSupplierExMapper;
 import com.ssic.education.common.mapper.ProSupplierMapper;
 import com.ssic.education.common.pojo.ProSupplier;
+import com.ssic.education.common.pojo.ViewProSupplierExample;
 import com.ssic.education.common.provider.dto.SupplierDto;
 import com.ssic.education.common.provider.utils.DataGrid;
 import com.ssic.education.common.provider.utils.PageHelper;
 import com.ssic.education.utils.mybatis.MyBatisBaseDao;
 import com.ssic.util.BeanUtils;
+import com.ssic.util.StringUtils;
 
 /**
  * 
@@ -32,6 +34,26 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 	
 	@Autowired
 	private ProSupplierExMapper exMapper;
+	
+	private void assemblyParams(ProSupplierDto proSupplierDto, ViewProSupplierExample.Criteria criteria) {
+		if (null != proSupplierDto) {
+			if (StringUtils.isNotEmpty(proSupplierDto.getId())){
+				criteria.andIdEqualTo(proSupplierDto.getId().trim());
+			}
+			if (StringUtils.isNotEmpty(proSupplierDto.getArea())){
+				criteria.andAreaEqualTo(proSupplierDto.getArea().trim());
+			}
+			if (StringUtils.isNotBlank(proSupplierDto.getSupplierName())){
+				criteria.andSupplierNameLike("%"+proSupplierDto.getSupplierName().trim()+"%");
+			}
+			if (StringUtils.isNotBlank(proSupplierDto.getAddress())){
+				criteria.andAddressLike("%"+proSupplierDto.getAddress().trim()+"%");
+			}
+			if (StringUtils.isNotBlank(proSupplierDto.getSchoolIds())){
+				criteria.andSchoolIdsLike("%"+proSupplierDto.getSchoolIds().trim()+"%");
+			}
+		}
+	}
 
 	public DataGrid findProSupplier(SupplierDto supplierDto, PageHelper ph) {
 		DataGrid dataGrid=new DataGrid();

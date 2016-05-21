@@ -105,8 +105,8 @@ else
 							}
 				}
 			},{
-				field : 'supplierName',
-				title : '供应商名称',
+				field : 'manufacturer',
+				title : '生产企业',
 				width : 150,
 				formatter : function(value, row, index) {
 					if(value!=null){

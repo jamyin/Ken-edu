@@ -81,7 +81,12 @@ public class ProSupplierController extends BaseController {
 		mv.addObject("mWares", mWares);
 //		mv.addObject("pWares", pWares);
 		mv.addObject("mSuppliers", mSuppliers);
-		mv.setViewName("supplier/supplier_qualification");
+		if (null != dto.getSource() && dto.getSource() == 1) {
+			mv.setViewName("supplier/supplier_qualifications");
+		}else {
+			mv.setViewName("supplier/supplier_qualification");
+		}
+		
 		return mv;
 	}
 
