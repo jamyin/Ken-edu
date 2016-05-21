@@ -36,9 +36,11 @@ import com.ssic.education.provider.dto.ProWaresDto;
 import com.ssic.education.provider.pageModel.DataGrid;
 import com.ssic.education.provider.pageModel.Json;
 import com.ssic.education.provider.pageModel.PageHelper;
+import com.ssic.education.provider.pageModel.SessionInfo;
 import com.ssic.education.provider.service.ICreatePhdtoService;
 import com.ssic.education.provider.service.IProLicenseService;
 import com.ssic.education.provider.service.IWaresService;
+import com.ssic.education.provider.util.ConfigUtil;
 import com.ssic.education.provider.util.ProductClass;
 import com.ssic.education.utils.poi.ParseExcelUtil;
 import com.ssic.education.utils.util.BeanUtils;
@@ -462,12 +464,20 @@ public class WaresController extends BaseController {
 	 */
 	public ModelAndView importExcel(
 			@RequestParam("filename") MultipartFile file,
-			HttpServletRequest request, HttpServletResponse response) throws IOException {
+			HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
+		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
+				ConfigUtil.SESSIONINFONAME);
+		// 当前登录用户所属供应商的id
+		String supplierId = info.getSupplierId();
+		// 读取excel
 		HSSFWorkbook hssfWorkbook = new HSSFWorkbook(file.getInputStream());
 		HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(0);
 		if (hssfSheet == null) {
 			return null;
 		}
+		
+		// 转换excel到list
 		List<ProWaresDto> list = new ArrayList();
 		Date now = new Date();
 		for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
@@ -484,8 +494,15 @@ public class WaresController extends BaseController {
 					dto.setSpec(value);
 				} else if (i == 2) {
 					// 生产企业
-					dto.setManufacturer(value);	
-					// TODO 检查这个商品是否存在，如果存在不导入
+					dto.setManufacturer(value);
+					// 检查这个商品是否存在，如果存在不导入
+					ProWares pw = waresService.findProWarsByNameSpecManu(
+							dto.getWaresName(), dto.getSpec(),
+							dto.getManufacturer(), supplierId);
+					if (pw != null) {
+						dto = null;
+						break;
+					}
 				} else if (i == 3) {
 					// 保质期
 					if (value != null) {
@@ -510,6 +527,7 @@ public class WaresController extends BaseController {
 					// 产地
 					dto.setPlace(value);
 				}
+				dto.setSupplierId(supplierId);
 				dto.setWay(0);
 				dto.setCreateTime(now);
 				dto.setLastUpdateTime(now);
