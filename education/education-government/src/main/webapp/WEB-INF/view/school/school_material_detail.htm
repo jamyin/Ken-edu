@@ -91,5 +91,13 @@
             </div>
         </div>
        <#include "/common/footer.htm" />
+       
+      <script type="text/javascript">
+	    $(function(){
+	      // debugger;
+	      $(".nav").find("a").removeClass("cur");
+	      $(".nav").find("a:eq(2)").addClass("cur");
+	    })
+      </script>
     </body>
 </html>
