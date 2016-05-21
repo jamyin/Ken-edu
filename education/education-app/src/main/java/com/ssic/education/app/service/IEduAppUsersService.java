@@ -7,4 +7,5 @@ public interface IEduAppUsersService {
 
 	public EduAppUserDto appLogin(EduUsersInfoDto user);
 
+	public int updatePwd(String oldPwd, String account, String newPwd);
 }
