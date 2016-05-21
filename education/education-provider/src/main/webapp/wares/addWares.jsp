@@ -77,16 +77,7 @@
 							    <option value="小时">小时</option>   							  
 							</select></td>
 						</tr>
-						<tr>
-							<th>供应商名称</th>
-							<td><input name="supplierName" type="text" placeholder="请输入供应商名称" id="supplierName"
-								class="easyui-validatebox span2" ></td>
-							<th>商品方向</th>
-							<td><select name="way" class="easyui-combobox" id="way"
-								data-options="width:140,height:29,editable:false,panelHeight:'auto'"
-								data-options="required:true"><option value="0">采购品</option>
-									<option value="1">产出品</option></select></td>
-						</tr>
+						
 						<tr>
 							<th>企业自定义代码</th>
 						    <td><input name="customCode" type="text" placeholder="请输入自定义代码" id="customCode"
@@ -97,6 +88,9 @@
 								></td>
 						</tr>
 						<tr>
+						<th>生产企业</th>
+							<td><input name="manufacturer" type="text" placeholder="请输入供应商名称" id="manufacturer"
+								class="easyui-validatebox span2" ></td>
 							<th>商品分类</th>
 							<td><select id="waresType" class="easyui-combobox" name="waresType"  data-options="width:140,height:29,editable:false,panelHeight:'auto'"
 								data-options="required:true">
@@ -121,11 +115,7 @@
 							    <option value="19">添加剂类</option>   
 							    <option value="20">其他类</option>   
 							</select> </td>
-							<th>是否是菜肴</th>
-							<td><select name="dishes" class="easyui-combobox" id="dishes"
-								data-options="width:140,height:29,editable:false,panelHeight:'auto'"
-								data-options="required:true"><option value="0">是</option>
-									<option value="1">否</option></select></td>
+							
 						</tr>
 						<tr>
 							<th>英文名</th>

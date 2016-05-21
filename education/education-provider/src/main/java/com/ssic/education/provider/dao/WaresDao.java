@@ -37,6 +37,7 @@ public class WaresDao{
 		ProWares wares = new ProWares();
 		 BeanUtils.copyProperties(pro,wares);
 		 wares.setStat(1);
+		 wares.setWay(0);
 		 wares.setCreateTime(new Date());
 		 wares.setLastUpdateTime(new Date());
 		mapper.insertSelective(wares);
