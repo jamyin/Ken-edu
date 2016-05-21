@@ -70,25 +70,25 @@
 					<th>餐饮服务证号</th>
 						<td><input name="foodServiceCode" type="text" class="easyui-validatebox span2" data-options="required:true" value="${ProSupplie.foodServiceCode}" ></td>
 					<th>餐饮服务证号失效日期</th>
-						<td><input name="foodServiceCodeDate" class="easyui-validatebox span2" placeholder="点击选择时间" value="<fmt:formatDate value="${ProSupplie.foodServiceCodeDate }" pattern="yyyy-MM-dd HH:mm:ss"/>" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly"></td>
+						<td><input name="foodServiceCodeDate" class="easyui-validatebox span2" placeholder="点击选择时间" value="<fmt:formatDate value="${ProSupplie.foodServiceCodeDate }" pattern="yyyy-MM-dd"/>" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" readonly="readonly"></td>
 				</tr>
 				<tr>
 					<th>食品经营许可证号</th>
 						<td><input name="foodBusinessCode" type="text" class="easyui-validatebox span2" data-options="required:true" value="${ProSupplie.foodBusinessCode}" ></td>
 					<th>食品经营许可证号失效日期</th>
-						<td><input name="foodBusinessCodeDate" class="easyui-validatebox span2" placeholder="点击选择时间" value="<fmt:formatDate value="${ProSupplie.foodBusinessCodeDate }" pattern="yyyy-MM-dd HH:mm:ss"/>" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly"></td>
+						<td><input name="foodBusinessCodeDate" class="easyui-validatebox span2" placeholder="点击选择时间" value="<fmt:formatDate value="${ProSupplie.foodBusinessCodeDate }" pattern="yyyy-MM-dd"/>" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" readonly="readonly"></td>
 				</tr>
 				<tr>
 					<th>食品流通证号</th>
 						<td><input name="foodCirculationCode" type="text" class="easyui-validatebox span2" data-options="required:true" value="${ProSupplie.foodCirculationCode}" ></td>
 					<th>食品流通证号失效日期</th>
-						<td><input name="foodCirculationCodeDate" class="easyui-validatebox span2" placeholder="点击选择时间" value="<fmt:formatDate value="${ProSupplie.foodCirculationCodeDate }" pattern="yyyy-MM-dd HH:mm:ss"/>" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly"></td>
+						<td><input name="foodCirculationCodeDate" class="easyui-validatebox span2" placeholder="点击选择时间" value="<fmt:formatDate value="${ProSupplie.foodCirculationCodeDate }" pattern="yyyy-MM-dd"/>" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" readonly="readonly"></td>
 				</tr>
 				<tr>
 					<th>食品生产证号</th>
 						<td><input name="foodProduceCode" type="text" class="easyui-validatebox span2" data-options="required:true" value="${ProSupplie.foodProduceCode}" ></td>
 					<th>食品生产证号失效日期</th>
-						<td><input name="foodProduceCodeDate" class="easyui-validatebox span2" placeholder="点击选择时间" value="<fmt:formatDate value="${ProSupplie.foodProduceCodeDate }" pattern="yyyy-MM-dd HH:mm:ss"/>" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" ></td>
+						<td><input name="foodProduceCodeDate" class="easyui-validatebox span2" placeholder="点击选择时间" value="<fmt:formatDate value="${ProSupplie.foodProduceCodeDate }" pattern="yyyy-MM-dd"/>" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" readonly="readonly" ></td>
 				</tr>
 				<tr>
 					<th>供应商编码</th>

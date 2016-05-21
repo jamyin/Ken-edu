@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.ssic.education.provider.mapper.LedgerExMapper">
+	<select id="countAllLedger" resultType="Long">
+		SELECT
+		count(id)
+		FROM
+		t_pro_ledger
+		WHERE
+		stat = 1
+		AND source_id=#{ledgerDto.sourceId}
+	</select>
+	<select id="findAllLedger" resultType="com.ssic.education.provider.dto.LedgerDto">
+		SELECT
+		l.ware_batch_no ware_batch_no,
+		l.action_date actionDate,
+		l.receiver_name receiverName,
+		u.`name` userName
+		FROM
+		t_pro_ledger
+		l,t_pro_users u
+		WHERE
+		l.user_id=u.id
+		AND
+		l.stat = 1
+		AND
+		l.source_id
+		=#{ledgerDto.sourceId}
+		<if test="ph!=null and ph.rows!=0">
+			limit #{ph.beginRow},#{ph.rows}
+		</if>
+	</select>
+	<select id="findAllDriver" resultType="com.ssic.education.provider.dto.TImsUsersDto">
+		SELECT
+		id,
+		name
+		FROM
+		t_pro_users
+		WHERE
+		stat = 1
+		AND
+		user_type = 1
+		AND
+		source_id
+		=#{ledgerDto.sourceId}
+	</select>
+	<insert id="insertLedger" parameterType="java.util.List">
+		<foreach item="item" collection="list" separator="," open="("
+			close=")" index="">
+			insert into t_pro_ledger (id, wares_id, name,
+			spce, action_type, action_date,
+			supplier_id, supplier_code, supplier_name,
+			quantity, production_date, batch_no,
+			receiver_id, receiver_code, receiver_name,
+			trace_code, user_id, source_id,
+			ware_batch_no, create_time, last_update_time,
+			stat)
+			values (UUID(), #{item.waresId},
+			#{item.name},
+			#{item.spce}, #{item.actionType}, #{item.actionDate},
+			#{item.supplierId}, #{item.supplierCode},
+			#{item.supplierName},
+			#{item.quantity}, #{item.productionDate}, #{item.batchNo},
+			#{item.receiverId}, #{item.receiverCode},
+			#{item.receiverName},
+			#{item.traceCode}, #{item.userId}, #{item.sourceId},
+			#{item.wareBatchNo}, #{item.createTime},
+			#{item.lastUpdateTime},
+			#{item.stat})
+		</foreach>
+	</insert>
+</mapper>
