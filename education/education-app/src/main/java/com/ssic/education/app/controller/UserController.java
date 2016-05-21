@@ -58,7 +58,6 @@ public class UserController extends BaseController {
 		Response<EduAppUserDto> result = new Response<EduAppUserDto>();
 		user.setUserAccount(account);
 		user.setPassword(password);
-		System.out.println(user);
 		EduAppUserDto userdto = userService.appLogin(user);
 
 		result.setData(userdto);
@@ -72,4 +71,19 @@ public class UserController extends BaseController {
 		result.setMessage("登录失败，请检查用户名密码！");
 		return result;
 	}
+
+	@RequestMapping(value = "/modifyPwd", method = { RequestMethod.POST, RequestMethod.GET })
+	@ResponseBody
+	public Response<String> modifyPwd(String oldPwd, String account, String newPwd) {
+		Response<String> result = new Response<String>();
+		if (userService.updatePwd(oldPwd, account, newPwd) == 1) {
+			result.setStatus(DataStatus.HTTP_SUCCESS);
+			result.setMessage("修改成功！");
+		} else {
+			result.setStatus(DataStatus.HTTP_SUCCESS);
+			result.setMessage("修改失败，原密码有误");
+		}
+		return result;
+	}
+
 }

@@ -20,4 +20,10 @@ public class AppUsersDao {
 		EduAppUserDto appUser = appUsersMapper.selectLoginInfo(userDto);
 		return appUser;
 	}
+
+	public int updatePwd(EduUsersInfoDto userDto) {
+		int appUser = appUsersMapper.updatePwd(userDto);
+		return appUser;
+	}
+
 }
