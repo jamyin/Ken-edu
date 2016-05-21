@@ -33,11 +33,12 @@ public class EduSchoolDto implements Serializable {
 	private String province;
 	private String city;
 	private String area;
+	private Byte reviewed;
 	private Date createTime;
 	private Date lastUpdateTime;
 	private Integer stat;
 	private List<ProPackagesDto> packagesDtoList;
-	
+	private Integer source;
 	private String waresName;
 	private Integer waresType;
 	private String spec;

@@ -10,7 +10,7 @@
 <#include "/common/nav.htm" />
 	
 	<div class="wrapper">
-		<div class="page_title"><span>学   校</span></div>
+		<!-- <div class="page_title"><span>学   校</span></div>
 		<div class="menu_box">
 			<img src="${(eduSchoolDto.schoolThum)!}" border="0">
 			<div class="info">
@@ -24,7 +24,7 @@
 					</#list>
 				</#if>				
 			</div>
-		</div>
+		</div> -->
 		<div class="page_title"><span>菜   谱</span></div>
 		<div class="menu_box">
 			<div class="subbar">
@@ -44,6 +44,7 @@
 						<label class="ct1">用餐时段</label>
 						<label class="ct2">套餐名</label>
 						<label class="ct3">成品菜</label>
+						<label class="ct4">营养</label>
 					</div>
 					<#if (proPackagesDtos??) &&(proPackagesDtos?size>0)>
 						<#list proPackagesDtos as proPackages>
@@ -53,13 +54,24 @@
 								<ul>
 									<#if proPackages.proPackagesDtos??>
 										<#list proPackages.proPackagesDtos as packages>
-											<li><span class="name"><#if packages.type == 0>国内班</#if><#if packages.type == 1>国际班</#if></span>
-											<#if packages.proDishesDtos??>
-												<#list packages.proDishesDtos as proDishes>
-													<span>${(proDishes.waresName)!}</span>
-												</#list>
-											</#if>
-											</li>
+												<li data="<#if proPackages.supplyPhase == 1>午餐</#if><#if proPackages.supplyPhase == 3>晚餐</#if>，<#if packages.type == 0>国内班</#if><#if packages.type == 1>国际班</#if>，<#if packages.proDishesDtos??> <#list packages.proDishesDtos as proDishes> ${(proDishes.waresName)!} </#list></#if>，<#if packages.proNutritionalDtos??>
+													<#list packages.proNutritionalDtos as proNutritionalDtos>
+														${(proNutritionalDtos.name)!}
+													</#list>
+												</#if>">
+												<span class="name"><#if packages.type == 0>国内班</#if><#if packages.type == 1>国际班</#if></span>
+												<span><#if packages.proDishesDtos??>
+													<#list packages.proDishesDtos as proDishes>
+														${(proDishes.waresName)!}
+													</#list>
+												</#if></span>
+												<span class="nutrition"><#if packages.proNutritionalDtos??>
+													<#list packages.proNutritionalDtos as proNutritionalDtos>
+														${(proNutritionalDtos.name)!}
+													</#list>
+												</#if>
+												</span>
+												</li>
 										</#list>										
 									</#if>
 								</ul>
@@ -92,8 +104,9 @@
 		</div>
 		<div class="page_title"><span>成品菜资料</span></div>
 		<div class="menu_box">
-			<img src="/static/img/school.jpg" border="0">
-			<div class="info">
+			<span id="moreInfo"></span>
+			<!--<img id="goods_pic" src="static/img/school.jpg" border="0">
+			<div id="goods_info"  class="info">
 				<p>名称：糖醋小排</p>
 				<p>分类：大荤</p>
 				<p>原料：排骨</p>
@@ -101,7 +114,7 @@
 				<p>保质期：3天</p>
 				<p>营养配比：热量320KJ/781-800千卡</p>
 				<p>供应商名称：上海联程餐饮有限公司</p>
-			</div>
+			</div>-->
 		</div>
 	</div>
 	<#include "/common/footer.htm" />
@@ -114,6 +127,15 @@
 		} else{
 		}
 		fix_table()
+		var _info1 = $('.row ul li').eq(0).attr('data')
+		$('.row ul li').eq(0).addClass('cur')
+		$('#moreInfo').html(_info1)
+		$('.row ul').on('click', 'li',function(){
+			var _info = $(this).attr('data')
+			$('.row ul li').removeClass('cur')
+			$(this).addClass('cur')
+			$('#moreInfo').html(_info)
+		})
 	});
 	
 	function fix_table(){

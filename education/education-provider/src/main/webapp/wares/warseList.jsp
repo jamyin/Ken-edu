@@ -36,28 +36,25 @@ else
 	</script>
 
 <script type="text/javascript">
+		$.editImage = true;
+	</script>
+<script type="text/javascript">
 	var dataGrid;
 	$(function() {
 		dataGrid = $('#dataGrid').propertygrid({
 			url : '${pageContext.request.contextPath}/waresController/dataGrid',
 			fit : true,
 			fitColumns : true,
-			//rownumbers : true ,
 			border : false,
 			pagination : true,
 			idField : 'id',
-			pageSize : 200,
-			groupField:"way", 
-			 showGroup:false, 
-			pageList : [100,200,300,400 ],
-			//sortName : 'deptName',
-			//sortOrder : 'asc',
+			pageSize : 10,
+			pageList : [ 10, 20, 30, 40, 50 ],
+			sortName : 'name',
+			sortOrder : 'asc',
 			checkOnSelect : false,
 			selectOnCheck : false,
-			//singleSelect:true,
 			nowrap : false,
-			resizable:true,
-			height:"200px",
 			frozenColumns : [ [{
 				field : 'id',
 				title : '编号',
@@ -225,19 +222,24 @@ else
 					
 					
 					if ($.canImage) {
-						str += $.formatString('<img onclick="imageFun(\'{0}\');" src="{1}" title="上传图片"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
+						str += $.formatString('<img onclick="imageFun(\'{0}\');" src="{1}" title="上传图片"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/photoAndPic/photo_add.png');
 					}
 					
 					str += '&nbsp;';
 				
 					if ($.lookImage) {
-						str += $.formatString('<img onclick="lookImage(\'{0}\');" src="{1}" title="查看图片"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
+						str += $.formatString('<img onclick="lookImage(\'{0}\');" src="{1}" title="查看图片"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/photoAndPic/photo.png');
 					}
 					
 					str += '&nbsp;';
-
-					if ($.lookImage) {
+/* 
+					if ($.lookSupplier) {
 						str += $.formatString('<img onclick="lookSupplier(\'{0}\');" src="{1}" title="查看供应商"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
+					}	
+					str += '&nbsp;';
+ */
+					if ($.editImage) {
+						str += $.formatString('<img onclick="editImage(\'{0}\');" src="{1}" title="修改图片"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/photoAndPic/picture_edit.png');
 					}	
 					str += '&nbsp;';
 					if ($.canDelete) {
@@ -324,7 +326,7 @@ else
 			} ]
 		});
 	}
-	
+	/* 
 	function lookSupplier(id) {
 		if (id == undefined) {
 			var rows = dataGrid.datagrid('getSelections');
@@ -348,8 +350,31 @@ else
 				}
 			} ]
 		});
+	} */
+	function editImage(id) {
+		if (id == undefined) {
+			var rows = dataGrid.datagrid('getSelections');
+			id = rows[0].id;
+		} else {
+			dataGrid.datagrid('unselectAll').datagrid('uncheckAll');
+		}
+		parent.$.modalDialog({
+			title : '修改图片信息',
+			width :768,
+			height : 480,
+			href : '${pageContext.request.contextPath}/waresController/editImage?id='+ id,
+			buttons : [ {
+				text : '编辑',
+				handler : function() {
+					parent.$.modalDialog.openner_dataGrid = dataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
+					var f = parent.$.modalDialog.handler.find('#updateImage');
+					f.submit();
+					var f2 = parent.$.modalDialog.handler.find('#projectFormEdit');
+					f2.submit();
+				}
+			} ]
+		});
 	}
-	
 	
 	function lookImage(id) {
 		if (id == undefined) {
@@ -426,6 +451,7 @@ else
 	}
 	function cleanFun() {
 		$('#searchForm input').val('');
+		
 		$("#gender").val("");
 		dataGrid.datagrid('load', {});
 	}
@@ -477,21 +503,38 @@ else
 					<tr>
 						<th>商品名称</th>
 						<td><input name="waresName" placeholder="可以商品名称" class="easyui-validatebox"  style="width: 215px;"/></td>
-						  <th>商品方向</th>
+						  <th>商品类别</th>
 					    <td>
-					       <select id="way" name="way"  class="easyui-combobox" style="height: 27px;">
-					          <option value="">请选择</option>
-					          <option value="0">采购品</option>
-					          <option value="1">产出品</option>
-					       </select>
+					       <select id="waresType" class="easyui-combobox"  name="waresType"  data-options="width:140,height:29,editable:false,panelHeight:'auto'"
+								data-options="required:true"  >	
+								<option value="">请选择商品分类</option>							
+							    <option value="1">畜产品及其制品</option>   
+							    <option value="2">禽及其产品、制品</option>   
+							    <option value="3">蔬菜</option>   
+							    <option value="4">乳及乳制品</option>   
+							    <option value="5">油脂及其制品</option>   
+							    <option value="6">水产及其制品</option>   
+							    <option value="7">冷冻饮品</option>   
+							    <option value="8">水果</option>   
+							    <option value="9">粮食和粮食制品</option>   
+							    <option value="10">豆类及其制品</option>   
+							    <option value="11">食用菌和藻类</option>   
+							    <option value="12">可可和巧克力制品及糖果</option>   
+							    <option value="13">焙烤食品</option>   
+							    <option value="14">甜味料</option>   
+							    <option value="15">调味品</option>   
+							    <option value="16">特殊膳食用食品</option>   
+							    <option value="17">饮料类</option>   
+							    <option value="18">酒类</option>   
+							    <option value="19">添加剂类</option>   
+							    <option value="20">其他类</option>   
+							</select>
 					    </td>
 					</tr>
 					<tr>
-					     <th>产地</th>
-					     <td><input name="place" placeholder="可以查询产地" class="easyui-validatebox"  style="width: 215px;"/></td>
-					     <th>商品条形码</th>
-					     <td><input name="barCode" placeholder="可以查询条形码" class="easyui-validatebox"  style="width: 215px;"/></td>
-					</tr>				
+					     <th>企业编码</th>
+					     <td><input name="customCode" placeholder="可以查询企业编码" class="easyui-validatebox"  style="width: 215px;"/></td>
+					     	</tr>		
 				</table>
 			</form>
 		</div>

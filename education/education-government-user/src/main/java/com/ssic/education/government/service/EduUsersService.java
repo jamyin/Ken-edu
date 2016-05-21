@@ -23,4 +23,8 @@ public interface EduUsersService {
 
 	public void save(EduUsersDto usersDto);
 	
+	public EduUsersDto getUserInfo(EduUsersDto usersDto);
+	
+	public Integer update(EduUsersDto usersDto);
+	
 }

@@ -15,6 +15,21 @@
 			AND a.cer_source = #{license.cerSource}		
 	</select>
 	
+	
+	
+<update id="alterImage" parameterType="com.ssic.education.common.pojo.ProLicense">
+		
+		update t_pro_license AS a
+		<set>
+			<if test="proLicense.licPic != null  and proLicense.licPic!=''">
+				a.lic_pic = #{proLicense.licPic}
+			</if>			
+		</set>
+		where 
+		 a.lic_name=#{proLicense.licName}  
+		AND  a.relation_id=#{proLicense.relationId}
+		AND a.cer_source = #{proLicense.cerSource}		
+	</update>	
 			
 
 </mapper>

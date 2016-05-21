@@ -10,4 +10,6 @@ public interface IProLicenseService {
 
 	List<ProLicense> lookImage(ProLicense license);
 
+	void alterImage(ProLicense license);
+
 }

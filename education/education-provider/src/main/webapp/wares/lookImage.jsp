@@ -10,7 +10,7 @@
 	
 	<c:if test="${list.licName=='商品图片' }"> 
 	<tr>
-	<th>商品名称</th>
+	<th>商品图片</th>
 	<td><img src="${list.licPic }" /></td>	</tr>
 	</c:if>
 	

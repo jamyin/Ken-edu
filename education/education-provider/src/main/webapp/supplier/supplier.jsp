@@ -6,16 +6,26 @@
 <head>
 <title>供应商管理</title>
 <jsp:include page="../inc.jsp"></jsp:include>
-<c:if test="${fn:contains(sessionInfo.resourceList, '/userController/editPage')}">
+
 	<script type="text/javascript">
 		$.canEdit = true;
 	</script>
-</c:if>
-<c:if test="${fn:contains(sessionInfo.resourceList, '/userController/delete')}">
+
+
 	<script type="text/javascript">
 		$.canDelete = true;
 	</script>
-</c:if>
+
+
+	<script type="text/javascript">
+		$.inputImage = true;
+	</script>
+		<script type="text/javascript">
+		$.lookImage = true;
+	</script>
+		<script type="text/javascript">
+		$.editImage = true;
+	</script>
 <script type="text/javascript">
 	var dataGrid;
 	$(function() {
@@ -115,9 +125,26 @@
 						str += $.formatString('<img onclick="editFun(\'{0}\');" src="{1}" title="编辑"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
 					}
 					str += '&nbsp;';
+					if ($.inputImage) {
+						str += $.formatString('<img onclick="inputImage(\'{0}\');" src="{1}" title="上传图片"/>',  row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/photoAndPic/photo_add.png');
+					}
+				
+					str += '&nbsp;';
+				
+					if ($.lookImage) {
+						str += $.formatString('<img onclick="lookImage(\'{0}\');" src="{1}" title="查看图片"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/photoAndPic/photo.png');
+					}
+					
+					str += '&nbsp;';
+
+					if ($.editImage) {
+						str += $.formatString('<img onclick="editImage(\'{0}\');" src="{1}" title="修改图片"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/photoAndPic/picture_edit.png');
+					}	
+					str += '&nbsp;';
 					if ($.canDelete) {
 						str += $.formatString('<img onclick="deleteFun(\'{0}\');" src="{1}" title="删除"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/cancel.png');
 					}
+					
 					return str;
 				}
 			} ] ],
@@ -214,36 +241,95 @@
 		});
 	}
 
-	function searchFun() {
+	function inputImage() {
 		dataGrid.datagrid('load', $.serializeObject($('#searchForm')));
 	}
 	function cleanFun() {
 		$('#searchForm input').val('');
 		dataGrid.datagrid('load', {});
 	}
+	
+	
+	function inputImage(id) {
+		if (id == undefined) {
+			var rows = dataGrid.datagrid('getSelections');
+			id = rows[0].id;
+		} else {
+			dataGrid.datagrid('unselectAll').datagrid('uncheckAll');
+		}
+		parent.$.modalDialog({
+			title : '上传图片',
+			width :768,
+			height : 480,
+			href : '${pageContext.request.contextPath}/proSupplierController/inputImage?id='+ id,
+			buttons : [ {
+				text : '编辑',
+				handler : function() {
+					parent.$.modalDialog.openner_dataGrid = dataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
+					var f = parent.$.modalDialog.handler.find('#formEditImage');
+					f.submit();
+					var f2 = parent.$.modalDialog.handler.find('#projectFormEdit');
+					f2.submit();
+				}
+			} ]
+		});
+	}
+	
+	function lookImage(id) {
+		if (id == undefined) {
+			var rows = dataGrid.datagrid('getSelections');
+			id = rows[0].id;
+		} else {
+			dataGrid.datagrid('unselectAll').datagrid('uncheckAll');
+		}
+		parent.$.modalDialog({
+			title : '查看图片',
+			width :768,
+			height : 480,
+			href : '${pageContext.request.contextPath}/proSupplierController/lookImage?id='+ id,
+	
+		});
+	}
+	
+	function editImage(id) {
+		if (id == undefined) {
+			var rows = dataGrid.datagrid('getSelections');
+			id = rows[0].id;
+		} else {
+			dataGrid.datagrid('unselectAll').datagrid('uncheckAll');
+		}
+		parent.$.modalDialog({
+			title : '修改图片信息',
+			width :768,
+			height : 480,
+			href : '${pageContext.request.contextPath}/proSupplierController/editImage?id='+ id,
+			buttons : [ {
+				text : '编辑',
+				handler : function() {
+					parent.$.modalDialog.openner_dataGrid = dataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
+					var f = parent.$.modalDialog.handler.find('#updateImage');
+					f.submit();
+					var f2 = parent.$.modalDialog.handler.find('#projectFormEdit');
+					f2.submit();
+				}
+			} ]
+		});
+	}
+	
 </script>
 </head>
 <body>
 	<div class="easyui-layout" data-options="fit : true,border : false">
-		<div data-options="region:'north',title:'查询条件',border:false" style="height: 160px; overflow: hidden;">
+		<div data-options="region:'north',title:'查询条件',border:false" style="height: 80px; overflow: hidden;">
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">
-					<!--<tr>
-						<th>供应商编码</th>
-						<td><input class="span2" name="searchName" /></td>
-					</tr>-->
+			
 					<tr>
 						<th>名称</th>
 						<td><input class="span2" name="supplierName" /></td>
-					</tr>
-					<tr>
 						<th>地址</th>
 						<td><input class="span2" name="address" /></td>
-					</tr>
-					<tr>
-						<th>供应商类别</th>
-						<td><input class="span2" name="supplierType" /></td>
-					</tr>
+					</tr>							
 				</table>
 			</form>
 		</div>

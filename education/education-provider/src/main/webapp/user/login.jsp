@@ -140,7 +140,7 @@
 	}
 </script>
 <div id="loginDialog" title="用户登录"
-	style="width: 330px; height: 220px; overflow: hidden; display: none;">
+	style="width: 330px; height: 260px; overflow: hidden; display: none;">
 	<div id="loginTabs" class="easyui-tabs"
 		data-options="fit:true,border:false">
 		<div title="用户输入模式" style="overflow: hidden; padding: 10px;">
@@ -160,6 +160,12 @@
 							value="">
 						</td>
 					</tr>
+					<tr>
+						<th></th>
+						<td>	
+							<a href="reg.jsp">用户注册</a>
+						</td>
+					</tr>					
 				</table>
 			</form>
 		</div>

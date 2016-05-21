@@ -12,18 +12,22 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ssic.education.common.dto.EduAreaDto;
 import com.ssic.education.common.dto.EduSchoolDto;
+import com.ssic.education.common.dto.ProLicenseDto;
 import com.ssic.education.common.dto.ProPackagesDto;
 import com.ssic.education.common.dto.ProSupplierDto;
 import com.ssic.education.common.government.service.AreaService;
 import com.ssic.education.common.government.service.EduSchoolService;
 import com.ssic.education.common.government.service.ProPackagesService;
+import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.constants.SchoollevelEnum;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
+import com.ssic.education.utils.model.Response;
 import com.ssic.education.utils.util.DateUtils;
 
 /**
@@ -64,11 +68,16 @@ public class EduSchoolController extends BaseController{
 		ModelAndView mv = getModelAndView();
 		PageResult<EduSchoolDto> result = eduSchoolService.list(dto, page);
 		List<EduAreaDto> areaDtos = areaService.queryAll();
-		mv.setViewName("/school/school_list");
 		mv.addObject("pageList", result);
 		mv.addObject("areaDtos", areaDtos);
 		mv.addObject("dto", dto);
 		mv.addObject("level", SchoollevelEnum.values());
+		if (dto.getSource() == DataStatus.DISABLED) {
+			mv.setViewName("/school/school_list");
+		}
+		if (dto.getSource() == DataStatus.ENABLED) {
+			mv.setViewName("/school/school_list");
+		}			
 		return mv;
 	}
 	
@@ -99,5 +108,55 @@ public class EduSchoolController extends BaseController{
 		mv.addObject("level", SchoollevelEnum.values());
 		mv.addObject("proPackagesDtos", proPackagesDtos);
 		return mv;
+	}
+	
+	/**
+	 * 
+	  @Name:  detail 
+	  @Author: pengpeng
+	  @Date: 2016年5月20日 下午4:32:24 
+	  @Description: 教委审批单位详情
+	  @param dto
+	  @return
+	 */
+	@RequestMapping(value = "/detail")
+	public ModelAndView detail(EduSchoolDto dto) {
+		ModelAndView mv = getModelAndView();
+		EduSchoolDto eduSchoolDto = eduSchoolService.findById(dto.getId());
+		mv.addObject("eduSchoolDto", eduSchoolDto);
+		mv.setViewName("/detail");
+		return mv;
+	}
+	
+	/**
+	 * 
+	  @Name:  getProLicenseBySchId 
+	  @Author: pengpeng
+	  @Date: 2016年5月20日 下午4:33:07 
+	  @Description: 教委审批单位详情
+	  @param dto
+	  @return
+	 */
+	@RequestMapping(value = "/license")
+	public ModelAndView getProLicenseBySchId(ProLicenseDto dto) {
+		ModelAndView mv = getModelAndView();
+		List<ProLicenseDto> proLicenseDtos = eduSchoolService.getProLicenseBySchId(dto);
+		mv.addObject("proLicenseDtos", proLicenseDtos);
+		return mv;
+	}
+	
+	@RequestMapping(value = "/update")
+	@ResponseBody
+	public Response<String> update(EduSchoolDto dto) {
+		Response<String> res = new Response<String>();
+		Integer result = eduSchoolService.updateSchool(dto);
+		if (result == DataStatus.ENABLED) {
+			res.setStatus(DataStatus.HTTP_SUCCESS);
+			res.setMessage("更新成功！");
+		}if (result == DataStatus.DISABLED) {
+			res.setStatus(DataStatus.HTTP_FAILE);
+			res.setMessage("更新成功！");
+		}
+		return res;
 	}
 }
