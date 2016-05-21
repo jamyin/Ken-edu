@@ -2,16 +2,20 @@ package com.ssic.education.provider.pageModel;
 
 import java.util.List;
 
+import lombok.Data;
+
 /**
  * session信息模型
  * 
  * @author 刘博
  * 
  */
+@Data
 public class SessionInfo implements java.io.Serializable {
 
 	private String id;// 用户ID
 	private String name;// 用户登录名
+	private String supplierId;//供应商Id
 	private String ip;// 用户IP
 	private String userAccount;//用户账号
 	private String password;//密码
