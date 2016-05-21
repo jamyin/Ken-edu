@@ -49,7 +49,7 @@ import com.ssic.education.utils.util.PageData;
 import com.ssic.util.UUIDGenerator;
 
 @Controller
-@RequestMapping("/waresController")
+@RequestMapping("/waresController")  
 public class WaresController extends BaseController {
 	@Autowired
 	private IWaresService waresService;
@@ -69,6 +69,7 @@ public class WaresController extends BaseController {
 		 * String nginxPath = PropertiesUtils.getProperty("nginx.url");
 		 * request.setAttribute("nginxPath", nginxPath);
 		 */
+		
 		return "wares/warseList";
 	}
 
