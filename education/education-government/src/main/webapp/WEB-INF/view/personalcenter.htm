@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <#include "/common/head.htm" />
+        <link rel="stylesheet" href="/static/css/style.css">
+    </head>
+<body>
+<#include "/common/nav.htm" />
+	
+	<div class="wrapper">
+		<div class="page_title"><span>个人中心</span></div>
+		<div class="pcenter_box">
+			<div class="portrait">
+				<p><img src="/static/img/portrait.png" border="0"></p>
+				<span>${(userInfo.userAccount)!}</span>
+			</div>
+			<ul>
+				<li><label>新登录密码</label><input id="password" type="password" placeholder=""></li>
+				<li><label>确认密码</label><input id="new_password" type="password" placeholder=""></li>
+			</ul>
+			<input class="submit" type="button" value="确认提交">
+			</div>
+	</div>	
+	<#include "/common/footer.htm" />
+<script>
+	$(function(){	
+		
+		$(".submit").on('click', function(){
+			var passWord = $.trim($("#password").val());
+			var new_password = $.trim($("#new_password").val());
+			if (passWord.length <= 0) {
+				alert("新登录密码不能为空~");
+				return;
+			}
+			if (new_password.length <= 0) {
+				alert("确认密码不能为空~");
+				return;
+			}
+			if (passWord != new_password) {
+				alert("新登录密码和确认密码不相同~");
+				return;
+			}
+			$.ajax({
+				url:"/user/update.htm",
+				type:"post",
+				dataType:"json",
+				data:{password:passWord},
+				async: false,
+				success:function(data){
+					if(data.status == 200){
+						alert("修改成功");
+						window.location.href="/login.htm";
+						return;
+					}else {
+						alert(data.msg);
+					}							
+				}
+			});
+		})
+
+	});
+</script>
+	
+</body>
+</html>
