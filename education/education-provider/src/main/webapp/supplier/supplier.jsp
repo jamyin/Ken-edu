@@ -320,25 +320,16 @@
 </head>
 <body>
 	<div class="easyui-layout" data-options="fit : true,border : false">
-		<div data-options="region:'north',title:'查询条件',border:false" style="height: 160px; overflow: hidden;">
+		<div data-options="region:'north',title:'查询条件',border:false" style="height: 80px; overflow: hidden;">
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">
-					<!--<tr>
-						<th>供应商编码</th>
-						<td><input class="span2" name="searchName" /></td>
-					</tr>-->
+			
 					<tr>
 						<th>名称</th>
 						<td><input class="span2" name="supplierName" /></td>
-					</tr>
-					<tr>
 						<th>地址</th>
 						<td><input class="span2" name="address" /></td>
-					</tr>
-					<tr>
-						<th>供应商类别</th>
-						<td><input class="span2" name="supplierType" /></td>
-					</tr>
+					</tr>							
 				</table>
 			</form>
 		</div>

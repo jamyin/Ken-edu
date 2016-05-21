@@ -81,9 +81,10 @@ public class WaresController extends BaseController {
 	 */
 	@RequestMapping("/dataGrid")
 	@ResponseBody
-	public DataGrid dataGrid(ProWaresDto waresDto, PageHelper ph) {
-		waresDto.setSupplierId("1");
-
+	public DataGrid dataGrid(ProWaresDto waresDto, PageHelper ph,HttpServletRequest request) {
+		
+	SessionInfo info=	(SessionInfo) request.getSession().getAttribute(ConfigUtil.SESSIONINFONAME);
+	waresDto.setSupplierId(info.getId());
 		DataGrid dataGrid = new DataGrid();
 		PageHelperDto phdto = new PageHelperDto();
 		phdto.setOrder(ph.getOrder());
@@ -126,7 +127,7 @@ public class WaresController extends BaseController {
 	@RequestMapping("/insertWares")
 	@ResponseBody
 	//
-	public Json insertWares(ProWaresDto pro) {
+	public Json insertWares(ProWaresDto pro,HttpServletRequest request) {
 		Json j = new Json();
 		if (pro.getWaresName() == null || pro.getWaresName().equals("")) {
 			j.setMsg("商品名称不能为空");
@@ -147,9 +148,8 @@ public class WaresController extends BaseController {
 		}
 
 		DataSourceHolderUtil.setToMaster();
-		String supplierId = waresService.findSupplierIdByName(pro
-				.getSupplierName());
-		pro.setSupplierId(supplierId);
+		SessionInfo info=	(SessionInfo) request.getSession().getAttribute(ConfigUtil.SESSIONINFONAME);
+		pro.setSupplierId(info.getId());
 
 		waresService.insertWares(pro);
 		j.setMsg("新增商品成功");
@@ -233,11 +233,10 @@ public class WaresController extends BaseController {
 	 */
 	@RequestMapping("/updateWares")
 	@ResponseBody
-	public Json updateWares(ProWaresDto pro) {
+	public Json updateWares(ProWaresDto pro,HttpServletRequest request) {
 		Json json = new Json();
-		String supplierId = waresService.findSupplierIdByName(pro
-				.getSupplierName());
-		pro.setSupplierId(supplierId);
+		SessionInfo info=	(SessionInfo) request.getSession().getAttribute(ConfigUtil.SESSIONINFONAME);
+		pro.setSupplierId(info.getId());
 		pro.setStat(1);
 		ProWares proWares = new ProWares();
 		BeanUtils.copyProperties(pro, proWares);
@@ -395,11 +394,12 @@ public class WaresController extends BaseController {
 		return "wares/lookSupplier";
 	}
 
-	@RequestMapping(value = "/export")
+	@RequestMapping(value = "/excel")
 	@ResponseBody
 	public ModelAndView exportExcel(ProWaresDto proWaresDto,
 			HttpServletRequest request) {
-		proWaresDto.setSupplierId("1");
+		SessionInfo info=	(SessionInfo) request.getSession().getAttribute(ConfigUtil.SESSIONINFONAME);
+		proWaresDto.setSupplierId(info.getId());
 		PageHelperDto phdto = new PageHelperDto();
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
@@ -431,7 +431,7 @@ public class WaresController extends BaseController {
 					vpd.put("var3", expList.get(i).getManufacturer());
 					vpd.put("var4", expList.get(i).getShelfLife());
 					vpd.put("var5", expList.get(i).getUnit());
-					vpd.put("var6", expList.get(i).getWaresType());
+					vpd.put("var6", ProductClass.getName(expList.get(i).getWaresType()));
 					vpd.put("var7", expList.get(i).getCustomCode());
 					vpd.put("var8", expList.get(i).getBarCode());
 					vpd.put("var9", expList.get(i).getEnName());
