@@ -92,14 +92,18 @@
 								class="easyui-validatebox span2" data-options="required:true" value="${wdto.unit}"></td>
 						</tr>
 						<tr>
-							<th>供应商名称</th>
-							<td><input name="supplierName" type="text" placeholder="请输入供应商名称" id="supplierName"
+							<th>生产企业</th>
+							<td><input name="manufacturer" type="text" placeholder="请输入生产企业" id="manufacturer"
 								class="easyui-validatebox span2" data-options="required:true" value="${wdto.supplierName}"></td>
-							<th>商品方向</th>
+								<th>条形码</th>
+							<td><input name="barCode" type="text" id="barCode"
+								placeholder="请输入条形码" class="easyui-validatebox span2"
+								data-options="required:true" value="${wdto.barCode}"></td>
+							<!-- <th>商品方向</th>
 							<td><select name="way" class="easyui-combobox" id="way"
 								data-options="width:140,height:29,editable:false,panelHeight:'auto'"
 								data-options="required:true"><option value="0">采购品</option>
-									<option value="1">产出品</option></select></td>
+									<option value="1">产出品</option></select></td> -->
 						</tr>
 						<tr>
 							<th>企业自定义代码</th>
@@ -110,11 +114,8 @@
 								placeholder="请输入产地" class="easyui-validatebox span2"
 								data-options="required:true" value="${wdto.place}"></td>
 						</tr>
-						<tr>
-							<th>条形码</th>
-							<td><input name="barCode" type="text" id="barCode"
-								placeholder="请输入条形码" class="easyui-validatebox span2"
-								data-options="required:true" value="${wdto.barCode}"></td>
+						<%-- <tr>
+							
 							<th>是否是菜肴</th>
 							<td><select name="dishes" class="easyui-combobox" id="dishes"
 								data-options="width:140,height:29,editable:false,panelHeight:'auto'" 
@@ -125,9 +126,8 @@
 									</c:if></select>
 								
 									</td>
-										
-							
-						</tr>
+						
+						</tr> --%>
 					</table>
 			
 				</form>
