@@ -14,7 +14,7 @@ public class ProWaresDto {
 	    private String waresName;
 		@Getter
 		@Setter
-	    private String supplierName;//供应商名称
+	    private String manufacturer;//生产商名称
 		
 		@Getter
 		@Setter

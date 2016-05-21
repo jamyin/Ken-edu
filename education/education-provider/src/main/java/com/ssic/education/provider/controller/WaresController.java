@@ -426,7 +426,7 @@ public class WaresController extends BaseController {
 					PageData vpd = new PageData();
 					vpd.put("var1", expList.get(i).getWaresName());
 					vpd.put("var2", expList.get(i).getSpec());
-					vpd.put("var3", expList.get(i).getSupplierName());
+					vpd.put("var3", expList.get(i).getManufacturer());
 					vpd.put("var4", expList.get(i).getShelfLife());
 					vpd.put("var5", expList.get(i).getUnit());
 					vpd.put("var6", expList.get(i).getWaresType());
@@ -484,7 +484,7 @@ public class WaresController extends BaseController {
 					dto.setSpec(value);
 				} else if (i == 2) {
 					// 生产企业
-					
+					dto.setManufacturer(value);	
 					// TODO 检查这个商品是否存在，如果存在不导入
 				} else if (i == 3) {
 					// 保质期
