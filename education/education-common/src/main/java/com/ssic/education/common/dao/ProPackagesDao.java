@@ -117,6 +117,28 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 		return propackagesDtos;
 	}
 	
+	public ProPackagesDto findById (String id) {
+		ProPackages proPackages = this.selectByPrimaryKey(id);
+		ProPackagesDto proPackagesDto = BeanUtils.createBeanByTarget(proPackages, ProPackagesDto.class);
+		ProDishesExample exampleDis = new ProDishesExample();
+		ProDishesExample.Criteria criteriaDis = exampleDis.createCriteria();
+		if (StringUtils.isNotBlank(proPackagesDto.getId())) {
+			criteriaDis.andPackageIdEqualTo(proPackagesDto.getId());
+		}	
+		criteriaDis.andStatEqualTo(DataStatus.ENABLED);
+		List<ProDishesDto> proDishesDtos = BeanUtils.createBeanListByTarget(disMapper.selectByExample(exampleDis), ProDishesDto.class);
+		proPackagesDto.setProDishesDtos(proDishesDtos);
+		ProNutritionalExample exampleNu = new ProNutritionalExample();
+		ProNutritionalExample.Criteria criteriaNu = exampleNu.createCriteria();
+		if (StringUtils.isNotBlank(proPackagesDto.getId())) {
+			criteriaNu.andPackageIdEqualTo(proPackagesDto.getId());
+		}
+		criteriaNu.andStatEqualTo(DataStatus.ENABLED);
+		List<ProNutritionalDto> proNutritionalDtos = BeanUtils.createBeanListByTarget(nuMapper.selectByExample(exampleNu), ProNutritionalDto.class);
+		proPackagesDto.setProNutritionalDtos(proNutritionalDtos);
+		return proPackagesDto;
+	}
+	
 	public List<ProPackagesDto> fingPackagesPage(ProPackagesDto dto,PageQuery page) {
 		ProPackagesExample example = new ProPackagesExample();
 		ProPackagesExample.Criteria criteria = example.createCriteria();

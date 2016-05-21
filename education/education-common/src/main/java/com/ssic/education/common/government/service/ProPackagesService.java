@@ -13,5 +13,8 @@ public interface ProPackagesService {
 	public List<ProPackagesDto> getProPackages(ProPackagesDto dto) throws ParseException;
 	
 	public PageResult<ProPackagesDto> fingPackagesPage(ProPackagesDto dto, PageQuery page);
-
+	
+	public void save(ProPackagesDto dto, String jsonWares);
+	
+	public ProPackagesDto findById (String id);
 }
