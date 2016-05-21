@@ -19,6 +19,8 @@ import com.ssic.education.provider.pageModel.User;
  */
 public interface UserServiceI {
 
+	List<TImsUsersDto> findAllDriver(String sourceId);
+
 	/**
 	 * 用户登录
 	 * 

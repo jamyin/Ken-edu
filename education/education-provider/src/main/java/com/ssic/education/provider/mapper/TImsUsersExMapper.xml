@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ssic.education.provider.mapper.TImsUsersExMapper">
+	<select id="findAllDriver" resultType="com.ssic.education.provider.dto.TImsUsersDto">
+		SELECT
+		id,
+		name
+		FROM
+		t_pro_users
+		WHERE
+		stat = 1
+		AND
+		user_type = 1
+		AND
+		source_id
+		=#{ledgerDto.sourceId}
+	</select>
 	<select id="findBy" resultType="com.ssic.education.provider.dto.TImsUsersDto">
 		select users.id as id, age as age,createdatetime as
 		createdatetime,source_id as sourceId,gender as gender,isAdmin as isAdmin,isDelete as

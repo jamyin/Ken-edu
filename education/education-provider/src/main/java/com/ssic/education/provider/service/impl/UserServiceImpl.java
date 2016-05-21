@@ -5,13 +5,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import com.ssic.education.provider.dao.ImsRoleDao;
 import com.ssic.education.provider.dao.ResourceDao;
@@ -48,6 +44,11 @@ public class UserServiceImpl implements UserServiceI {
 	private TImsUsersRolesDao userRoleDao;
 
 	private static Logger log = Logger.getLogger(UserServiceImpl.class);
+	
+	@Override
+	public List<TImsUsersDto> findAllDriver(String sourceId) {
+		return userDao.findAllDriver(sourceId);
+	}
 
 	public TImsUsersDto login(TImsUsersDto user) {
 		user.setPassword(MD5Util.md5(user.getPassword()));

@@ -1,40 +1,23 @@
 package com.ssic.education.provider.controller;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.ssic.education.common.pojo.ProLedger;
-import com.ssic.education.common.pojo.ProWares;
+import com.ssic.education.common.provider.dto.LedgerDto;
+import com.ssic.education.common.provider.service.ILedgerService;
 import com.ssic.education.common.provider.utils.DataGrid;
 import com.ssic.education.common.provider.utils.PageHelper;
-import com.ssic.education.provider.dto.LedgerDto;
 import com.ssic.education.provider.dto.TImsUsersDto;
 import com.ssic.education.provider.pageModel.Json;
 import com.ssic.education.provider.pageModel.LedgerModel;
-import com.ssic.education.provider.pageModel.SessionInfo;
-import com.ssic.education.provider.service.ILedgerService;
-import com.ssic.education.provider.service.IWaresService;
-import com.ssic.education.provider.util.ConfigUtil;
-import com.ssic.education.provider.util.ProductClass;
-import com.ssic.education.utils.poi.ParseExcelUtil;
+import com.ssic.education.provider.service.UserServiceI;
 
 /**
  * 
@@ -51,10 +34,10 @@ import com.ssic.education.utils.poi.ParseExcelUtil;
 public class LedgerController {
 
 	@Autowired
-	private IWaresService waresService;
-
-	@Autowired
 	private ILedgerService ledgerService;
+	
+	@Autowired
+	private UserServiceI userService;
 
 	@RequestMapping("/manager")
 	public String manager(HttpServletRequest request) {
@@ -79,7 +62,7 @@ public class LedgerController {
 		if (user == null) {
 			return null;
 		}
-		List<TImsUsersDto> driver = ledgerService.findAllDriver(user
+		List<TImsUsersDto> driver = userService.findAllDriver(user
 				.getSourceId());
 		request.setAttribute("Driver", driver);
 		return "ledger/ledgerAdd";
@@ -105,7 +88,7 @@ public class LedgerController {
 		j.setSuccess(true);
 		return j;
 	}
-
+	
 	@RequestMapping(value = "/import")
 	@ResponseBody
 	/**

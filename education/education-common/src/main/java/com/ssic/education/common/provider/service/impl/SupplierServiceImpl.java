@@ -1,5 +1,6 @@
 package com.ssic.education.common.provider.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class SupplierServiceImpl implements ISupplierService {
 
 	@Autowired
 	private ProSupplierMapper mapper;
-	
+
 	@Autowired
 	private ProSupplierReceiverMapper psrmapper;
 
@@ -45,15 +46,27 @@ public class SupplierServiceImpl implements ISupplierService {
 		ProSupplierReceiverExample ex = new ProSupplierReceiverExample();
 		ProSupplierReceiverExample.Criteria c = ex.createCriteria();
 		c.andReceiverIdEqualTo(supplierId);
+		c.andSupplierCodeEqualTo(code);
 		List<ProSupplierReceiver> list = psrmapper.selectByExample(ex);
-		
-		
-//		if (code != null) {
-//			ProSupplierExample ex = new ProSupplierExample();
-//			ProSupplierExample.Criteria c = ex.createCriteria();
-//			c.andCodeEqualTo(code);
-//			c.andStatEqualTo(1);
-//		}
+
+		if (list.size() > 0) {
+			List<String> ids = new ArrayList();
+			for (ProSupplierReceiver o : list) {
+				ids.add(o.getSupplierId());
+			}
+			ProSupplierExample pex = new ProSupplierExample();
+			ProSupplierExample.Criteria pc = pex.createCriteria();
+			pc.andIdIn(ids);
+			pc.andStatEqualTo(1);
+			
+			List<ProSupplier> result = mapper.selectByExample(ex);
+			
+			// 根据当前企业下的供应商
+			if (result.size() > 0) {
+				return result.get(0);
+			}
+		}
+
 	}
 
 	@Override

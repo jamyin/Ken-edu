@@ -24,6 +24,10 @@ public class UserDao {
 
 	@Autowired
 	private TImsUserRoleExMapper userRoleMapper;
+	
+	public List<TImsUsersDto> findAllDriver(String sourceId) {
+		return tImsUsersExMapper.findAllDriver(sourceId);
+	}
 
 	public TImsUsersDto login(TImsUsersDto userDto) {
 		List<TImsUsersDto> list = tImsUsersExMapper.findBy(userDto);

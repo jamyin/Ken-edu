@@ -44,7 +44,7 @@ public class UserDao {
 		if (userDto != null) {
 			EduUsers users = new EduUsers();
 			BeanUtils.copyProperties(userDto, users);
-			users.setCreatedatetime(new Date());
+			users.setCreateTime(new Date());
 //			MD5Utils.md5(users.getPassword())
 			try {
 				users.setPassword(MD5Coder.encodeMD5Hex(users.getPassword()));
@@ -132,7 +132,7 @@ public class UserDao {
 		if (userDto != null) {
 			EduUsers users = new EduUsers();
 			BeanUtils.copyProperties(userDto, users);
-			users.setCreatedatetime(new Date());
+			users.setCreateTime(new Date());
 			try {
 				users.setPassword(MD5Coder.encodeMD5Hex(users.getPassword()));
 			} catch (Exception e) {
