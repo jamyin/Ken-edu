@@ -75,11 +75,11 @@ public class ProSupplierController extends BaseController {
 		ProSupplierDto supplier = proSupplierService.findById(dto.getId());
 		PageQuery query = new PageQuery();
 		PageResult<ProWaresDto> mWares = queryWares(dto.getId(), query, false);
-		PageResult<ProWaresDto> pWares = queryWares(dto.getId(), query, true);
+//		PageResult<ProWaresDto> pWares = queryWares(dto.getId(), query, true);
 		PageResult<ProSupplierDto> mSuppliers = queryMaterialSupplier(dto, query);
 		mv.addObject("supplier", supplier);
 		mv.addObject("mWares", mWares);
-		mv.addObject("pWares", pWares);
+//		mv.addObject("pWares", pWares);
 		mv.addObject("mSuppliers", mSuppliers);
 		mv.setViewName("supplier/supplier_qualification");
 		return mv;
@@ -119,7 +119,7 @@ public class ProSupplierController extends BaseController {
 		query.setPageSize(PAGESIZE_WARES);
 		ProWaresDto params = new ProWaresDto();
 		params.setSupplierId(supplierId);
-		params.setDishes(dishes);
+//		params.setDishes(dishes);
 		PageResult<ProWaresDto> results = proWaresService.queryWaresByParams(params, query);
 		return results;
 	}

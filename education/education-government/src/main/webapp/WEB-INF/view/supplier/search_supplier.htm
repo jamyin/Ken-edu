@@ -14,9 +14,10 @@
         <div class="search-bar">
             <form action="/pro/supplier/search.htm" method="post" id="myform">
                 <input type="hidden" name="currPage" id="currPage" value="1"/>
-                <ul>
-                    <li class="search">
-                        <label for="area">区县:</label>
+                 <div class="search-bar-school">
+		          <ul>
+		            <li class="search">
+		              <label for="">区县:</label>
                         <select name="area" panelheight="auto" id="area">
                             <option value="">请选择区县</option>
                             <#if areas??>
@@ -41,16 +42,17 @@
                             </#if>
                         </select>
                     </li>
-                    <li class="search">
+                    <!-- <li class="search">
                         <label for="supplierName">供应商名称:</label>
                         <input type="text" name="supplierName" id="supplierName" value="${(params.supplierName)!}">
                     </li>
                     <li class="search">
                         <label for="address">单位地址:</label>
                         <input type="text" name="address" id="address" value="${(params.address)!}">
-                    </li>
+                    </li> -->
                 </ul>
                 <input class="search-bt" type="button" value="搜索">
+                </div>
             </form>
         </div>
 
