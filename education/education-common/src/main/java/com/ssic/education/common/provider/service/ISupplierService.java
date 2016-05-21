@@ -3,6 +3,7 @@ package com.ssic.education.common.provider.service;
 import java.util.List;
 
 import com.ssic.education.common.dto.ProSupplierDto;
+import com.ssic.education.common.pojo.ProSupplier;
 import com.ssic.education.common.provider.dto.SupplierDto;
 import com.ssic.education.common.provider.utils.DataGrid;
 import com.ssic.education.common.provider.utils.PageHelper;
@@ -29,4 +30,26 @@ public interface ISupplierService {
 		 * @version: 2016年5月20日 下午1:57:07
 	 */
 	String saveOrUpdateSupplier(SupplierDto ps);
+	
+	/**
+	 * 根据供应商编码查询自己<code>supplierId</code>的供应商
+	 * 
+	 * @param code
+	 * @param supplierId
+	 * @return
+	 * @author zhangjiwei
+	 * @since 2016.5.21
+	 */
+	ProSupplier getSupplierByCode(String code, String supplierId);
+	
+	/**
+	 * 根据供应商名称查询自己<code>supplierId</code>的供应商
+	 * 
+	 * @param name
+	 * @param supplierId
+	 * @return
+	 * @author zhangjiwei
+	 * @since 2016.5.21
+	 */
+	ProSupplier getSupplierByName(String name, String supplierId);
 }
