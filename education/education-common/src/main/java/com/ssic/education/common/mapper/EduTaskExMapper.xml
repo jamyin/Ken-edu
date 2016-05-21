@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssic.education.common.mapper.EduTaskExMapper">
+	<select id="findTaskListById" resultType="com.ssic.education.common.dto.EduTaskDto">
+		SELECT a.receive_id AS receiveId, a.readstat, b.id, b.content,b.create_id , b.create_name AS createName,b.create_time AS createTime,b.last_update_time AS lastUpdateTime, b.pic, b.stat, b.summary, b.title 
+		FROM t_edu_task_receive a   
+		LEFT JOIN t_edu_task b ON a.task_id = b.id 
+		WHERE a.receive_id =#{id} AND a.stat = 1 AND b.stat = 1 
+		<include refid="where_conditions"></include>
+		ORDER BY a.create_time DESC
+		<if test="query != null">
+        LIMIT  #{query.startNum}, #{query.pageSize}
+        </if>
+	</select>
+
+	<select id="selectTaskAccount" resultType="java.lang.Integer">
+		SELECT count(*) 
+		FROM t_edu_task_receive a   
+		LEFT JOIN t_edu_task b ON a.task_id = b.id
+		WHERE a.receive_id =#{id} AND a.stat = 1 AND b.stat = 1 
+	<include refid="where_conditions"></include>
+	</select>
+	
+	<sql id="where_conditions">
+		<if test="readstat != '' ">
+			AND a.readstat = #{readstat}
+		</if>	
+	</sql>
+	
+</mapper>
