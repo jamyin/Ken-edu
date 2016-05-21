@@ -1,5 +1,6 @@
 package com.ssic.education.common.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -13,6 +14,9 @@ import com.ssic.education.common.mapper.ProLedgerExMapper;
 import com.ssic.education.common.mapper.ProLedgerMapper;
 import com.ssic.education.common.pojo.ProLedger;
 import com.ssic.education.common.pojo.ProLedgerExample;
+import com.ssic.education.common.provider.dto.LedgerDto;
+import com.ssic.education.common.provider.utils.DataGrid;
+import com.ssic.education.common.provider.utils.PageHelper;
 import com.ssic.education.government.dto.ProLedgerDto;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
@@ -33,6 +37,24 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger>{
 	
 	@Autowired
 	private ProLedgerExMapper exMapper;
+	
+	public DataGrid findAllLedger(LedgerDto ld, PageHelper ph) {
+		DataGrid dataGrid = new DataGrid();
+		Long total = exMapper.countAllLedger(ld);
+		dataGrid.setTotal(total);
+		int beginRow = (ph.getPage() - 1) * ph.getRows();
+		ph.setBeginRow(beginRow);
+		dataGrid.setRows(exMapper.findAllLedger(ld, ph));
+		return dataGrid;
+	}
+
+	public int saveLedger(List<LedgerDto> ledger) {
+		ledger.get(0).setCreateTime(new Date());
+		ledger.get(0).setLastUpdateTime(ledger.get(0).getCreateTime());
+		ledger.get(0).setStat(1);
+		exMapper.insertLedger(ledger);
+		return 0;
+	}
 	
 	public List<ProLedgerDto> findList(ProLedgerDto proLedgerDto,PageQuery page) {
 		ProLedgerExample example = new ProLedgerExample();

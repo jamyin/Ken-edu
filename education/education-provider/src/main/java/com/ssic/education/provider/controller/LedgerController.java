@@ -10,13 +10,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ssic.education.common.provider.dto.LedgerDto;
+import com.ssic.education.common.provider.service.ILedgerService;
 import com.ssic.education.common.provider.utils.DataGrid;
 import com.ssic.education.common.provider.utils.PageHelper;
-import com.ssic.education.provider.dto.LedgerDto;
 import com.ssic.education.provider.dto.TImsUsersDto;
 import com.ssic.education.provider.pageModel.Json;
 import com.ssic.education.provider.pageModel.LedgerModel;
-import com.ssic.education.provider.service.ILedgerService;
+import com.ssic.education.provider.service.UserServiceI;
 
 /**
  * 
@@ -34,6 +35,9 @@ public class LedgerController {
 
 	@Autowired
 	private ILedgerService ledgerService;
+	
+	@Autowired
+	private UserServiceI userService;
 
 	@RequestMapping("/manager")
 	public String manager(HttpServletRequest request) {
@@ -58,7 +62,7 @@ public class LedgerController {
 		if (user == null) {
 			return null;
 		}
-		List<TImsUsersDto> driver = ledgerService.findAllDriver(user
+		List<TImsUsersDto> driver = userService.findAllDriver(user
 				.getSourceId());
 		request.setAttribute("Driver", driver);
 		return "ledger/ledgerAdd";

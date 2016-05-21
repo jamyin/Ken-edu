@@ -1,4 +1,4 @@
-package com.ssic.education.provider.dto;
+package com.ssic.education.common.provider.dto;
 
 import java.util.Date;
 

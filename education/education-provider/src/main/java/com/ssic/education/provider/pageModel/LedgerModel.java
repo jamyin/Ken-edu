@@ -2,7 +2,7 @@ package com.ssic.education.provider.pageModel;
 
 import java.util.List;
 
-import com.ssic.education.provider.dto.LedgerDto;
+import com.ssic.education.common.provider.dto.LedgerDto;
 
 
 public class LedgerModel implements java.io.Serializable {

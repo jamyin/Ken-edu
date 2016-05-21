@@ -86,7 +86,8 @@ public class WaresController extends BaseController {
 
 		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
 				ConfigUtil.SESSIONINFONAME);
-		waresDto.setSupplierId(info.getId());
+		waresDto.setSupplierId(info.getSupplierId());
+		
 		DataGrid dataGrid = new DataGrid();
 		PageHelperDto phdto = new PageHelperDto();
 		phdto.setOrder(ph.getOrder());
@@ -150,13 +151,19 @@ public class WaresController extends BaseController {
 		}
 
 		DataSourceHolderUtil.setToMaster();
-		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
-				ConfigUtil.SESSIONINFONAME);
-		pro.setSupplierId(info.getId());
-
+		SessionInfo info = (SessionInfo) request.getSession().getAttribute(ConfigUtil.SESSIONINFONAME);
+		pro.setSupplierId(info.getSupplierId());
+	
+		ProWares specManu = waresService.findProWarsByNameSpecManu(pro.getWaresName(), pro.getSpec(), pro.getManufacturer(), pro.getSupplierId());
+		if(specManu==null || specManu.equals("")){
+			waresService.insertWares(pro);
+			j.setMsg("新增商品成功");
+			j.setSuccess(true);
+			return j;
+		}
 		waresService.insertWares(pro);
-		j.setMsg("新增商品成功");
-		j.setSuccess(true);
+		j.setMsg("新增商品失败，数据重复");
+		j.setSuccess(false);
 		return j;
 
 	}
@@ -240,12 +247,20 @@ public class WaresController extends BaseController {
 		Json json = new Json();
 		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
 				ConfigUtil.SESSIONINFONAME);
-		pro.setSupplierId(info.getId());
+		pro.setSupplierId(info.getSupplierId());
 		pro.setStat(1);
 		ProWares proWares = new ProWares();
 		BeanUtils.copyProperties(pro, proWares);
+		ProWares specManu = waresService.findProWarsByNameSpecManu(pro.getWaresName(), pro.getSpec(), pro.getManufacturer(), pro.getSupplierId());
+		if(specManu==null || specManu.equals("")){
+			waresService.updateImsUsers(proWares);
+			json.setMsg("修改信息成功");
+			json.setSuccess(true);
+			return json;
+		}
+		
 		waresService.updateImsUsers(proWares);
-		json.setMsg("修改信息成功");
+		json.setMsg("修改信息失败，数据重复");
 		json.setSuccess(true);
 		return json;
 	}
@@ -404,7 +419,7 @@ public class WaresController extends BaseController {
 			HttpServletRequest request) {
 		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
 				ConfigUtil.SESSIONINFONAME);
-		proWaresDto.setSupplierId(info.getId());
+		proWaresDto.setSupplierId(info.getSupplierId());
 		PageHelperDto phdto = new PageHelperDto();
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
