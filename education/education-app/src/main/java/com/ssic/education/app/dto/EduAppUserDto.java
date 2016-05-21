@@ -1,6 +1,7 @@
 package com.ssic.education.app.dto;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
@@ -25,12 +26,11 @@ import lombok.NoArgsConstructor;
 public class EduAppUserDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String id;
-	private Date createdatetime;
 	private String sourceId;
-	private Byte sourceType;
+	private Integer sourceType;
 	private Integer gender;
 	private String name;
 	private String userImage;
-	private String userNo;
-	private String tonke;
+	private String pjNo;
+	private String token;
 }

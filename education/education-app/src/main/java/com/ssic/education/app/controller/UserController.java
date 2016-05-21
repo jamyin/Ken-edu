@@ -38,7 +38,6 @@ public class UserController extends BaseController {
 		user.setPassword(pwd);
 		Response<EduAppUserDto> result = new Response<EduAppUserDto>();
 		EduAppUserDto userdto = userService.appLogin(user);
-		userdto.setTonke("asdagasdgdfgdfhgdf454");
 		result.setData(userdto);
 		return result;
 	}

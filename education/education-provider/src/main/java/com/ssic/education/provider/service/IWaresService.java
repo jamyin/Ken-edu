@@ -24,6 +24,16 @@ public interface IWaresService {
 
 	List<SupplierDto> lookSupplier(ProWaresDto dto);
 
-
+	/**
+	 * 根据采购品名称，规格，生产商找采购品，只可能有一条有效记录
+	 * 
+	 * @param name
+	 * @param spec
+	 * @param manufacturer
+	 * @return
+	 * @author zhangjiwei
+	 * @since 2016.5.21
+	 */
+	ProWares findProWarsByNameSpecManu(String name, String spec, String manufacturer, String supplierId);
 
 }

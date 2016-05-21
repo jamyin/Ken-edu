@@ -29,10 +29,12 @@ public enum ProductClass {
 	 
      
      private static final Map<Integer, String> schoolLevelMap = new LinkedHashMap<Integer, String>();
+     private static final Map<String, Integer> schoolLevelMap2 = new LinkedHashMap<String, Integer>();
  
      static{
          	for(ProductClass school : ProductClass.values()){
          	    schoolLevelMap.put(school.getValue(), school.getName());
+         	    schoolLevelMap2.put(school.getName(), school.getValue());
          	}
      }
      
@@ -73,6 +75,10 @@ public enum ProductClass {
 	 */
 	public static String getName(Integer value) {
 		return schoolLevelMap.get(value);
+	}
+	
+	public static Integer fromName(String name) {
+		return schoolLevelMap2.get(name);
 	}
 	
 	/**     

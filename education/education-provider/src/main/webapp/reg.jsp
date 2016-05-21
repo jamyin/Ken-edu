@@ -160,7 +160,7 @@ $(function(){
 	//图片上传
 	$("#id-input-file-3").uploadify({
         'uploader': 'reg/uploadify/uploadify.swf',
-        'script':"/file/upload.htm",
+        'script':"file/upload.htm",
         'cancelImg': 'reg/uploadify/cancel.png',
         'queueID': 'fileQueue',
         'auto': true,
@@ -170,7 +170,7 @@ $(function(){
         'sizeLimit':1024*1024*10,
         'queueSizeLimit' : 1,
         'fileDesc' : 'pictures',
-        'fileExt': '*.gif;*.png;*.jpg',
+        'fileExt': '*.gif;*.png;*.jpg;*.jpge',
         onComplete: function(event, queueID, fileObj, response, data) {
             var dataObj = eval("("+response+")");
             if(dataObj.status == 200){
