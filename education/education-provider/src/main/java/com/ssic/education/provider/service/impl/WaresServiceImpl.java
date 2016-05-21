@@ -48,6 +48,19 @@ public class WaresServiceImpl implements IWaresService {
 		return null;
 	}
 	
+	/**
+	 * 批量添加prowares
+	 * 
+	 * @param list
+	 * @author zhangjiwei
+	 * @since 2016.5.21
+	 */
+	public void addProWares(List<ProWares> list) {
+		for (ProWares o : list) {
+			mapper.insertSelective(o);
+		}
+	}
+	
 	@Override
 	public List<ProWaresDto> findAllWares(ProWaresDto waresDto, PageHelperDto phdto) {
 		// TODO Auto-generated method stub

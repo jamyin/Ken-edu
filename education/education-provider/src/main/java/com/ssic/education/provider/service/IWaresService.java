@@ -35,5 +35,14 @@ public interface IWaresService {
 	 * @since 2016.5.21
 	 */
 	ProWares findProWarsByNameSpecManu(String name, String spec, String manufacturer, String supplierId);
+	
+	/**
+	 * 批量添加prowares
+	 * 
+	 * @param list
+	 * @author zhangjiwei
+	 * @since 2016.5.21
+	 */
+	void addProWares(List<ProWares> list);
 
 }

@@ -81,10 +81,12 @@ public class WaresController extends BaseController {
 	 */
 	@RequestMapping("/dataGrid")
 	@ResponseBody
-	public DataGrid dataGrid(ProWaresDto waresDto, PageHelper ph,HttpServletRequest request) {
-		
-	SessionInfo info=	(SessionInfo) request.getSession().getAttribute(ConfigUtil.SESSIONINFONAME);
-	waresDto.setSupplierId(info.getId());
+	public DataGrid dataGrid(ProWaresDto waresDto, PageHelper ph,
+			HttpServletRequest request) {
+
+		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
+				ConfigUtil.SESSIONINFONAME);
+		waresDto.setSupplierId(info.getId());
 		DataGrid dataGrid = new DataGrid();
 		PageHelperDto phdto = new PageHelperDto();
 		phdto.setOrder(ph.getOrder());
@@ -127,7 +129,7 @@ public class WaresController extends BaseController {
 	@RequestMapping("/insertWares")
 	@ResponseBody
 	//
-	public Json insertWares(ProWaresDto pro,HttpServletRequest request) {
+	public Json insertWares(ProWaresDto pro, HttpServletRequest request) {
 		Json j = new Json();
 		if (pro.getWaresName() == null || pro.getWaresName().equals("")) {
 			j.setMsg("商品名称不能为空");
@@ -148,7 +150,8 @@ public class WaresController extends BaseController {
 		}
 
 		DataSourceHolderUtil.setToMaster();
-		SessionInfo info=	(SessionInfo) request.getSession().getAttribute(ConfigUtil.SESSIONINFONAME);
+		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
+				ConfigUtil.SESSIONINFONAME);
 		pro.setSupplierId(info.getId());
 
 		waresService.insertWares(pro);
@@ -233,9 +236,10 @@ public class WaresController extends BaseController {
 	 */
 	@RequestMapping("/updateWares")
 	@ResponseBody
-	public Json updateWares(ProWaresDto pro,HttpServletRequest request) {
+	public Json updateWares(ProWaresDto pro, HttpServletRequest request) {
 		Json json = new Json();
-		SessionInfo info=	(SessionInfo) request.getSession().getAttribute(ConfigUtil.SESSIONINFONAME);
+		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
+				ConfigUtil.SESSIONINFONAME);
 		pro.setSupplierId(info.getId());
 		pro.setStat(1);
 		ProWares proWares = new ProWares();
@@ -398,7 +402,8 @@ public class WaresController extends BaseController {
 	@ResponseBody
 	public ModelAndView exportExcel(ProWaresDto proWaresDto,
 			HttpServletRequest request) {
-		SessionInfo info=	(SessionInfo) request.getSession().getAttribute(ConfigUtil.SESSIONINFONAME);
+		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
+				ConfigUtil.SESSIONINFONAME);
 		proWaresDto.setSupplierId(info.getId());
 		PageHelperDto phdto = new PageHelperDto();
 		ModelAndView mv = this.getModelAndView();
@@ -431,7 +436,8 @@ public class WaresController extends BaseController {
 					vpd.put("var3", expList.get(i).getManufacturer());
 					vpd.put("var4", expList.get(i).getShelfLife());
 					vpd.put("var5", expList.get(i).getUnit());
-					vpd.put("var6", ProductClass.getName(expList.get(i).getWaresType()));
+					vpd.put("var6",
+							ProductClass.getName(expList.get(i).getWaresType()));
 					vpd.put("var7", expList.get(i).getCustomCode());
 					vpd.put("var8", expList.get(i).getBarCode());
 					vpd.put("var9", expList.get(i).getEnName());
@@ -476,12 +482,12 @@ public class WaresController extends BaseController {
 		if (hssfSheet == null) {
 			return null;
 		}
-		
+
 		// 转换excel到list
-		List<ProWaresDto> list = new ArrayList();
+		List<ProWares> list = new ArrayList();
 		Date now = new Date();
 		for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
-			ProWaresDto dto = new ProWaresDto();
+			ProWares dto = new ProWares();
 			HSSFRow hssfRow = hssfSheet.getRow(rowNum);
 			for (int i = 0; i < hssfRow.getLastCellNum(); i++) {
 				HSSFCell cell = hssfRow.getCell(i);
@@ -527,17 +533,25 @@ public class WaresController extends BaseController {
 					// 产地
 					dto.setPlace(value);
 				}
+			}
+			if (dto != null) {
+				// 检查参数
+				if (dto.getWaresName() == null || dto.getSpec() == null
+						|| dto.getWaresType() == null) {
+					continue;
+				}
 				dto.setSupplierId(supplierId);
 				dto.setWay(0);
 				dto.setCreateTime(now);
 				dto.setLastUpdateTime(now);
 				dto.setStat(1);
-			}
-			if (dto != null) {
 				list.add(dto);
 			}
 		}
-		// TODO 导入商品
+		// 导入商品
+		waresService.addProWares(list);
+		
+		// TODO 反馈用户错误信息
 		return null;
 	}
 }
