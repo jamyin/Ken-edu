@@ -34,7 +34,7 @@ public class SupplierServiceImpl implements ISupplierService {
 	private ProSupplierReceiverMapper psrmapper;
 
 	/**
-	 * 根据供应商编码查询自己<code>supplierId</code>的供应商
+	 * 根据供应商编码查询当前企业<code>supplierId</code>的供应商。由于编码在企业内部的唯一性，只可能有一个结果。
 	 * 
 	 * @param code
 	 * @param supplierId
@@ -59,14 +59,50 @@ public class SupplierServiceImpl implements ISupplierService {
 			pc.andIdIn(ids);
 			pc.andStatEqualTo(1);
 			
-			List<ProSupplier> result = mapper.selectByExample(ex);
+			List<ProSupplier> result = mapper.selectByExample(pex);
 			
-			// 根据当前企业下的供应商
+			// 由于编码在企业内部的唯一性，只可能有一个结果
 			if (result.size() > 0) {
 				return result.get(0);
 			}
 		}
+		return null;
+	}
+	
+	/**
+	 * 根据供应商名称查询当前企业<code>supplierId</code>的供应商
+	 * 
+	 * @param name
+	 * @param supplierId
+	 * @return
+	 * @author zhangjiwei
+	 * @since 2016.5.21
+	 */
+	public ProSupplier getSupplierByName(String name, String supplierId) {
+		ProSupplierReceiverExample ex = new ProSupplierReceiverExample();
+		ProSupplierReceiverExample.Criteria c = ex.createCriteria();
+		c.andReceiverIdEqualTo(supplierId);
+		List<ProSupplierReceiver> list = psrmapper.selectByExample(ex);
 
+		if (list.size() > 0) {
+			List<String> ids = new ArrayList();
+			for (ProSupplierReceiver o : list) {
+				ids.add(o.getSupplierId());
+			}
+			ProSupplierExample pex = new ProSupplierExample();
+			ProSupplierExample.Criteria pc = pex.createCriteria();
+			pc.andIdIn(ids);
+			pc.andSupplierNameEqualTo(name);
+			pc.andStatEqualTo(1);
+			
+			List<ProSupplier> result = mapper.selectByExample(pex);
+			
+			// 由于名称的唯一性，只可能有一个结果
+			if (result.size() > 0) {
+				return result.get(0);
+			}
+		}
+		return null;
 	}
 
 	@Override

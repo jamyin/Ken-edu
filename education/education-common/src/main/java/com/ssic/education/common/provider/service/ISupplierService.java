@@ -32,7 +32,7 @@ public interface ISupplierService {
 	String saveOrUpdateSupplier(SupplierDto ps);
 	
 	/**
-	 * 根据供应商编码查询自己<code>supplierId</code>的供应商
+	 * 根据供应商编码查询当前企业<code>supplierId</code>的供应商。由于编码在企业内部的唯一性，只可能有一个结果。
 	 * 
 	 * @param code
 	 * @param supplierId
@@ -43,7 +43,7 @@ public interface ISupplierService {
 	ProSupplier getSupplierByCode(String code, String supplierId);
 	
 	/**
-	 * 根据供应商名称查询自己<code>supplierId</code>的供应商
+	 * 根据供应商名称查询当前企业<code>supplierId</code>的供应商
 	 * 
 	 * @param name
 	 * @param supplierId
