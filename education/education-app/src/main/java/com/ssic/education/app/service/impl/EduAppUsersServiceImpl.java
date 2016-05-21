@@ -18,10 +18,13 @@ public class EduAppUsersServiceImpl implements IEduAppUsersService {
 
 	@Override
 	public synchronized EduAppUserDto appLogin(EduUsersInfoDto user) {
-		user.setPassword(MD5Util.md5(user.getPassword()));
+		//user.setPassword(MD5Util.md5(user.getPassword()));
+		user.setPassword(user.getPassword());
 		EduAppUserDto result = eduUsersDao.appLogin(user);
-		result.setToken(TokenUtil.getToken(user.getUserAccount()).getSignature());
-		//TODO 第一次登陆创建Token 第二次登录刷新Token 待实现
+		if (result != null) {
+			result.setToken(TokenUtil.getToken(user.getUserAccount()).getSignature());
+			//TODO 第一次登陆创建Token 第二次登录刷新Token 待实现
+		}
 		return result;
 	}
 

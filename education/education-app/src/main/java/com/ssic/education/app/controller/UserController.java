@@ -5,11 +5,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssic.education.app.dto.EduAppUserDto;
 import com.ssic.education.app.dto.EduUsersInfoDto;
 import com.ssic.education.app.service.IEduAppUsersService;
+import com.ssic.util.constants.DataStatus;
 import com.ssic.util.model.Response;
 
 /**		
@@ -30,15 +32,44 @@ public class UserController extends BaseController {
 	@Autowired
 	private IEduAppUsersService userService;
 
-	@RequestMapping(value = "/applogin/{id}/{pwd}", method = RequestMethod.GET)
+	@RequestMapping(value = "/applogin/{account}/{password}", method = RequestMethod.GET)
 	@ResponseBody
-	public Response<EduAppUserDto> applogin(@PathVariable("id") String id, @PathVariable("pwd") String pwd) {
+	public Response<EduAppUserDto> applogin(@PathVariable("account") String account, @PathVariable("pwd") String password) {
 		EduUsersInfoDto user = new EduUsersInfoDto();
-		user.setUserAccount(id);
-		user.setPassword(pwd);
+		user.setUserAccount(account);
+		user.setPassword(password);
 		Response<EduAppUserDto> result = new Response<EduAppUserDto>();
 		EduAppUserDto userdto = userService.appLogin(user);
+		if (userdto != null) {
+			result.setStatus(DataStatus.HTTP_SUCCESS);
+			result.setMessage("登录成功！");
+			result.setData(userdto);
+			return result;
+		} else
+			result.setStatus(DataStatus.HTTP_SUCCESS);
+		result.setMessage("登录失败，请检查用户名密码！");
+		return result;
+	}
+
+	@RequestMapping(value = "/login", method = { RequestMethod.POST, RequestMethod.GET })
+	@ResponseBody
+	public Response<EduAppUserDto> login(@RequestParam(required = true) String account, @RequestParam(required = true) String password) {
+		EduUsersInfoDto user = new EduUsersInfoDto();
+		Response<EduAppUserDto> result = new Response<EduAppUserDto>();
+		user.setUserAccount(account);
+		user.setPassword(password);
+		System.out.println(user);
+		EduAppUserDto userdto = userService.appLogin(user);
+
 		result.setData(userdto);
+		if (userdto != null) {
+			result.setStatus(DataStatus.HTTP_SUCCESS);
+			result.setMessage("登录成功！");
+			result.setData(userdto);
+			return result;
+		} else
+			result.setStatus(DataStatus.HTTP_SUCCESS);
+		result.setMessage("登录失败，请检查用户名密码！");
 		return result;
 	}
 }
