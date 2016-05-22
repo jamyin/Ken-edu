@@ -17,8 +17,6 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
-import com.gotye.entity.User;
-
 /**
  * 
 	 * 此类描述的是：解析excel 工具类
@@ -216,7 +214,7 @@ public class ParseExcelUtil {
 	/** 保存excel里面的数据 **/
 	@SuppressWarnings("unchecked")
 	public void saveExcelData(String entityName) {
-
+/*
 		List<User> users = new ArrayList();
 		for (int i = 0; i < this.getListDatas().size(); i++) {
 			Map excelCol = (Map) this.getListDatas().get(i); // 得到第 i 行的数据
@@ -236,7 +234,8 @@ public class ParseExcelUtil {
 			}
 
 		}
-		// /**批量保存数据**/
+
+		*/// /**批量保存数据**/
 		// Dao dao = new Dao();
 		// for(int i = 0;i<users.size();i++){
 		// try{

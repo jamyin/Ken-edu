@@ -18,8 +18,8 @@ import com.ssic.education.common.provider.dto.SupplierDto;
 import com.ssic.education.common.provider.service.ISupplierService;
 import com.ssic.education.common.provider.utils.DataGrid;
 import com.ssic.education.common.provider.utils.PageHelper;
+import com.ssic.education.utils.util.BeanUtils;
 import com.ssic.education.utils.util.UUIDGenerator;
-import com.ssic.util.BeanUtils;
 
 @Service
 public class SupplierServiceImpl implements ISupplierService {

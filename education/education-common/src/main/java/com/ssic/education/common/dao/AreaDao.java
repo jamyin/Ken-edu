@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.ssic.education.common.mapper.EduAreaMapper;
 import com.ssic.education.common.pojo.EduArea;
 import com.ssic.education.common.pojo.EduAreaExample;
-import com.ssic.util.base.MyBatisBaseDao;
+import com.ssic.education.utils.mybatis.MyBatisBaseDao;
 
 /**
 * @ClassName: AreaServiceImpl

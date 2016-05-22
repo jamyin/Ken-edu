@@ -5,10 +5,12 @@ import com.ssic.education.common.mapper.ViewProSupplierMapper;
 import com.ssic.education.common.pojo.ViewProSupplier;
 import com.ssic.education.common.pojo.ViewProSupplierExample;
 import com.ssic.education.common.pojo.ViewProSupplierWithBLOBs;
-import com.ssic.util.StringUtils;
-import com.ssic.util.base.MyBatisBaseDao;
 import com.ssic.education.utils.model.PageQuery;
+import com.ssic.education.utils.mybatis.MyBatisBaseDao;
+import com.ssic.education.utils.util.StringUtils;
+
 import lombok.Getter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

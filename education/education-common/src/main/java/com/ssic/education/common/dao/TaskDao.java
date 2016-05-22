@@ -15,10 +15,10 @@ import com.ssic.education.common.pojo.EduTask;
 import com.ssic.education.common.pojo.EduTaskExample;
 import com.ssic.education.common.pojo.EduTaskReceive;
 import com.ssic.education.common.pojo.EduTaskReceiveExample;
+import com.ssic.education.utils.constants.DataStatus;
+import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.mybatis.MyBatisBaseDao;
-import com.ssic.util.StringUtils;
-import com.ssic.util.constants.DataStatus;
-import com.ssic.util.model.PageQuery;
+import com.ssic.education.utils.util.StringUtils;
 
 /**
  * @ClassName: TaskDao

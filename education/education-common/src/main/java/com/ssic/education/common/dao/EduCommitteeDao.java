@@ -11,7 +11,7 @@ import com.ssic.education.common.dto.EduCommitteeDto;
 import com.ssic.education.common.mapper.EduCommitteeMapper;
 import com.ssic.education.common.pojo.EduCommittee;
 import com.ssic.education.common.pojo.EduCommitteeExample;
-import com.ssic.util.base.MyBatisBaseDao;
+import com.ssic.education.utils.mybatis.MyBatisBaseDao;
 
 @Repository
 public class EduCommitteeDao extends MyBatisBaseDao<EduCommittee> {

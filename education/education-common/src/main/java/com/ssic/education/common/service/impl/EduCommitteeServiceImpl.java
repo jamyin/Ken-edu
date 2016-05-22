@@ -11,7 +11,7 @@ import com.ssic.education.common.dao.EduCommitteeDao;
 import com.ssic.education.common.dto.EduCommitteeDto;
 import com.ssic.education.common.pojo.EduCommittee;
 import com.ssic.education.common.service.IEduCommitteeService;
-import com.ssic.util.BeanUtils;
+import com.ssic.education.utils.util.BeanUtils;
 
 @Service
 public class EduCommitteeServiceImpl implements IEduCommitteeService {

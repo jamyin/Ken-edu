@@ -17,24 +17,12 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-
-
-
-
-
-
-
-
-
-
-
 import com.ssic.education.common.dto.ImageInfoDto;
 import com.ssic.education.common.pojo.ImageInfo;
 import com.ssic.education.common.service.ICreateImageService;
+import com.ssic.education.utils.util.BeanUtils;
+import com.ssic.education.utils.util.FileUtils;
 import com.ssic.education.utils.util.PropertiesUtils;
-import com.ssic.util.BeanUtils;
-import com.ssic.util.FileUtils;
-import com.ssic.util.model.Response;
 
 @Service
 public class CreateImageServiceImpl implements ICreateImageService{

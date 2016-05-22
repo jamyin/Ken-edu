@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.ssic.education.common.dto.EduTaskDto;
-import com.ssic.util.model.PageQuery;
+import com.ssic.education.utils.model.PageQuery;
 
 
 public interface EduTaskExMapper {

@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 import com.ssic.education.common.dto.EduSupplierReviewDto;
 import com.ssic.education.common.mapper.EduSupplierReviewMapper;
 import com.ssic.education.common.pojo.EduSupplierReview;
+import com.ssic.education.utils.mybatis.MyBatisBaseDao;
 import com.ssic.education.utils.util.BeanUtils;
-import com.ssic.util.base.MyBatisBaseDao;
 
 @Repository
 public class EduSupplierReviewDao extends MyBatisBaseDao<EduSupplierReview> {

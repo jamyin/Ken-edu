@@ -12,10 +12,10 @@ import com.ssic.education.common.mapper.EduInformationMapper;
 import com.ssic.education.common.pojo.EduInformation;
 import com.ssic.education.common.pojo.EduInformationExample;
 import com.ssic.education.common.pojo.EduInformationExample.Criteria;
-import com.ssic.util.StringUtils;
-import com.ssic.util.base.MyBatisBaseDao;
-import com.ssic.util.constants.DataStatus;
-import com.ssic.util.model.PageQuery;
+import com.ssic.education.utils.constants.DataStatus;
+import com.ssic.education.utils.model.PageQuery;
+import com.ssic.education.utils.mybatis.MyBatisBaseDao;
+import com.ssic.education.utils.util.StringUtils;
 
 /**
 * @ClassName: InformationDao

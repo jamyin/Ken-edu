@@ -1,3 +1,4 @@
+/*
 package com.ssic.education.utils.qrcode;
 
 
@@ -30,3 +31,4 @@ public class TwoDimensionCodeImage implements QRCodeImage {
 	}
 
 }
+*/
