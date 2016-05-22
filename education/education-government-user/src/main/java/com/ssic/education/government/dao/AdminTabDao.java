@@ -13,8 +13,8 @@ import com.ssic.education.government.mapper.EduTabMapper;
 import com.ssic.education.government.pojo.EduTab;
 import com.ssic.education.government.pojo.EduTabExample;
 import com.ssic.education.government.pojo.EduTabExample.Criteria;
-import com.ssic.util.BeanUtils;
-import com.ssic.util.constants.DataStatus;
+import com.ssic.education.utils.constants.DataStatus;
+import com.ssic.education.utils.util.BeanUtils;
 
 @Repository
 public class AdminTabDao {

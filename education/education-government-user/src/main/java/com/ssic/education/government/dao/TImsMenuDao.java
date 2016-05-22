@@ -1,7 +1,6 @@
 package com.ssic.education.government.dao;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -19,8 +18,8 @@ import com.ssic.education.government.mapper.TImsUsersExMapper;
 import com.ssic.education.government.pageModel.SessionInfo;
 import com.ssic.education.government.pojo.EduMenu;
 import com.ssic.education.government.pojo.EduMenuType;
-import com.ssic.util.BeanUtils;
-import com.ssic.util.UUIDGenerator;
+import com.ssic.education.utils.util.BeanUtils;
+import com.ssic.education.utils.util.UUIDGenerator;
 
 @Repository
 public class TImsMenuDao {

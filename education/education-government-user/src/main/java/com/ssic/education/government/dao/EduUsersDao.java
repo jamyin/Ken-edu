@@ -12,9 +12,9 @@ import com.ssic.education.government.dto.EduUsersDto;
 import com.ssic.education.government.mapper.EduUsersMapper;
 import com.ssic.education.government.pojo.EduUsers;
 import com.ssic.education.government.pojo.EduUsersExample;
-import com.ssic.util.BeanUtils;
-import com.ssic.util.base.MyBatisBaseDao;
-import com.ssic.util.digest.MD5Coder;
+import com.ssic.education.utils.digest.MD5Coder;
+import com.ssic.education.utils.mybatis.MyBatisBaseDao;
+import com.ssic.education.utils.util.BeanUtils;
 
 @Repository
 public class EduUsersDao extends MyBatisBaseDao<EduUsers>{

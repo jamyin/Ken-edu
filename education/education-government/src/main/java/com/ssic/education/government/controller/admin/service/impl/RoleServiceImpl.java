@@ -28,7 +28,7 @@ import com.ssic.education.government.mapper.TImsUserRoleExMapper;
 import com.ssic.education.government.pageModel.Role;
 import com.ssic.education.government.pageModel.SessionInfo;
 import com.ssic.education.government.pageModel.Tree;
-import com.ssic.util.UUIDGenerator;
+import com.ssic.education.utils.util.UUIDGenerator;
 
 @Service
 public class RoleServiceImpl implements RoleServiceI {

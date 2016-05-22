@@ -14,8 +14,8 @@ import com.ssic.education.government.controller.admin.service.IRoleProjectServic
 import com.ssic.education.government.dao.RoleProjectDao;
 import com.ssic.education.government.dto.RoleProjectDto;
 import com.ssic.education.government.pojo.EduRoleProject;
-import com.ssic.util.BeanUtils;
-import com.ssic.util.constants.DataStatus;
+import com.ssic.education.utils.constants.DataStatus;
+import com.ssic.education.utils.util.BeanUtils;
 
 /**		
  * <p>Title: RoleProjectServiceImpl </p>

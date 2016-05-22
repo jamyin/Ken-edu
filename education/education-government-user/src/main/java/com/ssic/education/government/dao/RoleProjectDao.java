@@ -15,9 +15,9 @@ import com.ssic.education.government.mapper.EduRoleProjectMapper;
 import com.ssic.education.government.pojo.EduRoleProject;
 import com.ssic.education.government.pojo.EduRoleProjectExample;
 import com.ssic.education.government.pojo.EduRoleProjectExample.Criteria;
-import com.ssic.util.StringUtils;
-import com.ssic.util.base.MyBatisBaseDao;
-import com.ssic.util.constants.DataStatus;
+import com.ssic.education.utils.constants.DataStatus;
+import com.ssic.education.utils.mybatis.MyBatisBaseDao;
+import com.ssic.education.utils.util.StringUtils;
 
 /**		
  * <p>Title: RoleProjectDao </p>
