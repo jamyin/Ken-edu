@@ -30,7 +30,7 @@
    
    <task:annotation-driven /> 
    
-   <bean class="com.ssic.util.SpringContextUtil" lazy-init="false"/>
+   <bean class="com.ssic.education.utils.util.SpringContextUtil" lazy-init="false"/>
    
    <import resource="persistence.xml" /> 
    <import resource="redis-persistence.xml" />
