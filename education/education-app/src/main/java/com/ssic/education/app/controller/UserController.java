@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ssic.education.app.dto.EduAppUserDto;
 import com.ssic.education.app.dto.EduUsersInfoDto;
 import com.ssic.education.app.service.IEduAppUsersService;
-import com.ssic.util.constants.DataStatus;
-import com.ssic.util.model.Response;
+import com.ssic.education.utils.constants.DataStatus;
+import com.ssic.education.utils.model.Response;
 
 /**		
  * <p>Title: UserController </p>

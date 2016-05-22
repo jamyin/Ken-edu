@@ -10,11 +10,11 @@ import com.ssic.education.app.service.ISupplierService;
 import com.ssic.education.common.dto.ProSupplierDto;
 import com.ssic.education.common.government.service.ProWaresService;
 import com.ssic.education.government.dto.ProWaresDto;
+import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 import com.ssic.education.utils.model.Response;
-import com.ssic.util.StringUtils;
-import com.ssic.util.constants.DataStatus;
+import com.ssic.education.utils.util.StringUtils;
 
 /**
 * @ClassName: SupplierController

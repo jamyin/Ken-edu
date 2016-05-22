@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssic.education.app.dto.LedgerInfoDto;
 import com.ssic.education.app.service.ILedgerInfoService;
-import com.ssic.util.model.Response;
-
+import com.ssic.education.utils.model.Response;
 /**		
  * <p>Title: StockBatchController </p>
  * <p>Description: 库存批次控制器类</p>

@@ -8,12 +8,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssic.education.app.service.ITaskService;
 import com.ssic.education.common.dto.EduTaskDto;
-import com.ssic.education.common.dto.EduTaskReceiveDto;
-import com.ssic.util.StringUtils;
-import com.ssic.util.constants.DataStatus;
-import com.ssic.util.model.PageQuery;
-import com.ssic.util.model.PageResult;
-import com.ssic.util.model.Response;
+import com.ssic.education.utils.constants.DataStatus;
+import com.ssic.education.utils.model.PageQuery;
+import com.ssic.education.utils.model.PageResult;
+import com.ssic.education.utils.model.Response;
+import com.ssic.education.utils.util.StringUtils;
 
 /**
 * @ClassName: TaskController

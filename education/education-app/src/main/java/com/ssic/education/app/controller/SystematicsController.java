@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssic.education.app.constants.ProductClass;
-import com.ssic.education.app.dto.WaresRelatedDto;
-import com.ssic.util.model.Response;
+import com.ssic.education.utils.model.Response;
 
 /**		
  * <p>Title: SystematicsController </p>

@@ -9,7 +9,7 @@ import com.ssic.education.app.dto.EduAreaDto;
 import com.ssic.education.app.service.IAreaService;
 import com.ssic.education.common.dao.AreaDao;
 import com.ssic.education.common.pojo.EduArea;
-import com.ssic.util.BeanUtils;
+import com.ssic.education.utils.util.BeanUtils;
 
 /**
 * @ClassName: AreaServiceImpl

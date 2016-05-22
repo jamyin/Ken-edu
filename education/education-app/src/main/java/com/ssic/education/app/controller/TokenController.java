@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssic.education.app.token.Token;
 import com.ssic.education.app.token.TokenUtil;
-import com.ssic.util.model.Response;
+import com.ssic.education.utils.model.Response;
 
 /**		
  * <p>Title: TokenController </p>

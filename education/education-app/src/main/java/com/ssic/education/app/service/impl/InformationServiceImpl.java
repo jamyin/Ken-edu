@@ -9,9 +9,9 @@ import com.ssic.education.app.service.IInformationService;
 import com.ssic.education.common.dao.InformationDao;
 import com.ssic.education.common.dto.EduInformationDto;
 import com.ssic.education.common.pojo.EduInformation;
-import com.ssic.util.BeanUtils;
-import com.ssic.util.model.PageQuery;
-import com.ssic.util.model.PageResult;
+import com.ssic.education.utils.model.PageQuery;
+import com.ssic.education.utils.model.PageResult;
+import com.ssic.education.utils.util.BeanUtils;
 
 /**
  * @ClassName: InformationServiceImpl

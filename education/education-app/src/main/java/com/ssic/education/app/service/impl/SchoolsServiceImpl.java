@@ -9,9 +9,9 @@ import com.ssic.education.app.service.ISchoolService;
 import com.ssic.education.common.dao.SchoolDao;
 import com.ssic.education.common.dto.EduSchoolDto;
 import com.ssic.education.common.pojo.EduSchool;
-import com.ssic.util.BeanUtils;
-import com.ssic.util.model.PageQuery;
-import com.ssic.util.model.PageResult;
+import com.ssic.education.utils.model.PageQuery;
+import com.ssic.education.utils.model.PageResult;
+import com.ssic.education.utils.util.BeanUtils;
 
 /**	
 * @ClassName: SchoolServiceImpl

@@ -5,7 +5,7 @@ import java.util.List;
 import com.ssic.education.app.dto.WaresInfoDto;
 import com.ssic.education.app.dto.WaresRelatedDto;
 import com.ssic.education.utils.model.PageQuery;
-import com.ssic.util.model.Response;
+import com.ssic.education.utils.model.Response;
 
 /**		
  * <p>Title: IWaresInfoService </p>
