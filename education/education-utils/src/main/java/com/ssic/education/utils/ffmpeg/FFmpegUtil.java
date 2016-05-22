@@ -198,7 +198,6 @@ public class FFmpegUtil implements IStringGetter {
 	/* 
 	 * 处理字符串
 	 */
-	@Override
 	public void dealString(String str) {
 		logger.info("dealString=========>" + str);
 

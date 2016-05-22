@@ -13,6 +13,7 @@ import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.Response;
 import com.ssic.education.wecaht.handle.dto.EduParentScChDto;
 import com.ssic.education.wecaht.handle.service.IEduParentScChService;
+
 /**
  * 
 	 * 此类描述的是：wap 和学校信息相关的接口信息

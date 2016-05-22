@@ -29,7 +29,6 @@ public class RedisServiceImpl implements RedisService {
 	@Autowired
 	private RedisTemplate<String, Object> redisTemplate;
 
-	@Override
 	public long del(final String... keys) {
 		return redisTemplate.execute(new RedisCallback<Long>() {
 			public Long doInRedis(RedisConnection connection)
@@ -43,7 +42,6 @@ public class RedisServiceImpl implements RedisService {
 		});
 	}
 
-	@Override
 	public void set(final byte[] key, final byte[] value, final long liveTime) {
 		redisTemplate.execute(new RedisCallback<Long>() {
 			public Long doInRedis(RedisConnection connection)
@@ -57,22 +55,21 @@ public class RedisServiceImpl implements RedisService {
 		});
 	}
 
-	@Override
 	public void set(String key, String value, long liveTime) {
 		this.set(key.getBytes(), value.getBytes(), liveTime);
 	}
 
-	@Override
+	
 	public void set(String key, String value) {
 		this.set(key, value, 0L);
 	}
 
-	@Override
+	
 	public void set(byte[] key, byte[] value) {
 		this.set(key, value, 0L);
 	}
 
-	@Override
+	
 	public String get(final String key) {
 		return redisTemplate.execute(new RedisCallback<String>() {
 			public String doInRedis(RedisConnection connection)
@@ -87,12 +84,12 @@ public class RedisServiceImpl implements RedisService {
 		});
 	}
 
-	@Override
+	
 	public Set<String> keys(String pattern) {
 		return redisTemplate.keys(pattern);
 	}
 
-	@Override
+	
 	public boolean exists(final String key) {
 		return redisTemplate.execute(new RedisCallback<Boolean>() {
 			public Boolean doInRedis(RedisConnection connection)
@@ -102,7 +99,7 @@ public class RedisServiceImpl implements RedisService {
 		});
 	}
 
-	@Override
+	
 	public String flushDB() {
 		return redisTemplate.execute(new RedisCallback<String>() {
 			public String doInRedis(RedisConnection connection)
@@ -113,7 +110,7 @@ public class RedisServiceImpl implements RedisService {
 		});
 	}
 
-	@Override
+	
 	public long dbSize() {
 		return redisTemplate.execute(new RedisCallback<Long>() {
 			public Long doInRedis(RedisConnection connection)
@@ -123,7 +120,7 @@ public class RedisServiceImpl implements RedisService {
 		});
 	}
 
-	@Override
+	
 	public String ping() {
 		return redisTemplate.execute(new RedisCallback<String>() {
 			public String doInRedis(RedisConnection connection)

@@ -20,6 +20,8 @@
     <module>education-user-api</module>
     <module>education-government-user</module>
     <module>education-wecaht-handle</module>
+    <module>education-provider-handle</module>
+    <module>education-utils</module>
   </modules>
   
     <properties>	
