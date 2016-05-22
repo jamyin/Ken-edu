@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ssic.education.common.mapper.ProRecycleOilMapper;
-import com.ssic.education.common.pojo.ProRecycleOil;
 import com.ssic.education.common.provider.utils.DataGrid;
 import com.ssic.education.common.provider.utils.PageHelper;
 import com.ssic.education.provider.dto.RecycleOilDto;

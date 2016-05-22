@@ -13,8 +13,8 @@ import com.ssic.education.provider.mapper.ProTabMapper;
 import com.ssic.education.provider.pojo.ProTab;
 import com.ssic.education.provider.pojo.ProTabExample;
 import com.ssic.education.provider.pojo.ProTabExample.Criteria;
-import com.ssic.util.BeanUtils;
-import com.ssic.util.constants.DataStatus;
+import com.ssic.education.utils.constants.DataStatus;
+import com.ssic.education.utils.util.BeanUtils;
 
 @Repository
 public class AdminTabDao {

@@ -9,11 +9,11 @@ import org.apache.log4j.Logger;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ssic.education.utils.constants.DataStatus;
+import com.ssic.education.utils.model.Response;
+import com.ssic.education.utils.util.JsonUtil;
+import com.ssic.education.utils.util.LogWriter;
 import com.ssic.education.wechat.exception.EduException;
-import com.ssic.util.JsonUtil;
-import com.ssic.util.LogWriter;
-import com.ssic.util.constants.DataStatus;
-import com.ssic.util.model.Response;
 
 /**
  * 统一异常处理器

@@ -1,6 +1,5 @@
 package com.ssic.education.provider.controller;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +23,6 @@ import com.ssic.education.common.provider.service.ISupplierService;
 import com.ssic.education.common.provider.utils.DataGrid;
 import com.ssic.education.common.provider.utils.PageHelper;
 import com.ssic.education.common.service.ICreateImageService;
-import com.ssic.education.provider.dto.ProWaresDto;
 import com.ssic.education.provider.pageModel.Json;
 import com.ssic.education.provider.service.IProLicenseService;
 import com.ssic.education.provider.service.IWaresService;

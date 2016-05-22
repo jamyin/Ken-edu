@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ssic.education.provider.mapper.ProUsersMapper;
 import com.ssic.education.provider.pojo.ProUsers;
-import com.ssic.util.base.MyBatisBaseDao;
+import com.ssic.education.utils.mybatis.MyBatisBaseDao;
 
 @Repository
 public class ProUsersDao extends MyBatisBaseDao<ProUsers> {

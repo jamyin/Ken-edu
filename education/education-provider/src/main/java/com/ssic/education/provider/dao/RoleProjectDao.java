@@ -10,16 +10,14 @@ import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-
-
 import com.ssic.education.provider.dto.PageHelperDto;
 import com.ssic.education.provider.mapper.ProRoleProjectMapper;
 import com.ssic.education.provider.pojo.ProRoleProject;
 import com.ssic.education.provider.pojo.ProRoleProjectExample;
 import com.ssic.education.provider.pojo.ProRoleProjectExample.Criteria;
-import com.ssic.util.StringUtils;
-import com.ssic.util.base.MyBatisBaseDao;
-import com.ssic.util.constants.DataStatus;
+import com.ssic.education.utils.constants.DataStatus;
+import com.ssic.education.utils.mybatis.MyBatisBaseDao;
+import com.ssic.education.utils.util.StringUtils;
 
 /**		
  * <p>Title: RoleProjectDao </p>

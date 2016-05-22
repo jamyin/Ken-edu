@@ -21,7 +21,6 @@ import com.ssic.education.provider.dto.RecycleOilDto;
 import com.ssic.education.provider.dto.TImsUsersDto;
 import com.ssic.education.provider.pageModel.Json;
 import com.ssic.education.provider.service.IRecycleOilService;
-import com.ssic.education.provider.util.ConfigUtil;
 
 @Controller
 @RequestMapping("/recycleOilControllor")

@@ -13,9 +13,9 @@ import com.ssic.education.provider.pageModel.DataGrid;
 import com.ssic.education.provider.pageModel.PageHelper;
 import com.ssic.education.provider.pojo.ProUsers;
 import com.ssic.education.provider.util.MD5Util;
-import com.ssic.util.BeanUtils;
-import com.ssic.util.StringUtils;
-import com.ssic.util.UUIDGenerator;
+import com.ssic.education.utils.util.BeanUtils;
+import com.ssic.education.utils.util.StringUtils;
+import com.ssic.education.utils.util.UUIDGenerator;
 
 @Repository
 public class UserDao {

@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ssic.base.datasource.DataSourceHolderUtil;
 import com.ssic.education.common.dto.ImageInfoDto;
 import com.ssic.education.common.pojo.ProLicense;
 import com.ssic.education.common.pojo.ProWares;
@@ -42,11 +41,12 @@ import com.ssic.education.provider.service.IProLicenseService;
 import com.ssic.education.provider.service.IWaresService;
 import com.ssic.education.provider.util.ConfigUtil;
 import com.ssic.education.provider.util.ProductClass;
+import com.ssic.education.utils.jdbc.DataSourceHolderUtil;
 import com.ssic.education.utils.poi.ParseExcelUtil;
 import com.ssic.education.utils.util.BeanUtils;
 import com.ssic.education.utils.util.ObjectExcelView;
 import com.ssic.education.utils.util.PageData;
-import com.ssic.util.UUIDGenerator;
+import com.ssic.education.utils.util.UUIDGenerator;
 
 @Controller
 @RequestMapping("/waresController")  

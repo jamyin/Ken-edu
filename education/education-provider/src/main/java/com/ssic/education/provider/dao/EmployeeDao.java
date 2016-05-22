@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import com.ssic.education.common.mapper.ProEmployeeMapper;
 import com.ssic.education.common.pojo.ProEmployee;
-import com.ssic.education.common.pojo.ProWares;
 import com.ssic.education.provider.dto.PageHelperDto;
 import com.ssic.education.provider.dto.ProEmployeeDto;
 import com.ssic.education.provider.mapper.ProEmployeeExMapper;

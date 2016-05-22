@@ -28,7 +28,7 @@ import com.ssic.education.provider.pageModel.Role;
 import com.ssic.education.provider.pageModel.SessionInfo;
 import com.ssic.education.provider.pageModel.Tree;
 import com.ssic.education.provider.service.RoleServiceI;
-import com.ssic.util.UUIDGenerator;
+import com.ssic.education.utils.util.UUIDGenerator;
 
 @Service
 public class RoleServiceImpl implements RoleServiceI {

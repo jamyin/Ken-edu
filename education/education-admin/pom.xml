@@ -140,15 +140,7 @@
 			<artifactId>druid</artifactId>
 		</dependency>
 		
-		<!-- liubo项目文件 结束-->  		
-        <dependency>
-			<groupId>com.ssic</groupId>
-		    <artifactId>ssic-util</artifactId>
-		</dependency>	
-         <dependency>
-            <groupId>com.ssic</groupId>
-		    <artifactId>ssic-datasource</artifactId>
-         </dependency>
+		<!-- liubo项目文件 结束-->  			
          <!-- 亲加云 -->
         <dependency>
 	        <groupId>commons-beanutils</groupId>

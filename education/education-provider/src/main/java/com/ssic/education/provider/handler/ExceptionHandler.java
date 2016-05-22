@@ -8,8 +8,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ssic.util.JsonUtil;
-import com.ssic.util.model.RequestResult;
+import com.ssic.education.utils.model.RequestResult;
+import com.ssic.education.utils.util.JsonUtil;
+
+
 
 /**
  * 统一异常处理器

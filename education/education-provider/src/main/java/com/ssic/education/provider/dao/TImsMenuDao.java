@@ -20,8 +20,8 @@ import com.ssic.education.provider.pageModel.SessionInfo;
 import com.ssic.education.provider.pojo.ProMenu;
 import com.ssic.education.provider.pojo.ProMenuType;
 import com.ssic.education.provider.util.MyComparator;
-import com.ssic.util.BeanUtils;
-import com.ssic.util.UUIDGenerator;
+import com.ssic.education.utils.util.BeanUtils;
+import com.ssic.education.utils.util.UUIDGenerator;
 
 @Repository
 public class TImsMenuDao {
