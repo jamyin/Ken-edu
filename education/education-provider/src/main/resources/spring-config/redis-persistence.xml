@@ -19,7 +19,7 @@
     <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">  
         <property name="caches">  
             <set>  
-                <bean class="com.ssic.base.redis.cache.RedisCache">  
+                <bean class="com.ssic.education.utils.redis.cache.RedisCache">  
                     <property name="redisTemplate" ref="redisTemplate" />  
                     <property name="name" value="default"/>  
                 </bean>             
@@ -57,7 +57,7 @@
     	</property>   	
     </bean>
     
-    <bean id="wdRedisDao" class="com.ssic.base.redis.WdRedisDao" >
+    <bean id="wdRedisDao" class="com.ssic.education.utils.redis.WdRedisDao" >
     	<property name="redisTemplate" ref="redisTemplate" />  
     </bean>
 </beans>
