@@ -54,19 +54,18 @@
 				a.remark AS remark,
 				a.supplier_id  AS supplierId
 			FROM
-				t_pro_wares a,
-				t_pro_supplier b
+				t_pro_wares a
+				
 			WHERE
-			a.supplier_id = b.id
-			AND a.stat = 1
-			AND b.stat = 1
+			 a.stat = 1
+			
 			AND a.id=#{proWaresDto.id}
 			
 			order by a.create_time desc
 			
 	</select>
 	
-	<select id="lookSupplier"   resultType="com.ssic.education.provider.dto.ProWaresDto">
+	<!-- <select id="lookSupplier"   resultType="com.ssic.education.provider.dto.ProWaresDto">
 	
 					SELECT
 					b.supplier_name AS supplierName,
@@ -84,7 +83,7 @@
 				AND b.action_type=0
 				AND a.stat=1 
 				AND  b.stat=1
-	</select>
+	</select> -->
 	
 	
 	

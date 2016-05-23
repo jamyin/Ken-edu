@@ -94,7 +94,7 @@
 						<tr>
 							<th>生产企业</th>
 							<td><input name="manufacturer" type="text" placeholder="请输入生产企业" id="manufacturer"
-								class="easyui-validatebox span2" data-options="required:true" value="${wdto.supplierName}"></td>
+								class="easyui-validatebox span2" data-options="required:true" value="${wdto.manufacturer}"></td>
 								<th>条形码</th>
 							<td><input name="barCode" type="text" id="barCode"
 								placeholder="请输入条形码" class="easyui-validatebox span2"
