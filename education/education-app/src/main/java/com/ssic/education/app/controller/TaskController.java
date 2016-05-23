@@ -17,7 +17,7 @@ import com.ssic.education.utils.util.StringUtils;
 /**
 * @ClassName: TaskController
 * @Description: 任务(通知)controll
-* @author Ken Yin
+* @author Ken Yin_
 * @date 2016年5月20日 下午2:53:15
 *
  */
