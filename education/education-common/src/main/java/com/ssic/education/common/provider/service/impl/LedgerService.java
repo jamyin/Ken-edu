@@ -40,7 +40,7 @@ public class LedgerService implements ILedgerService {
 
 	@Override
 	public int deleteLedger(String sourceId, String wareBatchNo) {
-		return 0;
+		return ledgerDao.deleteLedger(sourceId,wareBatchNo);
 	}
 
 }

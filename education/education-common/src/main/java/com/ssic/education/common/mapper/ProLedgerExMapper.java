@@ -38,4 +38,6 @@ public interface ProLedgerExMapper {
 
 	public int updateLedger(@Param("ledgerList")List<LedgerDto> ledger);
 
+	public int deleteLedger(@Param("sourceId")String sourceId, @Param("wareBatchNo")String wareBatchNo);
+
 }

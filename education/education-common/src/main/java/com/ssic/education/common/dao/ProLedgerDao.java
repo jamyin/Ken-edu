@@ -133,5 +133,9 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger>{
 		}
 		return exMapper.updateLedger(ledger);
 	}
+
+	public int deleteLedger(String sourceId, String wareBatchNo) {
+		return exMapper.deleteLedger(sourceId,wareBatchNo);
+	}
 	
 }
