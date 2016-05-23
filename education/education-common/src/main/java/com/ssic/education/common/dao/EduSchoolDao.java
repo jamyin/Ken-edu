@@ -1,19 +1,6 @@
 package com.ssic.education.common.dao;
 
-import com.ssic.education.common.dto.EduSchoolDto;
-import com.ssic.education.common.dto.ProSupplierDto;
-import com.ssic.education.common.mapper.EduSchoolExMapper;
-import com.ssic.education.common.mapper.EduSchoolMapper;
-import com.ssic.education.common.mapper.EduSchoolSupplierMapper;
-import com.ssic.education.common.pojo.EduSchool;
-import com.ssic.education.common.pojo.EduSchoolExample;
-import com.ssic.education.common.pojo.EduSchoolSupplier;
-import com.ssic.education.common.pojo.EduSchoolSupplierExample;
-import com.ssic.education.common.pojo.ProSupplier;
-import com.ssic.education.utils.constants.DataStatus;
-import com.ssic.education.utils.model.PageQuery;
-import com.ssic.education.utils.mybatis.MyBatisBaseDao;
-import com.ssic.education.utils.util.BeanUtils;
+import java.util.List;
 
 import lombok.Getter;
 
@@ -21,7 +8,16 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import com.ssic.education.common.dto.EduSchoolDto;
+import com.ssic.education.common.dto.ProSupplierDto;
+import com.ssic.education.common.mapper.EduSchoolExMapper;
+import com.ssic.education.common.mapper.EduSchoolMapper;
+import com.ssic.education.common.pojo.EduSchool;
+import com.ssic.education.common.pojo.EduSchoolExample;
+import com.ssic.education.utils.constants.DataStatus;
+import com.ssic.education.utils.model.PageQuery;
+import com.ssic.education.utils.mybatis.MyBatisBaseDao;
+import com.ssic.education.utils.util.BeanUtils;
 
 /**
  * @author pengpeng

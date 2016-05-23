@@ -17,6 +17,10 @@ public interface DataStatus {
     final static int ENABLED = 1;
 
     final static int DISABLED = 0;
+    
+    final static short SHORT_ENABLED = 1;
+
+    final static short SHORT_DISABLED = 0;
     /**   
     * DISABLED: 交易完成
     */
