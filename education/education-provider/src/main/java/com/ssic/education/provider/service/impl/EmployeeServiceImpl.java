@@ -16,7 +16,6 @@ public class EmployeeServiceImpl implements IEmployeeService {
 	
 	
 	
-	@Override
 	public List<ProEmployeeDto> findAllEmployee(ProEmployeeDto pe, PageHelperDto phdto) {
 		// TODO Auto-generated method stub
 		return dao.findAllEmployee(pe,phdto);
@@ -24,7 +23,6 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
 
 
-	@Override
 	public void insertEmployee(ProEmployeeDto pe) {
 		// TODO Auto-generated method stub
 		dao.insertEmployee(pe);
