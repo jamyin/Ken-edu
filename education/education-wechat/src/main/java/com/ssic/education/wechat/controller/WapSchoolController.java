@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ssic.education.common.dto.EduSchoolDto;
 import com.ssic.education.common.government.service.EduSchoolService;
@@ -84,6 +85,23 @@ public class WapSchoolController extends BaseController{
 		int data = iEduParentScChService.saveFollow(eduParentScChDto);
 		
 		return result;
+	}
+	
+	/**
+	 * 
+		 * 此方法描述的是：查询家长关注的学校列表
+		 * @author: cwftalus@163.com
+		 * @version: 2016年5月23日 上午10:18:10
+	 */
+	@RequestMapping(value="followList")
+	public ModelAndView followList(EduParentScChDto eduParentScChDto){
+		ModelAndView mv = getModelAndView();
+		
+		List<EduParentScChDto> dataList =  iEduParentScChService.searchFollowList(eduParentScChDto);
+		
+		mv.addObject("dataList",dataList);
+		mv.setViewName("followList");
+		return mv;
 	}
 	
 }
