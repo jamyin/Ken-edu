@@ -61,7 +61,7 @@ public class WaresServiceImpl implements IWaresService {
 		}
 	}
 	
-	@Override
+	
 	public List<ProWaresDto> findAllWares(ProWaresDto waresDto, PageHelperDto phdto) {
 		// TODO Auto-generated method stub
 		return dao.findAllWares(waresDto,phdto);
@@ -69,7 +69,7 @@ public class WaresServiceImpl implements IWaresService {
 
 
 
-	@Override
+	
 	public void insertWares(ProWaresDto pro) {
 		// TODO Auto-generated method stub
 		dao.insertWares(pro);
@@ -77,7 +77,7 @@ public class WaresServiceImpl implements IWaresService {
 
 
 
-	@Override
+	
 	public String findSupplierIdByName(String supplierName) {
 		// TODO Auto-generated method stub
 		return dao.findSupplierIdByName(supplierName);
@@ -85,7 +85,7 @@ public class WaresServiceImpl implements IWaresService {
 
 
 
-	@Override
+	
 	public List<ProWaresDto> findWares(ProWaresDto proWaresDto) {
 		// TODO Auto-generated method stub
 		return dao.findWares(proWaresDto);
@@ -93,7 +93,7 @@ public class WaresServiceImpl implements IWaresService {
 
 
 
-	@Override
+	
 	public void deleteWares(ProWaresDto waresDto) {
 		// TODO Auto-generated method stub
 		dao.deleteWares(waresDto);
@@ -101,7 +101,7 @@ public class WaresServiceImpl implements IWaresService {
 
 
 
-	@Override
+	
 	public void updateImsUsers(ProWares proWares) {
 		// TODO Auto-generated method stub
 		dao.updateImsUsers(proWares);
@@ -109,7 +109,7 @@ public class WaresServiceImpl implements IWaresService {
 
 
 
-	@Override
+	
 	public List<SupplierDto> lookSupplier(ProWaresDto dto) {
 		// TODO Auto-generated method stub
 		return dao.lookSupplier(dto);

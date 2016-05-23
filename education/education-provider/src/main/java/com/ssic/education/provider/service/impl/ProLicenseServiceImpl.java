@@ -13,17 +13,14 @@ public class ProLicenseServiceImpl implements IProLicenseService {
 
 	@Autowired
 	private ProLicenseDao dao;
-	@Override
 	public void updateImage(ProLicense license) {
 		// TODO Auto-generated method stub
 		dao.updateImage(license);
 	}
-	@Override
 	public List<ProLicense> lookImage(ProLicense license) {
 		// TODO Auto-generated method stub
 		return dao.lookImage(license);
 	}
-	@Override
 	public void alterImage(ProLicense license) {
 		// TODO Auto-generated method stub
 		dao.alterImage(license);

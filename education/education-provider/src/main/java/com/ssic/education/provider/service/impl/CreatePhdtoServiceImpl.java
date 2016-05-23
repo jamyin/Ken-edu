@@ -7,7 +7,6 @@ import com.ssic.education.provider.service.ICreatePhdtoService;
 @Service
 public class CreatePhdtoServiceImpl implements ICreatePhdtoService {
 
-	@Override
 	public PageHelperDto getNewPhDto(String order, int page, int rows,
 			String sort) {
 		// TODO Auto-generated method stub

@@ -34,7 +34,6 @@ public class RecipeServiceImpl implements IRecipeService {
 		return null;
 	}
 
-	@Override
 	public List<ProPackagesDto> findAllPackage(ProPackagesDto dto, PageQuery page) {
 		//return packagesDao.getProPackages(dto)
 		return null;

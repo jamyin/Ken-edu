@@ -191,7 +191,7 @@ public class ResourceServiceImpl implements ResourceServiceI {
 	 * 
 	 * @see com.ssic.game.admin.service.ResourceServiceI#tabTree(com.ssic.game.admin.pageModel.SessionInfo)
 	 */
-	@Override
+
 	public List<Tree> tabTree(SessionInfo sessionInfo) {
 		List<Tree> lt = new ArrayList<Tree>();
 		AdminTabDto tabDto = adminTabDao
@@ -227,7 +227,7 @@ public class ResourceServiceImpl implements ResourceServiceI {
 	 * 
 	 * @see com.ssic.game.admin.service.ResourceServiceI#allsTree(com.ssic.game.admin.pageModel.SessionInfo)
 	 */
-	@Override
+	
 	public List<Tree> allsTree(SessionInfo sessionInfo) {
 		List<Tree> lt = new ArrayList<Tree>();
 

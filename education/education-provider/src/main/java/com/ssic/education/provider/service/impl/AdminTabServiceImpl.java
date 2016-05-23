@@ -18,12 +18,10 @@ public class AdminTabServiceImpl implements AdminTabServiceI {
 		return adminTabDao.findAll();
 	}
 
-	@Override
 	public AdminTabDto findById(String id) {
 		return adminTabDao.findById(id);
 	}
 
-	@Override
 	public AdminTabDto findByTabName(String tabName) {
 		return adminTabDao.findByTabName(tabName);
 	}
