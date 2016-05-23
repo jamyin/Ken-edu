@@ -401,3 +401,13 @@ hs_err_pid*
 /education/education-wechat/build/classes/main/webapp/form/*.html
 /education/education-wechat/build/classes/main/webapp/form/js/*.js
 /education/education-wechat/build/classes/main/webapp/*.jsp
+/education/education-utils/*.classpath
+/education/education-utils/*.project
+/education/education-utils/.settings/*.prefs
+/education/education-utils/.settings/*.component
+/education/education-utils/.settings/*.xml
+/education/education-wecaht-handle/*.classpath
+/education/education-wecaht-handle/*.project
+/education/education-wecaht-handle/.settings/*.prefs
+/education/education-wecaht-handle/.settings/*.component
+/education/education-wecaht-handle/.settings/*.xml
