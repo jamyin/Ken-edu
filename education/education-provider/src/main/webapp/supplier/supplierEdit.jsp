@@ -34,6 +34,7 @@
 <div class="easyui-layout" data-options="fit:true,border:false">
 	<div data-options="region:'center',border:false" title="" style="overflow: hidden;">
 		<form id="form" method="post">
+		  <input id="id" name="id" type="hidden" value="${ProSupplie.id}" />
 			<table class="table table-hover table-condensed">
 				<tr>					
 					<th>供应商名称</th>

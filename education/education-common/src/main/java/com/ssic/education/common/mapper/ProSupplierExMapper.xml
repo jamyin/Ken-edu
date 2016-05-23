@@ -266,7 +266,18 @@ AND  a.stat=1 AND  a.id=#{id}
 				AND a.stat=1 
 
 	</select>
+	<select id="findSupplierCodeByReceiverId"
+		resultType="com.ssic.education.common.provider.dto.SupplierDto">
 	
+	
+	SELECT
+	a.supplier_code AS supplierCode
+FROM
+	t_pro_supplier_receiver a
+WHERE
+	a.receiver_id = #{supplierId}
+	
+	</select>
 	
 	
 	

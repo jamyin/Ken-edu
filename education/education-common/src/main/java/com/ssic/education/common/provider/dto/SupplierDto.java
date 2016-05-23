@@ -18,6 +18,9 @@ public class SupplierDto {
     private String supplierName;
 	@Setter
 	@Getter
+    private String supplierId;
+	@Setter
+	@Getter
     private String waresName;//商品名称
 	@Setter
 	@Getter

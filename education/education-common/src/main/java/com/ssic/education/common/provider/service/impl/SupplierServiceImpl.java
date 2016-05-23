@@ -152,4 +152,10 @@ public class SupplierServiceImpl implements ISupplierService {
 		proSupplierDao.saveSupplierReceiver(proSupplierReceiver);
 	}
 
+	@Override
+	public List<SupplierDto> findSupplierCodeByReceiverId(String supplierId) {
+		// TODO Auto-generated method stub
+		return proSupplierDao.findSupplierCodeByReceiverId(supplierId);
+	}
+
 }

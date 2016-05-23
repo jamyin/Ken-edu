@@ -43,8 +43,7 @@
 					<tr>
 					<th>供应商名称</th>
 						<td><input name="supplierName" type="text" placeholder="请输入供应商名称" class="easyui-validatebox span2" data-options="required:true" ></td>
-						
-					
+											
 					</tr>
 					<tr>
 					
@@ -67,7 +66,7 @@
 						</tr>	
 			<tr>
 				<th>供应商编码</th>
-						<td><input name="SupplierCode" type="text" class="easyui-validatebox span2" ></td>
+						<td><input name="SupplierCode" type="text" class="easyui-validatebox span2"  data-options="required:true" ></td>
 				</tr>
 							<tr>
 				

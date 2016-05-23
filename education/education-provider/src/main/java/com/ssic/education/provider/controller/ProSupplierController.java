@@ -1,6 +1,7 @@
 package com.ssic.education.provider.controller;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -88,7 +89,7 @@ public class ProSupplierController {
 	 */
 	@RequestMapping(value = "/proSupplierEdit")
 	@ResponseBody
-	public Json updataProSupplier(SupplierDto ps) {
+	public Json updataProSupplier(SupplierDto ps,HttpServletRequest request) {
 		Json j = null;
 		j=checkSupplier(ps);
 		if(j!=null){
@@ -100,6 +101,18 @@ public class ProSupplierController {
 			j.setMsg("不存在的供应商");
 			j.setSuccess(false);
 			return j;
+		}
+		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
+				ConfigUtil.SESSIONINFONAME);
+		//查找已定义的供应商编码，供应商编码唯一
+	List<SupplierDto>  list=	supplierService.findSupplierCodeByReceiverId(info.getSupplierId());
+		for (SupplierDto supplierDto : list) {
+			if(supplierDto.getSupplierCode().equals(ps.getSupplierCode())){
+				j.setMsg("供应商编码重复");
+				j.setSuccess(false);
+				return j;
+			}
+			
 		}
 		supplierService.updataProSupplier(ps);
 		j.setMsg("修改信息成功");
@@ -153,6 +166,19 @@ public class ProSupplierController {
 				ConfigUtil.SESSIONINFONAME);
 		proSupplierReceiver.setReceiverId(info.getSupplierId());
 		proSupplierReceiver.setSupplierCode(ps.getSupplierCode());
+		List<SupplierDto>  list=	supplierService.findSupplierCodeByReceiverId(info.getSupplierId());
+	
+		
+		for (int i = 0; i < list.size(); i++) {
+			 boolean falge = list.get(i).getSupplierCode().equalsIgnoreCase(ps.getSupplierCode());
+			if(falge){
+				j=new Json();
+				j.setMsg("供应商编码重复");
+				j.setSuccess(false);
+				return j;
+			}
+			 
+		}
 		supplierService.saveSupplierReceiver(proSupplierReceiver);
 		j=new Json();
 		j.setMsg("添加供应商成功");

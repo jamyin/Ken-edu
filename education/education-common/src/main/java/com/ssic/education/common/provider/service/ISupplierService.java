@@ -55,4 +55,6 @@ public interface ISupplierService {
 	ProSupplier getSupplierByName(String name, String supplierId);
 
 	void saveSupplierReceiver(ProSupplierReceiver proSupplierReceiver);
+
+	List<SupplierDto> findSupplierCodeByReceiverId(String supplierId);
 }
