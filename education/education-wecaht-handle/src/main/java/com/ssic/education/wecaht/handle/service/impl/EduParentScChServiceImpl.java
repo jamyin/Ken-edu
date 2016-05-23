@@ -1,11 +1,8 @@
 package com.ssic.education.wecaht.handle.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ssic.education.common.dto.EduSchoolDto;
 import com.ssic.education.utils.util.BeanUtils;
 import com.ssic.education.wecaht.handle.dao.EduParentScChDao;
 import com.ssic.education.wecaht.handle.dto.EduParentScChDto;
@@ -26,12 +23,6 @@ public class EduParentScChServiceImpl implements IEduParentScChService {
 	public int updateFollow(EduParentScChDto eduParentScChDto) {
 		EduParentScCh eduParentScCh = BeanUtils.createBeanByTarget(eduParentScChDto, EduParentScCh.class);
 		return eduParentScChDao.updateByPrimaryKeySelective(eduParentScCh);
-	}
-
-	public List<EduParentScChDto> searchFollowList(EduParentScChDto eduParentScChDto) {
-		List<EduParentScCh> resultList = eduParentScChDao.searchFollowList(eduParentScChDto);
-		List<EduParentScChDto> dataList = BeanUtils.createBeanListByTarget(resultList, EduParentScChDto.class);
-		return dataList;
 	}
 	
 

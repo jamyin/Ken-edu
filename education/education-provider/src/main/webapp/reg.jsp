@@ -40,7 +40,7 @@
                     </li>
                 </ul>
             </div> -->
-            <form id="submit_form" enctype="multipart/form-data" method="POST">
+            <form id="submit_form">
 	        	<div class="reg-box" id="verifyCheck" style="margin-top:20px;">
 	            	<div class="part1">                	
 	                    <div class="item col-xs-12">
@@ -83,19 +83,13 @@
 	                    <div class="item col-xs-12">
 	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>区教委：</span>    
 	                        <div class="" id="committeeList" style="float: right;margin-left:90px;"></div>
-	                    </div>
+	                    </div>	                    
 						<div class="item col-xs-12" style="margin-top:60px;">
 	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>工商执照：</span>    
 	                       <div class="f-fl item-ifo">
 	      						<input multiple type="file" id="id-input-file-3"/>
 	                        </div>
-	                    </div>
-						<div class="item col-xs-12" >
-	                        <span class="intelligent-label f-fl"><b class="ftx04"></b></span>    
-	                       <div class="f-fl item-ifo">
-	      						<img id="img_show" alt="" src="" style="width:100px;height:55px;"/>
-	                        </div>
-	                    </div>		                    
+	                    </div>	
 	                    <div class="item col-xs-12" >
 	                        <span class="intelligent-label f-fl"><b class="ftx04">*</b>用户名：</span>    
 	                        <div class="f-fl item-ifo">
@@ -180,10 +174,22 @@ $(function(){
         onComplete: function(event, queueID, fileObj, response, data) {
             var dataObj = eval("("+response+")");
             if(dataObj.status == 200){
-				$("#img_show").attr("src",'http://127.0.0.1/'+dataObj.filePath);
-				$("#pic").val(dataObj.filePath);
+            	parent.layer.msg('图片上传成功', {
+					shade: [0.9, '#000'],
+				    icon: 6,
+				    time: 800 //2秒关闭（如果不配置，默认是3秒）
+				}, function(){
+					$("#img_show").attr("src",'${imgurl}'+dataObj.filePath);
+					$("#pic").val(dataObj.filePath);
+				});                
+           		//console.log(dataObj.filePath);
+				//$("[name=logo]").val(dataObj.filePath);
             }else{
-            	
+            	layer.alert("对不起," + fileObj.name + "上传失败!<br/>请选择小于10M的图片", {
+    				shade: [0.9, '#000'],
+    			    icon: 3,
+    			    time: 3000 //2秒关闭（如果不配置，默认是3秒）
+    			}); 
             }
         },
         onSelect:function(){

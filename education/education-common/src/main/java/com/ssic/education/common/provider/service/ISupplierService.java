@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ssic.education.common.dto.ProSupplierDto;
 import com.ssic.education.common.pojo.ProSupplier;
+import com.ssic.education.common.pojo.ProSupplierReceiver;
 import com.ssic.education.common.provider.dto.SupplierDto;
 import com.ssic.education.common.provider.utils.DataGrid;
 import com.ssic.education.common.provider.utils.PageHelper;
@@ -52,4 +53,6 @@ public interface ISupplierService {
 	 * @since 2016.5.21
 	 */
 	ProSupplier getSupplierByName(String name, String supplierId);
+
+	void saveSupplierReceiver(ProSupplierReceiver proSupplierReceiver);
 }

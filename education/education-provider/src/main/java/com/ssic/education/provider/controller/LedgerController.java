@@ -1,8 +1,6 @@
 package com.ssic.education.provider.controller;
 
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -150,6 +148,7 @@ public class LedgerController {
 		List<ProLedger> list = new ArrayList();
 		Date now = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/M/d");
+		DecimalFormat df2 = new DecimalFormat("#.##");
 		for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
 			ProLedger dto = new ProLedger();
 			HSSFRow hssfRow = hssfSheet.getRow(rowNum);
@@ -188,7 +187,8 @@ public class LedgerController {
 					}
 				} else if (i == 4) {
 					// 数量
-					dto.setQuantity(new BigDecimal(value).setScale(2, RoundingMode.DOWN));
+					// TODO need yanggang regenerate pojo
+					//dto.setUnit(df2.parse(value));
 				} else if (i == 5) {
 					// 生产日期
 					dto.setProductionDate(sdf.parse(value));
@@ -231,8 +231,7 @@ public class LedgerController {
 				list.add(dto);
 			}
 		}
-		// 批量导入 
-		ledgerService.addProLedger(list);
+		// TODO 导入批次
 
 		// TODO 反馈用户错误信息
 		return null;
