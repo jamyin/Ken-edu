@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ssic.education.common.dto.EduTaskDto;
+import com.ssic.education.common.dto.EduTaskReadDto;
+import com.ssic.education.common.dto.EduTaskReceiveDto;
 import com.ssic.education.common.mapper.EduTaskExMapper;
 import com.ssic.education.common.mapper.EduTaskMapper;
+import com.ssic.education.common.mapper.EduTaskReceiveExMapper;
 import com.ssic.education.common.mapper.EduTaskReceiveMapper;
 import com.ssic.education.common.pojo.EduTask;
 import com.ssic.education.common.pojo.EduTaskExample;
@@ -37,11 +40,14 @@ public class TaskDao extends MyBatisBaseDao<EduTask> {
 	@Autowired
 	private EduTaskExMapper mappers;
 	
-
 	@Autowired
 	@Getter
 	private EduTaskReceiveMapper exMapper;
-
+	
+	@Autowired
+	@Getter
+	private EduTaskReceiveExMapper exMappers;
+	
 	public List<EduTaskDto> findTaskListById(String id, int readstat,
 			PageQuery query) {
 		return mappers.findTaskListById(id, readstat,
@@ -82,6 +88,16 @@ public class TaskDao extends MyBatisBaseDao<EduTask> {
 		receive.setReadstat(1);    //设置已读
 		EduTaskReceiveExample example = new EduTaskReceiveExample();
 		return exMapper.updateByExampleSelective(receive, example);
+	}
+
+	public List<EduTaskReadDto> findReadList(EduTaskReceiveDto receiveDto,
+			PageQuery query) {
+		return exMappers.findReadList(receiveDto,
+				query);
+	}
+
+	public int selectReadAccount(EduTaskReceiveDto receiveDto) {
+		return exMappers.selectReadAccount(receiveDto);
 	}
 
 
