@@ -27,4 +27,20 @@ public class LedgerService implements ILedgerService {
 		return ledgerDao.saveLedger(ledger);
 	}
 
+	@Override
+	public List<LedgerDto> findLedgerById(String sourceId,
+			String wareBatchNo) {
+		return ledgerDao.findLedgerById(sourceId,wareBatchNo);
+	}
+
+	@Override
+	public int updataLedger(List<LedgerDto> ledger) {
+		return ledgerDao.updataLedger(ledger);
+	}
+
+	@Override
+	public int deleteLedger(String sourceId, String wareBatchNo) {
+		return 0;
+	}
+
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ssic.education.common.mapper.ProLedgerExMapper" >
+<mapper namespace="com.ssic.education.common.mapper.ProLedgerExMapper">
 	<select id="countAllLedger" resultType="Long">
 		SELECT
 		count(id)
@@ -11,10 +11,11 @@
 		AND source_id=#{ledgerDto.sourceId}
 	</select>
 	<select id="findAllLedger" resultType="com.ssic.education.common.provider.dto.LedgerDto">
-		SELECT
-		l.ware_batch_no ware_batch_no,
-		l.action_date actionDate,
-		l.receiver_name receiverName,
+		SELECT DISTINCT
+		l.ware_batch_no wareBatchNo,
+		l.action_date sendDate,
+		l.receiver_name
+		receiverName,
 		u.`name` userName
 		FROM
 		t_pro_ledger
@@ -31,61 +32,196 @@
 		</if>
 	</select>
 	<insert id="insertLedger" parameterType="java.util.List">
-		
-			insert into t_pro_ledger (id, wares_id, name,
-			spce, action_type, action_date,
-			supplier_id, supplier_code, supplier_name,
-			quantity, production_date, batch_no,
-			receiver_id, receiver_code, receiver_name,
-			trace_code, user_id, source_id,
-			ware_batch_no, create_time, last_update_time,
-			stat)
-			values
-			<foreach item="item" collection="ledgerList" separator="," open="("
-			close=")" index="index">
-			 UUID(), #{item.waresId},
+
+		insert into t_pro_ledger (id, wares_id, name,
+		spce, action_type,
+		action_date,
+		supplier_id, supplier_code, supplier_name,
+		quantity,
+		production_date,production_Name, batch_no,
+		receiver_id, receiver_code,
+		receiver_name,
+		trace_code, user_id, source_id,
+		ware_batch_no,
+		create_time,
+		last_update_time,
+		stat)
+		values
+		<foreach item="item" collection="ledgerList" separator=","
+			index="index">
+			(UUID(), #{item.waresId},
 			#{item.name},
-			#{item.spce}, #{item.actionType}, #{item.actionDate},
-			#{item.supplierId}, #{item.supplierCode},
+			#{item.spce},
+			#{item.actionType},
+			#{ledgerList[0].actionDate},
+			#{item.supplierId},
+			#{item.supplierCode},
 			#{item.supplierName},
-			#{item.quantity}, #{item.productionDate}, #{item.batchNo},
-			#{item.receiverId}, #{item.receiverCode},
-			#{item.receiverName},
-			#{item.traceCode}, #{item.userId}, #{item.sourceId},
-			#{item.wareBatchNo}, #{item.createTime},
-			#{item.lastUpdateTime},
-			#{item.stat}
+			#{item.quantity},
+			#{item.productionDate},
+			#{item.productionName}, #{item.batchNo},
+			#{ledgerList[0].receiverId},
+			#{item.receiverCode},
+			#{ledgerList[0].receiverName},
+			#{item.traceCode},
+			#{ledgerList[0].userId}, #{ledgerList[0].sourceId},
+			#{ledgerList[0].wareBatchNo}, #{ledgerList[0].createTime},
+			#{ledgerList[0].lastUpdateTime},
+			#{ledgerList[0].stat})
 		</foreach>
 	</insert>
-	<select id="selectSupplierByReceiverId" resultType="com.ssic.education.common.dto.ProSupplierDto" parameterType="java.lang.String">
-	   SELECT a.id,a.supplier_name as supplierName,a.address,a.supplier_type as supplierType,a.business_license as businessLicense, 
-	   a.organization_code as organizationCode,a.corporation,a.contact_way as contactWay,a.longitude,a.latitude,
-	   a.last_update_time as lastUpdateTime,a.create_time as createTime,a.stat
-	   FROM t_pro_supplier a 
-	   LEFT JOIN t_pro_ledger b on b.supplier_id = a.id 
-	   WHERE a.stat =1 and b.stat = 1 
-	   <include refid="where_supplier_bypage" />
-	   GROUP BY a.id
-	   ORDER BY a.create_time desc
-       limit  #{page.startNum}, #{page.pageSize}
+	<select id="findSchoolIdByReceiverId" resultType="java.lang.String">
+		SELECT
+		a.school_id
+		FROM t_edu_school_supplier a,t_edu_school b
+		WHERE
+		a.school_id=b.id
+		AND a.supplier_id=#{ledgerDto.sourceId}
+		AND
+		trim(b.school_name)=#{ledgerDto.receiverName}
+		AND b.stat = 1
 	</select>
-	
-	<select id="countSupplier" resultType="java.lang.Long" parameterType="java.lang.String">
-	   SELECT count(*) from (SELECT a.id, COUNT(*) counts 
-	   FROM t_pro_supplier a 
-	   LEFT JOIN t_pro_ledger b on b.supplier_id = a.id  
-	   WHERE a.stat =1 and b.stat = 1 
-	   <include refid="where_supplier_bypage" />
-	    GROUP BY a.id) t
+	<select id="findWaresIdBySupplierId" resultType="java.lang.String">
+		SELECT id
+		FROM
+		t_pro_wares
+		WHERE supplier_id=#{ledgerDto.sourceId}
+		AND
+		wares_name=#{ledgerDto.name}
+		AND stat = 1
 	</select>
-	
+	<select id="findSupplierIdBySourceId" resultType="java.lang.String">
+		SELECT b.id
+		FROM t_pro_supplier_receiver a, t_pro_supplier b
+		WHERE
+		a.supplier_id=b.id
+		AND a.receiver_id=#{ledgerDto.sourceId}
+		AND
+		b.supplier_name=#{ledgerDto.supplierName}
+		AND b.stat = 1
+	</select>
+	<select id="findLedgerByWareBatchNo" resultType="com.ssic.education.common.provider.dto.LedgerDto">
+		SELECT l.id id,
+		l.wares_id waresId, l.name, l.spce, l.action_type actionType,
+		l.action_date actionDate,
+		l.supplier_id supplierId,
+		l.supplier_code
+		supplierCode, l.supplier_name supplierName,
+		l.quantity,
+		l.production_date productionDate,l.production_name productionName
+		,l.batch_no batchNo, l.receiver_id receiverId, l.receiver_code
+		receiverCode,
+		l.receiver_name receiverName,
+		l.trace_code traceCode,
+		l.user_id userId, l.source_id sourceId, l.ware_batch_no wareBatchNo,
+		l.create_time createTime, l.last_update_time lastUpdateTime,
+		l.stat,u.`name` userName
+		FROM
+		t_pro_ledger
+		l,t_pro_users u
+		WHERE
+		l.user_id=u.id
+		AND
+		l.source_id=#{sourceId}
+		AND
+		l.ware_batch_no=#{wareBatchNo}
+		AND l.stat = 1
+	</select>
+	<select id="findWareBatchNoById" resultType="java.lang.String">
+		SELECT ware_batch_no
+		FROM
+		t_pro_ledger
+		WHERE
+		id=#{id}
+		AND stat = 1
+	</select>
+	<update id="updateLedger" parameterType="java.util.List">
+		<!-- WARNING - @mbggenerated This element is automatically generated by 
+			MyBatis Generator, do not modify. This element was generated on Fri May 20 
+			16:18:17 JST 2016. -->
+		<foreach item="item" collection="ledgerList" index="index" separator=";">
+			update
+			t_pro_ledger
+			set
+			wares_id = #{item.waresId},
+			name =
+			#{item.name,jdbcType=VARCHAR},
+			spce = #{item.spce,jdbcType=VARCHAR},
+			action_type = #{item.actionType,jdbcType=INTEGER},
+			action_date =
+			#{ledgerList[0].actionDate,jdbcType=DATE},
+			supplier_id =
+			#{item.supplierId,jdbcType=VARCHAR},
+			supplier_code =
+			#{item.supplierCode,jdbcType=VARCHAR},
+			supplier_name =
+			#{item.supplierName,jdbcType=VARCHAR},
+			quantity =
+			#{item.quantity,jdbcType=INTEGER},
+			production_date =
+			#{item.productionDate,jdbcType=DATE},
+			production_name =
+			#{item.productionName,jdbcType=DATE},
+			batch_no =
+			#{item.batchNo,jdbcType=VARCHAR},
+			receiver_id =
+			#{ledgerList[0].receiverId,jdbcType=VARCHAR},
+			receiver_code =
+			#{item.receiverCode,jdbcType=VARCHAR},
+			receiver_name =
+			#{ledgerList[0].receiverName,jdbcType=VARCHAR},
+			trace_code =
+			#{item.traceCode,jdbcType=VARCHAR},
+			user_id =
+			#{item.userId,jdbcType=VARCHAR},
+			source_id =
+			#{item.sourceId,jdbcType=VARCHAR},
+			ware_batch_no =
+			#{ledgerList[0].wareBatchNo,jdbcType=VARCHAR}
+			Where
+			id =
+			#{item.id,jdbcType=INTEGER}
+		</foreach>
+	</update>
+	<select id="selectSupplierByReceiverId" resultType="com.ssic.education.common.dto.ProSupplierDto"
+		parameterType="java.lang.String">
+		SELECT a.id,a.supplier_name as supplierName,a.address,a.supplier_type
+		as supplierType,a.business_license as businessLicense,
+		a.organization_code as organizationCode,a.corporation,a.contact_way as
+		contactWay,a.longitude,a.latitude,
+		a.last_update_time as
+		lastUpdateTime,a.create_time as createTime,a.stat
+		FROM t_pro_supplier a
+		LEFT JOIN t_pro_ledger b on b.supplier_id = a.id
+		WHERE a.stat =1 and
+		b.stat = 1
+		<include refid="where_supplier_bypage" />
+		GROUP BY a.id
+		ORDER BY a.create_time desc
+		limit #{page.startNum},
+		#{page.pageSize}
+	</select>
+
+	<select id="countSupplier" resultType="java.lang.Long"
+		parameterType="java.lang.String">
+		SELECT count(*) from (SELECT a.id, COUNT(*) counts
+		FROM t_pro_supplier
+		a
+		LEFT JOIN t_pro_ledger b on b.supplier_id = a.id
+		WHERE a.stat =1 and
+		b.stat = 1
+		<include refid="where_supplier_bypage" />
+		GROUP BY a.id) t
+	</select>
+
 	<sql id="where_supplier_bypage">
 		<if test="proSupplierDto.id != null and proSupplierDto.id != ''">
 			and b.receiver_id = #{proSupplierDto.id}
-	   </if>
-	   	<if test="proSupplierDto.supplierName != null and proSupplierDto.supplierName != ''">
+		</if>
+		<if
+			test="proSupplierDto.supplierName != null and proSupplierDto.supplierName != ''">
 			and a.supplier_name like "%"#{proSupplierDto.supplierName}"%"
-	   </if>
+		</if>
 	</sql>
 </mapper>
 

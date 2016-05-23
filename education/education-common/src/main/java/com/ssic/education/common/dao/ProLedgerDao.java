@@ -1,6 +1,7 @@
 package com.ssic.education.common.dao;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -49,11 +50,24 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger>{
 	}
 
 	public int saveLedger(List<LedgerDto> ledger) {
+		ledger.get(0).setReceiverId(exMapper.findSchoolIdByReceiverId(ledger.get(0)));
+		if(ledger.get(0).getReceiverId()==null){
+			return 0;
+		}
 		ledger.get(0).setCreateTime(new Date());
 		ledger.get(0).setLastUpdateTime(ledger.get(0).getCreateTime());
 		ledger.get(0).setStat(1);
-		exMapper.insertLedger(ledger);
-		return 0;
+		for (int i = 0; i < ledger.size(); i++) {
+			ledger.get(i).setSourceId(ledger.get(0).getSourceId());
+			ledger.get(i).setWaresId(exMapper.findWaresIdBySupplierId(ledger.get(i)));
+			if(ledger.get(i).getWaresId()!=null){
+				ledger.get(i).setSupplierId(exMapper.findSupplierIdBySourceId(ledger.get(i)));
+				if(ledger.get(i).getSupplierId()==null){
+					ledger.get(i).setSupplierName(null);
+				}
+			}
+		}
+		return exMapper.insertLedger(ledger);
 	}
 	
 	public List<ProLedgerDto> findList(ProLedgerDto proLedgerDto,PageQuery page) {
@@ -92,6 +106,32 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger>{
 	
 	public long count(ProSupplierDto dto) {
 		return exMapper.countSupplier(dto);
+	}
+
+	public List<LedgerDto> findLedgerById(String sourceId,
+			String wareBatchNo) {
+		return exMapper.findLedgerByWareBatchNo(sourceId,wareBatchNo);
+	}
+
+	public int updataLedger(List<LedgerDto> ledger) {
+		ledger.get(0).setReceiverId(exMapper.findSchoolIdByReceiverId(ledger.get(0)));
+		if(ledger.get(0).getReceiverId()==null){
+			return 0;
+		}
+		ledger.get(0).setCreateTime(new Date());
+		ledger.get(0).setLastUpdateTime(ledger.get(0).getCreateTime());
+		ledger.get(0).setStat(1);
+		for (int i = 0; i < ledger.size(); i++) {
+			ledger.get(i).setSourceId(ledger.get(0).getSourceId());
+			ledger.get(i).setWaresId(exMapper.findWaresIdBySupplierId(ledger.get(i)));
+			if(ledger.get(i).getWaresId()!=null){
+				ledger.get(i).setSupplierId(exMapper.findSupplierIdBySourceId(ledger.get(i)));
+				if(ledger.get(i).getSupplierId()==null){
+					ledger.get(i).setSupplierName(null);
+				}
+			}
+		}
+		return exMapper.updateLedger(ledger);
 	}
 	
 }

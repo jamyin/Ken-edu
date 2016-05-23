@@ -12,4 +12,10 @@ public interface ILedgerService {
 
 	int saveLedger(List<LedgerDto> ledger);
 
+	List<LedgerDto> findLedgerById(String sourceId, String wareBatchNo);
+
+	int updataLedger(List<LedgerDto> ledger);
+
+	int deleteLedger(String sourceId, String wareBatchNo);
+
 }
