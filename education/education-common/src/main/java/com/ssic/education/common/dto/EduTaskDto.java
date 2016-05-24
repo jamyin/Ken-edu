@@ -1,7 +1,9 @@
 package com.ssic.education.common.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -37,6 +39,7 @@ public class EduTaskDto  implements Serializable {
 	
 	private String receiveId; //接收者Id
 	private Integer readstat;	//阅读状态(0:未读;1:已读)
+	private List<String>  receive = new ArrayList<String>(); //接收者Id List
 
 }
 
