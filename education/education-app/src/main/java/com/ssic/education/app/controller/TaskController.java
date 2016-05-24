@@ -122,6 +122,8 @@ public class TaskController {
     * @date 2016年5月20日 下午5:53:55
     * @return Response<String>    返回类型
      */
+    @RequestMapping("/upadteTask/{id}/{receiveId}")
+    @ResponseBody
     public Response<String> upadteTask(@PathVariable("id")String id, @PathVariable("receiveId")String receiveId){
     	Response<String> result = new Response<String>();
     	if(StringUtils.isEmpty(id)){
