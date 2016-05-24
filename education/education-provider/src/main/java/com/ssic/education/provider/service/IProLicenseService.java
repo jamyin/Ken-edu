@@ -2,6 +2,7 @@ package com.ssic.education.provider.service;
 
 import java.util.List;
 
+import com.ssic.education.common.dto.ProLicenseDto;
 import com.ssic.education.common.pojo.ProLicense;
 
 public interface IProLicenseService {
@@ -12,4 +13,5 @@ public interface IProLicenseService {
 
 	void alterImage(ProLicense license);
 
+	public void saveProLicense(ProLicenseDto proLicenseDto);
 }

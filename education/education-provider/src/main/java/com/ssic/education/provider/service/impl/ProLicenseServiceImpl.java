@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssic.education.common.dao.ProLicenseDao;
+import com.ssic.education.common.dto.ProLicenseDto;
 import com.ssic.education.common.pojo.ProLicense;
 import com.ssic.education.provider.service.IProLicenseService;
+import com.ssic.education.utils.util.BeanUtils;
 @Service
 public class ProLicenseServiceImpl implements IProLicenseService {
 
@@ -24,6 +26,12 @@ public class ProLicenseServiceImpl implements IProLicenseService {
 	public void alterImage(ProLicense license) {
 		// TODO Auto-generated method stub
 		dao.alterImage(license);
+	}
+	
+	@Override
+	public void saveProLicense(ProLicenseDto proLicenseDto) {
+		ProLicense proLicense = BeanUtils.createBeanByTarget(proLicenseDto, ProLicense.class);
+		dao.insertSelective(proLicense);
 	}
 
 }
