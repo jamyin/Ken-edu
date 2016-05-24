@@ -1,1 +1,205 @@
-zhuce 
+<!DOCTYPE html>
+<html>
+    <head>
+        <#include "/common/head.htm" />
+       	<link rel="stylesheet" href="/static/css/style.css">
+       	<script src="/static/js/reg.js"></script>
+    </head>
+<body>
+	<!--<script src="static/js/header.js"></script>-->
+	<div class="header">
+		<div class="wrap">
+			<a class="logo" href="index.html">上海市中小学校校生午餐综合管理平台</a>
+			<div class="p_status">
+				<!-- <a class="p_center" href="pcenter.html">个人中心</a>  |  <a class="logout" href="/login_out.htm">退出</a> -->
+			</div>
+		</div>
+	</div>
+	<!-- <div class="nav">
+		<div class="wrap">                                                                   
+			<a class="cur" href="index.html">首页</a>
+			<a class="" href="index.html">安全追溯</a>
+			<a class="" href="index.html">菜谱</a>
+			<a class="" href="index.html">健康宣教</a>
+			<a class="" href="index.html">通告公示</a>
+			<a class="" href="index.html">任务传达</a>
+			<a class="" href="index.html">发布</a>
+		</div>
+	</div> -->
+	
+	<div class="wrapper">
+		<div class="page_title"><span>个人中心</span></div>
+		<div class="reg_box">
+			<h4>学校信息</h4>
+			<ul>
+				<li><label><i>*</i>学校名称</label><input id="schoolName" type="text" placeholder=""></li>
+				<li><label>地址</label><input id="address" type="text" placeholder=""></li>
+				<li><label>区教委</label>
+				<select name="province"  id="province" panelheight="auto">
+					<option value="">请选择区县</option>
+		          	<#if areaDtos??>
+		          		<#list areaDtos as area>
+		          			<option value="${(area.addressCode)!}">${(area.addressName)!}</option>
+		          		</#list>
+		          	</#if>
+				</select>
+				</li>				
+				<li><label>级别</label>
+				<label class="ckb"><input type="checkbox" name="CheckboxGroup1" value="0" id="CheckboxGroup1_0">幼儿园</label>
+				<label class="ckb"><input type="checkbox" name="CheckboxGroup1" value="1" id="CheckboxGroup1_1">小学</label>
+				<label class="ckb"><input type="checkbox" name="CheckboxGroup1" value="2" id="CheckboxGroup1_2">初中</label>
+				<label class="ckb"><input type="checkbox" name="CheckboxGroup1" value="3" id="CheckboxGroup1_3">高中</label>
+				<label class="ckb"><input type="checkbox" name="CheckboxGroup1" value="4" id="CheckboxGroup1_4">大学</label>
+				</li>
+			</ul>
+			
+			<h4>食堂信息</h4>
+			<ul>
+				<li><label><i>*</i>食堂名称</label><input id="canteenName" type="text" placeholder=""></li>
+				<li><label>联系人姓名</label><input id="canteenContacts" type="text" placeholder=""></li>
+				<li><label>手机</label><input id="phoneNumber" type="text" placeholder=""></li>
+				<li>
+					<label><i>*</i>证件类型</label>
+					<ul class="c_type">
+						<li name="phoneFile1">
+						<select>
+							<option id="type1">证件类型1</option>
+							<option id="type2" selected>证件类型2</option>
+							<option id="type3">证件类型3</option>
+							<option id="type4">证件类型4</option>
+							<option id="type5">证件类型5</option>
+						</select>
+						<label class="file" for="phoneFile1">未选择文件<i>浏览</i></label>
+						<input id="phoneFile1" type="file" name="file" onchange="selectfun(this)"><span class="add">+</span>
+						<a id="phoneQuery1"></a>
+						</li>
+					</ul>				
+				</li>
+			</ul>
+			
+			<h4>账号设置</h4>
+			<ul>
+				<li><label>用户名</label><input id="userAccount" type="text" placeholder=""></li>
+				<li><label>密码</label><input id="password" type="password" style="border:thin double #CCCCCC; height: 28px;width: 210px;" placeholder=""></li>
+				<li><label>确认密码</label><input id="confirmPassword" type="password" style="border:thin solid #CCCCCC; height:  28px;width: 210px;" placeholder=""></li>
+			</ul>
+			<input class="submit" type="button" value="确认提交">
+		</div>
+	</div>	
+	<div class="footer">
+		上海市中小学校学生午餐综合管理平台<br>CopyRight© 2016上海市天坊信息技术有限公司
+	</div>
+	<!--<script src="static/js/footer.js"></script>-->
+<script>
+	$(function(){	
+		$('.c_type').on('click', 'span', function(){
+			var _tag = $(this).attr('class')
+			if(_tag == 'add'){
+				var _ind = $(this).closest('ul').find('li').length + 1
+				//alert(_ind)
+				$('.c_type').append('<li name="phoneFile'+ _ind +'"><select><option>证件类型1</option><option>证件类型2</option><option>证件类型3</option><option>证件类型4</option><option>证件类型5</option></select><label class="file" for="phoneFile'+ _ind +'">未选择文件<i>浏览</i></label><input id="phoneFile'+ _ind +'"  type="file" name="file" onchange="selectfun(this)"><span class="remove">-</span><a id="phoneQuery'+ _ind +'"></a></li>')
+			}else if(_tag == 'remove'){
+				$(this).closest('li').remove()
+				for(var i=0; i<$('.c_type').find('li').length;i++){
+					$('.c_type li').eq(i).find('input').attr('id','phoneFile'+(i+1))
+					$('.c_type li').eq(i).find('label.file').attr('for','phoneFile'+(i+1))
+				}
+			}
+		})
+		
+		$(".submit").on('click', function(){
+			var schoolName = $.trim($("#schoolName").val());
+			if (schoolName.length <= 0) {
+				alert("学校名称不能为空~");
+				return;
+			}
+			var address = $.trim($("#address").val());
+			if (address.length <= 0) {
+				alert("学校地址不能为空~");
+				return;
+			}
+			var province = $.trim($("#province").val());
+			if (province.length <= 0) {
+				alert("区教委不能为空~");
+				return;
+			}
+			var checkStr="{";
+			var checked = 0;
+            $('input[name="CheckboxGroup1"]:checked').each(function(){
+            	checkStr += $(this).val()+","
+            	checked++;
+            });
+            checkStr=checkStr.substring(0,checkStr.length-1);
+            checkStr +="}";
+			if (checked == 0 ) {
+            	alert("学校级别不能为空~");
+				return;
+            } 
+			var _ind = $(this).closest('ul').find('li').length + 1;
+			var jsonLic;
+			jsonLic = '[';
+			for (i=1; i<=_ind; i++) {
+				if ($.trim($('#phoneFile1').attr("value")).length >0 && $('#phoneFile1').attr("value") != 'undefined') {
+					jsonLic += '{\"licPic\":\"' +$('#phoneFile'+i+'').attr("value")+'\"},';
+				}				
+			}
+			jsonLic += ']';
+			var canteenName = $.trim($("#canteenName").val());
+			/* if (canteenName.length <= 0) {
+				alert("食堂名称不能为空~");
+				return;
+			} */
+			var canteenContacts = $.trim($("#canteenContacts").val());
+			/* if (canteenContacts.length <= 0) {
+				alert("食堂联系人不能为空~");
+				return;
+			} */
+			var phoneNumber = $.trim($("#phoneNumber").val());
+			var userAccount = $.trim($("#userAccount").val());
+			if (userAccount.length <= 0) {
+				alert("用户名不能为空~");
+				return;
+			} 
+			var passWord = $.trim($("#password").val());
+			var new_password = $.trim($("#confirmPassword").val());
+			if (passWord.length <= 0) {
+				alert("密码不能为空~");
+				return;
+			}
+			if (new_password.length <= 0) {
+				alert("确认密码不能为空~");
+				return;
+			}
+			if (passWord != new_password) {
+				alert("密码和确认密码不相同~");
+				return;
+			}
+			$.ajax({
+				url:"/user/regUser.htm",
+				type:"post",
+				dataType:"json",
+				data:{schoolName:schoolName,address:address,province:province,sourceType:1,level:checkStr,
+					canteenName:canteenName,canteenContacts:canteenContacts,phoneNumber:phoneNumber,
+					userAccount:userAccount,password:passWord,jsonLic:jsonLic,cerSource:3},
+				async: false,
+				success:function(data){
+					if(data.status == 200){
+						alert("注册成功！");
+						window.location.href="/main.htm";
+						return;
+					}else {
+						alert(data.message);
+					}							
+				}
+			});
+		})
+	});
+	/*
+	function selectfun(obj){
+		$('#'+obj.id).closest('li').find('.file').html(obj.value + '<i>浏览</i>')
+	} 
+	*/
+</script>
+	
+</body>
+</html>
