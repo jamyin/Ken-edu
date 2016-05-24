@@ -44,9 +44,10 @@
 							var lastId = $(lastTr).attr("id");
 							var nextId=parseInt(lastId.substring(6))+1;
 							var a=$(lastTr).html().replace(/ledger\[[0-9]+]/g,"ledger["+nextId+"]");
-							var b="<tr id='ledger"+nextId+"'>"+a.replace('<td><a id="addLedger">+</a></td>',"")+"</tr>";
+							var b="<tr id='ledger"+nextId+"'>"+a.replace('<td><a id="addLedger" ><font size="15" >+</font></a></td>',"")+"</tr>";
 							var c=b.replace(/title=""/g,"");
 							$(c).insertAfter($(lastTr));
+							$("#ledger"+nextId+" a").remove();
 							$.parser.parse();
 						});
 	});
@@ -75,7 +76,9 @@
 					<td><select name="ledger[0].userId" type="text"
 						placeholder="请选择驾驶员" class="easyui-validatebox span2"
 						data-options="required:true">
-							<option value ="${Driver[0].id}">${Driver[0].name}</option>
+						<c:forEach items="${Driver}" var="user">
+							<option value ="${user.id}">${user.name}</option>
+						</c:forEach>
 						</select></td>
 				</tr>
 				<tr id="ledger0">
@@ -105,7 +108,7 @@
 						data-options="required:true"
 						onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})"
 						readonly="readonly"></td>
-					<td><a id="addLedger">+</a></td>
+					<td><a id="addLedger" ><font size="15" >+</font></a></td>
 				</tr>
 				</table>
 				</form>

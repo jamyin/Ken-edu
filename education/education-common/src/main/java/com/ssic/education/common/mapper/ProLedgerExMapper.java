@@ -36,7 +36,7 @@ public interface ProLedgerExMapper {
 
 	public String findWareBatchNoById(String id);
 
-	public int updateLedger(@Param("ledgerList")List<LedgerDto> ledger);
+	public int updateLedger(@Param("ledgerDto")LedgerDto ledger);
 
 	public int deleteLedger(@Param("sourceId")String sourceId, @Param("wareBatchNo")String wareBatchNo);
 
