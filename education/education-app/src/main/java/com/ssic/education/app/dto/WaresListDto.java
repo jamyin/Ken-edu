@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 public class WaresListDto {
 	private String id; //商品ID
 	private String waresName; //商品名称
-	private String custom_code; //企业自定义代码
- 	private String spec;//商品规格
-
+	private String customCode; //企业自定义代码
+	private String spec;//商品规格
+	private String image;//商品展示图片
 }

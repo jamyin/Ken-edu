@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ssic.education.app.dao.WaresInfoDao;
 import com.ssic.education.app.dto.WaresInfoDto;
+import com.ssic.education.app.dto.WaresListDto;
 import com.ssic.education.app.dto.WaresRelatedDto;
 import com.ssic.education.app.service.IWaresInfoService;
 import com.ssic.education.utils.model.PageQuery;
@@ -51,14 +52,16 @@ public class WaresInfoServiceImpl implements IWaresInfoService {
 		return null;
 	}
 
-	/** 
-	* (non-Javadoc)   
-	* @see com.ssic.education.app.service.IWaresInfoService#findWarseById(java.lang.String)   
-	*/
 	@Override
 	public WaresRelatedDto findWarseById(String id) {
 		// TODO 添加方法注释
 		return waresInfoDao.findWarseById(id);
+	}
+
+	@Override
+	public List<WaresListDto> findWarseBySchoolId(String schoolId) {
+		// TODO 添加方法注释
+		return waresInfoDao.findWarseBySchoolId(schoolId);
 	}
 
 }
