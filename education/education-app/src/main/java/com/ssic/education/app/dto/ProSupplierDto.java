@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 /**		
  * <p>Title: ProSupplierDto </p>
- * <p>Description: 类描述</p>
+ * <p>Description: 供应商DTO类</p>
  * <p>Copyright (c) 2016 </p>
  * <p>Company: 上海天坊信息科技有限公司</p>
  * @author SeanYoung
@@ -27,7 +27,13 @@ public class ProSupplierDto {
 
 	private String supplierName;
 
-	private String asddress;
+	private String address;
+
+	private String provinces;
+
+	private String city;
+
+	private String area;
 
 	private Integer supplierType;
 
@@ -35,7 +41,27 @@ public class ProSupplierDto {
 
 	private String organizationCode;
 
+	private String foodServiceCode;
+
+	private Date foodServiceCodeDate;
+
+	private String foodBusinessCode;
+
+	private Date foodBusinessCodeDate;
+
+	private String foodCirculationCode;
+
+	private Date foodCirculationCodeDate;
+
+	private String foodProduceCode;
+
+	private Date foodProduceCodeDate;
+
 	private String corporation;
+
+	private String idCard;
+
+	private String idType;
 
 	private String contactWay;
 
@@ -43,10 +69,11 @@ public class ProSupplierDto {
 
 	private String latitude;
 
+	private Byte reviewed;
+
 	private Date createTime;
 
 	private Date lastUpdateTime;
 
 	private Integer stat;
-
 }

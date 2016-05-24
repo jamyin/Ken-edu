@@ -5,6 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssic.education.app.dao.SupplierInfoDao;
+import com.ssic.education.app.dto.MaterialSupplierDto;
+import com.ssic.education.app.dto.SupplierLicDto;
 import com.ssic.education.app.service.ISupplierService;
 import com.ssic.education.common.dao.SupplierDao;
 import com.ssic.education.common.dto.ProSupplierDto;
@@ -12,7 +15,6 @@ import com.ssic.education.common.pojo.ProSupplier;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 import com.ssic.education.utils.util.BeanUtils;
-
 
 /**	
 * @ClassName: SupplierServiceImpl
@@ -22,14 +24,16 @@ import com.ssic.education.utils.util.BeanUtils;
 *
  */
 @Service
-public class SuppliersServiceImpl implements ISupplierService{
+public class SuppliersServiceImpl implements ISupplierService {
 
-    @Autowired
-    private SupplierDao supplierDao;
+	@Autowired
+	private SupplierDao supplierDao;
+
+	@Autowired
+	private SupplierInfoDao supplierInfoDao;
 
 	@Override
-	public PageResult<ProSupplierDto> findSupplierList(ProSupplierDto proSupplierDto,
-			PageQuery query) {
+	public PageResult<ProSupplierDto> findSupplierList(ProSupplierDto proSupplierDto, PageQuery query) {
 		List<ProSupplier> list = supplierDao.findSupplierList(proSupplierDto, query);
 		List<ProSupplierDto> supplierDtoList = BeanUtils.createBeanListByTarget(list, ProSupplierDto.class);
 		int total = supplierDao.selectSupplierAccount(proSupplierDto);
@@ -42,5 +46,14 @@ public class SuppliersServiceImpl implements ISupplierService{
 		return supplierDao.findSupplierDetail(id);
 	}
 
+	@Override
+	public SupplierLicDto findSupplierInfo(String supplier_id) {
+		SupplierLicDto sld = new SupplierLicDto();
+		sld = supplierInfoDao.getSupplierInfoById(supplier_id);
+		if (sld != null) {
+			List<MaterialSupplierDto> msdList = supplierInfoDao.getSupplierListById(supplier_id);
+			sld.setMaterialSupplierList(msdList);
+		}
+		return sld;
+	}
 }
-

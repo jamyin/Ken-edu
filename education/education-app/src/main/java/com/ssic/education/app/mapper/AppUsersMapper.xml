@@ -21,8 +21,7 @@
 		u.gender AS gender,
 		u.pj_no AS pj_no,
 		u.user_image AS user_image
-		FROM
-		t_edu_users u
+		FROM t_edu_users u
 		WHERE
 		u.stat = 1
 		AND u.isAdmin = 1

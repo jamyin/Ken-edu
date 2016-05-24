@@ -1,5 +1,6 @@
 package com.ssic.education.app.service;
 
+import com.ssic.education.app.dto.SupplierLicDto;
 import com.ssic.education.common.dto.ProSupplierDto;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
@@ -20,5 +21,12 @@ public interface ISupplierService {
 	//根据Id查询供应商详细信息
 	ProSupplierDto findSupplierDetail(String id);
 
-}
+	/**     
+	 * findSupplierInfo：根据Id查询供应商详细信息
+	 * @param supplier_id
+	 * @author SeanYoung
+	 * @date 2016年5月23日 下午4:21:39	 
+	 */
+	SupplierLicDto findSupplierInfo(String supplier_id);
 
+}
