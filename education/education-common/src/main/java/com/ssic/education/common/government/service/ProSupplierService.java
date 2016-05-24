@@ -33,5 +33,7 @@ public interface ProSupplierService {
 	 * @version 1.0
 	 */
 	PageResult<ProSupplierDto> querySupplierByParams(ProSupplierDto params, PageQuery query);
+	
+	Integer updatePS(ProSupplierDto dto);
 
 }

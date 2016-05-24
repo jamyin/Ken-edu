@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <#include "/common/head.htm" />
+        <link rel="stylesheet" href="/static/css/style.css">
+        <link rel="stylesheet" href="/static/css/dis_edu.css">
+    </head>
+    <body>
+        <!-- <div class="header">
+    		<div class="wrap">
+    			<a class="logo" href="index.html">上海市中小学校校生午餐综合管理平台</a>
+    			<div class="p_status">
+    				<a class="p_center" href="pcenter.html">个人中心</a>  |  <a class="logout" href="###">退出</a>
+    			</div>
+    		</div>
+    	</div>
+        <div class="nav">
+          <div class="wrap">
+            <a class="" href="index.html">首页</a>
+            <a class="" href="search_supplier.html">安全追溯</a>
+            <a class="" href="index.html">菜谱</a>
+            <a class="" href="index.html">健康宣教</a>
+            <a class="cur" href="index.html">通告公示</a>
+            <a class="" href="index.html">任务传达</a>
+            <a class="" href="index.html">发布</a>
+          </div>
+        </div> -->
+        <#include "/common/nav.htm" />
+        <div class="breadcrumb">
+            <span>当前位置:</span>
+            <a href="#">审批</a>
+            <span> &gt; </span>
+            <a href="#">未审批单位</a>
+        </div>
+        <div class="main_wrap">
+
+            <h2>未审批单位</h2>
+            <div class="content_wrap">
+                <div class="tab_wrap">
+                    <ul class="side_menu">
+                        <li class="active">信息</li>
+                        <li>图片</li>
+                    </ul>
+                    <div class="tab_content">
+                    <#if dto.schoolName??>
+                    	<h1>${(eduSchoolDto.schoolName)!}</h1>
+                        <h2>基本信息</h2>
+                        <p> 地址：${(eduSchoolDto.address)!} </p>
+                        <p> 联系人姓名： </p>
+                        <p> 电话： </p>
+
+                        <h2>证件类型</h2>
+                        <p> 食品经营许可证：  </p>
+                        <p> 食品流通证号：  </p>
+                        <p> 食品生产证号：  </p>
+                        <p> 工商执照号：  </p>
+                     </#if>
+                        <div class="subbt">
+                            <a id="disPass" style="cursor:pointer;">通过</a>
+                            <a id="disNotPass" style="cursor:pointer;">不通过</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <#include "/common/footer.htm" />
+        <script>
+	$(function(){	
+		
+		$("#disPass").on('click', function(){
+			$.ajax({
+				url:"/edu/school/update.htm",
+				type:"post",
+				dataType:"json",
+				data:{id:'${(eduSchoolDto.id)!}',schoolName:'${(eduSchoolDto.schoolName)!}',reviewed:1},
+				async: false,
+				success:function(data){
+					if(data.status == 200){
+						alert("修改成功");
+						window.location.href="checkList.htm?source=1&reviewed=0";
+						return;
+					}else {
+						alert(data.msg);
+					}							
+				}
+			});
+		})
+		$("#disNotPass").on('click', function(){
+			$.ajax({
+				url:"/edu/school/update.htm",
+				type:"post",
+				dataType:"json",
+				data:{id:'${(eduSchoolDto.id)!}',schoolName:'${(eduSchoolDto.schoolName)!}',reviewed:2},
+				async: false,
+				success:function(data){
+					if(data.status == 200){
+						alert("修改成功");
+						window.location.href="checkList.htm?source=1&reviewed=0";
+						return;
+					}else {
+						alert(data.msg);
+					}							
+				}
+			});
+		})
+
+	});
+</script>
+    </body>
+</html>

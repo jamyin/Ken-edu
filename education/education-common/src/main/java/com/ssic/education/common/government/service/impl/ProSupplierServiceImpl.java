@@ -29,6 +29,11 @@ public class ProSupplierServiceImpl implements ProSupplierService{
 	@Autowired
 	private ProLicenseDao proLicenseDao;
 
+	public Integer updatePS(ProSupplierDto dto) {
+		ProSupplier proSupplier = BeanUtils.createBeanByTarget(dto, ProSupplier.class);
+		return proSupplierDao.updateByPrimaryKeySelective(proSupplier);
+	}
+	
 	@Override
 	public List<ProSupplierDto> querySupplierByParams(ProSupplierDto params) {
 		List<ViewProSupplierWithBLOBs> viewProSuppliers = viewProSupplierDao.queryViewSupplier(params, null);

@@ -22,7 +22,23 @@
 		<result column="last_update_time" property="lastUpdateTime" jdbcType="TIMESTAMP" />
 		<result column="stat" property="stat" jdbcType="INTEGER" />
 	</resultMap>
+
+	<resultMap id="LedgerListMap" type="com.ssic.education.app.dto.LedgerInfoDto">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="action_date" property="actionDate" jdbcType="DATE" />
+		<result column="supplier_id" property="supplierId" jdbcType="VARCHAR" />
+		<result column="supplier_name" property="supplierName" jdbcType="VARCHAR" />
+		<result column="quantity" property="quantity" jdbcType="INTEGER" />
+		<result column="production_date" property="productionDate" jdbcType="DATE" />
+		<result column="batch_no" property="batchNo" jdbcType="VARCHAR" />
+		<result column="receiver_id" property="receiverId" jdbcType="VARCHAR" />
+		<result column="receiver_name" property="receiverName" jdbcType="VARCHAR" />
+		<result column="trace_code" property="traceCode" jdbcType="VARCHAR" />
+	</resultMap>
 	<select id="findLedgerByBatchNo" parameterType="java.lang.String" resultMap="BaseResultMap">
 		select * from t_pro_ledger where batch_no=#{batchNo}
+	</select>
+	<select id="findLedgerByWaresId" parameterType="java.lang.String" resultMap="LedgerListMap">
+		select * from t_pro_ledger where wares_id=#{waresId}
 	</select>
 </mapper>

@@ -1,3 +1,10 @@
+.breadcrumb {
+  width: 1000px;
+  margin: 0 auto;
+  margin-top: 20px; }
+  .breadcrumb a {
+    color: #000; }
+
 .panel {
   position: relative; }
   .panel h2 {
@@ -60,11 +67,15 @@
     .detail_list li .nutrition {
       display: inline-block;
       margin-top: -10px;
-      margin-left: 20px; }
+      margin-left: -60px; }
+    .detail_list li .nutrition2 {
+      display: inline-block;
+      margin-top: -10px;
+      margin-left: 16px; }
 
 .main_wrap {
   width: 1000px;
-  margin: 40px auto; }
+  margin: 30px auto; }
   .main_wrap h2 {
     padding: 10px;
     background: #60ac62;

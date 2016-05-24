@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+<#include "/common/head.htm" />
+        <link rel="stylesheet" href="/static/css/style.css">
+        <link rel="stylesheet" href="/static/css/dis_edu.css">
+    </head>
+    <body>
+        <!-- <div class="header">
+    		<div class="wrap">
+    			<a class="logo" href="index.html">上海市中小学校校生午餐综合管理平台</a>
+    			<div class="p_status">
+    				<a class="p_center" href="pcenter.html">个人中心</a>  |  <a class="logout" href="###">退出</a>
+    			</div>
+    		</div>
+    	</div>
+        <div class="nav">
+          <div class="wrap">
+            <a class="" href="index.html">首页</a>
+            <a class="cur" href="search_supplier.html">安全追溯</a>
+            <a class="" href="index.html">菜谱</a>
+            <a class="" href="index.html">健康宣教</a>
+            <a class="" href="index.html">通告公示</a>
+            <a class="" href="index.html">任务传达</a>
+            <a class="" href="index.html">发布</a>
+          </div>
+        </div> -->
+        <#include "/common/nav.htm" />
+        <div class="breadcrumb">
+            <span>当前位置:</span>
+            <a href="#">安全追溯</a>
+            <span> &gt; </span>
+            <a href="#">采购品列表</a>
+            <span> &gt; </span>
+            <a href="#">采购品详情</a>
+        </div>
+        <div class="main_wrap">
+
+            <h2>未审批单位</h2>
+            <div class="content_wrap">
+                <div class="tab_wrap">
+                    <ul class="side_menu">
+                        <li class="active">信息</li>
+                        <li>图片</li>
+                    </ul>
+                    <div class="tab_content">
+                    <#if proSupplierDto.supplierName??>
+                    	<h1>${(proSupplierDto.supplierName)!}</h1>
+                    	<#if proSupplierDto.reviewed == 1>
+                    	<div class="status">
+                            <span>审核状态：已通过</span>
+                        </div>
+                        </#if>
+                        <#if proSupplierDto.reviewed == 2>
+                    	<div class="status">
+                            <span style="background-color: red;">审核状态：未通过</span>
+                        </div>
+                        </#if>
+                        <h2>基本信息</h2>
+                        <p> 地址：${(proSupplierDto.address)!} </p>
+                        <p> 联系人姓名： </p>
+                        <p> 电话： </p>
+
+                        <h2>证件类型</h2>
+                        <p> 食品经营许可证：  </p>
+                        <p> 食品流通证号：  </p>
+                        <p> 食品生产证号：  </p>
+                        <p> 工商执照号：  </p>
+                    </#if>
+                        <!-- <h1>济南鲁伊肉类有限公司</h1>
+                        <div class="status">
+                            <span>审核状态：已通过</span>
+                        </div>
+                        <h2>基本信息</h2>
+                        <p> 地址：兴化市工业园 </p>
+                        <p> 联系人姓名：何娟 </p>
+                        <p> 电话：133594649565 </p>
+
+                        <h2>证件类型</h2>
+                        <p> 食品经营许可证： 455674799 </p>
+                        <p> 食品流通证号： 876554563 </p>
+                        <p> 食品生产证号： 455674799 </p>
+                        <p> 工商执照号： 455245254 </p> -->                        
+                    </div>
+                </div>
+            </div>
+
+        </div>
+         <#include "/common/footer.htm" />
+    </body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <#include "/common/head.htm" />
+        <link rel="stylesheet" href="/static/css/style.css">
+        <link rel="stylesheet" href="/static/css/dis_edu.css">
+    </head>
+    <body>
+        <!-- <div class="header">
+    		<div class="wrap">
+    			<a class="logo" href="index.html">上海市中小学校校生午餐综合管理平台</a>
+    			<div class="p_status">
+    				<a class="p_center" href="pcenter.html">个人中心</a>  |  <a class="logout" href="###">退出</a>
+    			</div>
+    		</div>
+    	</div>
+        <div class="nav">
+          <div class="wrap">
+            <a class="" href="index.html">首页</a>
+            <a class="cur" href="search_supplier.html">安全追溯</a>
+            <a class="" href="index.html">菜谱</a>
+            <a class="" href="index.html">健康宣教</a>
+            <a class="" href="index.html">通告公示</a>
+            <a class="" href="index.html">任务传达</a>
+            <a class="" href="index.html">发布</a>
+          </div>
+        </div> -->
+        <#include "/common/nav.htm" />
+        <div class="breadcrumb">
+            <span>当前位置:</span>
+            <a href="#">安全追溯</a>
+            <span> &gt; </span>
+            <a href="#">采购品列表</a>
+            <span> &gt; </span>
+            <a href="#">采购品详情</a>
+        </div>
+        <div class="main_wrap">
+
+            <h2>所有单位</h2>
+            <div class="content_wrap">
+
+                <div class="tab_wrap">
+                    <ul class="side_menu">
+                        <a href="checkList.htm?source=1&reviewed=0"><li>未审批单位</li></a>
+                        <a href="checkList.htm?source=1&reviewed=1"><li>审批通过单位</li></a>
+                        <a href="checkList.htm?source=1&reviewed=2"><li class="active">审批不通过单位</li></a>
+                    </ul>
+                    <div class="tab_content">
+                        <table>
+                            <thead>
+                                <th> 单位名称 </th>
+                                <th> 单位地址 </th>
+                                <th> 状态 </th>
+                                <th> 时间 </th>
+                            </thead>
+                            <form class="" action="" method="post">
+                            	<#if pageList??>
+                            	<#list pageList.results as data>
+                            		 <tr>
+	                                   <td><a href="/edu/school/detailed.htm?id=${(data.id)!}&schoolName=${(data.schoolName)!}&supplierName=${(data.supplierName)!}"> <#if data.schoolName??> ${(data.schoolName)!} <#elseif data.supplierName??> ${(data.supplierName)!}</#if></a></td>
+	                                    <td> ${(data.address)!} </td>
+	                                    <td> <#if data.reviewed==2> 审批不通过 </#if></td>
+	                                    <td> ${data.createTime?string("yyyy-MM-dd")}</td>
+	                                </tr>
+                            	</#list>
+                           		</#if>
+                            </form>
+                        </table>
+                        <#include "/common/page.htm" />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+       <#include "/common/footer.htm" />
+        <script type="text/javascript">
+		    $(function(){
+		      // debugger;
+		      $(".nav").find("a").removeClass("cur");
+		      $(".nav").find("a:eq(2)").addClass("cur");
+		      
+		      $('.search-bt').on('click', function() {
+		    	  $("#myform").submit();
+		      })
+		      
+		   	  // 跳转指定页
+		      $('#jump_btn').on('click', function () {
+		          var jump_num = $('#jump_num').val();
+		          if (jump_num != '') {
+		              var reg = /^[-+]?\d*$/;
+		              if (!reg.test(jump_num)) {
+		                  alert("对不起，您输入的跳转页数格式不正确!");//请将“整数类型”要换成你要验证的那个属性名称！
+		                  return;
+		              }
+		              <#if pageList?? && pageList.total gt 0>
+		              if (jump_num > ${(pageList.totalPage)!}) {
+		                  alert("对不起，您输入的跳转页数大于总页数!");
+		                  return;
+		              }
+		              </#if>
+		          } else {
+		              alert("对不起，您输入的跳转页数!");
+		              return;
+		          }
+		          gotoPage(jump_num);
+		      });
+		    })
+		    
+		    function gotoPage(page) {
+		        $("#currPage").val(page);
+		        $("#myform").submit();
+		    }
+  		</script>
+    </body>
+</html>
