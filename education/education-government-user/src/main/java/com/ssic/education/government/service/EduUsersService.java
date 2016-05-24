@@ -1,6 +1,7 @@
 package com.ssic.education.government.service;
 
 import com.ssic.education.government.dto.EduUsersDto;
+import com.ssic.education.government.dto.EduUsersRegDto;
 
 
 /**
@@ -19,9 +20,9 @@ public interface EduUsersService {
 		 * @author: cwftalus@163.com
 		 * @version: 2016年5月16日 下午3:06:20
 	 */
-	public boolean validateAccount(EduUsersDto usersDto);
+	public boolean validateAccount(EduUsersRegDto usersDto);
 
-	public void save(EduUsersDto usersDto);
+	public EduUsersDto save(EduUsersRegDto usersDto);
 	
 	public EduUsersDto getUserInfo(EduUsersDto usersDto);
 	

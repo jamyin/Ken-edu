@@ -1,6 +1,7 @@
 package com.ssic.education.government.controller.users;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,8 +15,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.common.base.Objects;
+import com.ssic.education.common.dto.EduAreaDto;
+import com.ssic.education.common.government.service.AreaService;
 import com.ssic.education.government.controller.BaseController;
 import com.ssic.education.government.dto.EduUsersDto;
+import com.ssic.education.government.dto.EduUsersRegDto;
 import com.ssic.education.government.service.EduUsersService;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.constants.SessionConstants;
@@ -35,8 +39,37 @@ public class UserController extends BaseController{
 	@Autowired
 	private EduUsersService eduUsersService;
 	
+	@Autowired
+	private AreaService areaService;
+	
+	@RequestMapping(value="oreg")
+	public ModelAndView oreg(){
+		ModelAndView mv = getModelAndView();
+		List<EduAreaDto> areaDtos = areaService.queryAll();
+		mv.addObject("areaDtos", areaDtos);
+		mv.setViewName("reg");	
+		return mv;
+	}
+	
+	@RequestMapping(value="regUser")	
+	@ResponseBody
+	public Response<String> regUser(EduUsersRegDto usersDto) throws Exception{
+		Response<String> res = new Response<String>();
+		boolean isTrue = eduUsersService.validateAccount(usersDto);
+		if(isTrue){//新增
+			usersDto.setPassword(MD5Coder.encodeMD5Hex(usersDto.getPassword()));
+			EduUsersDto eduUsersDto = eduUsersService.save(usersDto);
+			setSession(eduUsersDto.getId());
+			res.setStatus(DataStatus.HTTP_SUCCESS);
+			res.setMessage("注册成功！");
+		} else {
+			res.setStatus(DataStatus.HTTP_FAILE);
+			res.setMessage("用户名已被使用，注册失败！");
+		}
+		return res;
+	}
 	@RequestMapping(value="reg")
-	public ModelAndView reg(EduUsersDto usersDto){
+	public ModelAndView reg(EduUsersRegDto usersDto){
 		ModelAndView mv = getModelAndView();
 		
 		if(Objects.equal(getRequest().getMethod().toString(), RequestMethod.GET.toString())){

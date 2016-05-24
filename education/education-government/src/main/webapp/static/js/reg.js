@@ -171,16 +171,16 @@ $(function(){
     });
 */
 	  //上传
-	$('#file').on("change",function(){
-		$("#query").click();
-	});
-	
-	$("#query").upload({
-        uploadData: { id: "12233" },
-        successFn: "success",
-        deleteData: { id: function () { 
-        	return "asdfasdf" } }
-	});
+//	$('#file').on("change",function(){
+//		$("#query").click();
+//	});
+//	
+//	$("#query").upload({
+//        uploadData: { id: "12233" },
+//        successFn: "success",
+//        deleteData: { id: function () { 
+//        	return "asdfasdf" } }
+//	});
 	
 //	$('#phoneFile').on("change",function(){
 //		
