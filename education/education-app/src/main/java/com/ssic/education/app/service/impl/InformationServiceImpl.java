@@ -39,6 +39,9 @@ public class InformationServiceImpl implements IInformationService{
 	@Override
 	public EduInformationDto findInformationDetial(String id) {
 		EduInformation eduInformation = informationDao.findInformationDetial(id);
+		if(eduInformation == null){
+			return null;
+		}
 		EduInformationDto dtoList = BeanUtils.createBeanByTarget(eduInformation, EduInformationDto.class);
 		return dtoList;
 	}

@@ -179,52 +179,6 @@
 <script>
 $(function(){
 	
-	//图片上传
-	$("#id-input-file-3").uploadify({
-        'uploader': 'reg/uploadify/uploadify.swf',
-        'script':"file/upload.htm",
-        'cancelImg': 'reg/uploadify/cancel.png',
-        'queueID': 'fileQueue',
-        'auto': true,
-        //'multi':true,
-        'buttonText': 'select',
-        'simUploadLimit' : 1,
-        'sizeLimit':1024*1024*10,
-        'queueSizeLimit' : 1,
-        'fileDesc' : 'pictures',
-        'fileExt': '*.gif;*.png;*.jpg;*.jpge',
-        onComplete: function(event, queueID, fileObj, response, data) {
-            var dataObj = eval("("+response+")");
-            if(dataObj.status == 200){
-            	parent.layer.msg('图片上传成功', {
-					shade: [0.9, '#000'],
-				    icon: 6,
-				    time: 800 //2秒关闭（如果不配置，默认是3秒）
-				}, function(){
-					$("#img_show").attr("src",'${imgurl}'+dataObj.filePath);
-					$("#pic").val(dataObj.filePath);
-				});                
-           		//console.log(dataObj.filePath);
-				//$("[name=logo]").val(dataObj.filePath);
-            }else{
-            	layer.alert("对不起," + fileObj.name + "上传失败!<br/>请选择小于10M的图片", {
-    				shade: [0.9, '#000'],
-    			    icon: 3,
-    			    time: 3000 //2秒关闭（如果不配置，默认是3秒）
-    			}); 
-            }
-        },
-        onSelect:function(){
-        },
-        onError: function(event, queueID, fileObj) {
-        	layer.alert("对不起," + fileObj.name + "上传失败!<br/>请选择小于10M的图片", {
-				shade: [0.9, '#000'],
-			    icon: 3,
-			    time: 3000 //2秒关闭（如果不配置，默认是3秒）
-			}); 
-        }
-    });	
-	
 	//第一页的确定按钮
 	$("#btn_part1").click(function(){
 		if(!verifyCheck._click()) return;
@@ -235,16 +189,16 @@ $(function(){
  */			
 		//加载
 		var dataParam = $("#submit_form").serialize();
-		$.ajax({
+ 		console.log(dataParam);
+/* 		$.ajax({
 			url:'${pageContext.request.contextPath}/proUserRegController/pureg',
 			type:"POST",
 			data : dataParam,
 			dataType:'json',
 			success:function(data){
 				$("#submit_form").hide();
-				/* $(".part4").show(); */
 			}
-		});
+		}); */
 	});
 	
 	laodcommittee();

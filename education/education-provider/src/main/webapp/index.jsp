@@ -120,8 +120,8 @@
 				</div>
 			</div>
 		</div>
-		<div data-options="region:'east',href:'${pageContext.request.contextPath}/layout/east.jsp'" title="日历" style="width: 230px; overflow: hidden;"></div>
-		<div data-options="region:'south',href:'${pageContext.request.contextPath}/layout/south.jsp',border:false" style="height: 30px; overflow: hidden;"></div>
+	
+		
 	</div>
 
 	<div id="index_tabsMenu" style="width: 120px; display: none;">

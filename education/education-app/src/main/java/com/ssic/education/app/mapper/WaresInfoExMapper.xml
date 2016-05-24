@@ -43,6 +43,13 @@
 		<association property="supplier" column="supplier_id" javaType="com.ssic.education.app.dto.ProSupplierDto" />
 		<association property="ledgerList" column="id" javaType="com.ssic.education.app.dto.LedgerInfoDto" />
 	</resultMap>
+	<resultMap id="WaresList" type="com.ssic.education.app.dto.WaresListDto">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="wares_name" property="waresName" jdbcType="VARCHAR" />
+		<result column="spec" property="spec" jdbcType="VARCHAR" />
+		<result column="custom_code" property="customCode" jdbcType="VARCHAR" />
+		<result column="image" property="image" jdbcType="VARCHAR" />
+	</resultMap>
 
 	<select id="findWarseBySupplier" parameterType="java.lang.String" resultMap="BaseResultMap">
 		select * from t_pro_wares where supplier_id=#{supplierId}
@@ -55,5 +62,13 @@
 	</select>
 	<select id="getLedgerById" parameterType="java.lang.String" resultType="com.ssic.education.app.dto.LedgerInfoDto">
 		SELECT * from t_pro_ledger where supplier_id=#{supplierId} and wares_id=#{wares_id}
+	</select>
+	<select id="findWarseBySchoolId" parameterType="java.lang.String" resultMap="WaresList">
+		SELECT id,wares_name,spec,custom_code,image FROM t_pro_wares
+		WHERE
+		id IN (
+		SELECT ware_id FROM t_pro_school_ware WHERE school_id = #{schoolId} AND stat = 1
+		)
+		AND stat=1
 	</select>
 </mapper>

@@ -5,7 +5,7 @@
 <head>
 <title></title>
 <jsp:include page="../inc.jsp"></jsp:include>
-<script type="text/javascript" charset="utf-8">
+<!-- <script type="text/javascript" charset="utf-8">
 	var portalLayout;
 	var portal;
 	$(function() {
@@ -111,17 +111,44 @@
 				}
 			}
 		}
-	}
-</script>
+	}</script> -->
+
 </head>
 <body>
 	<div id="portalLayout">
-		<div data-options="region:'center',border:false">
-			<div id="portal" style="position: relative">
-				<div></div>
-				<div></div>
-			</div>
-		</div>
+								<h1 align="center"  ><font color="read ">这片弹幕由我承包</font></h1>
+									<h1 align="center"  ><font color="RoyalBlue  ">这片弹幕由我承包</font></h1>
+								<h1 align="center"  ><font color="red ">这片弹幕由我承包</font></h1>
+								<h1 align="center"  ><font color="Yellow  ">这片弹幕由我承包</font></h1>								
+								<h1 align="center"  ><font color="VioletRed">这片弹幕由我承包</font></h1>
+								<h1 align="center"  ><font color="red ">王老菊</font></h1>
+								<h1 align="center"  ><font color="PaleGreen  ">此人智商高达50</font></h1>
+		<h1 align="left"  ><font color="AntiqueWhite ">还有谁</font></h1>			<h1 align="right"  ><font color="red">还有谁</font></h1>  	<h1 align="center"  ><font color="red">还有谁</font></h1>
+		<h1 align="left"  ><font color="AntiqueWhite ">还有谁</font></h1>			<h1 align="right"  ><font color="AntiqueWhite ">还有谁</font></h1> <h1 align="center"  ><font color="AntiqueWhite ">还有谁</font></h1>
+					<h1 align="left"  ><font color="Aqua">还有谁</font></h1> 
+		<h1 align="left"  ><font color="AntiqueWhite ">还有谁</font></h1>			<h1 align="right"  ><font color="Aquamarine ">还有谁</font></h1> 
+	<h1 align="left"  ><font color="AntiqueWhite ">还有谁</font></h1>				<h1 align="center"  ><font color="Azure ">还有谁</font></h1> <h1 align="center"  ><font color="AntiqueWhite ">还有谁</font></h1>
+	<h1 align="left"  ><font color="AntiqueWhite ">还有谁</font></h1>				<h1 align="center"  ><font color="Beige ">还有谁</font></h1> 
+					<h1 align="left"  ><font color="Bisque ">还有谁</font></h1> <h1 align="center"  ><font color="AntiqueWhite ">还有谁</font></h1>
+		<h1 align="center"  ><font color="AntiqueWhite ">还有谁</font></h1>			<h1 align="right"  ><font color="Black">还有谁</font></h1> 
+					<h1 align="left"  ><font color="BlanchedAlmond ">还有谁</font></h1> 
+					<h1 align="left"  ><font color="Blue">还有谁</font></h1> <h1 align="center"  ><font color="AntiqueWhite ">还有谁</font></h1>
+	<h1 align="left"  ><font color="AntiqueWhite ">还有谁</font></h1>				<h1 align="center"  ><font color="BlueViolet ">还有谁</font></h1> 
+					<h1 align="center"  ><font color="Brown">还有谁</font></h1> <h1 align="center"  ><font color="AntiqueWhite ">还有谁</font></h1>
+	<h1 align="left"  ><font color="AntiqueWhite ">还有谁</font></h1>				<h1 align="center"  ><font color="BurlyWood">还有谁</font></h1> 
+					<h1 align="left"  ><font color="BurlyWood">还有谁</font></h1><h1 align="center"  ><font color="AntiqueWhite ">还有谁</font></h1>
+	<h1 align="center"  ><font color="AntiqueWhite ">还有谁</font></h1>				<h1 align="left"  ><font color="AntiqueWhite ">还有谁</font></h1> 
+					<h1 align="left"  ><font color="Aqua">还有谁</font></h1> <h1 align="center"  ><font color="AntiqueWhite ">还有谁</font></h1>
+		<h1 align="center"  ><font color="AntiqueWhite ">还有谁</font></h1>			<h1 align="left"  ><font color="Aquamarine ">还有谁</font></h1> <h1 align="center"  ><font color="AntiqueWhite ">还有谁</font></h1>
+					<h1 align="left"  ><font color="Azure ">还有谁</font></h1> 
+					<h1 align="left"  ><font color="Beige ">还有谁</font></h1> <h1 align="center"  ><font color="AntiqueWhite ">还有谁</font></h1>
+					<h1 align="left"  ><font color="Bisque ">还有谁</font></h1> 
+	<h1 align="center"  ><font color="AntiqueWhite ">还有谁</font></h1>				<h1 align="left"  ><font color="Black">还有谁</font></h1> 
+					<h1 align="left"  ><font color="BlanchedAlmond ">还有谁</font></h1> 
+					<h1 align="right"  ><font color="Blue">还有谁</font></h1> 
+					<h1 align="right"  ><font color="BlueViolet ">还有谁</font></h1> 
+					<h1 align="left"  ><font color="Brown">还有谁</font></h1> 
+					<h1 align="left"  ><font color="BurlyWood">还有谁</font></h1> 
 	</div>
 </body>
 </html>

@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,7 +46,7 @@ public class ProUserRegController extends BaseController{
 	
 	@RequestMapping(value="/pureg")
 	@ResponseBody
-	public Json prreg(SupplierDto supplierDto,ProUsersDto proUsersDto,ProLicenseDto proLicenseDto) {
+	public Json prreg(SupplierDto supplierDto,ProUsersDto proUsersDto) {
 		Json json = new Json();
 		//先保存供应商信息  -->  保存该供应商对应的用户信息(账号) //需要增加事务处理 或 增加判断
 		String supplierId = iSupplierService.saveOrUpdateSupplier(supplierDto);
@@ -54,7 +55,8 @@ public class ProUserRegController extends BaseController{
 		saveSupplierReview(supplierId);
 		
 		//保存证件信息
-		iProLicenseService.saveProLicense(proLicenseDto);
+		String[] licenses = getRequest().getParameterValues("licenseList");
+		saveLicenses(supplierId,licenses);
 		
 		//用户信息
 		proUsersDto.setSourceId(supplierId);
@@ -63,6 +65,23 @@ public class ProUserRegController extends BaseController{
 		
 		return json;
 		
+	}
+
+	private void saveLicenses(String supplierId, String[] licenses) {
+		if(licenses!=null){
+			for(String licesse : licenses){
+				if(!StringUtils.isEmpty(licesse)){
+					String licenseName = licesse.split("-")[0];
+					String licPic = licesse.split("-")[1];
+					ProLicenseDto proLicenseDto = new ProLicenseDto();
+					
+					proLicenseDto.setLicName(licenseName);
+					proLicenseDto.setLicPic(licPic);
+
+					iProLicenseService.saveProLicense(proLicenseDto);
+				}
+			}
+		}
 	}
 
 	private void saveSupplierReview(String supplierId) {

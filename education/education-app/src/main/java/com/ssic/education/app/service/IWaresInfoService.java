@@ -3,6 +3,7 @@ package com.ssic.education.app.service;
 import java.util.List;
 
 import com.ssic.education.app.dto.WaresInfoDto;
+import com.ssic.education.app.dto.WaresListDto;
 import com.ssic.education.app.dto.WaresRelatedDto;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.Response;
@@ -28,5 +29,8 @@ public interface IWaresInfoService {
 
 	//根据商品的ID查询商品信息
 	WaresRelatedDto findWarseById(String id);
+
+	//根据学校Id查询采购品列表
+	List<WaresListDto> findWarseBySchoolId(String schoolId);
 
 }

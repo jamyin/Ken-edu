@@ -9,10 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ssic.education.app.dto.SupplierLicDto;
 import com.ssic.education.app.dto.WaresInfoDto;
+import com.ssic.education.app.dto.WaresListDto;
 import com.ssic.education.app.dto.WaresRelatedDto;
 import com.ssic.education.app.service.IWaresInfoService;
+import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.Response;
+import com.ssic.education.utils.util.StringUtils;
 
 /**		
  * <p>Title: WaresInfoController </p>
@@ -78,5 +82,32 @@ public class WaresInfoController {
 		WaresRelatedDto waresInfoList = waresInfoService.findWarseById(id);
 		result.setData(waresInfoList);
 		return result;
+	}
+
+	/**
+	 * purchaseList：采购品列表根据学校ID查询
+	 * @author SeanYoung
+	 * @date 2016年5月13日 下午12:00:30
+	 */
+	@RequestMapping(value = "/purchaseList/{schoolId}", method = RequestMethod.GET)
+	@ResponseBody
+	public Response<List<WaresListDto>> purchaseList(@PathVariable("schoolId") String schoolId) {
+		Response<List<WaresListDto>> result = new Response<List<WaresListDto>>();
+		if (StringUtils.isEmpty(schoolId)) {
+			result.setStatus(DataStatus.HTTP_FAILE);
+			result.setMessage("查询Id为空");
+			return result;
+		}
+		List<WaresListDto> waresInfoList = waresInfoService.findWarseBySchoolId(schoolId);
+		if (waresInfoList.size() > 0) {
+			result.setStatus(DataStatus.HTTP_SUCCESS);
+			result.setMessage("查询成功！");
+			result.setData(waresInfoList);
+			return result;
+		}
+		result.setStatus(DataStatus.HTTP_SUCCESS);
+		result.setMessage("未查到相关记录！");
+		return result;
+
 	}
 }
