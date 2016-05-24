@@ -16,9 +16,9 @@
 		=#{ledgerDto.sourceId}
 	</select>
 	<select id="findBy" resultType="com.ssic.education.provider.dto.TImsUsersDto">
-		select users.id as id, age as age,createdatetime as
+		select users.id as id, age as age,create_time as
 		createdatetime,source_id as sourceId,gender as gender,isAdmin as isAdmin,isDelete as
-		isDelete,modifydatetime as modifydatetime,name,
+		isDelete,last_update_time as modifydatetime,name,
 		users.pj_no as
 		pjNo,post_no as postNo,password as password,qjy_account as
 		qjyAccount,user_account as userAccount,user_image as userImage,user_no
@@ -33,14 +33,14 @@
 	</select>
 	<insert id="insertBy">
 		insert into
-		t_pro_users(id,`name`,`password`,qjy_account,stat,isAdmin,createdatetime,user_account,email,user_no,gender,age)
+		t_pro_users(id,`name`,`password`,qjy_account,stat,isAdmin,create_time,user_account,email,user_no,gender,age)
 		values(#{users.id},#{users.name},#{users.password},#{users.qjyAccount},#{users.stat},#{users.isAdmin},#{users.createdatetime},#{users.userAccount},#{users.email},#{users.userNo},#{users.gender},#{users.age})
 
 	</insert>
 
 	<insert id="addImsUsers" parameterType="com.ssic.education.provider.pojo.ProUsers">
 		insert into
-		t_ims_users(id,`name`,`password`,qjy_account,stat,isAdmin,createdatetime,user_account,email,user_no,gender,age)
+		t_ims_users(id,`name`,`password`,qjy_account,stat,isAdmin,create_time,user_account,email,user_no,gender,age)
 		values(#{users.id},#{users.name},#{users.password},#{users.qjyAccount},#{users.stat},#{users.isAdmin},#{users.createdatetime},#{users.userAccount},#{users.email},#{users.userNo},#{users.gender},#{users.age})
 
 	</insert>
@@ -52,7 +52,7 @@
 	</update>
 	<update id="updatePwd">
 		update t_pro_users set
-		password=#{user.password},modifydatetime=#{user.modifydatetime} where
+		password=#{user.password},last_update_time=#{user.modifydatetime} where
 		id =#{user.id}
 	</update>
 	<update id="updateDelBy">
@@ -63,9 +63,9 @@
 	</update>
 
 	<select id="findPageBy" resultType="com.ssic.education.provider.dto.TImsUsersDto">
-		select users.id as id, age as age,createdatetime as
+		select users.id as id, age as age,create_time as
 		createdatetime,gender as gender,isAdmin as isAdmin,isDelete as
-		isDelete,modifydatetime as modifydatetime,name,
+		isDelete,last_update_time as modifydatetime,name,
 		users.pj_no as
 		pjNo,post_no as postNo,password as password,qjy_account as
 		qjyAccount,user_account as userAccount,user_image as userImage,user_no
@@ -96,16 +96,16 @@
 			#{user.name}
 		</if>
 		<if test="user.createdatetimeStart!=null">
-			and users.createdatetime &gt;= #{user.createdatetimeStart}
+			and users.create_time &gt;= #{user.createdatetimeStart}
 		</if>
 		<if test="user.createdatetimeEnd!=null">
-			and users.createdatetime &lt;= #{user.createdatetimeEnd}
+			and users.create_time &lt;= #{user.createdatetimeEnd}
 		</if>
 		<if test="user.modifydatetimeStart!=null">
-			and users.modifydatetime &gt;= #{user.modifydatetimeStart}
+			and users.last_update_time &gt;= #{user.modifydatetimeStart}
 		</if>
 		<if test="user.modifydatetimeEnd!=null">
-			and users.modifydatetime &lt;=#{user.modifydatetimeEnd}
+			and users.last_update_time &lt;=#{user.modifydatetimeEnd}
 		</if>
 		<if test="user.searchName!=null and user.searchName!=''">
 			and users.user_account like #{user.searchName}
