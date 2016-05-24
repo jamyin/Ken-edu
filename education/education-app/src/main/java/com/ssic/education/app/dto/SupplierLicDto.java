@@ -1,5 +1,7 @@
 package com.ssic.education.app.dto;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,5 +36,5 @@ public class SupplierLicDto {
 	private String idCard; // 身份证号
 	private String idType;//身份证类型
 	private String contactWay;//联系方式
-
+	private List<MaterialSupplierDto> materialSupplierList;
 }
