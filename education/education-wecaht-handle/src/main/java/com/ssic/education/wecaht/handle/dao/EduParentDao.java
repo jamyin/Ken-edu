@@ -7,6 +7,7 @@ import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.mybatis.MyBatisBaseDao;
 import com.ssic.education.utils.util.BeanUtils;
 import com.ssic.education.wecaht.handle.dto.EduParentDto;
@@ -32,7 +33,7 @@ public class EduParentDao extends MyBatisBaseDao<EduParent> {
 
 	private void assemblyParams(EduParentDto eduParentDto, Criteria criteria) {
 		// TODO Auto-generated method stub
-
+		criteria.andStatEqualTo(DataStatus.ENABLED);
 	}
 
 }
