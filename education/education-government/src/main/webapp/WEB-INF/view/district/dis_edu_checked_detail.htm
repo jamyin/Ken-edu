@@ -35,13 +35,19 @@
             <a href="#">采购品详情</a>
         </div>
         <div class="main_wrap">
-
-            <h2>未审批单位</h2>
+			
+			<#if eduSchoolDto.reviewed == 1>
+				 <h2>审批通过单位</h2>
+            </#if>
+            <#if eduSchoolDto.reviewed == 2>
+              	 <h2>审批不通过单位</h2>
+            </#if>
+           
             <div class="content_wrap">
                 <div class="tab_wrap">
                     <ul class="side_menu">
                         <li class="active">信息</li>
-                        <li>图片</li>
+                       <a href="/edu/school/license.htm?relationId=${(dto.id)!}&schoolName=${(dto.schoolName)!}&reviewed=${(eduSchoolDto.reviewed)!}&supplierName=${(dto.supplierName)!}&cerSource=3"><li>图片</li></a>
                     </ul>
                     <div class="tab_content">
                     <#if dto.schoolName??>

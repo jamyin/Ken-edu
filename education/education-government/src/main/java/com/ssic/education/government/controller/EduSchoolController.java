@@ -187,9 +187,11 @@ public class EduSchoolController extends BaseController{
 	 */
 	@RequestMapping(value = "/license")
 	public ModelAndView getProLicenseBySchId(ProLicenseDto dto) {
-		ModelAndView mv = getModelAndView();
+		ModelAndView mv = getModelAndView();		
 		List<ProLicenseDto> proLicenseDtos = eduSchoolService.getProLicenseBySchId(dto);
 		mv.addObject("proLicenseDtos", proLicenseDtos);
+		mv.addObject("data", dto);
+		mv.setViewName("/district/dis_edu_pic");
 		return mv;
 	}
 	

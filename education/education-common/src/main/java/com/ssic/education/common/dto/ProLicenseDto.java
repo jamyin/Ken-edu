@@ -32,5 +32,11 @@ public class ProLicenseDto {
     private String relationId;
 
     private Short cerSource;
+    
+    private String schoolName;
+    
+    private String supplierName;
+    
+    private Byte reviewed;//0:未审批，1：通过，2：不通过
 
 }
