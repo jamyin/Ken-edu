@@ -13,5 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value="/wap/scpro/")
 public class WapSchoolProController extends BaseController{
 
+	/**
+	 * 查询学校对应的食堂资质
+	 */
 	
+	
+	
+	/**
+	 * 查询学校食堂对应的供应商资质
+	 */
 }

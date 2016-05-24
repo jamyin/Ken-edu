@@ -82,7 +82,31 @@ public class WapSchoolController extends BaseController{
 		Response<EduSchoolDto> result = new Response<EduSchoolDto>();
 		
 		int data = iEduParentScChService.saveFollow(eduParentScChDto);
+		if(data > 0 ){
+			result.setMessage("关注成功");
+		}else{
+			result.setStatus(DataStatus.HTTP_FAILE);
+		}
+		return result;
+	}
+	
+	/**
+	 * 
+		 * 此方法描述的是：取消关注
+		 * @author: cwftalus@163.com
+		 * @version: 2016年5月24日 下午2:15:12
+	 */
+	@RequestMapping(value="unFollow")
+	@ResponseBody
+	public Response<EduSchoolDto> unFollow(EduParentScChDto eduParentScChDto){
+		Response<EduSchoolDto> result = new Response<EduSchoolDto>();
 		
+		int data = iEduParentScChService.updateFollow(eduParentScChDto);
+		if(data > 0 ){
+			result.setMessage("操作成功");
+		}else{
+			result.setStatus(DataStatus.HTTP_FAILE);
+		}
 		return result;
 	}
 	
