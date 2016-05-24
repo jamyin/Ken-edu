@@ -2,6 +2,7 @@ package com.ssic.education.provider.service;
 
 import java.util.List;
 
+import com.ssic.education.provider.dto.ProUsersDto;
 import com.ssic.education.provider.dto.TImsUsersDto;
 import com.ssic.education.provider.model.Tuser;
 import com.ssic.education.provider.pageModel.DataGrid;
@@ -79,14 +80,6 @@ public interface UserServiceI {
 	 */
 	public void delete(String id);
 
-	/**
-	 * 用户授权
-	 * 
-	 * @param ids
-	 * @param user
-	 *            需要user.roleIds的属性值
-	 */
-	public void grant(String ids, TImsUsersDto user);
 
 	/**
 	 * 获得用户能访问的资源地址
@@ -150,6 +143,8 @@ public interface UserServiceI {
 	public int vailUserAccount(TImsUsersDto userDto);
 	public TImsUsersDto getUser(String id);
 	public String findUserRole(String userId);
+
+
 	
 	/**
 	 * 根据session获取用户所属项目的信息<BR>	 

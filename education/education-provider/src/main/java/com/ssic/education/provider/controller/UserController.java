@@ -17,9 +17,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+
+import com.ssic.education.provider.dto.PageHelperDto;
+import com.ssic.education.provider.dto.ProUsersDto;
+import com.ssic.education.provider.dto.ProWaresDto;
+
 import com.google.common.base.Objects;
 import com.ssic.education.common.dto.ProSupplierDto;
 import com.ssic.education.common.provider.service.ISupplierService;
+//192.168.1.231/group-one/education.git
 import com.ssic.education.provider.dto.TImsUsersDto;
 import com.ssic.education.provider.pageModel.DataGrid;
 import com.ssic.education.provider.pageModel.Json;
@@ -149,8 +155,8 @@ public class UserController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping("/manager")
-	public String manager() {
-		return "admin/user";
+	public String manager(HttpServletRequest request) {
+		return "user/user";
 	}
 
 	/**
@@ -176,7 +182,7 @@ public class UserController extends BaseController {
 		User u = new User();
 		u.setId(UUID.randomUUID().toString());
 		request.setAttribute("user", u);
-		return "admin/userAdd";
+		return "user/userAdd";
 	}
 
 	/**
@@ -198,40 +204,32 @@ public class UserController extends BaseController {
 			j.setMsg("用户名称不能大于10位");
 			return j;
 		}
-		if(user.getUserNo().length()>10){
+		if(user.getPassword()!=(user.getPassword2())){
 			j.setSuccess(false);
-			j.setMsg("用户工号不能大于10位");
+			j.setMsg("两次密码输入不同");
 			return j;
 		}
-		  Pattern pattern = Pattern.compile("[0-9]*"); 
-		   Matcher isNum = pattern.matcher(user.getAge()+"");
-		   if( !isNum.matches() ){
-		       j.setSuccess(false);
-		       j.setMsg("年龄不是数字");
-		       return j;
-		   }
-		   TImsUsersDto temps = new TImsUsersDto();
-		   temps.setUserNo(user.getUserNo());
-		  int tempCounts =  userService.vailUserAccount(temps);
-		  	if(tempCounts>0){
-		  		j.setSuccess(false);
-		  		j.setMsg("员工编号已存在");
-		  		return j;
-		  	}
-		   Pattern p = Pattern.compile("^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\\.([a-zA-Z0-9_-])+)+$");
+		   Pattern p = Pattern.compile("^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\\.([a-zA-Z0-9_-])+)+$");		  
 		   Matcher isMail = p.matcher(user.getEmail());
 		   if(!StringUtils.isEmpty(user.getEmail())&&!isMail.matches()){
 			   j.setSuccess(false);
 			   j.setMsg("邮箱不合法");
 			   return j;
 		   }
-//		   Pattern mailP = Pattern.compile("/^[a-zA-Z0-9_\\-]{1,}@[a-zA-Z0-9_\\-]{1,}\.[a-zA-Z0-9_\\-.]{1,}$/");
+		   Pattern p2 = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
+		   Matcher isMail2 = p2.matcher(user.getUserNo());
+		   if(!StringUtils.isEmpty(user.getUserNo())&&!isMail2.matches()){
+			   j.setSuccess(false);
+			   j.setMsg("手机不合法");
+			   return j;
+		   }
+
 		TImsUsersDto tempUser = new TImsUsersDto();
 		tempUser.setUserAccount(user.getUserAccount());
 		int counts = userService.vailUserAccount(tempUser);
 		if(counts>0){
 			j.setSuccess(false);
-			j.setMsg("登录用户已存在");
+			j.setMsg("用户已存在");
 			return j;
 		}
 		try {
@@ -258,7 +256,8 @@ public class UserController extends BaseController {
 	public String editPage(HttpServletRequest request, String id) {
 		TImsUsersDto u = userService.getUser(id);
 	    request.setAttribute("user", u);
-        return "admin/userEdit";
+	    
+        return "user/userEdit";
 	}
 
 	/**
@@ -271,40 +270,39 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public Json edit(TImsUsersDto user) {
 		Json j = new Json();
-		 Pattern pattern = Pattern.compile("[0-9]*"); 
-		   Matcher isNum = pattern.matcher(user.getAge()+"");
-		   if( !isNum.matches() ){
-		       j.setSuccess(false);
-		       j.setMsg("年龄不是数字");
-		       return j;
-		   }
-			if(user.getName().length()>10){
-				j.setSuccess(false);
-				j.setMsg("用户名称不能大于10位");
-				return j;
-			}
-			if(user.getUserNo().length()>10){
-				j.setSuccess(false);
-				j.setMsg("用户工号不能大于10位");
-				return j;
-			}
-//			 TImsUsersDto temps = new TImsUsersDto();
-//			   temps.setUserNo(user.getUserNo());
-//			  int tempCounts =  userService.vailUserAccount(temps);
-//			  	if(tempCounts>0){
-//			  		j.setSuccess(false);
-//			  		j.setMsg("员工编号已存在");
-//			  		return j;
-//			  	}
-		   Pattern p = Pattern.compile("^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\\.([a-zA-Z0-9_-])+)+$");
+		
+		if (user.getPassword().length()<6){
+			j.setSuccess(false);
+			j.setMsg("密码长度不能小于六位");
+			return j;
+		}
+		if(user.getName().length()>10){
+			j.setSuccess(false);
+			j.setMsg("用户名称不能大于10位");
+			return j;
+		}
+		if(user.getPassword()!=(user.getPassword2())){
+			j.setSuccess(false);
+			j.setMsg("两次密码输入不同");
+			return j;
+		}
+
+		   Pattern p = Pattern.compile("^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\\.([a-zA-Z0-9_-])+)+$");		  
 		   Matcher isMail = p.matcher(user.getEmail());
 		   if(!StringUtils.isEmpty(user.getEmail())&&!isMail.matches()){
 			   j.setSuccess(false);
 			   j.setMsg("邮箱不合法");
 			   return j;
 		   }
+		   Pattern p2 = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
+		   Matcher isMail2 = p2.matcher(user.getUserNo());
+		   if(!StringUtils.isEmpty(user.getUserNo())&&!isMail2.matches()){
+			   j.setSuccess(false);
+			   j.setMsg("手机不合法");
+			   return j;
+		   }
 		try {
-			user.setModifydatetime(new Date());
+			
 			userService.edit(user);
 			j.setSuccess(true);
 			j.setMsg("编辑成功！");
@@ -369,27 +367,12 @@ public class UserController extends BaseController {
 		if (ids != null && !ids.equalsIgnoreCase("") && ids.indexOf(",") == -1) {
 			TImsUsersDto u = userService.getUser(ids);
 			String result = userService.findUserRole(ids);
-			u.setRoleIds(result);
+			
 			request.setAttribute("user", u);
 		}
 		return "admin/userGrant";
 	}
 
-	/**
-	 * 用户授权
-	 * 
-	 * @param ids
-	 * @return
-	 */
-	@RequestMapping("/grant")
-	@ResponseBody
-	public Json grant(String ids, TImsUsersDto user) {
-		Json j = new Json();
-		userService.grant(ids, user);
-		j.setSuccess(true);
-		j.setMsg("授权成功！");
-		return j;
-	}
 
 	/**
 	 * 跳转到编辑用户密码页面
@@ -531,6 +514,5 @@ public class UserController extends BaseController {
 		SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ConfigUtil.SESSIONINFONAME);
 		return userService.findUserTree(sessionInfo.getId());
 	}
-
 
 }

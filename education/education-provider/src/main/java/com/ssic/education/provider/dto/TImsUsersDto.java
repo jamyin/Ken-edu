@@ -58,6 +58,9 @@ public class TImsUsersDto implements Serializable
     private String password;
     @Getter
     @Setter
+    private String password2;
+    @Getter
+    @Setter
     private String qjyAccount;
     @Getter
     @Setter
@@ -107,7 +110,12 @@ public class TImsUsersDto implements Serializable
     @Getter
     @Setter
     private String userTable;
-
+    @Getter
+    @Setter
+    private String userType;
+    @Getter
+    @Setter
+    private String userTypeName;
     @Getter
     @Setter
     private String projectIds;
@@ -116,25 +124,7 @@ public class TImsUsersDto implements Serializable
     @Setter
     private String deptIds;
 
-	@Override
-	public String toString() {
-		return "TImsUsersDto [id=" + id + ", age=" + age + ", createdatetime="
-				+ createdatetime + ", sourceId=" + sourceId + ", deptId="
-				+ deptId + ", gender=" + gender + ", isAdmin=" + isAdmin
-				+ ", isDelete=" + isDelete + ", modifydatetime="
-				+ modifydatetime + ", name=" + name + ", pjNo=" + pjNo
-				+ ", postNo=" + postNo + ", password=" + password
-				+ ", qjyAccount=" + qjyAccount + ", userAccount=" + userAccount
-				+ ", userImage=" + userImage + ", userNo=" + userNo
-				+ ", createdatetimeStart=" + createdatetimeStart
-				+ ", createdatetimeEnd=" + createdatetimeEnd
-				+ ", modifydatetimeStart=" + modifydatetimeStart
-				+ ", modifydatetimeEnd=" + modifydatetimeEnd + ", searchName="
-				+ searchName + ", roleIds=" + roleIds + ", roleNames="
-				+ roleNames + ", email=" + email + ", deptName=" + deptName
-				+ ", userTable=" + userTable + ", projectIds=" + projectIds
-				+ ", deptIds=" + deptIds + "]";
-	}
+	
     
     
 
