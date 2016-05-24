@@ -28,7 +28,7 @@ public class ProLicenseServiceImpl implements IProLicenseService {
 		dao.alterImage(license);
 	}
 	
-	@Override
+
 	public void saveProLicense(ProLicenseDto proLicenseDto) {
 		ProLicense proLicense = BeanUtils.createBeanByTarget(proLicenseDto, ProLicense.class);
 		dao.insertSelective(proLicense);
