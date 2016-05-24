@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <#include "/common/head.htm" />
+        <link rel="stylesheet" href="/static/css/style.css">
+        <link rel="stylesheet" href="/static/css/dis_edu.css">
+    </head>
+    <body>
+        <!-- <div class="header">
+    		<div class="wrap">
+    			<a class="logo" href="index.html">上海市中小学校校生午餐综合管理平台</a>
+    			<div class="p_status">
+    				<a class="p_center" href="pcenter.html">个人中心</a>  |  <a class="logout" href="###">退出</a>
+    			</div>
+    		</div>
+    	</div>
+        <div class="nav">
+          <div class="wrap">
+            <a class="" href="index.html">首页</a>
+            <a class="" href="search_supplier.html">安全追溯</a>
+            <a class="" href="index.html">菜谱</a>
+            <a class="" href="index.html">健康宣教</a>
+            <a class="cur" href="index.html">通告公示</a>
+            <a class="" href="index.html">任务传达</a>
+            <a class="" href="index.html">发布</a>
+          </div> -->
+         <#include "/common/nav.htm" />
+        </div><div class="breadcrumb">
+            <span>当前位置:</span>
+            <a href="#">公告通知</a>
+            <span> &gt; </span>
+            <a href="#">审批</a>
+            <span> &gt; </span>
+            <a href="#">未审批详细</a>
+        </div>
+        <div class="main_wrap">
+       		<#if data.reviewed == 0>
+              	 <h2>未审批单位</h2>
+            </#if>
+			<#if data.reviewed == 1>
+				 <h2>审批通过单位</h2>
+            </#if>
+            <#if data.reviewed == 2>
+              	 <h2>审批不通过单位</h2>
+            </#if>
+            <div class="content_wrap">
+                <div class="tab_wrap">
+                    <ul class="side_menu">
+                        <a href="/edu/school/detail.htm?id=${(data.relationId)!}&schoolName=${(data.schoolName)!}&supplierName=${(data.supplierName)!}"><li>信息</li></a>
+                        <li class="active">图片</li>
+                    </ul>
+                    <div class="tab_content">
+                        <h1><#if data.schoolName??> ${(data.schoolName)!} <#elseif data.supplierName??> ${(data.supplierName)!}</#if></h1>
+
+                        <h2>企业证书</h2>
+                        <#if proLicenseDtos??>
+                        	<#list proLicenseDtos as proLicenseDtos>
+                        		<div class="pic_wrap">
+		                            <img src="${(proLicenseDtos.licPic)!}" />
+		                            <span>${(proLicenseDtos.licName)!}</span>
+		                        </div>
+                        	</#list>
+                        </#if>
+                         <!-- <div class="pic_wrap">
+                            <img src="static/img/cerf.jpg" />
+                            <span>工商营业执照</span>
+                        </div>
+                        <div class="pic_wrap">
+                            <img src="static/img/cerf.jpg" />
+                            <span>组织机构代码</span>
+                        </div>
+                        <div class="pic_wrap">
+                            <img src="static/img/cerf.jpg" />
+                            <span>税务登记证</span>
+                        </div>
+
+                       <h2>许可证</h2>
+                        <div class="pic_wrap">
+                            <img src="static/img/cerf.jpg" />
+                            <span>食品流通许可证</span>
+                        </div>
+                        <div class="pic_wrap">
+                            <img src="static/img/cerf.jpg" />
+                            <span>食品生产许可证</span>
+                        </div>
+                        <div class="pic_wrap">
+                            <img src="static/img/cerf.jpg" />
+                            <span>餐饮服务许可证</span>
+                        </div>
+                        <div class="pic_wrap">
+                            <img src="static/img/cerf.jpg" />
+                            <span>食品经营许可证</span>
+                        </div>
+
+                        <h2>法定代表人/负责人/业主证件 </h2>
+                        <div class="pic_wrap">
+                            <img src="static/img/cerf.jpg" />
+                            <span>身份证</span>
+                        </div>
+                        <div class="pic_wrap">
+                            <img src="static/img/cerf.jpg" />
+                            <span>港澳居民来往内地通行证</span>
+                        </div>
+                        <div class="pic_wrap">
+                            <img src="static/img/cerf.jpg" />
+                            <span>台湾居民往来内地通行证</span>
+                        </div>
+
+                        <h2>其他</h2>
+                        <div class="pic_wrap">
+                            <img src="static/img/cerf.jpg" />
+                            <span>其他</span>
+                        </div>
+
+                        <div class="subbt">
+                            <a href="#">通过</a>
+                            <a href="#">不通过</a>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="background">
+            <div class="panel">
+                <span class="close"><img src="static/img/button_close.png" /></span>
+                <img src="static/img/cerf.jpg" />
+            </div>
+        </div>
+        <#include "/common/footer.htm" />
+        <script src="static/js/jquery-2.1.3.min.js"></script>
+        <script type="text/javascript">
+            $(function(){
+                $(".pic_wrap img").click(function(){
+                    $(".background").show();
+                });
+                $(".background .close").click(function(){
+                    $(".background").hide();
+                });
+            });
+        </script>
+    </body>
+</html>
