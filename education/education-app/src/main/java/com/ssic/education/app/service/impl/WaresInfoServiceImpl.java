@@ -5,7 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssic.education.app.dao.LedgerInfoDao;
+import com.ssic.education.app.dao.LicDao;
 import com.ssic.education.app.dao.WaresInfoDao;
+import com.ssic.education.app.dto.LedgerListDto;
 import com.ssic.education.app.dto.WaresInfoDto;
 import com.ssic.education.app.dto.WaresListDto;
 import com.ssic.education.app.dto.WaresRelatedDto;
@@ -31,6 +34,11 @@ public class WaresInfoServiceImpl implements IWaresInfoService {
 	@Autowired
 	private WaresInfoDao waresInfoDao;
 
+	@Autowired
+	private LicDao licDao;
+	@Autowired
+	private LedgerInfoDao ledgerDao;
+
 	/**
 	 * 根据供应商ID查询商品列表
 	 * (non-Javadoc)   
@@ -54,8 +62,12 @@ public class WaresInfoServiceImpl implements IWaresInfoService {
 
 	@Override
 	public WaresRelatedDto findWarseById(String id) {
-		// TODO 添加方法注释
-		return waresInfoDao.findWarseById(id);
+		WaresRelatedDto wrd = waresInfoDao.findWarseById(id);
+		List<LedgerListDto> ledgerList = ledgerDao.findLedgerByWaresId(wrd.getId());
+		wrd.setInsReport(licDao.getLicbyType(wrd.getId(), 31));
+		wrd.setProLic(licDao.getLicbyType(wrd.getId(), 30));
+		wrd.setLedgerList(ledgerList);
+		return wrd;
 	}
 
 	@Override

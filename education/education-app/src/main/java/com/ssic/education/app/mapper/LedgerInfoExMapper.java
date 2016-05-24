@@ -1,8 +1,11 @@
 package com.ssic.education.app.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.ssic.education.app.dto.LedgerInfoDto;
+import com.ssic.education.app.dto.LedgerListDto;
 
 /**
  * 		
@@ -19,4 +22,6 @@ import com.ssic.education.app.dto.LedgerInfoDto;
  */
 public interface LedgerInfoExMapper {
 	LedgerInfoDto findLedgerByBatchNo(@Param("batchNo") String batchNo);
+
+	List<LedgerListDto> findLedgerByWaresId(@Param("waresId") String waresId);
 }

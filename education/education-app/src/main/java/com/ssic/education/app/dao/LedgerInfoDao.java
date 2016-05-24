@@ -1,11 +1,14 @@
 package com.ssic.education.app.dao;
 
+import java.util.List;
+
 import lombok.Getter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ssic.education.app.dto.LedgerInfoDto;
+import com.ssic.education.app.dto.LedgerListDto;
 import com.ssic.education.app.mapper.LedgerInfoExMapper;
 
 /**		
@@ -30,4 +33,9 @@ public class LedgerInfoDao {
 	public LedgerInfoDto findLedgerByBatchNo(String batchNo) {
 		return mapper.findLedgerByBatchNo(batchNo);
 	}
+	public List<LedgerListDto> findLedgerByWaresId(String waresId)
+	{
+		return mapper.findLedgerByWaresId(waresId);
+	}
+	
 }
