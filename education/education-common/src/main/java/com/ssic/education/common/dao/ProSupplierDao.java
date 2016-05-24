@@ -11,12 +11,15 @@ import org.springframework.stereotype.Repository;
 import com.ssic.education.common.dto.ProSupplierDto;
 import com.ssic.education.common.mapper.ProSupplierExMapper;
 import com.ssic.education.common.mapper.ProSupplierMapper;
+import com.ssic.education.common.mapper.ProSupplierReceiverMapper;
 import com.ssic.education.common.pojo.ProSupplier;
+import com.ssic.education.common.pojo.ProSupplierReceiver;
 import com.ssic.education.common.pojo.ViewProSupplierExample;
 import com.ssic.education.common.provider.dto.SupplierDto;
 import com.ssic.education.common.provider.utils.DataGrid;
 import com.ssic.education.common.provider.utils.PageHelper;
 import com.ssic.education.utils.mybatis.MyBatisBaseDao;
+import com.ssic.education.utils.util.BeanUtils;
 import com.ssic.education.utils.util.StringUtils;
 
 /**
@@ -33,6 +36,8 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 	
 	@Autowired
 	private ProSupplierExMapper exMapper;
+	@Autowired
+	private ProSupplierReceiverMapper  srMapper;
 	
 	private void assemblyParams(ProSupplierDto proSupplierDto, ViewProSupplierExample.Criteria criteria) {
 		if (null != proSupplierDto) {
@@ -88,11 +93,24 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 		ps.setCreateTime(new Date());
 		ps.setLastUpdateTime(ps.getCreateTime());
 		ps.setStat(1);
-		return exMapper.insert(ps);
+		ProSupplier supplier =new ProSupplier();
+		BeanUtils.copyProperties(ps, supplier);
+		
+		return mapper.insertSelective(supplier);
 	}
 
 	public List<SupplierDto> lookRelatingWares(ProSupplierDto dto) {
 		// TODO Auto-generated method stub
 		return exMapper.lookRelatingWares(dto);
+	}
+
+	public void saveSupplierReceiver(ProSupplierReceiver proSupplierReceiver) {
+		// TODO Auto-generated method stub
+		srMapper.insert(proSupplierReceiver);
+	}
+
+	public List<SupplierDto> findSupplierCodeByReceiverId(String supplierId) {
+		// TODO Auto-generated method stub
+		return exMapper.findSupplierCodeByReceiverId(supplierId);
 	}
 }

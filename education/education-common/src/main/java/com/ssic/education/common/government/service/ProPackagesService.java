@@ -17,4 +17,7 @@ public interface ProPackagesService {
 	public void save(ProPackagesDto dto, String jsonWares);
 	
 	public ProPackagesDto findById (String id);
+
+	public List<ProPackagesDto> searchProSchoolPackage(String customerId,
+			String timeDate);
 }

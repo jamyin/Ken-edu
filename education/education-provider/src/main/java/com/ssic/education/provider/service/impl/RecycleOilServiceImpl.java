@@ -15,33 +15,32 @@ public class RecycleOilServiceImpl implements IRecycleOilService {
 	@Autowired
 	private RecycleOilDao recycleOilDao;
 	
-	@Override
 	public DataGrid findAllRecycleOil(RecycleOilDto recycleOilDto,
 			PageHelper ph) {
 		return recycleOilDao.findAllRecycleOil(recycleOilDto,ph);
 	}
 
-	@Override
+
 	public RecycleOilDto findRecycleOilById(String sourceId,String id) {
 		return recycleOilDao.findRecycleOilById(sourceId,id);
 	}
 
-	@Override
+
 	public int updataRecycleOil(RecycleOilDto rod) {
 		return recycleOilDao.updataRecycleOil(rod);
 	}
 
-	@Override
+	
 	public int deleteRecycleOil(String sourceId,String id) {
 		return recycleOilDao.deleteRecycleOil(sourceId,id);
 	}
 
-	@Override
+	
 	public int saveRecycleOil(RecycleOilDto rod) {
 		return recycleOilDao.saveRecycleOil(rod);
 	}
 
-	@Override
+	
 	public String findRecycleBySourceId(String sourceId) {
 		return recycleOilDao.findRecycleBySourceId(sourceId);
 	}

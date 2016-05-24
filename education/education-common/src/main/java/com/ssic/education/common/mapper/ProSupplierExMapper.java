@@ -23,5 +23,8 @@ public interface ProSupplierExMapper {
 	int insert(SupplierDto record);
 
 	List<SupplierDto> lookRelatingWares(@Param("dto") ProSupplierDto dto);
+
+	List<SupplierDto> findSupplierCodeByReceiverId(@Param("supplierId")String supplierId);
+	
 	
 }

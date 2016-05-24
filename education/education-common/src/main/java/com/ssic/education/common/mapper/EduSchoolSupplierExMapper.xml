@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssic.education.common.mapper.EduSchoolSupplierExMapper" >
+
+	<select id="countAllLedgerAddress" resultType="Long">
+		SELECT
+		count(id)
+		FROM
+		t_edu_school_supplier
+		WHERE
+		stat = 1
+		AND supplier_id=#{ledgerAddress.supplierId}
+	</select>
+
+	<select id="findAllLedgerAddress" resultType="com.ssic.education.common.provider.dto.LedgerAddressDto">
+		SELECT
+		b.id id,
+		a.school_name schoolName,
+		a.mobile_no mobileNo,
+		b.school_id schoolId,
+		a.address address,
+		a.contacts contacts,
+		b.supplier_id supplierId
+		FROM
+		t_edu_school a,t_edu_school_supplier b
+		WHERE
+		b.stat = 1
+		AND a.id=b.school_id
+		AND b.supplier_id=#{ledgerAddress.supplierId}
+		<if
+			test="ledgerAddress.schoolName!=null and  ledgerAddress.schoolName!=''">
+			AND trim(a.school_name) = #{ledgerAddress.schoolName}
+		</if>
+		<if test="ph!=null and ph.rows!=0">
+			limit #{ph.beginRow},#{ph.rows}
+		</if>
+	</select>
+
+</mapper>

@@ -72,9 +72,11 @@
 					<td><input name="ledger[0].wareBatchNo" type="text"
 						class="easyui-validatebox span2"></td>
 					<th>驾驶员：</th>
-					<td><input name="ledger[0].userName" type="text"
-						placeholder="请输入驾驶员" class="easyui-validatebox span2"
-						data-options="required:true" value="${Driver[0].name}"></td>
+					<td><select name="ledger[0].userId" type="text"
+						placeholder="请选择驾驶员" class="easyui-validatebox span2"
+						data-options="required:true">
+							<option value ="${Driver[0].id}">${Driver[0].name}</option>
+						</select></td>
 				</tr>
 				<tr id="ledger0">
 					<th>采购品：</th>
@@ -105,6 +107,7 @@
 						readonly="readonly"></td>
 					<td><a id="addLedger">+</a></td>
 				</tr>
+				</table>
 				</form>
 				</div>
 				</div>

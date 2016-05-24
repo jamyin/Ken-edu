@@ -17,7 +17,6 @@ public class ProUsersServiceImpl implements IProUsersService {
 	@Autowired
 	private ProUsersDao proUsersDao;
 
-	@Override
 	public String saveProUsers(ProUsersDto proUsersDto) {
 		// TODO Auto-generated method stub
 		proUsersDto.setId(UUIDGenerator.getUUID());

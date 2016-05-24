@@ -54,6 +54,10 @@ public class LedgerDto {
 	@Getter
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date productionDate;
+	
+	@Setter
+	@Getter
+	private String productionName;
 
 	@Setter
 	@Getter
@@ -102,6 +106,10 @@ public class LedgerDto {
 	@Setter
 	@Getter
 	private String userName;
+	
+	@Setter
+	@Getter
+	private String sendDate;
 
 	@Override
 	public String toString() {

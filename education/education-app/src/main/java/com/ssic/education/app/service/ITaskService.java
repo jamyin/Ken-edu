@@ -1,6 +1,8 @@
 package com.ssic.education.app.service;
 
 import com.ssic.education.common.dto.EduTaskDto;
+import com.ssic.education.common.dto.EduTaskReadDto;
+import com.ssic.education.common.dto.EduTaskReceiveDto;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 
@@ -27,6 +29,9 @@ public interface ITaskService {
 	//修改任务阅读状态
 	Integer updateTask(String id, String receiveId);
 
+	//根据任务Id查询当前任务已读和未读列表
+	PageResult<EduTaskReadDto> findReadList(EduTaskReceiveDto receiveDto,
+			PageQuery query);
 
 }
 

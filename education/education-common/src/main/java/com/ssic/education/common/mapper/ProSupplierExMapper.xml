@@ -34,22 +34,21 @@
 		food_circulation_code_date
 		foodCirculationCodeDate,
 		food_produce_code foodProduceCode,
-		food_produce_code_date foodProduceCodeDate,
-		code code,
-		abbr abbr,
+		food_produce_code_date foodProduceCodeDate,	
 		corporation,
 		contact_way contactWay,
 		longitude,
-		latitude,
-		create_time
-		createTime,
-		last_update_time lastUpdateTime,
-		stat
+		latitude,		
+		b.supplier_code  as  supplierCode
 		FROM
-		t_pro_supplier
+			t_pro_supplier a  ,
+			t_pro_supplier_receiver b
 		WHERE
-		stat = 1
+		stat = 1  AND
+		
+		b.supplier_id=a.id
 		<include refid="where_findSupplier"></include>
+		ORDER BY   a.create_time DESC
 		<if test="ph.rows!=0 and ph!=null">
 			limit #{ph.beginRow},#{ph.rows}
 		</if>
@@ -83,38 +82,35 @@
 	<select id="findProSupplierById"
 		resultType="com.ssic.education.common.provider.dto.SupplierDto">
 		SELECT
-		id,
-		supplier_name supplierName,
-		address,
-		provinces,
-		city,
-		area,
-		supplier_type supplierType,
-		business_license businessLicense,
-		organization_code organizationCode,
-		food_service_code foodServiceCode,
-		food_service_code_date foodServiceCodeDate,
-		food_business_code
-		foodBusinessCode,
-		food_business_code_date foodBusinessCodeDate,
-		food_circulation_code foodCirculationCode,
-		food_circulation_code_date
-		foodCirculationCodeDate,
-		food_produce_code foodProduceCode,
-		food_produce_code_date foodProduceCodeDate,
-		code code,
-		abbr abbr,
-		corporation,
-		contact_way contactWay,
-		longitude,
-		latitude,
-		create_time
-		createTime,
-		last_update_time lastUpdateTime,
-		stat
-		FROM
-		t_pro_supplier
-		where id=#{id}
+
+	a.id,
+	a.supplier_name supplierName,
+	a.address,
+	a.provinces,
+	a.city,
+	a.area,
+	a.supplier_type supplierType,
+	a.business_license businessLicense,
+	a.organization_code organizationCode,
+	a.food_service_code foodServiceCode,
+	a.food_service_code_date foodServiceCodeDate,
+	a.food_business_code foodBusinessCode,
+	a.food_business_code_date foodBusinessCodeDate,
+	a.food_circulation_code foodCirculationCode,
+	a.food_circulation_code_date foodCirculationCodeDate,
+	a.food_produce_code foodProduceCode,
+	a.food_produce_code_date foodProduceCodeDate,
+	a.corporation,
+	a.contact_way contactWay,
+	a.longitude,
+	a.latitude,
+  b.supplier_code  AS supplierCode
+FROM
+	t_pro_supplier a,
+t_pro_supplier_receiver b
+WHERE
+ b.supplier_id=#{id}
+AND  a.stat=1 AND  a.id=#{id}
 	</select>
 	<sql id="where_findSupplier">
 		<if test="supplierDto.supplierName!=null and  supplierDto.supplierName!=''">
@@ -126,6 +122,10 @@
 		<if test="supplierDto.supplierType!=null and supplierDto.supplierType!='' ">
 			AND supplier_type = #{supplierDto.supplierType}
 		</if>
+		<if test="supplierDto.receiverId!=null and supplierDto.receiverId!='' ">
+			AND b.receiver_id=  #{supplierDto.receiverId}
+		</if>
+		
 	</sql>
 
 	<insert id="insert" parameterType="com.ssic.education.common.provider.dto.SupplierDto">
@@ -138,7 +138,7 @@
 		food_service_code, food_service_code_date, food_business_code,
 		food_business_code_date, food_circulation_code,
 		food_circulation_code_date, food_produce_code,
-		food_produce_code_date, code, abbr,
+		food_produce_code_date, 
 		corporation, contact_way, longitude,
 		latitude, create_time, last_update_time,
 		stat)
@@ -155,7 +155,7 @@
 		#{foodCirculationCodeDate,jdbcType=DATE},
 		#{foodProduceCode,jdbcType=VARCHAR},
 		#{foodProduceCodeDate,jdbcType=DATE}, #{code,jdbcType=VARCHAR},
-		#{abbr,jdbcType=VARCHAR},
+	
 		#{corporation,jdbcType=VARCHAR}, #{contactWay,jdbcType=VARCHAR}, #{longitude,jdbcType=VARCHAR},
 		#{latitude,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
 		#{lastUpdateTime,jdbcType=TIMESTAMP},
@@ -222,12 +222,8 @@
 				food_produce_code_date =
 				#{foodProduceCodeDate,jdbcType=DATE},
 			</if>
-			<if test="code != null">
-				code = #{code,jdbcType=VARCHAR},
-			</if>
-			<if test="abbr != null">
-				abbr = #{abbr,jdbcType=VARCHAR},
-			</if>
+			
+			
 			<if test="corporation != null">
 				corporation = #{corporation,jdbcType=VARCHAR},
 			</if>
@@ -268,12 +264,20 @@
 					AND
 				a.way=0
 				AND a.stat=1 
-					
+
+	</select>
+	<select id="findSupplierCodeByReceiverId"
+		resultType="com.ssic.education.common.provider.dto.SupplierDto">
 	
 	
+	SELECT
+	a.supplier_code AS supplierCode
+FROM
+	t_pro_supplier_receiver a
+WHERE
+	a.receiver_id = #{supplierId}
 	
 	</select>
-	
 	
 	
 	

@@ -40,7 +40,7 @@ public class RoleProjectServiceImpl implements IRoleProjectService
     * (non-Javadoc)   
     * @see com.ssic.catering.base.service.IRoleProjectService#grantProject(com.ssic.catering.base.dto.RoleProjectDto)   
     */
-    @Override
+  
     public void grantProject(RoleProjectDto roleProjectDto)
     {
         ProRoleProject roleProject = new ProRoleProject();
@@ -69,7 +69,7 @@ public class RoleProjectServiceImpl implements IRoleProjectService
     * (non-Javadoc)   
     * @see com.ssic.catering.base.service.IRoleProjectService#delete(com.ssic.catering.base.dto.RoleProjectDto)   
     */
-    @Override
+    
     public void delete(RoleProjectDto delete_dto)
     {
     	ProRoleProject roleProject = new ProRoleProject();

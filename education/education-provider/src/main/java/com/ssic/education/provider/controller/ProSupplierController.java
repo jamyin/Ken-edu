@@ -1,6 +1,7 @@
 package com.ssic.education.provider.controller;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -18,14 +19,17 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ssic.education.common.dto.ImageInfoDto;
 import com.ssic.education.common.dto.ProSupplierDto;
 import com.ssic.education.common.pojo.ProLicense;
+import com.ssic.education.common.pojo.ProSupplierReceiver;
 import com.ssic.education.common.provider.dto.SupplierDto;
 import com.ssic.education.common.provider.service.ISupplierService;
 import com.ssic.education.common.provider.utils.DataGrid;
 import com.ssic.education.common.provider.utils.PageHelper;
 import com.ssic.education.common.service.ICreateImageService;
 import com.ssic.education.provider.pageModel.Json;
+import com.ssic.education.provider.pageModel.SessionInfo;
 import com.ssic.education.provider.service.IProLicenseService;
 import com.ssic.education.provider.service.IWaresService;
+import com.ssic.education.provider.util.ConfigUtil;
 import com.ssic.education.utils.util.UUIDGenerator;
 
 @Controller
@@ -55,8 +59,11 @@ public class ProSupplierController {
 	 */
 	@RequestMapping("/dataGrid")
 	@ResponseBody
-	public DataGrid dataGrid(SupplierDto supplierDto, PageHelper ph) {
+	public DataGrid dataGrid(SupplierDto supplierDto, PageHelper ph,HttpServletRequest request) {
 		DataGrid dataGrid = new DataGrid();
+		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
+				ConfigUtil.SESSIONINFONAME);
+		supplierDto.setReceiverId(info.getSupplierId());
 		return supplierService.findProSupplier(supplierDto,ph);
 	}
 
@@ -82,7 +89,7 @@ public class ProSupplierController {
 	 */
 	@RequestMapping(value = "/proSupplierEdit")
 	@ResponseBody
-	public Json updataProSupplier(SupplierDto ps) {
+	public Json updataProSupplier(SupplierDto ps,HttpServletRequest request) {
 		Json j = null;
 		j=checkSupplier(ps);
 		if(j!=null){
@@ -94,6 +101,18 @@ public class ProSupplierController {
 			j.setMsg("不存在的供应商");
 			j.setSuccess(false);
 			return j;
+		}
+		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
+				ConfigUtil.SESSIONINFONAME);
+		//查找已定义的供应商编码，供应商编码唯一
+	List<SupplierDto>  list=	supplierService.findSupplierCodeByReceiverId(info.getSupplierId());
+		for (SupplierDto supplierDto : list) {
+			if(supplierDto.getSupplierCode().equals(ps.getSupplierCode())){
+				j.setMsg("供应商编码重复");
+				j.setSuccess(false);
+				return j;
+			}
+			
 		}
 		supplierService.updataProSupplier(ps);
 		j.setMsg("修改信息成功");
@@ -133,7 +152,7 @@ public class ProSupplierController {
 	 */
 	@RequestMapping("/saveSupplier")
 	@ResponseBody
-	public Json saveSupplier(SupplierDto ps) {
+	public Json saveSupplier(SupplierDto ps ,HttpServletRequest request) {
 		Json j=null;
 		j=checkSupplier(ps);
 		if(j!=null){
@@ -141,6 +160,26 @@ public class ProSupplierController {
 		};
 		ps.setId(UUIDGenerator.getUUID());
 		supplierService.saveSupplier(ps);
+		ProSupplierReceiver proSupplierReceiver =new ProSupplierReceiver();
+		proSupplierReceiver.setSupplierId(ps.getId());
+		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
+				ConfigUtil.SESSIONINFONAME);
+		proSupplierReceiver.setReceiverId(info.getSupplierId());
+		proSupplierReceiver.setSupplierCode(ps.getSupplierCode());
+		List<SupplierDto>  list=	supplierService.findSupplierCodeByReceiverId(info.getSupplierId());
+	
+		
+		for (int i = 0; i < list.size(); i++) {
+			 boolean falge = list.get(i).getSupplierCode().equalsIgnoreCase(ps.getSupplierCode());
+			if(falge){
+				j=new Json();
+				j.setMsg("供应商编码重复");
+				j.setSuccess(false);
+				return j;
+			}
+			 
+		}
+		supplierService.saveSupplierReceiver(proSupplierReceiver);
 		j=new Json();
 		j.setMsg("添加供应商成功");
 		j.setSuccess(true);
@@ -160,38 +199,7 @@ public class ProSupplierController {
 			j.setSuccess(false);
 			return j;
 		}
-		if (ps.getSupplierType() == null || ps.getSupplierType().equals("")) {
-			Json j=new Json();
-			j.setMsg("供应商类型不能为空");
-			j.setSuccess(false);
-			return j;
-		}
-		if (ps.getBusinessLicense() == null
-				|| ps.getBusinessLicense().equals("")) {
-			Json j=new Json();
-			j.setMsg("工商执照号不能为空");
-			j.setSuccess(false);
-			return j;
-		}
-		if (ps.getOrganizationCode() == null
-				|| ps.getOrganizationCode().equals("")) {
-			Json j=new Json();
-			j.setMsg("组织机构代码不能为空");
-			j.setSuccess(false);
-			return j;
-		}
-		if (ps.getCorporation() == null || ps.getCorporation().equals("")) {
-			Json j=new Json();
-			j.setMsg("法人代表不能为空");
-			j.setSuccess(false);
-			return j;
-		}
-		if (ps.getContactWay() == null || ps.getContactWay().equals("")) {
-			Json j=new Json();
-			j.setMsg("联系方式不能为空");
-			j.setSuccess(false);
-			return j;
-		}
+		
 		return null;
 	}
 	

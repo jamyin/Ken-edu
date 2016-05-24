@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>废弃油脂管理</title>
+<title>配货管理</title>
 <jsp:include page="../inc.jsp"></jsp:include>
 <c:if test="${fn:contains(sessionInfo.resourceList, '/userController/editPage')}">
 	<script type="text/javascript">
@@ -25,7 +25,7 @@
 			fitColumns : true,
 			border : false,
 			pagination : true,
-			idField : 'id',
+			idField : 'wareBatchNo',
 			pageSize : 10,
 			pageList : [ 10, 20, 30, 40, 50 ],
 			sortName : 'name',
@@ -34,12 +34,12 @@
 			selectOnCheck : false,
 			nowrap : false,
 			frozenColumns : [ [ {
-				field : 'id',
+				field : 'wareBatchNo',
 				title : '编号',
 				width : 150,
 				checkbox : true
 			}, {
-				field : 'actionDate',
+				field : 'sendDate',
 				title : '配货日期',
 				width : 80,
 				sortable : true
@@ -64,7 +64,7 @@
 				formatter : function(value, row, index) {
 					var str = '';
 					if ($.canEdit) {
-						str += $.formatString('<img onclick="editFun(\'{0}\');" src="{1}" title="编辑"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
+						str += $.formatString('<img onclick="editFun('+row.wareBatchNo+');" src="{1}" title="编辑"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
 					}
 					str += '&nbsp;';
 					if ($.canDelete) {
@@ -96,6 +96,7 @@
 		if (id == undefined) {//点击右键菜单才会触发这个
 			var rows = dataGrid.datagrid('getSelections');
 			id = rows[0].id;
+			alert(id)
 		} else {//点击操作里面的删除图标会触发这个
 			dataGrid.datagrid('unselectAll').datagrid('uncheckAll');
 		}
@@ -107,7 +108,7 @@
 						title : '提示',
 						text : '数据处理中，请稍后....'
 					});
-					$.post('${pageContext.request.contextPath}/recycleOilControllor/deleteRecycleOil', {
+					$.post('${pageContext.request.contextPath}/ledgerController/deleteLedger', {
 						id : id
 					}, function(result) {
 						if (result.success) {
@@ -130,14 +131,15 @@
 		if (id == undefined) {
 			var rows = dataGrid.datagrid('getSelections');
 			id = rows[0].id;
+			alert(id);
 		} else {
 			dataGrid.datagrid('unselectAll').datagrid('uncheckAll');
 		}
 		parent.$.modalDialog({
 			title : '编辑废弃油脂',
-			width : 500,
+			width : 1600,
 			height : 500,
-			href : '${pageContext.request.contextPath}/recycleOilControllor/editPage?id=' + id,
+			href : '${pageContext.request.contextPath}/ledgerController/editPage?wareBatchNo=' +id ,
 			buttons : [ {
 				text : '编辑',
 				handler : function() {
@@ -178,6 +180,7 @@
 <body>
 	<div class="easyui-layout" data-options="fit : true,border : false">
 		<div data-options="region:'north',title:'查询条件',border:false" style="height: 160px; overflow: hidden;">
+			
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">
 					<tr>

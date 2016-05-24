@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssic.education.app.service.ITaskService;
 import com.ssic.education.common.dto.EduTaskDto;
+import com.ssic.education.common.dto.EduTaskReadDto;
+import com.ssic.education.common.dto.EduTaskReceiveDto;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
@@ -30,7 +32,7 @@ public class TaskController {
     
    /**
    * @Title: findTaskListById
-   * @Description: 根据Id查询当前用户接收任务列表 -带分页(未读和历史-已读)
+   * @Description: 根据Id查询当前用户接收任务列表 -带分页(未读和已读-历史)
    * @author Ken Yin  
    * @date 2016年5月20日 下午3:17:18
    * @return Response<EduTaskDto>    返回类型
@@ -143,33 +145,35 @@ public class TaskController {
     }
     
     /**
-    * @Title: findTaskListById
+    * @Title: findReadList
     * @Description: 根据任务Id查询当前任务已读和未读列表
     * @author Ken Yin  
     * @date 2016年5月21日 上午11:34:50
-    * @return Response<PageResult<EduTaskDto>>    返回类型
+    * @return Response<EduTaskReadDto>    返回类型
      */
-      /*@RequestMapping("/findReceiveList/{id}")
+      @RequestMapping("/findReceiveList/{id}")
       @ResponseBody
-      public Response<PageResult<EduTaskReceiveDto>> findReceiveList(@PathVariable("id")String id, @PathVariable("readstat")int readstat, PageQuery query) {
-      	Response<PageResult<EduTaskReceiveDto>> result = new Response<PageResult<EduTaskReceiveDto>>();
+      public Response<EduTaskReadDto> findReadList(@PathVariable("id")String id, PageQuery query) {
+      	Response<EduTaskReadDto> result = new Response<EduTaskReadDto>();
       	if(StringUtils.isEmpty(id)){
        		result.setStatus(DataStatus.HTTP_FAILE);
        		result.setMessage("任务Id为空");
        		return result;
        	}
-      	PageResult<EduTaskDto> taskList = taskService.findReceiveList(id, readstat, query);
-      	if(taskList.getResults() != null && taskList.getResults().size() >0 ){
-      		result.setStatus(DataStatus.HTTP_SUCCESS);
-      		result.setMessage("查询任务成功！");
-      		result.setData(taskList);
-      		return result;
-      	}else{
-      		result.setStatus(DataStatus.HTTP_FAILE);
-      		result.setMessage("未查到相关记录！");
-      		return result;
-      	}
-      }*/
+      	EduTaskReceiveDto receiveDto = new EduTaskReceiveDto();
+      	receiveDto.setTaskId(id);
+      	receiveDto.setReadstat(1);    //已读
+      	PageResult<EduTaskReadDto> readList = taskService.findReadList(receiveDto, query);
+      	receiveDto.setReadstat(0);	  //未读
+    	PageResult<EduTaskReadDto> notReadList = taskService.findReadList(receiveDto, query);
+    	EduTaskReadDto dto = new EduTaskReadDto();
+    	dto.setReadList(readList);
+    	dto.setNotReadList(notReadList);
+    	result.setStatus(DataStatus.HTTP_SUCCESS);
+		result.setMessage("查询成功");
+		result.setData(dto);
+		return result;
+      }
     
 }
 

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.ssic.education.app.service.ITaskService;
 import com.ssic.education.common.dao.TaskDao;
 import com.ssic.education.common.dto.EduTaskDto;
+import com.ssic.education.common.dto.EduTaskReadDto;
+import com.ssic.education.common.dto.EduTaskReceiveDto;
 import com.ssic.education.common.pojo.EduTask;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
@@ -54,6 +56,15 @@ public class TaskServiceImpl implements ITaskService{
 	@Override
 	public Integer updateTask(String id, String receiveId) {
 		return taskDao.updateTask(id, receiveId);
+	}
+
+	@Override
+	public PageResult<EduTaskReadDto> findReadList(EduTaskReceiveDto receiveDto,
+			PageQuery query) {
+		List<EduTaskReadDto> list = taskDao.findReadList(receiveDto, query);
+		int total = taskDao.selectReadAccount(receiveDto);
+		query.setTotal(total);
+		return new PageResult<EduTaskReadDto>(query, list);
 	}
 
 	

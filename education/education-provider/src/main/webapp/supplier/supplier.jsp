@@ -48,74 +48,143 @@
 				title : '编号',
 				width : 150,
 				checkbox : true
-			}, {
-				field : 'supplierName',
-				title : '供应商名称',
-				width : 80,
-				sortable : true
 			} ] ],
-			columns : [ [ {
-				field : 'address',
-				title : '供应商地址',
-				width : 60,
-				sortable : true
-			}, 
+			columns : [ [ 
+			             {
+			 				field : 'supplierName',
+			 				title : '供应商名称',
+			 				width : 120,
+			 				
+			 				formatter : function(value, row, index) {
+			 					if(value!=null){
+			 					return '<font style="font-style: normal;font-weight: bolder;">'
+			 							+ value + '</font>';
+			 					}else{
+			 					return "";
+			 							}
+			 				}
+			 			}, {
+			 				field : 'supplierCode',
+			 				title : '供应商编码',
+			 				width : 120,
+			 				
+			 				formatter : function(value, row, index) {
+			 					if(value!=null){
+			 					return '<font style="font-style: normal;font-weight: bolder;">'
+			 							+ value + '</font>';
+			 					}else{
+			 					return "";
+			 							}
+			 				}
+			 			},{
+			 				field : 'address',
+			 				title : '供应商地址',
+			 				width : 120,
+			 				
+			 				formatter : function(value, row, index) {
+			 					if(value!=null){
+			 					return '<font style="font-style: normal;font-weight: bolder;">'
+			 							+ value + '</font>';
+			 					}else{
+			 					return "";
+			 							}
+			 				}
+			 			},
+			 			
+			 			{
+			 				field : 'corporation',
+			 				title : '法人代表',
+			 				width : 120,
+			 				
+			 				formatter : function(value, row, index) {
+			 					if(value!=null){
+			 					return '<font style="font-style: normal;font-weight: bolder;">'
+			 							+ value + '</font>';
+			 					}else{
+			 					return "";
+			 							}
+			 				}
+			 			},{
+			 				field : 'contactWay',
+			 				title : '联系方式',
+			 				width : 120,
+			 				
+			 				formatter : function(value, row, index) {
+			 					if(value!=null){
+			 					return '<font style="font-style: normal;font-weight: bolder;">'
+			 							+ value + '</font>';
+			 					}else{
+			 					return "";
+			 							}
+			 				}
+			 			},
+			 			{
+			 				field : 'businessLicense',
+			 				title : '工商执照号',
+			 				width : 120,
+			 				
+			 				formatter : function(value, row, index) {
+			 					if(value!=null){
+			 					return '<font style="font-style: normal;font-weight: bolder;">'
+			 							+ value + '</font>';
+			 					}else{
+			 					return "";
+			 							}
+			 				}
+			 			},{
+			 				field : 'foodServiceCode',
+			 				title : '餐饮服务证号',
+			 				width : 120,
+			 				
+			 				formatter : function(value, row, index) {
+			 					if(value!=null){
+			 					return '<font style="font-style: normal;font-weight: bolder;">'
+			 							+ value + '</font>';
+			 					}else{
+			 					return "";
+			 							}
+			 				}
+			 			},{
+			 				field : 'foodBusinessCode',
+			 				title : '食品经营许可证号',
+			 				width : 120,
+			 				
+			 				formatter : function(value, row, index) {
+			 					if(value!=null){
+			 					return '<font style="font-style: normal;font-weight: bolder;">'
+			 							+ value + '</font>';
+			 					}else{
+			 					return "";
+			 							}
+			 				}
+			 			},{
+			 				field : 'foodCirculationCode',
+			 				title : '食品流通证号',
+			 				width : 120,
+			 				
+			 				formatter : function(value, row, index) {
+			 					if(value!=null){
+			 					return '<font style="font-style: normal;font-weight: bolder;">'
+			 							+ value + '</font>';
+			 					}else{
+			 					return "";
+			 							}
+			 				}
+			 			},{
+			 				field : 'foodProduceCode',
+			 				title : '食品生产证号',
+			 				width : 120,
+			 				
+			 				formatter : function(value, row, index) {
+			 					if(value!=null){
+			 					return '<font style="font-style: normal;font-weight: bolder;">'
+			 							+ value + '</font>';
+			 					}else{
+			 					return "";
+			 							}
+			 				}
+			 			},			 						
 			{
-				field : 'provinces',
-				title : '省',
-				width : 50,
-				sortable : true
-			},
-			{
-				field : 'city',
-				title : '市',
-				width : 50,
-				sortable : true
-			},
-			{
-				field : 'area',
-				title : '区',
-				width : 50,
-				sortable : true
-			},{
-				field : 'supplierType',
-				title : '供应商类型',
-				width : 50,
-				sortable : true
-			}, {
-				field : 'businessLicense',
-				title : '工商执照号',
-				width : 50,
-				sortable : true
-			}, {
-				field : 'organizationCode',
-				title : '组织机构代码',
-				width : 50,
-				sortable : true
-			}, {
-				field : 'corporation',
-				title : '法人代表',
-				width : 50,
-				sortable : true
-			},
-			{
-				field : 'contactWay',
-				title : '联系方式',
-				width : 50,
-				sortable : true
-			},
-			{
-				field : 'longitude',
-				title : '精度',
-				width : 50,
-				sortable : true
-			},
-			{
-				field : 'latitude',
-				title : '维度',
-				width : 50,
-				sortable : true
-			}, {
 				field : 'action',
 				title : '操作',
 				width : 100,

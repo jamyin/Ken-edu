@@ -18,7 +18,16 @@ public class SupplierDto {
     private String supplierName;
 	@Setter
 	@Getter
+    private String supplierId;
+	@Setter
+	@Getter
     private String waresName;//商品名称
+	@Setter
+	@Getter
+    private String  receiverId;
+	@Setter
+	@Getter
+    private String  supplierCode;
 	@Setter
 	@Getter
     private String spec;//商品规格

@@ -176,4 +176,27 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		return mapper.countByExample(example);
 	}
+
+	public List<ProPackages> searchProSchoolPackage(String customerId,
+			String timeDate) {
+		ProPackagesExample example = new ProPackagesExample();
+		ProPackagesExample.Criteria criteria = example.createCriteria();
+		
+		if(StringUtils.isNotEmpty(customerId)){
+			criteria.andCustomerIdEqualTo(customerId);	
+		}
+		if(!StringUtils.isNotEmpty(timeDate)){
+			Date date = new Date();
+			timeDate = DateUtils.format(date, DateUtils.YMD_DASH);
+			criteria.andSupplyDateEqualTo(DateUtils.parse(timeDate, DateUtils.YMD_DASH));	
+		}else{
+			criteria.andSupplyDateEqualTo(DateUtils.parse(timeDate, DateUtils.YMD_DASH));
+		}
+
+		criteria.andStatEqualTo(DataStatus.ENABLED);
+		
+		example.setOrderByClause(" supply_phase asc");
+		
+		return mapper.selectByExample(example);
+	}
 }

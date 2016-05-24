@@ -146,4 +146,16 @@ public class SupplierServiceImpl implements ISupplierService {
 		return ps.getId();
 	}
 
+	@Override
+	public void saveSupplierReceiver(ProSupplierReceiver proSupplierReceiver) {
+		// TODO Auto-generated method stub
+		proSupplierDao.saveSupplierReceiver(proSupplierReceiver);
+	}
+
+	@Override
+	public List<SupplierDto> findSupplierCodeByReceiverId(String supplierId) {
+		// TODO Auto-generated method stub
+		return proSupplierDao.findSupplierCodeByReceiverId(supplierId);
+	}
+
 }

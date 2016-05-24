@@ -1,14 +1,13 @@
 package com.ssic.education.provider.controller;
 
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ssic.education.common.dto.ImageInfoDto;
 import com.ssic.education.common.pojo.ProLedger;
 import com.ssic.education.common.pojo.ProSupplier;
 import com.ssic.education.common.pojo.ProWares;
@@ -34,6 +34,7 @@ import com.ssic.education.common.provider.service.ILedgerService;
 import com.ssic.education.common.provider.service.ISupplierService;
 import com.ssic.education.common.provider.utils.DataGrid;
 import com.ssic.education.common.provider.utils.PageHelper;
+import com.ssic.education.provider.dto.RecycleOilDto;
 import com.ssic.education.provider.dto.TImsUsersDto;
 import com.ssic.education.provider.pageModel.Json;
 import com.ssic.education.provider.pageModel.LedgerModel;
@@ -119,6 +120,60 @@ public class LedgerController {
 		return j;
 	}
 	
+	@RequestMapping("/editPage")
+	public String editPage( String wareBatchNo,HttpServletRequest request,HttpSession session) {
+		TImsUsersDto user = (TImsUsersDto) session.getAttribute("user");
+		if(user==null){
+			return null;
+		}
+		List<LedgerDto> list = ledgerService.findLedgerById(user.getSourceId(),wareBatchNo);
+		request.setAttribute("LedgerList", list);
+		System.out.println(list.get(0));
+		return "ledger/ledgerEdit";
+	}
+	
+	@RequestMapping(value = "/ledgerEdit")
+	@ResponseBody
+	public Json updataLedger(LedgerModel lm, HttpSession session) {
+		Json j = new Json();
+		TImsUsersDto user = (TImsUsersDto) session.getAttribute("user");
+		String sourceId = user.getSourceId();
+		if (sourceId == null) {
+			j.setMsg("尚未登录");
+			j.setSuccess(false);
+			return j;
+		}
+		System.out.println(lm);
+		List<LedgerDto> ledger = lm.getLedger();
+		ledger.get(0).setSourceId(sourceId);
+		ledgerService.updataLedger(ledger);
+		j = new Json();
+		j.setMsg("添加供应商成功");
+		j.setSuccess(true);
+		return j;
+	}
+	
+	@RequestMapping("/deleteLedger")
+	@ResponseBody
+	public Json deleteLedger(String wareBatchNo,HttpSession session) {
+		Json j = new Json();
+		TImsUsersDto user = (TImsUsersDto) session.getAttribute("user");
+		if(user==null){
+			j.setMsg("供应商不能为空");
+			j.setSuccess(false);
+			return j;
+		}
+		int r = ledgerService.deleteLedger(user.getSourceId(),wareBatchNo);
+		if (r == 0) {
+			j.setMsg("删除供应商失败");
+			j.setSuccess(false);
+			return j;
+		}
+		j.setMsg("删除供应商成功");
+		j.setSuccess(true);
+		return j;
+	}
+	
 	@RequestMapping(value = "/import")
 	@ResponseBody
 	/**
@@ -150,6 +205,7 @@ public class LedgerController {
 		List<ProLedger> list = new ArrayList();
 		Date now = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/M/d");
+		DecimalFormat df2 = new DecimalFormat("#.##");
 		for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
 			ProLedger dto = new ProLedger();
 			HSSFRow hssfRow = hssfSheet.getRow(rowNum);
@@ -188,7 +244,8 @@ public class LedgerController {
 					}
 				} else if (i == 4) {
 					// 数量
-					dto.setQuantity(new BigDecimal(value).setScale(2, RoundingMode.DOWN));
+					// TODO need yanggang regenerate pojo
+					//dto.setUnit(df2.parse(value));
 				} else if (i == 5) {
 					// 生产日期
 					dto.setProductionDate(sdf.parse(value));
@@ -231,8 +288,7 @@ public class LedgerController {
 				list.add(dto);
 			}
 		}
-		// 批量导入 
-		ledgerService.addProLedger(list);
+		// TODO 导入批次
 
 		// TODO 反馈用户错误信息
 		return null;

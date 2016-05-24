@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>教委管理系统</title>
+<title>团餐管理系统</title>
 <jsp:include page="inc.jsp"></jsp:include>
 <script type="text/javascript">
 	var index_tabs;
