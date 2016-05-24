@@ -44,7 +44,7 @@
 					<div class="reg-box" id="verifyCheck" style="margin-top: 20px;">
 						<div class="part1">
 							<div class="item col-xs-12">
-								<span class="intelligent-label f-fl"><b class="ftx04">*</b>单位名称1：</span>
+								<span class="intelligent-label f-fl"><b class="ftx04">*</b>单位名称：</span>
 								<div class="f-fl item-ifo">
 									<input name="supplierName" type="text" maxlength="20" class="txt03 f-r3 required" tabindex="1" data-valid="isNonEmpty||between:3-20||isUname"
 										data-error="单位名称不能为空||用户名长度3-20位||只能输入中文、字母、数字、下划线，且以中文或字母开头" id="adminNo" /> <span class="ie8 icon-close close hide"></span> <label class="icon-sucessfill blank hide"></label>
@@ -122,7 +122,7 @@
 
 						</div>
 					</div>
-					<a href="javascript:;" class="btn btn-blue f-r3" id="btn_part2">完成11</a>
+					<!-- <a href="javascript:;" class="btn btn-blue f-r3" id="btn_part2">完成11</a> -->
 				</form>
 				<div class="part4 text-center" style="display: none">
 					<h3>恭喜，您已注册成功，审核通过之后即可登录使用！</h3>
