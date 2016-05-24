@@ -11,15 +11,13 @@ import com.ssic.education.common.dto.EduTaskDto;
 import com.ssic.education.common.dto.EduTaskReadDto;
 import com.ssic.education.common.dto.EduTaskReceiveDto;
 import com.ssic.education.common.pojo.EduTask;
-import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 import com.ssic.education.utils.util.BeanUtils;
-import com.ssic.education.utils.util.UUIDGenerator;
 
 /**	
 * @ClassName: SchoolServiceImpl
-* @Description: 
+* @Description: TODO(这里用一句话描述这个类的作用)
 * @author Ken Yin
 * @date 2016年5月12日 下午2:20:58
 *
@@ -68,24 +66,6 @@ public class TaskServiceImpl implements ITaskService{
 		query.setTotal(total);
 		return new PageResult<EduTaskReadDto>(query, list);
 	}
-
-	@Override
-	public EduTaskDto addTask(EduTaskDto eduTaskDto) {
-		eduTaskDto.setId(UUIDGenerator.getUUID());
-		eduTaskDto.setStat(DataStatus.ENABLED);
-		EduTask task = BeanUtils.createBeanByTarget(eduTaskDto, EduTask.class);
-		int flag = taskDao.insertSelective(task);
-		if(flag > 0){
-			return eduTaskDto;
-		}
-		return null;
-	}
-
-	@Override
-	public int addReceiveTask(List<EduTaskReceiveDto> receiveDtolist) {
-		return taskDao.addReceiveTask(receiveDtolist);
-	}
-
 
 	
 }

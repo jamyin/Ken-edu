@@ -27,13 +27,4 @@
 		</if>	
 	</sql>
 	
-	 <insert id="addReceiveTaskBatch" parameterType="java.util.List">  
-     insert into t_edu_task_receive (id, task_id, readstat, 
-      receive_id, school_id, create_time, last_update_time, stat)
-    values 
-     <foreach collection="list" item="receiveDtolist" index="index" separator="," >  
-        (#{receiveDtolist.id},#{receiveDtolist.taskId},#{receiveDtolist.readstat},#{receiveDtolist.receiveId},#{receiveDtolist.schoolId},#{receiveDtolist.createTime},#{receiveDtolist.lastUpdateTime},#{receiveDtolist.stat})  
-    </foreach> 
-  </insert>  
-	
 </mapper>

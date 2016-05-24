@@ -71,12 +71,14 @@ public class ProUserRegController extends BaseController{
 		if(licenses!=null){
 			for(String licesse : licenses){
 				if(!StringUtils.isEmpty(licesse)){
-					String licenseName = licesse.split("-")[0];
-					String licPic = licesse.split("-")[1];
+					String licenseName = licesse.split("#")[0];
+					String licPic = licesse.split("#")[1];
 					ProLicenseDto proLicenseDto = new ProLicenseDto();
 					
 					proLicenseDto.setLicName(licenseName);
 					proLicenseDto.setLicPic(licPic);
+					proLicenseDto.setRelationId(supplierId);
+					proLicenseDto.setCerSource(Short.valueOf("0"));
 
 					iProLicenseService.saveProLicense(proLicenseDto);
 				}

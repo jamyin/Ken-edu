@@ -16,7 +16,8 @@ $(function(){
         onComplete: function(event, queueID, fileObj, response, data) {
             var dataObj = eval("("+response+")");
             if(dataObj.status == 200){
-            	$("#file-1").attr("value","工商营业执照-"+dataObj.filePath)            	            	
+            	$("#file-1").attr("value","工商营业执照#"+dataObj.filePath);
+            	$("#file-1").attr("checked","checked");
             }
         },
         onSelect:function(){
@@ -46,7 +47,8 @@ $(function(){
         onComplete: function(event, queueID, fileObj, response, data) {
             var dataObj = eval("("+response+")");
             if(dataObj.status == 200){
-                $("#file-2").val("餐饮服务许可证-"+dataObj.filePath)            	            	
+                $("#file-2").val("餐饮服务许可证#"+dataObj.filePath);
+                $("#file-2").attr("checked","checked");
             }
         },
         onSelect:function(){
@@ -77,7 +79,8 @@ $(function(){
         onComplete: function(event, queueID, fileObj, response, data) {
             var dataObj = eval("("+response+")");
             if(dataObj.status == 200){
-                $("#file-3").val("食品流通许可证-"+dataObj.filePath)            	            	
+                $("#file-3").val("食品流通许可证#"+dataObj.filePath);
+                $("#file-3").attr("checked","checked");
             }
         },
         onSelect:function(){
@@ -107,7 +110,8 @@ $(function(){
         onComplete: function(event, queueID, fileObj, response, data) {
             var dataObj = eval("("+response+")");
             if(dataObj.status == 200){
-                $("#file-4").val("食品生产许可证-"+dataObj.filePath)            	            	
+                $("#file-4").val("食品生产许可证#"+dataObj.filePath);
+                $("#file-4").attr("checked","checked");         	            	
             }
         },
         onSelect:function(){
@@ -120,6 +124,5 @@ $(function(){
 			}); 
         }
     });
-	
 	
 });
