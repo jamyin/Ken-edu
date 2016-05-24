@@ -48,7 +48,7 @@ public class UserDao {
 		if (userDto != null) {
 			ProUsers users = new ProUsers();
 			BeanUtils.copyProperties(userDto, users);
-			users.setCreatedatetime(new Date());
+			users.setCreateTime(new Date());
 			users.setPassword(MD5Util.md5(users.getPassword()));
 			users.setQjyAccount("qjy_" + users.getName());
 			users.setStat(1);
@@ -130,7 +130,7 @@ public class UserDao {
 		if (userDto != null) {
 			ProUsers users = new ProUsers();
 			BeanUtils.copyProperties(userDto, users);
-			users.setCreatedatetime(new Date());
+			users.setCreateTime(new Date());
 			users.setPassword(MD5Util.md5(users.getPassword()));
 			users.setQjyAccount("qjy_" + users.getUserAccount());
 			users.setStat(1);
