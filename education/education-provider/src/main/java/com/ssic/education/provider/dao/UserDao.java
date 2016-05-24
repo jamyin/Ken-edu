@@ -2,10 +2,12 @@ package com.ssic.education.provider.dao;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ssic.education.provider.dto.ProUsersDto;
 import com.ssic.education.provider.dto.TImsUsersDto;
 import com.ssic.education.provider.mapper.TImsUserRoleExMapper;
 import com.ssic.education.provider.mapper.TImsUsersExMapper;
@@ -49,11 +51,17 @@ public class UserDao {
 			ProUsers users = new ProUsers();
 			BeanUtils.copyProperties(userDto, users);
 			users.setCreateTime(new Date());
+
+			
+			
+
 			users.setPassword(MD5Util.md5(users.getPassword()));
 			users.setQjyAccount("qjy_" + users.getName());
+
 			users.setStat(1);
 			users.setIsadmin(0);
-
+			String uuid = UUID.randomUUID().toString(); 
+			users.setId(uuid);
 			tImsUsersExMapper.insertBy(users);
 		}
 	}
@@ -68,8 +76,8 @@ public class UserDao {
 
 	public DataGrid findAll(TImsUsersDto userDto, PageHelper ph) {
 		DataGrid dataGrid = new DataGrid();
-		if (!StringUtils.isEmpty(userDto.getSearchName())) {
-			userDto.setSearchName("%" + userDto.getSearchName() + "%");
+		if (!StringUtils.isEmpty(userDto.getName())) {
+			userDto.setName("%" +userDto.getName()+ "%");
 		}
 		int counts = tImsUsersExMapper.findCountBy(userDto);
 		dataGrid.setTotal(Long.valueOf(counts));
@@ -80,19 +88,23 @@ public class UserDao {
 		    ph.setRows(tempPage*tempRows);
 		}
 		List<TImsUsersDto> list = tImsUsersExMapper.findPageBy(userDto, ph);
+	
+		for (int i = 0; i < list.size(); i++) {
+			if(list.get(i).getUserType()!=null && list.get(i).getUserType()!=""){
+			if(list.get(i).getUserType().equals("0")){
+				list.get(i).setUserTypeName("管理员");
+			}
+			if(list.get(i).getUserType().equals("1")){
+				list.get(i).setUserTypeName("驾驶员");
+			}
+		}}
+		
 		dataGrid.setRows(list);
 		return dataGrid;
 	}
 
 	public void updateBy(TImsUsersDto user) throws Exception {
-//		TImsUsersDto temp = new TImsUsersDto();
-//		temp.setUserAccount(user.getUserAccount());
-//		List<TImsUsersDto> list = tImsUsersExMapper.findBy(temp);
-//		if (list.size() > 0) {
-//			throw new Exception("登录名已存在！");
-//		} else {
-//			tImsUsersExMapper.updateBy(user);
-//		}
+
 		tImsUsersExMapper.updateBy(user);
 	}
 
@@ -139,6 +151,7 @@ public class UserDao {
 			tImsUsersExMapper.addImsUsers(users);
 		}
 	}
+
 	
 	/**
 	 * 通过userId查找项目信息	 
