@@ -68,7 +68,7 @@
 					}
 					str += '&nbsp;';
 					if ($.canDelete) {
-						str += $.formatString('<img onclick="deleteFun(\'{0}\');" src="{1}" title="删除"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/cancel.png');
+						str += $.formatString('<img onclick="deleteFun('+row.wareBatchNo+');" src="{1}" title="删除"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/cancel.png');
 					}
 					return str;
 				}
@@ -109,7 +109,7 @@
 						text : '数据处理中，请稍后....'
 					});
 					$.post('${pageContext.request.contextPath}/ledgerController/deleteLedger', {
-						id : id
+						wareBatchNo : id
 					}, function(result) {
 						if (result.success) {
 							parent.$.messager.alert('提示', result.msg, 'info');

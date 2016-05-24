@@ -4,12 +4,17 @@
 
 	<select id="countAllLedgerAddress" resultType="Long">
 		SELECT
-		count(id)
+		count(b.id)
 		FROM
-		t_edu_school_supplier
+		t_edu_school a,t_edu_school_supplier b
 		WHERE
-		stat = 1
-		AND supplier_id=#{ledgerAddress.supplierId}
+		b.stat = 1
+		AND a.id=b.school_id
+		AND b.supplier_id=#{ledgerAddress.supplierId}
+		<if
+			test="ledgerAddress.schoolName!=null and  ledgerAddress.schoolName!=''">
+			AND a.school_name like "%"#{ledgerAddress.schoolName}"%"
+		</if>
 	</select>
 
 	<select id="findAllLedgerAddress" resultType="com.ssic.education.common.provider.dto.LedgerAddressDto">
@@ -29,7 +34,7 @@
 		AND b.supplier_id=#{ledgerAddress.supplierId}
 		<if
 			test="ledgerAddress.schoolName!=null and  ledgerAddress.schoolName!=''">
-			AND trim(a.school_name) = #{ledgerAddress.schoolName}
+			AND a.school_name like "%"#{ledgerAddress.schoolName}"%"
 		</if>
 		<if test="ph!=null and ph.rows!=0">
 			limit #{ph.beginRow},#{ph.rows}
