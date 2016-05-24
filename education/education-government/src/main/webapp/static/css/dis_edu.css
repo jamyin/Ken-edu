@@ -1,3 +1,6 @@
+a:link, a:visited {
+    color: #333;
+}
 .main_wrap {
   width: 1000px;
   margin: 30px auto; }

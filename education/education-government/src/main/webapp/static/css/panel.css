@@ -7,12 +7,29 @@
 .blue_head {
   border-left: 3px #68b2e7 solid; }
 
+.breadcrumb {
+  width: 1000px;
+  margin: 0 auto;
+  margin-top: 20px; }
+  .breadcrumb a {
+    color: #000; }
+
 .header a {
   font-size: 14px; }
 
 .main_wrap {
+  display: inline-block;
   width: 1000px;
-  margin: 30px auto; }
+  margin: 30px auto;
+  display: block; }
+  .main_wrap:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden; }
+  * html .main_wrap {
+    height: 1px; }
   .main_wrap .bread {
     padding: 1rem 0;
     color: #333; }
