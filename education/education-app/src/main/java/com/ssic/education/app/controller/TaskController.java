@@ -37,7 +37,7 @@ public class TaskController {
    * @date 2016年5月20日 下午3:17:18
    * @return Response<EduTaskDto>    返回类型
     */
-    @RequestMapping("/findTaskListById/{id}")
+    @RequestMapping("/findTaskListById/{id}/{readstat}")
     @ResponseBody
     public Response<PageResult<EduTaskDto>> findTaskListById(@PathVariable("id")String id, @PathVariable("readstat")int readstat, PageQuery query) {
     	Response<PageResult<EduTaskDto>> result = new Response<PageResult<EduTaskDto>>();
@@ -94,6 +94,8 @@ public class TaskController {
     * @date 2016年5月20日 下午5:39:27
     * @return Response<String>    返回类型
      */
+    @RequestMapping("/delTask/{id}")
+    @ResponseBody
     public Response<String> delTask(@PathVariable("id")String id){
     	Response<String> result = new Response<String>();
     	if(StringUtils.isEmpty(id)){

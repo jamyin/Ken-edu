@@ -11,6 +11,7 @@ import com.ssic.education.common.dto.EduTaskDto;
 import com.ssic.education.common.dto.EduTaskReadDto;
 import com.ssic.education.common.dto.EduTaskReceiveDto;
 import com.ssic.education.common.pojo.EduTask;
+import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 import com.ssic.education.utils.util.BeanUtils;
@@ -50,6 +51,7 @@ public class TaskServiceImpl implements ITaskService{
 	public Integer delTask(String id) {
 		EduTask task = new EduTask();
 		task.setId(id);
+		task.setStat(DataStatus.DISABLED);
 		return taskDao.updateByPrimaryKeySelective(task);
 	}
 
