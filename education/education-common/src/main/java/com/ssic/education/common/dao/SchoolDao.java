@@ -65,18 +65,9 @@ public class SchoolDao extends MyBatisBaseDao<EduSchool> {
 			if (StringUtils.isNotBlank(eduSchoolDto.getLevel())) {
 				criteria.andLevelLike("%" + eduSchoolDto.getLevel().trim()+ "%");
 			}
-			if (eduSchoolDto.getArea() != null){
+			if (StringUtils.isNotBlank(eduSchoolDto.getArea())){
 				criteria.andAreaEqualTo(eduSchoolDto.getArea());
 			}	
-        	if (StringUtils.isNotEmpty(eduSchoolDto.getId())){
-        		criteria.andIdEqualTo(eduSchoolDto.getId().trim());
-        	}
-        	if (StringUtils.isNotBlank(eduSchoolDto.getSchoolName())){
-        		criteria.andSchoolNameLike("%"+eduSchoolDto.getSchoolName().trim()+"%");
-        	}	
-        	if (eduSchoolDto.getLevel() != null){
-        		criteria.andLevelEqualTo(eduSchoolDto.getLevel());
-        	}	
 		}
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 	}

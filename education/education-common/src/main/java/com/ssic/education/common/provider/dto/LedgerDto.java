@@ -33,6 +33,11 @@ public class LedgerDto {
 	@Getter
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date actionDate;
+	
+	@Setter
+	@Getter
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Date nextDate;
 
 	@Setter
 	@Getter
