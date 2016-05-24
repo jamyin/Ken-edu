@@ -78,12 +78,34 @@
 								<span class="intelligent-label f-fl"><b class="ftx04"></b>区教委：</span>
 								<div class="" id="committeeList" style="float: right; margin-left: 90px;"></div>
 							</div>
-							<div class="item col-xs-12" style="margin-top: 60px;">
-								<span class="intelligent-label f-fl"><b class="ftx04"></b>工商执照：</span>
-								<div class="f-fl item-ifo">
-									<input multiple type="file" id="id-input-file-3" />
-								</div>
-							</div>
+						<div class="item col-xs-12" style="margin-top:60px;">
+	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>工商营业执照：</span>    
+	                       <div class="f-fl item-ifo">
+	                       		<input id="file-1" name="licenseList" type="checkbox" style="display:none;"/>
+	      						<input multiple type="file" id="id-input-file-1"/>
+	                        </div>
+	                    </div>
+						<div class="item col-xs-12">
+	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>餐饮服务许可证：</span>    
+	                       <div class="f-fl item-ifo">
+	                       		<input id="file-2" name="licenseList" type="checkbox" style="display:none;"/>
+	      						<input multiple type="file" id="id-input-file-2"/>
+	                        </div>
+	                    </div>
+						<div class="item col-xs-12">
+	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>食品流通许可证：</span>    
+	                       <div class="f-fl item-ifo">
+	                       		<input id="file-3" name="licenseList" type="checkbox" style="display:none;"/>
+	      						<input multiple type="file" id="id-input-file-3"/>
+	                        </div>
+	                    </div>
+						<div class="item col-xs-12">
+	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>食品生产许可证：</span>    
+	                       <div class="f-fl item-ifo">
+	                       		<input id="file-4" name="licenseList" type="checkbox" style="display:none;"/>
+	      						<input multiple type="file" id="id-input-file-4"/>
+	                        </div>
+	                    </div>	
 							<div class="item col-xs-12">
 								<span class="intelligent-label f-fl"><b class="ftx04">*</b>用户名：</span>
 								<div class="f-fl item-ifo">
@@ -204,5 +226,6 @@
 		}
 	</script>
 	<script src="reg/js/reg.js"></script>
+	<script src="reg/js/regImages.js"></script>
 </body>
 </html>
