@@ -27,8 +27,6 @@
 	                        collapsible:true,
 	                        content:'<div style="padding:10px" class="well well-small"><ul name="'+n.tabName+'"></ul></div>',
 	                    });
-	                    
-	                    
 	                });
 	                
 	                $('#left_accordion').accordion({
@@ -93,7 +91,7 @@
         });
 	}
 	
-	function addTab(params) {
+ 	function addTab(params) {
 		var iframe = '<iframe src="'
 				+ params.url
 				+ '" frameborder="0" style="border:0;width:100%;height:98%;"></iframe>';

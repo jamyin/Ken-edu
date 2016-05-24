@@ -1,25 +1,33 @@
 package com.ssic.education.government.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import javax.servlet.http.HttpServletRequest;
 
-import com.ssic.education.common.dto.EduAreaDto;
-import com.ssic.education.common.dto.EduSchoolDto;
-import com.ssic.education.common.government.service.AreaService;
-import com.ssic.education.common.government.service.EduSchoolService;
-import com.ssic.education.utils.model.Response;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.druid.support.json.JSONUtils;
+import com.google.common.base.Objects;
+import com.google.gson.Gson;
+import com.ssic.education.common.dto.EduAreaDto;
+import com.ssic.education.common.dto.EduSchoolDto;
+import com.ssic.education.common.government.service.AreaService;
+import com.ssic.education.common.government.service.EduSchoolService;
+import com.ssic.education.government.controller.dto.MenuListDto;
+import com.ssic.education.government.controller.dto.ParentMenuDto;
+import com.ssic.education.government.dto.EduUsersDto;
+import com.ssic.education.government.service.EduUsersService;
 import com.ssic.education.utils.constants.SessionConstants;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
+import com.ssic.education.utils.util.FileUtils;
+import com.ssic.education.utils.util.JsonUtil;
 
 
 public class BaseController {
@@ -35,14 +43,38 @@ public class BaseController {
 	@Autowired
 	private EduSchoolService schoolService;
 	
+	@Autowired
+	private EduUsersService eduUsersService;
+	
 	/**
 	 * 得到ModelAndView
 	 */
 	public ModelAndView getModelAndView(){
 		ModelAndView mv = new ModelAndView();
+		
+		mv.addObject("navList", getNavList());
 		return mv;
 	}
 
+	public List<MenuListDto> getNavList(){
+		List<MenuListDto> navList = null;
+		if(!Objects.equal(getSessionUserId(), null)){
+			EduUsersDto eduUsersDto = new EduUsersDto();
+			eduUsersDto.setId(getSessionUserId());
+			eduUsersDto =  eduUsersService.getUserInfo(eduUsersDto);
+			try {
+				String fileName = eduUsersDto.getSourceType()+"menu.txt";
+				String path = this.getClass().getClassLoader().getResource(fileName).getPath();;
+				String menuList = FileUtils.readFileToString(new File(path));
+				ParentMenuDto parentMenuDto = JsonUtil.getObjFromJson(menuList, ParentMenuDto.class);
+				navList = parentMenuDto.getParentMenu();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}			
+		}
+		return navList;
+	}
 	
 	/**
 	 * 得到request对象
@@ -55,6 +87,16 @@ public class BaseController {
 	public void setSession(String userId){
 		getRequest().getSession().setAttribute(SessionConstants.LOGIN_USER_INFO,userId);
 	}
+	
+	public String getSessionUserId(){
+		String userId = null;
+		Object obj = getRequest().getSession().getAttribute(SessionConstants.LOGIN_USER_INFO);
+		if(!Objects.equal(obj, null)){
+			userId = String.valueOf(obj);
+		}
+		return userId;
+	}
+	
 	
 	public void removeSession(){
 		getRequest().getSession().removeAttribute(SessionConstants.LOGIN_USER_INFO);

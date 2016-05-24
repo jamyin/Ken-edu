@@ -9,11 +9,16 @@
 <div class="nav">
     <div class="wrap">
         <a href="/main.htm">首页</a>
-        <a class="" href="/pro/supplier/search.htm">安全追溯</a>
+        <#if navList ??>
+        	<#list navList as data>
+        		<a class="" href="${(data.menuUrl)!}">${(data.menuName)!}</a>
+        	</#list>
+        </#if>
+<!--         <a class="" href="/pro/supplier/search.htm">安全追溯</a>
         <a class="" href="/edu/school/list.htm?source=0">菜谱</a>
         <a class="" href="index.html">健康宣教</a>
         <a class="" href="index.html">通告公示</a>
         <a class="" href="index.html">任务传达</a>
-        <a class="" href="index.html">发布</a>
+        <a class="" href="index.html">发布</a> -->
     </div>
 </div>

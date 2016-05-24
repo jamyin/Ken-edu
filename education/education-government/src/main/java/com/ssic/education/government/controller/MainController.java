@@ -6,11 +6,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
-public class MainController {
+public class MainController extends BaseController{
 	
 	@RequestMapping(value="main")
 	private ModelAndView main(){
-		ModelAndView mv = new ModelAndView();
+		ModelAndView mv = getModelAndView();
 		
 		mv.setViewName("main");
 		return mv;

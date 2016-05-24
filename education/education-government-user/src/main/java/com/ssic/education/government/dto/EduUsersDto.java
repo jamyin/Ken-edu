@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 
 @Data
@@ -16,6 +14,7 @@ public class EduUsersDto implements Serializable{
      *
      * @mbggenerated Sat May 21 16:50:26 CST 2016
      */
+	
     private String id;
 
     /**

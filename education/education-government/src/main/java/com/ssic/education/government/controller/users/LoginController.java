@@ -1,5 +1,9 @@
 package com.ssic.education.government.controller.users;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +17,8 @@ import com.ssic.education.government.dto.EduUsersDto;
 import com.ssic.education.government.service.EduUsersService;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.Response;
+import com.ssic.education.utils.util.FileUtils;
+import com.ssic.education.utils.util.PropertiesUtils;
 /**
  * 
 	 * 此类描述的是：用户登录
@@ -27,7 +33,7 @@ public class LoginController extends BaseController{
 	
 	@RequestMapping(value="login")
 	public ModelAndView login(EduUsersDto usersDto) {
-		ModelAndView mv = new ModelAndView();
+		ModelAndView mv = getModelAndView();
 		if(Objects.equal(getRequest().getMethod().toString(), RequestMethod.GET.toString())){
 			mv.setViewName("/login");	
 		}else{
@@ -35,7 +41,7 @@ public class LoginController extends BaseController{
 			if(Objects.equal(eduUser, null)){
 				return new ModelAndView("redirect:/login.htm");
 			}
-			setSession(eduUser.getId());
+			setSession(eduUser.getId());		
 			return new ModelAndView("redirect:/main.htm");  
 		}
 		return mv;
