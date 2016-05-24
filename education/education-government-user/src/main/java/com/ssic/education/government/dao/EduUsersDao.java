@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ssic.education.government.dto.EduUsersDto;
+import com.ssic.education.government.dto.EduUsersRegDto;
 import com.ssic.education.government.mapper.EduUsersMapper;
 import com.ssic.education.government.pojo.EduUsers;
 import com.ssic.education.government.pojo.EduUsersExample;
@@ -49,7 +50,7 @@ public class EduUsersDao extends MyBatisBaseDao<EduUsers>{
 		return BeanUtils.createBeanByTarget(results.get(0), EduUsersDto.class);
 	}
 
-	public boolean validateAccount(EduUsersDto usersDto) {
+	public boolean validateAccount(EduUsersRegDto usersDto) {
 		EduUsersExample example = new EduUsersExample();
 		EduUsersExample.Criteria criteria = example.createCriteria();
 		
