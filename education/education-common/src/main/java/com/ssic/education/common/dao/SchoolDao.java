@@ -19,11 +19,11 @@ import com.ssic.education.utils.mybatis.MyBatisBaseDao;
 import com.ssic.education.utils.util.StringUtils;
 
 /**
-* @ClassName: SchoolDao
-* @Description: TODO(这里用一句话描述这个类的作用)
-* @author Ken Yin
-* @date 2016年5月13日 上午9:24:21
-*
+ * @ClassName: SchoolDao
+ * @Description: TODO(这里用一句话描述这个类的作用)
+ * @author Ken Yin
+ * @date 2016年5月13日 上午9:24:21
+ *
  */
 @Repository
 public class SchoolDao extends MyBatisBaseDao<EduSchool> {
@@ -31,24 +31,24 @@ public class SchoolDao extends MyBatisBaseDao<EduSchool> {
 	@Getter
 	@Autowired
 	private EduSchoolMapper mapper;
-	
+
 	@Getter
 	@Autowired
 	private EduSchoolExMapper mappers;
-	
+
 	/**
-	* @Title: findSchoolList
-	* @Description: 查询学校列表-分页
-	* @author Ken Yin  
-	* @date 2016年5月13日 上午9:25:55
-	* @return List<EduSchool>    返回类型
+	 * @Title: findSchoolList
+	 * @Description: 查询学校列表-分页
+	 * @author Ken Yin  
+	 * @date 2016年5月13日 上午9:25:55
+	 * @return List<EduSchool>    返回类型
 	 */
 	public List<EduSchool> findSchoolList(EduSchoolDto eduSchoolDto,PageQuery query) {
 		EduSchoolExample example = new EduSchoolExample();
 		EduSchoolExample.Criteria criteria = example.createCriteria();
-        assemblyParams(eduSchoolDto, criteria);
-        if(query != null && query.getPageSize() > 0){
-        	example.setOrderByClause("create_time DESC limit "+query.getStartNum() +"," + query.getPageSize());
+		assemblyParams(eduSchoolDto, criteria);
+		if(query != null && query.getPageSize() > 0){
+			example.setOrderByClause("create_time DESC limit "+query.getStartNum() +"," + query.getPageSize());
 		}
 		List<EduSchool> list = mapper.selectByExample(example);
 		return list;
@@ -56,31 +56,34 @@ public class SchoolDao extends MyBatisBaseDao<EduSchool> {
 
 	private void assemblyParams(EduSchoolDto eduSchoolDto, Criteria criteria) {
 		if (null != eduSchoolDto) {
-        	if (StringUtils.isNotEmpty(eduSchoolDto.getId())){
-        		criteria.andIdEqualTo(eduSchoolDto.getId().trim());
-        	}
-        	if (StringUtils.isNotBlank(eduSchoolDto.getSchoolName())){
-        		criteria.andSchoolNameLike("%"+eduSchoolDto.getSchoolName().trim()+"%");
-        	}	
-        	if (eduSchoolDto.getLevel() != null){
-        		criteria.andLevelEqualTo(eduSchoolDto.getLevel());
-        	}	
+			if (StringUtils.isNotEmpty(eduSchoolDto.getId())){
+				criteria.andIdEqualTo(eduSchoolDto.getId().trim());
+			}
+			if (StringUtils.isNotBlank(eduSchoolDto.getSchoolName())){
+				criteria.andSchoolNameLike("%"+eduSchoolDto.getSchoolName().trim()+"%");
+			}	
+			if (StringUtils.isNotBlank(eduSchoolDto.getLevel())) {
+				criteria.andLevelLike("%" + eduSchoolDto.getLevel().trim()+ "%");
+			}
+			if (StringUtils.isNotBlank(eduSchoolDto.getArea())){
+				criteria.andAreaEqualTo(eduSchoolDto.getArea());
+			}	
 		}
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 	}
 
 	/**
-	* @Title: selectSchoolAccount
-	* @Description: 分页总条数
-	* @author Ken Yin  
-	* @date 2016年5月13日 上午9:27:48
-	* @return int    返回类型
+	 * @Title: selectSchoolAccount
+	 * @Description: 分页总条数
+	 * @author Ken Yin  
+	 * @date 2016年5月13日 上午9:27:48
+	 * @return int    返回类型
 	 */
 	public int selectSchoolAccount(EduSchoolDto eduSchoolDto) {
 		EduSchoolExample example = new EduSchoolExample();
 		EduSchoolExample.Criteria criteria = example.createCriteria();
-        assemblyParams(eduSchoolDto, criteria);  
-        return mapper.countByExample(example);
+		assemblyParams(eduSchoolDto, criteria);  
+		return mapper.countByExample(example);
 	}
 
 	public List<EduSchool> findSchoolDetialList(String id,EduSchoolDto eduSchoolDto,
