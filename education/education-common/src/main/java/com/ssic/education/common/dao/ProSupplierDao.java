@@ -8,16 +8,20 @@ import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+
 import com.ssic.education.common.dto.ProSupplierDto;
 import com.ssic.education.common.mapper.ProSupplierExMapper;
 import com.ssic.education.common.mapper.ProSupplierMapper;
 import com.ssic.education.common.mapper.ProSupplierReceiverMapper;
 import com.ssic.education.common.pojo.ProSupplier;
+import com.ssic.education.common.pojo.ProSupplierExample;
 import com.ssic.education.common.pojo.ProSupplierReceiver;
 import com.ssic.education.common.pojo.ViewProSupplierExample;
 import com.ssic.education.common.provider.dto.SupplierDto;
 import com.ssic.education.common.provider.utils.DataGrid;
 import com.ssic.education.common.provider.utils.PageHelper;
+import com.ssic.education.utils.constants.DataStatus;
+import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.mybatis.MyBatisBaseDao;
 import com.ssic.education.utils.util.BeanUtils;
 import com.ssic.education.utils.util.StringUtils;
@@ -39,7 +43,31 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 	@Autowired
 	private ProSupplierReceiverMapper  srMapper;
 	
-	private void assemblyParams(ProSupplierDto proSupplierDto, ViewProSupplierExample.Criteria criteria) {
+	public List<ProSupplierDto> findPage(ProSupplierDto dto, PageQuery page) {
+		ProSupplierExample example = new ProSupplierExample();
+		ProSupplierExample.Criteria criteria = example.createCriteria();
+		if (null != dto.getReviewed()) {
+			criteria.andReviewedEqualTo(dto.getReviewed());
+		}
+		criteria.andStatEqualTo(DataStatus.ENABLED);
+		if (null != page) {
+            example.setOrderByClause("stat desc,create_time desc limit " + page.getStartNum() + "," + page.getPageSize());
+        } else {
+            example.setOrderByClause("create_time desc");
+        }
+		return BeanUtils.createBeanListByTarget(mapper.selectByExample(example), ProSupplierDto.class);
+	}
+	
+	public long count(ProSupplierDto dto) {
+		ProSupplierExample example = new ProSupplierExample();
+		ProSupplierExample.Criteria criteria = example.createCriteria();
+		if (null != dto.getReviewed()) {
+			criteria.andReviewedEqualTo(dto.getReviewed());
+		}
+		criteria.andStatEqualTo(DataStatus.ENABLED);
+		return mapper.countByExample(example);
+	}
+	/*private void assemblyParams(ProSupplierDto proSupplierDto, ProSupplierExample.Criteria criteria) {
 		if (null != proSupplierDto) {
 			if (StringUtils.isNotEmpty(proSupplierDto.getId())){
 				criteria.andIdEqualTo(proSupplierDto.getId().trim());
@@ -56,8 +84,10 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 			if (StringUtils.isNotBlank(proSupplierDto.getSchoolIds())){
 				criteria.andSchoolIdsLike("%"+proSupplierDto.getSchoolIds().trim()+"%");
 			}
+			if (null != proSupplierDto.getReviewed()) {
+			}
 		}
-	}
+	}*/
 
 	public DataGrid findProSupplier(SupplierDto supplierDto, PageHelper ph) {
 		DataGrid dataGrid=new DataGrid();

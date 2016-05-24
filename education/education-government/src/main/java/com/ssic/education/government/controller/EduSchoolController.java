@@ -20,14 +20,17 @@ import com.ssic.education.common.dto.EduSchoolDto;
 import com.ssic.education.common.dto.ProLicenseDto;
 import com.ssic.education.common.dto.ProPackagesDto;
 import com.ssic.education.common.dto.ProSupplierDto;
+import com.ssic.education.common.dto.SupplierReviewedDto;
 import com.ssic.education.common.government.service.AreaService;
 import com.ssic.education.common.government.service.EduSchoolService;
 import com.ssic.education.common.government.service.ProPackagesService;
+import com.ssic.education.common.government.service.ProSupplierService;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.constants.SchoollevelEnum;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 import com.ssic.education.utils.model.Response;
+import com.ssic.education.utils.util.BeanUtils;
 import com.ssic.education.utils.util.DateUtils;
 
 /**
@@ -51,6 +54,9 @@ public class EduSchoolController extends BaseController{
 	private ProPackagesService proPackagesService;
 	
 	@Autowired
+	private ProSupplierService proSupplierService;
+	
+	@Autowired
 	private AreaService areaService;
 	
 	/**
@@ -72,12 +78,7 @@ public class EduSchoolController extends BaseController{
 		mv.addObject("areaDtos", areaDtos);
 		mv.addObject("dto", dto);
 		mv.addObject("level", SchoollevelEnum.values());
-		if (dto.getSource() == DataStatus.DISABLED) {//菜谱
-			mv.setViewName("/school/school_list");
-		}
-		if (dto.getSource() == DataStatus.ENABLED) {//区教委未审批单位
-			mv.setViewName("/district/list");
-		}			
+		mv.setViewName("/school/school_list");
 		return mv;
 	}
 	
@@ -110,6 +111,24 @@ public class EduSchoolController extends BaseController{
 		return mv;
 	}
 	
+	@RequestMapping(value = "/checkList")
+	public ModelAndView checkList(SupplierReviewedDto dto, PageQuery page) {
+		ModelAndView mv = getModelAndView();
+		PageResult<SupplierReviewedDto> result = eduSchoolService.list(dto, page);
+		mv.addObject("pageList", result);
+		mv.addObject("dto", dto);
+		if (dto.getReviewed() == DataStatus.DISABLED) {//区教委未审批单位
+			mv.setViewName("/district/dis_edu_check");
+		}	
+		if (dto.getReviewed() == DataStatus.ENABLED) {//区教委审批通过单位
+			mv.setViewName("/district/dis_edu_checked_list");
+		}
+		if (dto.getReviewed() == DataStatus.EVA_TWO) {//区教委审批通过单位
+			mv.setViewName("/district/dis_edu_not_checked_list");
+		}
+		return mv;
+	}
+	
 	/**
 	 * 
 	  @Name:  detail 
@@ -120,11 +139,40 @@ public class EduSchoolController extends BaseController{
 	  @return
 	 */
 	@RequestMapping(value = "/detail")
-	public ModelAndView detail(EduSchoolDto dto) {
+	public ModelAndView detail(SupplierReviewedDto dto) {
 		ModelAndView mv = getModelAndView();
-		EduSchoolDto eduSchoolDto = eduSchoolService.findById(dto.getId());
-		mv.addObject("eduSchoolDto", eduSchoolDto);
-		mv.setViewName("/detail");
+		if (StringUtils.isNotBlank(dto.getSchoolName())) {
+			EduSchoolDto eduSchoolDto = eduSchoolService.findById(dto.getId());
+			mv.addObject("eduSchoolDto", eduSchoolDto);
+			mv.addObject("dto", dto);
+			mv.setViewName("/district/dis_edu_uncheck");
+		}
+		if (StringUtils.isNotBlank(dto.getSupplierName())) {
+			ProSupplierDto proSupplierDto = proSupplierService.findById(dto.getId());
+			mv.addObject("proSupplierDto", proSupplierDto);
+			mv.addObject("dto", dto);
+			mv.setViewName("/district/dis_edu_unchecks");
+		}
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "/detailed")
+	public ModelAndView detailed(SupplierReviewedDto dto) {
+		ModelAndView mv = getModelAndView();
+		if (StringUtils.isNotBlank(dto.getSchoolName())) {
+			EduSchoolDto eduSchoolDto = eduSchoolService.findById(dto.getId());
+			mv.addObject("eduSchoolDto", eduSchoolDto);
+			mv.addObject("dto", dto);
+			mv.setViewName("/district/dis_edu_checked_detail");
+		}
+		if (StringUtils.isNotBlank(dto.getSupplierName())) {
+			ProSupplierDto proSupplierDto = proSupplierService.findById(dto.getId());
+			mv.addObject("proSupplierDto", proSupplierDto);
+			mv.addObject("dto", dto);
+			mv.setViewName("/district/dis_edu_checked_details");
+		}
+		
 		return mv;
 	}
 	
@@ -147,9 +195,17 @@ public class EduSchoolController extends BaseController{
 	
 	@RequestMapping(value = "/update")
 	@ResponseBody
-	public Response<String> update(EduSchoolDto dto) {
+	public Response<String> update(SupplierReviewedDto dto) {
 		Response<String> res = new Response<String>();
-		Integer result = eduSchoolService.updateSchool(dto);
+		Integer result = null;
+		if (StringUtils.isNotBlank(dto.getSchoolName())) {
+			EduSchoolDto eduSchoolDto = BeanUtils.createBeanByTarget(dto, EduSchoolDto.class);
+			result = eduSchoolService.updateSchool(eduSchoolDto);
+		}
+		if (StringUtils.isNotBlank(dto.getSupplierName())) {
+			ProSupplierDto proSupplierDto = BeanUtils.createBeanByTarget(dto, ProSupplierDto.class);
+			result = proSupplierService.updatePS(proSupplierDto);
+		}
 		if (result == DataStatus.ENABLED) {
 			res.setStatus(DataStatus.HTTP_SUCCESS);
 			res.setMessage("更新成功！");
