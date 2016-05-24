@@ -12,7 +12,7 @@
 		</div>
 	</div>
         <div class="login_wrap">
-            <form id="login" method="post">
+            <form id="login" action="login.htm" method="post">
                 <section>
                     <label for="name"><img src="static/img/icon_user.png"/></label>
                     <input id="username" type="text" name="userAccount" placeholder="用户名">
@@ -30,8 +30,8 @@
                 <input class="submit" type="button" value="登&nbsp;&nbsp;&nbsp;录">
             </form>
         </div>
-		<!-- <a class="forgot" href="##" title="提示：忘记密码，联系客服 400-800216">忘记密码？</a> -->
-		<a class="forgot" href="/user/oreg.htm" style="font-size: 16px;">注册账号</a>  
+		<!-- <a class="forgot" href="forgot.html">忘记密码？</a> -->
+		<a class="forgot" href="/user/oreg.htm">注册</a>  
 	<div class="footer login">
 		上海市中小学校学生午餐综合管理平台<br>CopyRight© 2016上海市天坊信息技术有限公司
 	</div>
@@ -39,11 +39,6 @@
         <script src="static/js/jquery.validate.min.js"></script>
         <script type="text/javascript">
 		$(function(){
-			$("#password").keydown(function() {
-			    if (event.keyCode == "13") {//keyCode=13是回车键
-			    	$('.submit').click();
-			    }
-			});
 		//提交
 		$('.submit').on('click', function(){
 			var result = check_form();
@@ -59,7 +54,6 @@
 					success:function(data){
 						if(data.status==500){
 							alert_redtext('username',data.message);
-							return false;
 						}else{
 							window.location.href = "main.htm";
 						}
