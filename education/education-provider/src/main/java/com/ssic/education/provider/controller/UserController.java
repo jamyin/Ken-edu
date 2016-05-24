@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.google.common.base.Objects;
+import com.ssic.education.common.dto.ProSupplierDto;
+import com.ssic.education.common.provider.service.ISupplierService;
 import com.ssic.education.provider.dto.TImsUsersDto;
 import com.ssic.education.provider.pageModel.DataGrid;
 import com.ssic.education.provider.pageModel.Json;
@@ -28,6 +31,7 @@ import com.ssic.education.provider.service.ResourceServiceI;
 import com.ssic.education.provider.service.RoleServiceI;
 import com.ssic.education.provider.service.UserServiceI;
 import com.ssic.education.provider.util.ConfigUtil;
+import com.ssic.education.utils.constants.DataStatus;
 
 /**
  * 用户控制器
@@ -48,6 +52,9 @@ public class UserController extends BaseController {
 	@Autowired
 	private ResourceServiceI resourceService;
 	
+	@Autowired
+	private ISupplierService iSupplierService;
+	
 	
 
 	/**
@@ -65,6 +72,16 @@ public class UserController extends BaseController {
 		Json j = new Json();
 		TImsUsersDto u = userService.login(usersDto);
 		if (u != null) {
+			//系统管理员不需要判断
+			if(!Objects.equal(u.getIsAdmin(),DataStatus.ENABLED)){
+//				u.getSourceId();//用户对应的供应商Id 查看该供应商是否审核通过
+				ProSupplierDto proSupplierDto = iSupplierService.searchProSupplierById(u.getSourceId());				
+				if(!Objects.equal(proSupplierDto.getReviewed(), Byte.valueOf("1"))){
+					j.setMsg("供应商信息审核未通过,请通过之后再进行登陆");
+					return j;
+				}			
+			}			
+			
 			j.setSuccess(true);
 			j.setMsg("登陆成功！");
 

@@ -57,4 +57,11 @@ public interface ISupplierService {
 	void saveSupplierReceiver(ProSupplierReceiver proSupplierReceiver);
 
 	List<SupplierDto> findSupplierCodeByReceiverId(String supplierId);
+	/**
+	 * 
+		 * 此方法描述的是：根据Id查询对象
+		 * @author: cwftalus@163.com
+		 * @version: 2016年5月24日 下午1:39:55
+	 */
+	ProSupplierDto searchProSupplierById(String sourceId);
 }

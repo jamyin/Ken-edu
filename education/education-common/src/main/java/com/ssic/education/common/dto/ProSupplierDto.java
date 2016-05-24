@@ -117,4 +117,8 @@ public class ProSupplierDto implements Serializable {
 	@Setter
 	@Getter
 	private Integer source;
+	
+	@Setter
+	@Getter
+	private Byte reviewed;
 }

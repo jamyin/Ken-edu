@@ -158,4 +158,11 @@ public class SupplierServiceImpl implements ISupplierService {
 		return proSupplierDao.findSupplierCodeByReceiverId(supplierId);
 	}
 
+	@Override
+	public ProSupplierDto searchProSupplierById(String sourceId) {
+		// TODO Auto-generated method stub
+		ProSupplier proSupplier =  proSupplierDao.selectByPrimaryKey(sourceId);
+		return BeanUtils.createBeanByTarget(proSupplier, ProSupplierDto.class);
+	}
+
 }
