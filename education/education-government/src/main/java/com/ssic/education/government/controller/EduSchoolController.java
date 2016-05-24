@@ -72,11 +72,11 @@ public class EduSchoolController extends BaseController{
 		mv.addObject("areaDtos", areaDtos);
 		mv.addObject("dto", dto);
 		mv.addObject("level", SchoollevelEnum.values());
-		if (dto.getSource() == DataStatus.DISABLED) {
+		if (dto.getSource() == DataStatus.DISABLED) {//菜谱
 			mv.setViewName("/school/school_list");
 		}
-		if (dto.getSource() == DataStatus.ENABLED) {
-			mv.setViewName("/school/school_list");
+		if (dto.getSource() == DataStatus.ENABLED) {//区教委未审批单位
+			mv.setViewName("/district/list");
 		}			
 		return mv;
 	}

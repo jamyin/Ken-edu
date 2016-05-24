@@ -29,11 +29,11 @@ public class EduSchoolDto implements Serializable {
 	private String address;
 	private String longitude;
 	private String latitude;
-	private Byte level;
+	private String level;
 	private String province;
 	private String city;
 	private String area;
-	private Byte reviewed;
+	private Byte reviewed;//0:未审批，1：通过，2：不通过
 	private Date createTime;
 	private Date lastUpdateTime;
 	private Integer stat;

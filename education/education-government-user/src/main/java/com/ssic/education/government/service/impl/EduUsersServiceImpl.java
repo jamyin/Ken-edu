@@ -20,6 +20,7 @@ import com.ssic.education.government.dto.EduUsersDto;
 import com.ssic.education.government.dto.EduUsersRegDto;
 import com.ssic.education.government.pojo.EduUsers;
 import com.ssic.education.government.service.EduUsersService;
+import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.util.BeanUtils;
 
 @Service
@@ -51,6 +52,8 @@ public class EduUsersServiceImpl implements EduUsersService {
 	public EduUsersDto save(EduUsersRegDto usersDto) {
 		// TODO Auto-generated method stub
 		EduSchool eduSchool = BeanUtils.createBeanByTarget(usersDto, EduSchool.class);
+		Integer reviewed = DataStatus.DISABLED;
+		eduSchool.setReviewed(reviewed.byteValue());
 		eduSchoolDao.insertSelective(eduSchool);
 		EduUsers eduUsers = BeanUtils.createBeanByTarget(usersDto, EduUsers.class);
 		eduUsers.setSourceId(eduSchool.getId());
