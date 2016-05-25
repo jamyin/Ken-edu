@@ -27,6 +27,9 @@ public class BaseController {
 	protected Logger logger = Logger.getLogger(BaseController.class);
 	public static final String EDU_ALLAREAS = "edu_allAreas";
 	public static final String EDU_ALLSCHOOLS = "edu_allSchools";
+	
+	
+	public static final String parentId = "1";//家长Id 为微信openId 目前默认1 测试使用
 
 	@Autowired
 	private RedisTemplate<String, Object> redisTemplate;
