@@ -10,6 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ssic.education.common.dto.ProLedgerDto;
 import com.ssic.education.common.dto.ProSupplierDto;
 import com.ssic.education.common.mapper.ProLedgerExMapper;
 import com.ssic.education.common.mapper.ProLedgerMapper;
@@ -21,7 +22,6 @@ import com.ssic.education.common.pojo.ProSchoolWareExample;
 import com.ssic.education.common.provider.dto.LedgerDto;
 import com.ssic.education.common.provider.utils.DataGrid;
 import com.ssic.education.common.provider.utils.PageHelper;
-import com.ssic.education.government.dto.ProLedgerDto;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.mybatis.MyBatisBaseDao;

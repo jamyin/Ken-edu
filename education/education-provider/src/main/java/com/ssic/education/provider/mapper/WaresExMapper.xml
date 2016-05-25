@@ -102,7 +102,15 @@
 		
 	</sql>
 	
-	
+	<select id="findWaresIdBySupplierId" resultType="java.lang.String">
+		SELECT id
+		FROM
+		t_pro_wares
+		WHERE supplier_id=#{ledgerDto.sourceId}
+		AND
+		wares_name=#{ledgerDto.name}
+		AND stat = 1
+	</select>
 	
 	
 	

@@ -14,6 +14,7 @@ import com.ssic.education.common.pojo.ProSupplier;
 import com.ssic.education.common.pojo.ProSupplierExample;
 import com.ssic.education.common.pojo.ProSupplierReceiver;
 import com.ssic.education.common.pojo.ProSupplierReceiverExample;
+import com.ssic.education.common.provider.dto.LedgerDto;
 import com.ssic.education.common.provider.dto.SupplierDto;
 import com.ssic.education.common.provider.service.ISupplierService;
 import com.ssic.education.common.provider.utils.DataGrid;
@@ -163,6 +164,12 @@ public class SupplierServiceImpl implements ISupplierService {
 		// TODO Auto-generated method stub
 		ProSupplier proSupplier =  proSupplierDao.selectByPrimaryKey(sourceId);
 		return BeanUtils.createBeanByTarget(proSupplier, ProSupplierDto.class);
+	}
+
+	@Override
+	public String findSupplierIdBySourceId(LedgerDto ledger) {
+		// TODO Auto-generated method stub
+		return proSupplierDao.findSupplierIdBySourceId(ledger);
 	}
 
 }

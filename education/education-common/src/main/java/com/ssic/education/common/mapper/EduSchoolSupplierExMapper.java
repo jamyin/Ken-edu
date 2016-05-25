@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.ssic.education.common.provider.dto.LedgerAddressDto;
+import com.ssic.education.common.provider.dto.LedgerDto;
 import com.ssic.education.common.provider.utils.DataGrid;
 import com.ssic.education.common.provider.utils.PageHelper;
 
@@ -14,5 +15,6 @@ public interface EduSchoolSupplierExMapper {
 
 	Long countAllLedgerAddress(@Param("ledgerAddress")LedgerAddressDto lad);
 	
-
+	String findSchoolIdByReceiverId(@Param("ledgerDto") LedgerDto ld);
+	
 }

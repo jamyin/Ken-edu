@@ -7,7 +7,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +24,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ssic.education.common.dto.ImageInfoDto;
 import com.ssic.education.common.pojo.ProLedger;
 import com.ssic.education.common.pojo.ProSupplier;
 import com.ssic.education.common.pojo.ProWares;
@@ -34,7 +32,7 @@ import com.ssic.education.common.provider.service.ILedgerService;
 import com.ssic.education.common.provider.service.ISupplierService;
 import com.ssic.education.common.provider.utils.DataGrid;
 import com.ssic.education.common.provider.utils.PageHelper;
-import com.ssic.education.provider.dto.RecycleOilDto;
+import com.ssic.education.common.service.IEduSchoolSupplierService;
 import com.ssic.education.provider.dto.TImsUsersDto;
 import com.ssic.education.provider.pageModel.Json;
 import com.ssic.education.provider.pageModel.LedgerModel;
@@ -57,16 +55,19 @@ import com.ssic.education.utils.poi.ParseExcelUtil;
 @Controller
 @RequestMapping("/ledgerController")
 public class LedgerController {
-	
+
 	@Autowired
 	private ISupplierService supplierService;
-	
+
 	@Autowired
 	private IWaresService waresService;
 
 	@Autowired
 	private ILedgerService ledgerService;
-	
+
+	@Autowired
+	private IEduSchoolSupplierService eduSchoolSupplierService;
+
 	@Autowired
 	private UserServiceI userService;
 
@@ -93,6 +94,7 @@ public class LedgerController {
 		if (user == null) {
 			return null;
 		}
+
 		List<TImsUsersDto> driver = userService.findAllDriver(user
 				.getSourceId());
 		request.setAttribute("Driver", driver);
@@ -110,28 +112,71 @@ public class LedgerController {
 			j.setSuccess(false);
 			return j;
 		}
-		System.out.println(lm);
-		List<LedgerDto> ledger = lm.getLedger();
-		ledger.get(0).setSourceId(sourceId);
-		ledgerService.saveLedger(ledger);
+		List<LedgerDto> ledgers = lm.getLedger();
+		ledgers.get(0).setSourceId(sourceId);
+		Date actionDate = ledgers.get(0).getActionDate();
+		if (actionDate == null) {
+			j.setMsg("配送日期不能为空");
+			j.setSuccess(false);
+			return j;
+		}
+		String receiverId = eduSchoolSupplierService
+				.findSchoolIdByReceiverId(ledgers.get(0));
+		if (receiverId == null) {
+			j.setMsg("不存在的配送点");
+			j.setSuccess(false);
+			return j;
+		}
+		for (LedgerDto ledger : ledgers) {
+			ledger.setActionDate(actionDate);
+			ledger.setReceiverId(receiverId);
+			ledger.setSourceId(sourceId);
+			ledger.setWaresId(waresService.findWaresIdBySupplierId(ledger));
+			if (ledger.getWaresId() == null) {
+				j.setMsg(ledger.getName() + "是错误的采购品");
+				j.setSuccess(false);
+				return j;
+			}
+			int num = ledger.getQuantity();
+			if (num == 0) {
+				j.setMsg(ledger.getName() + "错误的采购数量");
+				j.setSuccess(false);
+				return j;
+			}
+			String spce = ledger.getSpce();
+			if (num == 0) {
+				j.setMsg(ledger.getName() + "的采购规格不能为空");
+				j.setSuccess(false);
+				return j;
+			}
+			String supplierId = supplierService
+					.findSupplierIdBySourceId(ledger);
+			ledger.setSupplierId(supplierId);
+			if (ledger.getSupplierId() == null) {
+				ledger.setSupplierName(null);
+			}
+		}
+		ledgerService.saveLedger(ledgers);
 		j = new Json();
 		j.setMsg("添加供应商成功");
 		j.setSuccess(true);
 		return j;
 	}
-	
+
 	@RequestMapping("/editPage")
-	public String editPage( String wareBatchNo,HttpServletRequest request,HttpSession session) {
+	public String editPage(String wareBatchNo, HttpServletRequest request,
+			HttpSession session) {
 		TImsUsersDto user = (TImsUsersDto) session.getAttribute("user");
-		if(user==null){
+		if (user == null) {
 			return null;
 		}
-		List<LedgerDto> list = ledgerService.findLedgerById(user.getSourceId(),wareBatchNo);
+		List<LedgerDto> list = ledgerService.findLedgerById(user.getSourceId(),
+				wareBatchNo);
 		request.setAttribute("LedgerList", list);
 		System.out.println(list.get(0));
 		return "ledger/ledgerEdit";
 	}
-	
+
 	@RequestMapping(value = "/ledgerEdit")
 	@ResponseBody
 	public Json updataLedger(LedgerModel lm, HttpSession session) {
@@ -143,27 +188,30 @@ public class LedgerController {
 			j.setSuccess(false);
 			return j;
 		}
-		System.out.println(lm);
-		List<LedgerDto> ledger = lm.getLedger();
-		ledger.get(0).setSourceId(sourceId);
-		ledgerService.updataLedger(ledger);
+		// String receiverId=
+		// List<LedgerDto> ledgers = lm.getLedger();
+		// for (LedgerDto ledger : ledgers) {
+		// ledger.setSourceId(sourceId);
+		// ledger.setWaresId(waresService.findWaresIdBySupplierId(ledger));
+		// }
+		// ledgerService.updataLedger(ledgers);
 		j = new Json();
 		j.setMsg("添加供应商成功");
 		j.setSuccess(true);
 		return j;
 	}
-	
+
 	@RequestMapping("/deleteLedger")
 	@ResponseBody
-	public Json deleteLedger(String wareBatchNo,HttpSession session) {
+	public Json deleteLedger(String wareBatchNo, HttpSession session) {
 		Json j = new Json();
 		TImsUsersDto user = (TImsUsersDto) session.getAttribute("user");
-		if(user==null){
+		if (user == null) {
 			j.setMsg("供应商不能为空");
 			j.setSuccess(false);
 			return j;
 		}
-		int r = ledgerService.deleteLedger(user.getSourceId(),wareBatchNo);
+		int r = ledgerService.deleteLedger(user.getSourceId(), wareBatchNo);
 		if (r == 0) {
 			j.setMsg("删除供应商失败");
 			j.setSuccess(false);
@@ -173,7 +221,7 @@ public class LedgerController {
 		j.setSuccess(true);
 		return j;
 	}
-	
+
 	@RequestMapping(value = "/import")
 	@ResponseBody
 	/**
@@ -212,10 +260,10 @@ public class LedgerController {
 			String name = null;
 			String spec = null;
 			String manufacturer = null;
-			
+
 			String supplierCode = null;
 			String supplierName = null;
-			
+
 			for (int i = 0; i < hssfRow.getLastCellNum(); i++) {
 				HSSFCell cell = hssfRow.getCell(i);
 				String value = ParseExcelUtil.getStringCellValue(cell);
@@ -245,7 +293,7 @@ public class LedgerController {
 				} else if (i == 4) {
 					// 数量
 					// TODO need yanggang regenerate pojo
-					//dto.setUnit(df2.parse(value));
+					// dto.setUnit(df2.parse(value));
 				} else if (i == 5) {
 					// 生产日期
 					dto.setProductionDate(sdf.parse(value));
@@ -258,14 +306,16 @@ public class LedgerController {
 				} else if (i == 8) {
 					// 供应商名称
 					supplierName = value;
-					
+
 					ProSupplier ps = null;
 					if (supplierCode != null) {
-						ps = supplierService.getSupplierByCode(supplierCode, supplierId);
-					}else if(supplierName != null) {
-						ps = supplierService.getSupplierByName(supplierName, supplierId);
+						ps = supplierService.getSupplierByCode(supplierCode,
+								supplierId);
+					} else if (supplierName != null) {
+						ps = supplierService.getSupplierByName(supplierName,
+								supplierId);
 					}
-					
+
 					if (ps == null) {
 						// TODO 报错
 						dto = null;

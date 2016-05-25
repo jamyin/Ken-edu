@@ -279,7 +279,16 @@ WHERE
 	
 	</select>
 	
-	
+	<select id="findSupplierIdBySourceId" resultType="java.lang.String">
+		SELECT b.id
+		FROM t_pro_supplier_receiver a, t_pro_supplier b
+		WHERE
+		a.supplier_id=b.id
+		AND a.receiver_id=#{ledgerDto.sourceId}
+		AND
+		b.supplier_name=#{ledgerDto.supplierName}
+		AND b.stat = 1
+	</select>
 	
 	
 	

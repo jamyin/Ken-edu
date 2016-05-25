@@ -6,9 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssic.education.common.dao.ProDishesDao;
-import com.ssic.education.common.dto.ProDishesDto;
+import com.ssic.education.common.dto.ProWaresDto;
 import com.ssic.education.common.government.service.ProDishesService;
-import com.ssic.education.government.dto.ProWaresDto;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 
