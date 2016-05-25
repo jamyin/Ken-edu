@@ -27,6 +27,7 @@ import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 import com.ssic.education.utils.util.BeanUtils;
+import com.ssic.education.utils.util.StringUtils;
 import com.ssic.education.utils.util.UUIDGenerator;
 
 @Service
@@ -101,13 +102,16 @@ public class ProPackagesServiceImpl implements ProPackagesService{
 	@Override
 	@Transactional
 	public int addPackage(ProPackagesDto dto) {
-		ProPackages proPackages = BeanUtils.createBeanByTarget(dto, ProPackages.class);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		try {
-			proPackages.setSupplyDate(sdf.parse(dto.getSupplyDate()));
-		} catch (ParseException e) {
-			e.printStackTrace();
+		if(StringUtils.isNotEmpty(dto.getSupplyDateStr())){
+			try {
+				dto.setSupplyDate(sdf.parse(dto.getSupplyDateStr()));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
 		}
+		ProPackages proPackages = BeanUtils.createBeanByTarget(dto, ProPackages.class);
+		
 		proPackages.setId(UUIDGenerator.getUUID());
 		int packagesFlag = proPackagesDao.insertSelective(proPackages);
 		int waresFlag = 0;
