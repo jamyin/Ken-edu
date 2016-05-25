@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 
+
 import com.ssic.education.common.dto.ProSupplierDto;
 import com.ssic.education.common.mapper.ProSupplierExMapper;
 import com.ssic.education.common.mapper.ProSupplierMapper;
@@ -17,6 +18,7 @@ import com.ssic.education.common.pojo.ProSupplier;
 import com.ssic.education.common.pojo.ProSupplierExample;
 import com.ssic.education.common.pojo.ProSupplierReceiver;
 import com.ssic.education.common.pojo.ViewProSupplierExample;
+import com.ssic.education.common.provider.dto.LedgerDto;
 import com.ssic.education.common.provider.dto.SupplierDto;
 import com.ssic.education.common.provider.utils.DataGrid;
 import com.ssic.education.common.provider.utils.PageHelper;
@@ -146,5 +148,9 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 	
 	public ProSupplier findSupplierById(String sourceId) {
 		return mapper.selectByPrimaryKey(sourceId);
+	}
+
+	public String findSupplierIdBySourceId(LedgerDto ledger) {
+		return exMapper.findSupplierIdBySourceId(ledger);
 	}
 }

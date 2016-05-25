@@ -8,10 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ssic.education.common.dto.EduSchoolSupplierDto;
+import com.ssic.education.common.mapper.EduSchoolSupplierExMapper;
 import com.ssic.education.common.mapper.EduSchoolSupplierMapper;
 import com.ssic.education.common.pojo.EduSchoolSupplier;
 import com.ssic.education.common.pojo.EduSchoolSupplierExample;
 import com.ssic.education.common.pojo.EduSchoolSupplierExample.Criteria;
+import com.ssic.education.common.provider.dto.LedgerDto;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.mybatis.MyBatisBaseDao;
 import com.ssic.education.utils.util.StringUtils;
@@ -22,6 +24,9 @@ public class EduSchoolSupplierDao  extends MyBatisBaseDao<EduSchoolSupplier>{
 	@Getter
 	@Autowired
 	private EduSchoolSupplierMapper mapper;
+	
+	@Autowired
+	private EduSchoolSupplierExMapper exMapper;
 
 	public List<EduSchoolSupplier> searchEduSchoolSupplierDto(EduSchoolSupplierDto eduSchoolSupplierDto) {
 		EduSchoolSupplierExample example = new EduSchoolSupplierExample();
@@ -33,5 +38,9 @@ public class EduSchoolSupplierDao  extends MyBatisBaseDao<EduSchoolSupplier>{
 		
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		return mapper.selectByExample(example);
+	}
+
+	public String findSchoolIdByReceiverId(LedgerDto ledgerDto) {
+		return exMapper.findSchoolIdByReceiverId(ledgerDto);
 	}
 }

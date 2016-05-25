@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.ssic.education.common.mapper.ProWaresMapper;
 import com.ssic.education.common.pojo.ProWares;
 import com.ssic.education.common.pojo.ProWaresExample;
+import com.ssic.education.common.provider.dto.LedgerDto;
 import com.ssic.education.common.provider.dto.SupplierDto;
 import com.ssic.education.provider.dao.WaresDao;
 import com.ssic.education.provider.dto.PageHelperDto;
@@ -113,6 +114,11 @@ public class WaresServiceImpl implements IWaresService {
 	public List<SupplierDto> lookSupplier(ProWaresDto dto) {
 		// TODO Auto-generated method stub
 		return dao.lookSupplier(dto);
+	}
+
+	public String findWaresIdBySupplierId(LedgerDto ledger) {
+		// TODO Auto-generated method stub
+		return dao.findWaresIdBySupplierId(ledger);
 	}
 
 

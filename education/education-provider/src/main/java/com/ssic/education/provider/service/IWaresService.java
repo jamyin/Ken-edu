@@ -3,6 +3,7 @@ package com.ssic.education.provider.service;
 import java.util.List;
 
 import com.ssic.education.common.pojo.ProWares;
+import com.ssic.education.common.provider.dto.LedgerDto;
 import com.ssic.education.common.provider.dto.SupplierDto;
 import com.ssic.education.provider.dto.PageHelperDto;
 import com.ssic.education.provider.dto.ProWaresDto;
@@ -44,5 +45,7 @@ public interface IWaresService {
 	 * @since 2016.5.21
 	 */
 	void addProWares(List<ProWares> list);
+
+	String findWaresIdBySupplierId(LedgerDto ledger);
 
 }

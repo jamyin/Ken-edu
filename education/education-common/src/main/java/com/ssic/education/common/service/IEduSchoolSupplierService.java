@@ -3,12 +3,15 @@ package com.ssic.education.common.service;
 import java.util.List;
 
 import com.ssic.education.common.dto.EduSchoolSupplierDto;
+import com.ssic.education.common.provider.dto.LedgerDto;
 
 public interface IEduSchoolSupplierService {
 
 	List<EduSchoolSupplierDto> searchEduSchoolSupplierListDto(EduSchoolSupplierDto eduSchoolSupplierDto);
 	
 	EduSchoolSupplierDto searchEduSchoolSupplierDto(EduSchoolSupplierDto eduSchoolSupplierDto);
+
+	String findSchoolIdByReceiverId(LedgerDto ledgerDto);
 	
 //	List<SchoolSupplierDto> findByPage(SchoolSupplierDto schoolSupplierDto,PageHelper ph);
 //	

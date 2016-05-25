@@ -5,6 +5,7 @@ import java.util.List;
 import com.ssic.education.common.dto.ProSupplierDto;
 import com.ssic.education.common.pojo.ProSupplier;
 import com.ssic.education.common.pojo.ProSupplierReceiver;
+import com.ssic.education.common.provider.dto.LedgerDto;
 import com.ssic.education.common.provider.dto.SupplierDto;
 import com.ssic.education.common.provider.utils.DataGrid;
 import com.ssic.education.common.provider.utils.PageHelper;
@@ -64,4 +65,6 @@ public interface ISupplierService {
 		 * @version: 2016年5月24日 下午1:39:55
 	 */
 	ProSupplierDto searchProSupplierById(String sourceId);
+
+	String findSupplierIdBySourceId(LedgerDto ledger);
 }

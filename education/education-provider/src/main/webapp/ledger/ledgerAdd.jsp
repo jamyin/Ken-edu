@@ -57,23 +57,18 @@
 		style="overflow: hidden;">
 		<form id="form" method="post">
 			<table id="ledgers" class="table table-hover table-condensed">
-				<tr>
-					<th >进货日期：</th>
-					<td><input name="ledger[0].actionDate" type="text"
+				<tr >
+					<th style='width:70px;'>进货日期：</th>
+					<td style='width:100px;'><input name="ledger[0].actionDate" style='width:100px;' type="text"
 						class="span2" placeholder="点击选择日期" data-options="required:true"
 						onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})"
 						readonly="readonly"></td>
-					<th>配货点：</th>
-					<td><input name="ledger[0].receiverName" type="text"
+					<th style='width:70px;'>配货点：</th>
+					<td style='width:100px;'><input name="ledger[0].receiverName" style='width:100px;' type="text"
 						placeholder="请输入回收人配货点" class="easyui-validatebox span2"
 						data-options="required:true"></td>
-				</tr>
-				<tr>
-					<th>批次号：</th>
-					<td><input name="ledger[0].wareBatchNo" type="text"
-						class="easyui-validatebox span2"></td>
-					<th>驾驶员：</th>
-					<td><select name="ledger[0].userId" type="text"
+					<th style='width:70px;'>驾驶员：</th>
+					<td style='width:100px;'><select name="ledger[0].userId" style='width:100px;' type="text"
 						placeholder="请选择驾驶员" class="easyui-validatebox span2"
 						data-options="required:true">
 						<c:forEach items="${Driver}" var="user">
@@ -82,28 +77,28 @@
 						</select></td>
 				</tr>
 				<tr id="ledger0">
-					<th>采购品：</th>
-					<td><input name="ledger[0].name" type="text"
+					<th style='width:70px;'>采购品：</th>
+					<td style='width:100px;'><input name="ledger[0].name" style='width:100px;' type="text"
 						placeholder="请输入采购品" class="easyui-validatebox span2"
 						data-options="required:true"></td>
-					<th>数量：</th>
-					<td><input name="ledger[0].quantity" type="text"
+					<th style='width:70px;'>数量：</th>
+					<td style='width:100px;'><input name="ledger[0].quantity" style='width:100px;' type="text"
 						placeholder="请输入数量" class="easyui-validatebox span2"
 						data-options="required:true"></td>
-					<th>规格：</th>
-					<td><input name="ledger[0].spce" type="text"
+					<th style='width:70px;'>规格：</th>
+					<td style='width:100px;'><input name="ledger[0].spce" style='width:100px;' type="text"
 						placeholder="请输入规格" class="easyui-validatebox span2"
 						data-options="required:true"></td>
-					<th>供应商名称：</th>
-					<td><input name="ledger[0].supplierName" type="text"
+					<th style='width:70px;'>供应商名称：</th>
+					<td style='width:100px;'><input name="ledger[0].supplierName" style='width:100px;' type="text"
 						placeholder="请输入供应商" class="easyui-validatebox span2"
 						data-options="required:true"></td>
-					<th>生产单位：</th>
-					<td><input name="ledger[0].productionName" type="text"
+					<th style='width:70px;'>生产单位：</th>
+					<td style='width:100px;'><input name="ledger[0].productionName" style='width:100px;' type="text"
 						placeholder="请输入生产单位" class="easyui-validatebox span2"
 						data-options="required:true"></td>
-					<th>生产日期：</th>
-					<td><input name="ledger[0].productionDate" type="text"
+					<th style='width:70px;'>生产日期：</th>
+					<td style='width:100px;'><input name="ledger[0].productionDate" style='width:100px;' type="text"
 						placeholder="点击选择日期" class="easyui-validatebox span2"
 						data-options="required:true"
 						onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})"

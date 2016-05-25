@@ -9,6 +9,7 @@ import com.ssic.education.common.dao.EduSchoolSupplierDao;
 import com.ssic.education.common.dto.EduCanteenDto;
 import com.ssic.education.common.dto.EduSchoolSupplierDto;
 import com.ssic.education.common.pojo.EduSchoolSupplier;
+import com.ssic.education.common.provider.dto.LedgerDto;
 import com.ssic.education.common.service.IEduSchoolSupplierService;
 import com.ssic.education.utils.util.BeanUtils;
 
@@ -34,6 +35,11 @@ public class EduSchoolSupplierServiceImpl implements IEduSchoolSupplierService{
 			return resultList.get(0);
 		}
 		return null;
+	}
+
+	@Override
+	public String findSchoolIdByReceiverId(LedgerDto ledgerDto) {
+		return eduSchoolSupplierDao.findSchoolIdByReceiverId(ledgerDto);
 	}
 
 
