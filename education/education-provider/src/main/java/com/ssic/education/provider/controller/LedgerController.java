@@ -1,13 +1,13 @@
 package com.ssic.education.provider.controller;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -270,8 +270,8 @@ public class LedgerController {
 				String value = ParseExcelUtil.getStringCellValue(cell);
 
 				if (i == 0) {
-					// TODO 进货日期
-					// dto.set(sdf.parse(value));
+					// 进货日期
+//					dto.setActionDate(sdf.parse(value));
 				} else if (i == 1) {
 					// 名称
 					name = value;
@@ -294,7 +294,7 @@ public class LedgerController {
 				} else if (i == 4) {
 					// 数量
 					// TODO need yanggang regenerate pojo
-					dto.setQuantity(new BigDecimal(df2.parse(value).toString()));
+					// dto.setUnit(df2.parse(value));
 				} else if (i == 5) {
 					// 生产日期
 					dto.setProductionDate(sdf.parse(value));
