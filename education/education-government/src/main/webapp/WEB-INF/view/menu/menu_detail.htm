@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <#include "/common/head.htm" />
+  <link rel="stylesheet" href="/static/css/menu_detail.css" media="screen" charset="utf-8">
+</head>
+<body>
+  <!-- <div class="header">
+  <div class="wrap">
+    <a class="logo" href="index.html">上海市中小学校校生午餐综合管理平台</a>
+    <div class="p_status">
+      <a class="p_center" href="pcenter.html">个人中心</a>  |  <a class="logout" href="###">退出</a>
+    </div>
+  </div>
+</div>
+<div class="nav">
+  <div class="wrap">
+    <a class="" href="index.html">首页</a>
+    <a class="" href="search_supplier.html">安全追溯</a>
+    <a class="" href="index.html">菜谱</a>
+    <a class="" href="index.html">健康宣教</a>
+    <a class="" href="index.html">通告公示</a>
+    <a class="" href="index.html">任务传达</a>
+    <a class="" href="index.html">发布</a>
+  </div>
+</div> -->
+<#include "/common/nav.htm" />
+  <div class="wrapperA">
+    <div class="cur_postion">
+      <span class="cp">当前位置:</span><a href="#">安全追溯</a><span class="gt">&gt;</span><a href="#">采购品列表</a><span class="gt">&gt;</span><a href="#">采购品详情</a>
+    </div>
+
+    <h1 class="con-tt">
+      <span class="title">菜谱详情</span>
+    </h1>
+
+    <div class="wrapperB">
+      <ul>
+        <li><label for="">时间:</label><span>${data.supplyDate?string("yyyy-MM-dd")}</span></li>
+        <li><label for="">类型:</label><span><#if data.type == 0>国内班</#if><#if data.type == 1>国际班</#if><#if data.type == 2>教工</#if></span></li>
+        <li><label for="">餐次:</label><span><#if data.supplyPhase == 0>早餐</#if><#if data.supplyPhase == 1>午餐</#if><#if data.supplyPhase == 2>午后甜点</#if><#if data.supplyPhase == 3>晚餐</#if><#if data.supplyPhase == 4>夜宵</#if></span></li>
+        <li><label for="">菜品:</label><span><#if data.proDishesDtos??>
+		          <#list data.proDishesDtos as proDishesDto>
+		          	${(proDishesDto.waresName)!}、
+		          </#list>
+		          </#if></span></li>
+        <li><label for="">营养:</label><span><#if data.proNutritionalDtos??>
+		          <#list data.proNutritionalDtos as proNutritionalDto>
+		          	${(proNutritionalDto.name)!}:${(proNutritionalDto.weight)!}${(proNutritionalDto.unit)!}、
+		          </#list></#if></span></li>
+      </ul>
+    </div>
+  </div>
+  <#include "/common/footer.htm" />
+
+  <script type="text/javascript">
+    $(function(){
+      // debugger;
+      $(".nav").find("a").removeClass("cur");
+      $(".nav").find("a:eq(1)").addClass("cur");
+    })
+  </script>
+</body>
+</html>

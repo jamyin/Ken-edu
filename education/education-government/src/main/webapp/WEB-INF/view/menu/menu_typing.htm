@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <#include "/common/head.htm" />
+  <link rel="stylesheet" href="/static/css/menu_typing.css" media="screen" charset="utf-8">
+</head>
+<body>
+  <!-- <div class="header">
+  <div class="wrap">
+    <a class="logo" href="index.html">上海市中小学校校生午餐综合管理平台</a>
+    <div class="p_status">
+      <a class="p_center" href="pcenter.html">个人中心</a>  |  <a class="logout" href="###">退出</a>
+    </div>
+  </div>
+</div>
+<div class="nav">
+  <div class="wrap">
+    <a class="" href="index.html">首页</a>
+    <a class="" href="search_supplier.html">安全追溯</a>
+    <a class="" href="index.html">菜谱</a>
+    <a class="" href="index.html">健康宣教</a>
+    <a class="" href="index.html">通告公示</a>
+    <a class="" href="index.html">任务传达</a>
+    <a class="" href="index.html">发布</a>
+  </div>
+</div> -->
+<#include "/common/nav.htm" />
+  <div class="wrapperA">
+    <div class="cur_postion">
+      <span class="cp">当前位置:</span><a href="#">安全追溯</a><span class="gt">&gt;</span><a href="#">采购品列表</a><span class="gt">&gt;</span><a href="#">采购品详情</a>
+    </div>
+
+    <h1 class="con-tt">
+      <span class="title">菜谱录入</span>
+      <span>
+        <input class="add-bt" type="button" name="name" value="新增">
+      </span>
+    </h1>
+
+    <div class="wrapperB">
+      <ul class="menu_ul">
+        <li class="head">
+          <span class="time">时间</span>
+          <span class="type">类型</span>
+          <span class="caterers">餐次</span>
+          <span class="goods">菜品</span>
+          <span class="nutrition">营养</span>
+          <span class="operation">操作</span>
+        </li>
+        <#if pageList??>
+        	<#list pageList.results as data>
+        		<li>
+		          <span class="time"><#if data.supplyDate??>${data.supplyDate?string("yyyy-MM-dd")}</#if></span>
+		          <span class="type"><#if data.type == 0>国内班</#if><#if data.type == 1>国际班</#if><#if data.type == 2>教工</#if></span>
+		          <span class="caterers"><#if data.supplyPhase == 0>早餐</#if><#if data.supplyPhase == 1>午餐</#if><#if data.supplyPhase == 2>午后甜点</#if><#if data.supplyPhase == 3>晚餐</#if><#if data.supplyPhase == 4>夜宵</#if></span>
+		          <span class="goods ellipsis"><#if data.proDishesDtos??>
+		          <#list data.proDishesDtos as proDishesDto>
+		          	${(proDishesDto.waresName)!}、
+		          </#list>
+		          </#if></span>
+		          <span class="nutrition ellipsis"><#if data.proNutritionalDtos??>
+		          <#list data.proNutritionalDtos as proNutritionalDto>
+		          	${(proNutritionalDto.name)!}、
+		          </#list></#if></span>
+		          <span class="operation">
+		            <a href="detail.htm?id=${(data.id)!}">查看</a>
+		            <a href="#">编辑</a>
+		            <a  onclick="deleteProPackage('${(data.id)!}')" style="cursor: pointer;">删除</a>
+		          </span>
+		        </li>
+        	</#list>
+        </#if>
+        <!-- <li>
+          <span class="time">2016-5-19</span>
+          <span class="type">国际班</span>
+          <span class="caterers">中餐</span>
+          <span class="goods ellipsis">红烧肉/炒西兰花、红烧鸡块</span>
+          <span class="nutrition ellipsis">能量、维生素、蛋白质</span>
+          <span class="operation">
+            <a href="menu_detail.html">查看</a>
+            <a href="menu_edit.html">编辑</a>
+            <a href="#">删除</a>
+          </span>
+        </li>
+        <li>
+          <span class="time">2016-5-19</span>
+          <span class="type">国际班</span>
+          <span class="caterers">中餐</span>
+          <span class="goods ellipsis">红烧肉/炒西兰花、红烧鸡块</span>
+          <span class="nutrition ellipsis">能量、维生素、蛋白质</span>
+          <span class="operation">
+            <a href="menu_detail.html">查看</a>
+            <a href="#">编辑</a>
+            <a href="#">删除</a>
+          </span>
+        </li> -->
+      </ul>
+    </div>
+
+    <!-- <div class="page">
+      <a href="#">上一页</a>
+      <a class="pageno" href="#">1</a>
+      <a class="pageno cur" href="#">2</a>
+      <a class="pageno" href="#">3</a>
+      <a class="pageno" href="#">4</a>
+      <a class="pageno" href="#">5</a>
+      <a href="#">下一页</a>
+      <input class="page_to_go" type="text" name="name" value="">
+      <input class="page_jump" type="button" name="name" value="跳转">
+    </div> -->
+    <#include "/common/page.htm" />
+  </div>
+  <#include "/common/footer.htm" />
+
+  <script type="text/javascript">
+    $(function(){
+      // debugger;
+      $(".nav").find("a").removeClass("cur");
+      $(".nav").find("a:eq(1)").addClass("cur");
+      
+      $(".menuTypingEdit").on('click', function(){
+			var id = $(".menuTypingEdit").attr("data-id");
+			$.ajax({
+				url:"delete.htm",
+				type:"post",
+				dataType:"json",
+				data:{id:id},
+				async: false,
+				success:function(data){
+					if(data.status == 200){
+						alert("删除成功");
+						window.location.href="findPage.htm";
+						return;
+					}else {
+						alert(data.msg);
+					}							
+				}
+			});
+		})
+      
+    })
+    function deleteProPackage(obj){
+		$.ajax({
+			url:"delete.htm",
+			type:"post",
+			dataType:"json",
+			data:{id:obj},
+			async: false,
+			success:function(data){
+				if(data.status == 200){
+					alert("删除成功");
+					window.location.href="findPage.htm";
+					return;
+				}else {
+					alert(data.msg);
+				}							
+			}
+		});
+    }
+  </script>
+</body>
+</html>
