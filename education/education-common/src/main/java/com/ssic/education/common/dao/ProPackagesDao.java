@@ -20,10 +20,14 @@ import com.ssic.education.common.mapper.EduSchoolMapper;
 import com.ssic.education.common.mapper.ProDishesMapper;
 import com.ssic.education.common.mapper.ProNutritionalMapper;
 import com.ssic.education.common.mapper.ProPackagesMapper;
+import com.ssic.education.common.mapper.ProWaresMapper;
+import com.ssic.education.common.pojo.ProDishes;
 import com.ssic.education.common.pojo.ProDishesExample;
+import com.ssic.education.common.pojo.ProNutritional;
 import com.ssic.education.common.pojo.ProNutritionalExample;
 import com.ssic.education.common.pojo.ProPackages;
 import com.ssic.education.common.pojo.ProPackagesExample;
+import com.ssic.education.common.pojo.ProWares;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.mybatis.MyBatisBaseDao;
@@ -50,9 +54,37 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 	@Autowired
 	private ProNutritionalMapper nuMapper;
 	
+	@Autowired
+	private ProWaresMapper pwMapper;
+	
 	@Getter
 	@Autowired
 	private ProDishesMapper disMapper;
+	
+	public void delete(String id) {
+		ProPackages proPackages = this.selectByPrimaryKey(id);
+		proPackages.setStat(DataStatus.DISABLED);
+		this.updateByPrimaryKeySelective(proPackages);
+		ProDishesExample example = new ProDishesExample();
+		ProDishesExample.Criteria criteria = example.createCriteria();
+		criteria.andPackageIdEqualTo(id);
+		List<ProDishes> proDishess = disMapper.selectByExample(example);
+		for (ProDishes proDishes : proDishess) {
+			proDishes.setStat(DataStatus.DISABLED);
+			disMapper.updateByPrimaryKeySelective(proDishes);
+			ProWares proWares = pwMapper.selectByPrimaryKey(proDishes.getWaresId());
+			proWares.setStat(DataStatus.DISABLED);
+			pwMapper.updateByPrimaryKeySelective(proWares);
+		}
+		ProNutritionalExample exampleN = new ProNutritionalExample();
+		ProNutritionalExample.Criteria criteriaN = exampleN.createCriteria();
+		criteriaN.andPackageIdEqualTo(id);
+		List<ProNutritional> proNutritionals = nuMapper.selectByExample(exampleN);
+		for (ProNutritional proNutritional:proNutritionals) {
+			proNutritional.setStat(DataStatus.DISABLED);
+			nuMapper.updateByPrimaryKeySelective(proNutritional);
+		}
+	}
 	
 	public List<ProPackagesDto> getProPackages(ProPackagesDto dto) throws ParseException  {
 		
@@ -75,7 +107,7 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 		if (null == dto.getSupplyDate()) {
 			criteria.andSupplyDateBetween(startDate, endDate);
 		}
-		if (StringUtils.isNotBlank(dto.getSupplyDate())) {			
+		if (null != dto.getSupplyDate()) {			
 			criteria.andSupplyDateBetween(sdfh.parse(dto.getSupplyDate()+" 00:00:00"),sdfh.parse(dto.getSupplyDate()+" 23:59:59"));
 		}
 		criteria.andStatEqualTo(DataStatus.ENABLED);
@@ -100,7 +132,7 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 			proPackagesDto.setProNutritionalDtos(proNutritionalDtos);
 		}
 		List<ProPackagesDto> propackagesDtos = new ArrayList<ProPackagesDto>();
-		if (StringUtils.isNotBlank(dto.getSupplyDate())) {
+		if (null != dto.getSupplyDate()) {
 			propackagesDtos = schoolMapper.getPackagesById(dto.getCustomerId(), dto.getSupplierId(),sdfh.parse(dto.getSupplyDate()+" 00:00:00"),sdfh.parse(dto.getSupplyDate()+" 23:59:59"));	
 		}else {
 			propackagesDtos = schoolMapper.getPackagesById(dto.getCustomerId(), dto.getSupplierId(),startDate,endDate);	

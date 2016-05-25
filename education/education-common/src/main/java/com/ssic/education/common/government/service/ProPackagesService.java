@@ -20,4 +20,6 @@ public interface ProPackagesService {
 
 	public List<ProPackagesDto> searchProSchoolPackage(String customerId,
 			String timeDate);
+	
+	public void delete(String id);
 }

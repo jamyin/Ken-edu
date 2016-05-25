@@ -100,8 +100,8 @@ public class EduSchoolController extends BaseController{
 		mv.setViewName("/school/menu");
 		SimpleDateFormat sdf=new SimpleDateFormat(DateUtils.YMD_DASH);  
 		String str=sdf.format(new Date()); 
-		if (StringUtils.isBlank(dto.getSupplyDate())) {
-			dto.setSupplyDate(str);
+		if (null == dto.getSupplyDate()) {
+			dto.setSupplyDate(new Date());
 		}
 		mv.addObject("dto", dto);
 		mv.addObject("eduSchoolDto", eduSchoolDto);

@@ -20,6 +20,7 @@ import com.ssic.education.common.pojo.ProNutritional;
 import com.ssic.education.common.pojo.ProPackages;
 import com.ssic.education.common.pojo.ProWares;
 import com.ssic.education.government.dto.ProWaresDto;
+import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 import com.ssic.education.utils.util.BeanUtils;
@@ -76,6 +77,10 @@ public class ProPackagesServiceImpl implements ProPackagesService{
 		return proPackagesDao.findById(id);
 	}
 
+	public void delete(String id) {
+		proPackagesDao.delete(id);
+	}
+	
 	@Override
 	public List<ProPackagesDto> searchProSchoolPackage(String customerId,String timeDate) {
 		List<ProPackages> dataList = proPackagesDao.searchProSchoolPackage(customerId,timeDate);

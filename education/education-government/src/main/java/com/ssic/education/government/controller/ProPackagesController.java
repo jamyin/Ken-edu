@@ -24,10 +24,30 @@ public class ProPackagesController extends BaseController{
 	public ModelAndView findPage(ProPackagesDto dto, PageQuery page) {
 		ModelAndView mv = this.getModelAndView();
 		PageResult<ProPackagesDto> proPackagesDtos = proPackagesService.fingPackagesPage(dto, page);
-		mv.addObject("proPackagesDtos", proPackagesDtos);
-		mv.setViewName("/");
+		mv.addObject("pageList", proPackagesDtos);
+		mv.setViewName("/menu/menu_typing");
 		return mv;
 	}
+	
+	@RequestMapping(value = "/detail")
+	public ModelAndView detail(ProPackagesDto dto) {
+		ModelAndView mv = this.getModelAndView();
+		ProPackagesDto proPackagesDto = proPackagesService.findById(dto.getId());
+		mv.addObject("data", proPackagesDto);
+		mv.setViewName("/menu/menu_detail");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/delete")
+	@ResponseBody
+	public Response<String> delete(ProPackagesDto dto) {
+		proPackagesService.delete(dto.getId());
+		Response<String> res = new Response<String>();
+		res.setStatus(DataStatus.HTTP_SUCCESS);
+		res.setMessage("删除成功！");
+		return res;
+	}
+	
 	
 	@RequestMapping(value = "/add")
 	public ModelAndView add() {
