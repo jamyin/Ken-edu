@@ -11,6 +11,7 @@ import com.ssic.education.common.dto.ProWaresDto;
 import com.ssic.education.common.mapper.ProDishesExMapper;
 import com.ssic.education.common.mapper.ProDishesMapper;
 import com.ssic.education.common.pojo.ProDishes;
+import com.ssic.education.common.pojo.ProWares;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.mybatis.MyBatisBaseDao;
 
@@ -37,4 +38,11 @@ public class ProDishesDao extends MyBatisBaseDao<ProDishes>{
 		return exMapper.countWares(proWaresDto);
 	}
 	
+	public int addWaresBatch(List<ProWares> waresList) {
+		return exMapper.addWaresBatch(waresList);
+	}
+
+	public int addDishesBatch(List<ProDishes> dishesList) {
+		return exMapper.addDishesBatch(dishesList);
+	}
 }

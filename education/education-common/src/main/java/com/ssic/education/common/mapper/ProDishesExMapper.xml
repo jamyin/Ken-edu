@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ssic.education.common.mapper.ProDishesExMapper" >
+	 <insert id="addWaresBatch" parameterType="java.util.List">  
+      INSERT INTO t_pro_wares (id, wares_name, create_time, stat)
+      VALUES 
+     <foreach collection="list" item="item" index="index" separator="," >  
+        (#{item.id},#{item.waresName},#{item.createTime},#{item.stat})  
+    </foreach> 
+  </insert> 
+  
+   <insert id="addDishesBatch" parameterType="java.util.List">  
+      INSERT INTO t_pro_dishes (id, package_id,wares_id,wares_name, create_time, stat)
+      VALUES 
+     <foreach collection="list" item="item" index="index" separator="," >  
+        (#{item.id},#{item.packageId},#{item.waresId},#{item.waresName},#{item.createTime},#{item.stat})  
+    </foreach> 
+  </insert> 
+  
 	<select id="selectWaresByContact" resultType="com.ssic.education.common.dto.ProWaresDto" parameterType="com.ssic.education.common.dto.ProWaresDto">
 	   SELECT a.id,a.wares_name as waresName,a.spec,a.shelf_life as shelfLife,a.unit, a.supplier_id as supplierId,a.way,a.wares_type as waresType,a.custom_code as customCode,
 	   a.bar_code as barCode,a.en_name as enName,a.place,a.dishes,a.last_update_time as lastUpdateTime,a.create_time as createTime,a.stat
