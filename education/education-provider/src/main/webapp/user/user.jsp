@@ -177,7 +177,7 @@ else
 						title : '提示',
 						text : '数据处理中，请稍后....'
 					});
-					$.post('${pageContext.request.contextPath}/waresController/deleteWares', {
+					$.post('${pageContext.request.contextPath}/userController/delete', {
 						id : id
 					}, function(result) {
 						if (result.success) {

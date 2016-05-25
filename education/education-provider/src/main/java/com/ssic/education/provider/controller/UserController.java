@@ -167,8 +167,10 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping("/dataGrid")
 	@ResponseBody
-	public DataGrid dataGrid(TImsUsersDto user, PageHelper ph) {
-		return userService.dataGrid(user, ph);
+	public DataGrid dataGrid(TImsUsersDto user, PageHelper ph ,HttpServletRequest request) {
+		SessionInfo info = (SessionInfo) request.getSession().getAttribute(ConfigUtil.SESSIONINFONAME);
+		user.setSourceId(info.getSupplierId());
+		return userService.dataGrid(user, ph);   
 	}
 
 	/**
@@ -192,7 +194,7 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping("/add")
 	@ResponseBody
-	public Json add(TImsUsersDto user) {
+	public Json add(TImsUsersDto user,HttpServletRequest request) {
 		Json j = new Json();
 		if (user.getPassword().length()<6){
 			j.setSuccess(false);
@@ -204,7 +206,7 @@ public class UserController extends BaseController {
 			j.setMsg("用户名称不能大于10位");
 			return j;
 		}
-		if(user.getPassword()!=(user.getPassword2())){
+		if(!user.getPassword().equals(user.getPassword2())){
 			j.setSuccess(false);
 			j.setMsg("两次密码输入不同");
 			return j;
@@ -224,16 +226,10 @@ public class UserController extends BaseController {
 			   return j;
 		   }
 
-		TImsUsersDto tempUser = new TImsUsersDto();
-		tempUser.setUserAccount(user.getUserAccount());
-		int counts = userService.vailUserAccount(tempUser);
-		if(counts>0){
-			j.setSuccess(false);
-			j.setMsg("用户已存在");
-			return j;
-		}
+	
 		try {
-		
+			SessionInfo info = (SessionInfo) request.getSession().getAttribute(ConfigUtil.SESSIONINFONAME);
+			user.setSourceId(info.getSupplierId());
 				//添加t_admin_uses
 				userService.add(user);
 			

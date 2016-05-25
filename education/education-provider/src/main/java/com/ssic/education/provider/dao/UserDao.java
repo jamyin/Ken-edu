@@ -52,12 +52,6 @@ public class UserDao {
 			BeanUtils.copyProperties(userDto, users);
 			users.setCreateTime(new Date());
 
-			
-			
-
-			users.setPassword(MD5Util.md5(users.getPassword()));
-			users.setQjyAccount("qjy_" + users.getName());
-
 			users.setStat(1);
 			users.setIsadmin(0);
 			String uuid = UUID.randomUUID().toString(); 

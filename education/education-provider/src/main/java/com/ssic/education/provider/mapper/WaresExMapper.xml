@@ -5,7 +5,7 @@
 
 
 <select id="findWares" resultType="com.ssic.education.provider.dto.ProWaresDto">
-					SELECT
+				SELECT
 				a.id AS id,
 				a.wares_name AS waresName,
 				a.spec AS spec,
@@ -91,10 +91,10 @@
 	
 	<sql id="where_findWares">
 		<if test="warseDto.waresName!=null and  warseDto.waresName!=''">
-			AND a.wares_name = #{warseDto.waresName}
+			AND a.wares_name  like  #{warseDto.waresName}
 		</if>
 		<if test="warseDto.customCode!=null and warseDto.customCode!='' ">
-			AND a.custom_code = #{warseDto.customCode}
+			AND a.custom_code like #{warseDto.customCode}
 		</if>
 		<if test="warseDto.waresType!=null and warseDto.waresType!='' ">
 			and a.wares_type = #{warseDto.waresType}

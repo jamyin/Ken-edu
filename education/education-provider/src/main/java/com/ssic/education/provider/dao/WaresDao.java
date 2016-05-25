@@ -14,6 +14,7 @@ import com.ssic.education.provider.dto.PageHelperDto;
 import com.ssic.education.provider.dto.ProWaresDto;
 import com.ssic.education.provider.mapper.WaresExMapper;
 import com.ssic.education.utils.util.BeanUtils;
+import com.ssic.education.utils.util.StringUtils;
 
 
 @Repository
@@ -26,6 +27,13 @@ public class WaresDao{
 	private ProSupplierExMapper supMapper;
 
 	public List<ProWaresDto> findAllWares(ProWaresDto waresDto, PageHelperDto ph) {
+		if (!StringUtils.isEmpty(waresDto.getWaresName())) {
+			waresDto.setWaresName("%" +waresDto.getWaresName()+ "%");
+		}
+		
+		if (!StringUtils.isEmpty(waresDto.getCustomCode())) {
+			waresDto.setCustomCode("%" +waresDto.getCustomCode()+ "%");
+		}
 		List<ProWaresDto> list = exmapper.findWares(waresDto,ph);
 		return list;
 	}

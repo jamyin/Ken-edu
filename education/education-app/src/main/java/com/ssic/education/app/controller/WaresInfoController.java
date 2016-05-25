@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ssic.education.app.dto.SupplierLicDto;
 import com.ssic.education.app.dto.WaresInfoDto;
 import com.ssic.education.app.dto.WaresListDto;
 import com.ssic.education.app.dto.WaresRelatedDto;
@@ -69,7 +68,7 @@ public class WaresInfoController {
 	}
 
 	/**
-	 * getMaterialInfo：根据原料id查原料信息（需带出批次列表）
+	 * getMaterialInfo：根据原料id查原料信息
 	 * @return
 	 * @exception	
 	 * @author SeanYoung
