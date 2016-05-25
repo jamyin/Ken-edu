@@ -9,6 +9,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ssic.education.common.dto.ProPackagesDto;
 import com.ssic.education.common.government.service.ProPackagesService;
 import com.ssic.education.utils.constants.DataStatus;
+import com.ssic.education.utils.constants.PackagesTypeEnum;
+import com.ssic.education.utils.constants.ProNutritionalNameEnum;
+import com.ssic.education.utils.constants.ProNutritionalUnitEnum;
+import com.ssic.education.utils.constants.SupplyPhaseEnum;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 import com.ssic.education.utils.model.Response;
@@ -53,6 +57,10 @@ public class ProPackagesController extends BaseController{
 		ModelAndView mv = this.getModelAndView();
 		ProPackagesDto proPackagesDto = proPackagesService.findById(dto.getId());
 		mv.addObject("data", proPackagesDto);
+		mv.addObject("PackagesType", PackagesTypeEnum.values());
+		mv.addObject("SupplyPhase", SupplyPhaseEnum.values());
+		mv.addObject("NutritionalUnit", ProNutritionalUnitEnum.values());
+		mv.addObject("NutritionalName", ProNutritionalNameEnum.values());
 		mv.setViewName("/menu/menu_edit");
 		return mv;
 	}
