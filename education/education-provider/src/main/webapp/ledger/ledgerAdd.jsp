@@ -75,6 +75,10 @@
 							<option value ="${user.id}">${user.name}</option>
 						</c:forEach>
 						</select></td>
+					<th>批次号：</th>
+					<td><input name="ledger[0].wareBatchNo" style='width:100px;' type="text"
+						placeholder="请输入回收人批次号" class="easyui-validatebox span2"
+						data-options="required:true"></td>
 				</tr>
 				<tr id="ledger0">
 					<th style='width:70px;'>采购品：</th>

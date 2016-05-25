@@ -96,11 +96,26 @@ public class CorporateController {
 		return "corporate/lookImage";
 	}
 	
+	 /**
+	  * 跳转到修改图片页面
+	  * @param request
+	  * @param id
+	  * @return
+	  */
+	 @RequestMapping("/editPic")
+	    public String editPic(HttpServletRequest request,HttpSession session){
+		 TImsUsersDto user = (TImsUsersDto) session.getAttribute("user");
+			if (user == null) {
+				return null;
+			}
+	        request.setAttribute("id", user.getSourceId());
+	    	return "corporate/editImage";
+	    }
 	  /**
 		  * 上传图片
 		  */
-		  @RequestMapping("/alterImage")
-		    @ResponseBody
+		@RequestMapping("/alterImage")
+		@ResponseBody
 		    public Json alterImage(String id,@RequestParam(value = "imgUrl1") MultipartFile imgUrl1,@RequestParam(value = "imgUrl2") MultipartFile imgUrl2,@RequestParam(value = "imgUrl3") MultipartFile imgUrl3,@RequestParam(value = "imgUrl4") MultipartFile imgUrl4,@RequestParam(value = "imgUrl5") MultipartFile imgUrl5,@RequestParam(value = "imgUrl6") MultipartFile imgUrl6,@RequestParam(value = "imgUrl7") MultipartFile imgUrl7,@RequestParam(value = "imgUrl8") MultipartFile imgUrl8,@RequestParam(value = "imgUrl9") MultipartFile imgUrl9,@RequestParam(value = "imgUrl10") MultipartFile imgUrl10,@RequestParam(value = "imgUrl11") MultipartFile imgUrl11,ImageInfoDto image,HttpServletRequest request, HttpServletResponse response){
 		    	Json json = new Json();
 		    	 ProLicense  license =new ProLicense();

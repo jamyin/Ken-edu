@@ -25,7 +25,7 @@
 			fitColumns : true,
 			border : false,
 			pagination : true,
-			idField : 'wareBatchNo',
+			idField : 'id',
 			pageSize : 10,
 			pageList : [ 10, 20, 30, 40, 50 ],
 			sortName : 'name',
@@ -34,17 +34,23 @@
 			selectOnCheck : false,
 			nowrap : false,
 			frozenColumns : [ [ {
-				field : 'wareBatchNo',
+				field : 'id',
 				title : '编号',
 				width : 150,
 				checkbox : true
 			}, {
-				field : 'sendDate',
-				title : '配货日期',
+				field : 'wareBatchNo',
+				title : '编号',
 				width : 80,
 				sortable : true
 			} ] ],
 			columns : [ [  
+			{
+				field : 'sendDate',
+				title : '配货日期',
+				width : 80,
+				sortable : true
+			},
 			{
 				field : 'receiverName',
 				title : '配货点',

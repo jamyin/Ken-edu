@@ -17,20 +17,23 @@
 	}
 
 	function edit(){
-		parent.$.modalDialog({
-			title : '编辑废弃油脂',
-			width : 500,
-			height : 600,
-			href : '${pageContext.request.contextPath}/corporateController/editPage',
-			buttons : [ {
+ 		$("#aa").dialog({    
+		    title: 'My Dialog',    
+		    width: 500,    
+		    height: 500,    
+		    closed: false,    
+		    cache: false,    
+		    href: '${pageContext.request.contextPath}/corporateController/editPage',    
+		    modal: true,
+		    buttons : [ {
 				text : '编辑',
 				handler : function() {
-					var f = parent.$.modalDialog.handler.find('#form');
+					var f = $('#form');
 					f.submit();
 				}
 			} ]
 		});
-	}
+	} 
 	
 	function editPic(){
 		parent.$.modalDialog({
@@ -93,7 +96,7 @@
 				<td>${Corporate.foodProduceCode }</td>
 			</tr>
 			<tr>
-				<th></th>
+				<th id="aa"></th>
 				<th style='text-align:center;'>工商执照号:</th>
 				<td>${Corporate.businessLicense }</td>
 			</tr>

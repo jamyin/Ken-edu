@@ -1,90 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ssic.education.common.mapper.ProLedgerExMapper">
-	<select id="countAllLedger" resultType="Long">
-		SELECT
-		count(id)
-		FROM
-		t_pro_ledger
-		WHERE
-		stat = 1
-		AND source_id=#{ledgerDto.sourceId}
-		<if test="ledgerDto.actionDate != null  and ledgerDto.actionDate!=''">
-				AND action_date >= #{ledgerDto.actionDate}
-		</if>
-		<if test="ledgerDto.nextDate != null  and ledgerDto.nextDate!=''">
-				AND action_date &lt;= #{ledgerDto.nextDate}
-		</if>
-		<if
-			test="ledgerDto.receiverName!=null and  ledgerDto.receiverName!=''">
-			AND receiver_name like "%"#{ledgerDto.receiverName}"%"
-		</if>
-	</select>
-	<select id="findAllLedger" resultType="com.ssic.education.common.provider.dto.LedgerDto">
-		SELECT DISTINCT
-		l.ware_batch_no wareBatchNo,
-		l.action_date sendDate,
-		l.receiver_name
-		receiverName,
-		u.`name` userName
-		FROM
-		t_pro_ledger
-		l,t_pro_users u
-		WHERE
-		l.user_id=u.id
-		AND
-		l.stat = 1
-		AND
-		l.source_id
-		=#{ledgerDto.sourceId}
-		<if test="ledgerDto.actionDate != null  and ledgerDto.actionDate!=''">
-				AND l.action_date >= #{ledgerDto.actionDate}
-		</if>	
-		<if test="ledgerDto.nextDate != null  and ledgerDto.nextDate!=''">
-				AND l.action_date &lt;= #{ledgerDto.nextDate}
-		</if>
-		<if
-			test="ledgerDto.receiverName!=null and  ledgerDto.receiverName!=''">
-			AND l.receiver_name like "%"#{ledgerDto.receiverName}"%"
-		</if>
-	</select>
+
 	<insert id="insertLedger" parameterType="java.util.List">
 
-		insert into t_pro_ledger (id, wares_id, name,
-		spce, action_type,
-		action_date,
+		insert into t_pro_ledger (id, master_id,wares_id, name,
+		spce, 
 		supplier_id, supplier_code, supplier_name,
 		quantity,
 		production_date,production_Name, batch_no,
-		receiver_id, receiver_code,
-		receiver_name,
-		trace_code, user_id, source_id,
-		ware_batch_no,
+		trace_code, 
 		create_time,
 		last_update_time,
 		stat)
 		values
 		<foreach item="item" collection="ledgerList" separator=","
 			index="index">
-			(UUID(), #{item.waresId},
+			(UUID(), #{item.id}, #{item.waresId},
 			#{item.name},
 			#{item.spce},
-			#{item.actionType},
-			#{ledgerList[0].actionDate},
 			#{item.supplierId},
 			#{item.supplierCode},
 			#{item.supplierName},
 			#{item.quantity},
 			#{item.productionDate},
 			#{item.productionName}, #{item.batchNo},
-			#{ledgerList[0].receiverId},
-			#{item.receiverCode},
-			#{ledgerList[0].receiverName},
 			#{item.traceCode},
-			#{ledgerList[0].userId}, #{ledgerList[0].sourceId},
-			#{ledgerList[0].wareBatchNo}, #{ledgerList[0].createTime},
-			#{ledgerList[0].lastUpdateTime},
-			#{ledgerList[0].stat})
+			#{item.createTime},
+			#{item.lastUpdateTime},
+			#{item.stat})
 		</foreach>
 	</insert>
 	<select id="findSchoolIdByReceiverId" resultType="java.lang.String">
@@ -119,29 +63,31 @@
 	</select>
 	<select id="findLedgerByWareBatchNo" resultType="com.ssic.education.common.provider.dto.LedgerDto">
 		SELECT l.id id,
-		l.wares_id waresId, l.name, l.spce, l.action_type actionType,
-		l.action_date actionDate,
+		m.id masterId,
+		l.wares_id waresId, l.name, l.spce,
+		m.action_date actionDate,
 		l.supplier_id supplierId,
 		l.supplier_code
 		supplierCode, l.supplier_name supplierName,
 		l.quantity,
 		l.production_date productionDate,l.production_name productionName
-		,l.batch_no batchNo, l.receiver_id receiverId, l.receiver_code
-		receiverCode,
-		l.receiver_name receiverName,
+		,l.batch_no batchNo, m.receiver_id receiverId, 
+		m.receiver_name receiverName,
 		l.trace_code traceCode,
-		l.user_id userId, l.source_id sourceId, l.ware_batch_no wareBatchNo,
+		m.user_id userId, m.source_id sourceId, m.ware_batch_no wareBatchNo,
 		l.create_time createTime, l.last_update_time lastUpdateTime,
 		l.stat,u.`name` userName
 		FROM
 		t_pro_ledger
-		l,t_pro_users u
+		l,t_pro_users u,t_pro_ledger_master m
 		WHERE
-		l.user_id=u.id
+		m.user_id=u.id
 		AND
-		l.source_id=#{sourceId}
+		m.id=l.master_id
 		AND
-		l.ware_batch_no=#{wareBatchNo}
+		m.source_id=#{sourceId}
+		AND
+		m.ware_batch_no=#{wareBatchNo}
 		AND l.stat = 1
 	</select>
 	<select id="findWareBatchNoById" resultType="java.lang.String">

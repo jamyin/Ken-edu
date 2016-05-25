@@ -14,11 +14,10 @@ import com.ssic.education.common.dto.ProLedgerDto;
 import com.ssic.education.common.dto.ProSupplierDto;
 import com.ssic.education.common.mapper.ProLedgerExMapper;
 import com.ssic.education.common.mapper.ProLedgerMapper;
+import com.ssic.education.common.mapper.ProLedgerMasterExMapper;
 import com.ssic.education.common.mapper.ProSchoolWareMapper;
 import com.ssic.education.common.pojo.ProLedger;
 import com.ssic.education.common.pojo.ProLedgerExample;
-import com.ssic.education.common.pojo.ProSchoolWare;
-import com.ssic.education.common.pojo.ProSchoolWareExample;
 import com.ssic.education.common.provider.dto.LedgerDto;
 import com.ssic.education.common.provider.utils.DataGrid;
 import com.ssic.education.common.provider.utils.PageHelper;
@@ -44,58 +43,42 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 
 	@Autowired
 	private ProLedgerExMapper exMapper;
+	
+	@Autowired
+	private ProLedgerMasterExMapper lmMapper;
 
 	public DataGrid findAllLedger(LedgerDto ld, PageHelper ph) {
 		DataGrid dataGrid = new DataGrid();
-		Long total = exMapper.countAllLedger(ld);
+		Long total = lmMapper.countAllLedger(ld);
 		dataGrid.setTotal(total);
 		int beginRow = (ph.getPage() - 1) * ph.getRows();
 		ph.setBeginRow(beginRow);
-		dataGrid.setRows(exMapper.findAllLedger(ld, ph));
+		dataGrid.setRows(lmMapper.findAllLedger(ld, ph));
 		return dataGrid;
 	}
 
 	public int saveLedger(List<LedgerDto> ledger) {
-		ledger.get(0).setReceiverId(
-				exMapper.findSchoolIdByReceiverId(ledger.get(0)));
-		if (ledger.get(0).getReceiverId() == null) {
-			return 0;
-		}
-		ledger.get(0).setCreateTime(new Date());
-		ledger.get(0).setLastUpdateTime(ledger.get(0).getCreateTime());
-		ledger.get(0).setStat(1);
-		for (int i = 0; i < ledger.size(); i++) {
-			ledger.get(i).setSourceId(ledger.get(0).getSourceId());
-			// 采购品Id
-			ledger.get(i).setWaresId(
-					exMapper.findWaresIdBySupplierId(ledger.get(i)));
-			if (ledger.get(i).getWaresId() != null) {
-				// 供货商Id
-				ledger.get(i).setSupplierId(
-						exMapper.findSupplierIdBySourceId(ledger.get(i)));
-				if (ledger.get(i).getSupplierId() == null) {
-					ledger.get(i).setSupplierName(null);
-				}
-			}
-			// 采购品与学校
-			ProSchoolWare psw = new ProSchoolWare();
-			psw.setSchoolId(ledger.get(0).getReceiverId());
-			psw.setWareId(ledger.get(i).getWaresId());
-			psw.setSourceId(ledger.get(i).getSourceId());
-			ProSchoolWareExample example = new ProSchoolWareExample();
-			ProSchoolWareExample.Criteria criteria = example.createCriteria();
-			criteria.andSchoolIdEqualTo(psw.getSchoolId());
-			criteria.andWareIdEqualTo(psw.getWareId());
-			criteria.andSourceIdEqualTo(psw.getSourceId());
-			List<ProSchoolWare> list = swMapper.selectByExample(example);
-			if (list.size() == 0) {
-				psw.setId(UUID.randomUUID().toString());
-				psw.setCreateTime(new Date());
-				psw.setLastUpdateTime(psw.getCreateTime());
-				psw.setStat(1);
-				swMapper.insert(psw);
-			}
-		}
+		// // 采购品与学校
+		// ProSchoolWare psw = new ProSchoolWare();
+		// psw.setSchoolId(ledger.get(0).getReceiverId());
+		// psw.setWareId(ledger.get(i).getWaresId());
+		// psw.setSourceId(ledger.get(i).getSourceId());
+		// ProSchoolWareExample example = new ProSchoolWareExample();
+		// ProSchoolWareExample.Criteria criteria = example.createCriteria();
+		// criteria.andSchoolIdEqualTo(psw.getSchoolId());
+		// criteria.andWareIdEqualTo(psw.getWareId());
+		// criteria.andSourceIdEqualTo(psw.getSourceId());
+		// List<ProSchoolWare> list = swMapper.selectByExample(example);
+		// if (list.size() == 0) {
+		// psw.setId(UUID.randomUUID().toString());
+		// psw.setCreateTime(new Date());
+		// psw.setLastUpdateTime(psw.getCreateTime());
+		// psw.setStat(1);
+		// swMapper.insert(psw);
+		// }
+		ledger.get(0).setId(UUID.randomUUID().toString());
+		ledger.get(0).setHaulStatus(0);;
+		lmMapper.insertLedgerMaster(ledger.get(0));
 		return exMapper.insertLedger(ledger);
 	}
 

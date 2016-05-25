@@ -33,8 +33,7 @@ text-align: right;
 								parent.$.messager.progress('close');
 								result = $.parseJSON(result);
 								if (result.success) {
-									 
-									 parent.$.modalDialog.handler.dialog('close');
+									window.location.href="";
 								} else {
 									parent.$.messager.alert('错误', result.msg,
 											'error');

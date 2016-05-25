@@ -7,7 +7,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -129,6 +128,7 @@ public class LedgerController {
 			return j;
 		}
 		for (LedgerDto ledger : ledgers) {
+			ledger.setWareBatchNo(ledgers.get(0).getWareBatchNo());
 			ledger.setActionDate(actionDate);
 			ledger.setReceiverId(receiverId);
 			ledger.setSourceId(sourceId);
@@ -156,6 +156,9 @@ public class LedgerController {
 			if (ledger.getSupplierId() == null) {
 				ledger.setSupplierName(null);
 			}
+			ledger.setCreateTime(new Date());
+			ledger.setLastUpdateTime(ledger.getCreateTime());
+			ledger.setStat(1);
 		}
 		ledgerService.saveLedger(ledgers);
 		j = new Json();

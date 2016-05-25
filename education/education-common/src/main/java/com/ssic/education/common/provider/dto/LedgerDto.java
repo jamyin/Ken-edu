@@ -12,6 +12,10 @@ public class LedgerDto {
 	@Setter
 	@Getter
 	private String id;
+	
+	@Setter
+	@Getter
+	private String masterId;
 
 	@Setter
 	@Getter
@@ -115,6 +119,10 @@ public class LedgerDto {
 	@Setter
 	@Getter
 	private String sendDate;
+	
+	@Setter
+	@Getter
+	private int haulStatus;
 
 	@Override
 	public String toString() {
