@@ -1,6 +1,13 @@
 package com.ssic.education.common.dao;
 
-import com.ssic.education.government.dto.ProWaresDto;
+import java.util.List;
+
+import lombok.Getter;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.ssic.education.common.dto.ProWaresDto;
 import com.ssic.education.common.mapper.ProWaresMapper;
 import com.ssic.education.common.pojo.ProWares;
 import com.ssic.education.common.pojo.ProWaresExample;
@@ -8,13 +15,6 @@ import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.mybatis.MyBatisBaseDao;
 import com.ssic.education.utils.util.StringUtils;
-
-import lombok.Getter;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 /**
  * 

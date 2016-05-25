@@ -1,5 +1,10 @@
 package com.ssic.education.common.government.service.impl;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.ssic.education.common.dao.ProLicenseDao;
 import com.ssic.education.common.dao.ProSupplierDao;
 import com.ssic.education.common.dao.ViewProSupplierDao;
@@ -13,11 +18,6 @@ import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 import com.ssic.education.utils.util.BeanUtils;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class ProSupplierServiceImpl implements ProSupplierService{

@@ -1,18 +1,18 @@
 package com.ssic.education.common.government.service.impl;
 
-import com.ssic.education.common.dao.ProWaresDao;
-import com.ssic.education.government.dto.ProWaresDto;
-import com.ssic.education.common.government.service.ProWaresService;
-import com.ssic.education.common.pojo.ProWares;
-import com.ssic.education.utils.model.PageQuery;
-import com.ssic.education.utils.model.PageResult;
-import com.ssic.education.utils.util.BeanUtils;
+import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.ssic.education.common.dao.ProWaresDao;
+import com.ssic.education.common.dto.ProWaresDto;
+import com.ssic.education.common.government.service.ProWaresService;
+import com.ssic.education.common.pojo.ProWares;
+import com.ssic.education.utils.model.PageQuery;
+import com.ssic.education.utils.model.PageResult;
+import com.ssic.education.utils.util.BeanUtils;
 
 @Service
 public class ProWaresServiceImpl implements ProWaresService {

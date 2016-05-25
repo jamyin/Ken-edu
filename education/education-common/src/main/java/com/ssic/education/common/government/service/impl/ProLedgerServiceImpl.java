@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssic.education.common.dao.ProLedgerDao;
+import com.ssic.education.common.dto.ProLedgerDto;
 import com.ssic.education.common.dto.ProSupplierDto;
-import com.ssic.education.common.pojo.ProLedger;
 import com.ssic.education.common.government.service.ProLedgerService;
-import com.ssic.education.government.dto.ProLedgerDto;
+import com.ssic.education.common.pojo.ProLedger;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 import com.ssic.education.utils.util.BeanUtils;
