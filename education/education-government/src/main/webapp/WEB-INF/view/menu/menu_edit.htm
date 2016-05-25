@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <#include "/common/head.htm" />
+  <link rel="stylesheet" href="/static/css/menu_edit.css" media="screen" charset="utf-8">
+  <script src="/static/js/jquery-ui.min.js"></script>
+  <link href="/static/css/jquery-ui.min.css" rel="stylesheet" />
+</head>
+<body>
+ <!--  <div class="header">
+  <div class="wrap">
+    <a class="logo" href="index.html">上海市中小学校校生午餐综合管理平台</a>
+    <div class="p_status">
+      <a class="p_center" href="pcenter.html">个人中心</a>  |  <a class="logout" href="###">退出</a>
+    </div>
+  </div>
+</div>
+<div class="nav">
+  <div class="wrap">
+    <a class="" href="index.html">首页</a>
+    <a class="" href="search_supplier.html">安全追溯</a>
+    <a class="" href="index.html">菜谱</a>
+    <a class="" href="index.html">健康宣教</a>
+    <a class="" href="index.html">通告公示</a>
+    <a class="" href="index.html">任务传达</a>
+    <a class="" href="index.html">发布</a>
+  </div>
+</div> -->
+<#include "/common/nav.htm" />
+  <div class="wrapperA">
+    <div class="cur_postion">
+      <span class="cp">当前位置:</span><a href="#">安全追溯</a><span class="gt">&gt;</span><a href="#">采购品列表</a><span class="gt">&gt;</span><a href="#">采购品详情</a>
+    </div>
+
+    <h1 class="con-tt">
+      <span class="title">编辑菜谱</span>
+    </h1>
+
+    <div class="wrapperB">
+      <ul>
+        <li>
+          <label for="">时间:</label>
+           <input class="date" type="text" name="supplyDate" id="supplyDate" value="<#if data.supplyDate??>${data.supplyDate?string("yyyy-MM-dd")}</#if>"readonly="readonly">
+        </li>
+        <li>
+          <label for="">类型:</label>
+          <select class="" name="type" id="type">
+          <#if PackagesType??>
+          	<#list PackagesType as type>
+          		<option <#if type.index == data.type>selected="selected"</#if> value="${(type.index)!}">${(type.value)!}</option>
+          	</#list>
+          </#if>            
+          </select>
+        </li>
+        <li>
+          <label for="">餐次:</label>
+          <select class="" name="supplyPhase" id="supplyPhase">
+          <#if SupplyPhase??>
+          	<#list SupplyPhase as SupplyPhase>
+          		<option <#if SupplyPhase.index == data.supplyPhase>selected="selected"</#if> value="${(SupplyPhase.index)!}">${(SupplyPhase.value)!}</option>
+          	</#list>
+          </#if>
+          </select>
+        </li>
+        <li>
+          <label for="" style="float:left">菜品:</label>
+          <div class="rt">
+            <ul class="rt_ul proDishes">
+            <#if data.proDishesDtos??>
+            	<#list data.proDishesDtos as proDishesDto>
+            		<#if proDishesDto_index == 0>
+            			 <li>
+			                <input type="text" name="waresName${proDishesDto?size}" value="${(proDishesDto.waresName)!}">
+			                <span class="add">+</span>
+			              </li>
+			        <#else>
+			        	<li>
+			                 <input type="text" name="waresName${proDishesDto?size}" value="${(proDishesDto.waresName)!}">
+				        	<span class='decrease'>-</span>
+				        </li>
+            		</#if>
+            	</#list>
+            </#if>
+              <!-- <li>
+                <input type="text" name="name" value="">
+                <span class="add">+</span>
+              </li> -->
+            </ul>
+          </div>
+        </li>
+        <li>
+          <label for="">营养:</label>
+          <div class="rt">
+            <ul class="rt_ul nutritional">
+            <#if (data.proNutritionalDtos??) && (data.proNutritionalDtos?size > 0)>
+            	<#list data.proNutritionalDtos as proNutritionalDto>
+            		<#if proNutritionalDto_index == 0>
+            			<li>
+			                <select class="s1" name="">
+			                <#if NutritionalName??>
+			                	<#list NutritionalName as name>
+			                		<option  <#if name.index == proNutritionalDto.name>selected="selected"</#if> value="${(name.index)!}">${(name.index)!}</option>
+			                	</#list>
+			                </#if> 
+			                </select>
+			                <input class="in1" type="text" name="name${proNutritionalDto?size}" value="${(proNutritionalDto.weight)}">
+			                <select class="s2" name="">
+			                <#if NutritionalUnit??>
+			                	<#list NutritionalUnit as unit>
+			                		<option <#if unit.index == proNutritionalDto.unit>selected="selected"</#if> value="${(unit.index)!}">${(unit.index)!}</option>
+			                	</#list>
+			                </#if>                  
+			                </select>
+			                <span class="add">+</span>
+			              </li>
+            		<#else>
+            			<li>
+			                <select class="s1" name="">
+			                <#if NutritionalName??>
+			                	<#list NutritionalName as name>
+			                		<option  <#if name.index == proNutritionalDto.name>selected="selected"</#if> value="${(name.index)!}">${(name.index)!}</option>
+			                	</#list>
+			                </#if> 
+			                </select>
+			                <input class="in1" type="text" name="name${proNutritionalDto?size}" value="${(proNutritionalDto.weight)}">
+			                <select class="s2" name="">
+			                <#if NutritionalUnit??>
+			                	<#list NutritionalUnit as unit>
+			                		<option <#if unit.index == proNutritionalDto.unit>selected="selected"</#if> value="${(unit.index)!}">${(unit.index)!}</option>
+			                	</#list>
+			                </#if>                  
+			                </select>
+			                <span class='decrease'>-</span>
+			              </li>
+            		</#if>
+            	</#list>
+            <#else>
+            	<li>
+	                <select class="s1" name="">
+	                <#if NutritionalName??>
+	                	<#list NutritionalName as name>
+	                		<option value="${(name.index)!}">${(name.index)!}</option>
+	                	</#list>
+	                </#if> 
+	                </select>
+	                <input class="in1" type="text" name="name" value="${(proNutritionalDto.weight)}">
+	                <select class="s2" name="">
+	                <#if NutritionalUnit??>
+	                	<#list NutritionalUnit as unit>
+	                		<option value="${(unit.index)!}">${(unit.index)!}</option>
+	                	</#list>
+	                </#if>                  
+	                </select>
+	                <span class="add">+</span>
+	              </li>
+            </#if>
+              
+            </ul>
+          </div>
+        </li>
+        <li><input class="savebt" type="button" name="name" value="保存"></li>
+      </ul>
+    </div>
+  </div>
+   <#include "/common/footer.htm" />
+
+  <script type="text/javascript">
+  $(function(){
+    $(".nav").find("a").removeClass("cur");
+    $(".nav").find("a:eq(1)").addClass("cur");
+    $(".add").on("click",function(){
+      var _this = $(this);
+      var p = _this.parents(".rt_ul").find("li:last").clone(true);
+      p.find(".add").remove();
+      if(!p.children().hasClass("decrease")){
+        p.append("<span class='decrease'>-</span>")
+      }
+      var childrens = p.children();
+      for(var i=0;i<childrens.length;i++){
+        var n = childrens[i].getAttribute("name");
+        childrens[i].value='';
+        childrens[i].setAttribute("name",n+1);
+      }
+      _this.parents(".rt_ul").append(p);
+    });
+    $(".rt_ul").on("click",".decrease",function(){
+      $(this).parent().remove();
+    });
+
+    $(".savebt").on('click', function(){
+    	var supplyDate = $("#supplyDate").attr("value");
+    	alert(supplyDate);
+    	if (supplyDate.length <= 0) {
+			alert("时间不能为空~");
+			return;
+		}
+    	var type = $.trim($("#type").val());
+    	if (type.length <= 0) {
+			alert("类型不能为空~");
+			return;
+		}
+    	var supplyPhase = $.trim($("#supplyPhase").val());
+    	if (supplyPhase.length <= 0) {
+			alert("餐次不能为空~");
+			return;
+		}
+    	var nu_len = $(".nutritional li").length;
+    	var jsonWares;
+    	jsonWares = '[';
+		for (i=1; i<=nu_len; i++) {
+			jsonWares += '{\"licPic\":\"' +$('#phoneFile'+i+'').attr("value")+'\"},';
+		}
+		jsonWares += ']';
+    	var nu_dis = $(".proDishes li").length;
+    	return;
+		$.ajax({
+			url:"save.htm",
+			type:"post",
+			dataType:"json",
+			data:{id:'${(data.id)!}',supplyDateStr:supplyDate,type:type,supplyPhase:supplyPhase},
+			async: false,
+			success:function(data){
+				if(data.status == 200){
+					alert("删除成功");
+					window.location.href="findPage.htm";
+					return;
+				}else {
+					alert(data.msg);
+				}							
+			}
+		});
+	})
+  
+    
+    
+    Date.prototype.format = function(format) {
+      var o = {
+        "M+": this.getMonth() + 1, //month
+        "d+": this.getDate(), //day
+        "h+": this.getHours(), //hour
+        "m+": this.getMinutes(), //minute
+        "s+": this.getSeconds(), //second
+        "q+": Math.floor((this.getMonth() + 3) / 3), //quarter
+        "S": this.getMilliseconds() //millisecond
+      }
+      if (/(y+)/.test(format)) {
+        format = format.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+      }
+      for (var k in o) {
+        if (new RegExp("(" + k + ")").test(format)) {
+          format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length));
+        }
+      }
+      return format;
+    }
+    $.datepicker.regional["zh-CN"] = {
+    	closeText: "关闭",
+    	prevText: "&#x3c;上月",
+    	nextText: "下月&#x3e;",
+    	currentText: "今天",
+    	monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+    	monthNamesShort: ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "十二"],
+    	dayNames: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"],
+    	dayNamesShort: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],
+    	dayNamesMin: ["日", "一", "二", "三", "四", "五", "六"],
+    	weekHeader: "周",
+    	dateFormat: "yy-mm-dd",
+    	firstDay: 1,
+    	isRTL: !1,
+    	showMonthAfterYear: !0,
+    	yearSuffix: "年"
+    }
+     $.datepicker.setDefaults($.datepicker.regional["zh-CN"]);
+    $(".date").datepicker();
+    
+    
+    
+  })
+  </script>
+</body>
+</html>
