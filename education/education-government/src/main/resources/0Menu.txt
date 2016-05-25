@@ -11,6 +11,10 @@
         {
             "menuName": "区教委",
             "menuUrl": "/edu/school/checkList.htm?source=1&reviewed=0"
+        },
+        {
+            "menuName": "学校",
+            "menuUrl": "/pro/packages/findPage.htm"
         }
     ]
 }
