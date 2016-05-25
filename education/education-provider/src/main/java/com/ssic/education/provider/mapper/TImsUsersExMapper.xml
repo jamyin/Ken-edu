@@ -45,11 +45,12 @@
 	user_account,
 	email,
 	user_no,
-	user_type 
+	user_type ,
+	source_id
 )
 VALUES
 	(
-		#{users.id},#{users.name},#{users.password},#{users.stat},#{users.isadmin},#{users.createTime},#{users.userAccount},#{users.email},#{users.userNo},#{users.userType})
+		#{users.id},#{users.name},#{users.password},#{users.stat},#{users.isadmin},#{users.createTime},#{users.userAccount},#{users.email},#{users.userNo},#{users.userType},#{users.sourceId})
 	</insert>
 
 	<insert id="addImsUsers" parameterType="com.ssic.education.provider.pojo.ProUsers">

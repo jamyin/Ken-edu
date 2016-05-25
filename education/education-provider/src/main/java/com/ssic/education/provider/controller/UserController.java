@@ -251,6 +251,9 @@ public class UserController extends BaseController {
 	@RequestMapping("/editPage")
 	public String editPage(HttpServletRequest request, String id) {
 		TImsUsersDto u = userService.getUser(id);
+		if(u.getIsAdmin()==1){
+			u.setUserType(null);
+		}
 	    request.setAttribute("user", u);
 	    
         return "user/userEdit";
@@ -277,7 +280,7 @@ public class UserController extends BaseController {
 			j.setMsg("用户名称不能大于10位");
 			return j;
 		}
-		if(user.getPassword()!=(user.getPassword2())){
+		if(!user.getPassword().equals(user.getPassword2())){
 			j.setSuccess(false);
 			j.setMsg("两次密码输入不同");
 			return j;
