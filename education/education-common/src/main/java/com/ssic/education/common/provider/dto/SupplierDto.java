@@ -1,134 +1,82 @@
 package com.ssic.education.common.provider.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class SupplierDto {
+@Data
+public class SupplierDto implements Serializable {
 
-	@Setter
-	@Getter
-    private String id;
+	private String id;
 
-	@Setter
-	@Getter
-    private String supplierName;
-	@Setter
-	@Getter
-    private String supplierId;
-	@Setter
-	@Getter
-    private String waresName;//商品名称
-	@Setter
-	@Getter
-    private String  receiverId;
-	@Setter
-	@Getter
-    private String  supplierCode;
-	@Setter
-	@Getter
-    private String spec;//商品规格
+	private String supplierName;
 
-	@Setter
-	@Getter
-    private String address;
+	private String supplierId;
 
-	@Setter
-	@Getter
-    private String provinces;
+	private String waresName;// 商品名称
 
-	@Setter
-	@Getter
-    private String city;
+	private String receiverId;
 
-	@Setter
-	@Getter
-    private String area;
+	private String supplierCode;
 
-	@Setter
-	@Getter
-    private Integer supplierType;
+	private String spec;// 商品规格
 
-	@Setter
-	@Getter
-    private String businessLicense;
+	private String address;
 
-	@Setter
-	@Getter
-    private String organizationCode;
+	private String provinces;
 
-	@Setter
-	@Getter
-    private String foodServiceCode;
+	private String city;
 
-	@Setter
-	@Getter
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private Date foodServiceCodeDate;
+	private String area;
 
-	@Setter
-	@Getter
-    private String foodBusinessCode;
+	private Integer supplierType;
 
-	@Setter
-	@Getter
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private Date foodBusinessCodeDate;
+	private String businessLicense;
 
-	@Setter
-	@Getter
-    private String foodCirculationCode;
+	private String organizationCode;
 
-	@Setter
-	@Getter
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private Date foodCirculationCodeDate;
+	private String foodServiceCode;
 
-	@Setter
-	@Getter
-    private String foodProduceCode;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private Date foodServiceCodeDate;
 
-	@Setter
-	@Getter
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private Date foodProduceCodeDate;
+	private String foodBusinessCode;
 
-	@Setter
-	@Getter
-    private String code;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private Date foodBusinessCodeDate;
 
-	@Setter
-	@Getter
-    private String abbr;
+	private String foodCirculationCode;
 
-	@Setter
-	@Getter
-    private String corporation;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private Date foodCirculationCodeDate;
 
-	@Setter
-	@Getter
-    private String contactWay;
+	private String foodProduceCode;
 
-	@Setter
-	@Getter
-    private String longitude;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private Date foodProduceCodeDate;
 
-	@Setter
-	@Getter
-    private String latitude;
+	private String code;
 
-	@Setter
-	@Getter
-    private Date createTime;
+	private String abbr;
 
-	@Setter
-	@Getter
-    private Date lastUpdateTime;
+	private String corporation;
 
-	@Setter
-	@Getter
-    private Integer stat;
+	private String contactWay;
+
+	private String longitude;
+
+	private String latitude;
+
+	private Date createTime;
+
+	private Date lastUpdateTime;
+
+	private Integer stat;
+
+	private Byte reviewed;
 }
