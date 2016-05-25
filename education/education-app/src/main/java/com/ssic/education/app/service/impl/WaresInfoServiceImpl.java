@@ -63,10 +63,10 @@ public class WaresInfoServiceImpl implements IWaresInfoService {
 	@Override
 	public WaresRelatedDto findWarseById(String id) {
 		WaresRelatedDto wrd = waresInfoDao.findWarseById(id);
-		List<LedgerListDto> ledgerList = ledgerDao.findLedgerByWaresId(wrd.getId());
+		//List<LedgerListDto> ledgerList=ledgerDao.findLedgerByWaresId(wrd.getId());
 		wrd.setInsReport(licDao.getLicbyType(wrd.getId(), 31));
-		wrd.setProLic(licDao.getLicbyType(wrd.getId(), 30));
-		wrd.setLedgerList(ledgerList);
+		//wrd.setProLic(licDao.getLicbyType(wrd.getId(), 30));
+		//wrd.setLedgerList(ledgerList);
 		return wrd;
 	}
 

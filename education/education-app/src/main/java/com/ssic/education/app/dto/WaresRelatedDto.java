@@ -1,7 +1,5 @@
 package com.ssic.education.app.dto;
 
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,12 +33,16 @@ public class WaresRelatedDto {
 	private String unit;
 	/**供应商ID*/
 	private String supplierId;
+	/**生成企业*/
+	private String manufacturer;
 	/**商品方向 0采购品1为产出品*/
 	private Integer way;
 	/**商品类别*/
 	private Integer waresType;
 	/**企业自定义编码*/
 	private String customCode;
+	/**产地*/
+	private String place;
 	/**商品英文名*/
 	private String enName;
 	/**商品图片*/
@@ -49,7 +51,5 @@ public class WaresRelatedDto {
 	private String insReport;
 	/**生产许可证*/
 	private String proLic;
-	/**商品交易信息*/
-	private List<LedgerListDto> ledgerList;
 
 }
