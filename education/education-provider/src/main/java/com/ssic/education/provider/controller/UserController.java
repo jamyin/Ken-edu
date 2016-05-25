@@ -170,7 +170,7 @@ public class UserController extends BaseController {
 	public DataGrid dataGrid(TImsUsersDto user, PageHelper ph ,HttpServletRequest request) {
 		SessionInfo info = (SessionInfo) request.getSession().getAttribute(ConfigUtil.SESSIONINFONAME);
 		user.setSourceId(info.getSupplierId());
-		return userService.dataGrid(user, ph);
+		return userService.dataGrid(user, ph);   
 	}
 
 	/**
