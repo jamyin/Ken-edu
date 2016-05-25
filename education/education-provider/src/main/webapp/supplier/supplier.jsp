@@ -43,12 +43,7 @@
 			checkOnSelect : false,
 			selectOnCheck : false,
 			nowrap : false,
-			frozenColumns : [ [ {
-				field : 'id',
-				title : '编号',
-				width : 150,
-				checkbox : true
-			} ] ],
+			frozenColumns : [ [] ],
 			columns : [ [ 
 			             {
 			 				field : 'supplierName',
@@ -407,28 +402,14 @@
 		</div>
 	</div>
 	<div id="toolbar" style="display: none;">
-		<c:if test="${fn:contains(sessionInfo.resourceList, '/userController/addPage')}">
+		
 			<a onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'">添加</a>
-		</c:if>
-		<!--<c:if test="${fn:contains(sessionInfo.resourceList, '/userController/grantPage')}">
-			<a onclick="batchGrantFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'tux'">批量授权</a>
-		</c:if>-->
-		<c:if test="${fn:contains(sessionInfo.resourceList, '/userController/batchDelete')}">
-			<a onclick="batchDeleteFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'delete'">批量删除</a>
-		</c:if>
-		<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_add',plain:true" onclick="searchFun();">过滤条件</a><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_delete',plain:true" onclick="cleanFun();">清空条件</a>
+		
+
+		<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_add',plain:true" onclick="searchFun();">搜索</a><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_delete',plain:true" onclick="cleanFun();">清空条件</a>
 	</div>
 
-	<div id="menu" class="easyui-menu" style="width: 120px; display: none;">
-		<c:if test="${fn:contains(sessionInfo.resourceList, '/userController/addPage')}">
-			<div onclick="addFun();" data-options="iconCls:'pencil_add'">增加</div>
-		</c:if>
-		<c:if test="${fn:contains(sessionInfo.resourceList, '/userController/delete')}">
-			<div onclick="deleteFun();" data-options="iconCls:'pencil_delete'">删除</div>
-		</c:if>
-		<c:if test="${fn:contains(sessionInfo.resourceList, '/userController/editPage')}">
-			<div onclick="editFun();" data-options="iconCls:'pencil'">编辑</div>
-		</c:if>
-	</div>
+	
+	
 </body>
 </html>
