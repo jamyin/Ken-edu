@@ -39,6 +39,10 @@ public class ProPackagesDto {
 	@Getter
 	@Setter
     private Date supplyDate;
+	
+	@Getter
+	@Setter
+    private String supplyDateStr;
 
 	@Getter
 	@Setter
