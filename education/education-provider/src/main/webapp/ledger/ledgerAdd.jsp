@@ -58,7 +58,7 @@
 		<form id="form" method="post">
 			<table id="ledgers" class="table table-hover table-condensed">
 				<tr>
-					<th>进货日期：</th>
+					<th >进货日期：</th>
 					<td><input name="ledger[0].actionDate" type="text"
 						class="span2" placeholder="点击选择日期" data-options="required:true"
 						onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})"

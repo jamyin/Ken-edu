@@ -3,6 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<style>
+
+.table th{    
+width: 100px;
+text-align: right;
+}
+
+</style>
 <script type="text/javascript">
 	$(function() {
 		parent.$.messager.progress('close');
@@ -41,7 +49,7 @@
 	<div data-options="region:'center',border:false" title=""
 		style="overflow: hidden;">
 		<form id="form" method="post" enctype="multipart/form-data">
-			<table class="table table-hover table-condensed">
+			<table class="table" style="width:400px;">
 				<tr>
 					<th>进货日期：</th>
 					<td><input name="ledger[0].actionDate" type="text"

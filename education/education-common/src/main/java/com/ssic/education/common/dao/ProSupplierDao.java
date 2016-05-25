@@ -143,4 +143,8 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 		// TODO Auto-generated method stub
 		return exMapper.findSupplierCodeByReceiverId(supplierId);
 	}
+	
+	public ProSupplier findSupplierById(String sourceId) {
+		return mapper.selectByPrimaryKey(sourceId);
+	}
 }

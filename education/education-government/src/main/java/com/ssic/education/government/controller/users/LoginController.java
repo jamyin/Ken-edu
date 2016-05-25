@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.common.base.Objects;
+import com.ssic.education.common.dto.EduSchoolDto;
+import com.ssic.education.common.government.service.EduSchoolService;
 import com.ssic.education.government.controller.BaseController;
 import com.ssic.education.government.dto.EduUsersDto;
 import com.ssic.education.government.service.EduUsersService;
@@ -30,6 +32,9 @@ public class LoginController extends BaseController{
 
 	@Autowired
 	private EduUsersService eduUsersService;
+	
+	@Autowired
+	private EduSchoolService eduSchoolService;
 	
 	@RequestMapping(value="login")
 	public ModelAndView login(EduUsersDto usersDto) {
@@ -55,10 +60,21 @@ public class LoginController extends BaseController{
 			if(Objects.equal(eduUser, null)){
 				res.setStatus(DataStatus.HTTP_FAILE);
 				res.setMessage("用户名或密码错误");
-			}else{
-				setSession(eduUser.getId());	
 			}
-			  
+			else{
+				if (null != eduUser.getSourceType() && eduUser.getSourceType() == DataStatus.ENABLED) {
+					EduSchoolDto eduSchoolDto = eduSchoolService.findById(eduUser.getSourceId());
+					if (eduSchoolDto.getReviewed() == DataStatus.ENABLED) {
+						setSession(eduUser.getId());
+					}else {
+						res.setStatus(DataStatus.HTTP_FAILE);
+						res.setMessage("用户还未审批无法登陆！");
+					}
+				}	
+				if (null != eduUser.getSourceType() && eduUser.getSourceType() == DataStatus.DISABLED) {
+					setSession(eduUser.getId());
+				}
+			}			  
 		return res;
 	}
 	

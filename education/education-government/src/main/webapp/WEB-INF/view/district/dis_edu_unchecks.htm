@@ -39,7 +39,7 @@
                 <div class="tab_wrap">
                     <ul class="side_menu">
                         <li class="active">信息</li>
-                        <li>图片</li>
+                       <a href="/edu/school/license.htm?relationId=${(dto.id)!}&reviewed=0&schoolName=${(dto.schoolName)!}&supplierName=${(dto.supplierName)!}&cerSource=1"><li>图片</li></a>
                     </ul>
                     <div class="tab_content">
                     <#if proSupplierDto.supplierName??>
@@ -65,47 +65,48 @@
 
         </div>
         <#include "/common/footer.htm" />
-        <script>
-	$(function(){	
-		
-		$("#disPass").on('click', function(){
-			$.ajax({
-				url:"/edu/school/update.htm",
-				type:"post",
-				dataType:"json",
-				data:{id:'${(proSupplierDto.id)!}',supplierName:'${(proSupplierDto.supplierName)!}',reviewed:1},
-				async: false,
-				success:function(data){
-					if(data.status == 200){
-						alert("修改成功");
-						window.location.href="checkList.htm?source=1&reviewed=0";
-						return;
-					}else {
-						alert(data.msg);
-					}							
-				}
-			});
-		})
-		$("#disNotPass").on('click', function(){
-			$.ajax({
-				url:"/edu/school/update.htm",
-				type:"post",
-				dataType:"json",
-				data:{id:'${(proSupplierDto.id)!}',supplierName:'${(proSupplierDto.supplierName)!}',reviewed:2},
-				async: false,
-				success:function(data){
-					if(data.status == 200){
-						alert("修改成功");
-						window.location.href="checkList.htm?source=1&reviewed=0";
-						return;
-					}else {
-						alert(data.msg);
-					}							
-				}
-			});
-		})
-
-	});
-</script>
+	        <script>
+		$(function(){	
+			$(".nav").find("a").removeClass("cur");
+		    $(".nav").find("a:eq(3)").addClass("cur");
+			$("#disPass").on('click', function(){
+				$.ajax({
+					url:"/edu/school/update.htm",
+					type:"post",
+					dataType:"json",
+					data:{id:'${(proSupplierDto.id)!}',supplierName:'${(proSupplierDto.supplierName)!}',reviewed:1},
+					async: false,
+					success:function(data){
+						if(data.status == 200){
+							alert("修改成功");
+							window.location.href="checkList.htm?source=1&reviewed=0";
+							return;
+						}else {
+							alert(data.msg);
+						}							
+					}
+				});
+			})
+			$("#disNotPass").on('click', function(){
+				$.ajax({
+					url:"/edu/school/update.htm",
+					type:"post",
+					dataType:"json",
+					data:{id:'${(proSupplierDto.id)!}',supplierName:'${(proSupplierDto.supplierName)!}',reviewed:2},
+					async: false,
+					success:function(data){
+						if(data.status == 200){
+							alert("修改成功");
+							window.location.href="checkList.htm?source=1&reviewed=0";
+							return;
+						}else {
+							alert(data.msg);
+						}							
+					}
+				});
+			})
+	
+		});
+	</script>
     </body>
 </html>

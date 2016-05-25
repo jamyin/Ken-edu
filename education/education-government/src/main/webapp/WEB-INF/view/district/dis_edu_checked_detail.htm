@@ -35,13 +35,19 @@
             <a href="#">采购品详情</a>
         </div>
         <div class="main_wrap">
-
-            <h2>未审批单位</h2>
+			
+			<#if eduSchoolDto.reviewed == 1>
+				 <h2>审批通过单位</h2>
+            </#if>
+            <#if eduSchoolDto.reviewed == 2>
+              	 <h2>审批不通过单位</h2>
+            </#if>
+           
             <div class="content_wrap">
                 <div class="tab_wrap">
                     <ul class="side_menu">
                         <li class="active">信息</li>
-                        <li>图片</li>
+                       <a href="/edu/school/license.htm?relationId=${(dto.id)!}&schoolName=${(dto.schoolName)!}&reviewed=${(eduSchoolDto.reviewed)!}&supplierName=${(dto.supplierName)!}&cerSource=3"><li>图片</li></a>
                     </ul>
                     <div class="tab_content">
                     <#if dto.schoolName??>
@@ -67,6 +73,16 @@
                         <p> 食品生产证号：  </p>
                         <p> 工商执照号：  </p>
                      </#if>
+                     <div class="subbt">
+                     	<#if eduSchoolDto.reviewed == 1>
+							 <a id="disNotPass" style="cursor:pointer;">不通过</a>
+			            </#if>
+			            <#if eduSchoolDto.reviewed == 2>
+			              	 <a id="disPass" style="cursor:pointer;">通过</a>
+			            </#if>
+                         
+                         
+                     </div>
                         <!-- <h1>济南鲁伊肉类有限公司</h1>
                         <div class="status">
                             <span>审核状态：已通过</span>
@@ -87,5 +103,49 @@
 
         </div>
          <#include "/common/footer.htm" />
+          <script>
+			$(function(){	
+				$(".nav").find("a").removeClass("cur");
+			    $(".nav").find("a:eq(3)").addClass("cur");			      
+				
+				$("#disPass").on('click', function(){
+					$.ajax({
+						url:"/edu/school/update.htm",
+						type:"post",
+						dataType:"json",
+						data:{id:'${(eduSchoolDto.id)!}',schoolName:'${(eduSchoolDto.schoolName)!}',reviewed:1},
+						async: false,
+						success:function(data){
+							if(data.status == 200){
+								alert("修改成功");
+								window.location.href="checkList.htm?source=1&reviewed=0";
+								return;
+							}else {
+								alert(data.msg);
+							}							
+						}
+					});
+				})
+				$("#disNotPass").on('click', function(){
+					$.ajax({
+						url:"/edu/school/update.htm",
+						type:"post",
+						dataType:"json",
+						data:{id:'${(eduSchoolDto.id)!}',schoolName:'${(eduSchoolDto.schoolName)!}',reviewed:2},
+						async: false,
+						success:function(data){
+							if(data.status == 200){
+								alert("修改成功");
+								window.location.href="checkList.htm?source=1&reviewed=0";
+								return;
+							}else {
+								alert(data.msg);
+							}							
+						}
+					});
+				})
+		
+			});
+		</script>
     </body>
 </html>

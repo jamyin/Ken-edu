@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,user-scalable=no" />
+    <title>${(eduSchoolDto.schoolName)!}</title>
+    <link href="/static/css/style.css" rel="stylesheet" />
+    <script src="/static/js/jquery-2.1.3.min.js"></script>
+  </head>
+<body>
+	<#include "constant.htm" />
+		
+	<header><span>${(eduSchoolDto.schoolName)!}</span></header>
+	<div class="school_box">
+		<img src="/static/img/school_simple.jpg" border="0">
+		<div class="info_bar">
+			<a href="###">采购品</a>
+			<a href="###">LBS轨迹</a>
+		</div>	
+		<div class="info_box">
+			<p><span class="lb">学校地址</span>${(eduSchoolDto.address)!}</p>
+			<p><span class="lb">经营单位</span>${(eduCanteenDto.canteenName)!}<a href="###">查看</a></p>
+			<p><span class="lb">委托经营单位</span id="gu">上海天坊食品制造有限公司<a href="###">查看</a></p>
+		</div>	
+	</div>
+	<div class="calendar_box">
+		<p><label><span>选择日期</span></label><input class="seldate" type="text" value="2015年04月29日"><input id="sel_date" type="text" value=""></p>
+		<p><label><span>选择年级</span></label>
+			<select id="sel_class">
+				<#assign keys=gradeList?keys>
+				<#list keys as key>
+					<option value="${gradeList[key]}">${key}</option>
+					${key}=${gradeList[key]}
+				</#list>
+ -->			</select>
+		</p>
+	</div>
+	
+	<div class="menu_box">
+		<div class="row breakfrist">
+			<h2><i>早餐</i><span>Breakfrist</span><a href="###">点评</a></h2>
+			<ul>
+				<li><img src="/static/img/food_simple.jpg" border="0"><p>红枣莲子银耳粥</p><span>原料：银耳5g; 莲子5g; 红枣 5g</span></li>
+			</ul>
+			<ul class="nutrition">
+				<li>能量（kcal）: 867.6</li>
+				<li>蛋白质（g）: 36.9</li>
+				<li>脂肪（g）: 26.3</li>
+				<li>碳水合合物（g）: 128</li>
+			</ul>
+		</div>
+		<div class="row lunch">
+			<h2><i>午餐</i><span>Lunch</span><a href="###">点评</a></h2>
+			<ul>
+				<li><img src="/static/img/food_simple.jpg" border="0"><p>红枣莲子银耳粥红枣莲子银耳粥红枣莲子银耳粥</p><span>原料：银耳5g; 莲子5g; 红枣 5g原料：银耳5g; 莲子5g; 红枣 5g原料：银耳5g; 莲子5g; 红枣 5g</span></li>
+				<li><img src="/static/img/food_simple.jpg" border="0"><p>红枣莲子银耳粥</p><span>原料：银耳5g; 莲子5g; 红枣 5g</span></li>
+				<li><img src="/static/img/food_simple.jpg" border="0"><p>红枣莲子银耳粥</p><span>原料：银耳5g; 莲子5g; 红枣 5g</span></li>
+				<li><img src="/static/img/food_simple.jpg" border="0"><p>红枣莲子银耳粥</p><span>原料：银耳5g; 莲子5g; 红枣 5g</span></li>
+				<li><img src="/static/img/food_simple.jpg" border="0"><p>红枣莲子银耳粥</p><span>原料：银耳5g; 莲子5g; 红枣 5g</span></li>
+				<li><img src="/static/img/food_simple.jpg" border="0"><p>红枣莲子银耳粥</p><span>原料：银耳5g; 莲子5g; 红枣 5g</span></li>
+				<li><img src="/static/img/food_simple.jpg" border="0"><p>红枣莲子银耳粥</p><span>原料：银耳5g; 莲子5g; 红枣 5g</span></li>
+			</ul>
+			<ul class="nutrition">
+				<li>能量（kcal）: 867.6</li>
+				<li>蛋白质（g）: 36.9</li>
+				<li>脂肪（g）: 26.3</li>
+				<li>碳水合合物（g）: 128</li>
+			</ul>
+		</div>
+	</div>
+	<div class="load_more">显示更多</div>
+</body>
+<script>
+	$(function(){
+		$('.seldate').on('click', function(){
+			$(this).attr('type','date').focus()
+		})
+		$('.seldate').on('change', function(){
+			var _val = $(this).val()
+			$('#sel_date').val(_val)
+		})
+	})
+</script>
+<script type="text/javascript" src="/static/js/school.js"></script>
+</html>
