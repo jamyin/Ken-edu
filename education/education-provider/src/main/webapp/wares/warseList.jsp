@@ -59,6 +59,7 @@ else
 				field : 'id',
 				title : '编号',
 				width : 150,
+				height : 40,
 				hidden:true,
 			
 			}]],
@@ -537,20 +538,32 @@ else
 					     	</tr>		
 				</table>
 			</form>
+				<table class=" table-hover table-condensed" style="width:200px;">
+					<tr style="width:200px;">
+						<td  style="width:100px;height:32px">
+							<a href="javascript:void(0);"  onclick="searchFun();" class="easyui-linkbutton" iconCls="icon-search" style="width:100px;height:32px">查询</a>
+						</td>
+						<td  style="width:100px;height:32px">
+							<a href="javascript:void(0);"  onclick="cleanFun();" class="easyui-linkbutton " iconCls="brick_delete" style="width:100px;height:32px">重置</a>
+						</td>						
+					</tr>		
+				</table>			
 		</div>
+		<div id="toolbar" style="display: none;">
+				<a onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'">添加</a>
+			<!--<c:if test="${fn:contains(sessionInfo.resourceList, '/userController/grantPage')}">
+				<a onclick="batchGrantFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'tux'">批量授权</a>
+			</c:if>-->
+		
+			<!-- <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_add',plain:true" onclick="searchFun();">搜索</a>
+			<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_delete',plain:true" onclick="cleanFun();">清空搜索条件</a> -->
+			<a class="btn btn-mini btn-light" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="icon-download-alt"></i>导出</a>
+		</div>		
 		<div data-options="region:'center',border:false">
 			<table id="dataGrid" title="采购品表单" data-options="collapsible:true" ></table>
 		</div>
 	</div>
-	<div id="toolbar" style="display: none;">
-			<a onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'">添加</a>
-		<!--<c:if test="${fn:contains(sessionInfo.resourceList, '/userController/grantPage')}">
-			<a onclick="batchGrantFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'tux'">批量授权</a>
-		</c:if>-->
 	
-		<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_add',plain:true" onclick="searchFun();">搜索</a><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_delete',plain:true" onclick="cleanFun();">清空搜索条件</a>
-		<a class="btn btn-mini btn-light" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="icon-download-alt"></i>导出</a>
-	</div>
 
 </body>
 </html>

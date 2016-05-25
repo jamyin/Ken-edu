@@ -1,11 +1,14 @@
 package com.ssic.education.government.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ssic.education.common.dto.ProNutritionalDto;
 import com.ssic.education.common.dto.ProPackagesDto;
 import com.ssic.education.common.government.service.ProPackagesService;
 import com.ssic.education.utils.constants.DataStatus;
@@ -23,6 +26,10 @@ public class ProPackagesController extends BaseController{
 
 	@Autowired
 	private ProPackagesService proPackagesService;
+	
+
+	@Autowired
+	private INutritionalService nutritionalService;
 	
 	@RequestMapping(value = "/findPage")
 	public ModelAndView findPage(ProPackagesDto dto, PageQuery page) {
@@ -73,5 +80,52 @@ public class ProPackagesController extends BaseController{
 		res.setStatus(DataStatus.HTTP_SUCCESS);
 		res.setMessage("更新成功！");
 		return res;
+	}
+	
+	/**
+	* @Title: add
+	* @Description: 去增加菜谱页面
+	* @author Ken Yin  
+	* @date 2016年5月24日 下午5:57:13
+	* @return ModelAndView    返回类型
+	 */
+	@RequestMapping(value = "/toAddPackage")
+	public ModelAndView toAddPackage() {
+		ModelAndView mv = this.getModelAndView();
+		//套餐类型下拉框
+		mv.addObject("packagesTypeList", PackagesTypeEnum.values());
+		//套餐餐次下拉框
+		mv.addObject("supplyPhaseList", SupplyPhaseEnum.values());
+		//套餐营养名称下拉框
+		List<ProNutritionalDto> nutritionalNameList = nutritionalService.selectAllNutritional();
+		//套餐营养单位下拉框
+		List<ProNutritionalDto> nutritionalUnitList = nutritionalService.selectAllNutritionalUnit();
+		mv.addObject("nutritionalNameList", nutritionalNameList);
+		mv.addObject("nutritionalUnitList", nutritionalUnitList);
+		mv.setViewName("/school/menu_add");
+		return mv;
+	}
+	
+	/**
+	* @Title: addPackage
+	* @Description: 增加菜谱
+	* @author Ken Yin  
+	* @date 2016年5月25日 下午2:29:32
+	* @return Response<String>    返回类型
+	 */
+	@RequestMapping(value = "/addPackage")
+	@ResponseBody
+	public Response<String> addPackage(ProPackagesDto dto) {
+		Response<String> res = new Response<String>();
+		int flag = proPackagesService.addPackage(dto);
+		if(flag > 0){
+			res.setStatus(DataStatus.HTTP_SUCCESS);
+			res.setMessage("添加菜谱成功");
+			return res;
+		}else{
+			res.setStatus(DataStatus.HTTP_SUCCESS);
+			res.setMessage("添加菜谱失败");
+			return res;
+		}
 	}
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssic.education.common.mapper.ProNutritionalExMapper">
+	<select id="selectAllNutritional" resultType="com.ssic.education.common.pojo.ProNutritional">
+		SELECT distinct name
+		FROM t_pro_nutritional   
+		WHERE stat = 1 
+	</select>
+	
+	<select id="selectAllNutritionalUnit" resultType="com.ssic.education.common.pojo.ProNutritional">
+		SELECT distinct unit
+		FROM t_pro_nutritional   
+		WHERE stat = 1 
+	</select>
+
+   <insert id="addNutritionalBatch" parameterType="java.util.List">  
+      INSERT INTO t_pro_nutritional (id, package_id,name,unit,weight, create_time, stat)
+      VALUES 
+     <foreach collection="list" item="item" index="index" separator="," >  
+        (#{item.id},#{item.packageId},#{item.name},#{item.unit},#{item.weight},#{item.createTime},#{item.stat})  
+    </foreach> 
+  </insert>  
+</mapper>
+

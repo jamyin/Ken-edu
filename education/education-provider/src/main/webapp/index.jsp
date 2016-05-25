@@ -126,7 +126,12 @@
 		params.title = $(_this).attr("data-text");
 		params.iconCls = $(_this).attr("iconCls");
 		
-		var iframe = '<iframe src="'
+		
+		$(".tabs-title").html(params.title);
+		//$("#index_tabs").find("span .tabs-title").html(params.title);
+		//console.log($("#index_tabs").find("span .tabs-title"));
+		$("#indexContext").attr("src",params.url);
+		/* var iframe = '<iframe src="'
 				+ params.url
 				+ '" frameborder="0" style="border:0;width:100%;height:98%;"></iframe>';
 		var t = $('#index_tabs');
@@ -143,7 +148,7 @@
 			parent.$.messager.progress('close');
 		} else {
 			t.tabs('add', opts);
-		}
+		} */
 	};
 </script>
 </head>

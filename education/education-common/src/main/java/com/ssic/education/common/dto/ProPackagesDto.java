@@ -72,4 +72,21 @@ public class ProPackagesDto {
 	@Getter
 	@Setter
 	private List<ProNutritionalDto> proNutritionalDtos;
+	
+	
+	@Getter
+	@Setter
+    private String waresNames;    //拼接菜品
+	
+	@Getter
+	@Setter
+    private String nutritionalNames;//拼接营养名称
+	
+	@Getter
+	@Setter
+    private String nutritionalWeights;//拼接营养含量
+
+	@Getter
+	@Setter
+    private String nutritionalUnits; //拼接营养单位
 }
