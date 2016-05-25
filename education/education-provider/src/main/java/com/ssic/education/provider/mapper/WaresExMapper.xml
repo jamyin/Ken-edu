@@ -5,7 +5,7 @@
 
 
 <select id="findWares" resultType="com.ssic.education.provider.dto.ProWaresDto">
-					SELECT
+				SELECT
 				a.id AS id,
 				a.wares_name AS waresName,
 				a.spec AS spec,
