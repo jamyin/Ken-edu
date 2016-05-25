@@ -6,9 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.ssic.education.common.dto.EduCanteenDto;
 import com.ssic.education.common.dto.EduSchoolDto;
+import com.ssic.education.common.dto.EduSchoolSupplierDto;
 import com.ssic.education.common.government.service.EduSchoolService;
+import com.ssic.education.common.government.service.IEduCanteenService;
+import com.ssic.education.common.service.IEduSchoolSupplierService;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.Response;
 import com.ssic.education.wecaht.handle.dto.EduParentScChDto;
@@ -29,6 +34,39 @@ public class WapSchoolController extends BaseController{
 
 	@Autowired
 	private IEduParentScChService iEduParentScChService;
+	
+	@Autowired
+	private IEduCanteenService iEduCanteenService;
+	
+	@Autowired
+	private IEduSchoolSupplierService iEduSchoolSupplierService;
+	
+	
+	@RequestMapping(value="school")
+	public ModelAndView school(String schoolId){
+		ModelAndView mv = getModelAndView();
+		//学校详细信息
+		EduSchoolDto eduSchoolDto = eduSchoolService.findById(schoolId);
+		
+		//学校对应的食堂信息
+		EduCanteenDto eduCanteenDto = new EduCanteenDto();
+		eduCanteenDto.setSchoolId(schoolId);
+		eduCanteenDto = iEduCanteenService.searchEduCanteenDto(eduCanteenDto);
+		
+		//学校对应的供应商信息
+		EduSchoolSupplierDto eduSchoolSupplierDto = new EduSchoolSupplierDto();
+		eduSchoolSupplierDto.setSchoolId(schoolId);
+		eduSchoolSupplierDto = iEduSchoolSupplierService.searchEduSchoolSupplierDto(eduSchoolSupplierDto);
+		
+		
+		mv.addObject("eduCanteenDto", eduCanteenDto);
+		mv.addObject("eduSchoolDto", eduSchoolDto);
+		mv.addObject("eduSchoolSupplierDto", eduSchoolSupplierDto);
+		
+		mv.setViewName("school");
+		return mv;
+	}
+	
 	
 	/**
 	 * 
@@ -109,5 +147,8 @@ public class WapSchoolController extends BaseController{
 		}
 		return result;
 	}
+	
+	
+	
 	
 }
