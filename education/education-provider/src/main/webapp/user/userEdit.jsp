@@ -92,18 +92,22 @@
 							<td><input name="password2" type="text" placeholder="请输入规格"  id="password2"
 								class="easyui-validatebox span2"  value="${user.password}"></td>
 						</tr>
+						
 							<tr>
 							<th>账户权限</th>
-								<td>
+								
 								<c:if test="${user.userType=='0'}">
+								<td>
 								<label><input name="userType" type="radio"  id="userType0"  value="0"  checked="checked"/>管理员 </label> </td>
 								<td>
 								<label><input name="userType" type="radio"  id="userType1"  value="1"  />驾驶员</label> 
 								</td>
-								</c:if><c:if test="${user.userType=='1'}">
+								</c:if>
+								<c:if test="${user.userType=='1'}">
+								<td>
 								<label><input name="userType" type="radio"  id="userType0"  value="0"  />管理员 </label> </td>
 								<td>
-								<label><input name="userType" type="radio"  id="userType1"  value="1"  checked="checked"/>驾驶员</label> 
+								<label><input name="userType" type="radio"  id="userType1"  value="1"  checked="checked"/>驾驶员</label> </td>
 								</c:if>
 						</tr>
 						
