@@ -1,10 +1,10 @@
 package com.ssic.education.common.government.service;
 
-import com.ssic.education.government.dto.ProWaresDto;
+import java.util.List;
+
+import com.ssic.education.common.dto.ProWaresDto;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
-
-import java.util.List;
 
 public interface ProWaresService {
 	
