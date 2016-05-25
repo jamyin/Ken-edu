@@ -46,13 +46,14 @@ public class ProPackagesController extends BaseController{
 		res.setStatus(DataStatus.HTTP_SUCCESS);
 		res.setMessage("删除成功！");
 		return res;
-	}
+	}	
 	
-	
-	@RequestMapping(value = "/add")
-	public ModelAndView add() {
+	@RequestMapping(value = "/edit")
+	public ModelAndView edit(ProPackagesDto dto) {
 		ModelAndView mv = this.getModelAndView();
-		mv.setViewName("");
+		ProPackagesDto proPackagesDto = proPackagesService.findById(dto.getId());
+		mv.addObject("data", proPackagesDto);
+		mv.setViewName("/menu/menu_edit");
 		return mv;
 	}
 	
