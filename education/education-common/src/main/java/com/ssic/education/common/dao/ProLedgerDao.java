@@ -103,7 +103,7 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 		ProLedgerExample example = new ProLedgerExample();
 		ProLedgerExample.Criteria criteria = example.createCriteria();
 		if (StringUtils.isNotBlank(proLedgerDto.getReceiverId())) {
-			criteria.andReceiverIdEqualTo(proLedgerDto.getReceiverId());
+//			criteria.andReceiverIdEqualTo(proLedgerDto.getReceiverId());
 		}
 		if (StringUtils.isNotBlank(proLedgerDto.getWaresId())) {
 			criteria.andWaresIdEqualTo(proLedgerDto.getWaresId());
@@ -121,7 +121,7 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 		ProLedgerExample example = new ProLedgerExample();
 		ProLedgerExample.Criteria criteria = example.createCriteria();
 		if (StringUtils.isNotBlank(proLedgerDto.getReceiverId())) {
-			criteria.andReceiverIdEqualTo(proLedgerDto.getReceiverId());
+//			criteria.andReceiverIdEqualTo(proLedgerDto.getReceiverId());
 		}
 		if (StringUtils.isNotBlank(proLedgerDto.getWaresId())) {
 			criteria.andWaresIdEqualTo(proLedgerDto.getWaresId());

@@ -271,7 +271,7 @@ public class LedgerController {
 
 				if (i == 0) {
 					// 进货日期
-					dto.setActionDate(sdf.parse(value));
+//					dto.setActionDate(sdf.parse(value));
 				} else if (i == 1) {
 					// 名称
 					name = value;
