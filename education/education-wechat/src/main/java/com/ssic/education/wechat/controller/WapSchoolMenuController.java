@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssic.education.common.dto.ProPackagesDto;
 import com.ssic.education.common.government.service.ProPackagesService;
+import com.ssic.education.utils.model.Response;
 import com.ssic.education.wecaht.handle.dto.EduParentPackCommentDto;
 import com.ssic.education.wecaht.handle.service.IEduParentPackCommentService;
 
@@ -38,12 +39,13 @@ public class WapSchoolMenuController extends BaseController{
 	 */
 	@RequestMapping(value="search")
 	@ResponseBody
-	public List<ProPackagesDto> search(String customerId,String timeDate){
-		
+	public Response<List<ProPackagesDto>> search(String customerId,String timeDate){
+		Response<List<ProPackagesDto>> response = new Response<List<ProPackagesDto>>();
 		List<ProPackagesDto> dataList =  proPackagesService.searchProSchoolPackage(customerId,timeDate);
 		
+		response.setData(dataList);
 		
-		return dataList;
+		return response;
 	}
 	
 	/**

@@ -72,6 +72,12 @@
                         <p> 食品生产证号：  </p>
                         <p> 工商执照号：  </p>
                     </#if>
+                    <#if proSupplierDto.reviewed == 1>
+						 <a id="disNotPass" style="cursor:pointer;">不通过</a>
+		            </#if>
+		            <#if proSupplierDto.reviewed == 2>
+		              	 <a id="disPass" style="cursor:pointer;">通过</a>
+		            </#if>
                         <!-- <h1>济南鲁伊肉类有限公司</h1>
                         <div class="status">
                             <span>审核状态：已通过</span>
@@ -91,6 +97,50 @@
             </div>
 
         </div>
-         <#include "/common/footer.htm" />
+        <#include "/common/footer.htm" />
+        <script>
+			$(function(){	
+				$(".nav").find("a").removeClass("cur");
+			    $(".nav").find("a:eq(3)").addClass("cur");
+			    
+				$("#disPass").on('click', function(){
+					$.ajax({
+						url:"/edu/school/update.htm",
+						type:"post",
+						dataType:"json",
+						data:{id:'${(proSupplierDto.id)!}',supplierName:'${(proSupplierDto.supplierName)!}',reviewed:1},
+						async: false,
+						success:function(data){
+							if(data.status == 200){
+								alert("修改成功");
+								window.location.href="checkList.htm?source=1&reviewed=0";
+								return;
+							}else {
+								alert(data.msg);
+							}							
+						}
+					});
+				})
+				$("#disNotPass").on('click', function(){
+					$.ajax({
+						url:"/edu/school/update.htm",
+						type:"post",
+						dataType:"json",
+						data:{id:'${(proSupplierDto.id)!}',supplierName:'${(proSupplierDto.supplierName)!}',reviewed:2},
+						async: false,
+						success:function(data){
+							if(data.status == 200){
+								alert("修改成功");
+								window.location.href="checkList.htm?source=1&reviewed=0";
+								return;
+							}else {
+								alert(data.msg);
+							}							
+						}
+					});
+				})
+		
+			});
+	</script>
     </body>
 </html>

@@ -6,7 +6,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.web.multipart.MultipartFile;
 
-import sun.misc.BASE64Decoder;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -81,54 +80,54 @@ public class FileUtils extends org.apache.commons.io.FileUtils{
 		 * @version: 2015年10月21日 下午1:38:34
 	 * @throws Exception 
 	 */
-	public static String uploadImage(String base64Img) throws Exception {
-		if(StringUtils.isEmpty(base64Img)){
-			return "";
-		}
-		base64Img = base64Img.substring(4, base64Img.length()-1);
-		String prefix = "jpg";
-		String baseImg  = "";
-		for(String data : dataImageBase){
-			if(base64Img.indexOf(data)>-1){
-				baseImg = base64Img.replace(data, "");
-				int start = data.indexOf("/");
-				int end  = data.indexOf(";");				
-				prefix = data.substring(start+1,end);
-				break;
-			}
-		}		
-		
-		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-		String context = "upload" + File.separator + format.format(new Date());
-        String fileName = FileUtils.getUploadFileNameBybase64(baseImg)+"."+prefix;
-        
-        StringBuffer rootPath = new StringBuffer(PropertiesUtils.getProperty("upload.url"));
-        rootPath.append(File.separator).append(context);
-        File file =new File(rootPath.toString());
-        //如果文件夹不存在则创建    
-        if(!file.exists() && !file.isDirectory()) {
-            file.mkdir();
-        }
-        BASE64Decoder decoder = new BASE64Decoder();
-        try {
-            //Base64解码
-            byte[] bytes = decoder.decodeBuffer(baseImg);
-            for(int i=0;i<bytes.length;++i){
-                if(bytes[i]<0) {//调整异常数据
-                	bytes[i]+=256;
-                }
-            }
-            //生成jpeg图片
-            String filePath = rootPath.append(File.separator).append(fileName).toString();
-            OutputStream out = new FileOutputStream(filePath);    
-            out.write(bytes);
-            out.flush();
-            out.close();
-        } catch (Exception e){
-        	logger.debug(e);
-        }
-		return File.separator+context + File.separator + fileName;
-	}
+//	public static String uploadImage(String base64Img) throws Exception {
+//		if(StringUtils.isEmpty(base64Img)){
+//			return "";
+//		}
+//		base64Img = base64Img.substring(4, base64Img.length()-1);
+//		String prefix = "jpg";
+//		String baseImg  = "";
+//		for(String data : dataImageBase){
+//			if(base64Img.indexOf(data)>-1){
+//				baseImg = base64Img.replace(data, "");
+//				int start = data.indexOf("/");
+//				int end  = data.indexOf(";");				
+//				prefix = data.substring(start+1,end);
+//				break;
+//			}
+//		}		
+//		
+//		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+//		String context = "upload" + File.separator + format.format(new Date());
+//        String fileName = FileUtils.getUploadFileNameBybase64(baseImg)+"."+prefix;
+//        
+//        StringBuffer rootPath = new StringBuffer(PropertiesUtils.getProperty("upload.url"));
+//        rootPath.append(File.separator).append(context);
+//        File file =new File(rootPath.toString());
+//        //如果文件夹不存在则创建    
+//        if(!file.exists() && !file.isDirectory()) {
+//            file.mkdir();
+//        }
+//        BASE64Decoder decoder = new BASE64Decoder();
+//        try {
+//            //Base64解码
+//            byte[] bytes = decoder.decodeBuffer(baseImg);
+//            for(int i=0;i<bytes.length;++i){
+//                if(bytes[i]<0) {//调整异常数据
+//                	bytes[i]+=256;
+//                }
+//            }
+//            //生成jpeg图片
+//            String filePath = rootPath.append(File.separator).append(fileName).toString();
+//            OutputStream out = new FileOutputStream(filePath);    
+//            out.write(bytes);
+//            out.flush();
+//            out.close();
+//        } catch (Exception e){
+//        	logger.debug(e);
+//        }
+//		return File.separator+context + File.separator + fileName;
+//	}
 
 
 	/**
@@ -137,40 +136,40 @@ public class FileUtils extends org.apache.commons.io.FileUtils{
 	 * @return
 	 * @throws Exception
      */
-	public static String upload64Image(String base64Img) throws Exception {
-		if(StringUtils.isEmpty(base64Img)){
-			return "";
-		}
-		String prefix = "jpg";
-		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-		String context = "upload" + File.separator + format.format(new Date());
-		String fileName = FileUtils.getUploadFileNameBybase64(base64Img)+"."+prefix;
-
-		StringBuffer rootPath = new StringBuffer(PropertiesUtils.getProperty("upload.url"));
-		rootPath.append(File.separator).append(context);
-		File file =new File(rootPath.toString());
-		//如果文件夹不存在则创建
-		if(!file.exists() && !file.isDirectory()) {
-			file.mkdir();
-		}
-		BASE64Decoder decoder = new BASE64Decoder();
-		try {
-			//Base64解码
-			byte[] bytes = decoder.decodeBuffer(base64Img);
-			for(int i=0;i<bytes.length;++i){
-				if(bytes[i]<0) {//调整异常数据
-					bytes[i]+=256;
-				}
-			}
-			//生成jpeg图片
-			String filePath = rootPath.append(File.separator).append(fileName).toString();
-			OutputStream out = new FileOutputStream(filePath);
-			out.write(bytes);
-			out.flush();
-			out.close();
-		} catch (Exception e){
-			logger.debug(e);
-		}
-		return File.separator+context + File.separator + fileName;
-	}
+//	public static String upload64Image(String base64Img) throws Exception {
+//		if(StringUtils.isEmpty(base64Img)){
+//			return "";
+//		}
+//		String prefix = "jpg";
+//		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+//		String context = "upload" + File.separator + format.format(new Date());
+//		String fileName = FileUtils.getUploadFileNameBybase64(base64Img)+"."+prefix;
+//
+//		StringBuffer rootPath = new StringBuffer(PropertiesUtils.getProperty("upload.url"));
+//		rootPath.append(File.separator).append(context);
+//		File file =new File(rootPath.toString());
+//		//如果文件夹不存在则创建
+//		if(!file.exists() && !file.isDirectory()) {
+//			file.mkdir();
+//		}
+//		BASE64Decoder decoder = new BASE64Decoder();
+//		try {
+//			//Base64解码
+//			byte[] bytes = decoder.decodeBuffer(base64Img);
+//			for(int i=0;i<bytes.length;++i){
+//				if(bytes[i]<0) {//调整异常数据
+//					bytes[i]+=256;
+//				}
+//			}
+//			//生成jpeg图片
+//			String filePath = rootPath.append(File.separator).append(fileName).toString();
+//			OutputStream out = new FileOutputStream(filePath);
+//			out.write(bytes);
+//			out.flush();
+//			out.close();
+//		} catch (Exception e){
+//			logger.debug(e);
+//		}
+//		return File.separator+context + File.separator + fileName;
+//	}
 }

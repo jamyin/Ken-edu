@@ -1,0 +1,55 @@
+@charset "UTF-8";
+/* reset */
+html{font-size:10px;-webkit-tap-highlight-color: rgba(255,255,255,0);}
+*{margin:0; padding:0;box-sizing:border-box;}
+ol,ul,li{list-style:none;} 
+img{border:0;}
+input,button,select,textarea{outline:none;border:0;background:#fff}
+input[type="button"]{transition: all .3s ease-in 0s;cursor:pointer}
+textarea{resize:none}
+h1,h2,h3,h4,h5,h6 {font-size:100%;font-weight:normal;} 
+i{font-style:normal;font-weight:normal}
+a{text-decoration:none}
+/* common */
+body{font-family:"Microsoft Yahei","Arial";font-size:1.4rem;color:#333;background:#fff;}
+header{width:100%;line-height:3rem;text-align:center;background:#f5f5f5}
+header span{padding-right:30px;background:url(../img/arrow_d.png) no-repeat right center;font-size:1.6rem}
+
+.school_box{width:100%;overflow:hidden;}
+.school_box > img{width:100%;height:auto;display:block}
+.school_box .info_bar{position:relative;width:90%;height:120px;overflow:hidden;border:1px #e6e6e6 solid;border-radius:10px;margin:-60px auto 0;background:#fff;box-shadow:0px 0px 10px rgba(0,0,0,.2);text-align:center}
+.school_box .info_bar a{width:49%;height:100px;display:inline-block;line-height:170px;color:#60ac62;margin:10px 0}
+.school_box .info_bar a:nth-child(1){background:url(../img/icon_goods.png) no-repeat center 2px}
+.school_box .info_bar a:nth-child(2){background:url(../img/icon_track.png) no-repeat center 2px;border-left:1px #d2d2d2 solid}
+.school_box .info_box{position:relative;width:90%;overflow:hidden;margin:20px auto}
+.school_box .info_box p{position:relative;width:100%;display:block;margin-bottom:5px;padding-left:100px;padding-right:50px;line-height:22px}
+.school_box .info_box p span{position:absolute;left:0;top:0;display:block;overflow:hidden;color:#666}
+.school_box .info_box p a{position:absolute;right:0;top:-2px;display:block;overflow:hidden;border:1px #60ac62 solid;border-radius:5px;padding:0 6px;color:#60ac62;font-size:1.2rem}
+
+.calendar_box{width:100%;overflow:hidden;background:#60ac62;text-align:center}
+.calendar_box p{width:49%;height:60px;display:inline-block;color:#fff;margin:10px 0;line-height:3rem;font-size:1.4rem;}
+.calendar_box p:nth-child(1){}
+.calendar_box p:nth-child(2){border-left:1px #cedbce solid}
+.calendar_box p input[type=text]{display:block;text-align:center;width:100%;color:#fff;font-size:1.7rem;text-align:center;background-color:transparent;}
+.calendar_box p input[type=date]{font-size:1.7rem;width:12rem;display:block;color:#fff;text-align:center;background-color:transparent;margin:0 auto}
+.calendar_box p select{display:block;text-align:center;width:5rem;margin:0 auto;color:#fff;font-size:1.7rem;text-align:center;background-color:transparent;}
+.calendar_box p label{padding-right:20px;background:url(../img/arrow_d_w.png) no-repeat right center;}
+.calendar_box p label span{padding-left:28px;background:url(../img/icon_calendar.png) no-repeat left center;background-size:22%}
+.calendar_box p:nth-child(2) label span{background:url(../img/icon_class.png) no-repeat left center;background-size:24%}
+
+.menu_box{width:100%;overflow:hidden;}
+.menu_box .row{width:100%;overflow:hidden}
+.menu_box .row h2{position:relative;width:100%;overflow:hidden;background:#f5f5f5;color:#60ac62;padding:14px;font-size:1.6rem;line-height:1.8rem}
+.menu_box .row h2 i{padding-left:22px;background:url(../img/icon_breakfrist.png) no-repeat left center;background-size:18px 18px;display:block;clear:both}
+.menu_box .row h2 span{color:#999;font-size:1.3rem;display:block;clear:both}
+.menu_box .row h2 a{position:absolute;top:23px;right:5%;display:block;overflow:hidden;border:1px #60ac62 solid;border-radius:5px;padding:0 6px;color:#60ac62;font-size:1.2rem}
+.menu_box .row ul{width:100%;overflow:hidden;border-top:1px #ddd solid}
+.menu_box .row ul li{position:relative;width:100%;height:100px;border-bottom:1px #ddd solid}
+.menu_box .row ul li img{position:absolute;width:80px;height:80px;border-radius:5px;top:10px;left:10px;z-index:1}
+.menu_box .row ul li p{position:absolute;width:100%;padding-left:110px;padding-right:5%;top:23px;font-size:1.8rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.menu_box .row ul li span{position:absolute;width:100%;padding-left:110px;padding-right:5%;top:56px;color:#666;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.menu_box .row ul.nutrition{border-top:0;}
+.menu_box .row ul.nutrition li{width:50%;float:left;height:auto;padding:10px 0;padding-right:5%}
+.menu_box .row ul.nutrition li:nth-child(odd){padding-left:5%;}
+.load_more{width:100%;line-height:4rem;text-align:center;background:#f5f5f5;color:#999}
+#sel_date{display:none}
