@@ -65,47 +65,48 @@
 
         </div>
         <#include "/common/footer.htm" />
-        <script>
-	$(function(){	
-		
-		$("#disPass").on('click', function(){
-			$.ajax({
-				url:"/edu/school/update.htm",
-				type:"post",
-				dataType:"json",
-				data:{id:'${(proSupplierDto.id)!}',supplierName:'${(proSupplierDto.supplierName)!}',reviewed:1},
-				async: false,
-				success:function(data){
-					if(data.status == 200){
-						alert("修改成功");
-						window.location.href="checkList.htm?source=1&reviewed=0";
-						return;
-					}else {
-						alert(data.msg);
-					}							
-				}
-			});
-		})
-		$("#disNotPass").on('click', function(){
-			$.ajax({
-				url:"/edu/school/update.htm",
-				type:"post",
-				dataType:"json",
-				data:{id:'${(proSupplierDto.id)!}',supplierName:'${(proSupplierDto.supplierName)!}',reviewed:2},
-				async: false,
-				success:function(data){
-					if(data.status == 200){
-						alert("修改成功");
-						window.location.href="checkList.htm?source=1&reviewed=0";
-						return;
-					}else {
-						alert(data.msg);
-					}							
-				}
-			});
-		})
-
-	});
-</script>
+	        <script>
+		$(function(){	
+			$(".nav").find("a").removeClass("cur");
+		    $(".nav").find("a:eq(3)").addClass("cur");
+			$("#disPass").on('click', function(){
+				$.ajax({
+					url:"/edu/school/update.htm",
+					type:"post",
+					dataType:"json",
+					data:{id:'${(proSupplierDto.id)!}',supplierName:'${(proSupplierDto.supplierName)!}',reviewed:1},
+					async: false,
+					success:function(data){
+						if(data.status == 200){
+							alert("修改成功");
+							window.location.href="checkList.htm?source=1&reviewed=0";
+							return;
+						}else {
+							alert(data.msg);
+						}							
+					}
+				});
+			})
+			$("#disNotPass").on('click', function(){
+				$.ajax({
+					url:"/edu/school/update.htm",
+					type:"post",
+					dataType:"json",
+					data:{id:'${(proSupplierDto.id)!}',supplierName:'${(proSupplierDto.supplierName)!}',reviewed:2},
+					async: false,
+					success:function(data){
+						if(data.status == 200){
+							alert("修改成功");
+							window.location.href="checkList.htm?source=1&reviewed=0";
+							return;
+						}else {
+							alert(data.msg);
+						}							
+					}
+				});
+			})
+	
+		});
+	</script>
     </body>
 </html>

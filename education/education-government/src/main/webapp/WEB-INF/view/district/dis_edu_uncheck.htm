@@ -67,7 +67,8 @@
         <#include "/common/footer.htm" />
         <script>
 	$(function(){	
-		
+		$(".nav").find("a").removeClass("cur");
+	    $(".nav").find("a:eq(3)").addClass("cur");
 		$("#disPass").on('click', function(){
 			$.ajax({
 				url:"/edu/school/update.htm",
