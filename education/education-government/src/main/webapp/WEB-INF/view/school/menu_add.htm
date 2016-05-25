@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>新增菜谱</title>
+  <link rel="stylesheet" href="/static/css/common.css" media="screen" charset="utf-8">
+  <link rel="stylesheet" href="/static/css/menu_edit.css" media="screen" charset="utf-8">
+  <script src="/static/js/jquery-2.1.3.min.js" charset="utf-8"></script>
+  <script src="/static/js/jquery-ui.min.js"></script>
+  <link href="/static/css/jquery-ui.min.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="header">
+  <div class="wrap">
+    <a class="logo" href="index.html">上海市中小学校校生午餐综合管理平台</a>
+    <div class="p_status">
+      <a class="p_center" href="pcenter.html">个人中心</a>  |  <a class="logout" href="###">退出</a>
+    </div>
+  </div>
+</div>
+<div class="nav">
+  <div class="wrap">
+    <a class="" href="index.html">首页</a>
+    <a class="" href="search_supplier.html">安全追溯</a>
+    <a class="" href="index.html">菜谱</a>
+    <a class="" href="index.html">健康宣教</a>
+    <a class="" href="index.html">通告公示</a>
+    <a class="" href="index.html">任务传达</a>
+    <a class="" href="index.html">发布</a>
+  </div>
+</div>
+
+  <div class="wrapperA">
+    <div class="cur_postion">
+      <span class="cp">当前位置:</span><a href="#">安全追溯</a><span class="gt">&gt;</span><a href="#">采购品列表</a><span class="gt">&gt;</span><a href="#">采购品详情</a>
+    </div>
+
+    <h1 class="con-tt">
+      <span class="title">新增菜谱</span>
+    </h1>
+
+    <div class="wrapperB">
+      <ul>
+        <li>
+          <label for="">时间:</label>
+           <input class="date" type="text" name="supplyDate" id="supplyDate" value="" readonly="readonly">
+        </li>
+        <li>
+          <label for="">类型:</label>
+          <select class="" name="type" id="type">
+           <!--  <option value="option">国际班</option>
+            <option value="option1">国内班</option> -->
+           <#if packagesTypeList??>
+          		<#list packagesTypeList as type>
+          			<option  value="${(type.index)!}">${(type.value)!}</option>
+          		</#list>
+          	</#if>
+          </select>
+        </li>
+        <li>
+          <label for="">餐次:</label>
+          <select class="" name="supplyPhase" id="supplyPhase">
+            <!-- <option value="option">早餐</option>
+            <option value="option1">午餐</option> -->
+             <#if supplyPhaseList??>
+          		<#list supplyPhaseList as supplyPhase>
+          			<option  value="${(supplyPhase.index)!}">${(supplyPhase.value)!}</option>
+          		</#list>
+          	</#if>
+          </select>
+        </li>
+        <li>
+          <label for="" style="float:left">菜品:</label>
+          <div class="rt">
+            <ul class="rt_ul" id="rt_ul_1">
+              <li>
+                <input type="text" name=waresName id="waresName" value="">
+                <span class="add">+</span>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li>
+          <label for="">营养:</label>
+          <div class="rt">
+            <ul class="rt_ul" id="rt_ul_2">
+              <li>
+                <select class="s1" name="nutritionalName">
+                  <!-- <option value="option">能量</option>
+                  <option value="option1">维生素</option>
+                  <option value="option1">蛋白质</option> -->
+            <#if nutritionalNameList??>
+          		<#list nutritionalNameList as dto>
+          			<option  value="${(dto.name)!}">${(dto.name)!}</option>
+          		</#list>
+          	</#if>
+                </select>
+                <input class="in1" type="text" name="weight" value="">
+                <select class="s2" name="nutritionalUnit">
+                 <!--  <option value="option">毫克</option>
+                  <option value="option1">克</option> -->
+            <#if nutritionalUnitList??>
+          		<#list nutritionalUnitList as dto>
+          			<option  value="${(dto.unit)!}">${(dto.unit)!}</option>
+          		</#list>
+          	</#if> 
+                </select>
+                <span class="add">+</span>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li><input class="savebt" type="button" name="save" id="save"value="保存"></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer">
+  上海市中小学校学生午餐综合管理平台<br>CopyRight© 2016上海市天坊信息技术有限公司
+</div>
+
+  <script type="text/javascript">
+  $(function(){
+    $(".nav").find("a").removeClass("cur");
+    $(".nav").find("a:eq(1)").addClass("cur");
+    $(".add").on("click",function(){
+      var _this = $(this);
+      var p = _this.parents(".rt_ul").find("li:last").clone(true);
+      p.find(".add").remove();
+      if(!p.children().hasClass("decrease")){
+        p.append("<span class='decrease'>-</span>")
+      }
+      var childrens = p.children();
+      for(var i=0;i<childrens.length;i++){
+        var n = childrens[i].getAttribute("name");
+        childrens[i].setAttribute("name",n+1);
+      }
+      _this.parents(".rt_ul").append(p);
+    });
+    $(".rt_ul").on("click",".decrease",function(){
+      $(this).parent().remove();
+    });
+
+    Date.prototype.format = function(format) {
+      var o = {
+        "M+": this.getMonth() + 1, //month
+        "d+": this.getDate(), //day
+        "h+": this.getHours(), //hour
+        "m+": this.getMinutes(), //minute
+        "s+": this.getSeconds(), //second
+        "q+": Math.floor((this.getMonth() + 3) / 3), //quarter
+        "S": this.getMilliseconds() //millisecond
+      }
+      if (/(y+)/.test(format)) {
+        format = format.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+      }
+      for (var k in o) {
+        if (new RegExp("(" + k + ")").test(format)) {
+          format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length));
+        }
+      }
+      return format;
+    }
+    $.datepicker.regional["zh-CN"] = {
+    	closeText: "关闭",
+    	prevText: "&#x3c;上月",
+    	nextText: "下月&#x3e;",
+    	currentText: "今天",
+    	monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+    	monthNamesShort: ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "十二"],
+    	dayNames: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"],
+    	dayNamesShort: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],
+    	dayNamesMin: ["日", "一", "二", "三", "四", "五", "六"],
+    	weekHeader: "周",
+    	dateFormat: "yy-mm-dd",
+    	firstDay: 1,
+    	isRTL: !1,
+    	showMonthAfterYear: !0,
+    	yearSuffix: "年"
+    }
+     $.datepicker.setDefaults($.datepicker.regional["zh-CN"]);
+    $(".date").datepicker();
+    
+    $("#save").on('click', function(){
+    	//校验
+    	/* var supplyDate = $.trim($("#supplyDate").val());
+		if (supplyDate.length <= 0) {
+			alert("时间不能为空");
+			return;
+		} */
+		//菜品校验
+		//营养校验
+		
+    	//拼装菜品名称
+    	var waresNames = '';
+    	$("#rt_ul_1 li input").each(function(i){
+    		// alert($(this).val());
+    		waresNames += $(this).val()+",";
+    	    
+    	})
+    	//拼装营养名称
+    	var nutritionalNames= '';
+    	$("#rt_ul_2 li .s1").each(function(i){
+    		nutritionalNames += $(this).val()+",";
+    	})
+    	//拼装营养含量
+    	var nutritionalWeights= '';
+    	$("#rt_ul_2 li .in1").each(function(i){
+    		nutritionalWeights += $(this).val()+",";
+    	})
+    	//拼装营养单位
+    	var nutritionalUnits= '';
+    	$("#rt_ul_2 li .s2").each(function(i){
+    		nutritionalUnits += $(this).val()+",";
+    	})
+    	
+    	var supplyDate = $.trim($("#supplyDate").val());
+    	var type = $.trim($("#type").val());
+    	var supplyPhase = $.trim($("#supplyPhase").val());
+    	$.ajax({
+			url:"/pro/packages/addPackage.htm",
+			type:"post",
+			dataType:"json",
+			data:{supplyDate:supplyDate,type:type,supplyPhase:supplyPhase,waresNames:waresNames,
+				nutritionalNames:nutritionalNames,nutritionalWeights:nutritionalWeights,nutritionalUnits:nutritionalUnits},
+			async: false,
+			success:function(data){
+				if(data.status == 200){
+					alert("添加菜谱成功");
+					window.location.href="/main.htm";
+					return;
+				}else {
+					alert(data.message);
+				}							
+			}
+		});
+    	
+    })
+  })
+  </script>
+</body>
+</html>
