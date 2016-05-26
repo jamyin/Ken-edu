@@ -88,9 +88,10 @@ public class CreateImageServiceImpl implements ICreateImageService{
     	SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 		String context =   format.format(new Date());
         String realPath = PropertiesUtils.getProperty("upload.url");
+        
         String fileName = FileUtils.getUploadFileName(myfile.getOriginalFilename());
         FileUtils.copyInputStreamToFile(myfile.getInputStream(), new File(realPath +"/" + context, fileName));  
-        logger.info("上传目录：  "+realPath +"/" + context);
+        logger.info("上传目录："+realPath +"/" + context);
         image.setUrl("/upload/" + context + "/" + fileName);
         logger.info("上传目录2：  "+"/upload/" + context + "/" + fileName);
 	}
