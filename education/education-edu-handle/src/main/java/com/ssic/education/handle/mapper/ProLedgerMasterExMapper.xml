@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssic.education.handle.mapper.ProLedgerMasterExMapper">
+	<select id="countAllLedger" resultType="Long">
+		SELECT
+		count(m.id)
+		FROM
+		t_pro_ledger_master m
+		WHERE
+		m.stat = 1
+		AND m.source_id=#{ledgerDto.sourceId}
+		<if test="ledgerDto.actionDate != null  and ledgerDto.actionDate!=''">
+			AND m.action_date >= #{ledgerDto.actionDate}
+		</if>
+		<if test="ledgerDto.nextDate != null  and ledgerDto.nextDate!=''">
+			AND m.action_date &lt;= #{ledgerDto.nextDate}
+		</if>
+		<if test="ledgerDto.receiverName!=null and  ledgerDto.receiverName!=''">
+			AND m.receiver_name like "%"#{ledgerDto.receiverName}"%"
+		</if>
+	</select>
+	<select id="findAllLedger" resultType="com.ssic.educateion.common.dto.LedgerDto">
+		SELECT DISTINCT
+		m.id masterId,
+		m.ware_batch_no wareBatchNo,
+		m.action_date
+		sendDate,
+		m.receiver_name
+		receiverName,
+		m.haul_status haulStatus,
+		(SELECT name FROM t_pro_users WHERE id=m.user_id) userName
+		FROM 
+		t_pro_ledger
+		l,t_pro_ledger_master m
+		WHERE
+		m.stat = 1
+		AND
+		m.source_id
+		=#{ledgerDto.sourceId}
+		<if test="ledgerDto.actionDate != null  and ledgerDto.actionDate!=''">
+			AND m.action_date >= #{ledgerDto.actionDate}
+		</if>
+		<if test="ledgerDto.nextDate != null  and ledgerDto.nextDate!=''">
+			AND m.action_date &lt;= #{ledgerDto.nextDate}
+		</if>
+		<if test="ledgerDto.receiverName!=null and  ledgerDto.receiverName!=''">
+			AND m.receiver_name like "%"#{ledgerDto.receiverName}"%"
+		</if>
+	</select>
+	<insert id="insertLedgerMaster" parameterType="java.util.List">
+		insert into
+		t_pro_ledger_master (id, action_date, receiver_id,
+		receiver_name,
+		user_id,
+		source_id,
+		ware_batch_no, haul_status, create_time,
+		last_update_time,
+		stat)
+		values
+		(#{ledger.id}, #{ledger.actionDate},
+		#{ledger.receiverId},
+		#{ledger.receiverName},
+		#{ledger.userId},
+		#{ledger.sourceId},
+		#{ledger.wareBatchNo},
+		#{ledger.haulStatus},
+		#{ledger.createTime},
+		#{ledger.lastUpdateTime},
+		#{ledger.stat}
+		)
+
+	</insert>
+	<update id="updateLedgerMaster" >
+			update
+			t_pro_ledger_master
+			set
+			action_date = #{ledger.actionDate},
+			receiver_id =
+			#{ledger.receiverId,jdbcType=VARCHAR},
+			receiver_name =
+			#{ledger.receiverName,jdbcType=VARCHAR},
+			user_id =
+			#{ledger.userId,jdbcType=VARCHAR},
+			source_id =
+			#{ledger.sourceId,jdbcType=VARCHAR},
+			ware_batch_no =
+			#{ledger.wareBatchNo,jdbcType=VARCHAR},
+			haul_status=
+			#{ledger.haulStatus},
+			last_update_time=#{ledger.lastUpdateTime}
+			Where
+			id =
+			#{ledger.masterId}
+	</update>
+	<update id="deleteLedgerMaster" >
+			update
+			t_pro_ledger_master
+			set
+			stat = 0
+			WHERE
+			ware_batch_no=#{wareBatchNo}
+			AND
+			source_id=#{sourceId}
+	</update>
+</mapper>
