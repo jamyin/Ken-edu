@@ -89,7 +89,7 @@
                   <option value="option1">蛋白质</option> -->
             <#if nutritionalNameList??>
           		<#list nutritionalNameList as dto>
-          			<option  value="${(dto.name)!}">${(dto.name)!}</option>
+          			<option  value="${(dto.index)!}">${(dto.index)!}</option>
           		</#list>
           	</#if>
                 </select>
@@ -99,7 +99,7 @@
                   <option value="option1">克</option> -->
             <#if nutritionalUnitList??>
           		<#list nutritionalUnitList as dto>
-          			<option  value="${(dto.unit)!}">${(dto.unit)!}</option>
+          			<option  value="${(dto.index)!}">${(dto.index)!}</option>
           		</#list>
           	</#if> 
                 </select>
@@ -128,6 +128,7 @@
       var childrens = p.children();
       for(var i=0;i<childrens.length;i++){
         var n = childrens[i].getAttribute("name");
+        childrens[i].value='';
         childrens[i].setAttribute("name",n+1);
       }
       _this.parents(".rt_ul").append(p);
@@ -188,11 +189,22 @@
 		
     	//拼装菜品名称
     	var waresNames = '';
+    	var flagWa=true;		
     	$("#rt_ul_1 li input").each(function(i){
     		// alert($(this).val());
-    		waresNames += $(this).val()+",";
-    	    
+    		if ($(this).val() <= 0) {
+    			alert("菜品不能为空！");
+    			flagWa=false;
+    		} else {
+    			waresNames += $(this).val()+",";
+    		}
+    		if (flagWa == false) {
+    			return;
+    		}
     	})
+    	if (flagWa == false) {
+   			return;
+   		}
     	//拼装营养名称
     	var nutritionalNames= '';
     	$("#rt_ul_2 li .s1").each(function(i){
@@ -200,9 +212,21 @@
     	})
     	//拼装营养含量
     	var nutritionalWeights= '';
+    	var flagNu=true;
     	$("#rt_ul_2 li .in1").each(function(i){
-    		nutritionalWeights += $(this).val()+",";
+    		if ($(this).val().length<=0) {
+    			alert("含量不能为空！");
+    			flagNu=false;
+    		} else {
+    			nutritionalWeights += $(this).val()+",";
+    		}
+    		if (flagNu == false) {
+    			return;
+    		}
     	})
+    	if (flagNu == false) {
+    			return;
+    	}
     	//拼装营养单位
     	var nutritionalUnits= '';
     	$("#rt_ul_2 li .s2").each(function(i){
@@ -222,7 +246,7 @@
 			success:function(data){
 				if(data.status == 200){
 					alert("添加菜谱成功");
-					window.location.href="/main.htm";
+					window.location.href="findPage.htm";
 					return;
 				}else {
 					alert(data.message);

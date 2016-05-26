@@ -14,7 +14,7 @@ public interface ProPackagesService {
 	
 	public PageResult<ProPackagesDto> fingPackagesPage(ProPackagesDto dto, PageQuery page);
 	
-	public void save(ProPackagesDto dto, String jsonWares);
+	public void save(ProPackagesDto dto, String jsonWares, String jsonNutritional);
 	
 	public ProPackagesDto findById (String id);
 

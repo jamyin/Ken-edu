@@ -59,26 +59,8 @@ public class ProPackagesServiceImpl implements ProPackagesService{
 		return new PageResult<>(page, results);
 	}
 	
-	public void save(ProPackagesDto dto, String jsonWares){
-		List<ProWaresDto> proWaresDtos =  new Gson().fromJson(jsonWares, new TypeToken<List<ProWaresDto>>(){}.getType());
-		if (null != proWaresDtos && proWaresDtos.size()>0) {
-			List<ProWares> proWaress = BeanUtils.createBeanListByTarget(proWaresDtos, ProWares.class);
-			List<ProNutritional> proNutritionals = BeanUtils.createBeanListByTarget(proWaresDtos, ProWares.class);
-			ProPackages proPackages = BeanUtils.createBeanByTarget(dto, ProPackages.class);
-			proPackagesDao.insertSelective(proPackages);
-			for (ProNutritional proNutritional:proNutritionals) {
-				proNutritional.setPackageId(proPackages.getId());
-				proNutritionalDao.insertSelective(proNutritional);
-			}
-			for (ProWares proWares : proWaress) {
-				proWaresDao.insertSelective(proWares);
-				ProDishes proDishes = new ProDishes();
-				proDishes.setPackageId(proPackages.getId());
-				proDishes.setWaresId(proWares.getId());
-				proDishes.setWaresName(proWares.getWaresName());
-				proDishesDao.insertSelective(proDishes);
-			}
-		}			
+	public void save(ProPackagesDto dto, String jsonWares, String jsonNutritional){
+		proPackagesDao.eidt(dto, jsonWares, jsonNutritional);	
 	}
 	
 	public ProPackagesDto findById (String id) {
@@ -128,6 +110,7 @@ public class ProPackagesServiceImpl implements ProPackagesService{
 				ProWares wares = new ProWares();
 				wares.setId(UUIDGenerator.getUUID()); 
 				wares.setWaresName(waresName[i]);
+				wares.setDishes(true);
 				wares.setCreateTime(new Date());
 				wares.setStat(DataStatus.ENABLED);
 				waresList.add(wares);
