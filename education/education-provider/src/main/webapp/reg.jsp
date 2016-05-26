@@ -188,6 +188,9 @@
 											success : function(data) {
 												$("#submit_form").hide();
 												$(".part4").show();
+												var obj =  $("#times");
+												//console.log(obj);
+												settime(obj);
 											}
 										});
 							});
