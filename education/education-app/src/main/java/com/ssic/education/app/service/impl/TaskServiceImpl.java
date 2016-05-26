@@ -76,6 +76,8 @@ public class TaskServiceImpl implements ITaskService{
 	public int sendTask(EduTaskDto eduTaskDto) {
 		
 		eduTaskDto.setId(UUIDGenerator.getUUID());
+		eduTaskDto.setCreateTime(new Date());
+		eduTaskDto.setStat(DataStatus.ENABLED);
 		EduTask eduTask = BeanUtils.createBeanByTarget(eduTaskDto, EduTask.class);
 		int flag = taskDao.addTask(eduTask);
 		int addReceiveFlag = 0;
