@@ -102,8 +102,8 @@
 		
 	</sql>
 	
-	<select id="findWaresIdBySupplierId" resultType="java.lang.String">
-		SELECT id
+	<select id="findWaresIdBySupplierId" resultType="com.ssic.education.provider.dto.ProWaresDto">
+		SELECT id,spec
 		FROM
 		t_pro_wares
 		WHERE supplier_id=#{ledgerDto.sourceId}

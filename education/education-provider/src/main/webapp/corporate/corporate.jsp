@@ -13,6 +13,7 @@
 			width :768,
 			height : 480,
 			href : '${pageContext.request.contextPath}/corporateController/showPic',
+			onOpen: function(){}
 		});
 	}
 

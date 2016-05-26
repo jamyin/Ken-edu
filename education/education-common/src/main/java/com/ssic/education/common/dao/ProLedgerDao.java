@@ -162,6 +162,7 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 		ProLedgerMasterExample.Criteria criteria = example.createCriteria();
 		criteria.andWareBatchNoEqualTo(ledgerDto.getWareBatchNo());
 		criteria.andSourceIdEqualTo(ledgerDto.getSourceId());
+		criteria.andStatEqualTo(1);
 		List<ProLedgerMaster> list = lmMapper.selectByExample(example);
 		return list.size();
 	}
