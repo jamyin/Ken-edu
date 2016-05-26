@@ -3,13 +3,11 @@
 <mapper namespace="com.ssic.education.common.mapper.ProLedgerMasterExMapper">
 	<select id="countAllLedger" resultType="Long">
 		SELECT
-		count(l.id)
+		count(m.id)
 		FROM
-		t_pro_ledger l,t_pro_ledger_master m
+		t_pro_ledger_master m
 		WHERE
 		m.stat = 1
-		AND
-		m.id = l.master_id
 		AND m.source_id=#{ledgerDto.sourceId}
 		<if test="ledgerDto.actionDate != null  and ledgerDto.actionDate!=''">
 			AND m.action_date >= #{ledgerDto.actionDate}
@@ -23,12 +21,13 @@
 	</select>
 	<select id="findAllLedger" resultType="com.ssic.education.common.provider.dto.LedgerDto">
 		SELECT DISTINCT
-		m.id id,
+		m.id masterId,
 		m.ware_batch_no wareBatchNo,
 		m.action_date
 		sendDate,
 		m.receiver_name
 		receiverName,
+		m.haul_status haulStatus,
 		u.`name` userName
 		FROM
 		t_pro_ledger

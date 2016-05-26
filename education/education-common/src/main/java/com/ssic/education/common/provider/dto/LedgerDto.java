@@ -126,20 +126,21 @@ public class LedgerDto {
 
 	@Override
 	public String toString() {
-		return "LedgerDto [id=" + id + ", waresId=" + waresId + ", name="
-				+ name + ", spce=" + spce + ", actionType=" + actionType
-				+ ", actionDate=" + actionDate + ", supplierId=" + supplierId
+		return "LedgerDto [id=" + id + ", masterId=" + masterId + ", waresId="
+				+ waresId + ", name=" + name + ", spce=" + spce
+				+ ", actionType=" + actionType + ", actionDate=" + actionDate
+				+ ", nextDate=" + nextDate + ", supplierId=" + supplierId
 				+ ", supplierCode=" + supplierCode + ", supplierName="
 				+ supplierName + ", quantity=" + quantity + ", productionDate="
-				+ productionDate + ", batchNo=" + batchNo + ", receiverId="
-				+ receiverId + ", receiverCode=" + receiverCode
-				+ ", receiverName=" + receiverName + ", traceCode=" + traceCode
-				+ ", userId=" + userId + ", sourceId=" + sourceId
-				+ ", wareBatchNo=" + wareBatchNo + ", createTime=" + createTime
+				+ productionDate + ", productionName=" + productionName
+				+ ", batchNo=" + batchNo + ", receiverId=" + receiverId
+				+ ", receiverCode=" + receiverCode + ", receiverName="
+				+ receiverName + ", traceCode=" + traceCode + ", userId="
+				+ userId + ", sourceId=" + sourceId + ", wareBatchNo="
+				+ wareBatchNo + ", createTime=" + createTime
 				+ ", lastUpdateTime=" + lastUpdateTime + ", stat=" + stat
-				+ ", userName=" + userName + "]";
+				+ ", userName=" + userName + ", sendDate=" + sendDate
+				+ ", haulStatus=" + haulStatus + "]";
 	}
-	
-	
 
 }
