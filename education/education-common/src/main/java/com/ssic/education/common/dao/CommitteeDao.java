@@ -38,12 +38,12 @@ public class CommitteeDao extends MyBatisBaseDao<EduCommittee> {
 	 * @date 2016年5月13日 上午9:25:55
 	 * @return List<EduCommittee>    返回类型
 	 */
-	public List<EduCommittee> findCommitteeList(EduCommitteeDto eduCommitteeDto,PageQuery query) {
+	public List<EduCommittee> findCommitteeList(EduCommitteeDto eduCommitteeDto, PageQuery query) {
 		EduCommitteeExample example = new EduCommitteeExample();
 		EduCommitteeExample.Criteria criteria = example.createCriteria();
 		assemblyParams(eduCommitteeDto, criteria);
-		if(query != null && query.getPageSize() > 0){
-			example.setOrderByClause("create_time DESC limit "+query.getStartNum() +"," + query.getPageSize());
+		if (query != null && query.getPageSize() > 0) {
+			example.setOrderByClause("create_time DESC limit " + query.getStartNum() + "," + query.getPageSize());
 		}
 		List<EduCommittee> list = mapper.selectByExample(example);
 		return list;
@@ -53,23 +53,25 @@ public class CommitteeDao extends MyBatisBaseDao<EduCommittee> {
 		EduCommitteeExample example = new EduCommitteeExample();
 		EduCommitteeExample.Criteria criteria = example.createCriteria();
 		assemblyParams(eduCommitteeDto, criteria);
-	    return mapper.countByExample(example);
+		return mapper.countByExample(example);
 	}
-	
+
 	private void assemblyParams(EduCommitteeDto eduCommitteeDto, Criteria criteria) {
 		if (null != eduCommitteeDto) {
-			if (StringUtils.isNotEmpty(eduCommitteeDto.getId())){
+			if (StringUtils.isNotEmpty(eduCommitteeDto.getId())) {
 				criteria.andIdEqualTo(eduCommitteeDto.getId().trim());
 			}
-			if (StringUtils.isNotBlank(eduCommitteeDto.getName())){
-				criteria.andNameLike("%"+eduCommitteeDto.getName().trim()+"%");
-			}	
-			if (eduCommitteeDto.getType() != null){
+			if (StringUtils.isNotBlank(eduCommitteeDto.getName())) {
+				criteria.andNameLike("%" + eduCommitteeDto.getName().trim() + "%");
+			}
+			if (eduCommitteeDto.getType() != null) {
 				criteria.andTypeEqualTo(eduCommitteeDto.getType());
-			}	
+			}
 		}
 		criteria.andStatEqualTo(DataStatus.SHORT_ENABLED);
 	}
 
+	public EduCommittee getbyId(String id) {
+		return mapper.selectByPrimaryKey(id);
+	}
 }
-
