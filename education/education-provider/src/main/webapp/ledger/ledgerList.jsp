@@ -40,16 +40,22 @@
 				checkbox : true
 			}, {
 				field : 'wareBatchNo',
-				title : '编号',
+				title : '配送号',
 				width : 80,
 				sortable : true
 			} ] ],
 			columns : [ [  
 			{
 				field : 'sendDate',
-				title : '配货日期',
+				title : '配送日期',
 				width : 80,
 				sortable : true
+			},
+			{
+				field : 'name',
+				title : '采购品',
+				width : 50,
+				sortable : true, 
 			},
 			{
 				field : 'receiverName',
@@ -58,10 +64,22 @@
 				sortable : true, 
 			},
 			{
-				field : 'userName',
-				title : '驾驶员',
+				field : 'haulStatus',
+				title : '状态',
 				width : 50,
-				sortable : true
+				sortable : true,
+				formatter: function(value,row,index){
+					if (value==0){
+						return "未配送";
+					} 
+					if (value==1){
+						return "配送中";
+					} 
+					if (value==2){
+						return "已配送";
+					} 
+				}
+
 			},
 			{
 				field : 'action',
@@ -143,7 +161,7 @@
 		}
 		parent.$.modalDialog({
 			title : '编辑废弃油脂',
-			width : 1600,
+			width : 1000,
 			height : 500,
 			href : '${pageContext.request.contextPath}/ledgerController/editPage?wareBatchNo=' +id ,
 			buttons : [ {
@@ -160,7 +178,7 @@
 	function addFun() {
 		parent.$.modalDialog({
 			title : '添加配货',
-			width : 1300,
+			width : 1000,
 			height : 500,
 			href : '${pageContext.request.contextPath}/ledgerController/addLedger',
 			buttons : [ {

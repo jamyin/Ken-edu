@@ -94,7 +94,6 @@ public class LedgerController {
 		if (user == null) {
 			return null;
 		}
-
 		List<TImsUsersDto> driver = userService.findAllDriver(user
 				.getSourceId());
 		request.setAttribute("Driver", driver);
@@ -124,6 +123,12 @@ public class LedgerController {
 				.findSchoolIdByReceiverId(ledgers.get(0));
 		if (receiverId == null) {
 			j.setMsg("不存在的配送点");
+			j.setSuccess(false);
+			return j;
+		}
+		int w=ledgerService.findWareBatchNo(ledgers.get(0));
+		if(w!=0){
+			j.setMsg("已存在的配送号");
 			j.setSuccess(false);
 			return j;
 		}
@@ -174,10 +179,12 @@ public class LedgerController {
 		if (user == null) {
 			return null;
 		}
+		List<TImsUsersDto> driver = userService.findAllDriver(user
+				.getSourceId());
 		List<LedgerDto> list = ledgerService.findLedgerById(user.getSourceId(),
 				wareBatchNo);
+		request.setAttribute("Driver", driver);
 		request.setAttribute("LedgerList", list);
-		System.out.println(list.get(0));
 		return "ledger/ledgerEdit";
 	}
 

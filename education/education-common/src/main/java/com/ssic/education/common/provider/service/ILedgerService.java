@@ -18,4 +18,6 @@ public interface ILedgerService {
 
 	int deleteLedger(String sourceId, String wareBatchNo);
 
+	int findWareBatchNo(LedgerDto ledgerDto);
+
 }

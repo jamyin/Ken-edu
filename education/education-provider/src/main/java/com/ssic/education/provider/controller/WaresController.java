@@ -46,6 +46,7 @@ import com.ssic.education.utils.poi.ParseExcelUtil;
 import com.ssic.education.utils.util.BeanUtils;
 import com.ssic.education.utils.util.ObjectExcelView;
 import com.ssic.education.utils.util.PageData;
+import com.ssic.education.utils.util.PropertiesUtils;
 import com.ssic.education.utils.util.UUIDGenerator;
 
 @Controller
@@ -393,6 +394,11 @@ public class WaresController extends BaseController {
 		license.setCerSource((short) 2);
 		List<ProLicense> ProLicenseList = proLicenseServiceImpl
 				.lookImage(license);
+		String realPath = PropertiesUtils.getProperty("upload.look.url");
+		for (ProLicense proLicense : ProLicenseList) {
+			
+			proLicense.setLicPic(realPath+proLicense.getLicPic());
+		}
 		request.setAttribute("ProLicenseList", ProLicenseList);
 		return "wares/lookImage";
 	}

@@ -71,6 +71,7 @@
 					<td style='width:100px;'><select name="ledger[0].userId" style='width:100px;' type="text"
 						placeholder="请选择驾驶员" class="easyui-validatebox span2"
 						data-options="required:true">
+						<option selected="selected" value =null>请选择驾驶员</option>
 						<c:forEach items="${Driver}" var="user">
 							<option value ="${user.id}">${user.name}</option>
 						</c:forEach>

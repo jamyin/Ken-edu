@@ -83,34 +83,8 @@
 							<td><input name="userAccount" type="text" placeholder="请输入规格"  id="userAccount"
 								class="easyui-validatebox span2"  value="${user.userAccount}"></td>
 						</tr>
-							<tr>
-							<th>密码</th>
-							<td><input name="password" type="text" id="password"
-								placeholder="请输入商品名称" class="easyui-validatebox span2"
-								data-options="required:true"  value="${user.password}"></td>
-							<th>确认密码</th>
-							<td><input name="password2" type="text" placeholder="请输入规格"  id="password2"
-								class="easyui-validatebox span2"  value="${user.password}"></td>
-						</tr>
-						<c:if test="${user.userType=='1'}">
-							<tr>
-							<th>账户权限</th>
-								
-								<c:if test="${user.userType=='0'}">
-								<td>
-								<label><input name="userType" type="radio"  id="userType0"  value="0"  checked="checked"/>管理员 </label> </td>
-								<td>
-								<label><input name="userType" type="radio"  id="userType1"  value="1"  />驾驶员</label> 
-								</td>
-								</c:if>
-								<c:if test="${user.userType=='1'}">
-								<td>
-								<label><input name="userType" type="radio"  id="userType0"  value="0"  />管理员 </label> </td>
-								<td>
-								<label><input name="userType" type="radio"  id="userType1"  value="1"  checked="checked"/>驾驶员</label> </td>
-								</c:if>
-						</tr>
-						</c:if>
+						
+						
 						<tr>
 							<th>手机</th>
 						    <td><input name="userNo" type="text" placeholder="请输入手机号" id="userNo"
@@ -128,14 +102,4 @@
 
 		</div>
 
-<div id="toolbar" style="display: none;">
 
-	<div style="height: 2px;"></div>
-
-	<a onclick="redos();" href="javascript:void(0);"
-		class="easyui-linkbutton"
-		data-options="plain:true,iconCls:'resultset_next'">展开</a> <a
-		onclick="undos();" href="javascript:void(0);"
-		class="easyui-linkbutton"
-		data-options="plain:true,iconCls:'resultset_previous'">折叠</a>
-</div>

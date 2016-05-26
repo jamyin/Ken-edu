@@ -30,6 +30,7 @@ import com.ssic.education.provider.pageModel.SessionInfo;
 import com.ssic.education.provider.service.IProLicenseService;
 import com.ssic.education.provider.service.IWaresService;
 import com.ssic.education.provider.util.ConfigUtil;
+import com.ssic.education.utils.util.PropertiesUtils;
 import com.ssic.education.utils.util.UUIDGenerator;
 
 @Controller
@@ -243,6 +244,10 @@ public class ProSupplierController {
 		 	license.setRelationId(id);
 		 	license.setCerSource((short)0);
 	        List<ProLicense> ProLicenseList = proLicenseServiceImpl.lookImage(license);		   
+	        String realPath = PropertiesUtils.getProperty("upload.look.url");
+	        for (ProLicense proLicense : ProLicenseList) {
+	        	proLicense.setLicPic(realPath+proLicense.getLicPic());
+			}
 	        request.setAttribute("ProLicenseList", ProLicenseList);		      
 	    	return "supplier/lookImage";
 	    }
