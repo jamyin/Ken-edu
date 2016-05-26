@@ -33,6 +33,7 @@ public class UserDao {
 
 	public TImsUsersDto login(TImsUsersDto userDto) {
 		List<TImsUsersDto> list = tImsUsersExMapper.findBy(userDto);
+		
 		if (list != null && list.size() > 0) {
 			TImsUsersDto result = list.get(0);
 //			TImsUsersDto result = new TImsUsersDto();
@@ -51,7 +52,7 @@ public class UserDao {
 			ProUsers users = new ProUsers();
 			BeanUtils.copyProperties(userDto, users);
 			users.setCreateTime(new Date());
-
+			users.setPassword(MD5Util.md5(userDto.getPassword()));	
 			users.setStat(1);
 			users.setIsadmin(0);
 			String uuid = UUID.randomUUID().toString(); 

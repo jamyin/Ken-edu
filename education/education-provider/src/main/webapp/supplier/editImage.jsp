@@ -51,30 +51,32 @@
 				style="overflow: hidden;">
 				<form id="updateImage" method="post"  enctype="multipart/form-data">
 				   <input id="id" name="id" type="hidden" value="${id}" />
-					<table class="table table-hover table-condensed">
+					<table class="table table-hover table-condensed" >
+					<tr><th>企业三证</th></tr>
 					<tr>							
-							<th>企业三证</th>
+							
 							<td>工商营业执照<input type="file" name="imgUrl1"  id="imgUrl1"  accept="image/*" />	</td>
 							<td>组织机构代码<input type="file" name="imgUrl2"  id="imgUrl2"  accept="image/*" />	</td>
 							<td>税务登记证<input type="file" name="imgUrl3"  id="imgUrl3"  accept="image/*" />	</td>
 						</tr>
+					<tr>	<th>许可证</th></tr>
 					<tr>							
-							<th>商品图片</th>
-							<td>	<input type="file" name="imgUrl4"  id="imgUrl4"  accept="image/*" />	</td>
-							<td>	<input type="file" name="imgUrl5"  id="imgUrl5"  accept="image/*" />	</td>
-							<td>	<input type="file" name="imgUrl6"  id="imgUrl6"  accept="image/*" />	</td>
+							
+							<td>食品流通许可证<input type="file" name="imgUrl4"  id="imgUrl4"  accept="image/*" />	</td>
+							<td>食品生产许可证<input type="file" name="imgUrl5"  id="imgUrl5"  accept="image/*" />	</td>
+							<td>餐饮服务许可证	<input type="file" name="imgUrl6"  id="imgUrl6"  accept="image/*" />	</td>
+							<td>食品经营许可证<input type="file" name="imgUrl7"  id="imgUrl7"  accept="image/*" />	</td>
 						</tr>
+					
+				<tr>	<th>法定代表人/负责人/业主证件</th></tr>
 						<tr>							
-							<th>商品图片</th>
-							<td>	<input type="file" name="imgUrl7"  id="imgUrl7"  accept="image/*" />	</td>
-							<td>	<input type="file" name="imgUrl8"  id="imgUrl8"  accept="image/*" />	</td>
-							<td>	<input type="file" name="imgUrl9"  id="imgUrl9"  accept="image/*" />	</td>
-							<td>	<input type="file" name="imgUrl10"  id="imgUrl10"  accept="image/*" />	</td>
+							<td>身份证<input type="file" name="imgUrl8"  id="imgUrl8"  accept="image/*" />	</td>
+							<td>港澳居民来往内地通行证<input type="file" name="imgUrl9"  id="imgUrl9"  accept="image/*" />	</td>
+							<td>台湾居民往来内地通行证<input type="file" name="imgUrl10"  id="imgUrl10"  accept="image/*" />	</td>
 						</tr>
+						<tr>	<th>其他</th></tr>
 						<tr>
-
-							<th>其他</th>
-							<td><input type="file" name="imgUrl11"  id="imgUrl11"  accept="image/*" /></td>							
+		<td><input type="file" name="imgUrl11"  id="imgUrl11"  accept="image/*" /></td>							
 						</tr>
 			</table>
 			

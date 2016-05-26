@@ -4,12 +4,18 @@ import java.util.List;
 
 import lombok.Getter;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ssic.education.app.dto.MaterialSupplierDto;
 import com.ssic.education.app.dto.SupplierLicDto;
 import com.ssic.education.app.mapper.SupplierInfoExMapper;
+import com.ssic.education.common.mapper.ProSupplierMapper;
+import com.ssic.education.common.pojo.ProLedger;
+import com.ssic.education.common.pojo.ProLedgerExample;
+import com.ssic.education.common.pojo.ProSupplier;
+import com.ssic.education.common.pojo.ProSupplierExample;
 
 /**		
  * <p>Title: SupplierInfoDao </p>
@@ -29,11 +35,24 @@ public class SupplierInfoDao {
 	@Autowired
 	private SupplierInfoExMapper mapper;
 
+	@Getter
+	@Autowired
+	private ProSupplierMapper SupplierMapper;
+
 	public SupplierLicDto getSupplierInfoById(String supplier_id) {
 		return mapper.getSupplierInfoById(supplier_id);
 	}
 
 	public List<MaterialSupplierDto> getSupplierListById(String supplier_id) {
 		return mapper.getSupplierListById(supplier_id);
+	}
+
+	public String getSupplierName(String supplierId) {
+		ProSupplier proSupplier = SupplierMapper.selectByPrimaryKey(supplierId);
+		if (proSupplier != null) {
+			return proSupplier.getSupplierName();
+		} else {
+			return null;
+		}
 	}
 }

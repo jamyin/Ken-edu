@@ -85,12 +85,12 @@
 						</tr>
 							<tr>
 							<th>密码</th>
-							<td><input name="password" type="text" id="password"
-								placeholder="请输入商品名称" class="easyui-validatebox span2"
-								data-options="required:true"  value="${user.password}"></td>
+							<td><input name="password" type="password" id="password"
+								placeholder="请输入密码" class="easyui-validatebox span2"   value="${user.password}"
+								 ></td>
 							<th>确认密码</th>
-							<td><input name="password2" type="text" placeholder="请输入规格"  id="password2"
-								class="easyui-validatebox span2"  value="${user.password}"></td>
+							<td><input name="password2" type="password" placeholder="请确认密码"  id="password2"  value="${user.password}"
+								class="easyui-validatebox span2"  ></td>
 						</tr>
 						<c:if test="${user.userType=='1'}">
 							<tr>
