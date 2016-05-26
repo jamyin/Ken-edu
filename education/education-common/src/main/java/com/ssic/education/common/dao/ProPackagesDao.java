@@ -11,13 +11,18 @@ import lombok.Getter;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.ssic.education.common.dto.ProDishesDto;
 import com.ssic.education.common.dto.ProNutritionalDto;
 import com.ssic.education.common.dto.ProPackagesDto;
 import com.ssic.education.common.mapper.EduSchoolExMapper;
 import com.ssic.education.common.mapper.EduSchoolMapper;
+import com.ssic.education.common.mapper.ProDishesExMapper;
 import com.ssic.education.common.mapper.ProDishesMapper;
+import com.ssic.education.common.mapper.ProNutritionalExMapper;
 import com.ssic.education.common.mapper.ProNutritionalMapper;
 import com.ssic.education.common.mapper.ProPackagesMapper;
 import com.ssic.education.common.mapper.ProWaresMapper;
@@ -28,11 +33,13 @@ import com.ssic.education.common.pojo.ProNutritionalExample;
 import com.ssic.education.common.pojo.ProPackages;
 import com.ssic.education.common.pojo.ProPackagesExample;
 import com.ssic.education.common.pojo.ProWares;
+import com.ssic.education.common.pojo.ProWaresExample;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.mybatis.MyBatisBaseDao;
 import com.ssic.education.utils.util.BeanUtils;
 import com.ssic.education.utils.util.DateUtils;
+import com.ssic.education.utils.util.UUIDGenerator;
 
 import freemarker.core._RegexBuiltins.matchesBI;
 
@@ -57,10 +64,17 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 	@Autowired
 	private ProWaresMapper pwMapper;
 	
+	@Autowired
+	private ProDishesExMapper disExMapper;
+	
 	@Getter
 	@Autowired
 	private ProDishesMapper disMapper;
 	
+	@Autowired
+	private ProNutritionalExMapper nuExMapper;
+	
+	@Transactional
 	public void delete(String id) {
 		ProPackages proPackages = this.selectByPrimaryKey(id);
 		proPackages.setStat(DataStatus.DISABLED);
@@ -147,6 +161,69 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 			propackagesDto.setProPackagesDtos(proArrayList);
 		}
 		return propackagesDtos;
+	}
+	@Transactional
+	public void eidt(ProPackagesDto dto, String jsonWares, String jsonNutritional) {
+		List<ProWares> proWaress =  new Gson().fromJson(jsonWares, new TypeToken<List<ProWares>>(){}.getType());
+		List<ProNutritional> proNutritionals = new Gson().fromJson(jsonNutritional, new TypeToken<List<ProNutritional>>(){}.getType());
+		ProPackages proPackages = BeanUtils.createBeanByTarget(dto, ProPackages.class);
+		this.updateByPrimaryKeySelective(proPackages);
+		ProDishesExample exampleDis = new ProDishesExample();
+		ProDishesExample.Criteria criteriaDis = exampleDis.createCriteria();
+		if (StringUtils.isNotBlank(proPackages.getId())) {
+			criteriaDis.andPackageIdEqualTo(proPackages.getId());
+		}	
+		criteriaDis.andStatEqualTo(DataStatus.ENABLED);
+		List<ProDishes> proDishess = disMapper.selectByExample(exampleDis);
+		for (ProDishes proDishes: proDishess) {
+			proDishes.setStat(DataStatus.DISABLED);
+			disMapper.updateByPrimaryKeySelective(proDishes);
+			ProWares proWares = pwMapper.selectByPrimaryKey(proDishes.getWaresId());
+			proWares.setStat(DataStatus.DISABLED);
+			pwMapper.updateByPrimaryKeySelective(proWares);
+		}
+		ProNutritionalExample exampleNu = new ProNutritionalExample();
+		ProNutritionalExample.Criteria criteriaNu = exampleNu.createCriteria();
+		if (StringUtils.isNotBlank(proPackages.getId())) {
+			criteriaNu.andPackageIdEqualTo(proPackages.getId());
+		}
+		criteriaNu.andStatEqualTo(DataStatus.ENABLED);
+		List<ProNutritional> proNutritionallist = nuMapper.selectByExample(exampleNu);
+		for (ProNutritional proNutritional : proNutritionallist) {
+			proNutritional.setStat(DataStatus.DISABLED);
+			nuMapper.updateByPrimaryKeySelective(proNutritional);
+		}
+		List<ProDishes> proDishesss = new ArrayList<ProDishes>();
+		for (ProWares proWares : proWaress) {
+			if (null != proWares && StringUtils.isNotBlank(proWares.getWaresName())) {
+				proWares.setDishes(true);
+				proWares.setId(UUIDGenerator.getUUID());
+				proWares.setCreateTime(new Date());
+				proWares.setStat(DataStatus.ENABLED);
+			}			
+		}
+		disExMapper.addWaresBatch(proWaress);
+		for (ProWares proWares : proWaress) {
+			ProDishes proDishes = new ProDishes();
+			proDishes.setWaresId(proWares.getId());
+			proDishes.setWaresName(proWares.getWaresName());
+			proDishes.setPackageId(proPackages.getId());
+			proDishes.setId(UUIDGenerator.getUUID());
+			proDishes.setCreateTime(new Date());
+			proDishes.setStat(DataStatus.ENABLED);
+			proDishesss.add(proDishes);
+		}
+		disExMapper.addDishesBatch(proDishesss);
+		for (ProNutritional proNutritional :proNutritionals) {
+			if (null != proNutritional && StringUtils.isNotBlank(proNutritional.getName())) {
+				proNutritional.setPackageId(proPackages.getId());
+				proNutritional.setId(UUIDGenerator.getUUID());
+				proNutritional.setCreateTime(new Date());
+				proNutritional.setStat(DataStatus.ENABLED);
+			}
+			
+		}
+		nuExMapper.addNutritionalBatch(proNutritionals);
 	}
 	
 	public ProPackagesDto findById (String id) {

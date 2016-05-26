@@ -66,20 +66,25 @@
           <label for="" style="float:left">菜品:</label>
           <div class="rt">
             <ul class="rt_ul proDishes">
-            <#if data.proDishesDtos??>
+            <#if (data.proDishesDtos??) && (data.proDishesDtos?size>0)>
             	<#list data.proDishesDtos as proDishesDto>
             		<#if proDishesDto_index == 0>
             			 <li>
-			                <input type="text" name="waresName${proDishesDto?size}" value="${(proDishesDto.waresName)!}">
+			                <input type="text" id="waresName${proDishesDto_index}" value="${(proDishesDto.waresName)!}">
 			                <span class="add">+</span>
 			              </li>
 			        <#else>
 			        	<li>
-			                 <input type="text" name="waresName${proDishesDto?size}" value="${(proDishesDto.waresName)!}">
+			                <input type="text" id="waresName${proDishesDto_index}" value="${(proDishesDto.waresName)!}">
 				        	<span class='decrease'>-</span>
 				        </li>
             		</#if>
             	</#list>
+            <#else>
+            	<li>
+	                <input type="text" id="waresName0" value="">
+	                <span class="add">+</span>
+	           </li>
             </#if>
               <!-- <li>
                 <input type="text" name="name" value="">
@@ -91,20 +96,20 @@
         <li>
           <label for="">营养:</label>
           <div class="rt">
-            <ul class="rt_ul nutritional">
+            <ul class="rt_ul nutritionalss">
             <#if (data.proNutritionalDtos??) && (data.proNutritionalDtos?size > 0)>
             	<#list data.proNutritionalDtos as proNutritionalDto>
             		<#if proNutritionalDto_index == 0>
             			<li>
-			                <select class="s1" name="">
+			                <select class="s1" id="a${proNutritionalDto_index}">
 			                <#if NutritionalName??>
 			                	<#list NutritionalName as name>
 			                		<option  <#if name.index == proNutritionalDto.name>selected="selected"</#if> value="${(name.index)!}">${(name.index)!}</option>
 			                	</#list>
 			                </#if> 
 			                </select>
-			                <input class="in1" type="text" name="name${proNutritionalDto?size}" value="${(proNutritionalDto.weight)}">
-			                <select class="s2" name="">
+			                <input class="in1" type="text" id="weight${proNutritionalDto_index}" value="${(proNutritionalDto.weight)}">
+			                <select class="s2" id="b${proNutritionalDto_index}">
 			                <#if NutritionalUnit??>
 			                	<#list NutritionalUnit as unit>
 			                		<option <#if unit.index == proNutritionalDto.unit>selected="selected"</#if> value="${(unit.index)!}">${(unit.index)!}</option>
@@ -115,15 +120,15 @@
 			              </li>
             		<#else>
             			<li>
-			                <select class="s1" name="">
+			               <select class="s1" id="a${proNutritionalDto_index}">
 			                <#if NutritionalName??>
 			                	<#list NutritionalName as name>
 			                		<option  <#if name.index == proNutritionalDto.name>selected="selected"</#if> value="${(name.index)!}">${(name.index)!}</option>
 			                	</#list>
 			                </#if> 
 			                </select>
-			                <input class="in1" type="text" name="name${proNutritionalDto?size}" value="${(proNutritionalDto.weight)}">
-			                <select class="s2" name="">
+			                <input class="in1" type="text" id="weight${proNutritionalDto_index}" value="${(proNutritionalDto.weight)}">
+			                <select class="s2" id="b${proNutritionalDto_index}">
 			                <#if NutritionalUnit??>
 			                	<#list NutritionalUnit as unit>
 			                		<option <#if unit.index == proNutritionalDto.unit>selected="selected"</#if> value="${(unit.index)!}">${(unit.index)!}</option>
@@ -136,15 +141,15 @@
             	</#list>
             <#else>
             	<li>
-	                <select class="s1" name="">
+	                <select class="s1" id="a0">
 	                <#if NutritionalName??>
 	                	<#list NutritionalName as name>
 	                		<option value="${(name.index)!}">${(name.index)!}</option>
 	                	</#list>
 	                </#if> 
 	                </select>
-	                <input class="in1" type="text" name="name" value="${(proNutritionalDto.weight)}">
-	                <select class="s2" name="">
+	                <input class="in1" type="text" id="weight0" value="${(proNutritionalDto.weight)}">
+	                <select class="s2" id="b0">
 	                <#if NutritionalUnit??>
 	                	<#list NutritionalUnit as unit>
 	                		<option value="${(unit.index)!}">${(unit.index)!}</option>
@@ -165,32 +170,55 @@
    <#include "/common/footer.htm" />
 
   <script type="text/javascript">
+  
+  
   $(function(){
     $(".nav").find("a").removeClass("cur");
     $(".nav").find("a:eq(4)").addClass("cur");
     $(".add").on("click",function(){
-      var _this = $(this);
-      var p = _this.parents(".rt_ul").find("li:last").clone(true);
-      p.find(".add").remove();
-      if(!p.children().hasClass("decrease")){
-        p.append("<span class='decrease'>-</span>")
-      }
-      var childrens = p.children();
-      for(var i=0;i<childrens.length;i++){
-        var n = childrens[i].getAttribute("name");
-        childrens[i].value='';
-        childrens[i].setAttribute("name",n+1);
-      }
-      _this.parents(".rt_ul").append(p);
-    });
-    $(".rt_ul").on("click",".decrease",function(){
-      $(this).parent().remove();
-    });
+     var _this = $(this);
+     var p = _this.parents(".rt_ul").find("li:last").clone(true);
+     p.find(".add").remove();
+     if(!p.children().hasClass("decrease")){
+       p.append("<span class='decrease'>-</span>")
+     }
+     var childrens = p.children();
+     for(var i=0;i<childrens.length;i++){
+       var n = childrens[i].getAttribute("id"),m=0,k;
+       if(n==null){
+         continue;
+       }
+       k = n.substr(0,n.length-1);
+       m = n.substr(n.length-1);
+       // console.log("k::",k,"m::",m);
+       childrens[i].value="";
+       childrens[i].setAttribute("id",k+(parseInt(m,10)+1));
+     }
+     _this.parents(".rt_ul").append(p);
+     });
+     $(".rt_ul").on("click",".decrease",function(){
+    	 var mm= $(this).parents('.rt_ul');
+    	 var key =  mm.hasClass("nutritional");
+    	 $(this).parent().remove();
+    	var lis = mm.find('li');
+    	//debugger;
+		for(var i=0; i<lis.length;i++){
+			if (key) {
+				lis.eq(i).find('input').attr('id','weight'+(i+1))
+				lis.eq(i).find('select:first').attr('id','a'+(i+1))
+				lis.eq(i).find('select:last').attr('id','b'+(i+1))
+			} else {
+				lis.eq(i).find('input').attr('id','waresName'+(i+1))
+			}
+			
+			
+		}
+		
+     });
 
     $(".savebt").on('click', function(){
-    	var supplyDate = $("#supplyDate").attr("value");
-    	alert(supplyDate);
-    	if (supplyDate.length <= 0) {
+    	var date = $("#supplyDate").val();
+    	if (date.length <= 0) {
 			alert("时间不能为空~");
 			return;
 		}
@@ -204,24 +232,37 @@
 			alert("餐次不能为空~");
 			return;
 		}
-    	var nu_len = $(".nutritional li").length;
+    	var nu_dis = $(".proDishes li").length;
     	var jsonWares;
     	jsonWares = '[';
-		for (i=1; i<=nu_len; i++) {
-			jsonWares += '{\"licPic\":\"' +$('#phoneFile'+i+'').attr("value")+'\"},';
+		for (i=0; i<=nu_dis-1; i++) {
+			if (i == nu_dis-1) {
+				jsonWares += '{\"waresName\":\"' +$('#waresName'+i+'').val()+'\"}';
+			} else {
+				jsonWares += '{\"waresName\":\"' +$('#waresName'+i+'').val()+'\"},';
+			}			
 		}
 		jsonWares += ']';
-    	var nu_dis = $(".proDishes li").length;
-    	return;
+    	var nu_len = $(".nutritionalss li").length;
+    	var jsonNutritional;
+    	jsonNutritional = '[';
+		for (i=0;i<=nu_len-1; i++) {
+			if (i == nu_len-1) {
+				jsonNutritional += '{\"name\":\"' +$('#a'+i+'').val()+'\",'+'\"unit\":\"' +$('#b'+i+'').val()+'\",'+'\"weight\":\"' +$('#weight'+i+'').val()+'\"}';
+			} else {
+				jsonNutritional += '{\"name\":\"' +$('#a'+i+'').val()+'\",'+'\"unit\":\"' +$('#b'+i+'').val()+'\",'+'\"weight\":\"' +$('#weight'+i+'').val()+'\"},';
+			}			
+		}
+		jsonNutritional += ']';
 		$.ajax({
 			url:"save.htm",
 			type:"post",
 			dataType:"json",
-			data:{id:'${(data.id)!}',supplyDateStr:supplyDate,type:type,supplyPhase:supplyPhase},
+			data:{id:'${(data.id)!}',supplyDateStr:date,type:type,supplyPhase:supplyPhase,jsonWares:jsonWares,jsonNutritional:jsonNutritional},
 			async: false,
 			success:function(data){
 				if(data.status == 200){
-					alert("删除成功");
+					alert(" 编辑成功");
 					window.location.href="findPage.htm";
 					return;
 				}else {

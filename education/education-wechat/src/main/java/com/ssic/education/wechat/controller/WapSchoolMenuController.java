@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssic.education.common.dto.ProPackagesDto;
 import com.ssic.education.common.government.service.ProPackagesService;
+import com.ssic.education.edu.dto.EduParentPackCommentDto;
+import com.ssic.education.edu.service.IEduParentPackCommentService;
 import com.ssic.education.utils.model.Response;
-import com.ssic.education.wecaht.handle.dto.EduParentPackCommentDto;
-import com.ssic.education.wecaht.handle.service.IEduParentPackCommentService;
 
 /**
  * 

@@ -75,8 +75,8 @@ public class ProPackagesController extends BaseController{
 	
 	@RequestMapping(value = "/save")
 	@ResponseBody
-	public Response<String> save(ProPackagesDto dto, String jsonWares) {
-		proPackagesService.save(dto, jsonWares);
+	public Response<String> save(ProPackagesDto dto, String jsonWares,String jsonNutritional) {
+		proPackagesService.save(dto, jsonWares, jsonNutritional);
 		Response<String> res = new Response<String>();
 		res.setStatus(DataStatus.HTTP_SUCCESS);
 		res.setMessage("更新成功！");
@@ -97,12 +97,8 @@ public class ProPackagesController extends BaseController{
 		mv.addObject("packagesTypeList", PackagesTypeEnum.values());
 		//套餐餐次下拉框
 		mv.addObject("supplyPhaseList", SupplyPhaseEnum.values());
-		//套餐营养名称下拉框
-		List<ProNutritionalDto> nutritionalNameList = nutritionalService.selectAllNutritional();
-		//套餐营养单位下拉框
-		List<ProNutritionalDto> nutritionalUnitList = nutritionalService.selectAllNutritionalUnit();
-		mv.addObject("nutritionalNameList", nutritionalNameList);
-		mv.addObject("nutritionalUnitList", nutritionalUnitList);
+		mv.addObject("nutritionalNameList", ProNutritionalNameEnum.values());
+		mv.addObject("nutritionalUnitList", ProNutritionalUnitEnum.values());
 		mv.setViewName("/school/menu_add");
 		return mv;
 	}

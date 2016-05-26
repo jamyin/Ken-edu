@@ -14,10 +14,10 @@ import com.ssic.education.common.dto.EduSchoolSupplierDto;
 import com.ssic.education.common.government.service.EduSchoolService;
 import com.ssic.education.common.government.service.IEduCanteenService;
 import com.ssic.education.common.service.IEduSchoolSupplierService;
+import com.ssic.education.edu.dto.EduParentScChDto;
+import com.ssic.education.edu.service.IEduParentScChService;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.Response;
-import com.ssic.education.wecaht.handle.dto.EduParentScChDto;
-import com.ssic.education.wecaht.handle.service.IEduParentScChService;
 
 /**
  * 

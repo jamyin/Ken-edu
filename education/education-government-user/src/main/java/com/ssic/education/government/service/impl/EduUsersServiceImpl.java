@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -49,6 +50,7 @@ public class EduUsersServiceImpl implements EduUsersService {
 		return eduUsersDao.validateAccount(usersDto);
 	}
 
+	@Transactional
 	public EduUsersDto save(EduUsersRegDto usersDto) {
 		// TODO Auto-generated method stub
 		EduSchool eduSchool = BeanUtils.createBeanByTarget(usersDto, EduSchool.class);

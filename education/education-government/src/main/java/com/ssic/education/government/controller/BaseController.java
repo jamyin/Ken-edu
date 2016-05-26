@@ -63,7 +63,7 @@ public class BaseController {
 			eduUsersDto.setId(getSessionUserId());
 			eduUsersDto =  eduUsersService.getUserInfo(eduUsersDto);
 			try {
-				String fileName = eduUsersDto.getSourceType()+"menu.txt";
+				String fileName = eduUsersDto.getSourceType()+"Menu.txt";
 				String path = this.getClass().getClassLoader().getResource(fileName).getPath();;
 				String menuList = FileUtils.readFileToString(new File(path));
 				ParentMenuDto parentMenuDto = JsonUtil.getObjFromJson(menuList, ParentMenuDto.class);

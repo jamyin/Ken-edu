@@ -18,7 +18,7 @@
 
 	function edit(){
  		$("#aa").dialog({    
-		    title: 'My Dialog',    
+		    title: '编辑',    
 		    width: 500,    
 		    height: 500,    
 		    closed: false,    
@@ -36,15 +36,15 @@
 	} 
 	
 	function editPic(){
-		parent.$.modalDialog({
-			title : '编辑废弃油脂',
-			width : 500,
+		$("#aa").dialog({
+			title : '编辑图片',
+			width : 900,
 			height : 600,
 			href : '${pageContext.request.contextPath}/corporateController/editPic',
 			buttons : [ {
 				text : '编辑',
 				handler : function() {
-					var f = parent.$.modalDialog.handler.find('#form');
+					var f = $('#updateImage');
 					f.submit();
 				}
 			} ]
@@ -58,7 +58,7 @@
 			<tr style='height:100px;'>
 				<th style="text-align:right; vertical-align:middle;"><a onclick="edit()">编辑</a></th>
 				<th style='text-align:center; vertical-align:middle;'><a onclick="showPic()">查看图片</a></th>
-				<th style='vertical-align:middle;'><a onclick="editPic()">编辑图片</a></th>
+				<th style='text-align:left; vertical-align:middle;'><a onclick="editPic()">编辑图片</a></th>
 			</tr>
 			<tr>
 				<th style="text-align:right;">单位名称:</th>
@@ -96,11 +96,13 @@
 				<td>${Corporate.foodProduceCode }</td>
 			</tr>
 			<tr>
-				<th id="aa"></th>
+				<th ></th>
 				<th style='text-align:center;'>工商执照号:</th>
 				<td>${Corporate.businessLicense }</td>
 			</tr>
+			<tr ></tr>
 		</table>
+		<div id="aa"></div>
 	</div>
 </body>
 </html>
