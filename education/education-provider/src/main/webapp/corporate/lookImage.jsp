@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<jsp:include page="../inc.jsp"></jsp:include>
 <script type="text/javascript">
 		$(function() {
 			parent.$.messager.progress('close');

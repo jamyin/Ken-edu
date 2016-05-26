@@ -10,6 +10,6 @@ public interface ProLicenseExMapper {
 
 	List<ProLicense> lookImage(@Param("license")ProLicense license);
 
-	void alterImage(@Param("proLicense") ProLicense license);
+	int alterImage(@Param("proLicense") ProLicense license);
 
 }
