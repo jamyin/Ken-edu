@@ -83,15 +83,13 @@ public class CreateImageServiceImpl implements ICreateImageService{
         //如果想上传多个文件，那么这里就要用MultipartFile[]类型来接收文件，并且还要指定@RequestParam注解  
 		//String context = "upload";
 		//String ngix_ip = "103.36.132.7";
-       // String realPath = "/upload";
-        
+       // String realPath = "/upload";       
     	SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 		String context =   format.format(new Date());
         String realPath = PropertiesUtils.getProperty("upload.url");
-        
         String fileName = FileUtils.getUploadFileName(myfile.getOriginalFilename());
         FileUtils.copyInputStreamToFile(myfile.getInputStream(), new File(realPath +"/" + context, fileName));  
-        logger.info("上传目录："+realPath +"/" + context);
+        logger.info("上传目录：  "+realPath +"/" + context);
         image.setUrl("/upload/" + context + "/" + fileName);
         logger.info("上传目录2：  "+"/upload/" + context + "/" + fileName);
 	}
