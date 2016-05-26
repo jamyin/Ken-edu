@@ -351,7 +351,7 @@
 			width :768,
 			height : 480,
 			href : '${pageContext.request.contextPath}/proSupplierController/lookImage?id='+ id,
-	
+			onOpen: function(){}
 		});
 	}
 	

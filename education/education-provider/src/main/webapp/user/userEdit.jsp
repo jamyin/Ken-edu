@@ -92,7 +92,7 @@
 							<td><input name="password2" type="text" placeholder="请输入规格"  id="password2"
 								class="easyui-validatebox span2"  value="${user.password}"></td>
 						</tr>
-						
+						<c:if test="${user.userType=='1'}">
 							<tr>
 							<th>账户权限</th>
 								
@@ -110,7 +110,7 @@
 								<label><input name="userType" type="radio"  id="userType1"  value="1"  checked="checked"/>驾驶员</label> </td>
 								</c:if>
 						</tr>
-						
+						</c:if>
 						<tr>
 							<th>手机</th>
 						    <td><input name="userNo" type="text" placeholder="请输入手机号" id="userNo"
