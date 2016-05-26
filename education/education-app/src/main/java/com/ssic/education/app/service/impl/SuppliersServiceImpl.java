@@ -5,13 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssic.educateion.common.dto.ProSupplierDto;
 import com.ssic.education.app.dao.SupplierInfoDao;
 import com.ssic.education.app.dto.MaterialSupplierDto;
 import com.ssic.education.app.dto.SupplierLicDto;
 import com.ssic.education.app.service.ISupplierService;
-import com.ssic.education.common.dao.SupplierDao;
-import com.ssic.education.common.dto.ProSupplierDto;
-import com.ssic.education.common.pojo.ProSupplier;
+import com.ssic.education.handle.dao.SupplierDao;
+import com.ssic.education.handle.pojo.ProSupplier;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 import com.ssic.education.utils.util.BeanUtils;

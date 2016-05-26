@@ -7,10 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ssic.education.common.dto.EduAreaDto;
-import com.ssic.education.common.dto.EduCommitteeDto;
-import com.ssic.education.common.government.service.AreaService;
-import com.ssic.education.common.service.IEduCommitteeService;
+import com.ssic.educateion.common.dto.EduAreaDto;
+import com.ssic.educateion.common.dto.EduCommitteeDto;
+import com.ssic.education.handle.service.AreaService;
+import com.ssic.education.handle.service.IEduCommitteeService;
 import com.ssic.education.utils.model.Response;
 
 @Controller

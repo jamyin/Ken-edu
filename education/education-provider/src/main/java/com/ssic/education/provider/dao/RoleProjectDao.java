@@ -10,7 +10,7 @@ import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.ssic.education.provider.dto.PageHelperDto;
+import com.ssic.educateion.common.utils.PageHelperDto;
 import com.ssic.education.provider.mapper.ProRoleProjectMapper;
 import com.ssic.education.provider.pojo.ProRoleProject;
 import com.ssic.education.provider.pojo.ProRoleProjectExample;

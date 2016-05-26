@@ -69,7 +69,7 @@
 	
 	<bean id="jsonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" /> 
 	
-	<bean id="exceptionResolver" class="com.ssic.education.government.controller.admin.handler.ExceptionHandler" />  
+	<bean id="exceptionResolver" class="com.ssic.education.government.handler.ExceptionHandler" />  
 	
 	
 	

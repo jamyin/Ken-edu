@@ -1,9 +1,5 @@
 package com.ssic.education.government.controller.users;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,15 +8,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.common.base.Objects;
-import com.ssic.education.common.dto.EduSchoolDto;
-import com.ssic.education.common.government.service.EduSchoolService;
+import com.ssic.educateion.common.dto.EduSchoolDto;
+import com.ssic.educateion.common.dto.EduUsersDto;
 import com.ssic.education.government.controller.BaseController;
-import com.ssic.education.government.dto.EduUsersDto;
-import com.ssic.education.government.service.EduUsersService;
+import com.ssic.education.handle.service.EduSchoolService;
+import com.ssic.education.handle.service.EduUsersService;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.Response;
-import com.ssic.education.utils.util.FileUtils;
-import com.ssic.education.utils.util.PropertiesUtils;
 /**
  * 
 	 * 此类描述的是：用户登录

@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ssic.educateion.common.dto.ProSupplierDto;
+import com.ssic.educateion.common.dto.ProWaresDto;
 import com.ssic.education.app.dto.MaterialSupplierDto;
 import com.ssic.education.app.dto.SupplierLicDto;
 import com.ssic.education.app.service.ISupplierService;
-import com.ssic.education.common.dto.ProSupplierDto;
-import com.ssic.education.common.dto.ProWaresDto;
-import com.ssic.education.common.government.service.ProWaresService;
+import com.ssic.education.handle.service.ProWaresService;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;

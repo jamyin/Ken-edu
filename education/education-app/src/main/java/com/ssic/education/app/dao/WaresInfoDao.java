@@ -1,18 +1,18 @@
 package com.ssic.education.app.dao;
 
-import com.ssic.education.app.dto.WaresInfoDto;
-import com.ssic.education.app.dto.WaresListDto;
-import com.ssic.education.app.dto.WaresRelatedDto;
-import com.ssic.education.app.mapper.WaresInfoExMapper;
-import com.ssic.education.common.mapper.ProWaresMapper;
-import com.ssic.education.utils.mybatis.MyBatisBaseDao;
+import java.util.List;
 
 import lombok.Getter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import com.ssic.education.app.dto.WaresInfoDto;
+import com.ssic.education.app.dto.WaresListDto;
+import com.ssic.education.app.dto.WaresRelatedDto;
+import com.ssic.education.app.mapper.WaresInfoExMapper;
+import com.ssic.education.handle.mapper.ProWaresMapper;
+import com.ssic.education.utils.mybatis.MyBatisBaseDao;
 
 /**
  * 		

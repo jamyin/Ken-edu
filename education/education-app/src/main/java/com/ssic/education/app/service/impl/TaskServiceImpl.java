@@ -7,12 +7,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssic.educateion.common.dto.EduTaskDto;
+import com.ssic.educateion.common.dto.EduTaskReadDto;
+import com.ssic.educateion.common.dto.EduTaskReceiveDto;
 import com.ssic.education.app.service.ITaskService;
-import com.ssic.education.common.dao.TaskDao;
-import com.ssic.education.common.dto.EduTaskDto;
-import com.ssic.education.common.dto.EduTaskReadDto;
-import com.ssic.education.common.dto.EduTaskReceiveDto;
-import com.ssic.education.common.pojo.EduTask;
+import com.ssic.education.handle.dao.TaskDao;
+import com.ssic.education.handle.pojo.EduTask;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;

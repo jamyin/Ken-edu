@@ -5,8 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ssic.educateion.common.dto.EduCommitteeDto;
 import com.ssic.education.app.service.ICommitteeService;
-import com.ssic.education.common.dto.EduCommitteeDto;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;

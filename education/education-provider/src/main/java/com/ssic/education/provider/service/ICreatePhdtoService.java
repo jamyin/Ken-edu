@@ -1,6 +1,6 @@
 package com.ssic.education.provider.service;
 
-import com.ssic.education.provider.dto.PageHelperDto;
+import com.ssic.educateion.common.utils.PageHelperDto;
 
 public interface ICreatePhdtoService {
 

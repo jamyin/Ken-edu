@@ -16,16 +16,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.ssic.education.common.dto.ImageInfoDto;
-import com.ssic.education.common.pojo.ProLicense;
-import com.ssic.education.common.pojo.ProSupplier;
-import com.ssic.education.common.provider.dto.SupplierDto;
-import com.ssic.education.common.provider.service.ICorporateService;
-import com.ssic.education.common.provider.service.ISupplierService;
-import com.ssic.education.common.service.ICreateImageService;
+import com.ssic.educateion.common.dto.ImageInfoDto;
+import com.ssic.educateion.common.dto.SupplierDto;
+import com.ssic.education.handle.pojo.ProLicense;
+import com.ssic.education.handle.pojo.ProSupplier;
+import com.ssic.education.handle.service.ICorporateService;
+import com.ssic.education.handle.service.ICreateImageService;
+import com.ssic.education.handle.service.IProLicenseService;
+import com.ssic.education.handle.service.ISupplierService;
 import com.ssic.education.provider.dto.TImsUsersDto;
 import com.ssic.education.provider.pageModel.Json;
-import com.ssic.education.provider.service.IProLicenseService;
 import com.ssic.education.utils.util.PropertiesUtils;
 
 @Controller

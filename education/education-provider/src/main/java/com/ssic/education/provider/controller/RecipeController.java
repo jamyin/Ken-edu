@@ -9,7 +9,7 @@ import net.sf.json.util.JSONUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ssic.education.common.pojo.ProPackages;
+import com.ssic.education.handle.pojo.ProPackages;
 import com.ssic.education.provider.util.RequestUtil;
 
 /**

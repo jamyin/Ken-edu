@@ -1,17 +1,14 @@
 package com.ssic.education.government.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ssic.education.common.dto.ProNutritionalDto;
-import com.ssic.education.common.dto.ProPackagesDto;
-import com.ssic.education.common.government.service.ProPackagesService;
-import com.ssic.education.common.service.INutritionalService;
+import com.ssic.educateion.common.dto.ProPackagesDto;
+import com.ssic.education.handle.service.INutritionalService;
+import com.ssic.education.handle.service.ProPackagesService;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.constants.PackagesTypeEnum;
 import com.ssic.education.utils.constants.ProNutritionalNameEnum;

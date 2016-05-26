@@ -8,14 +8,6 @@
 	</parent>
 	<artifactId>education-government-user</artifactId>
 	<name>education-government-user</name>
-	<dependencies>
-
-	<dependency>
-		<groupId>com.ssic</groupId>
-		<artifactId>education-common</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-	</dependency>
-	</dependencies>
 	<build>
 		<plugins>
 			<plugin>
@@ -42,4 +34,11 @@
 		</resources>
 	</build>
 
+	<dependencies>
+		<dependency>
+			<groupId>com.ssic</groupId>
+			<artifactId>educateion-DataTransferObject</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
 </project>

@@ -1,16 +1,17 @@
 package com.ssic.education.government.controller.api;
 
-import com.ssic.education.common.dto.EduAreaDto;
-import com.ssic.education.common.dto.EduSchoolDto;
-import com.ssic.education.government.controller.BaseController;
-import com.ssic.education.utils.model.Response;
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.List;
+import com.ssic.educateion.common.dto.EduAreaDto;
+import com.ssic.educateion.common.dto.EduSchoolDto;
+import com.ssic.education.government.controller.BaseController;
+import com.ssic.education.utils.model.Response;
 
 /**
  * <p>Description: 类描述:api接口提供controller层

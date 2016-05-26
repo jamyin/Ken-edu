@@ -11,14 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ssic.education.common.dto.EduSupplierReviewDto;
-import com.ssic.education.common.dto.ProLicenseDto;
-import com.ssic.education.common.provider.dto.SupplierDto;
-import com.ssic.education.common.provider.service.ISupplierService;
-import com.ssic.education.common.service.IEduSupplierReviewService;
+import com.ssic.educateion.common.dto.EduSupplierReviewDto;
+import com.ssic.educateion.common.dto.ProLicenseDto;
+import com.ssic.educateion.common.dto.SupplierDto;
+import com.ssic.education.handle.service.IEduSupplierReviewService;
+import com.ssic.education.handle.service.IProLicenseService;
+import com.ssic.education.handle.service.ISupplierService;
 import com.ssic.education.provider.dto.ProUsersDto;
 import com.ssic.education.provider.pageModel.Json;
-import com.ssic.education.provider.service.IProLicenseService;
 import com.ssic.education.provider.service.IProUsersService;
 import com.ssic.education.utils.constants.DataStatus;
 /**

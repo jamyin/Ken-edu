@@ -8,8 +8,8 @@ import com.ssic.education.app.dto.EduAppUserDto;
 import com.ssic.education.app.dto.EduUsersInfoDto;
 import com.ssic.education.app.service.IEduAppUsersService;
 import com.ssic.education.app.token.TokenUtil;
-import com.ssic.education.common.dao.CommitteeDao;
-import com.ssic.education.common.pojo.EduCommittee;
+import com.ssic.education.handle.dao.CommitteeDao;
+import com.ssic.education.handle.pojo.EduCommittee;
 
 @Service
 public class EduAppUsersServiceImpl implements IEduAppUsersService {

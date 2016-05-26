@@ -11,8 +11,8 @@ import com.ssic.education.app.dao.SupplierInfoDao;
 import com.ssic.education.app.dto.LedgerInfoDto;
 import com.ssic.education.app.dto.LedgerMasterListDto;
 import com.ssic.education.app.service.ILedgerInfoService;
-import com.ssic.education.common.pojo.ProLedger;
-import com.ssic.education.common.pojo.ProLedgerMaster;
+import com.ssic.education.handle.pojo.ProLedger;
+import com.ssic.education.handle.pojo.ProLedgerMaster;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 

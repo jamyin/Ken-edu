@@ -9,8 +9,8 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ssic.education.common.government.service.AreaService;
-import com.ssic.education.common.government.service.EduSchoolService;
+import com.ssic.education.handle.service.AreaService;
+import com.ssic.education.handle.service.EduSchoolService;
 import com.ssic.education.utils.constants.SessionConstants;
 
 

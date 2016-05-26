@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ssic.education.app.mapper.LicExMapper">
-	<resultMap id="BaseResultMap" type="com.ssic.education.common.pojo.ProLicense">
+	<resultMap id="BaseResultMap" type="com.ssic.education.handle.pojo.ProLicense">
 		<id column="id" property="id" jdbcType="VARCHAR" />
 		<result column="lic_name" property="licName" jdbcType="VARCHAR" />
 		<result column="lic_no" property="licNo" jdbcType="VARCHAR" />
@@ -15,7 +15,7 @@
 		<result column="cer_source" property="cerSource" jdbcType="SMALLINT" />
 	</resultMap>
 
-	<select id="getLicbyType" parameterType="com.ssic.education.common.pojo.ProLicense" resultType="java.lang.String">
+	<select id="getLicbyType" parameterType="com.ssic.education.handle.pojo.ProLicense" resultType="java.lang.String">
 		select id from t_pro_license where relation_id=#{l.relationId} and lic_type=#{l.licType} and stat=1 and cer_source=2
 	</select>
 </mapper>

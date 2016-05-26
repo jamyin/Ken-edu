@@ -1,6 +1,6 @@
 package com.ssic.education.app.service;
 
-import com.ssic.education.common.dto.EduInformationDto;
+import com.ssic.educateion.common.dto.EduInformationDto;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 

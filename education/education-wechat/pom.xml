@@ -61,17 +61,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.ssic</groupId>
-			<artifactId>education-utils</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
 		</dependency>		
-		<dependency>
-			<groupId>com.ssic</groupId>
-			<artifactId>education-government-user</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
 		<dependency>
 			<groupId>com.ssic</groupId>
 			<artifactId>education-edu-handle</artifactId>

@@ -65,12 +65,12 @@
 
         <dependency>
         	<groupId>com.ssic</groupId>
-        	<artifactId>education-utils</artifactId>
+        	<artifactId>education-pro-handle</artifactId>
         	<version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
         	<groupId>com.ssic</groupId>
-        	<artifactId>education-common</artifactId>
+        	<artifactId>education-edu-handle</artifactId>
         	<version>0.0.1-SNAPSHOT</version>
         </dependency>
 	</dependencies>

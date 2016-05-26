@@ -8,14 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ssic.education.common.dto.EduCanteenDto;
-import com.ssic.education.common.dto.EduSchoolDto;
-import com.ssic.education.common.dto.EduSchoolSupplierDto;
-import com.ssic.education.common.government.service.EduSchoolService;
-import com.ssic.education.common.government.service.IEduCanteenService;
-import com.ssic.education.common.service.IEduSchoolSupplierService;
-import com.ssic.education.edu.dto.EduParentScChDto;
-import com.ssic.education.edu.service.IEduParentScChService;
+import com.ssic.educateion.common.dto.EduCanteenDto;
+import com.ssic.educateion.common.dto.EduSchoolDto;
+import com.ssic.educateion.common.dto.EduSchoolSupplierDto;
+import com.ssic.education.handle.service.EduSchoolService;
+import com.ssic.education.handle.service.IEduCanteenService;
+import com.ssic.education.handle.service.IEduSchoolSupplierService;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.Response;
 
