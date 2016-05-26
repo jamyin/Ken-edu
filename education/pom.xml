@@ -17,7 +17,6 @@
     <module>education-government</module>
     <module>education-provider</module>
     <module>education-government-user</module>
-    <module>education-wecaht-handle</module>
     <module>education-utils</module>
     <module>education-edu-handle</module>
     <module>education-pro-handle</module>
