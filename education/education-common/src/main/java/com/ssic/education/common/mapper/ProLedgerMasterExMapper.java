@@ -18,4 +18,8 @@ public interface ProLedgerMasterExMapper {
 	
 	int insertLedgerMaster(@Param("ledger")LedgerDto ledgerDto);
 
+	int updateLedgerMaster(@Param("ledger")LedgerDto ledgerDto);
+
+	int deleteLedgerMaster(@Param("sourceId")String sourceId,@Param("wareBatchNo") String wareBatchNo);
+
 }

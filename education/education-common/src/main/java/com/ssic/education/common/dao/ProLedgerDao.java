@@ -43,7 +43,7 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 
 	@Autowired
 	private ProLedgerExMapper exMapper;
-	
+
 	@Autowired
 	private ProLedgerMasterExMapper lmMapper;
 
@@ -77,7 +77,8 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 		// swMapper.insert(psw);
 		// }
 		ledger.get(0).setId(UUID.randomUUID().toString());
-		ledger.get(0).setHaulStatus(0);;
+		ledger.get(0).setHaulStatus(0);
+		;
 		lmMapper.insertLedgerMaster(ledger.get(0));
 		return exMapper.insertLedger(ledger);
 	}
@@ -86,7 +87,7 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 		ProLedgerExample example = new ProLedgerExample();
 		ProLedgerExample.Criteria criteria = example.createCriteria();
 		if (StringUtils.isNotBlank(proLedgerDto.getReceiverId())) {
-//			criteria.andReceiverIdEqualTo(proLedgerDto.getReceiverId());
+			// criteria.andReceiverIdEqualTo(proLedgerDto.getReceiverId());
 		}
 		if (StringUtils.isNotBlank(proLedgerDto.getWaresId())) {
 			criteria.andWaresIdEqualTo(proLedgerDto.getWaresId());
@@ -104,7 +105,7 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 		ProLedgerExample example = new ProLedgerExample();
 		ProLedgerExample.Criteria criteria = example.createCriteria();
 		if (StringUtils.isNotBlank(proLedgerDto.getReceiverId())) {
-//			criteria.andReceiverIdEqualTo(proLedgerDto.getReceiverId());
+			// criteria.andReceiverIdEqualTo(proLedgerDto.getReceiverId());
 		}
 		if (StringUtils.isNotBlank(proLedgerDto.getWaresId())) {
 			criteria.andWaresIdEqualTo(proLedgerDto.getWaresId());
@@ -125,36 +126,16 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 		return exMapper.findLedgerByWareBatchNo(sourceId, wareBatchNo);
 	}
 
-	public int updataLedger(List<LedgerDto> ledger) {
-		ledger.get(0).setReceiverId(
-				exMapper.findSchoolIdByReceiverId(ledger.get(0)));
-		if (ledger.get(0).getReceiverId() == null) {
-			return 0;
-		}
-
-		for (LedgerDto ledgerDto : ledger) {
-			ledgerDto.setReceiverName(ledger.get(0).getReceiverName());
-			ledgerDto.setLastUpdateTime(new Date());
-			ledgerDto.setStat(1);
-			ledgerDto.setReceiverId(ledger.get(0).getReceiverId());
-			ledgerDto.setWareBatchNo(ledger.get(0).getWareBatchNo());
-			ledgerDto.setSourceId(ledger.get(0).getSourceId());
-			ledgerDto.setUserId(ledger.get(0).getUserId());
-			ledgerDto.setActionDate(ledger.get(0).getActionDate());
-			ledgerDto.setWaresId(exMapper.findWaresIdBySupplierId(ledgerDto));
-			if (ledgerDto.getWaresId() != null) {
-				ledgerDto.setSupplierId(exMapper
-						.findSupplierIdBySourceId(ledgerDto));
-				if (ledgerDto.getSupplierId() == null) {
-					ledgerDto.setSupplierName(null);
-				}
-				exMapper.updateLedger(ledgerDto);
-			}
+	public int updataLedger(List<LedgerDto> ledgers) {
+		lmMapper.updateLedgerMaster(ledgers.get(0));
+		for (LedgerDto ledger : ledgers) {
+			exMapper.updateLedger(ledger);
 		}
 		return 0;
 	}
 
 	public int deleteLedger(String sourceId, String wareBatchNo) {
+		lmMapper.deleteLedgerMaster(sourceId, wareBatchNo);
 		return exMapper.deleteLedger(sourceId, wareBatchNo);
 	}
 
