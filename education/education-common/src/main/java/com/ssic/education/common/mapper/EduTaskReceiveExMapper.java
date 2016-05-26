@@ -14,4 +14,6 @@ public interface EduTaskReceiveExMapper {
 
 	int selectReadAccount(@Param("receiveDto") EduTaskReceiveDto receiveDto);
 
+	int addTaskReceiveBatch(@Param("list") List<EduTaskReceiveDto> list);
+
 }

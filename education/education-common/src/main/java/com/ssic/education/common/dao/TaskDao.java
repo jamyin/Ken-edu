@@ -100,6 +100,14 @@ public class TaskDao extends MyBatisBaseDao<EduTask> {
 		return exMappers.selectReadAccount(receiveDto);
 	}
 
+	public int addTask(EduTask eduTask) {
+		return mapper.insertSelective(eduTask);
+	}
+
+	public int addTaskReceiveBatch(List<EduTaskReceiveDto> receiveDtoList) {
+		return exMappers.addTaskReceiveBatch(receiveDtoList);
+	}
+
 
 
 }

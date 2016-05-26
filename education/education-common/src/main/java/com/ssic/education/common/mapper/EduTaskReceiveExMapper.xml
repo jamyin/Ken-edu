@@ -2,29 +2,45 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ssic.education.common.mapper.EduTaskReceiveExMapper">
 	<select id="findReadList" resultType="com.ssic.education.common.dto.EduTaskReadDto">
-		SELECT a.task_id AS taskId,a.readstat, b.id AS userId,b.name,b.user_image AS userImage  
-		FROM t_edu_task_receive a LEFT JOIN t_edu_users b ON a.receive_id = b.id    
-		WHERE a.task_id = #{receiveDto.taskId}   
-		AND a.stat = 1 AND b.stat = 1    
+		SELECT a.task_id AS taskId,a.readstat, b.id AS
+		userId,b.name,b.user_image AS userImage
+		FROM t_edu_task_receive a LEFT
+		JOIN t_edu_users b ON a.receive_id = b.id
+		WHERE a.task_id =
+		#{receiveDto.taskId}
+		AND a.stat = 1 AND b.stat = 1
 		<include refid="where_conditions"></include>
-		ORDER BY a.create_time DESC  
-		<if test="query != null"> 
-        LIMIT  #{query.startNum}, #{query.pageSize}
-        </if>
+		ORDER BY a.create_time DESC
+		<if test="query != null">
+			LIMIT #{query.startNum}, #{query.pageSize}
+		</if>
 	</select>
 
-	<select id="selectReadAccount" resultType="java.lang.Integer"  parameterType="com.ssic.education.common.dto.EduTaskReceiveDto">
-		SELECT count(*) 
-		FROM t_edu_task_receive a LEFT JOIN t_edu_users b ON a.receive_id = b.id   
-		WHERE a.task_id = #{receiveDto.taskId}  
-		AND a.stat = 1 AND b.stat = 1  
-	<include refid="where_conditions"></include>
+	<select id="selectReadAccount" resultType="java.lang.Integer"
+		parameterType="com.ssic.education.common.dto.EduTaskReceiveDto">
+		SELECT count(*)
+		FROM t_edu_task_receive a LEFT JOIN t_edu_users b ON
+		a.receive_id = b.id
+		WHERE a.task_id = #{receiveDto.taskId}
+		AND a.stat =
+		1 AND b.stat = 1
+		<include refid="where_conditions"></include>
 	</select>
-	
+
 	<sql id="where_conditions">
 		<if test="receiveDto.readstat != '' ">
 			AND a.readstat = #{receiveDto.readstat}
-		</if>	
+		</if>
 	</sql>
-	
+
+	<insert id="addTaskReceiveBatch" parameterType="java.util.List">
+		INSERT INTO t_edu_task_receive (id,
+		task_id,readstat,receive_id,school_id, create_time, last_update_time,
+		stat)
+		VALUES
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.id},#{item.taskId},#{item.readstat},#{item.receiveId},#{item.schoolId},#{item.createTime},#{item.lastUpdateTime},#{item.stat})
+		</foreach>
+	</insert>
 </mapper>
