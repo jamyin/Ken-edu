@@ -484,14 +484,11 @@ else
 	}
 	//导出excel
 	function toExcel(){
-		/* var userName = $("#userName").val();
-		var userAccount = $("#userAccount").val();
-		var projectid = $("#projectid").combo('getValue');
-		var deptid = $("#deptid").combo('getValue');
-		var timeStar = $("#timeStar").combo('getValue');
-		var timeEnd = $("#timeEnd").combo('getValue');
-		var address = $("#address").val();	*/
-		window.location.href='${pageContext.request.contextPath}/waresController/excel.do?waresName=&spec=&supplierName=&shelfLife=&unit=&waresType=&customCode=&barCode=&enName=&place='
+	
+		var waresName = $("#waresName").val();
+		var customCode = $("#customCode").val();
+		var waresType = $("#waresType").combo('getValue');
+		window.location.href='${pageContext.request.contextPath}/waresController/excel.do?waresName='+waresName+'&waresType='+waresType+'&customCode='+customCode+''
 	}
 	
 </script>
@@ -503,7 +500,7 @@ else
 				<table class="table table-hover table-condensed" style="display: none;">
 					<tr>
 						<th>商品名称</th>
-						<td><input name="waresName" placeholder="可以商品名称" class="easyui-validatebox"  style="width: 215px;"/></td>
+						<td><input id="waresName" name="waresName" placeholder="可以商品名称" class="easyui-validatebox"  style="width: 215px;"/></td>
 						  <th>商品类别</th>
 					    <td>
 					       <select id="waresType" class="easyui-combobox"  name="waresType"  data-options="width:140,height:29,editable:false,panelHeight:'auto'"
@@ -534,7 +531,7 @@ else
 					</tr>
 					<tr>
 					     <th>企业编码</th>
-					     <td><input name="customCode" placeholder="可以查询企业编码" class="easyui-validatebox"  style="width: 215px;"/></td>
+					     <td><input id="customCode" name="customCode" placeholder="可以查询企业编码" class="easyui-validatebox"  style="width: 215px;"/></td>
 					     	</tr>		
 				</table>
 			</form>
