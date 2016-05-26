@@ -378,12 +378,12 @@ else
 	}
 	
 	function lookImage(id) {
-		if (id == undefined) {
+		/* if (id == undefined) {
 			var rows = dataGrid.datagrid('getSelections');
 			id = rows[0].id;
 		} else {
 			dataGrid.datagrid('unselectAll').datagrid('uncheckAll');
-		}
+		} */
 		parent.$.modalDialog({
 			title : '查看图片',
 			width :768,
