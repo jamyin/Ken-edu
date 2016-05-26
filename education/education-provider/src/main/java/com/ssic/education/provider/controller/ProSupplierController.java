@@ -106,7 +106,7 @@ public class ProSupplierController {
 		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
 				ConfigUtil.SESSIONINFONAME);
 		//查找已定义的供应商编码，供应商编码唯一
-	List<SupplierDto>  list=	supplierService.findSupplierCodeByReceiverId(info.getSupplierId());
+/*	List<SupplierDto>  list=	supplierService.findSupplierCodeByReceiverId(info.getSupplierId());
 		for (SupplierDto supplierDto : list) {
 			if(supplierDto.getSupplierCode().equals(ps.getSupplierCode())){
 				j.setMsg("供应商编码重复");
@@ -114,7 +114,7 @@ public class ProSupplierController {
 				return j;
 			}
 			
-		}
+		}*/
 		supplierService.updataProSupplier(ps);
 		j.setMsg("修改信息成功");
 		j.setSuccess(true);

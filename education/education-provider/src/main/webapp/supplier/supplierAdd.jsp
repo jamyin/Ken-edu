@@ -88,8 +88,7 @@
 					</tr>
 					<tr>
 						<th>食品生产证号</th>
-						<td><input name="foodProduceCode" type="text" ></td>
-				
+						<td><input name="foodProduceCode" type="text" ></td>				
 					</tr>
 			</table>
 	

@@ -292,7 +292,7 @@
 		parent.$.modalDialog({
 			title : '添加供应商',
 			width : 700,
-			height : 500,
+			height : 550,
 			href : '${pageContext.request.contextPath}/proSupplierController/addSupplier',
 			buttons : [ {
 				text : '添加',
