@@ -30,8 +30,8 @@
     <h1 class="con-tt">
       <span class="title">学校</span>
       <span>
-        <input class="search" type="button" name="name" value="">
-        <input class="search_text" type="text" name="name" value="" placeholder="请输入关键字">
+        <input id="searchBut" class="search" type="button" name="name" value="">
+        <input class="search_text" type="text" name="name" value="${(dto.schoolName)!}" placeholder="请输入关键字">
       </span>
     </h1>
     <div class="wrapperB">
@@ -41,7 +41,7 @@
       <ul>
         <li class="search">
           <label for="">区县:</label>
-          <select class="" name="province" id="province" panelheight="auto">
+          <select class="" name="area" id="area" panelheight="auto">
           	<option value="">请选择区县</option>
           	<#if areaDtos??>
           		<#list areaDtos as area>
@@ -84,13 +84,13 @@
 		   	  <li>
 		        <span class="s_name">${(data.schoolName)!}</span>
 		        <span class="s_addr">${(data.address)!}</span>
-		        <#if level??>
+		        <span class="s_level"><#if level??>
 		       		<#list level as level>
 		       			<#if level.index == data.level>
-		       				<span class="s_level">${(level.value)!}</span>
+		       				${(level.value)!}
 		       			</#if>
 		       		</#list>
-		        </#if>
+		        </#if></span>
 		        <span class="detail"> <a href="/edu/school/details.htm?customerId=${(data.id)!}">详情</a></span>
 		      </li>	
 		   </#list>
@@ -110,7 +110,10 @@
       $('.search-bt').on('click', function() {
     	  $("#myform").submit();
       })
-      
+      $('#searchBut').on('click', function() {
+    	  var schoolName = $('.search_text').val();
+    	  window.location.href ="list.htm?schoolName="+schoolName;
+      })
    	  // 跳转指定页
       $('#jump_btn').on('click', function () {
           var jump_num = $('#jump_num').val();

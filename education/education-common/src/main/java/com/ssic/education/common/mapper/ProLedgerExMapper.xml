@@ -157,8 +157,9 @@
 		lastUpdateTime,a.create_time as createTime,a.stat
 		FROM t_pro_supplier a
 		LEFT JOIN t_pro_ledger b on b.supplier_id = a.id
+		LEFT JOIN t_pro_ledger_master c on b.master_id = c.id
 		WHERE a.stat =1 and
-		b.stat = 1
+		b.stat = 1 and c.stat =1
 		<include refid="where_supplier_bypage" />
 		GROUP BY a.id
 		ORDER BY a.create_time desc
@@ -169,18 +170,18 @@
 	<select id="countSupplier" resultType="java.lang.Long"
 		parameterType="java.lang.String">
 		SELECT count(*) from (SELECT a.id, COUNT(*) counts
-		FROM t_pro_supplier
-		a
+		FROM t_pro_supplier a
 		LEFT JOIN t_pro_ledger b on b.supplier_id = a.id
+		LEFT JOIN t_pro_ledger_master c on b.master_id = c.id
 		WHERE a.stat =1 and
-		b.stat = 1
+		b.stat = 1 and c.stat =1
 		<include refid="where_supplier_bypage" />
 		GROUP BY a.id) t
 	</select>
 
 	<sql id="where_supplier_bypage">
 		<if test="proSupplierDto.id != null and proSupplierDto.id != ''">
-			and b.receiver_id = #{proSupplierDto.id}
+			and c.receiver_id = #{proSupplierDto.id}
 		</if>
 		<if
 			test="proSupplierDto.supplierName != null and proSupplierDto.supplierName != ''">

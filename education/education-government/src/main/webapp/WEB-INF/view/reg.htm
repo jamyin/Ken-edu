@@ -35,7 +35,7 @@
 				<li><label><i>*</i>学校名称</label><input id="schoolName" type="text" placeholder=""></li>
 				<li><label>地址</label><input id="address" type="text" placeholder=""></li>
 				<li><label>区教委</label>
-				<select name="province"  id="province" panelheight="auto">
+				<select name="area"  id="area" panelheight="auto">
 					<option value="">请选择区县</option>
 		          	<#if areaDtos??>
 		          		<#list areaDtos as area>
@@ -118,7 +118,7 @@
 				alert("学校地址不能为空~");
 				return;
 			}
-			var province = $.trim($("#province").val());
+			var province = $.trim($("#area").val());
 			if (province.length <= 0) {
 				alert("区教委不能为空~");
 				return;
@@ -178,14 +178,14 @@
 				url:"/user/regUser.htm",
 				type:"post",
 				dataType:"json",
-				data:{schoolName:schoolName,address:address,province:province,sourceType:1,level:checkStr,
+				data:{schoolName:schoolName,address:address,area:province,sourceType:1,level:checkStr,
 					canteenName:canteenName,canteenContacts:canteenContacts,phoneNumber:phoneNumber,
 					userAccount:userAccount,password:passWord,jsonLic:jsonLic,cerSource:3},
 				async: false,
 				success:function(data){
 					if(data.status == 200){
-						alert("注册成功！");
-						window.location.href="/main.htm";
+						alert("注册成功，请等待审批通过！");
+						window.location.href="/login.htm";
 						return;
 					}else {
 						alert(data.message);

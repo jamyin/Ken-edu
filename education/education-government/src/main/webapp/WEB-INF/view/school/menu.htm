@@ -36,9 +36,9 @@
 			</div>
 			<div class="menu_list">
 					<div class="control">
-						<a class="lbtn" href="###"><</a>
-						<span><input id="date" type="text" value="" onchange="changeDate()"></span>
-						<a class="rbtn" href="###">></a>
+						<!-- <a class="lbtn" href="###"><</a> -->
+						<span><input id="date" type="text" value="${dto.supplyDate?string("yyyy-MM-dd")}" onchange="changeDate()"></span>
+						<!-- <a class="rbtn" href="###">></a> -->
 					</div>
 					<div class="title">
 						<label class="ct1">用餐时段</label>
@@ -126,11 +126,6 @@
 	      $(".nav").find("a").removeClass("cur");
 	      $(".nav").find("a:eq(2)").addClass("cur");
 	      
-		var supplyDate = '${(dto.supplyDate)!}';
-		if (null != supplyDate && '' != supplyDate) {
-			$('#date').val(supplyDate);
-		} else{
-		}
 		fix_table()
 		var _info1 = $('.row ul li').eq(0).attr('data')
 		$('.row ul li').eq(0).addClass('cur')
@@ -156,7 +151,7 @@
 	
 	function changeDate(){
 		var date = $('#date').val();
-		window.location.href = '/edu/school/details.htm?customerId=${(dto.customerId)!}&supplierId=${(dto.supplierId)!}&supplyDate='+date;
+		window.location.href = '/edu/school/details.htm?customerId=${(dto.customerId)!}&supplierId=${(dto.supplierId)!}&supplyDateStr='+date;
 	}
 	
 	  // 日历

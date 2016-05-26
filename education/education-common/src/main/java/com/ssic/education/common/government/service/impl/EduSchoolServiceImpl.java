@@ -58,8 +58,7 @@ public class EduSchoolServiceImpl implements EduSchoolService{
 			if (null != eduSchool) {
 				return BeanUtils.createBeanByTarget(eduSchool, EduSchoolDto.class);
 			}
-		}
-		
+		}		
 		return null;
 	}
 

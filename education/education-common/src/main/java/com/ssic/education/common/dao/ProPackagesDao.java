@@ -118,11 +118,11 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 		SimpleDateFormat sdfh=new SimpleDateFormat(DateUtils.YMD_DASH_DATE_TIME);  
 		Date startDate = sdfh.parse(str+" 00:00:00");
 		Date endDate = sdfh.parse(str+" 23:59:59");
-		if (null == dto.getSupplyDate()) {
+		if (StringUtils.isBlank(dto.getSupplyDateStr())) {
 			criteria.andSupplyDateBetween(startDate, endDate);
 		}
-		if (null != dto.getSupplyDate()) {			
-			criteria.andSupplyDateBetween(sdfh.parse(dto.getSupplyDate()+" 00:00:00"),sdfh.parse(dto.getSupplyDate()+" 23:59:59"));
+		else {			
+			criteria.andSupplyDateBetween(sdfh.parse(dto.getSupplyDateStr()+" 00:00:00"),sdfh.parse(dto.getSupplyDateStr()+" 23:59:59"));
 		}
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		example.setOrderByClause("supply_phase asc");
@@ -146,8 +146,8 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 			proPackagesDto.setProNutritionalDtos(proNutritionalDtos);
 		}
 		List<ProPackagesDto> propackagesDtos = new ArrayList<ProPackagesDto>();
-		if (null != dto.getSupplyDate()) {
-			propackagesDtos = schoolMapper.getPackagesById(dto.getCustomerId(), dto.getSupplierId(),sdfh.parse(dto.getSupplyDate()+" 00:00:00"),sdfh.parse(dto.getSupplyDate()+" 23:59:59"));	
+		if (StringUtils.isNotBlank(dto.getSupplyDateStr())) {
+			propackagesDtos = schoolMapper.getPackagesById(dto.getCustomerId(), dto.getSupplierId(),sdfh.parse(dto.getSupplyDateStr()+" 00:00:00"),sdfh.parse(dto.getSupplyDateStr()+" 23:59:59"));	
 		}else {
 			propackagesDtos = schoolMapper.getPackagesById(dto.getCustomerId(), dto.getSupplierId(),startDate,endDate);	
 		}			
