@@ -17,7 +17,7 @@ List<ProWaresDto> findWaresById(@Param("proWaresDto")ProWaresDto proWaresDto);
 
 List<SupplierDto> lookSupplier(@Param("dto")ProWaresDto dto);
 
-String findWaresIdBySupplierId(@Param("ledgerDto") LedgerDto ledgerDto);
+ProWaresDto findWaresIdBySupplierId(@Param("ledgerDto") LedgerDto ledgerDto);
 
 
 }

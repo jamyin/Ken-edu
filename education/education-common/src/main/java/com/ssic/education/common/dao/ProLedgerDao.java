@@ -1,6 +1,5 @@
 package com.ssic.education.common.dao;
 
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,9 +14,12 @@ import com.ssic.education.common.dto.ProSupplierDto;
 import com.ssic.education.common.mapper.ProLedgerExMapper;
 import com.ssic.education.common.mapper.ProLedgerMapper;
 import com.ssic.education.common.mapper.ProLedgerMasterExMapper;
+import com.ssic.education.common.mapper.ProLedgerMasterMapper;
 import com.ssic.education.common.mapper.ProSchoolWareMapper;
 import com.ssic.education.common.pojo.ProLedger;
 import com.ssic.education.common.pojo.ProLedgerExample;
+import com.ssic.education.common.pojo.ProLedgerMaster;
+import com.ssic.education.common.pojo.ProLedgerMasterExample;
 import com.ssic.education.common.provider.dto.LedgerDto;
 import com.ssic.education.common.provider.utils.DataGrid;
 import com.ssic.education.common.provider.utils.PageHelper;
@@ -35,7 +37,7 @@ import com.ssic.education.utils.util.BeanUtils;
 public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 
 	@Autowired
-	ProSchoolWareMapper swMapper;
+	private ProSchoolWareMapper swMapper;
 
 	@Getter
 	@Autowired
@@ -45,15 +47,32 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 	private ProLedgerExMapper exMapper;
 
 	@Autowired
-	private ProLedgerMasterExMapper lmMapper;
+	private ProLedgerMasterMapper lmMapper;
+	
+	@Autowired
+	private ProLedgerMasterExMapper lmExMapper;
 
 	public DataGrid findAllLedger(LedgerDto ld, PageHelper ph) {
 		DataGrid dataGrid = new DataGrid();
-		Long total = lmMapper.countAllLedger(ld);
+		Long total = lmExMapper.countAllLedger(ld);
 		dataGrid.setTotal(total);
 		int beginRow = (ph.getPage() - 1) * ph.getRows();
 		ph.setBeginRow(beginRow);
-		dataGrid.setRows(lmMapper.findAllLedger(ld, ph));
+		List<LedgerDto> list = lmExMapper.findAllLedger(ld, ph);
+		for (LedgerDto ledgerDto : list) {
+			ProLedgerExample example = new ProLedgerExample();
+			ProLedgerExample.Criteria criteria = example.createCriteria();
+			criteria.andMasterIdEqualTo(ledgerDto.getMasterId());
+			List<ProLedger> leadgers = mapper.selectByExample(example);
+			String name="";
+			for (ProLedger proLedger : leadgers) {
+				name+=proLedger.getName()+",";
+			}
+			if(name!=""){
+			ledgerDto.setName(name.substring(0,name.length()-1));
+			}
+		}
+		dataGrid.setRows(list);
 		return dataGrid;
 	}
 
@@ -78,8 +97,7 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 		// }
 		ledger.get(0).setId(UUID.randomUUID().toString());
 		ledger.get(0).setHaulStatus(0);
-		;
-		lmMapper.insertLedgerMaster(ledger.get(0));
+		lmExMapper.insertLedgerMaster(ledger.get(0));
 		return exMapper.insertLedger(ledger);
 	}
 
@@ -127,7 +145,7 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 	}
 
 	public int updataLedger(List<LedgerDto> ledgers) {
-		lmMapper.updateLedgerMaster(ledgers.get(0));
+		lmExMapper.updateLedgerMaster(ledgers.get(0));
 		for (LedgerDto ledger : ledgers) {
 			exMapper.updateLedger(ledger);
 		}
@@ -135,8 +153,18 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 	}
 
 	public int deleteLedger(String sourceId, String wareBatchNo) {
-		lmMapper.deleteLedgerMaster(sourceId, wareBatchNo);
+		lmExMapper.deleteLedgerMaster(sourceId, wareBatchNo);
 		return exMapper.deleteLedger(sourceId, wareBatchNo);
+	}
+
+	public int findWareBatchNo(LedgerDto ledgerDto) {
+		ProLedgerMasterExample example = new ProLedgerMasterExample();
+		ProLedgerMasterExample.Criteria criteria = example.createCriteria();
+		criteria.andWareBatchNoEqualTo(ledgerDto.getWareBatchNo());
+		criteria.andSourceIdEqualTo(ledgerDto.getSourceId());
+		criteria.andStatEqualTo(1);
+		List<ProLedgerMaster> list = lmMapper.selectByExample(example);
+		return list.size();
 	}
 
 }

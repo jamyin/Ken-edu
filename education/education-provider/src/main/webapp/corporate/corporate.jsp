@@ -13,6 +13,7 @@
 			width :768,
 			height : 480,
 			href : '${pageContext.request.contextPath}/corporateController/showPic',
+			onOpen: function(){}
 		});
 	}
 
@@ -61,12 +62,11 @@
 				<th style='text-align:left; vertical-align:middle;'><a onclick="editPic()">编辑图片</a></th>
 			</tr>
 			<tr>
-				<th style="text-align:right;">单位名称:</th>
-				<td style='text-align:center;'>${Corporate.supplierName }</td>
+				<th style="text-align:right;">${Corporate.supplierName }</th>
 				<td></td>
 			</tr>
 			<tr>
-				<th style="text-align:right;">地址:</th>
+				<th style="text-align:right;">单位地址:</th>
 				<td style='text-align:center;'>${Corporate.address }</td>
 				<td></td>
 			</tr>

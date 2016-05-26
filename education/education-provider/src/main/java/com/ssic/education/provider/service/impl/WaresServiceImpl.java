@@ -116,7 +116,7 @@ public class WaresServiceImpl implements IWaresService {
 		return dao.lookSupplier(dto);
 	}
 
-	public String findWaresIdBySupplierId(LedgerDto ledger) {
+	public ProWaresDto findWaresBySupplierId(LedgerDto ledger) {
 		// TODO Auto-generated method stub
 		return dao.findWaresIdBySupplierId(ledger);
 	}

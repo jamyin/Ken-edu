@@ -63,6 +63,9 @@
 	</select>
 	
 	<sql id="where_conditions">
+		<if test="eduSchoolDto.supplyDate == null">
+			AND DATE_FORMAT(now() , '%Y%m%d') = #{eduSchoolDto.supplyDate}
+		</if>
 		<if test="eduSchoolDto.supplyDate != null">
 			AND DATE_FORMAT(b.supply_date, '%Y%m%d') = #{eduSchoolDto.supplyDate}
 		</if>

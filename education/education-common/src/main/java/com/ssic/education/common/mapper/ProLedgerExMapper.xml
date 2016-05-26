@@ -16,7 +16,7 @@
 		values
 		<foreach item="item" collection="ledgerList" separator=","
 			index="index">
-			(UUID(), #{item.id}, #{item.waresId},
+			(UUID(), #{ledgerList[0].id}, #{item.waresId},
 			#{item.name},
 			#{item.spce},
 			#{item.supplierId},
@@ -72,6 +72,7 @@
 		l.quantity,
 		l.production_date productionDate,l.production_name productionName
 		,l.batch_no batchNo, m.receiver_id receiverId, 
+		m.haul_status haulStatus,
 		m.receiver_name receiverName,
 		l.trace_code traceCode,
 		m.user_id userId, m.source_id sourceId, m.ware_batch_no wareBatchNo,

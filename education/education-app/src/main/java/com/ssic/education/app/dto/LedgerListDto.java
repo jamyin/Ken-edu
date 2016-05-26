@@ -36,6 +36,7 @@ public class LedgerListDto {
 	private Integer quantity; //数量
 
 	private Date productionDate;//生成日期
+	
 	private String productionName;//生产单位
 
 	private String batchNo;//生产批号
@@ -47,5 +48,5 @@ public class LedgerListDto {
 	private String receiverName;//收获商名称
 
 	private String traceCode;//追溯码
-	
+
 }

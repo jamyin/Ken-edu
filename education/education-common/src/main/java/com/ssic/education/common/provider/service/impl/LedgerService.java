@@ -43,4 +43,9 @@ public class LedgerService implements ILedgerService {
 		return ledgerDao.deleteLedger(sourceId,wareBatchNo);
 	}
 
+	@Override
+	public int findWareBatchNo(LedgerDto ledgerDto) {
+		return ledgerDao.findWareBatchNo(ledgerDto);
+	}
+
 }

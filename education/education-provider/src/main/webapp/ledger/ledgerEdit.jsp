@@ -5,11 +5,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style>
 
-.table th{    
-width: 100px;
-text-align: right;
-}
-
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -48,64 +43,103 @@ text-align: right;
 <div class="easyui-layout" data-options="fit:true,border:false">
 	<div data-options="region:'center',border:false" title=""
 		style="overflow: hidden;">
-		<form id="form" method="post" enctype="multipart/form-data">
-			<table class="table" style="width:400px;">
+		<form id="form" method="post" >
+			<table id="ledgers" class="table table-hover table-condensed">
 				<tr>
-					<th>进货日期：</th>
-					<td><input name="ledger[0].actionDate" type="text"
-						class="span2" placeholder="点击选择日期" data-options="required:true"
+					<th style='width:70px;'>配货日期：</th>
+					<td style='width:100px;'><input name="ledger[0].actionDate" type="text"
+						style='width:100px;' class="span2" placeholder="点击选择日期" data-options="required:true"
 						onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})"
 						readonly="readonly"
 						value="<fmt:formatDate value="${LedgerList[0].actionDate}" pattern="yyyy-MM-dd"/>"></td>
-					<th>配货点：</th>
-					<td><input name="ledger[0].receiverName" type="text"
-						placeholder="请输入回收人配货点" class="easyui-validatebox span2"
+					<th style='width:70px;'>配货点：</th>
+					<td style='width:100px;'><input name="ledger[0].receiverName" type="text"
+						style='width:100px;' placeholder="请输入回收人配货点" class="easyui-validatebox span2"
 						data-options="required:true" value="${LedgerList[0].receiverName}"></td>
-					<th>批次号：</th>
-					<td><input name="ledger[0].wareBatchNo" type="text"
-						class="easyui-validatebox span2"
+					<th style='width:70px;'>批次号：</th>
+					<td style='width:100px;'><input name="ledger[0].wareBatchNo" type="text"
+						style='width:100px;' class="easyui-validatebox span2" readonly="readonly"
 						value="${LedgerList[0].wareBatchNo}"></td>
-					<th>驾驶员：</th>
-					<td><select name="ledger[0].userId" type="text"
-						placeholder="请选择驾驶员" class="easyui-validatebox span2"
+					</tr>
+					<tr>
+					<th style='width:70px;'>驾驶员：</th>
+					<td style='width:100px;'><select name="ledger[0].userId" type="text"
+						style='width:100px;' placeholder="请选择驾驶员" class="easyui-validatebox span2"
 						data-options="required:true">
-							<option value="${LedgerList[0].userId}">${LedgerList[0].userName}</option>
+						<c:if test="${LedgerList[0].userName} == null">
+							<option selected="selected" value =null>请选择驾驶员</option>
+						</c:if>
+						<c:if test="${LedgerList[0].userName} != null">
+							<option value =null>请选择驾驶员</option>
+						</c:if>
+						<option selected="selected" value =null>请选择驾驶员</option>
+						<c:forEach items="${Driver}" var="user">
+							<c:if test="${LedgerList[0].userName eq user.name}">
+								<option selected="selected" value ="${user.id}">${user.name}</option>
+							</c:if>
+							<c:if test="${LedgerList[0].userName ne user.name}">
+								<option  value ="${user.id}">${user.name}</option>
+							</c:if>
+						</c:forEach>
 					</select></td>
-					<td><input name="ledger[0].masterId" type="hidden"
-						class="easyui-validatebox span2"
+					<th style='width:70px;'>配送状态：</th>
+					<td style='width:100px;'><select name="ledger[0].haulStatus" type="text"
+						style='width:100px;' placeholder="请选择驾驶员" class="easyui-validatebox span2"
+						data-options="required:true">
+						<c:if test="${LedgerList[0].haulStatus ==0}">
+							<option selected="selected" value ="0">未配送</option>
+						</c:if>
+						<c:if test="${LedgerList[0].haulStatus !=0}">
+							<option value ="0">未配送</option>
+						</c:if>
+						<c:if test="${LedgerList[0].haulStatus ==1}">
+							<option selected="selected" value ="1">配送中</option>
+						</c:if>
+						<c:if test="${LedgerList[0].haulStatus !=1}">
+							<option value ="1">配送中</option>
+						</c:if>
+						<c:if test="${LedgerList[0].haulStatus ==2}">
+							<option selected="selected" value ="2">已配送</option>
+						</c:if>
+						<c:if test="${LedgerList[0].haulStatus !=2}">
+							<option value ="2">已配送</option>
+						</c:if>
+					</select></td>
+					<td style='width:70px;'><input name="ledger[0].masterId" type="hidden"
+						style='width:100px;' class="easyui-validatebox span2"
 						value="${LedgerList[0].masterId}"></td>
 				</tr>
 				<c:forEach var="ledger" items="${LedgerList}" varStatus="status">
 					<tr>
-						<th>采购品：</th>
-						<td><input name="ledger[${status.index }].name" type="text"
-							placeholder="请输入采购品" class="easyui-validatebox span2"
+						<th style='width:70px;'>采购品：</th>
+						<td style='width:100px;'><input name="ledger[${status.index }].name" type="text"
+							style='width:100px;' placeholder="请输入采购品" class="easyui-validatebox span2"
 							data-options="required:true" value="${ledger.name}"></td>
-						<th>数量：</th>
-						<td><input name="ledger[${status.index }].quantity"
-							type="text" placeholder="请输入数量" class="easyui-validatebox span2"
+						<th style='width:70px;'>数量：</th>
+						<td style='width:100px;'><input name="ledger[${status.index }].quantity"
+							style='width:100px;' type="text" placeholder="请输入数量" class="easyui-validatebox span2"
 							data-options="required:true" value="${ledger.quantity}"></td>
-						<th>规格：</th>
-						<td><input name="ledger[${status.index }].spce" type="text"
-							placeholder="请输入规格" class="easyui-validatebox span2"
+						<th style='width:70px;'>规格：</th>
+						<td style='width:100px;'><input name="ledger[${status.index }].spce" type="text"
+							style='width:100px;' placeholder="请输入规格" class="easyui-validatebox span2"
 							data-options="required:true" value="${ledger.spce}"></td>
-						<th>供应商名称：</th>
-						<td><input name="ledger[${status.index }].supplierName"
-							type="text" placeholder="请输入供应商" class="easyui-validatebox span2"
+						<th style='width:70px;'>采购品供应商：</th>
+						<td style='width:100px;'><input name="ledger[${status.index }].supplierName"
+							style='width:100px;' type="text" placeholder="请输入供应商" class="easyui-validatebox span2"
 							data-options="required:true" value="${ledger.supplierName}"></td>
-						<th>生产单位：</th>
-						<td><input name="ledger[${status.index }].productionName"
+						<th style='width:70px;'>生产企业：</th>
+						<td style='width:100px;'><input name="ledger[${status.index }].productionName"
 							type="text" placeholder="请输入生产单位"
-							class="easyui-validatebox span2" data-options="required:true"
+							style='width:100px;' class="easyui-validatebox span2" data-options="required:true"
 							value="${ledger.productionName}"></td>
-						<th>生产日期：</th>
-						<td><input name="ledger[${status.index }].productionDate"
-							type="text" placeholder="点击选择日期" class="easyui-validatebox span2"
+						<th style='width:70px;'>生产日期：</th>
+						<td style='width:100px;'><input name="ledger[${status.index }].productionDate"
+							style='width:100px;' type="text" placeholder="点击选择日期" class="easyui-validatebox span2"
 							data-options="required:true"
 							onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})"
 							readonly="readonly"
 							value="<fmt:formatDate value="${ledger.productionDate }" pattern="yyyy-MM-dd"/>"></td>
-						<td><input name="ledger[${status.index }].id" type="hidden"
+						<td style='width:100px;'><input name="ledger[${status.index }].id" type="hidden"
 							class="easyui-validatebox span2" data-options="required:true" value="${ledger.id}"></td>
 					</tr>
 				</c:forEach>

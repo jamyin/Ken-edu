@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssic.education.app.dto.LedgerInfoDto;
+import com.ssic.education.app.dto.LedgerMasterListDto;
 import com.ssic.education.app.service.ILedgerInfoService;
+import com.ssic.education.utils.model.PageQuery;
+import com.ssic.education.utils.model.PageResult;
 import com.ssic.education.utils.model.Response;
 
 /**		
@@ -32,7 +35,7 @@ public class StockBatchController {
 
 	/**
 	 * 
-	 * getMaterialInfo：批次信息：根据批次id查批次信息（需带出收货商信息）
+	 * 批次信息：根据批次id查批次信息（需带出收货商信息）
 	 * 原料批次信息：根据原料批次id查原料批次信息（需带出供应商信息）
 	 * @return
 	 * @exception	
@@ -48,4 +51,12 @@ public class StockBatchController {
 		return result;
 	}
 
+	@RequestMapping(value = "/list/{receiverId}", method = RequestMethod.GET)
+	@ResponseBody
+	public Response<PageResult<LedgerMasterListDto>> getMaterialInfo(@PathVariable("receiverId") String receiverId, PageQuery query) {
+		Response<PageResult<LedgerMasterListDto>> result = new Response<PageResult<LedgerMasterListDto>>();
+		PageResult<LedgerMasterListDto> LedgerInfoDto = ledgerInfoService.findMasterList(receiverId, query);
+		result.setData(LedgerInfoDto);
+		return result;
+	}
 }

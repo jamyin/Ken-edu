@@ -54,7 +54,7 @@ text-align: right;
 						value="${Corporate.supplierName }" ></td>
 				</tr>
 				<tr>
-					<th>地址:</th>
+					<th>单位地址:</th>
 					<td><input name="address" type="text"
 						placeholder="请输入回收人配货点" class="easyui-validatebox span2"
 						data-options="required:true" value="${Corporate.address }"></td>
@@ -66,7 +66,7 @@ text-align: right;
 						value="${Corporate.corporation }"></td>
 				</tr>
 				<tr>
-					<th>电话:</th>
+					<th>联系方式:</th>
 					<td><input name="contactWay" type="text"
 						class="easyui-validatebox span2"
 						value="${Corporate.contactWay }"></td>
