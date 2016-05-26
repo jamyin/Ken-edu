@@ -153,7 +153,7 @@ public class ProPackagesServiceImpl implements ProPackagesService{
 			nutritionalFlag = proNutritionalDao.addNutritionalBatch(nutritionalList);
 		}
 		
-		if(packagesFlag ==1 && waresFlag ==1 && dishesFlag ==1 && nutritionalFlag ==1){
+		if(packagesFlag > 0 && waresFlag > 0 && dishesFlag > 0 && nutritionalFlag > 0){
 			return 1;
 		}
 		return 0;

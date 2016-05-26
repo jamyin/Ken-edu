@@ -147,6 +147,14 @@
                 </filters>
             </build>
         </profile>
+		<profile>
+			<id>test</id>
+			<build>
+				<filters>
+					<filter>src/main/properties/test.properties</filter>
+				</filters>
+			</build>
+		</profile>
         <profile>
             <id>prod</id>
             <build>

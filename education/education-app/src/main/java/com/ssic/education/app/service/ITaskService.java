@@ -33,5 +33,8 @@ public interface ITaskService {
 	PageResult<EduTaskReadDto> findReadList(EduTaskReceiveDto receiveDto,
 			PageQuery query);
 
+	//发布任务
+	int sendTask(EduTaskDto eduTaskDto);
+
 }
 

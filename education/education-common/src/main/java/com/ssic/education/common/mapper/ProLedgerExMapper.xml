@@ -109,9 +109,6 @@
 			name =
 			#{ledgerDto.name,jdbcType=VARCHAR},
 			spce = #{ledgerDto.spce,jdbcType=VARCHAR},
-			action_type = #{ledgerDto.actionType,jdbcType=INTEGER},
-			action_date =
-			#{ledgerDto.actionDate,jdbcType=DATE},
 			supplier_id =
 			#{ledgerDto.supplierId,jdbcType=VARCHAR},
 			supplier_code =
@@ -126,20 +123,9 @@
 			#{ledgerDto.productionName,jdbcType=DATE},
 			batch_no =
 			#{ledgerDto.batchNo,jdbcType=VARCHAR},
-			receiver_id =
-			#{ledgerDto.receiverId,jdbcType=VARCHAR},
-			receiver_code =
-			#{ledgerDto.receiverCode,jdbcType=VARCHAR},
-			receiver_name =
-			#{ledgerDto.receiverName,jdbcType=VARCHAR},
 			trace_code =
 			#{ledgerDto.traceCode,jdbcType=VARCHAR},
-			user_id =
-			#{ledgerDto.userId,jdbcType=VARCHAR},
-			source_id =
-			#{ledgerDto.sourceId,jdbcType=VARCHAR},
-			ware_batch_no =
-			#{ledgerDto.wareBatchNo,jdbcType=VARCHAR}
+			last_update_time=#{ledgerDto.lastUpdateTime}
 			Where
 			id =
 			#{ledgerDto.id}
@@ -150,9 +136,16 @@
 			set
 			stat=0
 			Where
-			source_id =#{sourceId}
-			AND
+			master_id =(
+			SELECT
+			id
+			FROM 
+			t_pro_ledger_master
+			WHERE
 			ware_batch_no=#{wareBatchNo}
+			AND
+			source_id=#{sourceId}
+			)
 	</update>
 	<select id="selectSupplierByReceiverId" resultType="com.ssic.education.common.dto.ProSupplierDto"
 		parameterType="java.lang.String">

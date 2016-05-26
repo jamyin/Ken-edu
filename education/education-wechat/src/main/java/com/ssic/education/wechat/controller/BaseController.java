@@ -2,24 +2,16 @@ package com.ssic.education.wechat.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.ssic.education.common.dto.EduAreaDto;
-import com.ssic.education.common.dto.EduSchoolDto;
-import com.ssic.education.common.government.service.AreaService;
-import com.ssic.education.common.government.service.EduSchoolService;
-import com.ssic.education.utils.model.Response;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ssic.education.common.government.service.AreaService;
+import com.ssic.education.common.government.service.EduSchoolService;
 import com.ssic.education.utils.constants.SessionConstants;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 
 public class BaseController {

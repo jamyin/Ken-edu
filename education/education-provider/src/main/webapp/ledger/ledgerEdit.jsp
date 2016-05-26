@@ -61,9 +61,6 @@ text-align: right;
 					<td><input name="ledger[0].receiverName" type="text"
 						placeholder="请输入回收人配货点" class="easyui-validatebox span2"
 						data-options="required:true" value="${LedgerList[0].receiverName}"></td>
-				</tr>
-				<tr>
-
 					<th>批次号：</th>
 					<td><input name="ledger[0].wareBatchNo" type="text"
 						class="easyui-validatebox span2"
@@ -74,6 +71,9 @@ text-align: right;
 						data-options="required:true">
 							<option value="${LedgerList[0].userId}">${LedgerList[0].userName}</option>
 					</select></td>
+					<td><input name="ledger[0].masterId" type="hidden"
+						class="easyui-validatebox span2"
+						value="${LedgerList[0].masterId}"></td>
 				</tr>
 				<c:forEach var="ledger" items="${LedgerList}" varStatus="status">
 					<tr>

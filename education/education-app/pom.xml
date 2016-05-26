@@ -13,16 +13,7 @@
 	<name>education-app Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
-	<properties>
-		<profile.active>dev</profile.active>
-	</properties>
-
 	<dependencies>
-		<dependency>
-			<groupId>com.ssic</groupId>
-		    <artifactId>education-common</artifactId>
-		    <version>0.0.1-SNAPSHOT</version>
-	    </dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
@@ -71,7 +62,17 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
-		
+
+        <dependency>
+        	<groupId>com.ssic</groupId>
+        	<artifactId>education-utils</artifactId>
+        	<version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+        	<groupId>com.ssic</groupId>
+        	<artifactId>education-common</artifactId>
+        	<version>0.0.1-SNAPSHOT</version>
+        </dependency>
 	</dependencies>
 
 	<build>
@@ -135,6 +136,14 @@
 			<build>
 				<filters>
 					<filter>src/main/properties/dev.properties</filter>
+				</filters>
+			</build>
+		</profile>
+		<profile>
+			<id>test</id>
+			<build>
+				<filters>
+					<filter>src/main/properties/test.properties</filter>
 				</filters>
 			</build>
 		</profile>
