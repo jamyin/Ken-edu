@@ -123,7 +123,7 @@ public class EduSchoolController extends BaseController{
 		EduSchoolSupplierDto eduSchoolSupplierDtos= iEduSchoolSupplierService.searchEduSchoolSupplierDto(eduSchoolSupplierDto);
 		PageResult<ProWaresDto> mWares = queryWares(eduSchoolSupplierDtos.getSupplierId(), query, false);
 		ProSupplierDto proSupplierDto = new ProSupplierDto();
-		proSupplierDto.setId(proPackagesDtos.get(0).getSupplierId());
+		proSupplierDto.setId(eduSchoolSupplierDtos.getSupplierId());
 		PageResult<ProSupplierDto> mSuppliers = queryMaterialSupplier(proSupplierDto, query);
 		mv.setViewName("/school/menu_city");		
 		mv.addObject("dto", dto);
