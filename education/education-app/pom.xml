@@ -13,10 +13,6 @@
 	<name>education-app Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
-	<properties>
-		<profile.active>dev</profile.active>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>com.ssic</groupId>
@@ -135,6 +131,14 @@
 			<build>
 				<filters>
 					<filter>src/main/properties/dev.properties</filter>
+				</filters>
+			</build>
+		</profile>
+		<profile>
+			<id>test</id>
+			<build>
+				<filters>
+					<filter>src/main/properties/test.properties</filter>
 				</filters>
 			</build>
 		</profile>

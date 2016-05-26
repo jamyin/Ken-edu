@@ -11,7 +11,9 @@ public interface IProLicenseService {
 
 	List<ProLicense> lookImage(ProLicense license);
 
-	void alterImage(ProLicense license);
+	int alterImage(ProLicense license);
 
 	public void saveProLicense(ProLicenseDto proLicenseDto);
+
+	int saveLicense(ProLicense license);
 }

@@ -1,6 +1,7 @@
 package com.ssic.education.provider.service.impl;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,15 +24,18 @@ public class ProLicenseServiceImpl implements IProLicenseService {
 		// TODO Auto-generated method stub
 		return dao.lookImage(license);
 	}
-	public void alterImage(ProLicense license) {
+	public int alterImage(ProLicense license) {
 		// TODO Auto-generated method stub
-		dao.alterImage(license);
+		return dao.alterImage(license);
 	}
 	
 
 	public void saveProLicense(ProLicenseDto proLicenseDto) {
 		ProLicense proLicense = BeanUtils.createBeanByTarget(proLicenseDto, ProLicense.class);
 		dao.insertSelective(proLicense);
+	}
+	public int saveLicense(ProLicense license) {
+		return dao.insertSelective(license);
 	}
 
 }
