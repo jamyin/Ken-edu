@@ -1,13 +1,13 @@
-package com.ssic.education.wecaht.handle.service.impl;
+package com.ssic.education.edu.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssic.education.edu.dao.EduParentScChDao;
+import com.ssic.education.edu.dto.EduParentScChDto;
+import com.ssic.education.edu.pojo.EduParentScCh;
+import com.ssic.education.edu.service.IEduParentScChService;
 import com.ssic.education.utils.util.BeanUtils;
-import com.ssic.education.wecaht.handle.dao.EduParentScChDao;
-import com.ssic.education.wecaht.handle.dto.EduParentScChDto;
-import com.ssic.education.wecaht.handle.pojo.EduParentScCh;
-import com.ssic.education.wecaht.handle.service.IEduParentScChService;
 
 @Service
 public class EduParentScChServiceImpl implements IEduParentScChService {

@@ -1,6 +1,6 @@
-package com.ssic.education.wecaht.handle.service;
+package com.ssic.education.edu.service;
 
-import com.ssic.education.wecaht.handle.dto.EduParentPackCommentDto;
+import com.ssic.education.edu.dto.EduParentPackCommentDto;
 
 public interface IEduParentPackCommentService {
 

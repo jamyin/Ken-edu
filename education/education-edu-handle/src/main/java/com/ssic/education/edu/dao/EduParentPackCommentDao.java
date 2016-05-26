@@ -1,4 +1,4 @@
-package com.ssic.education.wecaht.handle.dao;
+package com.ssic.education.edu.dao;
 
 import lombok.Getter;
 
@@ -6,13 +6,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ssic.education.edu.dto.EduParentPackCommentDto;
+import com.ssic.education.edu.mapper.EduParentPackCommentMapper;
+import com.ssic.education.edu.pojo.EduParentPackComment;
+import com.ssic.education.edu.pojo.EduParentPackCommentExample;
+import com.ssic.education.edu.pojo.EduParentPackCommentExample.Criteria;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.mybatis.MyBatisBaseDao;
-import com.ssic.education.wecaht.handle.dto.EduParentPackCommentDto;
-import com.ssic.education.wecaht.handle.mapper.EduParentPackCommentMapper;
-import com.ssic.education.wecaht.handle.pojo.EduParentPackComment;
-import com.ssic.education.wecaht.handle.pojo.EduParentPackCommentExample;
-import com.ssic.education.wecaht.handle.pojo.EduParentPackCommentExample.Criteria;
 
 @Repository
 public class EduParentPackCommentDao extends MyBatisBaseDao<EduParentPackComment> {

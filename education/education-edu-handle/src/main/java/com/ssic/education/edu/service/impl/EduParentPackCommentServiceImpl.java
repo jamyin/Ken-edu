@@ -1,13 +1,13 @@
-package com.ssic.education.wecaht.handle.service.impl;
+package com.ssic.education.edu.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssic.education.edu.dao.EduParentPackCommentDao;
+import com.ssic.education.edu.dto.EduParentPackCommentDto;
+import com.ssic.education.edu.pojo.EduParentPackComment;
+import com.ssic.education.edu.service.IEduParentPackCommentService;
 import com.ssic.education.utils.util.BeanUtils;
-import com.ssic.education.wecaht.handle.dao.EduParentPackCommentDao;
-import com.ssic.education.wecaht.handle.dto.EduParentPackCommentDto;
-import com.ssic.education.wecaht.handle.pojo.EduParentPackComment;
-import com.ssic.education.wecaht.handle.service.IEduParentPackCommentService;
 
 @Service
 public class EduParentPackCommentServiceImpl implements IEduParentPackCommentService {

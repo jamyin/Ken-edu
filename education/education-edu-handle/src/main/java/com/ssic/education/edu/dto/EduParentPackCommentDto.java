@@ -1,4 +1,4 @@
-package com.ssic.education.wecaht.handle.dto;
+package com.ssic.education.edu.dto;
 
 import java.io.Serializable;
 import java.util.Date;

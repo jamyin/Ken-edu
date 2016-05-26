@@ -15,11 +15,6 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.ssic</groupId>
-		    <artifactId>education-common</artifactId>
-		    <version>0.0.1-SNAPSHOT</version>
-	    </dependency>
-		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
 		</dependency>
@@ -67,7 +62,12 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
-		
+
+        <dependency>
+        	<groupId>com.ssic</groupId>
+        	<artifactId>education-utils</artifactId>
+        	<version>0.0.1-SNAPSHOT</version>
+        </dependency>
 	</dependencies>
 
 	<build>

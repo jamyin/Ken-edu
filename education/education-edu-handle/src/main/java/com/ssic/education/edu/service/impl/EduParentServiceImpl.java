@@ -1,13 +1,13 @@
-package com.ssic.education.wecaht.handle.service.impl;
+package com.ssic.education.edu.service.impl;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ssic.education.wecaht.handle.dao.EduParentDao;
-import com.ssic.education.wecaht.handle.dto.EduParentDto;
-import com.ssic.education.wecaht.handle.service.IEduParentService;
+import com.ssic.education.edu.dao.EduParentDao;
+import com.ssic.education.edu.dto.EduParentDto;
+import com.ssic.education.edu.service.IEduParentService;
 
 @Service
 public class EduParentServiceImpl implements IEduParentService {
