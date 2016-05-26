@@ -99,7 +99,7 @@ public class ProPackagesController extends BaseController{
 		mv.addObject("supplyPhaseList", SupplyPhaseEnum.values());
 		mv.addObject("nutritionalNameList", ProNutritionalNameEnum.values());
 		mv.addObject("nutritionalUnitList", ProNutritionalUnitEnum.values());
-		mv.setViewName("/school/menu_add");
+		mv.setViewName("/menu/menu_add");
 		return mv;
 	}
 	
