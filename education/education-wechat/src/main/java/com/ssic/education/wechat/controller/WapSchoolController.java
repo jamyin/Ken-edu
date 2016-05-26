@@ -32,8 +32,7 @@ public class WapSchoolController extends BaseController{
 	@Autowired
 	private EduSchoolService eduSchoolService;
 
-	@Autowired
-	private IEduParentScChService iEduParentScChService;
+
 	
 	@Autowired
 	private IEduCanteenService iEduCanteenService;
@@ -107,48 +106,6 @@ public class WapSchoolController extends BaseController{
 			result.setMessage("未找到相对应的学校信息");
 		}
 		return result;
-	}
-	/**
-	 * 
-		 * 此方法描述的是：关注 相当于保存信息处理
-		 * @author: cwftalus@163.com
-		 * @version: 2016年5月21日 下午3:31:44
-	 */
-	@RequestMapping(value="follow")
-	@ResponseBody
-	public Response<EduSchoolDto> follow(EduParentScChDto eduParentScChDto){
-		Response<EduSchoolDto> result = new Response<EduSchoolDto>();
-		
-		int data = iEduParentScChService.saveFollow(eduParentScChDto);
-		if(data > 0 ){
-			result.setMessage("关注成功");
-		}else{
-			result.setStatus(DataStatus.HTTP_FAILE);
-		}
-		return result;
-	}
-	
-	/**
-	 * 
-		 * 此方法描述的是：取消关注
-		 * @author: cwftalus@163.com
-		 * @version: 2016年5月24日 下午2:15:12
-	 */
-	@RequestMapping(value="unFollow")
-	@ResponseBody
-	public Response<EduSchoolDto> unFollow(EduParentScChDto eduParentScChDto){
-		Response<EduSchoolDto> result = new Response<EduSchoolDto>();
-		
-		int data = iEduParentScChService.updateFollow(eduParentScChDto);
-		if(data > 0 ){
-			result.setMessage("操作成功");
-		}else{
-			result.setStatus(DataStatus.HTTP_FAILE);
-		}
-		return result;
-	}
-	
-	
-	
+	}	
 	
 }

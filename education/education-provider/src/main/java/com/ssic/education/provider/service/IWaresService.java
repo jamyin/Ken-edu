@@ -46,6 +46,6 @@ public interface IWaresService {
 	 */
 	void addProWares(List<ProWares> list);
 
-	String findWaresIdBySupplierId(LedgerDto ledger);
+	ProWaresDto findWaresBySupplierId(LedgerDto ledger);
 
 }

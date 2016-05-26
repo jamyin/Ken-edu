@@ -57,7 +57,7 @@ public class LedgerDto {
 
 	@Setter
 	@Getter
-	private Integer quantity;
+	private String quantity;
 
 	@Setter
 	@Getter

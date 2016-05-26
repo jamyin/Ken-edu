@@ -67,10 +67,10 @@
 						</tr>
 						<tr>
 							<th>密码</th>
-							<td><input name="password" type="text" placeholder="请输入密码" id="password"
+							<td><input name="password" type="password" placeholder="请输入密码" id="password"
 								class="easyui-validatebox span2" ></td>
 								<th>确认密码</th>
-							<td><input name="password2" type="text" placeholder="请确认密码" id="password2"
+							<td><input name="password2" type="password" placeholder="请确认密码" id="password2"
 								class="easyui-validatebox span2" ></td>
 							
 						</tr>

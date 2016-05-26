@@ -17,14 +17,19 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ssic.education.common.dto.EduAreaDto;
 import com.ssic.education.common.dto.EduSchoolDto;
+import com.ssic.education.common.dto.EduSchoolSupplierDto;
 import com.ssic.education.common.dto.ProLicenseDto;
 import com.ssic.education.common.dto.ProPackagesDto;
 import com.ssic.education.common.dto.ProSupplierDto;
+import com.ssic.education.common.dto.ProWaresDto;
 import com.ssic.education.common.dto.SupplierReviewedDto;
 import com.ssic.education.common.government.service.AreaService;
 import com.ssic.education.common.government.service.EduSchoolService;
+import com.ssic.education.common.government.service.ProLedgerService;
 import com.ssic.education.common.government.service.ProPackagesService;
 import com.ssic.education.common.government.service.ProSupplierService;
+import com.ssic.education.common.government.service.ProWaresService;
+import com.ssic.education.common.service.IEduSchoolSupplierService;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.constants.SchoollevelEnum;
 import com.ssic.education.utils.model.PageQuery;
@@ -51,10 +56,19 @@ public class EduSchoolController extends BaseController{
 	private EduSchoolService eduSchoolService;
 	
 	@Autowired
+	private IEduSchoolSupplierService iEduSchoolSupplierService;
+	
+	@Autowired
 	private ProPackagesService proPackagesService;
 	
 	@Autowired
 	private ProSupplierService proSupplierService;
+	
+	@Autowired
+	private ProLedgerService proLedgerService;
+	
+	@Autowired
+	private ProWaresService proWaresService;
 	
 	@Autowired
 	private AreaService areaService;
@@ -92,23 +106,49 @@ public class EduSchoolController extends BaseController{
 	  @return
 	 */
 	@RequestMapping(value = "/details")
-	public ModelAndView details(ProPackagesDto dto) throws ParseException{
+	public ModelAndView details(ProPackagesDto dto,PageQuery query) throws ParseException{
 		ModelAndView mv = getModelAndView();
+		SimpleDateFormat sdf=new SimpleDateFormat(DateUtils.YMD_DASH);  
+		String str=sdf.format(new Date()); 
+		if (StringUtils.isNotBlank(dto.getSupplyDateStr())) {
+			dto.setSupplyDate(sdf.parse(dto.getSupplyDateStr()));
+		} else {
+			dto.setSupplyDate(new Date());
+		}
 		EduSchoolDto eduSchoolDto = eduSchoolService.findById(dto.getCustomerId());
 		List<ProSupplierDto> proSupplierDtos = eduSchoolService.getSupplier(dto.getCustomerId());
 		List<ProPackagesDto> proPackagesDtos = proPackagesService.getProPackages(dto);
-		mv.setViewName("/school/menu");
-		SimpleDateFormat sdf=new SimpleDateFormat(DateUtils.YMD_DASH);  
-		String str=sdf.format(new Date()); 
-		if (null == dto.getSupplyDate()) {
-			dto.setSupplyDate(new Date());
-		}
+		EduSchoolSupplierDto eduSchoolSupplierDto = new EduSchoolSupplierDto();
+		eduSchoolSupplierDto.setSchoolId(dto.getCustomerId());
+		EduSchoolSupplierDto eduSchoolSupplierDtos= iEduSchoolSupplierService.searchEduSchoolSupplierDto(eduSchoolSupplierDto);
+		PageResult<ProWaresDto> mWares = queryWares(eduSchoolSupplierDtos.getSupplierId(), query, false);
+		ProSupplierDto proSupplierDto = new ProSupplierDto();
+		proSupplierDto.setId(eduSchoolSupplierDtos.getSupplierId());
+		PageResult<ProSupplierDto> mSuppliers = queryMaterialSupplier(proSupplierDto, query);
+		mv.setViewName("/school/menu_city");		
 		mv.addObject("dto", dto);
+		mv.addObject("mWares", mWares);
 		mv.addObject("eduSchoolDto", eduSchoolDto);
 		mv.addObject("proSupplierDtos", proSupplierDtos);
 		mv.addObject("level", SchoollevelEnum.values());
 		mv.addObject("proPackagesDtos", proPackagesDtos);
+		mv.addObject("mSuppliers", mSuppliers);
 		return mv;
+	}
+	
+	private PageResult<ProWaresDto> queryWares(String supplierId, PageQuery query, boolean dishes){
+		query.setPageSize(10);
+		ProWaresDto params = new ProWaresDto();
+		params.setSupplierId(supplierId);
+//		params.setDishes(dishes);
+		PageResult<ProWaresDto> results = proWaresService.queryWaresByParams(params, query);
+		return results;
+	}
+	
+	private PageResult<ProSupplierDto> queryMaterialSupplier(ProSupplierDto dto, PageQuery query){
+		query.setPageSize(10);
+		PageResult<ProSupplierDto> results = proLedgerService.findPage(dto, query);
+		return results;
 	}
 	
 	@RequestMapping(value = "/checkList")

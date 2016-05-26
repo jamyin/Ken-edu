@@ -1,5 +1,7 @@
 package com.ssic.education.edu.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,12 @@ public class EduParentScChServiceImpl implements IEduParentScChService {
 	public int updateFollow(EduParentScChDto eduParentScChDto) {
 		EduParentScCh eduParentScCh = BeanUtils.createBeanByTarget(eduParentScChDto, EduParentScCh.class);
 		return eduParentScChDao.updateByPrimaryKeySelective(eduParentScCh);
+	}
+
+	public List<EduParentScChDto> searchParentScChDtoList(EduParentScChDto eduParentScChDto) {
+		List<EduParentScCh> resultList = eduParentScChDao.searchParentScChDtoList(eduParentScChDto);
+		List<EduParentScChDto> dataList = BeanUtils.createBeanListByTarget(resultList, EduParentScChDto.class);
+		return dataList;
 	}
 	
 

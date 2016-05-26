@@ -26,6 +26,7 @@ import com.ssic.education.common.service.ICreateImageService;
 import com.ssic.education.provider.dto.TImsUsersDto;
 import com.ssic.education.provider.pageModel.Json;
 import com.ssic.education.provider.service.IProLicenseService;
+import com.ssic.education.utils.util.PropertiesUtils;
 
 @Controller
 @RequestMapping("/corporateController")
@@ -93,6 +94,10 @@ public class CorporateController {
 		license.setCerSource((short) 0);
 		List<ProLicense> ProLicenseList = proLicenseServiceImpl
 				.lookImage(license);
+		String realPath = PropertiesUtils.getProperty("upload.look.url");
+		for (ProLicense proLicense : ProLicenseList) {
+			proLicense.setLicPic(realPath + proLicense.getLicPic());
+		}
 		request.setAttribute("ProLicenseList", ProLicenseList);
 		return "corporate/lookImage";
 	}
@@ -127,13 +132,13 @@ public class CorporateController {
 			@RequestParam(value = "imgUrl10") MultipartFile imgUrl10,
 			@RequestParam(value = "imgUrl11") MultipartFile imgUrl11,
 			ImageInfoDto image, HttpServletRequest request,
-			HttpServletResponse response ,HttpSession session) {
+			HttpServletResponse response, HttpSession session) {
 		Json json = new Json();
 		TImsUsersDto user = (TImsUsersDto) session.getAttribute("user");
 		if (user == null) {
 			return null;
 		}
-		String id=user.getSourceId();
+		String id = user.getSourceId();
 		ProLicense license = new ProLicense();
 		Map<String, Object> map1 = createImageServiceImpl.createImage(image,
 				imgUrl1, request, response);
@@ -176,8 +181,8 @@ public class CorporateController {
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl1);
-			int n=proLicenseServiceImpl.alterImage(license);
-			if(n==0){
+			int n = proLicenseServiceImpl.alterImage(license);
+			if (n == 0) {
 				proLicenseServiceImpl.saveLicense(license);
 			}
 		}
@@ -186,8 +191,8 @@ public class CorporateController {
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl1);
-			int n=proLicenseServiceImpl.alterImage(license);
-			if(n==0){
+			int n = proLicenseServiceImpl.alterImage(license);
+			if (n == 0) {
 				proLicenseServiceImpl.saveLicense(license);
 			}
 		}
@@ -196,8 +201,8 @@ public class CorporateController {
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl1);
-			int n=proLicenseServiceImpl.alterImage(license);
-			if(n==0){
+			int n = proLicenseServiceImpl.alterImage(license);
+			if (n == 0) {
 				proLicenseServiceImpl.saveLicense(license);
 			}
 		}
@@ -211,8 +216,8 @@ public class CorporateController {
 			license.setCerSource((short) 0);
 			String uuid = UUID.randomUUID().toString();
 			license.setId(uuid);
-			int n=proLicenseServiceImpl.alterImage(license);
-			if(n==0){
+			int n = proLicenseServiceImpl.alterImage(license);
+			if (n == 0) {
 				proLicenseServiceImpl.saveLicense(license);
 			}
 		}
@@ -221,8 +226,8 @@ public class CorporateController {
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl1);
-			int n=proLicenseServiceImpl.alterImage(license);
-			if(n==0){
+			int n = proLicenseServiceImpl.alterImage(license);
+			if (n == 0) {
 				proLicenseServiceImpl.saveLicense(license);
 			}
 		}
@@ -231,8 +236,8 @@ public class CorporateController {
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl1);
-			int n=proLicenseServiceImpl.alterImage(license);
-			if(n==0){
+			int n = proLicenseServiceImpl.alterImage(license);
+			if (n == 0) {
 				proLicenseServiceImpl.saveLicense(license);
 			}
 		}
@@ -241,8 +246,8 @@ public class CorporateController {
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl1);
-			int n=proLicenseServiceImpl.alterImage(license);
-			if(n==0){
+			int n = proLicenseServiceImpl.alterImage(license);
+			if (n == 0) {
 				proLicenseServiceImpl.saveLicense(license);
 			}
 		}
@@ -251,8 +256,8 @@ public class CorporateController {
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl1);
-			int n=proLicenseServiceImpl.alterImage(license);
-			if(n==0){
+			int n = proLicenseServiceImpl.alterImage(license);
+			if (n == 0) {
 				proLicenseServiceImpl.saveLicense(license);
 			}
 		}
@@ -261,8 +266,8 @@ public class CorporateController {
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl1);
-			int n=proLicenseServiceImpl.alterImage(license);
-			if(n==0){
+			int n = proLicenseServiceImpl.alterImage(license);
+			if (n == 0) {
 				proLicenseServiceImpl.saveLicense(license);
 			}
 		}
@@ -271,8 +276,8 @@ public class CorporateController {
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl1);
-			int n=proLicenseServiceImpl.alterImage(license);
-			if(n==0){
+			int n = proLicenseServiceImpl.alterImage(license);
+			if (n == 0) {
 				proLicenseServiceImpl.saveLicense(license);
 			}
 		}
@@ -281,8 +286,8 @@ public class CorporateController {
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl1);
-			int n=proLicenseServiceImpl.alterImage(license);
-			if(n==0){
+			int n = proLicenseServiceImpl.alterImage(license);
+			if (n == 0) {
 				proLicenseServiceImpl.saveLicense(license);
 			}
 		}
