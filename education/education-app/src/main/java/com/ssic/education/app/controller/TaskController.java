@@ -178,6 +178,34 @@ public class TaskController {
 		result.setData(dto);
 		return result;
       }
+      
+      /**
+      * @Title: findReadList
+      * @Description: 发送任务
+      * @author Ken Yin  
+      * @date 2016年5月26日 上午10:50:28
+      * @return Response<EduTaskReadDto>    返回类型
+       */
+      @RequestMapping("/sendTask")
+      @ResponseBody
+      public Response<String> sendTask(EduTaskDto eduTaskDto) {
+    	  Response<String> result = new Response<String>();
+    	  if(StringUtils.isEmpty(eduTaskDto.getReceiveId())){
+    		  result.setStatus(DataStatus.HTTP_FAILE);
+    		  result.setMessage("任务接收者为空");
+    		  return result;
+    	  }
+    	  int flag = taskService.sendTask(eduTaskDto);
+    	  if(flag > 0){
+    		  result.setStatus(DataStatus.HTTP_SUCCESS);
+    		  result.setMessage("发布任务成功");
+    		  return result;
+    	  }else{
+    		  result.setStatus(DataStatus.HTTP_FAILE);
+    		  result.setMessage("发布任务失败");
+    		  return result;
+    	  }
+      }
     
 }
 

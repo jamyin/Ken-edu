@@ -1,5 +1,7 @@
 package com.ssic.education.app.service.impl;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 import com.ssic.education.utils.util.BeanUtils;
+import com.ssic.education.utils.util.UUIDGenerator;
 
 /**	
 * @ClassName: SchoolServiceImpl
@@ -67,6 +70,37 @@ public class TaskServiceImpl implements ITaskService{
 		int total = taskDao.selectReadAccount(receiveDto);
 		query.setTotal(total);
 		return new PageResult<EduTaskReadDto>(query, list);
+	}
+
+	@Override
+	public int sendTask(EduTaskDto eduTaskDto) {
+		
+		eduTaskDto.setId(UUIDGenerator.getUUID());
+		EduTask eduTask = BeanUtils.createBeanByTarget(eduTaskDto, EduTask.class);
+		int flag = taskDao.addTask(eduTask);
+		int addReceiveFlag = 0;
+		if(flag > 0){
+			String receiveId = eduTaskDto.getReceiveId();
+			String receiveIds = receiveId.substring(0,receiveId.length()-1);   //去逗号
+			String ids[] = receiveIds.split(",");
+			List<EduTaskReceiveDto> receiveDtoList = new ArrayList<EduTaskReceiveDto>();
+			for(String id: ids){
+				EduTaskReceiveDto receiveDto = new EduTaskReceiveDto();
+				receiveDto.setReceiveId(id);
+				receiveDto.setTaskId(eduTaskDto.getId());
+				
+				receiveDto.setId(UUIDGenerator.getUUID());
+				receiveDto.setReadstat(DataStatus.DISABLED);
+				receiveDto.setCreateTime(new Date());
+				receiveDto.setStat(DataStatus.ENABLED);
+				receiveDtoList.add(receiveDto);
+			}
+			addReceiveFlag = taskDao.addTaskReceiveBatch(receiveDtoList); 
+		}
+		if(flag >0 && addReceiveFlag > 0){
+			return 1;
+		}
+		return 0;
 	}
 
 	
