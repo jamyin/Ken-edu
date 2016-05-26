@@ -192,13 +192,56 @@ public class LedgerController {
 			j.setSuccess(false);
 			return j;
 		}
-		// String receiverId=
-		// List<LedgerDto> ledgers = lm.getLedger();
-		// for (LedgerDto ledger : ledgers) {
-		// ledger.setSourceId(sourceId);
-		// ledger.setWaresId(waresService.findWaresIdBySupplierId(ledger));
-		// }
-		// ledgerService.updataLedger(ledgers);
+		List<LedgerDto> ledgers = lm.getLedger();
+		ledgers.get(0).setSourceId(sourceId);
+		Date actionDate = ledgers.get(0).getActionDate();
+		if (actionDate == null) {
+			j.setMsg("配送日期不能为空");
+			j.setSuccess(false);
+			return j;
+		}
+		String receiverId = eduSchoolSupplierService
+				.findSchoolIdByReceiverId(ledgers.get(0));
+		if (receiverId == null) {
+			j.setMsg("不存在的配送点");
+			j.setSuccess(false);
+			return j;
+		}
+		for (LedgerDto ledger : ledgers) {
+			ledger.setMasterId(ledgers.get(0).getMasterId());
+			ledger.setWareBatchNo(ledgers.get(0).getWareBatchNo());
+			ledger.setActionDate(actionDate);
+			ledger.setReceiverId(receiverId);
+			ledger.setSourceId(sourceId);
+			ledger.setWaresId(waresService.findWaresIdBySupplierId(ledger));
+			if (ledger.getWaresId() == null) {
+				j.setMsg(ledger.getName() + "是错误的采购品");
+				j.setSuccess(false);
+				return j;
+			}
+			int num = ledger.getQuantity();
+			if (num == 0) {
+				j.setMsg(ledger.getName() + "错误的采购数量");
+				j.setSuccess(false);
+				return j;
+			}
+			String spce = ledger.getSpce();
+			if (num == 0) {
+				j.setMsg(ledger.getName() + "的采购规格不能为空");
+				j.setSuccess(false);
+				return j;
+			}
+			String supplierId = supplierService
+					.findSupplierIdBySourceId(ledger);
+			ledger.setSupplierId(supplierId);
+			if (ledger.getSupplierId() == null) {
+				ledger.setSupplierName(null);
+			}
+			ledger.setCreateTime(null);
+			ledger.setLastUpdateTime(ledger.getCreateTime());
+			ledger.setStat(1);
+			ledgerService.updataLedger(ledgers);
+		}
 		j = new Json();
 		j.setMsg("添加供应商成功");
 		j.setSuccess(true);
