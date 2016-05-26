@@ -84,7 +84,7 @@ public class WaresDao{
 	}
 
 
-	public String findWaresIdBySupplierId(LedgerDto ledger) {
+	public ProWaresDto findWaresIdBySupplierId(LedgerDto ledger) {
 		// TODO Auto-generated method stub
 		return exmapper.findWaresIdBySupplierId(ledger);
 	}

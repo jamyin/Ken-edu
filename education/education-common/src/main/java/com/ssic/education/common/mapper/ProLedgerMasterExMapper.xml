@@ -28,13 +28,11 @@
 		m.receiver_name
 		receiverName,
 		m.haul_status haulStatus,
-		u.`name` userName
-		FROM
+		(SELECT name FROM t_pro_users WHERE id=m.user_id) userName
+		FROM 
 		t_pro_ledger
-		l,t_pro_ledger_master m,t_pro_users u
+		l,t_pro_ledger_master m
 		WHERE
-		m.user_id=u.id
-		AND
 		m.stat = 1
 		AND
 		m.source_id
