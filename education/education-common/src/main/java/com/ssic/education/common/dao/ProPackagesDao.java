@@ -308,4 +308,46 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 		
 		return mapper.selectByExample(example);
 	}
+	
+	public List<ProPackagesDto> searchPackages(ProPackagesDto dto,PageQuery page) {
+		ProPackagesExample example = new ProPackagesExample();
+		ProPackagesExample.Criteria criteria = example.createCriteria();
+		criteria.andCustomerIdEqualTo(dto.getCustomerId());    //查询当前学校
+		if(dto.getType() != null){
+			criteria.andTypeEqualTo(dto.getType());	
+		}
+		if(dto.getSupplyPhase() != null){
+			criteria.andSupplyPhaseEqualTo(dto.getSupplyPhase());	
+		}else{
+			Date date = new Date();
+			String timeDate = DateUtils.format(date, DateUtils.YMD_DASH);
+			criteria.andSupplyDateEqualTo(DateUtils.parse(timeDate, DateUtils.YMD_DASH));
+		}
+		criteria.andStatEqualTo(DataStatus.ENABLED);
+		if (null != page) {
+            example.setOrderByClause("stat desc,create_time desc limit " + page.getStartNum() + "," + page.getPageSize());
+        } else {
+            example.setOrderByClause("create_time desc");
+        }
+		List<ProPackagesDto> proPackagesDtos =BeanUtils.createBeanListByTarget(mapper.selectByExample(example), ProPackagesDto.class);
+		for (ProPackagesDto proPackagesDto : proPackagesDtos) {
+			ProDishesExample exampleDis = new ProDishesExample();
+			ProDishesExample.Criteria criteriaDis = exampleDis.createCriteria();
+			if (StringUtils.isNotBlank(proPackagesDto.getId())) {
+				criteriaDis.andPackageIdEqualTo(proPackagesDto.getId());
+			}	
+			criteriaDis.andStatEqualTo(DataStatus.ENABLED);
+			List<ProDishesDto> proDishesDtos = BeanUtils.createBeanListByTarget(disMapper.selectByExample(exampleDis), ProDishesDto.class);
+			proPackagesDto.setProDishesDtos(proDishesDtos);
+			ProNutritionalExample exampleNu = new ProNutritionalExample();
+			ProNutritionalExample.Criteria criteriaNu = exampleNu.createCriteria();
+			if (StringUtils.isNotBlank(proPackagesDto.getId())) {
+				criteriaNu.andPackageIdEqualTo(proPackagesDto.getId());
+			}
+			criteriaNu.andStatEqualTo(DataStatus.ENABLED);
+			List<ProNutritionalDto> proNutritionalDtos = BeanUtils.createBeanListByTarget(nuMapper.selectByExample(exampleNu), ProNutritionalDto.class);
+			proPackagesDto.setProNutritionalDtos(proNutritionalDtos);
+		}
+		return proPackagesDtos;
+	}
 }

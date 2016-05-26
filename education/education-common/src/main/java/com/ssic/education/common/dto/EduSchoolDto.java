@@ -21,23 +21,27 @@ import lombok.NoArgsConstructor;
 public class EduSchoolDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private String id;
-	private String committeeId;
-	private String schoolName;
-	private String schoolThum;
-	private String mobileNo;
-	private String address;
-	private String longitude;
-	private String latitude;
-	private String level;
-	private String province;
-	private String city;
-	private String area;
-	private Byte reviewed;//0:未审批，1：通过，2：不通过
-	private Date createTime;
-	private Date lastUpdateTime;
-	private Integer stat;
+    private String id;
+    private String committeeId;
+    private String schoolName;
+    private String schoolThum;
+    private String mobileNo;
+    private String contacts;
+    private String address;
+    private String longitude;
+    private String latitude;
+    private String level;
+    private String province;
+    private String city;
+    private String area;
+    private String supplierId;
+    private Byte reviewed;   //0:未审批，1：通过，2：不通过
+    private Date createTime;
+    private Date lastUpdateTime;
+    private Integer stat;
+	
 	private List<ProPackagesDto> packagesDtoList;
+	
 	private Integer source;
 	private String waresName;
 	private Integer waresType;

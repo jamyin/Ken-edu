@@ -10,14 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.ssic.education.common.dao.ProDishesDao;
 import com.ssic.education.common.dao.ProNutritionalDao;
 import com.ssic.education.common.dao.ProPackagesDao;
 import com.ssic.education.common.dao.ProWaresDao;
 import com.ssic.education.common.dto.ProPackagesDto;
-import com.ssic.education.common.dto.ProWaresDto;
 import com.ssic.education.common.government.service.ProPackagesService;
 import com.ssic.education.common.pojo.ProDishes;
 import com.ssic.education.common.pojo.ProNutritional;
@@ -157,5 +154,13 @@ public class ProPackagesServiceImpl implements ProPackagesService{
 			return 1;
 		}
 		return 0;
+	}
+
+	@Override
+	public PageResult<ProPackagesDto> searchPackages(ProPackagesDto dto,
+			PageQuery page) {
+		List<ProPackagesDto> results = proPackagesDao.fingPackagesPage(dto, page);
+		page.setTotal(proPackagesDao.fingPackagesCount(dto));
+		return new PageResult<>(page, results);
 	}
 }

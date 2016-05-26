@@ -32,4 +32,14 @@ public interface ProPackagesService {
 	* @return int    返回类型
 	 */
 	public int addPackage(ProPackagesDto dto);
+	
+	/**
+	* @Title: searchPackages
+	* @Description: 查询学校菜谱
+	* @author Ken Yin  
+	* @date 2016年5月26日 下午6:11:44
+	* @return PageResult<ProPackagesDto>    返回类型
+	 */
+	public PageResult<ProPackagesDto> searchPackages(ProPackagesDto dto,
+			PageQuery page);
 }
