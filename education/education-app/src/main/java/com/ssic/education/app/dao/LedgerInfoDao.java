@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ssic.education.app.dto.LedgerInfoDto;
 import com.ssic.education.app.dto.LedgerListDto;
+import com.ssic.education.app.dto.LedgerMasterInfoDto;
 import com.ssic.education.app.dto.LedgerMasterListDto;
 import com.ssic.education.app.mapper.LedgerInfoExMapper;
 import com.ssic.education.handle.mapper.ProLedgerMapper;
@@ -101,4 +102,19 @@ public class LedgerInfoDao {
 		List<ProLedger> proLedgers = ledgerMapper.selectByExample(example);
 		return proLedgers;
 	}
+
+	/**
+	 * 根据ID查询ProLedgerMaster
+	 * findProLedgerMasterInfo：一句话描述方法功能
+	 * @param proLedgerMaster
+	 * @return
+	 * @exception	
+	 * @author Administrator
+	 * @date 2016年5月27日 下午2:06:51
+	 */
+	public LedgerMasterInfoDto findProLedgerMasterInfo(String id) {
+		ProLedgerMaster ledgerMaster = ledgerMasterMapper.selectByPrimaryKey(id);
+		return BeanUtils.createBeanByTarget(ledgerMaster, LedgerMasterInfoDto.class);
+	}
+
 }

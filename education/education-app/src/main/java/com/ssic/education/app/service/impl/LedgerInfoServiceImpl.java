@@ -9,12 +9,15 @@ import org.springframework.stereotype.Service;
 import com.ssic.education.app.dao.LedgerInfoDao;
 import com.ssic.education.app.dao.SupplierInfoDao;
 import com.ssic.education.app.dto.LedgerInfoDto;
+import com.ssic.education.app.dto.LedgerMasterInfoDto;
 import com.ssic.education.app.dto.LedgerMasterListDto;
+import com.ssic.education.app.dto.ledgerDetailDto;
 import com.ssic.education.app.service.ILedgerInfoService;
 import com.ssic.education.handle.pojo.ProLedger;
 import com.ssic.education.handle.pojo.ProLedgerMaster;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
+import com.ssic.education.utils.util.BeanUtils;
 
 /**		
  * <p>Title: LedgerInfoServiceImpl </p>
@@ -61,13 +64,30 @@ public class LedgerInfoServiceImpl implements ILedgerInfoService {
 		return new PageResult<LedgerMasterListDto>(page, result);
 	}
 
+	//根据Id查询配送信息并带出批次列表
+	public LedgerMasterInfoDto findMasterById(String id, PageQuery page) {
+		LedgerMasterInfoDto ledgerMaster = this.ledgerInfoDao.findProLedgerMasterInfo(id);
+		ProLedger Ledger = new ProLedger();
+		Ledger.setMasterId(ledgerMaster.getId());
+		List<ProLedger> ProLedgerString = ledgerInfoDao.findProLedgerList(Ledger, null);
+		List<ProLedger> ProLedgerList = ledgerInfoDao.findProLedgerList(Ledger, page);
+		if (ProLedgerString != null) {
+			ledgerMaster.setStock(listToString(ProLedgerString));
+			List<ledgerDetailDto> ldd = BeanUtils.createBeanListByTarget(ProLedgerList, ledgerDetailDto.class);
+			ledgerMaster.setResultLedger((new PageResult<ledgerDetailDto>(page, ldd)));
+			ledgerMaster.setOutset(supplierInfoDao.getSupplierName(ledgerMaster.getSourceId()));
+		}
+		//TODO 还缺少采购拍列表
+		return ledgerMaster;
+	}
+
 	/**
 	 * List转String
 	 * listToString：一句话描述方法功能
 	 * @param list
 	 * @return
 	 * @exception	
-	 * @author Administrator
+	 * @author SeanYoung
 	 * @date 2016年5月26日 下午3:31:15
 	 */
 	public String listToString(List<ProLedger> list) {
