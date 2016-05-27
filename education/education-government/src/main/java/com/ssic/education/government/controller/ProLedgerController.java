@@ -35,6 +35,7 @@ public class ProLedgerController extends BaseController{
 		ModelAndView mv = this.getModelAndView();
 		LedgerDto ledgerDto = new LedgerDto();
 		ledgerDto.setReceiverId(dto.getCustomerId());
+		ledgerDto.setReceiverName(dto.getWaresNames());
 		PageResult<LedgerDto> ledgerDtos = proLedgerService.selectLedgerPage(ledgerDto,query);
 		mv.setViewName("/ledger/distribution_list");
 		mv.addObject("pageList", ledgerDtos);

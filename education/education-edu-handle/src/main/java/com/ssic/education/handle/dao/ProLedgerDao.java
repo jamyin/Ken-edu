@@ -133,15 +133,15 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 	}
 	
 	public List<LedgerDto> selectLedgerList(LedgerDto ledgerDto) {
-		return lmExMapper.selectLedgerList(ledgerDto.getMasterId(), ledgerDto.getReceiverId(),ledgerDto.getReceiverName());
+		return lmExMapper.selectLedgerList(ledgerDto);
 	}
 	
 	public List<LedgerDto> selectLedgerListOrderby(LedgerDto ledgerDto,PageQuery page) {
-		return lmExMapper.selectLedgerListOrderby(ledgerDto.getMasterId(), ledgerDto.getReceiverId(),ledgerDto.getReceiverName(), page);
+		return lmExMapper.selectLedgerListOrderby(ledgerDto, page);
 	}
 	
 	public long countLedgerListOrderby(LedgerDto ledgerDto) {
-		return lmExMapper.countLedgerListOrderby(ledgerDto.getMasterId(), ledgerDto.getReceiverId(),ledgerDto.getReceiverName());
+		return lmExMapper.countLedgerListOrderby(ledgerDto);
 	}
 	public List<ProSupplierDto> findPage(ProSupplierDto dto, PageQuery page) {
 		return exMapper.selectSupplierByReceiverId(dto, page);
