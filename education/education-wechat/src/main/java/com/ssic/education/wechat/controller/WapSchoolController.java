@@ -17,6 +17,7 @@ import com.ssic.education.handle.service.IEduCanteenService;
 import com.ssic.education.handle.service.IEduSchoolSupplierService;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.Response;
+import com.ssic.education.utils.util.StringUtils;
 
 /**
  * 
@@ -76,8 +77,16 @@ public class WapSchoolController extends BaseController{
 	@ResponseBody
 	public Response<List<EduSchoolDto>> search(EduSchoolDto eduSchoolDto){
 		Response<List<EduSchoolDto>> result = new Response<List<EduSchoolDto>>();
+		List<EduSchoolDto> dataList = null;
+		if(StringUtils.isEmpty(eduSchoolDto.getSchoolName())){
+			result.setStatus(DataStatus.HTTP_FAILE);
+			result.setMessage("未找到相对应的学校信息");
+			return result;
+		}
 		
-		List<EduSchoolDto> dataList = eduSchoolService.searchEduScholDtoList(eduSchoolDto);
+		eduSchoolDto.setSchoolName(StringUtils.trim(eduSchoolDto.getSchoolName()));
+		dataList = eduSchoolService.searchEduScholDtoList(eduSchoolDto);
+		
 		if(dataList!=null && dataList.size()>0){
 			result.setData(dataList);
 		}else{

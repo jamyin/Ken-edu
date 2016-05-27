@@ -107,6 +107,7 @@ public class EduSchoolController extends BaseController{
 	 */
 	@RequestMapping(value = "/details")
 	public ModelAndView details(ProPackagesDto dto,PageQuery query) throws ParseException{
+		query.setPageSize(5);
 		ModelAndView mv = getModelAndView();
 		SimpleDateFormat sdf=new SimpleDateFormat(DateUtils.YMD_DASH);  
 		String str=sdf.format(new Date()); 
@@ -121,10 +122,14 @@ public class EduSchoolController extends BaseController{
 		EduSchoolSupplierDto eduSchoolSupplierDto = new EduSchoolSupplierDto();
 		eduSchoolSupplierDto.setSchoolId(dto.getCustomerId());
 		EduSchoolSupplierDto eduSchoolSupplierDtos= iEduSchoolSupplierService.searchEduSchoolSupplierDto(eduSchoolSupplierDto);
-		PageResult<ProWaresDto> mWares = queryWares(eduSchoolSupplierDtos.getSupplierId(), query, false);
+		PageResult<ProWaresDto> mWares = new PageResult<ProWaresDto>();
 		ProSupplierDto proSupplierDto = new ProSupplierDto();
-		proSupplierDto.setId(eduSchoolSupplierDtos.getSupplierId());
-		PageResult<ProSupplierDto> mSuppliers = queryMaterialSupplier(proSupplierDto, query);
+		PageResult<ProSupplierDto> mSuppliers = new PageResult<ProSupplierDto>();
+		if (null != eduSchoolSupplierDtos && StringUtils.isNotBlank(eduSchoolSupplierDtos.getSupplierId())) {
+			 mWares = queryWares(eduSchoolSupplierDtos.getSupplierId(), query, false);
+			 proSupplierDto.setId(eduSchoolSupplierDtos.getSupplierId());
+			 mSuppliers = queryMaterialSupplier(proSupplierDto, query);
+		}
 		LedgerDto ledgerDto = new LedgerDto();
 		ledgerDto.setReceiverId(dto.getCustomerId());
 		PageResult<LedgerDto> ledgerDtos = proLedgerService.selectLedgerPage(ledgerDto,query);
