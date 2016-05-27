@@ -17,6 +17,7 @@ import com.ssic.education.handle.service.IEduCanteenService;
 import com.ssic.education.handle.service.IEduSchoolSupplierService;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.Response;
+import com.ssic.education.utils.util.StringUtils;
 
 /**
  * 
@@ -76,8 +77,11 @@ public class WapSchoolController extends BaseController{
 	@ResponseBody
 	public Response<List<EduSchoolDto>> search(EduSchoolDto eduSchoolDto){
 		Response<List<EduSchoolDto>> result = new Response<List<EduSchoolDto>>();
+		List<EduSchoolDto> dataList = null;
+		if(!StringUtils.isEmpty(eduSchoolDto.getSchoolName())){
+			 dataList = eduSchoolService.searchEduScholDtoList(eduSchoolDto);	
+		}
 		
-		List<EduSchoolDto> dataList = eduSchoolService.searchEduScholDtoList(eduSchoolDto);
 		if(dataList!=null && dataList.size()>0){
 			result.setData(dataList);
 		}else{
