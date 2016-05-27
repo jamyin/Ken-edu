@@ -19,6 +19,7 @@
 			AND m.receiver_name like "%"#{ledgerDto.receiverName}"%"
 		</if>
 	</select>
+<<<<<<< HEAD
 	
 	<select id="selectLedgerList" resultType="com.ssic.educateion.common.dto.LedgerDto" parameterType="java.lang.String">
 		SELECT a.id,b.id as masterId,b.action_date as actionDate,b.receiver_id as receiverId,b.receiver_name as receiverName,b.user_id as userId,b.source_id as sourceId,b.ware_batch_no as wareBatchNo,
@@ -76,6 +77,8 @@
 		GROUP BY b.ware_batch_no) t
 	</select>
 	
+=======
+>>>>>>> branch 'master' of http://192.168.1.231/group-one/education.git
 	<select id="findAllLedger" resultType="com.ssic.educateion.common.dto.LedgerDto">
 		SELECT DISTINCT
 		m.id masterId,
@@ -102,6 +105,9 @@
 		</if>
 		<if test="ledgerDto.receiverName!=null and  ledgerDto.receiverName!=''">
 			AND m.receiver_name like "%"#{ledgerDto.receiverName}"%"
+		</if>
+		<if test="ph.rows!=0 and ph!=null">
+			limit #{ph.beginRow},#{ph.rows}
 		</if>
 	</select>
 	<insert id="insertLedgerMaster" parameterType="java.util.List">
@@ -155,7 +161,7 @@
 			set
 			stat = 0
 			WHERE
-			ware_batch_no=#{wareBatchNo}
+			id=#{masterId}
 			AND
 			source_id=#{sourceId}
 	</update>

@@ -140,10 +140,12 @@ public class LedgerController {
 			ledger.setSourceId(sourceId);
 			ProWaresDto warerDto = waresService.findWaresBySupplierId(ledger);
 			ledger.setWaresId(warerDto.getId());
-			if(!ledgers.get(0).getActionDate().after(ledger.getProductionDate())){
-				j.setMsg(ledger.getName() + "错误的进货日期或生产日期");
-				j.setSuccess(false);
-				return j;
+			if(ledger.getProductionDate()!=null){
+				if(!ledgers.get(0).getActionDate().after(ledger.getProductionDate())){
+					j.setMsg(ledger.getName() + "错误的进货日期或生产日期");
+					j.setSuccess(false);
+					return j;
+				}
 			}
 			if (ledger.getWaresId() == null) {
 				j.setMsg(ledger.getName() + "是错误的采购品");
@@ -180,7 +182,7 @@ public class LedgerController {
 	}
 
 	@RequestMapping("/editPage")
-	public String editPage(String wareBatchNo, HttpServletRequest request,
+	public String editPage(String masterId, HttpServletRequest request,
 			HttpSession session) {
 		TImsUsersDto user = (TImsUsersDto) session.getAttribute("user");
 		if (user == null) {
@@ -188,15 +190,15 @@ public class LedgerController {
 		}
 		List<TImsUsersDto> driver = userService.findAllDriver(user
 				.getSourceId());
-		List<LedgerDto> list = ledgerService.findLedgerById(user.getSourceId(),
-				wareBatchNo);
+		List<LedgerDto> list = ledgerService.findLedgerByMasterId(user.getSourceId(),
+				masterId);
 		request.setAttribute("Driver", driver);
 		request.setAttribute("LedgerList", list);
 		return "ledger/ledgerEdit";
 	}
 	
 	@RequestMapping("/showPage")
-	public String showPage(String wareBatchNo, HttpServletRequest request,
+	public String showPage(String masterId, HttpServletRequest request,
 			HttpSession session) {
 		TImsUsersDto user = (TImsUsersDto) session.getAttribute("user");
 		if (user == null) {
@@ -204,8 +206,8 @@ public class LedgerController {
 		}
 		List<TImsUsersDto> driver = userService.findAllDriver(user
 				.getSourceId());
-		List<LedgerDto> list = ledgerService.findLedgerById(user.getSourceId(),
-				wareBatchNo);
+		List<LedgerDto> list = ledgerService.findLedgerByMasterId(user.getSourceId(),
+				masterId);
 		request.setAttribute("Driver", driver);
 		request.setAttribute("LedgerList", list);
 		return "ledger/ledgerShow";
@@ -245,10 +247,12 @@ public class LedgerController {
 			ledger.setSourceId(sourceId);
 			ProWaresDto warerDto = waresService.findWaresBySupplierId(ledger);
 			ledger.setWaresId(warerDto.getId());
-			if(ledgers.get(0).getActionDate().after(ledger.getProductionDate())){
-				j.setMsg(ledger.getName() + "错误的进货日期或生产日期");
-				j.setSuccess(false);
-				return j;
+			if(ledger.getProductionDate()!=null){
+				if(!ledgers.get(0).getActionDate().after(ledger.getProductionDate())){
+					j.setMsg(ledger.getName() + "错误的进货日期或生产日期");
+					j.setSuccess(false);
+					return j;
+				}
 			}
 			if (ledger.getWaresId() == null) {
 				j.setMsg(ledger.getName() + "是错误的采购品");
@@ -286,7 +290,7 @@ public class LedgerController {
 
 	@RequestMapping("/deleteLedger")
 	@ResponseBody
-	public Json deleteLedger(String wareBatchNo, HttpSession session) {
+	public Json deleteLedger(String masterId, HttpSession session) {
 		Json j = new Json();
 		TImsUsersDto user = (TImsUsersDto) session.getAttribute("user");
 		if (user == null) {
@@ -294,7 +298,7 @@ public class LedgerController {
 			j.setSuccess(false);
 			return j;
 		}
-		int r = ledgerService.deleteLedger(user.getSourceId(), wareBatchNo);
+		int r = ledgerService.deleteLedger(user.getSourceId(), masterId);
 		j.setMsg("删除供应商成功");
 		j.setSuccess(true);
 		return j;

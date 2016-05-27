@@ -25,6 +25,6 @@ public interface ProLedgerMasterExMapper {
 
 	int updateLedgerMaster(@Param("ledger")LedgerDto ledgerDto);
 
-	int deleteLedgerMaster(@Param("sourceId")String sourceId,@Param("wareBatchNo") String wareBatchNo);
+	int deleteLedgerMaster(@Param("sourceId")String sourceId,@Param("masterId") String masterId);
 
 }
