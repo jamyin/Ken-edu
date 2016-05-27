@@ -1,5 +1,7 @@
 package com.ssic.education.handle.dao;
 
+import java.util.List;
+
 import lombok.Getter;
 
 import org.apache.commons.lang3.StringUtils;
@@ -21,7 +23,7 @@ public class EduParentPackCommentDao extends MyBatisBaseDao<EduParentPackComment
 	@Getter
 	private EduParentPackCommentMapper mapper;
 
-	public void searchComment(EduParentPackCommentDto eduParentPackCommentDto) {
+	public List<EduParentPackComment> searchComment(EduParentPackCommentDto eduParentPackCommentDto) {
 		EduParentPackCommentExample example = new EduParentPackCommentExample();
 		Criteria criteria = example.createCriteria();
 		
@@ -30,7 +32,7 @@ public class EduParentPackCommentDao extends MyBatisBaseDao<EduParentPackComment
 		}
 
 		criteria.andStatEqualTo(DataStatus.ENABLED);
-		mapper.selectByExample(example);
+		return mapper.selectByExample(example);
 	}
 
 }
