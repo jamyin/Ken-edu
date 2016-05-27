@@ -75,7 +75,6 @@
 		</if>
 		GROUP BY b.ware_batch_no) t
 	</select>
-	
 	<select id="findAllLedger" resultType="com.ssic.educateion.common.dto.LedgerDto">
 		SELECT DISTINCT
 		m.id masterId,

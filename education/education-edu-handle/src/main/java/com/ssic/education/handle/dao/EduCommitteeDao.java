@@ -11,6 +11,7 @@ import com.ssic.educateion.common.dto.EduCommitteeDto;
 import com.ssic.education.handle.mapper.EduCommitteeMapper;
 import com.ssic.education.handle.pojo.EduCommittee;
 import com.ssic.education.handle.pojo.EduCommitteeExample;
+import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.mybatis.MyBatisBaseDao;
 
 @Repository
@@ -22,8 +23,13 @@ public class EduCommitteeDao extends MyBatisBaseDao<EduCommittee> {
 
 	public List<EduCommittee> queryCommittee(EduCommitteeDto eduCommitteeDto) {
 		 EduCommitteeExample example = new  EduCommitteeExample();
-		//EduAreaExample.Criteria criteria = example.createCriteria();
+		 EduCommitteeExample.Criteria criteria = example.createCriteria();
         //assemblyParams(eduAreaDto, criteria);
+		 
+		 
+		 
+		criteria.andStatEqualTo(Short.valueOf("1"));
+		 
         example.setOrderByClause("name ASC");
 		return mapper.selectByExample(example);
 	}
