@@ -1,6 +1,7 @@
 package com.ssic.education.government.controller;
 
 import java.text.ParseException;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -43,4 +44,17 @@ public class ProLedgerController extends BaseController{
 		return mv;
 	}
 	
+	@RequestMapping("/detail")
+	public ModelAndView detail(LedgerDto dto) {
+		ModelAndView mv = this.getModelAndView();
+		List<LedgerDto> ledgerDtos = proLedgerService.findById(dto);
+		LedgerDto ledgerDto = new LedgerDto();
+		mv.setViewName("/ledger/distribution_detail");
+		if (null !=ledgerDtos && ledgerDtos.size()>0) {
+			ledgerDto = ledgerDtos.get(0);
+		}
+		mv.addObject("ledgerDtos", ledgerDtos);
+		mv.addObject("ledgerDto", ledgerDto);
+		return mv;
+	}
 }

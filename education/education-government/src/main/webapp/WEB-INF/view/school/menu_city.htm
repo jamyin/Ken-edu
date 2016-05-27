@@ -135,7 +135,7 @@
 	                      </#if></span>
 	                      <span class="dis_start ellipsis">${(ledgerDto.supplierName)!}</span>
 	                      <span class="dis_status"><#if ledgerDto.haulStatus == 0>未配送 </#if><#if ledgerDto.haulStatus == 1>配送中</#if><#if ledgerDto.haulStatus == 2>已配送</#if></span>
-	                      <span class="detail">详情</span>
+	                      <a style="cursor: pointer;" href="/pro/ledger/detail.htm?wareBatchNo=${(ledgerDto.wareBatchNo)!}"><span style="cursor: pointer;" class="detail">详情</span></a>
 	                    </li>
                   	</#list>
                   </#if>
@@ -226,18 +226,20 @@
                 </div>
 
               </div>
-              <div class="footer">
-  上海市中小学校学生午餐综合管理平台<br>CopyRight© 2016上海市天坊信息技术有限公司
-</div>
+              <#include "/common/footer.htm" />
 
               <script type="text/javascript">
               $(function(){
                 // debugger;
                 $(".nav").find("a").removeClass("cur");
-                $(".nav").find("a:eq(1)").addClass("cur");
+                $(".nav").find("a:eq(2)").addClass("cur");
 
                 fix_table();
               });
+              function changeDate(){
+          		var date = $('#date').val();
+          		window.location.href = '/edu/school/details.htm?customerId=${(dto.customerId)!}&supplierId=${(dto.supplierId)!}&supplyDateStr='+date;
+          	  }
               function fix_table(){
                 var Cell_Count = $('.row').length
                 for(var i=0;i<Cell_Count;i++){

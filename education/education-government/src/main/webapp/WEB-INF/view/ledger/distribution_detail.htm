@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <#include "/common/head.htm" />
+  <link rel="stylesheet" href="/static/css/distribution_detail.css"  media="screen" charset="utf-8">
+</head>
+<body>
+<#include "/common/nav.htm" />
+
+  <div class="wrapperA">
+    <div class="cur_postion">
+      <span class="cp">当前位置:</span><a href="#">安全追溯</a><span class="gt">&gt;</span><a href="#">采购品列表</a><span class="gt">&gt;</span><a href="#">采购品详情</a>
+    </div>
+    <div class="track_box">
+      <div class="dis_info">
+        <span class="d_1"><label for="">配送号：</label><span class="d_2">${(ledgerDto.wareBatchNo)!}</span></span>
+        <span class="d_1"><label for="">配货日期：</label><span class="d_2">${ledgerDto.actionDate?string("yyyy-MM-dd")}</span></span>
+        <span class="d_1"><label for="">出发点：</label><span class="d_2">${(ledgerDto.wareBatchNo)!}</span></span>
+        <span class="d_1"><label for="">状态：</label><span class="d_2"><#if ledgerDto.haulStatus == 0>未配送 </#if><#if ledgerDto.haulStatus == 1>配送中</#if><#if ledgerDto.haulStatus == 2>已配送</#if></span></span>
+      </div>
+      <ul class="distribution_ul">
+        <li class="head">
+          <span class="ct1">采购品</span>
+          <span class="ct2">数量</span>
+          <span class="ct3">规格</span>
+          <span class="ct4">生产日期</span>
+          <span class="ct5">生产企业</span>
+          <span class="ct6">采购品供应商</span>
+        </li>
+        <#if ledgerDtos??>
+        <#list ledgerDtos as ledgerDtos>
+        	<li>
+	          <span class="ct1"><a href="/pro/wares/details.htm?id=${(ledgerDtos.waresId)!}">${(ledgerDtos.name)!}</a></span>
+	          <span class="ct2">${(ledgerDtos.quantity)!}</span>
+	          <span class="ct3">${(ledgerDtos.spce)!}</span>
+	          <span class="ct4">${ledgerDto.productionDate?string("yyyy-MM-dd")}</span>
+	          <span class="ct5">${(ledgerDtos.productionName)!}</span>
+	          <span class="ct6"><a href="/pro/supplier/detail.htm?id=${(ledgerDtos.supplierId)!}&source=1">${(ledgerDtos.supplierName)!}</a></span>
+	        </li>
+        </#list>
+        </#if>
+      </ul>
+
+      <div class="info">
+        <p class="driver"><span>${(ledgerDto.driverName)!}</span></p>
+        <p>出发点：<span></span></p>
+        <p>货物：<span></span></p>
+        <p>目的地：<span>${(ledgerDto.receiverName)!}</span></p>
+        <p>到达时间：<span></span></p>
+      </div>
+      <div class="map"><img src="/static/img/map.jpg" border="0"></div>
+    </div>
+  </div>
+
+  <#include "/common/footer.htm" />
+
+</body>
+</html>
