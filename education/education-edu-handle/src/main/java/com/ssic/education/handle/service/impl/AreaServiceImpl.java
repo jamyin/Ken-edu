@@ -25,7 +25,7 @@ public class AreaServiceImpl implements AreaService {
     @Autowired
     private AreaDao areaDao;
 
-    @Override
+    
     public List<EduAreaDto> queryAll() {
         List<EduArea> areaList = areaDao.findAreaList();
         if (null != areaList && areaList.size() > 0){

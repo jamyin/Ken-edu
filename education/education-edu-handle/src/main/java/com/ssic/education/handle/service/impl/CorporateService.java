@@ -12,7 +12,7 @@ public class CorporateService implements ICorporateService{
 	@Autowired
 	private ProSupplierDao supplierDao;
 
-	@Override
+	
 	public ProSupplier findSupplierById(String sourceId) {
 		return supplierDao.findSupplierById(sourceId);
 	}

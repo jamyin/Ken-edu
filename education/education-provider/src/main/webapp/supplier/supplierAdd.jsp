@@ -66,7 +66,7 @@
 						</tr>	
 			<tr>
 				<th>供应商编码</th>
-						<td><input name="SupplierCode" type="text" class="easyui-validatebox span2"  data-options="required:true" ></td>
+						<td><input name="SupplierCode" type="text" class="easyui-validatebox span2"  ></td>
 				</tr>
 							<tr>
 				

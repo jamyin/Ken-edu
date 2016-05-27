@@ -42,7 +42,7 @@ public class ProWaresDto implements Serializable {
 
 	private Boolean dishes;
 
-	private Date crateTime;
+	private Date createTime;
 
 	private Date lastUpdateTime;
 

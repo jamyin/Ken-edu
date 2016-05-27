@@ -19,14 +19,14 @@ public class EduSchoolSupplierServiceImpl implements IEduSchoolSupplierService{
 	private EduSchoolSupplierDao eduSchoolSupplierDao;
 	
 	
-	@Override
+	
 	public List<EduSchoolSupplierDto> searchEduSchoolSupplierListDto(EduSchoolSupplierDto eduSchoolSupplierDto) {
 		List<EduSchoolSupplier> dataList = eduSchoolSupplierDao.searchEduSchoolSupplierDto(eduSchoolSupplierDto);
 		List<EduSchoolSupplierDto> resultList = BeanUtils.createBeanListByTarget(dataList, EduSchoolSupplierDto.class);
 		return resultList;
 	}
 	
-	@Override
+	
 	public EduSchoolSupplierDto searchEduSchoolSupplierDto(EduSchoolSupplierDto eduSchoolSupplierDto) {
 		List<EduSchoolSupplier> dataList = eduSchoolSupplierDao.searchEduSchoolSupplierDto(eduSchoolSupplierDto);
 		List<EduSchoolSupplierDto> resultList = BeanUtils.createBeanListByTarget(dataList, EduSchoolSupplierDto.class);
@@ -36,7 +36,7 @@ public class EduSchoolSupplierServiceImpl implements IEduSchoolSupplierService{
 		return null;
 	}
 
-	@Override
+	
 	public String findSchoolIdByReceiverId(LedgerDto ledgerDto) {
 		return eduSchoolSupplierDao.findSchoolIdByReceiverId(ledgerDto);
 	}

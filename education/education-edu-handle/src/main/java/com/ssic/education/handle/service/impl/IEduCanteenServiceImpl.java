@@ -17,7 +17,7 @@ public class IEduCanteenServiceImpl implements IEduCanteenService {
 	@Autowired
 	private EduCanteenDao eduCanteenDao;
 
-	@Override
+	
 	public EduCanteenDto searchEduCanteenDto(EduCanteenDto eduCanteenDto) {
 		List<EduCanteen> dataList = eduCanteenDao.searchEduCanteenDto(eduCanteenDto);
 		List<EduCanteenDto> resultList = BeanUtils.createBeanListByTarget(dataList, EduCanteenDto.class);
@@ -27,7 +27,7 @@ public class IEduCanteenServiceImpl implements IEduCanteenService {
 		return null;
 	}
 
-	@Override
+
 	public List<EduCanteenDto> searchEduCanteenListDto(EduCanteenDto eduCanteenDto) {
 		List<EduCanteen> dataList = eduCanteenDao.searchEduCanteenDto(eduCanteenDto);
 		List<EduCanteenDto> resultList = BeanUtils.createBeanListByTarget(dataList, EduCanteenDto.class);

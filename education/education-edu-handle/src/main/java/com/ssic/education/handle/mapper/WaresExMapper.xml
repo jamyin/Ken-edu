@@ -21,10 +21,11 @@
 				a.dishes AS dishes,
 				a.image AS image,
 				a.remark AS remark,
-				a.supplier_id  AS supplierId
+				a.supplier_id  AS supplierId,
+				manufacturer AS manufacturer
 			FROM
-				t_edu_wares a,
-				t_edu_supplier b
+				t_pro_wares a,
+				t_pro_supplier b
 			WHERE
 			a.supplier_id = b.id
 			AND a.stat = 1
@@ -51,10 +52,11 @@
 				a.dishes AS dishes,
 				a.image AS image,
 				a.remark AS remark,
-				a.supplier_id  AS supplierId
+				a.supplier_id  AS supplierId,
+				manufacturer AS manufacturer
 			FROM
-				t_edu_wares a,
-				t_edu_supplier b
+				t_pro_wares a,
+				t_pro_supplier b
 			WHERE
 			a.supplier_id = b.id
 			AND a.stat = 1

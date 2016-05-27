@@ -15,7 +15,6 @@ public class LedgerAddressService implements ILedgerAddressService {
 	@Autowired
 	private LedgerAddressDao dao;
 
-	@Override
 	public DataGrid findAllLedgerAddress(LedgerAddressDto lad, PageHelper ph) {
 		return dao.findAllLedgerAddress(lad,ph);
 	}
