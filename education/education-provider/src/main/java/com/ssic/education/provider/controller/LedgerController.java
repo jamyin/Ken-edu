@@ -140,6 +140,11 @@ public class LedgerController {
 				str+=i+",";
 				continue;
 			}
+			if(ledger.getName()==null){
+				j.setMsg("采购品不能为空");
+				j.setSuccess(false);
+				return j;
+			}
 			ledger.setWareBatchNo(ledgers.get(0).getWareBatchNo());
 			ledger.setActionDate(actionDate);
 			ledger.setReceiverId(receiverId);
@@ -252,6 +257,11 @@ public class LedgerController {
 			return j;
 		}
 		for (LedgerDto ledger : ledgers) {
+			if(ledger.getName()==null){
+				j.setMsg("采购品不能为空");
+				j.setSuccess(false);
+				return j;
+			}
 			ledger.setMasterId(ledgers.get(0).getMasterId());
 			ledger.setWareBatchNo(ledgers.get(0).getWareBatchNo());
 			ledger.setActionDate(actionDate);
