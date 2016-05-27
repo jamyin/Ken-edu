@@ -12,12 +12,14 @@ i{font-style:normal;font-weight:normal}
 a{text-decoration:none}
 /* common */
 body{font-family:"Microsoft Yahei","Arial";font-size:1.4rem;color:#333;background:#f5f5f5;}
-header{position:relative;width:100%;line-height:3rem;text-align:center;font-size:1.6rem}
+header{position:relative;width:100%;line-height:3rem;text-align:center;font-size:1.6rem;}
 header span{padding-right:30px;background:url(../img/arrow_d.png) no-repeat right center;}
-header.navgat{background:#fff;border-bottom:1px #e5e5e5 solid}
+header.navgat{background:#fff;border-bottom:1px #e5e5e5 solid;}
+header.searchbar{background:#e5e5e5;padding:5px 5%;overflow:hidden;}
 header a{position:absolute;}
-.back{left:5%;color:#999;width:30px;height:36px;background:url(../img/back.png) no-repeat 0 center;background-size:8px 15px}
-.done{right:5%;color:#60ac62;font-size:1.4rem}
+header a.back{left:5%;color:#999;width:30px;height:36px;background:url(../img/back.png) no-repeat 0 center;background-size:8px 15px}
+header a.done{right:5%;color:#60ac62;font-size:1.4rem}
+header input[type=text]{width:100%;height:2rem;line-height:2rem;padding-left:5px;font-size:1.4rem;border-radius:3px;display:block}
 
 .school_box{width:100%;overflow:hidden;background:#fff}
 .school_box > img{width:100%;height:auto;display:block}
@@ -85,7 +87,6 @@ section.dp li .score span{width:33%;overflow:hidden;display:block;float:left}
 section.dp li .score span img{width:70px;height:12px;display:block;float:left;margin:3px 5px}
 section.dp li .score span i{float:left;display:block;}
 
-
 section.dp_c{width:100%;overflow:hidden;}
 section.dp_c h2{width:100%;border-left:2px #60ac62 solid;margin-bottom:10px;font-size:1.6rem;padding-left:10px}
 section.dp_c .con{width:100%;overflow:hidden;border-top:1px #e5e5e5 solid;border-bottom:1px #e5e5e5 solid;background:#fff;}
@@ -94,4 +95,15 @@ section.dp_c .con .row label{float:left;display:block;line-height:30px;}
 section.dp_c .con .row ul{width:150px;height:30px;float:right;margin-top:0;}
 section.dp_c .con .row ul li{width:30px;height:30px;background:url(../img/star_b.png) no-repeat center center;background-size:24px 24px;float:left;}
 section.dp_c .con .row ul li.cur{background-image:url(../img/star.png);}
+
+/*tablecell*/
+section.tablecell{width:100%;overflow:hidden}
+section.tablecell ul{width:100%;overflow:hidden;border:1px #e5e5e5 solid;background:#fff}
+section.tablecell ul li{width:90%;height:40px;margin:0 auto;border-bottom:1px #e5e5e5 solid;line-height:40px;padding-right:20px;background:url(../img/arrow_r.png) no-repeat right center;background-size:8px 15px;}
+section.tablecell ul li:last-child{border:0}
+section.tablecell ul li a{width:100%;height:100%;display:block;color:#333;}
+
+
+
+
 
