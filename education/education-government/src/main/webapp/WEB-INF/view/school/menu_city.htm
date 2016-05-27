@@ -110,7 +110,7 @@
 
                 <h1 class="con-tt">
                   <span class="title">配送信息列表</span>
-                  <a class="more" href="/material_list.html">更多 &gt;&gt; </a>
+                  <a class="more" href="/pro/ledger/findPage.htm?customerId=${(dto.customerId)!}">更多 &gt;&gt; </a>
                 </h1>
 
                 <div class="wrapperB">
@@ -133,7 +133,7 @@
 	                      		${(data.name)!}、
 	                      	</#list>
 	                      </#if></span>
-	                      <span class="dis_start ellipsis">${(ledgerDto.receiverName)!}</span>
+	                      <span class="dis_start ellipsis">${(ledgerDto.supplierName)!}</span>
 	                      <span class="dis_status"><#if ledgerDto.haulStatus == 0>未配送 </#if><#if ledgerDto.haulStatus == 1>配送中</#if><#if ledgerDto.haulStatus == 2>已配送</#if></span>
 	                      <span class="detail">详情</span>
 	                    </li>

@@ -50,6 +50,7 @@ public class ProUserRegController extends BaseController{
 		Json json = new Json();
 		//先保存供应商信息  -->  保存该供应商对应的用户信息(账号) //需要增加事务处理 或 增加判断
 		supplierDto.setReviewed(Byte.valueOf("0"));
+		supplierDto.setSupplierType(Integer.valueOf(1));//常量  0为不区分，1为成品菜供应商，2为原料供应商  
 		String supplierId = iSupplierService.saveOrUpdateSupplier(supplierDto);
 		
 		//供应商对应的区县信息
