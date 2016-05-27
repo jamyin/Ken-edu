@@ -140,10 +140,12 @@ public class LedgerController {
 			ledger.setSourceId(sourceId);
 			ProWaresDto warerDto = waresService.findWaresBySupplierId(ledger);
 			ledger.setWaresId(warerDto.getId());
-			if(!ledgers.get(0).getActionDate().after(ledger.getProductionDate())){
-				j.setMsg(ledger.getName() + "错误的进货日期或生产日期");
-				j.setSuccess(false);
-				return j;
+			if(ledger.getProductionDate()!=null){
+				if(!ledgers.get(0).getActionDate().after(ledger.getProductionDate())){
+					j.setMsg(ledger.getName() + "错误的进货日期或生产日期");
+					j.setSuccess(false);
+					return j;
+				}
 			}
 			if (ledger.getWaresId() == null) {
 				j.setMsg(ledger.getName() + "是错误的采购品");
@@ -245,10 +247,12 @@ public class LedgerController {
 			ledger.setSourceId(sourceId);
 			ProWaresDto warerDto = waresService.findWaresBySupplierId(ledger);
 			ledger.setWaresId(warerDto.getId());
-			if(!ledgers.get(0).getActionDate().after(ledger.getProductionDate())){
-				j.setMsg(ledger.getName() + "错误的进货日期或生产日期");
-				j.setSuccess(false);
-				return j;
+			if(ledger.getProductionDate()!=null){
+				if(!ledgers.get(0).getActionDate().after(ledger.getProductionDate())){
+					j.setMsg(ledger.getName() + "错误的进货日期或生产日期");
+					j.setSuccess(false);
+					return j;
+				}
 			}
 			if (ledger.getWaresId() == null) {
 				j.setMsg(ledger.getName() + "是错误的采购品");
