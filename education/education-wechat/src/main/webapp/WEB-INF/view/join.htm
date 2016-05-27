@@ -27,7 +27,7 @@
 	<section class="dp_c">
 		<h2>综合评价</h2>
 		<div class="con">
-			<div class="row"><label>口味</label><ul id="taste" score="0"><li></li><li></li><li></li><li></li><li></li></ul></div>
+			<div class="row"><label>口味</label><ul id="flavor" score="0"><li></li><li></li><li></li><li></li><li></li></ul></div>
 			<div class="row"><label>卫生</label><ul id="health" score="0"><li></li><li></li><li></li><li></li><li></li></ul></div>
 			<div class="row"><label>份量</label><ul id="weights" score="0"><li></li><li></li><li></li><li></li><li></li></ul></div>
 		</div>
@@ -36,16 +36,22 @@
 <script>
 	$(function(){
 		$('.con .row ul').on('click', 'li', function(){
-			$(this).addClass('cur').siblings().removeClass('cur').closest('ul').attr('score',$(this).index() + 1)
+			$(this).addClass('cur').siblings().removeClass('cur').closest('ul').attr('score',$(this).index() + 1);
 		})
 		$('.done').on('click', 'li', function(){
 			alert("");
-			console.log($('#taste').attr('score'))
+			console.log($('#flavor').attr('score'))
 			console.log($('#health').attr('score'))
 			console.log($('#weights').attr('score'))
 		});
 		$('.done').on('click',function(){
-			var dataParam = "";
+			var packageId = "${(packageId)!}";
+			
+			var flavor = $('#flavor').attr('score');
+			var health = $('#health').attr('score');
+			var weights = $('#weights').attr('score');
+			
+			var dataParam = {packageId:packageId,flavor:flavor,health:health,weights:weights};
 			$.ajax({
 				url:'/wap/comment/comment.htm',
 				type:"POST",

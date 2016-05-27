@@ -6,10 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ssic.education.handle.dto.EduParentPackCommentDto;
 import com.ssic.education.handle.service.IEduParentPackCommentService;
+import com.ssic.education.utils.constants.DataStatus;
+import com.ssic.education.utils.model.Response;
 
 /**
  * 
@@ -48,10 +51,16 @@ public class WapCommentController extends BaseController {
 		 * @version: 2016年5月23日 下午3:50:56
 	 */
 	@RequestMapping(value="comment")
-	public void comment(EduParentPackCommentDto eduParentPackCommentDto){
-		
-		iEduParentPackCommentService.saveComment(eduParentPackCommentDto);
-		
+	@ResponseBody
+	public Response<String> comment(EduParentPackCommentDto eduParentPackCommentDto){
+		Response<String> result = new Response<String>();
+		int data = iEduParentPackCommentService.saveComment(eduParentPackCommentDto);
+		if (data > 0) {
+			result.setMessage("点评成功");
+		} else {
+			result.setStatus(DataStatus.HTTP_FAILE);
+		}		
+		return result;
 	}
 	/**
 	 * 
