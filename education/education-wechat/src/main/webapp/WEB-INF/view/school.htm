@@ -19,8 +19,8 @@
 			<a href="###">LBS轨迹</a>
 		</div>	
 		<div class="info_box">
-			<p><span class="lb">学校地址</span>${(eduSchoolDto.address)!}</p>
-			<p><span class="lb">经营单位</span>${(eduCanteenDto.canteenName)!}<a href="###">查看</a></p>
+			<p><span class="lb">学校地址</span>${(eduSchoolDto.address)!}&nbsp;</p>
+			<p><span class="lb">经营单位</span>${(eduCanteenDto.canteenName)!}&nbsp;<a href="###">查看</a></p>
 			<p><span class="lb">委托经营单位</span id="gu">上海天坊食品制造有限公司<a href="###">查看</a></p>
 		</div>	
 	</div>
@@ -31,9 +31,9 @@
 				<#assign keys=gradeList?keys>
 				<#list keys as key>
 					<option value="${gradeList[key]}">${key}</option>
-					${key}=${gradeList[key]}
+					<!-- ${key}=${gradeList[key]} -->
 				</#list>
- -->			</select>
+			</select>
 		</p>
 	</div>
 	

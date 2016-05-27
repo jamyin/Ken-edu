@@ -24,20 +24,14 @@ public interface ProLedgerExMapper {
 
 	int insertLedger(@Param("ledgerList") List<LedgerDto> ledgerList);
 
-	String findSchoolIdByReceiverId(@Param("ledgerDto") LedgerDto ld);
-
-	String findWaresIdBySupplierId(@Param("ledgerDto") LedgerDto ledgerDto);
-
-	String findSupplierIdBySourceId(@Param("ledgerDto") LedgerDto ledgerDto);
-
-	public List<LedgerDto> findLedgerByWareBatchNo(
+	public List<LedgerDto> findLedgerByMasterId(
 			@Param("sourceId") String sourceId,
-			@Param("wareBatchNo") String wareBatchNo);
+			@Param("masterId") String masterId);
 
 	public String findWareBatchNoById(String id);
 
 	public int updateLedger(@Param("ledgerDto")LedgerDto ledger);
 
-	public int deleteLedger(@Param("sourceId")String sourceId, @Param("wareBatchNo")String wareBatchNo);
+	public int deleteLedger(@Param("sourceId")String sourceId, @Param("masterId")String masterId);
 
 }

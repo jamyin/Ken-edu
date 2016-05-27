@@ -98,7 +98,7 @@
 			set
 			stat = 0
 			WHERE
-			ware_batch_no=#{wareBatchNo}
+			id=#{masterId}
 			AND
 			source_id=#{sourceId}
 	</update>

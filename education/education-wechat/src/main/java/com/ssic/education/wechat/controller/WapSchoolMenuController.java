@@ -26,8 +26,6 @@ public class WapSchoolMenuController extends BaseController{
 	@Autowired
 	private ProPackagesService proPackagesService;
 	
-	@Autowired
-	private IEduParentPackCommentService iEduParentPackCommentService;
 	
 	/**
 	 * 
@@ -61,31 +59,6 @@ public class WapSchoolMenuController extends BaseController{
 		
 		return proPackageDto;
 	}
-	
-	
-	/**
-	 * 
-		 * 此方法描述的是：针对某一菜进行评价
-		 * @author: cwftalus@163.com
-		 * @version: 2016年5月23日 下午3:50:56
-	 */
-	@RequestMapping(value="comment")
-	public void comment(EduParentPackCommentDto eduParentPackCommentDto){
-		
-		iEduParentPackCommentService.saveComment(eduParentPackCommentDto);
-		
-	}
-	/**
-	 * 
-		 * 此方法描述的是：查询菜对应的点评信息
-		 * @author: cwftalus@163.com
-		 * @version: 2016年5月24日 上午9:26:45
-	 */
-	@RequestMapping(value="comment/list")
-	public void searchComment(EduParentPackCommentDto eduParentPackCommentDto){
-		
-		iEduParentPackCommentService.searchComment(eduParentPackCommentDto);
-		
-	}
+
 	
 }

@@ -31,37 +31,7 @@
 			#{item.stat})
 		</foreach>
 	</insert>
-	<select id="findSchoolIdByReceiverId" resultType="java.lang.String">
-		SELECT
-		a.school_id
-		FROM t_edu_school_supplier a,t_edu_school b
-		WHERE
-		a.school_id=b.id
-		AND a.supplier_id=#{ledgerDto.sourceId}
-		AND
-		trim(b.school_name)=#{ledgerDto.receiverName}
-		AND b.stat = 1
-	</select>
-	<select id="findWaresIdBySupplierId" resultType="java.lang.String">
-		SELECT id
-		FROM
-		t_pro_wares
-		WHERE supplier_id=#{ledgerDto.sourceId}
-		AND
-		wares_name=#{ledgerDto.name}
-		AND stat = 1
-	</select>
-	<select id="findSupplierIdBySourceId" resultType="java.lang.String">
-		SELECT b.id
-		FROM t_pro_supplier_receiver a, t_pro_supplier b
-		WHERE
-		a.supplier_id=b.id
-		AND a.receiver_id=#{ledgerDto.sourceId}
-		AND
-		b.supplier_name=#{ledgerDto.supplierName}
-		AND b.stat = 1
-	</select>
-	<select id="findLedgerByWareBatchNo" resultType="com.ssic.educateion.common.dto.LedgerDto">
+	<select id="findLedgerByMasterId" resultType="com.ssic.educateion.common.dto.LedgerDto">
 		SELECT l.id id,
 		m.id masterId,
 		l.wares_id waresId, l.name, l.spce,
@@ -88,7 +58,7 @@
 		AND
 		m.source_id=#{sourceId}
 		AND
-		m.ware_batch_no=#{wareBatchNo}
+		m.id=#{masterId}
 		AND l.stat = 1
 	</select>
 	<select id="findWareBatchNoById" resultType="java.lang.String">
@@ -137,16 +107,7 @@
 			set
 			stat=0
 			Where
-			master_id =(
-			SELECT
-			id
-			FROM 
-			t_pro_ledger_master
-			WHERE
-			ware_batch_no=#{wareBatchNo}
-			AND
-			source_id=#{sourceId}
-			)
+			master_id =#{masterId}
 	</update>
 	<select id="selectSupplierByReceiverId" resultType="com.ssic.educateion.common.dto.ProSupplierDto"
 		parameterType="java.lang.String">
