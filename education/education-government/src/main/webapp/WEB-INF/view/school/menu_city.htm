@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <#include "/common/head.htm" />
+	 <link rel="stylesheet" href="/static/css/menu_city.css" media="screen" charset="utf-8">
+	 <script src="/static/js/jquery-2.1.3.min.js" charset="utf-8"></script>
+	 <script src="/static/js/jquery-ui.min.js"></script>
+	 <link href="/static/css/jquery-ui.min.css" rel="stylesheet" />
+</head>
+<body>
+  <<!-- div class="header">
+  <div class="wrap">
+    <a class="logo" href="index.html">上海市中小学校校生午餐综合管理平台</a>
+    <div class="p_status">
+      <a class="p_center" href="pcenter.html">个人中心</a>  |  <a class="logout" href="###">退出</a>
+    </div>
+  </div>
+</div>
+<div class="nav">
+  <div class="wrap">
+    <a class="" href="index.html">首页</a>
+    <a class="" href="search_supplier.html">安全追溯</a>
+    <a class="" href="index.html">菜谱</a>
+    <a class="" href="index.html">健康宣教</a>
+    <a class="" href="index.html">通告公示</a>
+    <a class="" href="index.html">任务传达</a>
+    <a class="" href="index.html">发布</a>
+  </div>
+</div> -->
+<#include "/common/nav.htm" />
+
+  <div class="wrapperA">
+    <div class="cur_postion">
+      <span class="cp">当前位置:</span><a href="#">安全追溯</a><span class="gt">&gt;</span><a href="#">采购品列表</a><span class="gt">&gt;</span><a href="#">采购品详情</a>
+    </div>
+
+    <h1 class="con-tt">
+      <span class="title">实验小学</span>
+    </h1>
+
+    <div class="menu_box">
+      <div class="subbar">
+        <p class="lef">学校名称：${(eduSchoolDto.schoolName)!}</p><p class="rig">供应商名称：<#if proSupplierDtos??>
+					<#list proSupplierDtos as supplier>
+						<a href="/pro/supplier/detail.htm?id=${(supplier.id)!}&source=1">${(supplier.supplierName)!}</a>
+					</#list>
+				</#if></p>
+      </div>
+      <div class="menu_list">
+        <div class="control">
+			<!-- <a class="lbtn" href="###"><</a> -->
+			<span><input id="date" type="text" value="${dto.supplyDate?string("yyyy-MM-dd")}" onchange="changeDate()"></span>
+			<!-- <a class="rbtn" href="###">></a> -->
+		</div>
+        <div class="title">
+          <label class="ct1">餐次</label>
+          <label class="ct2">类型</label>
+          <label class="ct3">菜品</label>
+          <label class="ct4">营养</label>
+          <label class="ct5">评价</label>
+        </div>
+        <#if (proPackagesDtos??) &&(proPackagesDtos?size>0)>
+			<#list proPackagesDtos as proPackages>
+				<div class="lunch row">
+				<#if proPackages.supplyPhase??>
+					<label class="ct1"><#if proPackages.supplyPhase == 1>午餐</#if><#if proPackages.supplyPhase == 3>晚餐</#if></label>
+					<ul>
+						<#if proPackages.proPackagesDtos??>
+							<#list proPackages.proPackagesDtos as packages>
+									<li data="<#if proPackages.supplyPhase == 1>午餐</#if><#if proPackages.supplyPhase == 3>晚餐</#if>，<#if packages.type == 0>国内班</#if><#if packages.type == 1>国际班</#if>，<#if packages.proDishesDtos??> <#list packages.proDishesDtos as proDishes> ${(proDishes.waresName)!} </#list></#if>，<#if packages.proNutritionalDtos??>
+										<#list packages.proNutritionalDtos as proNutritionalDtos>
+											${(proNutritionalDtos.name)!}
+										</#list>
+									</#if>">
+									<span class="name"><#if packages.type == 0>国内班</#if><#if packages.type == 1>国际班</#if></span>
+									<span><#if packages.proDishesDtos??>
+										<#list packages.proDishesDtos as proDishes>
+											${(proDishes.waresName)!}
+										</#list>
+									</#if></span>
+									<span class="nutrition"><#if packages.proNutritionalDtos??>
+										<#list packages.proNutritionalDtos as proNutritionalDtos>
+											${(proNutritionalDtos.name)!}
+										</#list>
+									</#if>
+									</span>
+									<span class="evaluate">
+						             <span class="starts">
+						               <i class="star on"></i>
+						               <i class="star on"></i>
+						               <i class="star on"></i>
+						               <i class="star on"></i>
+						               <i class="star"></i>
+						             </span>
+						             <i class="points">4.9</i>
+						           </span>
+								</li>
+							</#list>										
+						</#if>
+					</ul>
+				</#if>
+				</div>
+			</#list>
+		<#else>
+			<div class="lunch row" style="color: red;font-size:24px; text-align:center;">暂无数据</div>				
+		</#if>
+         <!-- <div id="lunch" class="row cur">
+          <label class="ct1">午餐</label>
+          <ul>
+            <li data="1午餐,国内班,糖醋小排、番茄炒蛋、开胃冬瓜、红烧土豆,能量100%、维生素100%、蛋白质100%"><span class="name">国内班</span><span class="goods">糖醋小排、番茄炒蛋、开胃冬瓜、红烧土豆</span><span class="nutrition">能量、维生素、蛋白质</span>
+              <span class="evaluate">
+                <span class="starts">
+                  <i class="star on"></i>
+                  <i class="star on"></i>
+                  <i class="star on"></i>
+                  <i class="star on"></i>
+                  <i class="star"></i>
+                </span>
+                <i class="points">4.9</i>
+              </span></li>
+              <li data="2午餐,国内班,糖醋小排、番茄炒蛋、开胃冬瓜、红烧土豆,能量100%、维生素100%、蛋白质100%"><span class="name">国内班</span><span class="goods">糖醋小排、番茄炒蛋、开胃冬瓜、红烧土豆</span><span class="nutrition">能量、维生素、蛋白质</span>
+                <span class="evaluate">
+                  <span class="starts">
+                    <i class="star on"></i>
+                    <i class="star on"></i>
+                    <i class="star on"></i>
+                    <i class="star on"></i>
+                    <i class="star"></i>
+                  </span>
+                  <i class="points">4.9</i>
+                </span></li>
+                <li data="3午餐,国内班,糖醋小排、番茄炒蛋、开胃冬瓜、红烧土豆,能量100%、维生素100%、蛋白质100%"><span class="name">国内班</span><span class="goods">糖醋小排、番茄炒蛋、开胃冬瓜、红烧土豆</span><span class="nutrition">能量、维生素、蛋白质</span>
+                  <span class="evaluate">
+                    <span class="starts">
+                      <i class="star on"></i>
+                      <i class="star on"></i>
+                      <i class="star on"></i>
+                      <i class="star on"></i>
+                      <i class="star"></i>
+                    </span>
+                    <i class="points">4.9</i>
+                  </span></li>
+                  <li data="4午餐,国内班,糖醋小排、番茄炒蛋、开胃冬瓜、红烧土豆,能量100%、维生素100%、蛋白质100%"><span class="name">国内班</span><span class="goods">糖醋小排、番茄炒蛋、开胃冬瓜、红烧土豆</span><span class="nutrition">能量、维生素、蛋白质</span>
+                    <span class="evaluate">
+                      <span class="starts">
+                        <i class="star on"></i>
+                        <i class="star on"></i>
+                        <i class="star on"></i>
+                        <i class="star on"></i>
+                        <i class="star"></i>
+                      </span>
+                      <i class="points">4.9</i>
+                    </span>
+                  </li>
+                </ul>
+              </div>  -->
+
+              <!-- <div id="dinner" class="row">
+                <label class="ct1">晚餐</label>
+                <ul>
+                  <li data="1晚餐,国际班,糖醋小排、番茄炒蛋、开胃冬瓜、红烧土豆,能量100%、维生素100%、蛋白质100%"><span class="name">国际班</span><span class="goods">糖醋小排、番茄炒蛋、开胃冬瓜、红烧土豆</span><span class="nutrition">能量、维生素、蛋白质</span>
+                    <span class="evaluate">
+                      <span class="starts">
+                        <i class="star on"></i>
+                        <i class="star on"></i>
+                        <i class="star on"></i>
+                        <i class="star on"></i>
+                        <i class="star"></i>
+                      </span>
+                      <i class="points">4.9</i>
+                    </span></li>
+                    <li data="2晚餐,国际班,糖醋小排、番茄炒蛋、开胃冬瓜、红烧土豆,能量100%、维生素100%、蛋白质100%"><span class="name">国际班</span><span class="goods">糖醋小排、番茄炒蛋、开胃冬瓜、红烧土豆</span><span class="nutrition">能量、维生素、蛋白质</span>
+                      <span class="evaluate">
+                        <span class="starts">
+                          <i class="star on"></i>
+                          <i class="star on"></i>
+                          <i class="star on"></i>
+                          <i class="star on"></i>
+                          <i class="star"></i>
+                        </span>
+                        <i class="points">4.9</i>
+                      </span></li>
+                      <li data="3晚餐,国际班,糖醋小排、番茄炒蛋、开胃冬瓜、红烧土豆,能量100%、维生素100%、蛋白质100%"><span class="name">国际班</span><span class="goods">糖醋小排、番茄炒蛋、开胃冬瓜、红烧土豆</span><span class="nutrition">能量、维生素、蛋白质</span>
+                        <span class="evaluate">
+                          <span class="starts">
+                            <i class="star on"></i>
+                            <i class="star on"></i>
+                            <i class="star on"></i>
+                            <i class="star on"></i>
+                            <i class="star"></i>
+                          </span>
+                          <i class="points">4.9</i>
+                        </span></li>
+                      </ul>
+                    </div> -->
+                  </div>
+                </div>
+
+                <h1 class="con-tt">
+                  <span class="title">配送信息列表</span>
+                  <a class="more" href="/material_list.html">更多 &gt;&gt; </a>
+                </h1>
+
+                <div class="wrapperB">
+                  <ul class="distribution_ul">
+                    <li class="head">
+                      <span class="dis_no">配送号</span>
+                      <span class="dis_date">配送日期</span>
+                      <span class="dis_goods ellipsis">采购品</span>
+                      <span class="dis_start ellipsis">出发点</span>
+                      <span class="dis_status">状态</span>
+                      <span class="detail">详情</span>
+                    </li>
+                    <li>
+                      <span class="dis_no">2016050608</span>
+                      <span class="dis_date">2016.5.6</span>
+                      <span class="dis_goods">白菜、西红柿、猪肉、黄瓜、茄子、葱</span>
+                      <span class="dis_start">上海程联餐饮有限公司</span>
+                      <span class="dis_status">配送中</span>
+                      <span class="detail">详情</span>
+                    </li>
+                    <li>
+                      <span class="dis_no">2016050608</span>
+                      <span class="dis_date">2016.5.6</span>
+                      <span class="dis_goods">白菜、西红柿、猪肉、黄瓜、茄子、葱</span>
+                      <span class="dis_start">上海程联餐饮有限公司</span>
+                      <span class="dis_status">配送中</span>
+                      <span class="detail">详情</span>
+                    </li>
+                    <li>
+                      <span class="dis_no">2016050608</span>
+                      <span class="dis_date">2016.5.6</span>
+                      <span class="dis_goods">白菜、西红柿、猪肉、黄瓜、茄子、葱</span>
+                      <span class="dis_start">上海程联餐饮有限公司</span>
+                      <span class="dis_status">配送中</span>
+                      <span class="detail">详情</span>
+                    </li>
+                  </ul>
+                </div>
+
+
+                <h1 class="con-tt">
+                  <span class="title">采购品列表</span>
+                  <a class="more" href="/material_list.html">更多 &gt;&gt; </a>
+                </h1>
+                <div class="item-list">
+                  <ul>
+                  	<#if mWares??>
+		                <#list mWares.results as wares>
+			                <a href="/pro/wares/details.htm?id=${(wares.id)!}">
+			                    <li>
+			                        <img src="${(wares.image)!}" alt=""/>
+			                        <div class="name">${(wares.waresName)!}</div>
+			                        <div>分类:<span>${(wares.waresTypeStr)!}</span></div>
+			                        <div>规格:<span>${(wares.spec)!}</span></div>
+			                    </li>
+			                </a>
+		                </#list>
+		            </#if>
+                    <!-- <li>
+                      <img src="static/img/jichi_180X180.jpg" alt="" />
+                      <div class="name">
+                        猪肉
+                      </div>
+                      <div>
+                        分类:<span>禽肉类</span>
+                      </div>
+                      <div>
+                        规格:<span>kg</span>
+                      </div>
+                    </li>
+                     -->
+                  </ul>
+                </div>
+
+                <h1 class="con-tt">
+                  <span class="title">供应商列表</span>
+                  <a class="more" href="/pro/supplier/list.htm?supplierId=${(supplier.id)!}">更多 &gt;&gt; </a>
+                </h1>
+                <div class="wrapperB">
+                  <ul class="sulplier_ul">
+                  	<#if mSuppliers??>
+		                <#list mSuppliers.results as sup>
+		                    <li>
+		                        <span class="name">${(sup.supplierName)!}</span>
+		                        <span class="place">${(sup.address)!}</span>
+		                        <span class="detail"><a href="/pro/supplier/detail.htm?id=${(sup.id)!}&source=1">详情</a> &gt;</span>
+		                    </li>
+		                </#list>
+		            </#if>
+                    <!-- <li class="head">
+                      <span class="name">原料供应商名称</span>
+                      <span class="place">单位地址</span>
+                      <span class="detail">详情</span>
+                    </li> -->
+                  </ul>
+                </div>
+
+              </div>
+              <div class="footer">
+  上海市中小学校学生午餐综合管理平台<br>CopyRight© 2016上海市天坊信息技术有限公司
+</div>
+
+              <script type="text/javascript">
+              $(function(){
+                // debugger;
+                $(".nav").find("a").removeClass("cur");
+                $(".nav").find("a:eq(1)").addClass("cur");
+
+                fix_table();
+              });
+              function fix_table(){
+                var Cell_Count = $('.row').length
+                for(var i=0;i<Cell_Count;i++){
+                  $('.row').eq(i).find('label').css('height',$('.row').eq(i).height()+'px').css('line-height',$('.row').eq(i).height()+'px')
+                  $('.row').eq(i).find('ul li:last-child').css('border-color','#fff')
+                }
+              }
+              // 日历
+              $(function( factory ) {
+                if ( typeof define === "function" && define.amd ) {
+                  // AMD. Register as an anonymous module.
+                  define([ "../jquery.ui.datepicker" ], factory );
+                } else {
+                  // Browser globals
+                  factory( jQuery.datepicker );
+                }
+              }(function( datepicker ) {
+                datepicker.regional['zh-TW'] = {
+                  closeText: '關閉',
+                  prevText: '<上月',
+                  nextText: '下月>',
+                  currentText: '今天',
+                  monthNames: ['一月','二月','三月','四月','五月','六月',
+                  '七月','八月','九月','十月','十一月','十二月'],
+                  monthNamesShort: ['一月','二月','三月','四月','五月','六月',
+                  '七月','八月','九月','十月','十一月','十二月'],
+                  dayNames: ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'],
+                  dayNamesShort: ['周日','周一','周二','周三','周四','周五','周六'],
+                  dayNamesMin: ['日','一','二','三','四','五','六'],
+                  weekHeader: '周',
+                  dateFormat: 'yy-mm-dd',
+                  firstDay: 1,
+                  isRTL: false,
+                  showMonthAfterYear: true,
+                  yearSuffix: '年'};
+                  datepicker.setDefaults(datepicker.regional['zh-TW']);
+                  return datepicker.regional['zh-TW'];
+                }));
+
+                $( "#date" ).datepicker();
+                </script>
+              </body>
+              </html>
