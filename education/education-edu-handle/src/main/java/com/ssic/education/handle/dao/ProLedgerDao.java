@@ -141,7 +141,7 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 	}
 	
 	public long countLedgerListOrderby(LedgerDto ledgerDto) {
-		return lmExMapper.countLedgerListOrderby(ledgerDto.getMasterId(),ledgerDto.getReceiverName(), ledgerDto.getReceiverId());
+		return lmExMapper.countLedgerListOrderby(ledgerDto.getMasterId(), ledgerDto.getReceiverId(),ledgerDto.getReceiverName());
 	}
 	
 	public List<ProSupplierDto> findPage(ProSupplierDto dto, PageQuery page) {
