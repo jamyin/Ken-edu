@@ -26,6 +26,14 @@ public class WaresDao{
 	private ProSupplierExMapper supMapper;
 
 	public List<ProWaresDto> findAllWares(ProWaresDto waresDto, PageHelperDto ph) {
+		if(waresDto.getWaresName()!=null && waresDto.getWaresName()!=""){
+			waresDto.setWaresName("%"+waresDto.getWaresName()+"%");			
+			
+		}
+		if(waresDto.getCustomCode()!=null && waresDto.getCustomCode()!=""){
+			waresDto.setCustomCode("%"+waresDto.getCustomCode()+"%");
+		}
+		
 		List<ProWaresDto> list = exmapper.findWares(waresDto,ph);
 		return list;
 	}
