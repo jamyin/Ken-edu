@@ -194,6 +194,22 @@ public class LedgerController {
 		request.setAttribute("LedgerList", list);
 		return "ledger/ledgerEdit";
 	}
+	
+	@RequestMapping("/showPage")
+	public String showPage(String wareBatchNo, HttpServletRequest request,
+			HttpSession session) {
+		TImsUsersDto user = (TImsUsersDto) session.getAttribute("user");
+		if (user == null) {
+			return null;
+		}
+		List<TImsUsersDto> driver = userService.findAllDriver(user
+				.getSourceId());
+		List<LedgerDto> list = ledgerService.findLedgerById(user.getSourceId(),
+				wareBatchNo);
+		request.setAttribute("Driver", driver);
+		request.setAttribute("LedgerList", list);
+		return "ledger/ledgerShow";
+	}
 
 	@RequestMapping(value = "/ledgerEdit")
 	@ResponseBody

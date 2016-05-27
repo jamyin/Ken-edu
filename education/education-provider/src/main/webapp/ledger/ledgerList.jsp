@@ -88,6 +88,10 @@
 				formatter : function(value, row, index) {
 					var str = '';
 					if ($.canEdit) {
+						str += $.formatString('<img onclick="showFun('+row.wareBatchNo+');" src="{1}" title="查看"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
+					}
+					str += '&nbsp;';
+					if ($.canEdit) {
 						str += $.formatString('<img onclick="editFun('+row.wareBatchNo+');" src="{1}" title="编辑"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
 					}
 					str += '&nbsp;';
@@ -173,6 +177,22 @@
 		});
 	}
 
+	function showFun(id) {
+		if (id == undefined) {
+			var rows = dataGrid.datagrid('getSelections');
+			id = rows[0].id;
+		} else {
+			dataGrid.datagrid('unselectAll').datagrid('uncheckAll');
+		}
+		parent.$.modalDialog({
+			title : '编辑废弃油脂',
+			width : 1000,
+			height : 500,
+			href : '${pageContext.request.contextPath}/ledgerController/showPage?wareBatchNo=' +id,
+			onOpen: function(){}
+		});
+	}
+	
 	function addFun() {
 		parent.$.modalDialog({
 			title : '添加配货',
