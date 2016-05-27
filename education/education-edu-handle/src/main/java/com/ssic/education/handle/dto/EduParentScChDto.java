@@ -11,6 +11,8 @@ public class EduParentScChDto implements Serializable{
 	private String id;
 
 	private String schoolId;
+	
+	private String parentId;
 
 	private String schoolName;
 

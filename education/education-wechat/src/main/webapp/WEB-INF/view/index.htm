@@ -21,7 +21,7 @@ $(function(){
 				var schoolList = $("#schoolList");
 				schoolList.empty();				
 				$.each(data.data, function(index, item) {
-					$("#schoolList").append("<tr><td><a href='alert()'>"+item['schoolName']+"</a></td></tr>");	
+					$("#schoolList").append("<tr><td><a href='/wap/school/details/"+item['id']+".htm'>"+item['schoolName']+"</a></td></tr>");	
 				});
 			}
 		});

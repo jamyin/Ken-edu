@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -39,8 +40,8 @@ public class WapSchoolController extends BaseController{
 	private IEduSchoolSupplierService iEduSchoolSupplierService;
 	
 	
-	@RequestMapping(value="school")
-	public ModelAndView school(String schoolId){
+	@RequestMapping(value="school/{schoolId}")
+	public ModelAndView school(@PathVariable String schoolId){
 		ModelAndView mv = getModelAndView();
 		//学校详细信息
 		EduSchoolDto eduSchoolDto = eduSchoolService.findById(schoolId);
@@ -91,19 +92,14 @@ public class WapSchoolController extends BaseController{
 		 * @author: cwftalus@163.com
 		 * @version: 2016年5月21日 下午2:25:15
 	 */
-	@RequestMapping(value="details")
-	@ResponseBody
-	public Response<EduSchoolDto> details(String schoolId){
-		Response<EduSchoolDto> result = new Response<EduSchoolDto>();
-		
+	@RequestMapping(value="/details/{schoolId}")
+	public ModelAndView details(@PathVariable String schoolId){
+		ModelAndView mv = getModelAndView();
 		EduSchoolDto data = eduSchoolService.findById(schoolId);
-		if(data!=null){
-			result.setData(data);
-		}else{
-			result.setStatus(DataStatus.HTTP_FAILE);
-			result.setMessage("未找到相对应的学校信息");
-		}
-		return result;
+		
+		mv.addObject("data", data);
+		mv.setViewName("schoolDetails");
+		return mv;
 	}	
 	
 }
