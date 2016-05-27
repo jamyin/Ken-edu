@@ -6,16 +6,15 @@
 <head>
 <title>配货管理</title>
 <jsp:include page="../inc.jsp"></jsp:include>
-<c:if test="${fn:contains(sessionInfo.resourceList, '/userController/editPage')}">
+	<script type="text/javascript">
+		$.canShow = true;
+	</script>
 	<script type="text/javascript">
 		$.canEdit = true;
 	</script>
-</c:if>
-<c:if test="${fn:contains(sessionInfo.resourceList, '/userController/delete')}">
 	<script type="text/javascript">
 		$.canDelete = true;
 	</script>
-</c:if>
 <script type="text/javascript">
 	var dataGrid;
 	$(function() {
@@ -87,7 +86,7 @@
 				width : 100,
 				formatter : function(value, row, index) {
 					var str = '';
-					if ($.canEdit) {
+					if ($.canShow) {
 						str += $.formatString('<img onclick="showFun(\''+row.masterId+'\');" src="{1}" title="查看"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
 					}
 					str += '&nbsp;';
@@ -162,12 +161,12 @@
 			dataGrid.datagrid('unselectAll').datagrid('uncheckAll');
 		}
 		parent.$.modalDialog({
-			title : '编辑废弃油脂',
+			title : '编辑配送',
 			width : 1000,
 			height : 500,
 			href : '${pageContext.request.contextPath}/ledgerController/editPage?masterId=' +id ,
 			buttons : [ {
-				text : '编辑',
+				text : '保存',
 				handler : function() {
 					parent.$.modalDialog.openner_dataGrid = dataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
 					var f = parent.$.modalDialog.handler.find('#form');
@@ -185,7 +184,7 @@
 			dataGrid.datagrid('unselectAll').datagrid('uncheckAll');
 		}
 		parent.$.modalDialog({
-			title : '编辑废弃油脂',
+			title : '查看配送',
 			width : 1000,
 			height : 500,
 			href : '${pageContext.request.contextPath}/ledgerController/showPage?masterId=' +id,

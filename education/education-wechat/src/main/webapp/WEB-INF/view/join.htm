@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,user-scalable=no" />
+    <title>点评</title>
+    <link href="/static/css/style.css" rel="stylesheet" />
+    <script src="/static/js/jquery-2.1.3.min.js"></script>
+  </head>
+<body>
+	<header class="navgat"><a class="back" href="###"></a>点评<a class="done" href="###">完成</a></header>
+	<section class="dp">
+		<ul>
+			<li>
+				<div class="bar_t">
+					<span>2016-09-02  周四</span>
+					<span>午餐</span>
+					<span class="school">静安实验小学</span>
+				</div>
+				<div class="tag_m">
+					<p>清炒鱼</p><p>时蔬</p><p>清炒鱼片</p><p>时蔬米饭</p><p>清炒片</p><p>时蔬</p><p>番鸡蛋汤</p><p>饭</p><p>清炒鱼</p><p>时蔬</p><p>番鸡蛋汤</p><p>米饭</p><p>清炒鱼片</p><p>番茄时蔬米饭鸡汤</p><p>米饭</p>
+				</div>
+			</li>
+		</ul>
+	</section>
+	<section class="dp_c">
+		<h2>综合评价</h2>
+		<div class="con">
+			<div class="row"><label>口味</label><ul id="flavor" score="0"><li></li><li></li><li></li><li></li><li></li></ul></div>
+			<div class="row"><label>卫生</label><ul id="health" score="0"><li></li><li></li><li></li><li></li><li></li></ul></div>
+			<div class="row"><label>份量</label><ul id="weights" score="0"><li></li><li></li><li></li><li></li><li></li></ul></div>
+		</div>
+	</section>
+</body>
+<script>
+	$(function(){
+		$('.con .row ul').on('click', 'li', function(){
+			$(this).addClass('cur').siblings().removeClass('cur').closest('ul').attr('score',$(this).index() + 1);
+		})
+		$('.done').on('click', 'li', function(){
+			alert("");
+			console.log($('#flavor').attr('score'))
+			console.log($('#health').attr('score'))
+			console.log($('#weights').attr('score'))
+		});
+		$('.done').on('click',function(){
+			var packageId = "${(packageId)!}";
+			
+			var flavor = $('#flavor').attr('score');
+			var health = $('#health').attr('score');
+			var weights = $('#weights').attr('score');
+			
+			var dataParam = {packageId:packageId,flavor:flavor,health:health,weights:weights};
+			$.ajax({
+				url:'/wap/comment/comment.htm',
+				type:"POST",
+				data : dataParam,
+				dataType:'json',
+				success:function(data){
+					if(data.status==200){
+						window.location.href = "/wap/comment/index.htm";
+					}else{
+						
+					}					
+				}
+			});				
+		})		
+	})
+</script>
+</html>

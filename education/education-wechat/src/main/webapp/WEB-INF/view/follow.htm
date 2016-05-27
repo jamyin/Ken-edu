@@ -62,6 +62,11 @@
 			</li> -->
 		</ul>
 	</section>
+	
+	<section class="myfollow_c">
+			<input class="submit" value="添加关注" onclick="tianjia();"/>
+	</section>
+	
 </body>
 <script>
 	$(function() {
@@ -73,7 +78,9 @@
 			$('#sel_date').val(_val)
 		})
 	});
-	
+	function tianjia(){
+		window.location.href = "/index.htm";
+	}
 	function doAction(objThis){
 		var schoolId = $(objThis).attr("data-value");
 		var id = $(objThis).attr("data-id");

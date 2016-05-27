@@ -132,6 +132,10 @@ public class LedgerDto {
 	@Setter
 	@Getter
 	private List<LedgerDto> ledgerDtos;
+	
+	@Setter
+	@Getter
+	private int mark;
 
 	@Override
 	public String toString() {

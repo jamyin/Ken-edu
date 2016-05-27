@@ -25,7 +25,7 @@ public class EduAppUsersServiceImpl implements IEduAppUsersService {
 		if (result != null) {
 			if (result.getSourceType() == 0) {
 				EduCommittee ctte = committeeDao.getbyId(result.getSourceId());
-				result.setEareCode(ctte.getAreaCode());
+				result.setAreaCode(ctte.getAreaCode());
 				result.setEduType(ctte.getType().toString());
 			} else {
 				result.setEduType("3");

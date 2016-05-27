@@ -41,7 +41,7 @@ public class BaseController {
 	public ModelAndView getModelAndView(){
 		ModelAndView mv = new ModelAndView();
 		
-		getopenId(getaccess_token());
+//		getopenId(getaccess_token());
 		
 		return mv;
 	}

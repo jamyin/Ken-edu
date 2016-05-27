@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 /**		
  * <p>Title: EduAppUserDto </p>
  * <p>Description: APP用户操作类</p>
@@ -30,7 +31,7 @@ public class EduAppUserDto implements Serializable {
 	private String name;
 	private String userImage;
 	private String eduType;
-	private String eareCode;
+	private String areaCode;
 	private String pjNo;
 	private String token;
 }

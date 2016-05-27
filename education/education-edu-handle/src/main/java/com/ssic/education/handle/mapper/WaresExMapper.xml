@@ -46,10 +46,6 @@
 
 	</select>
 
-
-
-
-
 	<select id="findWaresById" resultType="com.ssic.educateion.common.dto.ProWaresDto">
 		SELECT
 		a.id AS id,
@@ -85,17 +81,14 @@
 
 	<sql id="where_findWares">
 		<if test="warseDto.waresName!=null and  warseDto.waresName!=''">
-			AND a.wares_name = #{warseDto.waresName}
+			AND a.wares_name  like  #{warseDto.waresName}
 		</if>
-		<if test="warseDto.barCode!=null and warseDto.barCode!='' ">
-			AND a.bar_code = #{warseDto.barCode}
+		<if test="warseDto.customCode!=null and warseDto.customCode!='' ">
+			AND a.custom_code  like #{warseDto.customCode}
 		</if>
-		<if test="warseDto.way!=null and warseDto.way!='' ">
-			and a.way = #{warseDto.way}
-		</if>
-		<if test="warseDto.place!=null and warseDto.place!=''">
-			and a.place =#{warseDto.place}
-		</if>
+		<if test="warseDto.waresType!=null and warseDto.waresType!='' ">
+			and a.wares_type = #{warseDto.waresType}
+		</if>	
 	</sql>
 	<select id="findWaresBySupplierId" resultType="com.ssic.educateion.common.dto.ProWaresDto">
 		SELECT

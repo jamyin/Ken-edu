@@ -40,8 +40,7 @@ else
 			idField : 'id',
 			pageSize : 10,
 			pageList : [ 10, 20, 30, 40, 50 ],
-			sortName : 'id',
-			sortOrder : 'asc',
+			
 			checkOnSelect : false,
 			selectOnCheck : false,
 			nowrap : false,
@@ -207,7 +206,7 @@ else
 			height : 480,
 			href : '${pageContext.request.contextPath}/userController/editPage?id='+ id,
 			buttons : [ {
-				text : '编辑',
+				text : '保存',
 				handler : function() {
 					parent.$.modalDialog.openner_dataGrid = dataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
 					var f = parent.$.modalDialog.handler.find('#formEdit');
@@ -228,7 +227,7 @@ else
 			height : 480,
 			href : '${pageContext.request.contextPath}/userController/addPage',
 			buttons : [ {
-				text : '添加',
+				text : '保存',
 				handler : function() {
 					parent.$.modalDialog.openner_dataGrid = dataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
 					 var f2 = parent.$.modalDialog.handler.find('#projectForm');
