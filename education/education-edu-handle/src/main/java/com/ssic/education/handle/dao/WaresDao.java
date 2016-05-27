@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ssic.educateion.common.dto.LedgerDto;
 import com.ssic.educateion.common.dto.ProWaresDto;
 import com.ssic.educateion.common.utils.PageHelperDto;
 import com.ssic.education.handle.mapper.ProSupplierExMapper;
@@ -64,6 +65,10 @@ public class WaresDao{
 	public void updateImsUsers(ProWares proWares) {
 		// TODO Auto-generated method stub
 		mapper.updateByPrimaryKey(proWares);
+	}
+
+	public ProWaresDto findWaresBySupplierId(LedgerDto ledger) {
+		return exmapper.findWaresBySupplierId(ledger);
 	}
 
 

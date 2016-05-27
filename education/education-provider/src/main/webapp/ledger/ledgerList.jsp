@@ -25,7 +25,7 @@
 			fitColumns : true,
 			border : false,
 			pagination : true,
-			idField : 'id',
+			idField : 'masterId',
 			pageSize : 10,
 			pageList : [ 10, 20, 30, 40, 50 ],
 			sortName : 'name',
@@ -88,15 +88,15 @@
 				formatter : function(value, row, index) {
 					var str = '';
 					if ($.canEdit) {
-						str += $.formatString('<img onclick="showFun('+row.wareBatchNo+');" src="{1}" title="查看"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
+						str += $.formatString('<img onclick="showFun(\''+row.masterId+'\');" src="{1}" title="查看"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
 					}
 					str += '&nbsp;';
 					if ($.canEdit) {
-						str += $.formatString('<img onclick="editFun('+row.wareBatchNo+');" src="{1}" title="编辑"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
+						str += $.formatString('<img onclick="editFun(\''+row.masterId+'\');" src="{1}" title="编辑"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
 					}
 					str += '&nbsp;';
 					if ($.canDelete) {
-						str += $.formatString('<img onclick="deleteFun('+row.wareBatchNo+');" src="{1}" title="删除"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/cancel.png');
+						str += $.formatString('<img onclick="deleteFun(\''+row.masterId+'\');" src="{1}" title="删除"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/cancel.png');
 					}
 					return str;
 				}
@@ -136,7 +136,7 @@
 						text : '数据处理中，请稍后....'
 					});
 					$.post('${pageContext.request.contextPath}/ledgerController/deleteLedger', {
-						wareBatchNo : id
+						masterId : id
 					}, function(result) {
 						if (result.success) {
 							parent.$.messager.alert('提示', result.msg, 'info');
@@ -165,7 +165,7 @@
 			title : '编辑废弃油脂',
 			width : 1000,
 			height : 500,
-			href : '${pageContext.request.contextPath}/ledgerController/editPage?wareBatchNo=' +id ,
+			href : '${pageContext.request.contextPath}/ledgerController/editPage?masterId=' +id ,
 			buttons : [ {
 				text : '编辑',
 				handler : function() {
@@ -188,7 +188,7 @@
 			title : '编辑废弃油脂',
 			width : 1000,
 			height : 500,
-			href : '${pageContext.request.contextPath}/ledgerController/showPage?wareBatchNo=' +id,
+			href : '${pageContext.request.contextPath}/ledgerController/showPage?masterId=' +id,
 			onOpen: function(){}
 		});
 	}
