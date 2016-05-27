@@ -295,11 +295,6 @@ public class LedgerController {
 			return j;
 		}
 		int r = ledgerService.deleteLedger(user.getSourceId(), wareBatchNo);
-		if (r == 0) {
-			j.setMsg("删除供应商失败");
-			j.setSuccess(false);
-			return j;
-		}
 		j.setMsg("删除供应商成功");
 		j.setSuccess(true);
 		return j;
