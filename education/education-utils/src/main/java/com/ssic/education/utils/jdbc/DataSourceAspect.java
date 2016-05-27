@@ -36,8 +36,10 @@ public class DataSourceAspect {
                 logger.info(data.value());
             } else if(isSlaveMethod(methodName)){
             	 DynamicDataSourceHolder.putDataSource("slave");
+            	 logger.info("slave");
             } else {
             	DynamicDataSourceHolder.putDataSource("master");
+           	 	logger.info("master");
             }
             
         } catch (Throwable e) {

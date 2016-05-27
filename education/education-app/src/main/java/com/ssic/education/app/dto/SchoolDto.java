@@ -6,6 +6,8 @@ import lombok.ToString;
 import com.ssic.educateion.common.dto.EduCanteenDto;
 import com.ssic.educateion.common.dto.EduSchoolDto;
 import com.ssic.educateion.common.dto.EduSchoolSupplierDto;
+import com.ssic.educateion.common.dto.ProPackagesDto;
+import com.ssic.education.utils.model.PageResult;
 
 /**
 * @ClassName: EduAreaDto
@@ -21,6 +23,7 @@ public class SchoolDto {
 	private EduSchoolDto eduSchoolDto;
 	private EduCanteenDto eduCanteenDto;
 	private EduSchoolSupplierDto eduSchoolSupplierDto;
+	private PageResult<ProPackagesDto> proPackagesDto;
     
 }
 
