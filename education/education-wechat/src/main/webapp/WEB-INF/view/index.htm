@@ -15,7 +15,7 @@
 </section>
 <script type="text/javascript">
 $(function(){
-	$("#schoolName").bind("keydown",function(){
+	$("#schoolName").bind("keyup",function(){
 		var schoolName = $("#schoolName").val();
 		var dataParame = {schoolName:schoolName};
 		$.ajax({
