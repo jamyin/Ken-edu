@@ -15,11 +15,11 @@ public interface ProLedgerMasterExMapper {
 	List<LedgerDto> findAllLedger(@Param("ledgerDto") LedgerDto ld,
 			@Param("ph") PageHelper ph);
 	
-	List<LedgerDto> selectLedgerList(@Param("legderId")String legderId, @Param("receiverId")String receiverId);
+	List<LedgerDto> selectLedgerList(@Param("legderId")String legderId, @Param("receiverId")String receiverId,@Param("receiverName")String receiverName);
 	
-	List<LedgerDto> selectLedgerListOrderby(@Param("legderId")String legderId, @Param("receiverId")String receiverId,@Param("page") PageQuery page);
+	List<LedgerDto> selectLedgerListOrderby(@Param("legderId")String legderId, @Param("receiverId")String receiverId,@Param("receiverName")String receiverName,@Param("page") PageQuery page);
 	
-	long countLedgerListOrderby(@Param("legderId")String legderId, @Param("receiverId")String receiverId);
+	long countLedgerListOrderby(@Param("legderId")String legderId, @Param("receiverId")String receiverId,@Param("receiverName")String receiverName);
 	
 	int insertLedgerMaster(@Param("ledger")LedgerDto ledgerDto);
 
