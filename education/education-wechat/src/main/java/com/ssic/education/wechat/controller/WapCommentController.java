@@ -54,6 +54,7 @@ public class WapCommentController extends BaseController {
 	@ResponseBody
 	public Response<String> comment(EduParentPackCommentDto eduParentPackCommentDto){
 		Response<String> result = new Response<String>();
+		eduParentPackCommentDto.setParentId(parentId);
 		int data = iEduParentPackCommentService.saveComment(eduParentPackCommentDto);
 		if (data > 0) {
 			result.setMessage("点评成功");
