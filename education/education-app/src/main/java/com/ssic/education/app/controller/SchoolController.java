@@ -129,7 +129,7 @@ public class SchoolController {
 	 */
 	@RequestMapping(value="school")
 	@ResponseBody
-	public Response<SchoolDto> school(String schoolId,ProPackagesDto dto, PageQuery page){
+	public Response<SchoolDto> school(String schoolId){
 		Response<SchoolDto> result = new Response<SchoolDto>();
 		SchoolDto school = new SchoolDto();
 		//学校详细信息
@@ -144,14 +144,11 @@ public class SchoolController {
 		EduSchoolSupplierDto eduSchoolSupplierDto = new EduSchoolSupplierDto();
 		eduSchoolSupplierDto.setSchoolId(schoolId);
 		eduSchoolSupplierDto = iEduSchoolSupplierService.searchEduSchoolSupplierDto(eduSchoolSupplierDto);
-		
-		PageResult<ProPackagesDto> proPackagesDtos = proPackagesService.searchPackages(dto, page);
 
 		school.setEduSchoolDto(eduSchoolDto);
 		school.setEduCanteenDto(eduCanteenDto);
 		school.setEduSchoolSupplierDto(eduSchoolSupplierDto);
-		school.setProPackagesDto(proPackagesDtos);
-		
+
 		result.setData(school);
 		return result;
 	}

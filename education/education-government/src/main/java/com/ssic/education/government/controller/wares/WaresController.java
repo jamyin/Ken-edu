@@ -47,8 +47,8 @@ public class WaresController extends BaseController {
 	@RequestMapping(value = "waresPages")
 	public ModelAndView waresPage(ProWaresDto params, PageQuery query){
 		ModelAndView mv = getModelAndView();
-//		PageResult<ProWaresDto> datas = proWaresService.queryWaresByParams(params, query);
-//		mv.addObject("pageList", datas);
+		PageResult<ProWaresDto> datas = proWaresService.queryWaresByParams(params, query);
+		mv.addObject("pageList", datas);
 		mv.addObject("params", params);
 		mv.setViewName("wares/list");
 		return mv;
@@ -67,12 +67,12 @@ public class WaresController extends BaseController {
 	@RequestMapping(value = "/details")
 	private ModelAndView waresDetails(String id,PageQuery page) {
 		ModelAndView mv = getModelAndView();
-//		ProWaresDto proWaresDto = proWaresService.findById(id);
+		ProWaresDto proWaresDto = proWaresService.findById(id);
 		ProLedgerDto proLedgerDto = new ProLedgerDto();
 		proLedgerDto.setWaresId(id);
 		PageResult<ProLedgerDto> proLedgerDtos = proLedgerService.findLedgerPage(proLedgerDto, page);
 		mv.setViewName("/school/school_material_detail");
-//		mv.addObject("proWaresDto", proWaresDto);
+		mv.addObject("proWaresDto", proWaresDto);
 		mv.addObject("proLedgerDtos", proLedgerDtos);
 		return mv;
 	}
@@ -90,10 +90,10 @@ public class WaresController extends BaseController {
 	@RequestMapping(value = "/ledgerDetails")
 	private ModelAndView ledgerDetails(String waresId,String ledgerId) {
 		ModelAndView mv = getModelAndView();
-//		ProWaresDto proWaresDto = proWaresService.findById(waresId);
+		ProWaresDto proWaresDto = proWaresService.findById(waresId);
 		ProLedgerDto proLedgerDto = proLedgerService.findById(ledgerId);
 		mv.setViewName("/school/school_material_batch");
-//		mv.addObject("proWaresDto", proWaresDto);
+		mv.addObject("proWaresDto", proWaresDto);
 		mv.addObject("proLedgerDto", proLedgerDto);
 		return mv;
 	}
