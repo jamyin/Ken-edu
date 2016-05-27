@@ -161,6 +161,7 @@ public class ProSupplierController {
 		}
 		;
 		ps.setId(UUIDGenerator.getUUID());
+		ps.setSupplierType(2);
 		supplierService.saveSupplier(ps);
 		ProSupplierReceiver proSupplierReceiver = new ProSupplierReceiver();
 		proSupplierReceiver.setSupplierId(ps.getId());
