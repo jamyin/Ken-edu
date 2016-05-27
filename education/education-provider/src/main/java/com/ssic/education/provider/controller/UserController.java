@@ -320,6 +320,9 @@ public class UserController extends BaseController {
 		Json j = new Json();
 		if (id != null && !id.equalsIgnoreCase(sessionInfo.getId())) {// 不能删除自己
 			userService.delete(id);
+			j.setMsg("不能删除自己！");
+			j.setSuccess(false);
+			return j;
 		}
 		j.setMsg("删除成功！");
 		j.setSuccess(true);

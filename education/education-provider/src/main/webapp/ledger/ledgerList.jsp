@@ -6,16 +6,15 @@
 <head>
 <title>配货管理</title>
 <jsp:include page="../inc.jsp"></jsp:include>
-<c:if test="${fn:contains(sessionInfo.resourceList, '/userController/editPage')}">
+	<script type="text/javascript">
+		$.canShow = true;
+	</script>
 	<script type="text/javascript">
 		$.canEdit = true;
 	</script>
-</c:if>
-<c:if test="${fn:contains(sessionInfo.resourceList, '/userController/delete')}">
 	<script type="text/javascript">
 		$.canDelete = true;
 	</script>
-</c:if>
 <script type="text/javascript">
 	var dataGrid;
 	$(function() {
@@ -87,7 +86,7 @@
 				width : 100,
 				formatter : function(value, row, index) {
 					var str = '';
-					if ($.canEdit) {
+					if ($.canShow) {
 						str += $.formatString('<img onclick="showFun(\''+row.masterId+'\');" src="{1}" title="查看"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
 					}
 					str += '&nbsp;';

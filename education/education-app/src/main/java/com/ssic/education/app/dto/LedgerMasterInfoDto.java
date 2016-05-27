@@ -1,6 +1,9 @@
 package com.ssic.education.app.dto;
 
 import java.util.Date;
+import java.util.List;
+
+import com.ssic.education.utils.model.PageResult;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,6 +27,7 @@ import lombok.NoArgsConstructor;
 public class LedgerMasterInfoDto {
 	private String id;
 	private Date actionDate; //配送日期
+	private String wareBatchNo; //商品运送批次
 	private String userId;//驾驶员ID 
 	private String driverName;//驾驶员名称
 	private String receiverId;//收获商ID
@@ -31,6 +35,7 @@ public class LedgerMasterInfoDto {
 	private String sourceId;//企业ID
 	private String outset;//出发点
 	private String stock;//菜品
-	private String wareBatchNo; //商品运送批次
 	private Integer haulStatus;//运送状态	
+	private Date lastUpdateTime;//
+	private PageResult<ledgerDetailDto> resultLedger;
 }
