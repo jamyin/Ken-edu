@@ -131,7 +131,18 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		return mapper.countByExample(example);
 	}
-
+	
+	public List<LedgerDto> selectLedgerList(LedgerDto ledgerDto) {
+		return lmExMapper.selectLedgerList(ledgerDto);
+	}
+	
+	public List<LedgerDto> selectLedgerListOrderby(LedgerDto ledgerDto,PageQuery page) {
+		return lmExMapper.selectLedgerListOrderby(ledgerDto, page);
+	}
+	
+	public long countLedgerListOrderby(LedgerDto ledgerDto) {
+		return lmExMapper.countLedgerListOrderby(ledgerDto);
+	}
 	public List<ProSupplierDto> findPage(ProSupplierDto dto, PageQuery page) {
 		return exMapper.selectSupplierByReceiverId(dto, page);
 	}

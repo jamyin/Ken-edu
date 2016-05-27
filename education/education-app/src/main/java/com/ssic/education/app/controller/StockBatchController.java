@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssic.education.app.dto.LedgerInfoDto;
+import com.ssic.education.app.dto.LedgerMasterInfoDto;
 import com.ssic.education.app.dto.LedgerMasterListDto;
 import com.ssic.education.app.service.ILedgerInfoService;
 import com.ssic.education.utils.model.PageQuery;
@@ -51,11 +52,40 @@ public class StockBatchController {
 		return result;
 	}
 
+	/**
+	 * 根据学校查询是收获是ID查询配送列表
+	 * getMaterialInfo：一句话描述方法功能
+	 * @param receiverId
+	 * @param query
+	 * @return
+	 * @exception	
+	 * @author Administrator
+	 * @date 2016年5月27日 下午2:24:06
+	 */
 	@RequestMapping(value = "/list/{receiverId}", method = RequestMethod.GET)
 	@ResponseBody
 	public Response<PageResult<LedgerMasterListDto>> getMaterialInfo(@PathVariable("receiverId") String receiverId, PageQuery query) {
 		Response<PageResult<LedgerMasterListDto>> result = new Response<PageResult<LedgerMasterListDto>>();
-		PageResult<LedgerMasterListDto> LedgerInfoDto = ledgerInfoService.findMasterList(receiverId, query);
+		PageResult<LedgerMasterListDto> ledgerInfoDto = ledgerInfoService.findMasterList(receiverId, query);
+		result.setData(ledgerInfoDto);
+		return result;
+	}
+
+	/**
+	 * 根据ID查询配送信息并带出货物列表
+	 * getMasterInfoById
+	 * @param id
+	 * @param query
+	 * @return
+	 * @exception	
+	 * @author Administrator
+	 * @date 2016年5月27日 下午2:39:55
+	 */
+	@RequestMapping(value = "/master/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public Response<LedgerMasterInfoDto> getMasterInfoById(@PathVariable("id") String id, PageQuery query) {
+		Response<LedgerMasterInfoDto> result = new Response<LedgerMasterInfoDto>();
+		LedgerMasterInfoDto LedgerInfoDto = ledgerInfoService.findMasterById(id, query);
 		result.setData(LedgerInfoDto);
 		return result;
 	}

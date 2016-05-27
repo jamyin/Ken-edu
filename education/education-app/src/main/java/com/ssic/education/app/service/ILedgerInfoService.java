@@ -1,6 +1,7 @@
 package com.ssic.education.app.service;
 
 import com.ssic.education.app.dto.LedgerInfoDto;
+import com.ssic.education.app.dto.LedgerMasterInfoDto;
 import com.ssic.education.app.dto.LedgerMasterListDto;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
@@ -21,4 +22,6 @@ public interface ILedgerInfoService {
 	LedgerInfoDto findLedgerByBatchNo(String batchNo);
 
 	PageResult<LedgerMasterListDto> findMasterList(String receiverId, PageQuery page);
+
+	LedgerMasterInfoDto findMasterById(String id, PageQuery page);
 }

@@ -95,6 +95,7 @@ public class UserDao {
 		}}
 		
 		dataGrid.setRows(list);
+		
 		return dataGrid;
 	}
 

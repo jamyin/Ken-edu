@@ -19,6 +19,62 @@
 			AND m.receiver_name like "%"#{ledgerDto.receiverName}"%"
 		</if>
 	</select>
+	
+	<select id="selectLedgerList" resultType="com.ssic.educateion.common.dto.LedgerDto" parameterType="com.ssic.educateion.common.dto.LedgerDto">
+		SELECT a.id,b.id as masterId,b.action_date as actionDate,b.receiver_id as receiverId,b.receiver_name as receiverName,b.user_id as userId,b.source_id as sourceId,b.ware_batch_no as wareBatchNo,
+		b.haul_status as haulStatus,a.wares_id as waresId,a.name,a.spce,a.supplier_id as supplierId,a.supplier_code as supplierCode, a.supplier_name as supplierName, a.quantity,a.production_date as productionDate,
+		a.production_name as productionName,a.batch_no as batchNo,a.trace_code as traceCode,a.create_time as createTime,a.last_update_time as lastUpdateTime,a.stat
+		FROM t_pro_ledger a
+		LEFT JOIN t_pro_ledger_master b on a.master_id = b.id
+		WHERE a.stat = 1 and b.stat=1
+		<if test="ledgerDto.receiverId != null  and ledgerDto.receiverId !=''">
+			AND b.receiver_id = #{ledgerDto.receiverId}
+		</if>
+		<if test="ledgerDto.masterId != null  and ledgerDto.masterId !=''">
+			AND b.id = #{ledgerDto.masterId}
+		</if>
+		<if test="ledgerDto.receiverName != null  and ledgerDto.receiverName !=''">
+			AND b.receiver_name like "%"#{ledgerDto.receiverName}"%"
+		</if>
+	</select>
+	
+	<select id="selectLedgerListOrderby" resultType="com.ssic.educateion.common.dto.LedgerDto" parameterType="com.ssic.educateion.common.dto.LedgerDto">
+		SELECT a.id,b.id as masterId,b.action_date as actionDate,b.receiver_id as receiverId,b.receiver_name as receiverName,b.user_id as userId,b.source_id as sourceId,b.ware_batch_no as wareBatchNo,
+		b.haul_status as haulStatus,a.wares_id as waresId,a.name,a.spce,a.supplier_id as supplierId,a.supplier_code as supplierCode, a.supplier_name as supplierName, a.quantity,a.production_date as productionDate,
+		a.production_name as productionName,a.batch_no as batchNo,a.trace_code as traceCode,a.create_time as createTime,a.last_update_time as lastUpdateTime,a.stat
+		FROM t_pro_ledger a
+		LEFT JOIN t_pro_ledger_master b on a.master_id = b.id
+		WHERE a.stat = 1 and b.stat=1
+		<if test="ledgerDto.receiverId != null  and ledgerDto.receiverId !=''">
+			AND b.receiver_id = #{ledgerDto.receiverId}
+		</if>
+		<if test="ledgerDto.masterId != null  and ledgerDto.masterId !=''">
+			AND b.id = #{ledgerDto.masterId}
+		</if>
+		<if test="ledgerDto.receiverName != null  and ledgerDto.receiverName !=''">
+			AND b.receiver_name like "%"#{ledgerDto.receiverName}"%"
+		</if>
+		GROUP BY b.ware_batch_no
+		ORDER BY a.create_time desc
+		limit #{page.startNum},
+		#{page.pageSize}
+	</select>
+	
+	<select id="countLedgerListOrderby" resultType="java.lang.Long" parameterType="java.lang.String">
+		SELECT count(*) from  (SELECT b.id, COUNT(*) counts FROM t_pro_ledger a
+		LEFT JOIN t_pro_ledger_master b on a.master_id = b.id
+		WHERE a.stat = 1 and b.stat=1
+		<if test="ledgerDto.receiverId != null  and ledgerDto.receiverId !=''">
+			AND b.receiver_id = #{ledgerDto.receiverId}
+		</if>
+		<if test="ledgerDto.masterId != null  and ledgerDto.masterId !=''">
+			AND b.id = #{ledgerDto.masterId}
+		</if>
+		<if test="ledgerDto.receiverName != null  and ledgerDto.receiverName !=''">
+			AND b.receiver_name like "%"#{ledgerDto.receiverName}"%"
+		</if>
+		GROUP BY b.ware_batch_no) t
+	</select>
 	<select id="findAllLedger" resultType="com.ssic.educateion.common.dto.LedgerDto">
 		SELECT DISTINCT
 		m.id masterId,
@@ -55,6 +111,7 @@
 		t_pro_ledger_master (id, action_date, receiver_id,
 		receiver_name,
 		user_id,
+		driver_name,
 		source_id,
 		ware_batch_no, haul_status, create_time,
 		last_update_time,
@@ -64,6 +121,7 @@
 		#{ledger.receiverId},
 		#{ledger.receiverName},
 		#{ledger.userId},
+		(SELECT name FROM t_pro_users WHERE id=#{ledger.userId}),
 		#{ledger.sourceId},
 		#{ledger.wareBatchNo},
 		#{ledger.haulStatus},
@@ -84,6 +142,8 @@
 			#{ledger.receiverName,jdbcType=VARCHAR},
 			user_id =
 			#{ledger.userId,jdbcType=VARCHAR},
+			driver_name=
+			(SELECT name FROM t_pro_users WHERE id=#{ledger.userId}),
 			source_id =
 			#{ledger.sourceId,jdbcType=VARCHAR},
 			ware_batch_no =

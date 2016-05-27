@@ -60,8 +60,6 @@ public class TaskController {
     	dto.setReceiveReadList(receiveReadList);
     	dto.setReceiveNotReadList(receiveNotReadList);
     	
-    	//result.setStatus(DataStatus.HTTP_SUCCESS);
-		//result.setMessage("查询任务成功！");
 		result.setData(dto);
     	return result;
     	/*if(taskList.getResults() != null && taskList.getResults().size() >0 ){
@@ -75,35 +73,6 @@ public class TaskController {
     		return result;
     	}*/
     }
-    
-    /**
-    * @Title: findSendListById
-    * @Description: 根据Id查询当前用户发送任务列表
-    * @author Ken Yin  
-    * @date 2016年5月21日 上午10:42:02
-    * @return Response<PageResult<EduTaskDto>>    返回类型
-     */
-   /* @RequestMapping("/findSendListById/{id}")
-    @ResponseBody
-    public Response<PageResult<EduTaskDto>> findSendListById(@PathVariable("id")String id, PageQuery query) {
-    	Response<PageResult<EduTaskDto>> result = new Response<PageResult<EduTaskDto>>();
-    	if(StringUtils.isEmpty(id)){
-    		result.setStatus(DataStatus.HTTP_FAILE);
-    		result.setMessage("查询Id为空");
-    		return result;
-    	}
-    	PageResult<EduTaskDto> taskList = taskService.findSendListById(id, query);
-    	if(taskList.getResults() != null && taskList.getResults().size() >0 ){
-    		result.setStatus(DataStatus.HTTP_SUCCESS);
-    		result.setMessage("查询任务成功！");
-    		result.setData(taskList);
-    		return result;
-    	}else{
-    		result.setStatus(DataStatus.HTTP_FAILE);
-    		result.setMessage("未查到相关记录！");
-    		return result;
-    	}
-    }*/
     
     /**
     * @Title: delTask
