@@ -81,4 +81,11 @@ public class EduSchoolServiceImpl implements EduSchoolService{
 	public List<ProLicenseDto> getProLicenseBySchId(ProLicenseDto dto) {
 		return BeanUtils.createBeanListByTarget(proLicenseDao.findById(dto.getId(), dto.getCerSource().intValue()), ProLicenseDto.class);
 	}
+
+	@Override
+	public List<EduSchoolDto> searchEduScholDtoList(EduSchoolDto eduSchoolDto) {
+		List<EduSchool> dataList = eduSchoolDao.searchEduScholDtoList(eduSchoolDto);
+		List<EduSchoolDto> resultList = BeanUtils.createBeanListByTarget(dataList, EduSchoolDto.class);
+		return resultList;
+	}
 }

@@ -76,7 +76,7 @@ public class WapSchoolController extends BaseController{
 	public Response<List<EduSchoolDto>> search(EduSchoolDto eduSchoolDto){
 		Response<List<EduSchoolDto>> result = new Response<List<EduSchoolDto>>();
 		
-		List<EduSchoolDto> dataList = eduSchoolService.queryAll();
+		List<EduSchoolDto> dataList = eduSchoolService.searchEduScholDtoList(eduSchoolDto);
 		if(dataList!=null && dataList.size()>0){
 			result.setData(dataList);
 		}else{

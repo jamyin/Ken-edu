@@ -1,20 +1,28 @@
 <html>
 <head>
 <script src="//cdn.bootcss.com/jquery/3.0.0-beta1/jquery.js"></script>
+
 </head>
 <body>
-<input type="text"/><button id="search">查询</button>
+<input id="schoolName" name="schoolName" type="text" style="width:100px;height:50px;"/><button id="search">查询</button>
 <div id="schoolList">
 </div>
 <script type="text/javascript">
 $(function(){
 	$("#search").bind("click",function(){
+		var schoolName = $("#schoolName").val();
+		var dataParame = {schoolName:schoolName};
 		$.ajax({
 			url:'wap/school/search.htm',
 			type:"POST",
+			data : dataParame,
 			dataType:'json',
 			success:function(data){
-				console.log(data);
+				var schoolList = $("#schoolList");
+				schoolList.empty();				
+				$.each(data.data, function(index, item) {
+					$("#schoolList").append("<tr><td><a href='alert()'>"+item['schoolName']+"</a></td></tr>");	
+				});
 			}
 		});
 	});
