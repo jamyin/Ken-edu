@@ -48,4 +48,6 @@ public interface IWaresService {
 
 	ProWaresDto findWaresBySupplierId(LedgerDto ledger);
 
+	int findAllWaresCount(ProWaresDto waresDto);
+
 }

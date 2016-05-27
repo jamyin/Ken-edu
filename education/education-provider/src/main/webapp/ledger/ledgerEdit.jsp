@@ -64,8 +64,7 @@
 					<tr>
 					<th style='width:70px;'>驾驶员：</th>
 					<td style='width:100px;'><select name="ledger[0].userId" type="text"
-						style='width:100px;' placeholder="请选择驾驶员" class="easyui-validatebox span2"
-						data-options="required:true">
+						style='width:100px;' placeholder="请选择驾驶员" class="easyui-validatebox span2">
 						<c:if test="${LedgerList[0].userName} == null">
 							<option selected="selected" value =null>请选择驾驶员</option>
 						</c:if>
@@ -84,8 +83,7 @@
 					</select></td>
 					<th style='width:70px;'>配送状态：</th>
 					<td style='width:100px;'><select name="ledger[0].haulStatus" type="text"
-						style='width:100px;' placeholder="请选择驾驶员" class="easyui-validatebox span2"
-						data-options="required:true">
+						style='width:100px;' placeholder="请选择驾驶员" class="easyui-validatebox span2">
 						<c:if test="${LedgerList[0].haulStatus ==0}">
 							<option selected="selected" value ="0">未配送</option>
 						</c:if>
@@ -126,16 +124,15 @@
 						<th style='width:70px;'>采购品供应商：</th>
 						<td style='width:100px;'><input name="ledger[${status.index }].supplierName"
 							style='width:100px;' type="text" placeholder="请输入供应商" class="easyui-validatebox span2"
-							data-options="required:true" value="${ledger.supplierName}"></td>
+							value="${ledger.supplierName}"></td>
 						<th style='width:70px;'>生产企业：</th>
 						<td style='width:100px;'><input name="ledger[${status.index }].productionName"
 							type="text" placeholder="请输入生产单位"
-							style='width:100px;' class="easyui-validatebox span2" data-options="required:true"
+							style='width:100px;' class="easyui-validatebox span2" 
 							value="${ledger.productionName}"></td>
 						<th style='width:70px;'>生产日期：</th>
 						<td style='width:100px;'><input name="ledger[${status.index }].productionDate"
 							style='width:100px;' type="text" placeholder="点击选择日期" class="easyui-validatebox span2"
-							data-options="required:true"
 							onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})"
 							readonly="readonly"
 							value="<fmt:formatDate value="${ledger.productionDate }" pattern="yyyy-MM-dd"/>"></td>

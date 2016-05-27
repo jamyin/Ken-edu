@@ -119,7 +119,15 @@ public class WaresServiceImpl implements IWaresService {
 	//cwf
 	public ProWaresDto findWaresBySupplierId(LedgerDto ledger) {
 		// TODO Auto-generated method stub
-		return null;//dao.findWaresIdBySupplierId(ledger);
+		return dao.findWaresBySupplierId(ledger);
+	}
+
+	
+	
+	@Override
+	public int findAllWaresCount(ProWaresDto waresDto) {
+		// TODO Auto-generated method stub
+		return dao.findAllWaresCount(waresDto);
 	}
 
 

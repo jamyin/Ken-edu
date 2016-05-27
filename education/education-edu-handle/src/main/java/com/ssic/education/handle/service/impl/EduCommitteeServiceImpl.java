@@ -25,7 +25,6 @@ public class EduCommitteeServiceImpl implements IEduCommitteeService {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
 	public List<EduCommitteeDto> queryCommittee(EduCommitteeDto eduCommitteeDto) {
 		// TODO Auto-generated method stub
 		List<EduCommittee> dataList = eduCommitteeDao.queryCommittee(eduCommitteeDto);

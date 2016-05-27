@@ -58,9 +58,10 @@ public class WapFollowController extends BaseController {
 	 */
 	@RequestMapping(value = "follow")
 	@ResponseBody
-	public Response<EduSchoolDto> follow(EduParentScChDto eduParentScChDto) {
-		Response<EduSchoolDto> result = new Response<EduSchoolDto>();
+	public Response<EduParentScChDto> follow(EduParentScChDto eduParentScChDto) {
+		Response<EduParentScChDto> result = new Response<EduParentScChDto>();
 
+		eduParentScChDto.setParentId(parentId);
 		int data = iEduParentScChService.saveFollow(eduParentScChDto);
 		if (data > 0) {
 			result.setMessage("关注成功");
@@ -79,9 +80,9 @@ public class WapFollowController extends BaseController {
 	 */
 	@RequestMapping(value = "unFollow")
 	@ResponseBody
-	public Response<EduSchoolDto> unFollow(EduParentScChDto eduParentScChDto) {
-		Response<EduSchoolDto> result = new Response<EduSchoolDto>();
-
+	public Response<EduParentScChDto> unFollow(EduParentScChDto eduParentScChDto) {
+		Response<EduParentScChDto> result = new Response<EduParentScChDto>();
+		eduParentScChDto.setStat(DataStatus.DISABLED);
 		int data = iEduParentScChService.updateFollow(eduParentScChDto);
 		if (data > 0) {
 			result.setMessage("操作成功");

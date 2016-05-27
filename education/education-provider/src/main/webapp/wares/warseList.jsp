@@ -311,7 +311,7 @@ else
 			dataGrid.datagrid('unselectAll').datagrid('uncheckAll');
 		}
 		parent.$.modalDialog({
-			title : '编辑用户',
+			title : '编辑原料',
 			width :768,
 			height : 480,
 			href : '${pageContext.request.contextPath}/waresController/editWares?id='+ id,
@@ -365,7 +365,7 @@ else
 			height : 480,
 			href : '${pageContext.request.contextPath}/waresController/editImage?id='+ id,
 			buttons : [ {
-				text : '编辑',
+				text : '上传',
 				handler : function() {
 					parent.$.modalDialog.openner_dataGrid = dataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
 					var f = parent.$.modalDialog.handler.find('#updateImage');
@@ -406,7 +406,7 @@ else
 			height : 480,
 			href : '${pageContext.request.contextPath}/waresController/updateImage?id='+ id,
 			buttons : [ {
-				text : '编辑',
+				text : '上传',
 				handler : function() {
 					parent.$.modalDialog.openner_dataGrid = dataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
 					var f = parent.$.modalDialog.handler.find('#formEditImage');

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no" />
+<title>我的关注</title>
+<link href="/static/css/style.css" rel="stylesheet" />
+<script src="/static/js/jquery-2.1.3.min.js"></script>
+</head>
+<body>
+	<section class="myfollow">
+		<ul>
+			<#if dataList ??> 
+				<#list dataList as data>
+					<li>
+						<div class="con">
+							<img src="/static/img/food_simple2.jpg" border="0">
+							<p class="nam">${(data.schoolName)!}</p>
+							<p class="adr">地址：${(data.schoolAddress)!}</p>
+						</div>
+						<div class="bar">
+							<#if data_index ==0>
+								<a class="shower cur" href="###">默认显示</a><a href="/wap/school/school/${(data.schoolId)!}.htm">编辑</a><a data-id="${(data.id)!}" data-value="${(data.schoolId)!}" href="#" onclick="doAction(this);">取消关注</a>
+							<#else>
+								<a class="shower" href="###">默认显示</a><a href="/wap/school/school/${(data.schoolId)!}.htm">编辑</a><a data-id="${(data.id)!}" data-value="${(data.schoolId)!}" href="#" onclick="doAction(this);">取消关注</a>
+							</#if>
+							
+						</div>
+					</li>				 
+				</#list> 
+			</#if>
+			<!-- <li>
+				<div class="con">
+					<img src="/static/img/food_simple2.jpg" border="0">
+					<p class="nam">静安实验小学</p>
+					<p class="adr">地址：上海市长宁区茅台路625号</p>
+				</div>
+				<div class="bar">
+					<a class="shower cur" href="###">默认显示</a><a href="###">编辑</a><a href="###">取消关注</a>
+				</div>
+			</li>
+			<li>
+				<div class="con">
+					<img src="/static/img/food_simple2.jpg" border="0">
+					<p class="nam">静安实验小学</p>
+					<p class="adr">地址：上海市长宁区茅台路625号</p>
+				</div>
+				<div class="bar">
+					<a class="shower" href="###">默认显示</a><a href="###">编辑</a><a href="###">取消关注</a>
+				</div>
+			</li>
+			<li>
+				<div class="con">
+					<img src="/static/img/food_simple2.jpg" border="0">
+					<p class="nam">静安实验小学</p>
+					<p class="adr">地址：上海市长宁区茅台路625号</p>
+				</div>
+				<div class="bar">
+					<a class="shower" href="###">默认显示</a><a href="###">编辑</a><a href="###">取消关注</a>
+				</div>
+			</li> -->
+		</ul>
+	</section>
+</body>
+<script>
+	$(function() {
+		$('.seldate').on('click', function() {
+			$(this).attr('type', 'date').focus()
+		});
+		$('.seldate').on('change', function() {
+			var _val = $(this).val()
+			$('#sel_date').val(_val)
+		})
+	});
+	
+	function doAction(objThis){
+		var schoolId = $(objThis).attr("data-value");
+		var id = $(objThis).attr("data-id");
+		var dataParame = {schoolId:schoolId,id:id};
+		$.ajax({
+			url:'/wap/follow/unFollow.htm',
+			type:"POST",
+			data : dataParame,
+			dataType:'json',
+			success:function(data){
+				if(data.status == 200){
+					window.location.href = "/wap/follow/index.htm";
+				}
+			}
+		});		
+	}
+	
+</script>
+</html>

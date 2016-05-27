@@ -48,7 +48,7 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 
 	@Autowired
 	private ProLedgerMasterMapper lmMapper;
-	
+
 	@Autowired
 	private ProLedgerMasterExMapper lmExMapper;
 
@@ -64,12 +64,12 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 			ProLedgerExample.Criteria criteria = example.createCriteria();
 			criteria.andMasterIdEqualTo(ledgerDto.getMasterId());
 			List<ProLedger> leadgers = mapper.selectByExample(example);
-			String name="";
+			String name = "";
 			for (ProLedger proLedger : leadgers) {
-				name+=proLedger.getName()+",";
+				name += proLedger.getName() + ",";
 			}
-			if(name!=""){
-			ledgerDto.setName(name.substring(0,name.length()-1));
+			if (name != "") {
+				ledgerDto.setName(name.substring(0, name.length() - 1));
 			}
 		}
 		dataGrid.setRows(list);
@@ -131,7 +131,18 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		return mapper.countByExample(example);
 	}
-
+	
+	public List<LedgerDto> selectLedgerList(LedgerDto ledgerDto) {
+		return lmExMapper.selectLedgerList(ledgerDto.getMasterId(), ledgerDto.getReceiverId(),ledgerDto.getReceiverName());
+	}
+	
+	public List<LedgerDto> selectLedgerListOrderby(LedgerDto ledgerDto,PageQuery page) {
+		return lmExMapper.selectLedgerListOrderby(ledgerDto.getMasterId(), ledgerDto.getReceiverId(),ledgerDto.getReceiverName(), page);
+	}
+	
+	public long countLedgerListOrderby(LedgerDto ledgerDto) {
+		return lmExMapper.countLedgerListOrderby(ledgerDto.getMasterId(), ledgerDto.getReceiverId(),ledgerDto.getReceiverName());
+	}
 	public List<ProSupplierDto> findPage(ProSupplierDto dto, PageQuery page) {
 		return exMapper.selectSupplierByReceiverId(dto, page);
 	}
@@ -140,8 +151,8 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 		return exMapper.countSupplier(dto);
 	}
 
-	public List<LedgerDto> findLedgerById(String sourceId, String wareBatchNo) {
-		return exMapper.findLedgerByWareBatchNo(sourceId, wareBatchNo);
+	public List<LedgerDto> findLedgerByMasterId(String sourceId, String masterId) {
+		return exMapper.findLedgerByMasterId(sourceId, masterId);
 	}
 
 	public int updataLedger(List<LedgerDto> ledgers) {
@@ -152,9 +163,12 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 		return 0;
 	}
 
-	public int deleteLedger(String sourceId, String wareBatchNo) {
-		lmExMapper.deleteLedgerMaster(sourceId, wareBatchNo);
-		return exMapper.deleteLedger(sourceId, wareBatchNo);
+	public int deleteLedger(String sourceId, String masterId) {
+		int r = lmExMapper.deleteLedgerMaster(sourceId, masterId);
+		if (r != 0) {
+			exMapper.deleteLedger(sourceId, masterId);
+		}
+		return r;
 	}
 
 	public int findWareBatchNo(LedgerDto ledgerDto) {

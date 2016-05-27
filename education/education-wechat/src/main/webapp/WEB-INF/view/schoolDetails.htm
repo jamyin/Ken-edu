@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no" />
+<title>设置关注学校</title>
+<link href="/static/css/style.css" rel="stylesheet" />
+<script src="/static/js/jquery-2.1.3.min.js"></script>
+</head>
+<body>
+	<#include "constant.htm" />
+	<section class="myfollow">
+		<ul>
+			<li>
+				<div class="con">
+					<img src="/static/img/food_simple2.jpg" border="0">
+					<p class="nam">${(data.schoolName)!}</p>
+					<p class="adr">地址：${(data.address)!}</p>
+				</div>
+			</li>
+		</ul>
+	</section>
+
+	<section class="myfollow_c">
+	<form id="form_action">
+			<input type="hidden" name="schoolId" value="${(data.id)!}"/>
+			<input type="hidden" name="schoolName" value="${(data.schoolName)!}"/>
+			<input type="hidden" name="schoolAddress" value="${(data.address)!}"/>	
+		<h2>学生信息</h2>
+		<ul>
+			<li><label>班 级</label>
+				<p>
+					<select name="childClass">
+						<#assign keys=gradeList?keys>
+						<#list keys as key>
+							<option value="${gradeList[key]}">${key}</option>
+						</#list>
+					</select>
+				</p></li>
+			<li><label>姓 名</label><input name="childName" type="text" placeholder="请输入学生姓名"></li>
+			<li><label>性 别</label>
+				<p>
+					<select name="childSex">
+						<option value="1">男</option>
+						<option value="2">女</option>
+						<option value="0">保密</option>
+					</select>
+				</p></li>
+			<li><label>关 系</label>
+				<p>
+					<select name="relation">
+						<option value="1">父亲  </option>
+						<option value="2">母亲 </option>
+					</select>
+				</p></li>
+			<li><label>手 机 号</label><input name="mobile" type="text" placeholder="请输入您的手机号"></li>
+		</ul>
+		<input class="submit" id="save_action" value="确认关注">
+	</form>
+	</section>
+</body>
+<script>
+	$(function() {
+		$('.con .row ul').on(
+				'click',
+				'li',
+				function() {
+					$(this).addClass('cur').siblings().removeClass('cur')
+							.closest('ul').attr('score', $(this).index() + 1)
+				})
+		$('.done').on('click', 'li', function() {
+			console.log($('#taste').attr('score'))
+			console.log($('#health').attr('score'))
+			console.log($('#weights').attr('score'))
+		});
+		
+		$("#save_action").bind("click",function(){
+			var dataParame = $("#form_action").serialize();
+			$.ajax({
+				url:'/wap/follow/follow.htm',
+				type:"POST",
+				data : dataParame,
+				dataType:'json',
+				success:function(data){
+					if(data.status == '200'){
+						window.location.href = "/wap/school/school/${(data.id)!}.htm";
+						//alert(data.message);
+					}
+				}
+			});
+		});		
+		
+	})
+</script>
+</html>

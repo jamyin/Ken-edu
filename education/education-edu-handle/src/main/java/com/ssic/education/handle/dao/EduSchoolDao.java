@@ -83,4 +83,13 @@ public class EduSchoolDao extends MyBatisBaseDao<EduSchool> {
 
         criteria.andStatEqualTo(DataStatus.ENABLED);
     }
+
+	public List<EduSchool> searchEduScholDtoList(EduSchoolDto eduSchoolDto) {
+        EduSchoolExample example = new EduSchoolExample();
+        EduSchoolExample.Criteria criteria = example.createCriteria();
+        
+        assemblyParams(eduSchoolDto, criteria);
+        
+		return mapper.selectByExample(example);
+	}
 }

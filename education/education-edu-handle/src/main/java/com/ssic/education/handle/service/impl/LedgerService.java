@@ -28,9 +28,9 @@ public class LedgerService implements ILedgerService {
 	}
 
 	@Override
-	public List<LedgerDto> findLedgerById(String sourceId,
-			String wareBatchNo) {
-		return ledgerDao.findLedgerById(sourceId,wareBatchNo);
+	public List<LedgerDto> findLedgerByMasterId(String sourceId,
+			String masterId) {
+		return ledgerDao.findLedgerByMasterId(sourceId,masterId);
 	}
 
 	@Override

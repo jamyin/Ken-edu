@@ -97,6 +97,8 @@ public class WaresController extends BaseController {
 		phdto.setRows(ph.getRows());
 		phdto.setSort(ph.getSort());
 		phdto.setBeginRow((ph.getPage() - 1) * ph.getRows());
+		
+		int count=waresService.findAllWaresCount(waresDto);
 		List<ProWaresDto> pdtoList = waresService.findAllWares(waresDto, phdto);
 		for (ProWaresDto proWaresDto : pdtoList) {
 
@@ -105,7 +107,7 @@ public class WaresController extends BaseController {
 		}
 		// 查询数量
 		dataGrid.setRows(pdtoList);
-		dataGrid.setTotal(Long.valueOf(pdtoList.size()));
+		dataGrid.setTotal((long) count);
 		return dataGrid;
 	}
 
@@ -165,8 +167,7 @@ public class WaresController extends BaseController {
 			j.setMsg("新增商品成功");
 			j.setSuccess(true);
 			return j;
-		}
-		waresService.insertWares(pro);
+		}	
 		j.setMsg("新增商品失败，数据重复");
 		j.setSuccess(false);
 		return j;
@@ -259,6 +260,8 @@ public class WaresController extends BaseController {
 		ProWares specManu = waresService.findProWarsByNameSpecManu(
 				pro.getWaresName(), pro.getSpec(), pro.getManufacturer(),
 				pro.getSupplierId());
+		proWares.setCreateTime(new Date());
+		proWares.setLastUpdateTime(new Date());
 		if (specManu == null || specManu.equals("")) {
 			waresService.updateImsUsers(proWares);
 			json.setMsg("修改信息成功");
@@ -266,7 +269,7 @@ public class WaresController extends BaseController {
 			return json;
 		}
 
-		waresService.updateImsUsers(proWares);
+		
 		json.setMsg("修改信息失败，数据重复");
 		json.setSuccess(true);
 		return json;

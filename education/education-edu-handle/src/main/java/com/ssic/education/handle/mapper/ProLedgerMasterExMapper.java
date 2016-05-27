@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.ssic.educateion.common.dto.LedgerDto;
 import com.ssic.educateion.common.utils.PageHelper;
+import com.ssic.education.utils.model.PageQuery;
 
 public interface ProLedgerMasterExMapper {
 
@@ -14,10 +15,16 @@ public interface ProLedgerMasterExMapper {
 	List<LedgerDto> findAllLedger(@Param("ledgerDto") LedgerDto ld,
 			@Param("ph") PageHelper ph);
 	
+	List<LedgerDto> selectLedgerList(@Param("legderId")String legderId, @Param("receiverId")String receiverId,@Param("receiverName")String receiverName);
+	
+	List<LedgerDto> selectLedgerListOrderby(@Param("legderId")String legderId, @Param("receiverId")String receiverId,@Param("receiverName")String receiverName,@Param("page") PageQuery page);
+	
+	long countLedgerListOrderby(@Param("legderId")String legderId, @Param("receiverId")String receiverId,@Param("receiverName")String receiverName);
+	
 	int insertLedgerMaster(@Param("ledger")LedgerDto ledgerDto);
 
 	int updateLedgerMaster(@Param("ledger")LedgerDto ledgerDto);
 
-	int deleteLedgerMaster(@Param("sourceId")String sourceId,@Param("wareBatchNo") String wareBatchNo);
+	int deleteLedgerMaster(@Param("sourceId")String sourceId,@Param("masterId") String masterId);
 
 }

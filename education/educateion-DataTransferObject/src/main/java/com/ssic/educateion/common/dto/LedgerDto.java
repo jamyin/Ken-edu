@@ -1,6 +1,7 @@
 package com.ssic.educateion.common.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -98,6 +99,10 @@ public class LedgerDto {
 	
 	@Setter
 	@Getter
+	private String sourceName;
+	
+	@Setter
+	@Getter
 	private String wareBatchNo;
 	
 	@Setter
@@ -123,6 +128,10 @@ public class LedgerDto {
 	@Setter
 	@Getter
 	private int haulStatus;
+	
+	@Setter
+	@Getter
+	private List<LedgerDto> ledgerDtos;
 
 	@Override
 	public String toString() {

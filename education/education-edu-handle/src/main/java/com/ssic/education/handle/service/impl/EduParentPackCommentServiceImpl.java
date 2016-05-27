@@ -1,5 +1,7 @@
 package com.ssic.education.handle.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +22,11 @@ public class EduParentPackCommentServiceImpl implements IEduParentPackCommentSer
 		eduParentPackCommentDao.insertSelective(eduParentPackComment);
 	}
 
-	public void searchComment(EduParentPackCommentDto eduParentPackCommentDto) {
+	public List<EduParentPackCommentDto> searchComment(EduParentPackCommentDto eduParentPackCommentDto) {
 		// TODO Auto-generated method stub
-		eduParentPackCommentDao.searchComment(eduParentPackCommentDto);
+		List<EduParentPackComment> resultList = eduParentPackCommentDao.searchComment(eduParentPackCommentDto);
+		List<EduParentPackCommentDto> dataList = BeanUtils.createBeanListByTarget(resultList, EduParentPackCommentDto.class);
+		return dataList;
 	}
 
 }

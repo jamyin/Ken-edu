@@ -71,7 +71,7 @@ public class WaresController extends BaseController {
 		ProLedgerDto proLedgerDto = new ProLedgerDto();
 		proLedgerDto.setWaresId(id);
 		PageResult<ProLedgerDto> proLedgerDtos = proLedgerService.findLedgerPage(proLedgerDto, page);
-		mv.setViewName("/school/school_material_detail");
+		mv.setViewName("/school/purchasing_goods_detail");
 		mv.addObject("proWaresDto", proWaresDto);
 		mv.addObject("proLedgerDtos", proLedgerDtos);
 		return mv;

@@ -2,6 +2,8 @@ package com.ssic.education.government.dto;
 
 import java.util.Date;
 
+import com.ssic.education.utils.constants.WaresMaterialEnum;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -44,7 +46,7 @@ public class ProWaresDto {
 		@Getter
 		@Setter
 	    private Integer waresType;
-
+		
 		@Getter
 		@Setter
 	    private String customCode;

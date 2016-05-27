@@ -24,4 +24,6 @@ public interface EduSchoolService {
 	public Integer updateSchool(EduSchoolDto dto);
 	
 	public PageResult<SupplierReviewedDto> list(SupplierReviewedDto dto, PageQuery page);
+
+	List<EduSchoolDto> searchEduScholDtoList(EduSchoolDto eduSchoolDto);
 }

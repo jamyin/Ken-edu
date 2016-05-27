@@ -1,10 +1,12 @@
 package com.ssic.education.handle.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssic.educateion.common.dto.LedgerDto;
 import com.ssic.educateion.common.dto.ProLedgerDto;
 import com.ssic.educateion.common.dto.ProSupplierDto;
 import com.ssic.education.handle.dao.ProLedgerDao;
@@ -19,6 +21,22 @@ public class ProLedgerServiceImpl implements ProLedgerService{
 	
 	@Autowired
 	private ProLedgerDao proLedgerDao;
+	
+	public PageResult<LedgerDto> selectLedgerPage(LedgerDto dto,PageQuery page) {
+		List<LedgerDto> results = proLedgerDao.selectLedgerListOrderby(dto, page);
+		page.setTotal(proLedgerDao.countLedgerListOrderby(dto));
+		List<LedgerDto> ledgerDtos = proLedgerDao.selectLedgerList(dto);
+		for (LedgerDto ledgerDto:results){
+			List<LedgerDto> ledgerDtoA = new ArrayList<LedgerDto>();
+			for (LedgerDto ledgerdto:ledgerDtos) {
+				if (ledgerDto.getWareBatchNo() == ledgerdto.getWareBatchNo()) {
+					ledgerDtoA.add(ledgerdto);
+				}
+			}
+			ledgerDto.setLedgerDtos(ledgerDtoA);
+		}
+		return new PageResult<>(page, results);
+	}
 	
 	public PageResult<ProSupplierDto> findPage(ProSupplierDto dto,PageQuery page) {
 		List<ProSupplierDto> results = proLedgerDao.findPage(dto, page);
