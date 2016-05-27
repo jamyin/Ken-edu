@@ -129,10 +129,16 @@ public class SchoolController {
 	 */
 	@RequestMapping(value="school")
 	@ResponseBody
-	public Response<SchoolDto> school(String schoolId,ProPackagesDto dto, PageQuery page){
+	public Response<SchoolDto> school(ProPackagesDto dto, PageQuery page){
 		Response<SchoolDto> result = new Response<SchoolDto>();
+		if(StringUtils.isEmpty(dto.getCustomerId())){
+			result.setStatus(DataStatus.HTTP_FAILE);
+			result.setMessage("学校Id为空！");
+			return result;
+		}
 		SchoolDto school = new SchoolDto();
 		//学校详细信息
+		String schoolId = dto.getCustomerId();
 		EduSchoolDto eduSchoolDto = eduSchoolService.findById(schoolId);
 
 		//学校对应的食堂信息

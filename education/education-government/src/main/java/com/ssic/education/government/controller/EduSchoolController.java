@@ -127,6 +127,7 @@ public class EduSchoolController extends BaseController{
 		mv.setViewName("/school/menu_city");		
 		mv.addObject("dto", dto);
 		mv.addObject("mWares", mWares);
+		mv.addObject("eduSchoolSupplierDtos", eduSchoolSupplierDtos);
 		mv.addObject("eduSchoolDto", eduSchoolDto);
 		mv.addObject("proSupplierDtos", proSupplierDtos);
 		mv.addObject("level", SchoollevelEnum.values());
