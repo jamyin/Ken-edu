@@ -50,8 +50,7 @@ else
 			idField : 'id',
 			pageSize : 10,
 			pageList : [ 10, 20, 30, 40, 50 ],
-			sortName : 'waresName',
-			sortOrder : 'asc',
+			
 			checkOnSelect : false,
 			selectOnCheck : false,
 			nowrap : false,
