@@ -276,7 +276,7 @@
 			height : 550,
 			href : '${pageContext.request.contextPath}/proSupplierController/editPage?id=' + id,
 			buttons : [ {
-				text : '编辑',
+				text : '保存',
 				handler : function() {
 					parent.$.modalDialog.openner_dataGrid = dataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
 					var f = parent.$.modalDialog.handler.find('#form');
@@ -293,7 +293,7 @@
 			height : 550,
 			href : '${pageContext.request.contextPath}/proSupplierController/addSupplier',
 			buttons : [ {
-				text : '添加',
+				text : '保存',
 				handler : function() {
 					parent.$.modalDialog.openner_dataGrid = dataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
 					var f = parent.$.modalDialog.handler.find('#form');
