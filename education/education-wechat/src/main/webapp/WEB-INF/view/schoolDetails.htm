@@ -84,7 +84,8 @@
 				dataType:'json',
 				success:function(data){
 					if(data.status == '200'){
-						alert(data.message);
+						window.location.href = "/wap/school/school/${(data.id)!}.htm";
+						//alert(data.message);
 					}
 				}
 			});
