@@ -13,5 +13,7 @@ public interface WaresExMapper {
 
 List<ProWaresDto> findWaresById(@Param("proWaresDto")ProWaresDto proWaresDto);
 
+int findAllWaresCount(@Param("dto")ProWaresDto waresDto);
+
 
 }

@@ -97,6 +97,8 @@ public class WaresController extends BaseController {
 		phdto.setRows(ph.getRows());
 		phdto.setSort(ph.getSort());
 		phdto.setBeginRow((ph.getPage() - 1) * ph.getRows());
+		
+		int count=waresService.findAllWaresCount(waresDto);
 		List<ProWaresDto> pdtoList = waresService.findAllWares(waresDto, phdto);
 		for (ProWaresDto proWaresDto : pdtoList) {
 
@@ -105,7 +107,7 @@ public class WaresController extends BaseController {
 		}
 		// 查询数量
 		dataGrid.setRows(pdtoList);
-		dataGrid.setTotal(Long.valueOf(pdtoList.size()));
+		dataGrid.setTotal((long) count);
 		return dataGrid;
 	}
 

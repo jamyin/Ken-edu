@@ -67,6 +67,12 @@ public class WaresDao{
 	}
 
 
+	public int findAllWaresCount(ProWaresDto waresDto) {
+		// TODO Auto-generated method stub
+		return exmapper.findAllWaresCount(waresDto);
+	}
+
+
 	
 
 }

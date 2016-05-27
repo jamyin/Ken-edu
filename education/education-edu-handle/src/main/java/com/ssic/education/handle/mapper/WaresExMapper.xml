@@ -11,7 +11,7 @@
 				a.spec AS spec,
 				a.shelf_life AS shelfLife,
 				a.unit AS unit,
-				b.supplier_name AS supplierName,
+			
 				a.way AS way,
 				a.wares_type AS waresType,
 				a.custom_code AS customCode,
@@ -24,17 +24,33 @@
 				a.supplier_id  AS supplierId,
 				manufacturer AS manufacturer
 			FROM
-				t_pro_wares a,
-				t_pro_supplier b
+				t_pro_wares a
 			WHERE
-			a.supplier_id = b.id
+			a.supplier_id = #{warseDto.supplierId}
 			AND a.stat = 1
-			AND b.stat = 1
+		
 	<include refid="where_findWares"></include>
 		order by a.create_time desc
 		limit #{page.beginRow},#{page.rows}
 	<!-- 	limit #{page.beginRow},#{page.rows} -->
 	</select>
+	<select id="findAllWaresCount"  resultType="int">
+			SELECT
+				count(1)
+			FROM
+				t_pro_wares a
+			WHERE
+		a.supplier_id = #{dto.supplierId}
+			AND a.stat = 1
+			
+	
+	
+	</select>
+	
+	
+	
+	
+	
 	<select id="findWaresById" resultType="com.ssic.educateion.common.dto.ProWaresDto">
 				SELECT
 				a.id AS id,

@@ -122,6 +122,14 @@ public class WaresServiceImpl implements IWaresService {
 		return null;//dao.findWaresIdBySupplierId(ledger);
 	}
 
+	
+	
+	@Override
+	public int findAllWaresCount(ProWaresDto waresDto) {
+		// TODO Auto-generated method stub
+		return dao.findAllWaresCount(waresDto);
+	}
+
 
 
 }
