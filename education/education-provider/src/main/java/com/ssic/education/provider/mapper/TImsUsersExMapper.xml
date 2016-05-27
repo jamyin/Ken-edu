@@ -30,7 +30,7 @@
 	</select>
 	<select id="findCountBy" resultType="Integer">
 		select count(*) from t_pro_users users
-		where users.stat=1
+		where users.stat=1  AND users.source_id=#{user.sourceId}
 		<include refid="where_clause_1" />
 	</select>
 	<insert id="insertBy">
