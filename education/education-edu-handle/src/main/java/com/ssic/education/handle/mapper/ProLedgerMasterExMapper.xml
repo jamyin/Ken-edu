@@ -46,6 +46,9 @@
 		<if test="ledgerDto.receiverName!=null and  ledgerDto.receiverName!=''">
 			AND m.receiver_name like "%"#{ledgerDto.receiverName}"%"
 		</if>
+		<if test="ph.rows!=0 and ph!=null">
+			limit #{ph.beginRow},#{ph.rows}
+		</if>
 	</select>
 	<insert id="insertLedgerMaster" parameterType="java.util.List">
 		insert into
