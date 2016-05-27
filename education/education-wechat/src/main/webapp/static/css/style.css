@@ -73,6 +73,18 @@ section.myfollow li .bar a{padding-left:20px;color:#60ac62}
 section.myfollow li .bar a.shower{padding-left:22px;float:left;background:url(../img/select.png) no-repeat 0 center;background-size:16px 16px;color:#999}
 section.myfollow li .bar a.shower.cur{background-image:url(../img/selected.png);color:#60ac62}
 
+section.myfollow_c{width:100%;overflow:hidden;}
+section.myfollow_c h2{width:100%;border-left:2px #60ac62 solid;margin-bottom:10px;font-size:1.6rem;padding-left:10px}
+section.myfollow_c ul{width:100%;overflow:hidden;border-top:1px #e5e5e5 solid;border-bottom:1px #e5e5e5 solid;background:#fff;}
+section.myfollow_c ul li{position:relative;width:90%;overflow:hidden;margin:0 auto;border-bottom:1px #e5e5e5 solid;line-height:30px}
+section.myfollow_c ul li:last-child{border:0}
+section.myfollow_c ul li label{position:absolute;left:0;width:60px;height:30px;margin:10px 0;display:block;border-right:1px #e5e5e5 solid;color:#666;word-spacing:17px;font-size:1.4rem}
+section.myfollow_c ul li:last-child label{word-spacing:0px}
+section.myfollow_c ul li input[type=text], section.myfollow_c ul li p{display:block;width:100%;padding-left:70px;height:30px;font-size:1.4rem;line-height:30px;margin:10px 0;border:0}
+section.myfollow_c ul li p select{width:100%;height:30px;font-size:1.4rem;background-color:transparent;}
+section.myfollow_c  input.submit{width:90%;overflow:hidden;display:block;color:#fff;background:#60ac62;margin:30px auto 0;border-radius:3px;font-size:1.6rem;padding:12px;text-align:center}
+
+
 /*dp*/
 section.dp{width:100%;overflow:hidden;}
 section.dp ul{width:100%;overflow:hidden;margin-top:10px}
@@ -102,7 +114,6 @@ section.tablecell ul{width:100%;overflow:hidden;border:1px #e5e5e5 solid;backgro
 section.tablecell ul li{width:90%;height:40px;margin:0 auto;border-bottom:1px #e5e5e5 solid;line-height:40px;padding-right:20px;background:url(../img/arrow_r.png) no-repeat right center;background-size:8px 15px;}
 section.tablecell ul li:last-child{border:0}
 section.tablecell ul li a{width:100%;height:100%;display:block;color:#333;}
-
 
 
 
