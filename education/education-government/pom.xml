@@ -13,11 +13,6 @@
   <url>http://maven.apache.org</url>
   
 	  <dependencies>
-	    <dependency>
-			<groupId>com.ssic</groupId>
-		    <artifactId>education-common</artifactId>
-		    <version>0.0.1-SNAPSHOT</version>
-	    </dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
@@ -68,17 +63,17 @@
 		</dependency>
 		<dependency>
 			<groupId>com.ssic</groupId>
-			<artifactId>education-common</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ssic</groupId>
 			<artifactId>education-government-user</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ssic</groupId>
-			<artifactId>education-utils</artifactId>
+			<artifactId>education-edu-handle</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ssic</groupId>
+			<artifactId>education-pro-handle</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	  </dependencies>

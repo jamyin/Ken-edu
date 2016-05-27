@@ -2,7 +2,7 @@ package com.ssic.education.provider.service.impl;
 
 import org.springframework.stereotype.Service;
 
-import com.ssic.education.provider.dto.PageHelperDto;
+import com.ssic.educateion.common.utils.PageHelperDto;
 import com.ssic.education.provider.service.ICreatePhdtoService;
 @Service
 public class CreatePhdtoServiceImpl implements ICreatePhdtoService {

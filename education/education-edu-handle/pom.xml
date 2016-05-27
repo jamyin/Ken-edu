@@ -24,7 +24,7 @@
     </dependency>
     <dependency>
     	<groupId>com.ssic</groupId>
-    	<artifactId>education-utils</artifactId>
+    	<artifactId>educateion-DataTransferObject</artifactId>
     	<version>0.0.1-SNAPSHOT</version>
     </dependency>
   </dependencies>

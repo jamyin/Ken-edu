@@ -50,7 +50,7 @@
 	<select id="findWarseById" parameterType="java.lang.String" resultMap="WaresRelated">
 		select * from t_pro_wares where id=#{id}
 	</select>
-	<select id="getSupplierById" parameterType="java.lang.String" resultType="com.ssic.education.app.dto.ProSupplierDto">
+	<select id="getSupplierById" parameterType="java.lang.String" resultType="com.ssic.educateion.common.dto.ProSupplierDto">
 		SELECT * from t_pro_supplier where supplier_id=#{supplierId}
 	</select>
 	<select id="getLedgerById" parameterType="java.lang.String" resultType="com.ssic.education.app.dto.LedgerInfoDto">

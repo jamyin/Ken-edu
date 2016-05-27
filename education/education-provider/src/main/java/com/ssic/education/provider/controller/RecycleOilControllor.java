@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.ssic.education.common.dto.ImageInfoDto;
-import com.ssic.education.common.provider.utils.DataGrid;
-import com.ssic.education.common.provider.utils.PageHelper;
-import com.ssic.education.common.service.ICreateImageService;
-import com.ssic.education.provider.dto.RecycleOilDto;
+import com.ssic.educateion.common.dto.ImageInfoDto;
+import com.ssic.educateion.common.dto.RecycleOilDto;
+import com.ssic.educateion.common.utils.DataGrid;
+import com.ssic.educateion.common.utils.PageHelper;
+import com.ssic.education.handle.service.ICreateImageService;
+import com.ssic.education.handle.service.IRecycleOilService;
 import com.ssic.education.provider.dto.TImsUsersDto;
 import com.ssic.education.provider.pageModel.Json;
-import com.ssic.education.provider.service.IRecycleOilService;
 
 @Controller
 @RequestMapping("/recycleOilControllor")
@@ -28,9 +28,9 @@ public class RecycleOilControllor {
 
 	@Autowired
 	private IRecycleOilService recycleOilService;
-	
+
 	@Autowired
-    private   ICreateImageService  createImageService;
+	private ICreateImageService createImageService;
 
 	@RequestMapping("/manager")
 	public String manager(HttpServletRequest request) {
@@ -45,9 +45,10 @@ public class RecycleOilControllor {
 	 */
 	@RequestMapping("/dataGrid")
 	@ResponseBody
-	public DataGrid dataGrid(RecycleOilDto rod,HttpSession session, PageHelper ph) {
+	public DataGrid dataGrid(RecycleOilDto rod, HttpSession session,
+			PageHelper ph) {
 		TImsUsersDto user = (TImsUsersDto) session.getAttribute("user");
-		if(user==null){
+		if (user == null) {
 			return null;
 		}
 		rod.setSupplierId(user.getSourceId());
@@ -63,33 +64,40 @@ public class RecycleOilControllor {
 	 * @return
 	 */
 	@RequestMapping("/editPage")
-	public String editPage( String id,HttpServletRequest request,HttpSession session) {
+	public String editPage(String id, HttpServletRequest request,
+			HttpSession session) {
 		TImsUsersDto user = (TImsUsersDto) session.getAttribute("user");
-		if(user==null){
+		if (user == null) {
 			return null;
 		}
-		RecycleOilDto rod = recycleOilService.findRecycleOilById(user.getSourceId(),id);
+		RecycleOilDto rod = recycleOilService.findRecycleOilById(
+				user.getSourceId(), id);
 		request.setAttribute("RecycleOil", rod);
 		return "recycle/recycleOilEdit";
 	}
-	
+
 	@RequestMapping(value = "/recycleOilEdit")
 	@ResponseBody
-	public Json updataProSupplier(@RequestParam(value = "oilDocumentUrl") MultipartFile oilDocumentUrl,RecycleOilDto rod ,ImageInfoDto image,HttpServletRequest request, HttpServletResponse response,HttpSession session) {
+	public Json updataProSupplier(
+			@RequestParam(value = "oilDocumentUrl") MultipartFile oilDocumentUrl,
+			RecycleOilDto rod, ImageInfoDto image, HttpServletRequest request,
+			HttpServletResponse response, HttpSession session) {
 		Json j = new Json();
 		TImsUsersDto user = (TImsUsersDto) session.getAttribute("user");
-		if(user==null){
+		if (user == null) {
 			j.setMsg("供应商不能为空");
 			j.setSuccess(false);
 			return j;
 		}
-		Map<String, Object> map = createImageService.createImage(image, oilDocumentUrl, request, response);
-	    String imageurl = (String) map.get("image_url");
-	    if(imageurl!=null && imageurl!=""){
-	    	rod.setDocumentUrl(imageurl);
-        } 
-	    String sourceId=user.getSourceId();
-		RecycleOilDto r = recycleOilService.findRecycleOilById(sourceId,rod.getId());
+		Map<String, Object> map = createImageService.createImage(image,
+				oilDocumentUrl, request, response);
+		String imageurl = (String) map.get("image_url");
+		if (imageurl != null && imageurl != "") {
+			rod.setDocumentUrl(imageurl);
+		}
+		String sourceId = user.getSourceId();
+		RecycleOilDto r = recycleOilService.findRecycleOilById(sourceId,
+				rod.getId());
 		if (r == null) {
 			j.setMsg("不存在的废油");
 			j.setSuccess(false);
@@ -104,15 +112,16 @@ public class RecycleOilControllor {
 
 	@RequestMapping("/deleteRecycleOil")
 	@ResponseBody
-	public Json deleteRecycleOil(RecycleOilDto rod,HttpSession session) {
+	public Json deleteRecycleOil(RecycleOilDto rod, HttpSession session) {
 		Json j = new Json();
 		TImsUsersDto user = (TImsUsersDto) session.getAttribute("user");
-		if(user==null){
+		if (user == null) {
 			j.setMsg("供应商不能为空");
 			j.setSuccess(false);
 			return j;
 		}
-		int r = recycleOilService.deleteRecycleOil(user.getSourceId(),rod.getId());
+		int r = recycleOilService.deleteRecycleOil(user.getSourceId(),
+				rod.getId());
 		if (r == 0) {
 			j.setMsg("删除供应商失败");
 			j.setSuccess(false);
@@ -122,23 +131,23 @@ public class RecycleOilControllor {
 		j.setSuccess(true);
 		return j;
 	}
-	
+
 	/**
 	 * 添加废弃油脂页面
 	 * 
 	 * @return
 	 */
 	@RequestMapping("/addRecycleOil")
-	public String addSupplier(HttpServletRequest request,HttpSession session) {
+	public String addSupplier(HttpServletRequest request, HttpSession session) {
 		TImsUsersDto user = (TImsUsersDto) session.getAttribute("user");
-		if(user==null){
+		if (user == null) {
 			return null;
 		}
 		String r = recycleOilService.findRecycleBySourceId(user.getSourceId());
 		request.setAttribute("Recycle", r);
 		return "Recycle/RecycleOilAdd";
 	}
-	
+
 	/**
 	 * 添加废弃油脂
 	 * 
@@ -146,25 +155,29 @@ public class RecycleOilControllor {
 	 */
 	@RequestMapping("/saveRecycleOil")
 	@ResponseBody
-	public Json saveRecycleOil(@RequestParam(value = "oilDocumentUrl") MultipartFile oilDocumentUrl,RecycleOilDto rod ,ImageInfoDto image,HttpServletRequest request, HttpServletResponse response,HttpSession session) {
+	public Json saveRecycleOil(
+			@RequestParam(value = "oilDocumentUrl") MultipartFile oilDocumentUrl,
+			RecycleOilDto rod, ImageInfoDto image, HttpServletRequest request,
+			HttpServletResponse response, HttpSession session) {
 		Json j = new Json();
 		TImsUsersDto user = (TImsUsersDto) session.getAttribute("user");
-		if(user==null){
+		if (user == null) {
 			j.setMsg("供应商不能为空");
 			j.setSuccess(false);
 			return j;
 		}
 		rod.setSupplierId(user.getSourceId());
-	    Map<String, Object> map = createImageService.createImage(image, oilDocumentUrl, request, response);
-	    String imageurl = (String) map.get("image_url");
-	    if(imageurl!=null && imageurl!=""){
-	    	rod.setDocumentUrl(imageurl);
-        } 
-	    recycleOilService.saveRecycleOil(rod);
-		j=new Json();
+		Map<String, Object> map = createImageService.createImage(image,
+				oilDocumentUrl, request, response);
+		String imageurl = (String) map.get("image_url");
+		if (imageurl != null && imageurl != "") {
+			rod.setDocumentUrl(imageurl);
+		}
+		recycleOilService.saveRecycleOil(rod);
+		j = new Json();
 		j.setMsg("添加供应商成功");
 		j.setSuccess(true);
 		return j;
 	}
-	
+
 }

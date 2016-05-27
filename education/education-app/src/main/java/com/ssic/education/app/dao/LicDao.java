@@ -1,12 +1,12 @@
 package com.ssic.education.app.dao;
 
+import lombok.Getter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ssic.education.app.mapper.LicExMapper;
-import com.ssic.education.common.pojo.ProLicense;
-
-import lombok.Getter;
+import com.ssic.education.handle.pojo.ProLicense;
 
 /**		
  * <p>Title: LicDao </p>

@@ -24,21 +24,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ssic.education.common.dto.ImageInfoDto;
-import com.ssic.education.common.pojo.ProLicense;
-import com.ssic.education.common.pojo.ProWares;
-import com.ssic.education.common.provider.dto.SupplierDto;
-import com.ssic.education.common.provider.service.ISupplierService;
-import com.ssic.education.common.service.ICreateImageService;
-import com.ssic.education.provider.dto.PageHelperDto;
-import com.ssic.education.provider.dto.ProWaresDto;
+import com.ssic.educateion.common.dto.ImageInfoDto;
+import com.ssic.educateion.common.dto.ProWaresDto;
+import com.ssic.educateion.common.dto.SupplierDto;
+import com.ssic.educateion.common.utils.PageHelperDto;
+import com.ssic.education.handle.pojo.ProLicense;
+import com.ssic.education.handle.pojo.ProWares;
+import com.ssic.education.handle.service.ICreateImageService;
+import com.ssic.education.handle.service.IProLicenseService;
+import com.ssic.education.handle.service.ISupplierService;
+import com.ssic.education.handle.service.IWaresService;
 import com.ssic.education.provider.pageModel.DataGrid;
 import com.ssic.education.provider.pageModel.Json;
 import com.ssic.education.provider.pageModel.PageHelper;
 import com.ssic.education.provider.pageModel.SessionInfo;
 import com.ssic.education.provider.service.ICreatePhdtoService;
-import com.ssic.education.provider.service.IProLicenseService;
-import com.ssic.education.provider.service.IWaresService;
 import com.ssic.education.provider.util.ConfigUtil;
 import com.ssic.education.provider.util.ProductClass;
 import com.ssic.education.utils.jdbc.DataSourceHolderUtil;
@@ -50,7 +50,7 @@ import com.ssic.education.utils.util.PropertiesUtils;
 import com.ssic.education.utils.util.UUIDGenerator;
 
 @Controller
-@RequestMapping("/waresController")  
+@RequestMapping("/waresController")
 public class WaresController extends BaseController {
 	@Autowired
 	private IWaresService waresService;
@@ -70,7 +70,7 @@ public class WaresController extends BaseController {
 		 * String nginxPath = PropertiesUtils.getProperty("nginx.url");
 		 * request.setAttribute("nginxPath", nginxPath);
 		 */
-		
+
 		return "wares/warseList";
 	}
 
@@ -89,7 +89,7 @@ public class WaresController extends BaseController {
 		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
 				ConfigUtil.SESSIONINFONAME);
 		waresDto.setSupplierId(info.getSupplierId());
-		
+
 		DataGrid dataGrid = new DataGrid();
 		PageHelperDto phdto = new PageHelperDto();
 		phdto.setOrder(ph.getOrder());
@@ -153,11 +153,14 @@ public class WaresController extends BaseController {
 		}
 
 		DataSourceHolderUtil.setToMaster();
-		SessionInfo info = (SessionInfo) request.getSession().getAttribute(ConfigUtil.SESSIONINFONAME);
+		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
+				ConfigUtil.SESSIONINFONAME);
 		pro.setSupplierId(info.getSupplierId());
-	
-		ProWares specManu = waresService.findProWarsByNameSpecManu(pro.getWaresName(), pro.getSpec(), pro.getManufacturer(), pro.getSupplierId());
-		if(specManu==null || specManu.equals("")){
+
+		ProWares specManu = waresService.findProWarsByNameSpecManu(
+				pro.getWaresName(), pro.getSpec(), pro.getManufacturer(),
+				pro.getSupplierId());
+		if (specManu == null || specManu.equals("")) {
 			waresService.insertWares(pro);
 			j.setMsg("新增商品成功");
 			j.setSuccess(true);
@@ -253,14 +256,16 @@ public class WaresController extends BaseController {
 		pro.setStat(1);
 		ProWares proWares = new ProWares();
 		BeanUtils.copyProperties(pro, proWares);
-		ProWares specManu = waresService.findProWarsByNameSpecManu(pro.getWaresName(), pro.getSpec(), pro.getManufacturer(), pro.getSupplierId());
-		if(specManu==null || specManu.equals("")){
+		ProWares specManu = waresService.findProWarsByNameSpecManu(
+				pro.getWaresName(), pro.getSpec(), pro.getManufacturer(),
+				pro.getSupplierId());
+		if (specManu == null || specManu.equals("")) {
 			waresService.updateImsUsers(proWares);
 			json.setMsg("修改信息成功");
 			json.setSuccess(true);
 			return json;
 		}
-		
+
 		waresService.updateImsUsers(proWares);
 		json.setMsg("修改信息失败，数据重复");
 		json.setSuccess(true);
@@ -396,8 +401,8 @@ public class WaresController extends BaseController {
 				.lookImage(license);
 		String realPath = PropertiesUtils.getProperty("upload.look.url");
 		for (ProLicense proLicense : ProLicenseList) {
-			
-			proLicense.setLicPic(realPath+proLicense.getLicPic());
+
+			proLicense.setLicPic(realPath + proLicense.getLicPic());
 		}
 		request.setAttribute("ProLicenseList", ProLicenseList);
 		return "wares/lookImage";
@@ -572,7 +577,7 @@ public class WaresController extends BaseController {
 		}
 		// 导入商品
 		waresService.addProWares(list);
-		
+
 		// TODO 反馈用户错误信息
 		return null;
 	}

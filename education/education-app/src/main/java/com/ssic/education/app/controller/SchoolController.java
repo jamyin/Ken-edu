@@ -1,6 +1,5 @@
 package com.ssic.education.app.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,17 +9,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ssic.educateion.common.dto.EduCanteenDto;
+import com.ssic.educateion.common.dto.EduSchoolDto;
+import com.ssic.educateion.common.dto.EduSchoolSupplierDto;
+import com.ssic.educateion.common.dto.ProPackagesDto;
 import com.ssic.education.app.constants.SchoolLevel;
 import com.ssic.education.app.dto.SchoolDto;
 import com.ssic.education.app.service.ISchoolService;
-import com.ssic.education.common.dto.EduCanteenDto;
-import com.ssic.education.common.dto.EduSchoolDto;
-import com.ssic.education.common.dto.EduSchoolSupplierDto;
-import com.ssic.education.common.dto.ProPackagesDto;
-import com.ssic.education.common.government.service.EduSchoolService;
-import com.ssic.education.common.government.service.IEduCanteenService;
-import com.ssic.education.common.government.service.ProPackagesService;
-import com.ssic.education.common.service.IEduSchoolSupplierService;
+import com.ssic.education.handle.service.EduSchoolService;
+import com.ssic.education.handle.service.IEduCanteenService;
+import com.ssic.education.handle.service.IEduSchoolSupplierService;
+import com.ssic.education.handle.service.ProPackagesService;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
@@ -156,18 +155,23 @@ public class SchoolController {
 
 	/**
 	 * 此方法描述的是：查询该家长关联下的学校的所有菜谱信息
-	 * @param schoolId 学校Id
-	 * @param timeDate 套餐日期 默认为当前日期
+	 * @param 传入customerId 为当前学校Id
+	 * @param supplyDateStr 套餐日期 默认为当前日期
 	 */
 	@RequestMapping(value="searchPackages")
 	@ResponseBody
-	public Response<List<ProPackagesDto>> searchPackages(String schoolId,String timeDate){
-		Response<List<ProPackagesDto>> response = new Response<List<ProPackagesDto>>();
-		List<ProPackagesDto> dataList =  proPackagesService.searchProSchoolPackage(schoolId,timeDate);
-
-		response.setData(dataList);
-
-		return response;
+	public Response<PageResult<ProPackagesDto>> searchPackages(ProPackagesDto dto, PageQuery page){
+		Response<PageResult<ProPackagesDto>> result = new Response<PageResult<ProPackagesDto>>();
+		PageResult<ProPackagesDto> proPackagesDtos = proPackagesService.searchPackages(dto, page);
+		if(proPackagesDtos != null && proPackagesDtos.getResults() != null && proPackagesDtos.getResults().size() > 0){
+			result.setData(proPackagesDtos);
+			result.setStatus(DataStatus.HTTP_SUCCESS);
+			result.setMessage("查询成功");
+			return result;
+		}
+		result.setStatus(DataStatus.HTTP_SUCCESS);
+		result.setMessage("未查到相关记录");
+		return result;
 	}
 }
 

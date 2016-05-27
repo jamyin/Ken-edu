@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.ssic.education.app.dto.EduAreaDto;
 import com.ssic.education.app.service.IAreaService;
-import com.ssic.education.common.dao.AreaDao;
-import com.ssic.education.common.pojo.EduArea;
+import com.ssic.education.handle.dao.AreaDao;
+import com.ssic.education.handle.pojo.EduArea;
 import com.ssic.education.utils.util.BeanUtils;
 
 /**

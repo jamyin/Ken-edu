@@ -1,10 +1,8 @@
 package com.ssic.education.app.mapper;
 
-import java.util.Map;
-
 import org.apache.ibatis.annotations.Param;
 
-import com.ssic.education.common.pojo.ProLicense;
+import com.ssic.education.handle.pojo.ProLicense;
 
 /**		
  * <p>Title: LicExMapper </p>

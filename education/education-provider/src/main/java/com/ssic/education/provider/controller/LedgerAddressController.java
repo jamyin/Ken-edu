@@ -8,10 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ssic.education.common.provider.dto.LedgerAddressDto;
-import com.ssic.education.common.provider.service.ILedgerAddressService;
-import com.ssic.education.common.provider.utils.DataGrid;
-import com.ssic.education.common.provider.utils.PageHelper;
+import com.ssic.educateion.common.dto.LedgerAddressDto;
+import com.ssic.educateion.common.utils.DataGrid;
+import com.ssic.educateion.common.utils.PageHelper;
+import com.ssic.education.handle.service.ILedgerAddressService;
 import com.ssic.education.provider.dto.TImsUsersDto;
 
 /**

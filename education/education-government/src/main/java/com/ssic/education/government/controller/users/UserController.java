@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.common.base.Objects;
-import com.ssic.education.common.dto.EduAreaDto;
-import com.ssic.education.common.government.service.AreaService;
+import com.ssic.educateion.common.dto.EduAreaDto;
+import com.ssic.educateion.common.dto.EduUsersDto;
+import com.ssic.educateion.common.dto.EduUsersRegDto;
 import com.ssic.education.government.controller.BaseController;
-import com.ssic.education.government.dto.EduUsersDto;
-import com.ssic.education.government.dto.EduUsersRegDto;
-import com.ssic.education.government.service.EduUsersService;
+import com.ssic.education.handle.service.AreaService;
+import com.ssic.education.handle.service.EduUsersService;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.constants.SessionConstants;
 import com.ssic.education.utils.digest.MD5Coder;

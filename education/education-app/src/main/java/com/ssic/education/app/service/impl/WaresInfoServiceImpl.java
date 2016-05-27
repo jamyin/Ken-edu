@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.ssic.education.app.dao.LedgerInfoDao;
 import com.ssic.education.app.dao.LicDao;
 import com.ssic.education.app.dao.WaresInfoDao;
-import com.ssic.education.app.dto.LedgerListDto;
 import com.ssic.education.app.dto.WaresInfoDto;
 import com.ssic.education.app.dto.WaresListDto;
 import com.ssic.education.app.dto.WaresRelatedDto;

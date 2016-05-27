@@ -10,13 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ssic.education.provider.dto.PageHelperDto;
-import com.ssic.education.provider.dto.ProEmployeeDto;
+import com.ssic.educateion.common.dto.ProEmployeeDto;
+import com.ssic.educateion.common.utils.PageHelperDto;
+import com.ssic.education.handle.service.IEmployeeService;
+import com.ssic.education.handle.service.IWaresService;
 import com.ssic.education.provider.pageModel.DataGrid;
 import com.ssic.education.provider.pageModel.Json;
 import com.ssic.education.provider.pageModel.PageHelper;
-import com.ssic.education.provider.service.IEmployeeService;
-import com.ssic.education.provider.service.IWaresService;
 import com.ssic.education.utils.jdbc.DataSourceHolderUtil;
 import com.ssic.education.utils.util.UUIDGenerator;
 

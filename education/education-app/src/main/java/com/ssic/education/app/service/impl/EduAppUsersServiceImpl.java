@@ -8,19 +8,28 @@ import com.ssic.education.app.dto.EduAppUserDto;
 import com.ssic.education.app.dto.EduUsersInfoDto;
 import com.ssic.education.app.service.IEduAppUsersService;
 import com.ssic.education.app.token.TokenUtil;
+import com.ssic.education.handle.dao.CommitteeDao;
+import com.ssic.education.handle.pojo.EduCommittee;
 
 @Service
 public class EduAppUsersServiceImpl implements IEduAppUsersService {
 
 	@Autowired
 	private AppUsersDao eduUsersDao;
+	@Autowired
+	private CommitteeDao committeeDao;
 
 	@Override
 	public synchronized EduAppUserDto appLogin(EduUsersInfoDto user) {
-		//user.setPassword(MD5Util.md5(user.getPassword()));
-		//user.setPassword(user.getPassword());
 		EduAppUserDto result = eduUsersDao.appLogin(user);
 		if (result != null) {
+			if (result.getSourceType() == 0) {
+				EduCommittee ctte = committeeDao.getbyId(result.getSourceId());
+				result.setEareCode(ctte.getAreaCode());
+				result.setEduType(ctte.getType().toString());
+			} else {
+				result.setEduType("3");
+			}
 			result.setToken(TokenUtil.getToken(user.getUserAccount()).getSignature());
 			//TODO 第一次登陆创建Token 第二次登录刷新Token 待实现
 		}

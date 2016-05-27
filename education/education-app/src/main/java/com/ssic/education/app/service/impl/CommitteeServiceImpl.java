@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssic.educateion.common.dto.EduCommitteeDto;
 import com.ssic.education.app.service.ICommitteeService;
-import com.ssic.education.common.dao.CommitteeDao;
-import com.ssic.education.common.dto.EduCommitteeDto;
-import com.ssic.education.common.pojo.EduCommittee;
+import com.ssic.education.handle.dao.CommitteeDao;
+import com.ssic.education.handle.pojo.EduCommittee;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 import com.ssic.education.utils.util.BeanUtils;

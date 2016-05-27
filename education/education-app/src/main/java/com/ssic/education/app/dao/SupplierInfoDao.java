@@ -4,18 +4,14 @@ import java.util.List;
 
 import lombok.Getter;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ssic.education.app.dto.MaterialSupplierDto;
 import com.ssic.education.app.dto.SupplierLicDto;
 import com.ssic.education.app.mapper.SupplierInfoExMapper;
-import com.ssic.education.common.mapper.ProSupplierMapper;
-import com.ssic.education.common.pojo.ProLedger;
-import com.ssic.education.common.pojo.ProLedgerExample;
-import com.ssic.education.common.pojo.ProSupplier;
-import com.ssic.education.common.pojo.ProSupplierExample;
+import com.ssic.education.handle.mapper.ProSupplierMapper;
+import com.ssic.education.handle.pojo.ProSupplier;
 
 /**		
  * <p>Title: SupplierInfoDao </p>

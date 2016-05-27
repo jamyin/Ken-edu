@@ -12,7 +12,7 @@
   <modules>
     <module>education-app</module>
     <module>education-wechat</module>
-    <module>education-common</module>
+    
     <module>education-admin</module>
     <module>education-government</module>
     <module>education-provider</module>
@@ -20,6 +20,7 @@
     <module>education-utils</module>
     <module>education-edu-handle</module>
     <module>education-pro-handle</module>
+    <module>educateion-DataTransferObject</module>
   </modules>
   
     <properties>	
@@ -392,7 +393,7 @@
 					<version>${ssic-base-redis.version}</version>
 				</dependency>
 				
-					<!-- 汉字转拼�???-->
+					<!-- 汉字转拼�????-->
 				 <dependency>
 	                <groupId>com.belerweb</groupId>
 	                <artifactId>pinyin4j</artifactId>

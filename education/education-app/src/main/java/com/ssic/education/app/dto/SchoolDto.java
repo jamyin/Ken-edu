@@ -3,9 +3,9 @@ package com.ssic.education.app.dto;
 import lombok.Data;
 import lombok.ToString;
 
-import com.ssic.education.common.dto.EduCanteenDto;
-import com.ssic.education.common.dto.EduSchoolDto;
-import com.ssic.education.common.dto.EduSchoolSupplierDto;
+import com.ssic.educateion.common.dto.EduCanteenDto;
+import com.ssic.educateion.common.dto.EduSchoolDto;
+import com.ssic.educateion.common.dto.EduSchoolSupplierDto;
 
 /**
 * @ClassName: EduAreaDto
