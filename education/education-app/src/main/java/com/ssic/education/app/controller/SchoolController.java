@@ -77,8 +77,8 @@ public class SchoolController {
 	}
 
 	/**
-	 * @Title: getDishesType
-	 * @Description: 学校年级列表
+	 * @Title: classList
+	 * @Description: 学校类型列表
 	 * @author Ken Yin  
 	 * @date 2016年5月17日 下午2:50:36
 	 * @return Response<Map<Integer,String>>    返回类型
