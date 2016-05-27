@@ -10,8 +10,7 @@
 				a.wares_name AS waresName,
 				a.spec AS spec,
 				a.shelf_life AS shelfLife,
-				a.unit AS unit,
-			
+				a.unit AS unit,			
 				a.way AS way,
 				a.wares_type AS waresType,
 				a.custom_code AS customCode,

@@ -31,12 +31,13 @@ public class ProWaresDto implements Serializable {
 	private String supplierId;
 
 	private Integer way;
-
+	@Getter
+	@Setter
 	private Integer waresType;
-	public void setWaresType(int waresType) {
+	/*public void setWaresType(int waresType) {
 		waresTypeStr = WaresMaterialEnum.getValueByIndex(waresType);
 		this.setWaresTypeStr(waresTypeStr);
-	}
+	}*/
 	
 	private String waresTypeStr;
 	
