@@ -22,6 +22,11 @@ public class ProLedgerServiceImpl implements ProLedgerService{
 	@Autowired
 	private ProLedgerDao proLedgerDao;
 	
+	public List<LedgerDto> findById(LedgerDto dto) {
+		List<LedgerDto> ledgerDtos = proLedgerDao.selectLedgerList(dto);
+		return ledgerDtos;
+	}
+	
 	public PageResult<LedgerDto> selectLedgerPage(LedgerDto dto,PageQuery page) {
 		List<LedgerDto> results = proLedgerDao.selectLedgerListOrderby(dto, page);
 		page.setTotal(proLedgerDao.countLedgerListOrderby(dto));
@@ -29,7 +34,7 @@ public class ProLedgerServiceImpl implements ProLedgerService{
 		for (LedgerDto ledgerDto:results){
 			List<LedgerDto> ledgerDtoA = new ArrayList<LedgerDto>();
 			for (LedgerDto ledgerdto:ledgerDtos) {
-				if (ledgerDto.getWareBatchNo() == ledgerdto.getWareBatchNo()) {
+				if (ledgerDto.getWareBatchNo().equals(ledgerdto.getWareBatchNo())) {
 					ledgerDtoA.add(ledgerdto);
 				}
 			}

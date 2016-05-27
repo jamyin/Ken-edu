@@ -36,6 +36,9 @@
 		<if test="ledgerDto.receiverName != null  and ledgerDto.receiverName !=''">
 			AND b.receiver_name like "%"#{ledgerDto.receiverName}"%"
 		</if>
+		<if test="ledgerDto.wareBatchNo != null  and ledgerDto.wareBatchNo !=''">
+			AND b.ware_batch_no = #{ledgerDto.wareBatchNo}
+		</if>
 	</select>
 	
 	<select id="selectLedgerListOrderby" resultType="com.ssic.educateion.common.dto.LedgerDto" parameterType="com.ssic.educateion.common.dto.LedgerDto">

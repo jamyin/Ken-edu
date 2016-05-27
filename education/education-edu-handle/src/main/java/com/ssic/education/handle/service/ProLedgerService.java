@@ -1,5 +1,7 @@
 package com.ssic.education.handle.service;
 
+import java.util.List;
+
 import com.ssic.educateion.common.dto.LedgerDto;
 import com.ssic.educateion.common.dto.ProLedgerDto;
 import com.ssic.educateion.common.dto.ProSupplierDto;
@@ -15,4 +17,6 @@ public interface ProLedgerService {
 	public ProLedgerDto findById(String id);
 	
 	public PageResult<LedgerDto> selectLedgerPage(LedgerDto dto,PageQuery page);
+	
+	public List<LedgerDto> findById(LedgerDto dto) ;
 }
