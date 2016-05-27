@@ -31,7 +31,7 @@ public class ProWaresDto implements Serializable {
 	private String supplierId;
 
 	private Integer way;
-	@Getter
+	@Getter	
 	@Setter
 	private Integer waresType;
 	/*public void setWaresType(int waresType) {

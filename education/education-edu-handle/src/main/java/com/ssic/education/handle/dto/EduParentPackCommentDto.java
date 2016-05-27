@@ -18,7 +18,7 @@ public class EduParentPackCommentDto implements Serializable {
 
 	private Integer health;
 
-	private Integer service;
+	private Integer weights;
 
 	private String comment;
 

@@ -17,9 +17,9 @@ public class EduParentPackCommentServiceImpl implements IEduParentPackCommentSer
 	@Autowired
 	private EduParentPackCommentDao eduParentPackCommentDao;
 
-	public void saveComment(EduParentPackCommentDto eduParentPackCommentDto) {
+	public int saveComment(EduParentPackCommentDto eduParentPackCommentDto) {
 		EduParentPackComment eduParentPackComment = BeanUtils.createBeanByTarget(eduParentPackCommentDto, EduParentPackComment.class);
-		eduParentPackCommentDao.insertSelective(eduParentPackComment);
+		return eduParentPackCommentDao.insertSelective(eduParentPackComment);
 	}
 
 	public List<EduParentPackCommentDto> searchComment(EduParentPackCommentDto eduParentPackCommentDto) {

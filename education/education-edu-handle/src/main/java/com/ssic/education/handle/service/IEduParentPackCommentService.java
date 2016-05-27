@@ -6,7 +6,7 @@ import com.ssic.education.handle.dto.EduParentPackCommentDto;
 
 public interface IEduParentPackCommentService {
 
-	void saveComment(EduParentPackCommentDto eduParentPackCommentDto);
+	int saveComment(EduParentPackCommentDto eduParentPackCommentDto);
 
 	List<EduParentPackCommentDto> searchComment(EduParentPackCommentDto eduParentPackCommentDto);
 
