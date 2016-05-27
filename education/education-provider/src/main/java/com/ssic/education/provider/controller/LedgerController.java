@@ -133,7 +133,13 @@ public class LedgerController {
 			j.setSuccess(false);
 			return j;
 		}
+		int i=0;
+		String str="";
 		for (LedgerDto ledger : ledgers) {
+			if(ledger.getMark()!=1){
+				str+=i+",";
+				continue;
+			}
 			ledger.setWareBatchNo(ledgers.get(0).getWareBatchNo());
 			ledger.setActionDate(actionDate);
 			ledger.setReceiverId(receiverId);
@@ -173,6 +179,12 @@ public class LedgerController {
 			ledger.setCreateTime(new Date());
 			ledger.setLastUpdateTime(ledger.getCreateTime());
 			ledger.setStat(1);
+			i+=1;
+		}
+		if(str!=""){
+			for (String b: str.split(",")) {
+				ledgers.remove(Integer.parseInt(b));
+			}
 		}
 		ledgerService.saveLedger(ledgers);
 		j = new Json();
