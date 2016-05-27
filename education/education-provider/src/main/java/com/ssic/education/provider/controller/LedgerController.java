@@ -245,7 +245,7 @@ public class LedgerController {
 			ledger.setSourceId(sourceId);
 			ProWaresDto warerDto = waresService.findWaresBySupplierId(ledger);
 			ledger.setWaresId(warerDto.getId());
-			if(ledgers.get(0).getActionDate().after(ledger.getProductionDate())){
+			if(!ledgers.get(0).getActionDate().after(ledger.getProductionDate())){
 				j.setMsg(ledger.getName() + "错误的进货日期或生产日期");
 				j.setSuccess(false);
 				return j;
