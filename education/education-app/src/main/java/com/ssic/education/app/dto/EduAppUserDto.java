@@ -31,7 +31,7 @@ public class EduAppUserDto implements Serializable {
 	private String name;
 	private String userImage;
 	private String eduType;
-	private String eareCode;
+	private String areaCode;
 	private String pjNo;
 	private String token;
 }
