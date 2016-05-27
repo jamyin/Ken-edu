@@ -1,5 +1,6 @@
 package com.ssic.education.handle.service;
 
+import com.ssic.educateion.common.dto.LedgerDto;
 import com.ssic.educateion.common.dto.ProLedgerDto;
 import com.ssic.educateion.common.dto.ProSupplierDto;
 import com.ssic.education.utils.model.PageQuery;
@@ -12,4 +13,6 @@ public interface ProLedgerService {
 	public PageResult<ProLedgerDto> findLedgerPage(ProLedgerDto proLedgerDto,PageQuery page);
 	
 	public ProLedgerDto findById(String id);
+	
+	public PageResult<LedgerDto> selectLedgerPage(LedgerDto dto,PageQuery page);
 }
