@@ -241,15 +241,11 @@
 		</div>
 	</div>
 	<div id="toolbar" style="display: none;">
-		<c:if test="${fn:contains(sessionInfo.resourceList, '/userController/addPage')}">
 			<a onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'">添加</a>
-		</c:if>
 		<!--<c:if test="${fn:contains(sessionInfo.resourceList, '/userController/grantPage')}">
 			<a onclick="batchGrantFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'tux'">批量授权</a>
 		</c:if>-->
-		<c:if test="${fn:contains(sessionInfo.resourceList, '/userController/batchDelete')}">
 			<a onclick="batchDeleteFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'delete'">批量删除</a>
-		</c:if>
 		<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_add',plain:true" onclick="searchFun();">过滤条件</a><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_delete',plain:true" onclick="cleanFun();">清空条件</a>
 	</div>
 
