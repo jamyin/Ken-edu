@@ -161,12 +161,12 @@
 			dataGrid.datagrid('unselectAll').datagrid('uncheckAll');
 		}
 		parent.$.modalDialog({
-			title : '编辑废弃油脂',
+			title : '编辑配送',
 			width : 1000,
 			height : 500,
 			href : '${pageContext.request.contextPath}/ledgerController/editPage?masterId=' +id ,
 			buttons : [ {
-				text : '编辑',
+				text : '保存',
 				handler : function() {
 					parent.$.modalDialog.openner_dataGrid = dataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
 					var f = parent.$.modalDialog.handler.find('#form');
@@ -184,7 +184,7 @@
 			dataGrid.datagrid('unselectAll').datagrid('uncheckAll');
 		}
 		parent.$.modalDialog({
-			title : '编辑废弃油脂',
+			title : '查看配送',
 			width : 1000,
 			height : 500,
 			href : '${pageContext.request.contextPath}/ledgerController/showPage?masterId=' +id,

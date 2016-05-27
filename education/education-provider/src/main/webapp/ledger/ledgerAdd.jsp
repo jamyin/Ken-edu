@@ -47,10 +47,16 @@
 							var b="<tr id='ledger"+nextId+"'>"+a.replace('<td><a id="addLedger" ><font size="15" >+</font></a></td>',"")+"</tr>";
 							var c=b.replace(/title=""/g,"");
 							$(c).insertAfter($(lastTr));
-							$("#ledger"+nextId+" a").remove();
+							$("<a id='subtract' onclick='subtractLedger(this);' data-id='ledger"+nextId+"' style='text-decoration:none;' ><font size='15' >-</font></a>").replaceAll("#ledger"+nextId+" a");
 							$.parser.parse();
 						});
 	});
+	
+	function subtractLedger(_this){
+		var id=$(_this).attr("data-id");
+		$("#"+id).remove();
+		$.parser.parse();
+	}
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
 	<div data-options="region:'center',border:false" title=""
@@ -104,7 +110,8 @@
 						placeholder="点击选择日期" class="easyui-validatebox span2"
 						onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})"
 						readonly="readonly"></td>
-					<td><a id="addLedger" ><font size="15" >+</font></a></td>
+					<td><a id="addLedger" style='text-decoration:none;' ><font size="15" >+</font></a></td>
+					<td><input type="hidden" name="ledger[0].mark" value="1" ></td>
 				</tr>
 				</table>
 				</form>
