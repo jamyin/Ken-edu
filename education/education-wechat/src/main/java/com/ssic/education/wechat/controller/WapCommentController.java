@@ -74,6 +74,7 @@ public class WapCommentController extends BaseController {
 		
 		ModelAndView mv = getModelAndView();
 
+		eduParentPackCommentDto.setParentId(parentId);
 		List<EduParentPackCommentDto> dataList = iEduParentPackCommentService.searchComment(eduParentPackCommentDto);
 		
 		mv.addObject("dataList",dataList);
