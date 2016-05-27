@@ -31,7 +31,7 @@ public class ProWaresServiceImpl implements ProWaresService {
         return null;
     }
 
-    @Override
+ 
     public List<ProWaresDto> queryWaresByParams(ProWaresDto params) {
         List<ProWares> proWares = proWaresDao.queryWaresByParams(params, null);
         if (null != proWares && proWares.size() > 0) {
@@ -40,7 +40,7 @@ public class ProWaresServiceImpl implements ProWaresService {
         return null;
     }
 
-    @Override
+   
     public PageResult<ProWaresDto> queryWaresByParams(ProWaresDto params, PageQuery query) {
         int total = proWaresDao.countWaresByParams(params);
         if (total > 0) {

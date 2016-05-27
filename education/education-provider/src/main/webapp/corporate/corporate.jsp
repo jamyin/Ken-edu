@@ -39,7 +39,7 @@
 	function editPic(){
 		$("#aa").dialog({
 			title : '编辑图片',
-			width : 900,
+			width : 700,
 			height : 600,
 			href : '${pageContext.request.contextPath}/corporateController/editPic',
 			buttons : [ {

@@ -22,7 +22,7 @@ public class EduSupplierReviewServiceImpl implements IEduSupplierReviewService{
     private EduSupplierReviewDao eduSupplierReviewDao;
 	
 
-	@Override
+	
 	public void saveSupplierReview(EduSupplierReviewDto eduSupplierReviewDto) {
 		eduSupplierReviewDao.saveSupplierReview(eduSupplierReviewDto);
 	}
@@ -30,7 +30,7 @@ public class EduSupplierReviewServiceImpl implements IEduSupplierReviewService{
 	/**
 	 * 需要修改成 单条导入 sql  ---cwf
 	 */
-	@Override
+	
 	public void saveSupplierReview(List<EduSupplierReviewDto> eduSupplierReviewList) {
 		List<EduSupplierReview> dataList = BeanUtils.createBeanListByTarget(eduSupplierReviewList, EduSupplierReview.class);
 		for(EduSupplierReview pojoObj :  dataList){

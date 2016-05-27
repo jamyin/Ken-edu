@@ -86,10 +86,10 @@
 							<tr>
 							<th>密码</th>
 							<td><input name="password" type="password" id="password"
-								placeholder="请输入密码" class="easyui-validatebox span2"   value="${user.password}"
+								placeholder="请输入密码" class="easyui-validatebox span2"   hidden="${user.password}" 
 								 ></td>
 							<th>确认密码</th>
-							<td><input name="password2" type="password" placeholder="请确认密码"  id="password2"  value="${user.password}"
+							<td><input name="password2" type="password" placeholder="请确认密码"  id="password2"  hidden="${user.password}"
 								class="easyui-validatebox span2"  ></td>
 						</tr>
 						<c:if test="${user.userType=='1'}">

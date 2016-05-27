@@ -77,8 +77,8 @@ public class SchoolController {
 	}
 
 	/**
-	 * @Title: getDishesType
-	 * @Description: 学校年级列表
+	 * @Title: classList
+	 * @Description: 学校类型列表
 	 * @author Ken Yin  
 	 * @date 2016年5月17日 下午2:50:36
 	 * @return Response<Map<Integer,String>>    返回类型
@@ -129,10 +129,16 @@ public class SchoolController {
 	 */
 	@RequestMapping(value="school")
 	@ResponseBody
-	public Response<SchoolDto> school(String schoolId){
+	public Response<SchoolDto> school(ProPackagesDto dto, PageQuery page){
 		Response<SchoolDto> result = new Response<SchoolDto>();
+		if(StringUtils.isEmpty(dto.getCustomerId())){
+			result.setStatus(DataStatus.HTTP_FAILE);
+			result.setMessage("学校Id为空！");
+			return result;
+		}
 		SchoolDto school = new SchoolDto();
 		//学校详细信息
+		String schoolId = dto.getCustomerId();
 		EduSchoolDto eduSchoolDto = eduSchoolService.findById(schoolId);
 
 		//学校对应的食堂信息
@@ -144,11 +150,14 @@ public class SchoolController {
 		EduSchoolSupplierDto eduSchoolSupplierDto = new EduSchoolSupplierDto();
 		eduSchoolSupplierDto.setSchoolId(schoolId);
 		eduSchoolSupplierDto = iEduSchoolSupplierService.searchEduSchoolSupplierDto(eduSchoolSupplierDto);
+		
+		PageResult<ProPackagesDto> proPackagesDtos = proPackagesService.searchPackages(dto, page);
 
 		school.setEduSchoolDto(eduSchoolDto);
 		school.setEduCanteenDto(eduCanteenDto);
 		school.setEduSchoolSupplierDto(eduSchoolSupplierDto);
-
+		school.setProPackagesDto(proPackagesDtos);
+		
 		result.setData(school);
 		return result;
 	}

@@ -75,15 +75,15 @@
 		m.haul_status haulStatus,
 		m.receiver_name receiverName,
 		l.trace_code traceCode,
-		m.user_id userId, m.source_id sourceId, m.ware_batch_no wareBatchNo,
+		m.user_id userId, m.source_id sourceId,
+		(SELECT supplier_name FROM t_pro_supplier WHERE id=#{sourceId} ) sourceName,
+		m.ware_batch_no wareBatchNo,
 		l.create_time createTime, l.last_update_time lastUpdateTime,
-		l.stat,u.`name` userName
+		(SELECT name FROM t_pro_users WHERE id=m.user_id) userName
 		FROM
-		t_pro_ledger
-		l,t_pro_users u,t_pro_ledger_master m
+		t_pro_ledger l,
+		t_pro_ledger_master m
 		WHERE
-		m.user_id=u.id
-		AND
 		m.id=l.master_id
 		AND
 		m.source_id=#{sourceId}

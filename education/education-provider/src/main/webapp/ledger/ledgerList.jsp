@@ -34,7 +34,7 @@
 			selectOnCheck : false,
 			nowrap : false,
 			frozenColumns : [ [ {
-				field : 'id',
+				field : 'masterId',
 				title : '编号',
 				width : 150,
 				checkbox : true
@@ -88,6 +88,10 @@
 				formatter : function(value, row, index) {
 					var str = '';
 					if ($.canEdit) {
+						str += $.formatString('<img onclick="showFun('+row.wareBatchNo+');" src="{1}" title="查看"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
+					}
+					str += '&nbsp;';
+					if ($.canEdit) {
 						str += $.formatString('<img onclick="editFun('+row.wareBatchNo+');" src="{1}" title="编辑"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
 					}
 					str += '&nbsp;';
@@ -120,7 +124,6 @@
 		if (id == undefined) {//点击右键菜单才会触发这个
 			var rows = dataGrid.datagrid('getSelections');
 			id = rows[0].id;
-			alert(id)
 		} else {//点击操作里面的删除图标会触发这个
 			dataGrid.datagrid('unselectAll').datagrid('uncheckAll');
 		}
@@ -155,7 +158,6 @@
 		if (id == undefined) {
 			var rows = dataGrid.datagrid('getSelections');
 			id = rows[0].id;
-			alert(id);
 		} else {
 			dataGrid.datagrid('unselectAll').datagrid('uncheckAll');
 		}
@@ -175,6 +177,22 @@
 		});
 	}
 
+	function showFun(id) {
+		if (id == undefined) {
+			var rows = dataGrid.datagrid('getSelections');
+			id = rows[0].id;
+		} else {
+			dataGrid.datagrid('unselectAll').datagrid('uncheckAll');
+		}
+		parent.$.modalDialog({
+			title : '编辑废弃油脂',
+			width : 1000,
+			height : 500,
+			href : '${pageContext.request.contextPath}/ledgerController/showPage?wareBatchNo=' +id,
+			onOpen: function(){}
+		});
+	}
+	
 	function addFun() {
 		parent.$.modalDialog({
 			title : '添加配货',
@@ -203,7 +221,7 @@
 </head>
 <body>
 	<div class="easyui-layout" data-options="fit : true,border : false">
-		<div data-options="region:'north',title:'查询条件',border:false" style="height: 160px; overflow: hidden;">
+		<div data-options="region:'north',title:'查询条件',border:false" style="height: 100px; overflow: hidden;">
 			
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">

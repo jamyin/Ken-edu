@@ -1,0 +1,67 @@
+<html>
+<head>
+<script src="//cdn.bootcss.com/jquery/3.0.0-beta1/jquery.js"></script>
+
+</head>
+<body>
+
+<tr>
+	<td>${(data.schoolName)!}</td>
+	<td>${(data.address)!}</td>
+</tr>
+<br>
+<tr>
+	<td>学生信息</td>
+</tr>
+<form id="form_action">
+<input type="hidden" name="schoolId" value="${(data.id)!}"/>
+<input type="hidden" name="schoolName" value="${(data.schoolName)!}"/>
+<input type="hidden" name="schoolAddress" value="${(data.address)!}"/>
+
+<tr>
+	<td>级别</td>
+	<td><input name="childClass" type="text"/></td>
+</tr>
+<tr>
+	<td>姓名</td>
+	<td><input name="childName" type="text"/></td>
+</tr>
+<tr>
+	<td>性别</td>
+	<td><input name="childSex" type="text"/></td>
+</tr>
+<tr>
+	<td>关系</td>
+	<td><input name="relation" type="text"/></td>
+</tr>
+<tr>
+	<td>手机号</td>
+	<td><input name="mobile" type="text"/></td>
+</tr>
+
+<tr>
+	<td colspan="2"><input type="button" id="save_action" value="确认关注"/></td>
+</tr>
+</form>
+<div id="schoolList">
+</div>
+<script type="text/javascript">
+$(function(){
+	$("#save_action").bind("click",function(){
+		var dataParame = $("#form_action").serialize();
+		$.ajax({
+			url:'/wap/follow/follow.htm',
+			type:"POST",
+			data : dataParame,
+			dataType:'json',
+			success:function(data){
+				if(data.status == '200'){
+					alert(data.message);
+				}
+			}
+		});
+	});
+});
+</script>
+</body>
+</html>

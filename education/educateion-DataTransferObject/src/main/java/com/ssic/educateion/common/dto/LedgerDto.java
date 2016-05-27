@@ -99,6 +99,10 @@ public class LedgerDto {
 	
 	@Setter
 	@Getter
+	private String sourceName;
+	
+	@Setter
+	@Getter
 	private String wareBatchNo;
 	
 	@Setter
