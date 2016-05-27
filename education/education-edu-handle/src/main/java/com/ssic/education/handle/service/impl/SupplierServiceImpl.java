@@ -106,38 +106,36 @@ public class SupplierServiceImpl implements ISupplierService {
 		return null;
 	}
 
-	@Override
+	
 	public DataGrid findProSupplier(SupplierDto supplierDto, PageHelper ph) {
 		return proSupplierDao.findProSupplier(supplierDto, ph);
 	}
 
-	@Override
 	public SupplierDto findProSupplierById(String id) {
 		return proSupplierDao.findProSupplierById(id);
 	}
 
-	@Override
+	
 	public void updataProSupplier(SupplierDto ps) {
 		proSupplierDao.updataProSupplier(ps);
 	}
 
-	@Override
+	
 	public int deleteSupplier(String id) {
 		return proSupplierDao.deleteSupplierById(id);
 	}
 
-	@Override
 	public int saveSupplier(SupplierDto ps) {
 		return proSupplierDao.saveSupplier(ps);
 	}
 
-	@Override
+	
 	public List<SupplierDto> lookRelatingWares(ProSupplierDto dto) {
 		// TODO Auto-generated method stub
 		return proSupplierDao.lookRelatingWares(dto);
 	}
 
-	@Override
+
 	public String saveOrUpdateSupplier(SupplierDto ps) {
 		// TODO Auto-generated method stub
 		ps.setId(UUIDGenerator.getUUID());
@@ -147,26 +145,26 @@ public class SupplierServiceImpl implements ISupplierService {
 		return ps.getId();
 	}
 
-	@Override
+
 	public void saveSupplierReceiver(ProSupplierReceiver proSupplierReceiver) {
 		// TODO Auto-generated method stub
 		proSupplierDao.saveSupplierReceiver(proSupplierReceiver);
 	}
 
-	@Override
+
 	public List<SupplierDto> findSupplierCodeByReceiverId(String supplierId) {
 		// TODO Auto-generated method stub
 		return proSupplierDao.findSupplierCodeByReceiverId(supplierId);
 	}
 
-	@Override
+	
 	public ProSupplierDto searchProSupplierById(String sourceId) {
 		// TODO Auto-generated method stub
 		ProSupplier proSupplier =  proSupplierDao.selectByPrimaryKey(sourceId);
 		return BeanUtils.createBeanByTarget(proSupplier, ProSupplierDto.class);
 	}
 
-	@Override
+
 	public String findSupplierIdBySourceId(LedgerDto ledger) {
 		// TODO Auto-generated method stub
 		return proSupplierDao.findSupplierIdBySourceId(ledger);

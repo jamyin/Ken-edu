@@ -17,33 +17,33 @@ public class LedgerService implements ILedgerService {
 	@Autowired
 	private ProLedgerDao ledgerDao;
 
-	@Override
+	
 	public DataGrid findAllLedger(LedgerDto ld, PageHelper ph) {
 		return ledgerDao.findAllLedger(ld, ph);
 	}
 
-	@Override
+	
 	public int saveLedger(List<LedgerDto> ledger) {
 		return ledgerDao.saveLedger(ledger);
 	}
 
-	@Override
+	
 	public List<LedgerDto> findLedgerById(String sourceId,
 			String wareBatchNo) {
 		return ledgerDao.findLedgerById(sourceId,wareBatchNo);
 	}
 
-	@Override
+	
 	public int updataLedger(List<LedgerDto> ledger) {
 		return ledgerDao.updataLedger(ledger);
 	}
 
-	@Override
+	
 	public int deleteLedger(String sourceId, String wareBatchNo) {
 		return ledgerDao.deleteLedger(sourceId,wareBatchNo);
 	}
 
-	@Override
+	
 	public int findWareBatchNo(LedgerDto ledgerDto) {
 		return ledgerDao.findWareBatchNo(ledgerDto);
 	}

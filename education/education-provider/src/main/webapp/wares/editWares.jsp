@@ -50,17 +50,22 @@
 								return isValid;
 							},
 							success : function(result) {
+								
 								parent.$.messager.progress('close');
 								result = $.parseJSON(result);
 								console.log(result);
+								
 								if (result.success) {
 									parent.$.modalDialog.openner_dataGrid
 											.datagrid('reload');//之所以能在这里调用到parent.$.modalDialog.openner_dataGrid这个对象，
+										
 									parent.$.modalDialog.handler
 											.dialog('close');
+								
 								} else {
-									parent.$.messager.alert('错误', result.msg,
+									parent.$.messager.alert('错误', result.message,
 											'error');
+								
 								}
 							}
 						});

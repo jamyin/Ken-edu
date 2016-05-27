@@ -34,7 +34,7 @@ public class ProSupplierServiceImpl implements ProSupplierService{
 		return proSupplierDao.updateByPrimaryKeySelective(proSupplier);
 	}
 	
-	@Override
+
 	public List<ProSupplierDto> querySupplierByParams(ProSupplierDto params) {
 		List<ViewProSupplierWithBLOBs> viewProSuppliers = viewProSupplierDao.queryViewSupplier(params, null);
 
@@ -44,7 +44,7 @@ public class ProSupplierServiceImpl implements ProSupplierService{
 		return null;
 	}
 
-	@Override
+	
 	public PageResult<ProSupplierDto> querySupplierByParams(ProSupplierDto params, PageQuery query) {
 		int total = viewProSupplierDao.countViewSupplier(params);
 		if (total > 0) {
