@@ -4,17 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ssic.educateion.common.dto.EduSchoolDto;
 import com.ssic.education.handle.dto.EduParentPackCommentDto;
-import com.ssic.education.handle.dto.EduParentScChDto;
 import com.ssic.education.handle.service.IEduParentPackCommentService;
-import com.ssic.education.handle.service.IEduParentScChService;
-import com.ssic.education.utils.constants.DataStatus;
-import com.ssic.education.utils.model.Response;
 
 /**
  * 
@@ -31,6 +26,20 @@ public class WapCommentController extends BaseController {
 	@Autowired
 	private IEduParentPackCommentService iEduParentPackCommentService;
 	
+	/**
+	 * 
+		 * 此方法描述的是：进入某一个菜的点评功能页面
+		 * @author: cwftalus@163.com
+		 * @version: 2016年5月23日 下午3:50:56
+	 */
+	@RequestMapping(value="/join/{packageId}")
+	public ModelAndView join(@PathVariable String packageId){	
+		ModelAndView mv = getModelAndView();
+
+		mv.addObject("packageId", packageId);
+		mv.setViewName("join");
+		return mv;
+	}
 	
 	/**
 	 * 
@@ -60,7 +69,6 @@ public class WapCommentController extends BaseController {
 		mv.addObject("dataList",dataList);
 		mv.setViewName("comment");
 		return mv;
-	
 	}	
 	
 	

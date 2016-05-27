@@ -10,7 +10,7 @@ $(function(){
 				var objHtml = "";
 				$.each(data.data, function(index, item) {
 					objHtml+="<div class='row breakfrist'>";
-					objHtml+="<h2><i>"+item['packageName']+"</i><span>Breakfrist</span><a href='###'>点评</a></h2>";
+					objHtml+="<h2><i>"+item['packageName']+"</i><span>Breakfrist</span><a href='/wap/comment/join/"+item['id']+".htm'>点评</a></h2>";
 					objHtml+="<ul>";
 					objHtml+="<li><img src='/static/img/food_simple.jpg' border='0'><p>红枣莲子银耳粥</p><span>原料：银耳5g; 莲子5g; 红枣 5g</span></li>";
 					objHtml+="</ul>";
