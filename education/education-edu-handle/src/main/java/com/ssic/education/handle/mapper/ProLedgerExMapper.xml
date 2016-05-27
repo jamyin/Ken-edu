@@ -75,7 +75,9 @@
 		m.haul_status haulStatus,
 		m.receiver_name receiverName,
 		l.trace_code traceCode,
-		m.user_id userId, m.source_id sourceId, m.ware_batch_no wareBatchNo,
+		m.user_id userId, m.source_id sourceId,
+		(SELECT supplier_name FROM t_pro_supplier WHERE id=#{sourceId} ) sourceName,
+		m.ware_batch_no wareBatchNo,
 		l.create_time createTime, l.last_update_time lastUpdateTime,
 		(SELECT name FROM t_pro_users WHERE id=m.user_id) userName
 		FROM
