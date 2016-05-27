@@ -78,7 +78,7 @@ public class WapSchoolController extends BaseController{
 	public Response<List<EduSchoolDto>> search(EduSchoolDto eduSchoolDto){
 		Response<List<EduSchoolDto>> result = new Response<List<EduSchoolDto>>();
 		List<EduSchoolDto> dataList = null;
-		if(StringUtils.isEmpty(eduSchoolDto.getSchoolName())){
+		if(StringUtils.isEmpty(StringUtils.trim(eduSchoolDto.getSchoolName()))){
 			result.setStatus(DataStatus.HTTP_FAILE);
 			result.setMessage("未找到相对应的学校信息");
 			return result;
