@@ -19,6 +19,66 @@
 			AND m.receiver_name like "%"#{ledgerDto.receiverName}"%"
 		</if>
 	</select>
+<<<<<<< HEAD
+	
+	<select id="selectLedgerList" resultType="com.ssic.educateion.common.dto.LedgerDto" parameterType="java.lang.String">
+		SELECT a.id,b.id as masterId,b.action_date as actionDate,b.receiver_id as receiverId,b.receiver_name as receiverName,b.user_id as userId,b.source_id as sourceId,b.ware_batch_no as wareBatchNo,
+		b.haul_status as haulStatus,a.wares_id as waresId,a.name,a.spce,a.supplier_id as supplierId,a.supplier_code as supplierCode, a.supplier_name as supplierName, a.quantity,a.production_date as productionDate,
+		a.production_name as productionName,a.batch_no as batchNo,a.trace_code as traceCode,a.create_time as createTime,a.last_update_time as lastUpdateTime,a.stat
+		FROM t_pro_ledger a
+		LEFT JOIN t_pro_ledger_master b on a.master_id = b.id
+		WHERE a.stat = 1 and b.stat=1
+		<if test="receiverId != null  and receiverId !=''">
+			AND b.receiver_id = #{receiverId}
+		</if>
+		<if test="legderId != null  and legderId !=''">
+			AND b.id = #{legderId}
+		</if>
+		<if test="receiverName != null  and receiverName !=''">
+			AND b.receiver_name like "%"#{receiverName}"%"
+		</if>
+	</select>
+	
+	<select id="selectLedgerListOrderby" resultType="com.ssic.educateion.common.dto.LedgerDto" parameterType="java.lang.String">
+		SELECT a.id,b.id as masterId,b.action_date as actionDate,b.receiver_id as receiverId,b.receiver_name as receiverName,b.user_id as userId,b.source_id as sourceId,b.ware_batch_no as wareBatchNo,
+		b.haul_status as haulStatus,a.wares_id as waresId,a.name,a.spce,a.supplier_id as supplierId,a.supplier_code as supplierCode, a.supplier_name as supplierName, a.quantity,a.production_date as productionDate,
+		a.production_name as productionName,a.batch_no as batchNo,a.trace_code as traceCode,a.create_time as createTime,a.last_update_time as lastUpdateTime,a.stat
+		FROM t_pro_ledger a
+		LEFT JOIN t_pro_ledger_master b on a.master_id = b.id
+		WHERE a.stat = 1 and b.stat=1
+		<if test="receiverId != null  and receiverId !=''">
+			AND b.receiver_id = #{receiverId}
+		</if>
+		<if test="legderId != null  and legderId !=''">
+			AND b.id = #{legderId}
+		</if>
+		<if test="receiverName != null  and receiverName !=''">
+			AND b.receiver_name like "%"#{receiverName}"%"
+		</if>
+		GROUP BY b.ware_batch_no
+		ORDER BY a.create_time desc
+		limit #{page.startNum},
+		#{page.pageSize}
+	</select>
+	
+	<select id="countLedgerListOrderby" resultType="java.lang.Long" parameterType="java.lang.String">
+		SELECT count(*) from  (SELECT b.id, COUNT(*) counts FROM t_pro_ledger a
+		LEFT JOIN t_pro_ledger_master b on a.master_id = b.id
+		WHERE a.stat = 1 and b.stat=1
+		<if test="receiverId != null  and receiverId !=''">
+			AND b.receiver_id = #{receiverId}
+		</if>
+		<if test="legderId != null  and legderId !=''">
+			AND b.id = #{legderId}
+		</if>
+		<if test="receiverName != null  and receiverName !=''">
+			AND b.receiver_name like "%"#{receiverName}"%"
+		</if>
+		GROUP BY b.ware_batch_no) t
+	</select>
+	
+=======
+>>>>>>> branch 'master' of http://192.168.1.231/group-one/education.git
 	<select id="findAllLedger" resultType="com.ssic.educateion.common.dto.LedgerDto">
 		SELECT DISTINCT
 		m.id masterId,
