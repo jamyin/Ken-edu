@@ -37,17 +37,34 @@ public class TaskController {
    * @date 2016年5月20日 下午3:17:18
    * @return Response<EduTaskDto>    返回类型
     */
-    @RequestMapping("/findTaskListById/{id}/{readstat}")
+    @RequestMapping("/findTaskListById/{id}")
     @ResponseBody
-    public Response<PageResult<EduTaskDto>> findTaskListById(@PathVariable("id")String id, @PathVariable("readstat")int readstat, PageQuery query) {
-    	Response<PageResult<EduTaskDto>> result = new Response<PageResult<EduTaskDto>>();
+    public Response<EduTaskDto> findTaskListById(@PathVariable("id")String id, PageQuery query) {
+    	Response<EduTaskDto> result = new Response<EduTaskDto>();
+    	EduTaskDto dto = new EduTaskDto();
     	if(StringUtils.isEmpty(id)){
      		result.setStatus(DataStatus.HTTP_FAILE);
      		result.setMessage("查询Id为空");
      		return result;
      	}
-    	PageResult<EduTaskDto> taskList = taskService.findTaskListById(id, readstat, query);
-    	if(taskList.getResults() != null && taskList.getResults().size() >0 ){
+    	//查询当前用户接收任务列表-已读 readStat=1
+    	PageResult<EduTaskDto> receiveReadList = taskService.findTaskListById(id, 1, query);
+    	
+    	//查询当前用户接收任务列表-未读 readStat=0
+    	PageResult<EduTaskDto> receiveNotReadList = taskService.findTaskListById(id, 0, query);
+    	
+    	//查询当前用户发送任务列表
+    	PageResult<EduTaskDto> sendList = taskService.findSendListById(id, query);
+    	
+    	dto.setSendList(sendList);
+    	dto.setReceiveReadList(receiveReadList);
+    	dto.setReceiveNotReadList(receiveNotReadList);
+    	
+    	//result.setStatus(DataStatus.HTTP_SUCCESS);
+		//result.setMessage("查询任务成功！");
+		result.setData(dto);
+    	return result;
+    	/*if(taskList.getResults() != null && taskList.getResults().size() >0 ){
     		result.setStatus(DataStatus.HTTP_SUCCESS);
     		result.setMessage("查询任务成功！");
     		result.setData(taskList);
@@ -56,8 +73,9 @@ public class TaskController {
     		result.setStatus(DataStatus.HTTP_FAILE);
     		result.setMessage("未查到相关记录！");
     		return result;
-    	}
+    	}*/
     }
+    
     /**
     * @Title: findSendListById
     * @Description: 根据Id查询当前用户发送任务列表
@@ -65,7 +83,7 @@ public class TaskController {
     * @date 2016年5月21日 上午10:42:02
     * @return Response<PageResult<EduTaskDto>>    返回类型
      */
-    @RequestMapping("/findSendListById/{id}")
+   /* @RequestMapping("/findSendListById/{id}")
     @ResponseBody
     public Response<PageResult<EduTaskDto>> findSendListById(@PathVariable("id")String id, PageQuery query) {
     	Response<PageResult<EduTaskDto>> result = new Response<PageResult<EduTaskDto>>();
@@ -85,7 +103,7 @@ public class TaskController {
     		result.setMessage("未查到相关记录！");
     		return result;
     	}
-    }
+    }*/
     
     /**
     * @Title: delTask
