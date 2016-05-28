@@ -2,6 +2,7 @@ package com.ssic.education.handle.service.impl;
 
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,9 +62,11 @@ public class LedgerService implements ILedgerService {
 	@Override
 	public int importLedger(Map<ProLedgerMaster, List<ProLedger>> map) {
 		for (ProLedgerMaster o : map.keySet()) {
+			o.setId(UUID.randomUUID().toString());
 			lmm.insertSelective(o);
 			List<ProLedger> list = map.get(o);
 			for (ProLedger oo : list) {
+				oo.setMasterId(o.getId());
 				lm.insertSelective(oo);
 			}
 		}
