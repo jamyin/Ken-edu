@@ -36,10 +36,11 @@
 <script>
 	$(function(){
 		$('.con .row ul').on('click', 'li', function(){
-			$(this).addClass('cur').siblings().removeClass('cur').closest('ul').attr('score',$(this).index() + 1);
+			$(this).siblings().removeClass('cur')
+			$(this).prevAll().andSelf().addClass('cur')
+			$(this).closest('ul').attr('score',$(this).index() + 1)
 		})
 		$('.done').on('click', 'li', function(){
-			alert("");
 			console.log($('#flavor').attr('score'))
 			console.log($('#health').attr('score'))
 			console.log($('#weights').attr('score'))
