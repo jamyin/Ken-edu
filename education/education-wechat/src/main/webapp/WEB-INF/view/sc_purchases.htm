@@ -13,7 +13,13 @@
 		<ul id="purchasesList">
 		<#if resultList ??>
 			<#list resultList as data>
-				<li><img src="/static/img/food_simple.jpg" border="0"><p>${(data.waresName)!}</p><span>产品编号：${(data.barCode)!}</span><span class="weight">${(data.spec)!}</span></li>
+				<li><a href="/wap/purchases/details/${(data.id)!}.htm">
+					<img src="/static/img/food_simple.jpg" border="0">
+					<p>${(data.waresName)!}</p>
+					<span>产品编号：${(data.barCode)!}</span>
+					<span class="weight">${(data.spec)!}</span>
+					</a>
+				</li>
 				<!-- <li><label>${(data.waresName)!}</label></li> -->
 			</#list>
 		</#if>
