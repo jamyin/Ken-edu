@@ -16,12 +16,12 @@
 			名称：${(proWaresDto.waresName)!}<br>
 			产品编码：86910001<br>
 			产品分类：畜产品及其制品<br>
-			规格：kg<br>
-			保质期：3 天<br>
+			规格：${(proWaresDto.spec)!}<br>
+			保质期：${(proWaresDto.shelfLife)!}${(proWaresDto.unit)!}<br>
 			英文名称：<br>
-			生产企业：爱森猪肉厂<br>
-			商品包装条码：201605061001<br>
-			产地：上海
+			生产企业：${(proWaresDto.manufacturer)!}<br>
+			商品包装条码：${(proWaresDto.customCode)!}<br>
+			产地：${(proWaresDto.place)!} 
 		</p>
 	</div>
 	<section class="tablecell">
