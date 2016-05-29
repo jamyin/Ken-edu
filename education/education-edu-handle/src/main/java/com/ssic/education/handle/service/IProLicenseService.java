@@ -16,4 +16,8 @@ public interface IProLicenseService {
 	public void saveProLicense(ProLicenseDto proLicenseDto);
 
 	int saveLicense(ProLicense license);
+
+	List<ProLicenseDto> searchProLicenseList(ProLicenseDto proLicenseDto);
+	
+	
 }

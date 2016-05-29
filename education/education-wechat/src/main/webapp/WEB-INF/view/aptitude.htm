@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,user-scalable=no" />
+    <title>静安实验小学食堂</title>
+    <link href="/static/css/style.css" rel="stylesheet" />
+    <script src="/static/js/jquery-2.1.3.min.js"></script>
+  </head>
+<body>
+	<section class="aptitude">
+		<ul>
+			<li><label>单位名称</label><span>静安实验小学食堂</span></li>
+			<li><label>单位地址</label><span>上海市浦东新区航头镇航头路144-164号5幢</span></li>
+			<li><label>联系人</label><span>张三</span></li>
+			<li><label>联系方式</label><span>13800138000</span></li>
+		</ul>
+	</section>
+	<section class="tablecell">
+		<ul>
+			<#if resultList ??>
+				<#list resultList as result>
+					<li><a href="###"></a><label>${(result.licName)!}</label><span>${(result.licNo)!}</span></li>		
+				</#list>
+			</#if>
+<!-- 			<li><a href="###"></a><label>工商营业执照</label><span>2012310115320026</span></li>
+			<li><a href="###"></a><label>组织机构代码证</label><span>2012310115320026</span></li>
+			<li><a href="###"></a><label>税务登记证</label><span>512512199012204848</span></li>
+			<li><a href="###"></a><label>食品经营许可证</label><span>沪餐证字 23231313232313132323131323231313</span></li>
+			<li><a href="###"></a><label>食品流通许可证</label><span>512512199012204848</span></li>
+			<li><a href="###"></a><label>食品生产许可证</label><span>512512199012204848</span></li>
+			<li><a href="###"></a><label>餐饮服务许可证</label><span>沪餐证字 2012310115320026201231011532002620123101153200262012310115320026</span></li>
+			<li><a href="###"></a><label>法定代表/负责人/业主证件</label><span>2012310115320026</span></li>
+ -->		</ul>
+	</section>
+	<section class="aptitude_c">
+		<h2>采购品供应商</h2>
+		<section class="tablecell">
+			<ul>
+				<li class="break-line"><a href="suppliers.html#"></a><label>上海爱森肉食品有限公司分公司</label><span>单位地址：上海市浦东新区航头街道</span></li>
+				<li class="break-line"><a href="suppliers.html#"></a><label>上海爱森肉食品有限公司分公司</label><span>单位地址：上海市浦东新区航头街道</span></li>
+				<li class="break-line"><a href="suppliers.html#"></a><label>上海爱森肉食品有限公司分公司</label><span>单位地址：上海市浦东新区航头街道</span></li>
+				<li class="break-line"><a href="suppliers.html#"></a><label>上海爱森肉食品有限公司分公司</label><span>单位地址：上海市浦东新区航头街道</span></li>
+			</ul>
+			<div class="load_more gr"><a href="suppliers.html">查看其它200个供应商</a></div>
+		</section>
+	</section>
+</body>
+<script>
+	$(function(){
+	})
+</script>
+</html>

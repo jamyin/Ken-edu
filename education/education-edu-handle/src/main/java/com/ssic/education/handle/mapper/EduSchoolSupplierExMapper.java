@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.ssic.educateion.common.dto.LedgerAddressDto;
-import com.ssic.educateion.common.dto.LedgerDto;
+import com.ssic.educateion.common.dto.SupplierDto;
 import com.ssic.educateion.common.utils.PageHelper;
 
 public interface EduSchoolSupplierExMapper {
@@ -15,5 +15,7 @@ public interface EduSchoolSupplierExMapper {
 	Long countAllLedgerAddress(@Param("ledgerAddress")LedgerAddressDto lad);
 	
 	String findSchoolIdByReceiverId(@Param("receiverName")String receiverName,@Param("sourceId")String sourceId);
+
+	List<SupplierDto> searchEduSchoolSupplierListDto(@Param("schoolId") String schoolId);
 	
 }

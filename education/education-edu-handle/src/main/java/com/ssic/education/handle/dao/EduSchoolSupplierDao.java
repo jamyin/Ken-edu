@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ssic.educateion.common.dto.EduSchoolSupplierDto;
-import com.ssic.educateion.common.dto.LedgerDto;
+import com.ssic.educateion.common.dto.SupplierDto;
 import com.ssic.education.handle.mapper.EduSchoolSupplierExMapper;
 import com.ssic.education.handle.mapper.EduSchoolSupplierMapper;
 import com.ssic.education.handle.pojo.EduSchoolSupplier;
@@ -42,5 +42,11 @@ public class EduSchoolSupplierDao  extends MyBatisBaseDao<EduSchoolSupplier>{
 
 	public String findSchoolIdByReceiverId(String receiverName,String sourceId) {
 		return exMapper.findSchoolIdByReceiverId(receiverName,sourceId);
+	}
+
+	public List<SupplierDto> searchEduSchoolSupplierListDto(
+			String schoolId) {
+		// TODO Auto-generated method stub
+		return exMapper.searchEduSchoolSupplierListDto(schoolId);
 	}
 }

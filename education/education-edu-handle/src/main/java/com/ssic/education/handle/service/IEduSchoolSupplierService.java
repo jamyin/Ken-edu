@@ -3,7 +3,7 @@ package com.ssic.education.handle.service;
 import java.util.List;
 
 import com.ssic.educateion.common.dto.EduSchoolSupplierDto;
-import com.ssic.educateion.common.dto.LedgerDto;
+import com.ssic.educateion.common.dto.SupplierDto;
 
 public interface IEduSchoolSupplierService {
 
@@ -12,6 +12,8 @@ public interface IEduSchoolSupplierService {
 	EduSchoolSupplierDto searchEduSchoolSupplierDto(EduSchoolSupplierDto eduSchoolSupplierDto);
 
 	String findSchoolIdByReceiverId(String receiverName,String sourceId);
+	
+	List<SupplierDto> searchEduSchoolSupplierListDto(String schoolId);
 	
 //	List<SchoolSupplierDto> findByPage(SchoolSupplierDto schoolSupplierDto,PageHelper ph);
 //	

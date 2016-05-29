@@ -36,5 +36,11 @@ public class ProLicenseServiceImpl implements IProLicenseService {
 	public int saveLicense(ProLicense license) {
 		return dao.insertSelective(license);
 	}
+	@Override
+	public List<ProLicenseDto> searchProLicenseList(ProLicenseDto proLicenseDto) {
+		List<ProLicense> dataList = dao.searchProLicenseList(proLicenseDto);
+		List<ProLicenseDto> resultList = BeanUtils.createBeanListByTarget(dataList, ProLicenseDto.class);
+		return resultList;
+	}
 
 }
