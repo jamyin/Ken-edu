@@ -13,10 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.EncryptedDocumentException;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -511,24 +514,24 @@ public class WaresController extends BaseController {
 		List<ProWares> list = new ArrayList();
 
 		// 读取excel
-		try (HSSFWorkbook hssfWorkbook = new HSSFWorkbook(file.getInputStream())) {
-			HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(0);
-			if (hssfSheet == null) {
+		try (Workbook wb = WorkbookFactory.create(file.getInputStream());) {
+			Sheet sheet = wb.getSheetAt(0);
+			if (sheet == null) {
 				return null;
 			}
 
 			Date now = new Date();
-			for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
+			for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
 				if (errorMsg != null) {
 					break;
 				}
 				ProWares dto = new ProWares();
-				HSSFRow hssfRow = hssfSheet.getRow(rowNum);
-				for (int i = 0; i < hssfRow.getLastCellNum(); i++) {
+				Row row = sheet.getRow(rowNum);
+				for (int i = 0; i < row.getLastCellNum(); i++) {
 					if (errorMsg != null) {
 						break;
 					}
-					HSSFCell cell = hssfRow.getCell(i);
+					Cell cell = row.getCell(i);
 					String value = ParseExcelUtil.getStringCellValue(cell);
 					if (value != null) {
 						value = value.trim();
@@ -607,6 +610,8 @@ public class WaresController extends BaseController {
 				dto.setStat(1);
 				list.add(dto);
 			}
+		} catch (EncryptedDocumentException | InvalidFormatException e) {
+			errorMsg = "Excel文件格式不正确";
 		}
 
 		if (errorMsg != null) {

@@ -28,6 +28,8 @@ public interface ProSupplierExMapper {
 	List<SupplierDto> findSupplierCodeByReceiverId(@Param("supplierId")String supplierId);
 
 	String findSupplierIdBySourceId(@Param("ledgerDto") LedgerDto ledgerDto);
+
+	List<ProSupplierDto> searchSupplierListBySupplierId(@Param("supplierId") String supplierId,@Param("suppliName") String suppliName,@Param("supplierType") Integer supplierType,@Param("limit") Integer limit);
 	
 	
 }

@@ -149,4 +149,10 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 	public String findSupplierIdBySourceId(LedgerDto ledger) {
 		return exMapper.findSupplierIdBySourceId(ledger);
 	}
+
+	public List<ProSupplierDto> searchSupplierListBySupplierId(
+			String supplierId,String suppliName, Integer supplierType,Integer limit) {
+		// TODO Auto-generated method stub
+		return exMapper.searchSupplierListBySupplierId(supplierId,suppliName,supplierType,limit);
+	}
 }

@@ -1,11 +1,9 @@
 package com.ssic.education.utils.poi;
 
-import java.beans.IntrospectionException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +14,7 @@ import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
 
 /**
  * 
@@ -253,17 +252,17 @@ public class ParseExcelUtil {
 	 * 
 	 * @throws UnSupportedCellTypeException
 	 */
-	public static String getStringCellValue(HSSFCell cell) {
+	public static String getStringCellValue(Cell cell) {
 		if (cell == null) {
 			return null;
 		}
 
 		String result = "";
 		switch (cell.getCellType()) {
-		case HSSFCell.CELL_TYPE_BOOLEAN:
+		case Cell.CELL_TYPE_BOOLEAN:
 			result = String.valueOf(cell.getBooleanCellValue());
 			break;
-		case HSSFCell.CELL_TYPE_NUMERIC:
+		case Cell.CELL_TYPE_NUMERIC:
 			if (HSSFDateUtil.isCellDateFormatted(cell)) {
 				java.text.SimpleDateFormat TIME_FORMATTER = new java.text.SimpleDateFormat(
 						"yyyy-MM-dd");
@@ -273,17 +272,17 @@ public class ParseExcelUtil {
 				result = "" + doubleValue;
 			}
 			break;
-		case HSSFCell.CELL_TYPE_STRING:
+		case Cell.CELL_TYPE_STRING:
 			if (cell.getRichStringCellValue() == null) {
 				result = null;
 			} else {
 				result = cell.getRichStringCellValue().getString();
 			}
 			break;
-		case HSSFCell.CELL_TYPE_BLANK:
+		case Cell.CELL_TYPE_BLANK:
 			result = null;
 			break;
-		case HSSFCell.CELL_TYPE_FORMULA:
+		case Cell.CELL_TYPE_FORMULA:
 			try {
 				result = String.valueOf(cell.getNumericCellValue());
 			} catch (Exception e) {

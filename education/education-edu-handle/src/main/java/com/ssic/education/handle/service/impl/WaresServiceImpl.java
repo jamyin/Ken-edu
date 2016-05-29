@@ -1,6 +1,7 @@
 package com.ssic.education.handle.service.impl;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,6 +59,7 @@ public class WaresServiceImpl implements IWaresService {
 	 */
 	public void addProWares(List<ProWares> list) {
 		for (ProWares o : list) {
+			o.setId(UUID.randomUUID().toString());
 			mapper.insertSelective(o);
 		}
 	}

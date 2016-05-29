@@ -1,6 +1,8 @@
 package com.ssic.education.provider.controller;
 
+import java.io.IOException;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -8,6 +10,11 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.poi.EncryptedDocumentException;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -614,4 +621,47 @@ public class ProSupplierController {
 		return json;
 	}
 
+	@RequestMapping("/importPage")
+	public String importPage() {
+		return "supplier/supplierImport";
+	}
+
+	@RequestMapping("/supplierImport")
+	@ResponseBody
+	public Json supplierImport(MultipartFile file, HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		Json j = new Json();
+		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
+				ConfigUtil.SESSIONINFONAME);
+		// 当前登录用户所属供应商的id
+		String supplierId = info.getSupplierId();
+		String errorMsg = null;
+		List<SupplierDto> masterLedger = new LinkedList();
+		try (Workbook wb = WorkbookFactory.create(file.getInputStream());) {
+			Sheet sheet = wb.getSheetAt(0);
+			if (sheet == null) {
+				return null;
+			}
+		} catch (EncryptedDocumentException | InvalidFormatException e) {
+			errorMsg = "Excel文件格式不正确";
+		}
+
+		// InputStream inputStream = file.getInputStream();
+		//
+		// Workbook wb = null;
+		// boolean isExcel2003 = false;
+		//
+		// if (file.getOriginalFilename().matches("^.+\\.(?i)(xls)$")) {
+		// isExcel2003 = true;
+		// }
+		// try {
+		// if (isExcel2003) {
+		// wb = new HSSFWorkbook(inputStream);
+		// } else {
+		// wb = new XSSFWorkbook(inputStream);
+		// }
+		// } finally {
+		// }
+		return j;
+	}
 }
