@@ -600,11 +600,6 @@ public class WaresController extends BaseController {
 				if (errorMsg != null) {
 					break;
 				}
-				// TODO 检查参数
-				if (dto.getWaresName() == null || dto.getSpec() == null
-						|| dto.getWaresType() == null) {
-					continue;
-				}
 				dto.setSupplierId(supplierId);
 				dto.setWay(0);
 				dto.setCreateTime(now);
