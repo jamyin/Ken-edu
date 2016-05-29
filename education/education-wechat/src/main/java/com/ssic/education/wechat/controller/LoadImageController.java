@@ -17,11 +17,12 @@ import com.ssic.education.utils.util.PropertiesUtils;
 public class LoadImageController extends BaseController{
 
 	@RequestMapping(value="loadImage")
-	public ModelAndView loadImage(String absFilePath) {
+	public ModelAndView loadImage(String absFilePath,String name) {
 		ModelAndView mv = getModelAndView();
 		String lookUrl = PropertiesUtils.getProperty("upload.look.url");
 		
 		mv.addObject("filePath", lookUrl+absFilePath);
+		mv.addObject("name", name);
 		mv.setViewName("img_alert");
 		return mv;
 	}

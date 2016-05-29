@@ -21,7 +21,7 @@
 		<ul>
 			<#if resultList ??>
 				<#list resultList as result>
-					<li><a href="#" onclick="loadImage('${(result.licPic)!}');"></a><label>${(result.licName)!}</label><span>${(result.licNo)!}</span></li>		
+					<li><a href="#" data-path="${(result.licPic)!}" data-name="${(result.licName)!}" onclick="loadImage(this);"></a><label>${(result.licName)!}</label><span>${(result.licNo)!}</span></li>		
 				</#list>
 			</#if>
 <!-- 			<li><a href="###"></a><label>工商营业执照</label><span>2012310115320026</span></li>

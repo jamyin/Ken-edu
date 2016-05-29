@@ -28,7 +28,7 @@
 		<ul>
 			<#if resultList ??>
 				<#list resultList as result>
-					<li><ahref="#" onclick="loadImage('${(result.licPic)!}');"></a><label>${(result.licName)!}</label><span>${(result.licNo)!}</span></li>		
+					<li><a href="#" data-path="${(result.licPic)!}" data-name="${(result.licName)!}" onclick="loadImage(this);"></a><label>${(result.licName)!}</label><span>${(result.licNo)!}</span></li>		
 				</#list>
 			</#if>		
 <!-- 		<li><a href="###"></a><label>检验检测报告</label></li>
