@@ -56,7 +56,7 @@
                         <p> <span class="key">工商执照号</span>：<span class="value"> ${(proSupplierdto.businessLicense)!} </span></p>
 
                         <div class="subbt">
-                            <a href="#">关联</a>
+                            <a>关联</a>
                         </div>
                     </div>
                 </div>
@@ -92,6 +92,7 @@
         <script src="/static/js/jquery-2.1.3.min.js"></script>
         <script type="text/javascript">
             $(function(){
+            	var supplierId;
                 $(".select").click(function(){
                     $(".background").show();
                 });
@@ -100,11 +101,30 @@
                     $(".background").hide();
                 });
                 $(".background .content_wrap2 .checkwrap2 label").click(function(){
-                	var d = $(this).closest('li').find('input').val();
-                	alert(d);
-                	return;
+                	supplierId = $(this).closest('li').find('input').val();
                     $(".background").fadeOut('fast');
                 });
+                $(".subbt").click(function(){
+                	if (supplierId == null || supplierId == '') {
+                		alert("请选择关联公司！");
+                		return;
+                	}
+                	$.ajax({
+    					url:'/edu/school/addShoolSupplier.htm',
+    					type:"POST",
+    					dataType:"json",
+    					data : {schoolId:'${(eduSchoolSupplierDto.schoolId)!}',supplierId:supplierId},
+    					async: false,
+    					success:function(data){
+    						if(data.status==200){
+    							alert("关联成功!");
+    							window.location.href = "/edu/school/details.htm?source=1";
+    						}else{
+    							alert("关联失败!");
+    						}
+    					}
+    				});
+                })
             });
         </script>
     </body>

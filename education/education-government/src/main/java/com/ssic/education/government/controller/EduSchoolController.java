@@ -143,7 +143,8 @@ public class EduSchoolController extends BaseController{
 		return mv;
 	}
 	
-	@RequestMapping("/schoolSupplier")
+	@RequestMapping("/addShoolSupplier")
+	@ResponseBody
 	public Response<String> schoolSupplier(EduSchoolSupplierDto eduSchoolSupplierDto) {
 		Response<String> res = new Response<String>();
 		int result = iEduSchoolSupplierService.save(eduSchoolSupplierDto);
@@ -201,12 +202,7 @@ public class EduSchoolController extends BaseController{
 		LedgerDto ledgerDto = new LedgerDto();
 		ledgerDto.setReceiverId(dto.getCustomerId());
 		PageResult<LedgerDto> ledgerDtos = proLedgerService.selectLedgerPage(ledgerDto,query);
-		if (dto.getSource() == DataStatus.DISABLED) {
-			mv.setViewName("/school/menu_city");
-		}
-		if (dto.getSource() == DataStatus.ENABLED) {
-			mv.setViewName("/school/menu_city");
-		}		
+		mv.setViewName("/school/menu_city");
 		mv.addObject("dto", dto);
 		mv.addObject("mWares", mWares);
 		mv.addObject("eduSchoolSupplierDtos", eduSchoolSupplierDtos);
