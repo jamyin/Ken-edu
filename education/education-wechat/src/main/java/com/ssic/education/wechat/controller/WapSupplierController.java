@@ -1,6 +1,9 @@
 package com.ssic.education.wechat.controller;
 
+import java.io.Serializable;
 import java.util.List;
+
+import lombok.Data;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,8 +13,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.common.base.Objects;
 import com.ssic.educateion.common.dto.EduCanteenDto;
 import com.ssic.educateion.common.dto.ProLicenseDto;
+import com.ssic.educateion.common.dto.ProSupplierDto;
 import com.ssic.education.handle.service.IEduCanteenService;
 import com.ssic.education.handle.service.IProLicenseService;
+import com.ssic.education.handle.service.ISupplierService;
 
 /**
  * 
@@ -25,6 +30,9 @@ public class WapSupplierController extends BaseController{
 
 	@Autowired
 	private IEduCanteenService iEduCanteenService; 
+	
+	@Autowired
+	private ISupplierService iSupplierService;
 	
 	@Autowired
 	private IProLicenseService iProLicenseService;
@@ -41,11 +49,13 @@ public class WapSupplierController extends BaseController{
 		ModelAndView mv = getModelAndView();
 
 		List<ProLicenseDto> resultList = null;
-		
+		InfoObj infoObj = new InfoObj();
 		if(Objects.equal(companyType, 1)){
 			EduCanteenDto eduCanteenDto = new EduCanteenDto();
 			eduCanteenDto.setSchoolId(relationId);
 			eduCanteenDto = iEduCanteenService.searchEduCanteenDto(eduCanteenDto);
+			
+			infoObj = copyCanteenProperty(eduCanteenDto);
 			
 			ProLicenseDto proLicenseDto = new ProLicenseDto();
 			proLicenseDto.setRelationId(eduCanteenDto.getId());
@@ -53,12 +63,56 @@ public class WapSupplierController extends BaseController{
 			resultList = iProLicenseService.searchProLicenseList(proLicenseDto);
 		}else if(Objects.equal(companyType, 2)){
 			
+			ProSupplierDto proSupplierDto =  iSupplierService.searchProSupplierById(relationId);
+			
+			infoObj = copySupplierProperty(proSupplierDto);
+			
+			ProLicenseDto proLicenseDto = new ProLicenseDto();
+			proLicenseDto.setRelationId(relationId);
+			proLicenseDto.setCerSource(Short.valueOf("0"));
+			resultList = iProLicenseService.searchProLicenseList(proLicenseDto);
 		}
 
-		
+		mv.addObject("infoObj",infoObj);
 		mv.addObject("resultList", resultList);
 		mv.setViewName("aptitude");
 		return mv;
 	}
+	
+	
+	
+	
+	private InfoObj copySupplierProperty(ProSupplierDto proSupplierDto) {
+		InfoObj infoObj = new InfoObj();
+		infoObj.setName(proSupplierDto.getSupplierName());
+		infoObj.setAddress(proSupplierDto.getAddress());
+		infoObj.setMobile(proSupplierDto.getCorporation());
+		infoObj.setRelationer(proSupplierDto.getContactWay());
+		return infoObj;
+	}
+
+
+
+
+	private InfoObj copyCanteenProperty(EduCanteenDto eduCanteenDto) {
+		InfoObj infoObj = new InfoObj();
+		infoObj.setName(eduCanteenDto.getCanteenName());
+		infoObj.setAddress("");
+		infoObj.setMobile(eduCanteenDto.getPhoneNumber());
+		infoObj.setRelationer(eduCanteenDto.getCanteenContacts());
+		return infoObj;
+	}
+
+
+
+
+	@Data
+	public class InfoObj implements Serializable{
+		public String name;
+		public String address;
+		public String relationer;
+		public String mobile;
+	}	
+	
 
 }
