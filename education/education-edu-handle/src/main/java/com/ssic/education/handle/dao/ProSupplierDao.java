@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ssic.educateion.common.dto.LedgerDto;
+import com.ssic.educateion.common.dto.ProLicenseDto;
 import com.ssic.educateion.common.dto.ProSupplierDto;
 import com.ssic.educateion.common.dto.SupplierDto;
 import com.ssic.educateion.common.utils.DataGrid;
@@ -148,5 +149,11 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 
 	public String findSupplierIdBySourceId(LedgerDto ledger) {
 		return exMapper.findSupplierIdBySourceId(ledger);
+	}
+
+	public List<ProSupplierDto> searchSupplierListBySupplierId(
+			String supplierId, int supplierType,int limit) {
+		// TODO Auto-generated method stub
+		return exMapper.searchSupplierListBySupplierId(supplierId,supplierType,limit);
 	}
 }

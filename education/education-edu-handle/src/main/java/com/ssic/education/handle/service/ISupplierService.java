@@ -3,6 +3,7 @@ package com.ssic.education.handle.service;
 import java.util.List;
 
 import com.ssic.educateion.common.dto.LedgerDto;
+import com.ssic.educateion.common.dto.ProLicenseDto;
 import com.ssic.educateion.common.dto.ProSupplierDto;
 import com.ssic.educateion.common.dto.SupplierDto;
 import com.ssic.educateion.common.utils.DataGrid;
@@ -67,4 +68,14 @@ public interface ISupplierService {
 	ProSupplierDto searchProSupplierById(String sourceId);
 
 	String findSupplierIdBySourceId(LedgerDto ledger);
+	/**
+	 * 
+		 * 此方法描述的是：根据供应商信息查询原料供应商list
+		 * @author: cwftalus@163.com
+		 * @version: 2016年5月29日 下午2:18:05
+		 * @param supplierId
+		 * @param supplierType供应商类型 0为不区分，1为成品菜供应商，2为原料供应商  
+		 * @parem limit 可以为空
+	 */
+	List<ProSupplierDto> searchSupplierListBySupplierId(String supplierId,int supplierType, int limit);
 }

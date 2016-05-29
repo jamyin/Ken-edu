@@ -34,18 +34,21 @@
 			<li><a href="###"></a><label>法定代表/负责人/业主证件</label><span>2012310115320026</span></li>
  -->		</ul>
 	</section>
+	<#if suppliList ??>
 	<section class="aptitude_c">
 		<h2>采购品供应商</h2>
 		<section class="tablecell">
 			<ul>
-				<li class="break-line"><a href="suppliers.html#"></a><label>上海爱森肉食品有限公司分公司</label><span>单位地址：上海市浦东新区航头街道</span></li>
-				<li class="break-line"><a href="suppliers.html#"></a><label>上海爱森肉食品有限公司分公司</label><span>单位地址：上海市浦东新区航头街道</span></li>
-				<li class="break-line"><a href="suppliers.html#"></a><label>上海爱森肉食品有限公司分公司</label><span>单位地址：上海市浦东新区航头街道</span></li>
-				<li class="break-line"><a href="suppliers.html#"></a><label>上海爱森肉食品有限公司分公司</label><span>单位地址：上海市浦东新区航头街道</span></li>
-			</ul>
-			<div class="load_more gr"><a href="suppliers.html">查看其它200个供应商</a></div>
+				<#if suppliList ??>
+					<#list suppliList as suppli>
+						<li class="break-line"><a href="/wap/supplier/index.htm?companyType=2&relationId=${(suppli.id)!}"></a><label>${(suppli.supplierName)!}</label><span>单位地址：${(suppli.address)!}</span></li>		
+					</#list>
+				</#if>
+ 			</ul>
+			<div class="load_more gr"><a href="suppliers.html">查看其它供应商</a></div>
 		</section>
 	</section>
+	</#if>	
 </body>
 <script>
 	$(function(){
