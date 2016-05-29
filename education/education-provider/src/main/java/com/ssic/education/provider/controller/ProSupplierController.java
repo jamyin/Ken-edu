@@ -1,7 +1,6 @@
 package com.ssic.education.provider.controller;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,9 +10,11 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.EncryptedDocumentException;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -636,22 +637,31 @@ public class ProSupplierController {
 		String supplierId = info.getSupplierId();
 		String errorMsg = null;
 		List<SupplierDto> masterLedger = new LinkedList();
-		InputStream inputStream = file.getInputStream();
-
-		Workbook wb = null;
-		boolean isExcel2003 = false;
-
-		if (file.getOriginalFilename().matches("^.+\\.(?i)(xls)$")) {
-			isExcel2003 = true;
-		}
-		try {
-			if (isExcel2003) {
-				wb = new HSSFWorkbook(inputStream);
-			} else {
-				wb = new XSSFWorkbook(inputStream);
+		try (Workbook wb = WorkbookFactory.create(file.getInputStream());) {
+			Sheet sheet = wb.getSheetAt(0);
+			if (sheet == null) {
+				return null;
 			}
-		} finally {
+		} catch (EncryptedDocumentException | InvalidFormatException e) {
+			errorMsg = "Excel文件格式不正确";
 		}
+
+		// InputStream inputStream = file.getInputStream();
+		//
+		// Workbook wb = null;
+		// boolean isExcel2003 = false;
+		//
+		// if (file.getOriginalFilename().matches("^.+\\.(?i)(xls)$")) {
+		// isExcel2003 = true;
+		// }
+		// try {
+		// if (isExcel2003) {
+		// wb = new HSSFWorkbook(inputStream);
+		// } else {
+		// wb = new XSSFWorkbook(inputStream);
+		// }
+		// } finally {
+		// }
 		return j;
 	}
 }
