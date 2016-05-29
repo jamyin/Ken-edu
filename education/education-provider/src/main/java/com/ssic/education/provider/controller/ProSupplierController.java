@@ -743,7 +743,6 @@ public class ProSupplierController {
 					}
 					psr.setSupplierId(supplier.getId());
 					psr.setReceiverId(supplierId);
-					psr.setStat(1);
 					suppliers.put(psr, supplier);
 					map.put(supplier.getSupplierName(), suppliers);
 				}
