@@ -97,8 +97,8 @@ public class WaresController extends BaseController {
 		phdto.setRows(ph.getRows());
 		phdto.setSort(ph.getSort());
 		phdto.setBeginRow((ph.getPage() - 1) * ph.getRows());
-		
-		int count=waresService.findAllWaresCount(waresDto);
+
+		int count = waresService.findAllWaresCount(waresDto);
 		List<ProWaresDto> pdtoList = waresService.findAllWares(waresDto, phdto);
 		for (ProWaresDto proWaresDto : pdtoList) {
 
@@ -167,7 +167,7 @@ public class WaresController extends BaseController {
 			j.setMsg("新增商品成功");
 			j.setSuccess(true);
 			return j;
-		}	
+		}
 		j.setMsg("新增商品失败，数据重复");
 		j.setSuccess(false);
 		return j;
@@ -269,7 +269,6 @@ public class WaresController extends BaseController {
 			return json;
 		}
 
-		
 		json.setMsg("修改信息失败，数据重复");
 		json.setSuccess(true);
 		return json;
@@ -515,13 +514,20 @@ public class WaresController extends BaseController {
 
 		// 转换excel到list
 		List<ProWares> list = new ArrayList();
+		String errorMsg = null;
 		Date now = new Date();
 		for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
 			ProWares dto = new ProWares();
 			HSSFRow hssfRow = hssfSheet.getRow(rowNum);
 			for (int i = 0; i < hssfRow.getLastCellNum(); i++) {
+				if (errorMsg != null) {
+					break;
+				}
 				HSSFCell cell = hssfRow.getCell(i);
 				String value = ParseExcelUtil.getStringCellValue(cell);
+				if (value != null) {
+					value = value.trim();
+				}
 				if (i == 0) {
 					// 产品名称
 					dto.setWaresName(value);
@@ -529,6 +535,9 @@ public class WaresController extends BaseController {
 					// 产品规格
 					dto.setSpec(value);
 				} else if (i == 2) {
+					// 采购品分类
+					dto.setWaresType(ProductClass.fromName(value));
+				} else if (i == 3) {
 					// 生产企业
 					dto.setManufacturer(value);
 					// 检查这个商品是否存在，如果存在不导入
@@ -536,52 +545,54 @@ public class WaresController extends BaseController {
 							dto.getWaresName(), dto.getSpec(),
 							dto.getManufacturer(), supplierId);
 					if (pw != null) {
-						dto = null;
+						errorMsg = "第" + (i + 1) + "行数据不正确，商品已存在。";
 						break;
 					}
-				} else if (i == 3) {
-					// 保质期
-					if (value != null) {
-						dto.setShelfLife(Integer.parseInt(value));
-					}
-				} else if (i == 4 && dto.getShelfLife() != null) {
-					// 保质期单位
-					dto.setUnit(value);
+				} else if (i == 4) {
+					// 英文名称
+					dto.setEnName(value);
 				} else if (i == 5) {
-					// 采购品分类
-					dto.setWaresType(ProductClass.fromName(value));
+					// 商品包装条码
+					dto.setBarCode(value);
 				} else if (i == 6) {
 					// 企业自定义编码
 					dto.setCustomCode(value);
 				} else if (i == 7) {
-					// 商品包装条码
-					dto.setBarCode(value);
-				} else if (i == 8) {
-					// 英文名称
-					dto.setEnName(value);
+					// 保质期
+					if (value != null) {
+						dto.setShelfLife(Integer.parseInt(value));
+					}
+				} else if (i == 8 && dto.getShelfLife() != null) {
+					// 保质期单位
+					dto.setUnit(value);
 				} else if (i == 9) {
 					// 产地
 					dto.setPlace(value);
 				}
 			}
-			if (dto != null) {
-				// 检查参数
-				if (dto.getWaresName() == null || dto.getSpec() == null
-						|| dto.getWaresType() == null) {
-					continue;
-				}
-				dto.setSupplierId(supplierId);
-				dto.setWay(0);
-				dto.setCreateTime(now);
-				dto.setLastUpdateTime(now);
-				dto.setStat(1);
-				list.add(dto);
+			if (errorMsg != null) {
+				break;
 			}
+			// TODO 检查参数
+			if (dto.getWaresName() == null || dto.getSpec() == null
+					|| dto.getWaresType() == null) {
+				continue;
+			}
+			dto.setSupplierId(supplierId);
+			dto.setWay(0);
+			dto.setCreateTime(now);
+			dto.setLastUpdateTime(now);
+			dto.setStat(1);
+			list.add(dto);
 		}
-		// 导入商品
-		waresService.addProWares(list);
 
-		// TODO 反馈用户错误信息
+		if (errorMsg != null) {
+			// TODO 反馈用户错误信息
+		} else {
+			// 导入商品
+			waresService.addProWares(list);
+		}
+
 		return null;
 	}
 }
