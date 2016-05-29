@@ -101,11 +101,13 @@ public class EduSchoolController extends BaseController{
 		return mv;
 	}
 	
+	@RequestMapping(value = "/canteen")
 	public ModelAndView canteen(EduCanteenDto dto) {
 		ModelAndView mv = this.getModelAndView();
 		EduCanteenDto eduCanteenDto =iEduCanteenService.searchEduCanteenDto(dto);
-		public EduCanteenDto searchEduCanteenDto(EduCanteenDto eduCanteenDto)
-		
+		mv.addObject("eduCanteenDto", eduCanteenDto);
+		mv.setViewName("/school/school_list");
+		return mv;
 	}
 	
 	/**
