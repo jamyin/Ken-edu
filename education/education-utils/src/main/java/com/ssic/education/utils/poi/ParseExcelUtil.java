@@ -259,10 +259,10 @@ public class ParseExcelUtil {
 
 		String result = "";
 		switch (cell.getCellType()) {
-		case HSSFCell.CELL_TYPE_BOOLEAN:
+		case Cell.CELL_TYPE_BOOLEAN:
 			result = String.valueOf(cell.getBooleanCellValue());
 			break;
-		case HSSFCell.CELL_TYPE_NUMERIC:
+		case Cell.CELL_TYPE_NUMERIC:
 			if (HSSFDateUtil.isCellDateFormatted(cell)) {
 				java.text.SimpleDateFormat TIME_FORMATTER = new java.text.SimpleDateFormat(
 						"yyyy-MM-dd");
@@ -272,17 +272,17 @@ public class ParseExcelUtil {
 				result = "" + doubleValue;
 			}
 			break;
-		case HSSFCell.CELL_TYPE_STRING:
+		case Cell.CELL_TYPE_STRING:
 			if (cell.getRichStringCellValue() == null) {
 				result = null;
 			} else {
 				result = cell.getRichStringCellValue().getString();
 			}
 			break;
-		case HSSFCell.CELL_TYPE_BLANK:
+		case Cell.CELL_TYPE_BLANK:
 			result = null;
 			break;
-		case HSSFCell.CELL_TYPE_FORMULA:
+		case Cell.CELL_TYPE_FORMULA:
 			try {
 				result = String.valueOf(cell.getNumericCellValue());
 			} catch (Exception e) {
