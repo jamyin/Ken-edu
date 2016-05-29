@@ -37,8 +37,8 @@ public class EduSchoolSupplierServiceImpl implements IEduSchoolSupplierService{
 	}
 
 	
-	public String findSchoolIdByReceiverId(LedgerDto ledgerDto) {
-		return eduSchoolSupplierDao.findSchoolIdByReceiverId(ledgerDto);
+	public String findSchoolIdByReceiverId(String receiverName,String sourceId) {
+		return eduSchoolSupplierDao.findSchoolIdByReceiverId(receiverName,sourceId);
 	}
 
 

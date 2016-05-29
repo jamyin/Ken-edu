@@ -1,17 +1,23 @@
 package com.ssic.education.provider.controller;
 
 import java.io.IOException;
-import java.text.DecimalFormat;
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -29,6 +35,7 @@ import com.ssic.educateion.common.dto.ProWaresDto;
 import com.ssic.educateion.common.utils.DataGrid;
 import com.ssic.educateion.common.utils.PageHelper;
 import com.ssic.education.handle.pojo.ProLedger;
+import com.ssic.education.handle.pojo.ProLedgerMaster;
 import com.ssic.education.handle.pojo.ProSupplier;
 import com.ssic.education.handle.pojo.ProWares;
 import com.ssic.education.handle.service.IEduSchoolSupplierService;
@@ -120,27 +127,27 @@ public class LedgerController {
 			j.setSuccess(false);
 			return j;
 		}
-		String receiverId = eduSchoolSupplierService
-				.findSchoolIdByReceiverId(ledgers.get(0));
+		String receiverId = eduSchoolSupplierService.findSchoolIdByReceiverId(
+				ledgers.get(0).getReceiverName(), ledgers.get(0).getSourceId());
 		if (receiverId == null) {
 			j.setMsg("不存在的配送点");
 			j.setSuccess(false);
 			return j;
 		}
-		int w=ledgerService.findWareBatchNo(ledgers.get(0));
-		if(w!=0){
+		int w = ledgerService.findWareBatchNo(ledgers.get(0));
+		if (w != 0) {
 			j.setMsg("已存在的配送号");
 			j.setSuccess(false);
 			return j;
 		}
-		int i=0;
-		String str="";
+		int i = 0;
+		String str = "";
 		for (LedgerDto ledger : ledgers) {
-			if(ledger.getMark()!=1){
-				str+=i+",";
+			if (ledger.getMark() != 1) {
+				str += i + ",";
 				continue;
 			}
-			if(ledger.getName()==null){
+			if (ledger.getName() == null) {
 				j.setMsg("采购品不能为空");
 				j.setSuccess(false);
 				return j;
@@ -150,12 +157,21 @@ public class LedgerController {
 			ledger.setReceiverId(receiverId);
 			ledger.setSourceId(sourceId);
 			ProWaresDto warerDto = waresService.findWaresBySupplierId(ledger);
+			if (warerDto == null) {
+				j.setMsg(ledger.getName() + "不存在的采购品");
+				j.setSuccess(false);
+				return j;
+			}
 			ledger.setWaresId(warerDto.getId());
-			if(ledger.getProductionDate()!=null){
-				if(!ledgers.get(0).getActionDate().after(ledger.getProductionDate())){
-					j.setMsg(ledger.getName() + "错误的进货日期或生产日期");
-					j.setSuccess(false);
-					return j;
+			if (ledger.getProductionDate() != null) {
+				if (!ledgers.get(0).getActionDate()
+						.after(ledger.getProductionDate())) {
+					if (ledgers.get(0).getActionDate()
+							.equals(ledger.getProductionDate())) {
+						j.setMsg(ledger.getName() + "错误的进货日期或生产日期");
+						j.setSuccess(false);
+						return j;
+					}
 				}
 			}
 			if (ledger.getWaresId() == null) {
@@ -184,10 +200,10 @@ public class LedgerController {
 			ledger.setCreateTime(new Date());
 			ledger.setLastUpdateTime(ledger.getCreateTime());
 			ledger.setStat(1);
-			i+=1;
+			i += 1;
 		}
-		if(str!=""){
-			for (String b: str.split(",")) {
+		if (str != "") {
+			for (String b : str.split(",")) {
 				ledgers.remove(Integer.parseInt(b));
 			}
 		}
@@ -207,13 +223,13 @@ public class LedgerController {
 		}
 		List<TImsUsersDto> driver = userService.findAllDriver(user
 				.getSourceId());
-		List<LedgerDto> list = ledgerService.findLedgerByMasterId(user.getSourceId(),
-				masterId);
+		List<LedgerDto> list = ledgerService.findLedgerByMasterId(
+				user.getSourceId(), masterId);
 		request.setAttribute("Driver", driver);
 		request.setAttribute("LedgerList", list);
 		return "ledger/ledgerEdit";
 	}
-	
+
 	@RequestMapping("/showPage")
 	public String showPage(String masterId, HttpServletRequest request,
 			HttpSession session) {
@@ -223,8 +239,8 @@ public class LedgerController {
 		}
 		List<TImsUsersDto> driver = userService.findAllDriver(user
 				.getSourceId());
-		List<LedgerDto> list = ledgerService.findLedgerByMasterId(user.getSourceId(),
-				masterId);
+		List<LedgerDto> list = ledgerService.findLedgerByMasterId(
+				user.getSourceId(), masterId);
 		request.setAttribute("Driver", driver);
 		request.setAttribute("LedgerList", list);
 		return "ledger/ledgerShow";
@@ -249,15 +265,15 @@ public class LedgerController {
 			j.setSuccess(false);
 			return j;
 		}
-		String receiverId = eduSchoolSupplierService
-				.findSchoolIdByReceiverId(ledgers.get(0));
+		String receiverId = eduSchoolSupplierService.findSchoolIdByReceiverId(
+				ledgers.get(0).getReceiverName(), ledgers.get(0).getSourceId());
 		if (receiverId == null) {
 			j.setMsg("不存在的配送点");
 			j.setSuccess(false);
 			return j;
 		}
 		for (LedgerDto ledger : ledgers) {
-			if(ledger.getName()==null){
+			if (ledger.getName() == null) {
 				j.setMsg("采购品不能为空");
 				j.setSuccess(false);
 				return j;
@@ -268,12 +284,21 @@ public class LedgerController {
 			ledger.setReceiverId(receiverId);
 			ledger.setSourceId(sourceId);
 			ProWaresDto warerDto = waresService.findWaresBySupplierId(ledger);
+			if (warerDto == null) {
+				j.setMsg(ledger.getName() + "不存在的采购品");
+				j.setSuccess(false);
+				return j;
+			}
 			ledger.setWaresId(warerDto.getId());
-			if(ledger.getProductionDate()!=null){
-				if(!ledgers.get(0).getActionDate().after(ledger.getProductionDate())){
-					j.setMsg(ledger.getName() + "错误的进货日期或生产日期");
-					j.setSuccess(false);
-					return j;
+			if (ledger.getProductionDate() != null) {
+				if (!ledgers.get(0).getActionDate()
+						.after(ledger.getProductionDate())) {
+					if (ledgers.get(0).getActionDate()
+							.equals(ledger.getProductionDate())) {
+						j.setMsg(ledger.getName() + "错误的进货日期或生产日期");
+						j.setSuccess(false);
+						return j;
+					}
 				}
 			}
 			if (ledger.getWaresId() == null) {
@@ -282,7 +307,7 @@ public class LedgerController {
 				return j;
 			}
 			String num = ledger.getQuantity();
-			if (num.matches("^[1-9][0-9]*$")) {
+			if (!num.matches("^[1-9][0-9]*$")) {
 				j.setMsg(ledger.getName() + "错误的采购数量");
 				j.setSuccess(false);
 				return j;
@@ -305,7 +330,7 @@ public class LedgerController {
 			ledgerService.updataLedger(ledgers);
 		}
 		j = new Json();
-		j.setMsg("添加供应商成功");
+		j.setMsg("修改供应商成功");
 		j.setSuccess(true);
 		return j;
 	}
@@ -346,105 +371,165 @@ public class LedgerController {
 				ConfigUtil.SESSIONINFONAME);
 		// 当前登录用户所属供应商的id
 		String supplierId = info.getSupplierId();
+		String errorMsg = null;
 		// 读取excel
-		HSSFWorkbook hssfWorkbook = new HSSFWorkbook(file.getInputStream());
-		HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(0);
-		if (hssfSheet == null) {
-			return null;
-		}
-
-		// 转换excel到list
-		List<ProLedger> list = new ArrayList();
-		Date now = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/M/d");
-		DecimalFormat df2 = new DecimalFormat("#.##");
-		for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
-			ProLedger dto = new ProLedger();
-			HSSFRow hssfRow = hssfSheet.getRow(rowNum);
-			String name = null;
-			String spec = null;
-			String manufacturer = null;
-
-			String supplierCode = null;
-			String supplierName = null;
-
-			for (int i = 0; i < hssfRow.getLastCellNum(); i++) {
-				HSSFCell cell = hssfRow.getCell(i);
-				String value = ParseExcelUtil.getStringCellValue(cell);
-
-				if (i == 0) {
-					// 进货日期
-//					dto.setActionDate(sdf.parse(value));
-				} else if (i == 1) {
-					// 名称
-					name = value;
-				} else if (i == 2) {
-					// 规格
-					spec = value;
-				} else if (i == 3) {
-					// 生产企业
-					manufacturer = value;
-
-					// 查找商品
-					ProWares pw = waresService.findProWarsByNameSpecManu(name,
-							spec, manufacturer, supplierId);
-					if (pw == null) {
-						dto = null;
-						break;
-					} else {
-						dto.setWaresId(pw.getId());
-					}
-				} else if (i == 4) {
-					// 数量
-					// TODO need yanggang regenerate pojo
-					// dto.setUnit(df2.parse(value));
-				} else if (i == 5) {
-					// 生产日期
-					dto.setProductionDate(sdf.parse(value));
-				} else if (i == 6) {
-					// 生产批号
-					dto.setBatchNo(value);
-				} else if (i == 7) {
-					// 供应商编码
-					supplierCode = value;
-				} else if (i == 8) {
-					// 供应商名称
-					supplierName = value;
-
-					ProSupplier ps = null;
-					if (supplierCode != null) {
-						ps = supplierService.getSupplierByCode(supplierCode,
-								supplierId);
-					} else if (supplierName != null) {
-						ps = supplierService.getSupplierByName(supplierName,
-								supplierId);
-					}
-
-					if (ps == null) {
-						// TODO 报错
-						dto = null;
-						break;
-					}
-					dto.setSupplierId(ps.getId());
-					dto.setSupplierCode(supplierCode);
-					dto.setSupplierName(ps.getSupplierName());
-				} else if (i == 9) {
-					// 追溯码
-					dto.setTraceCode(value);
-				}
+		try (HSSFWorkbook hssfWorkbook = new HSSFWorkbook(file.getInputStream())) {
+			HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(0);
+			if (hssfSheet == null) {
+				return null;
 			}
-			if (dto != null) {
-				// TODO 检查参数
+
+			Date now = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy.M.d");
+
+			Map<String, ProLedgerMaster> noMaster = new HashMap();
+			Map<ProLedgerMaster, List<ProLedger>> masterLedger = new LinkedHashMap();
+
+			// 缓存所有司机，数据量不大
+			List<TImsUsersDto> drivers = userService.findAllDriver(supplierId);
+			for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
+				if (errorMsg != null) {
+					break;
+				}
+				ProLedgerMaster master = null;
+				ProLedger dto = new ProLedger();
+				HSSFRow hssfRow = hssfSheet.getRow(rowNum);
+				String name = null;
+				String spec = null;
+
+				for (int i = 0; i < hssfRow.getLastCellNum(); i++) {
+					if (errorMsg != null) {
+						break;
+					}
+
+					HSSFCell cell = hssfRow.getCell(i);
+					String value = ParseExcelUtil.getStringCellValue(cell);
+					if (value != null) {
+						value = value.trim();
+					}
+
+					if (i == 0) {
+						if (StringUtils.isBlank(value)) {
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，配货号不能为空。";
+							break;
+						}
+						// 配货号
+						master = noMaster.get(value);
+						if (master == null) {
+							master = new ProLedgerMaster();
+							master.setWareBatchNo(value);
+							master.setSourceId(supplierId);
+							master.setHaulStatus(0);
+							master.setStat(1);
+							master.setCreateTime(now);
+							master.setLastUpdateTime(now);
+							noMaster.put(value, master);
+							masterLedger.put(master, new ArrayList());
+						}
+					}
+					if (i == 1 && master.getActionDate() != null) {
+						if (StringUtils.isBlank(value)) {
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，配送日期不能为空。";
+							break;
+						}
+						// 进货日期
+						try {
+							master.setActionDate(sdf.parse(value));
+						} catch (ParseException e) {
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，配送日期格式不正确。";
+							break;
+						}
+					} else if (i == 2) {
+						if (StringUtils.isBlank(value)) {
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，采购品名称不能为空。";
+							break;
+						}
+						// 名称
+						name = value;
+					} else if (i == 3) {
+						if (StringUtils.isBlank(value)) {
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，数量不能为空。";
+							break;
+						}
+						// 数量
+						try {
+							dto.setQuantity(new BigDecimal(value,
+									new MathContext(2, RoundingMode.DOWN)));
+						} catch (Exception e) {
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，数量格式不正确。";
+							break;
+						}
+					} else if (i == 4) {
+						if (StringUtils.isBlank(value)) {
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，规格不能为空。";
+							break;
+						}
+						// 规格
+						spec = value;
+					} else if (i == 5 && master.getReceiverId() == null) {
+						if (StringUtils.isBlank(value)) {
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，配货点不能为空。";
+							break;
+						}
+						// 配货点
+						String receiverId = eduSchoolSupplierService
+								.findSchoolIdByReceiverId(value, supplierId);
+						if (receiverId == null) {
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，配货点不存在。";
+							break;
+						}
+						master.setReceiverId(receiverId);
+						master.setReceiverName(value);
+					} else if (i == 6 && StringUtils.isNotBlank(value)
+							&& master.getUserId() == null) {
+						// 根据name取司机
+						for (TImsUsersDto o : drivers) {
+							if (value.equals(o.getName())) {
+								master.setUserId(o.getId());
+								break;
+							}
+						}
+					} else if (i == 7 && StringUtils.isNotBlank(value)) {
+						// 供应商名称
+						ProSupplier ps = supplierService.getSupplierByName(
+								value, supplierId);
+
+						if (ps != null) {
+							dto.setSupplierId(ps.getId());
+							dto.setSupplierName(ps.getSupplierName());
+						}
+					} else if (i == 8) {
+						// 生产单位
+						// 查找商品
+						ProWares pw = waresService.findProWarsByNameSpecManu(
+								name, spec, value, supplierId);
+						if (pw == null) {
+							errorMsg = "第" + (i + 1) + "行数据不正确，商品不存在。";
+							break;
+						} else {
+							dto.setWaresId(pw.getId());
+						}
+					} else if (i == 9 && StringUtils.isNotBlank(value)) {
+						// 生产日期
+						dto.setProductionDate(sdf.parse(value));
+					}
+				}
+				if (errorMsg != null) {
+					break;
+				}
 				dto.setSupplierId(supplierId);
 				dto.setCreateTime(now);
 				dto.setLastUpdateTime(now);
 				dto.setStat(1);
-				list.add(dto);
+				masterLedger.get(master).add(dto);
 			}
 		}
-		// TODO 导入批次
+		if (errorMsg != null) {
+			// TODO 反馈用户错误信息
+		} else {
+			// TODO 导入批次
+		}
 
-		// TODO 反馈用户错误信息
 		return null;
 	}
 }
