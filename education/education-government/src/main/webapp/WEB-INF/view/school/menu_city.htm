@@ -57,7 +57,7 @@
 
     <div class="menu_box">
       <div class="subbar">
-        <p class="lef">学校名称：${(eduSchoolDto.schoolName)!}</p><#if (dto.source == 1) && (eduSchoolSupplierDtos.supplierId??)><a class="offer_delete" href="#">删除</a> </#if><p class="rig">供应商名称：<#if (proSupplierDtos??) && (proSupplierDtos?size>0)>
+        <p class="lef">学校名称：${(eduSchoolDto.schoolName)!}</p><#if (dto.source == 1) && (eduSchoolSupplierDtos.supplierId??)><a class="offer_delete">删除</a> </#if><p class="rig">供应商名称：<#if (proSupplierDtos??) && (proSupplierDtos?size>0)>
 					<#list proSupplierDtos as supplier>
 						<a href="/pro/supplier/detail.htm?id=${(supplier.id)!}&source=1">${(supplier.supplierName)!}</a>
 					</#list>
@@ -253,6 +253,24 @@
                 $(".nav").find("a:eq(2)").addClass("cur");
 
                 fix_table();
+                
+                $(".offer_delete").click(function(){
+                	$.ajax({
+    					url:'/edu/school/addShoolSupplier.htm',
+    					type:"POST",
+    					dataType:"json",
+    					data : {schoolId:'${(eduSchoolSupplierDtos.schoolId)!}',supplierId:'${(eduSchoolSupplierDtos.supplierId)!}'},
+    					async: false,
+    					success:function(data){
+    						if(data.status==200){
+    							alert("关联成功!");
+    							window.location.href = "/edu/school/details.htm?source=1";
+    						}else{
+    							alert("关联失败!");
+    						}
+    					}
+    				});
+                })
               });
               function changeDate(){
           		var date = $('#date').val();

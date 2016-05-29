@@ -4,11 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSONObject;
 import com.ssic.educateion.common.dto.ProPackagesDto;
 import com.ssic.education.handle.service.ProPackagesService;
 import com.ssic.education.utils.model.Response;
@@ -41,6 +39,13 @@ public class WapSchoolMenuController extends BaseController{
 		
 		Response<List<ProPackagesDto>> response = new Response<List<ProPackagesDto>>();
 		List<ProPackagesDto> dataList =  proPackagesService.searchProSchoolPackage(customerId,timeDate);
+		
+		
+//		packageId ->  t_pro_dishes -> t_pro_wares
+//		t_pro_nutritional 营养信息
+		for(ProPackagesDto proPackageDto : dataList){
+			proPackageDto.setProDishesDtos(null);
+		}
 		
 		response.setData(dataList);
 		

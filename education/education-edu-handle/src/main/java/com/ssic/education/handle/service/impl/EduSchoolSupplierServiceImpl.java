@@ -2,6 +2,7 @@ package com.ssic.education.handle.service.impl;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +44,7 @@ public class EduSchoolSupplierServiceImpl implements IEduSchoolSupplierService{
 	
 	public int save (EduSchoolSupplierDto eduSchoolSupplierDto) {
 		EduSchoolSupplier enEduSchoolSupplier = BeanUtils.createBeanByTarget(eduSchoolSupplierDto, EduSchoolSupplier.class);
-		return eduSchoolSupplierDao.updateByPrimaryKeySelective(enEduSchoolSupplier);
+		return eduSchoolSupplierDao.insertSelective(enEduSchoolSupplier);
 	}
 
 
