@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -359,116 +360,158 @@ public class LedgerController {
 				ConfigUtil.SESSIONINFONAME);
 		// 当前登录用户所属供应商的id
 		String supplierId = info.getSupplierId();
-		// 读取excel
-		HSSFWorkbook hssfWorkbook = new HSSFWorkbook(file.getInputStream());
-		HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(0);
-		if (hssfSheet == null) {
-			return null;
-		}
-
-		Date now = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.M.d");
-
-		Map<String, ProLedgerMaster> noMaster = new HashMap();
-		Map<ProLedgerMaster, List<ProLedger>> masterLedger = new LinkedHashMap();
-
-		List<ProLedgerMaster> list = new ArrayList();
 		String errorMsg = null;
-		for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
-			if (errorMsg != null) {
-				break;
+		// 读取excel
+		try (HSSFWorkbook hssfWorkbook = new HSSFWorkbook(file.getInputStream())) {
+			HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(0);
+			if (hssfSheet == null) {
+				return null;
 			}
-			ProLedgerMaster master = null;
-			ProLedger dto = new ProLedger();
-			HSSFRow hssfRow = hssfSheet.getRow(rowNum);
-			String name = null;
-			String spec = null;
 
-			for (int i = 0; i < hssfRow.getLastCellNum(); i++) {
+			Date now = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy.M.d");
+
+			Map<String, ProLedgerMaster> noMaster = new HashMap();
+			Map<ProLedgerMaster, List<ProLedger>> masterLedger = new LinkedHashMap();
+
+			// 缓存所有司机，数据量不大
+			List<TImsUsersDto> drivers = userService.findAllDriver(supplierId);
+			for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
 				if (errorMsg != null) {
 					break;
 				}
+				ProLedgerMaster master = null;
+				ProLedger dto = new ProLedger();
+				HSSFRow hssfRow = hssfSheet.getRow(rowNum);
+				String name = null;
+				String spec = null;
 
-				HSSFCell cell = hssfRow.getCell(i);
-				String value = ParseExcelUtil.getStringCellValue(cell);
-				if (value != null) {
-					value = value.trim();
-				}
-
-				if (i == 0) {
-					// 配货号
-					master = noMaster.get(value);
-					if (master == null) {
-						master = new ProLedgerMaster();
-						master.setWareBatchNo(value);
-						master.setSourceId(supplierId);
-						master.setHaulStatus(0);
-						master.setStat(1);
-						master.setCreateTime(now);
-						master.setLastUpdateTime(now);
-						noMaster.put(value, master);
-						masterLedger.put(master, new ArrayList());
-					}
-				}
-				if (i == 1 && master.getActionDate() != null) {
-					// 进货日期
-					master.setActionDate(sdf.parse(value));
-				} else if (i == 2) {
-					// 名称
-					name = value;
-				} else if (i == 3) {
-					// 数量
-					dto.setQuantity(new BigDecimal(value, new MathContext(2,
-							RoundingMode.DOWN)));
-				} else if (i == 4) {
-					// 规格
-					spec = value;
-				} else if (i == 5 && master.getReceiverId() == null) {
-					// 配货点
-					String receiverId = eduSchoolSupplierService
-							.findSchoolIdByReceiverId(value, supplierId);
-					master.setReceiverId(receiverId);
-					master.setReceiverName(value);
-				} else if (i == 6 && master.getUserId() == null) {
-					// TODO 根据name取司机
-				} else if (i == 7) {
-					// 供应商名称
-					ProSupplier ps = null;
-					if (value != null) {
-						ps = supplierService.getSupplierByName(value,
-								supplierId);
-					}
-
-					if (ps != null) {
-						dto.setSupplierId(ps.getId());
-						dto.setSupplierName(ps.getSupplierName());
-					}
-				}
-
-				else if (i == 7) {
-					// 查找商品
-					ProWares pw = waresService.findProWarsByNameSpecManu(name,
-							spec, value, supplierId);
-					if (pw == null) {
-						errorMsg = "第" + (i + 1) + "行数据不正确，商品不存在。";
+				for (int i = 0; i < hssfRow.getLastCellNum(); i++) {
+					if (errorMsg != null) {
 						break;
-					} else {
-						dto.setWaresId(pw.getId());
 					}
-				} else if (i == 5) {
-					// 生产日期
-					dto.setProductionDate(sdf.parse(value));
+
+					HSSFCell cell = hssfRow.getCell(i);
+					String value = ParseExcelUtil.getStringCellValue(cell);
+					if (value != null) {
+						value = value.trim();
+					}
+
+					if (i == 0) {
+						if (StringUtils.isBlank(value)) {
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，配货号不能为空。";
+							break;
+						}
+						// 配货号
+						master = noMaster.get(value);
+						if (master == null) {
+							master = new ProLedgerMaster();
+							master.setWareBatchNo(value);
+							master.setSourceId(supplierId);
+							master.setHaulStatus(0);
+							master.setStat(1);
+							master.setCreateTime(now);
+							master.setLastUpdateTime(now);
+							noMaster.put(value, master);
+							masterLedger.put(master, new ArrayList());
+						}
+					}
+					if (i == 1 && master.getActionDate() != null) {
+						if (StringUtils.isBlank(value)) {
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，配送日期不能为空。";
+							break;
+						}
+						// 进货日期
+						try {
+							master.setActionDate(sdf.parse(value));
+						} catch (ParseException e) {
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，配送日期格式不正确。";
+							break;
+						}
+					} else if (i == 2) {
+						if (StringUtils.isBlank(value)) {
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，采购品名称不能为空。";
+							break;
+						}
+						// 名称
+						name = value;
+					} else if (i == 3) {
+						if (StringUtils.isBlank(value)) {
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，数量不能为空。";
+							break;
+						}
+						// 数量
+						try {
+							dto.setQuantity(new BigDecimal(value,
+									new MathContext(2, RoundingMode.DOWN)));
+						} catch (Exception e) {
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，数量格式不正确。";
+							break;
+						}
+					} else if (i == 4) {
+						if (StringUtils.isBlank(value)) {
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，规格不能为空。";
+							break;
+						}
+						// 规格
+						spec = value;
+					} else if (i == 5 && master.getReceiverId() == null) {
+						if (StringUtils.isBlank(value)) {
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，配货点不能为空。";
+							break;
+						}
+						// 配货点
+						String receiverId = eduSchoolSupplierService
+								.findSchoolIdByReceiverId(value, supplierId);
+						if (receiverId == null) {
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，配货点不存在。";
+							break;
+						}
+						master.setReceiverId(receiverId);
+						master.setReceiverName(value);
+					} else if (i == 6 && StringUtils.isNotBlank(value)
+							&& master.getUserId() == null) {
+						// 根据name取司机
+						for (TImsUsersDto o : drivers) {
+							if (value.equals(o.getName())) {
+								master.setUserId(o.getId());
+								break;
+							}
+						}
+					} else if (i == 7 && StringUtils.isNotBlank(value)) {
+						// 供应商名称
+						ProSupplier ps = supplierService.getSupplierByName(
+								value, supplierId);
+
+						if (ps != null) {
+							dto.setSupplierId(ps.getId());
+							dto.setSupplierName(ps.getSupplierName());
+						}
+					} else if (i == 8) {
+						// 生产单位
+						// 查找商品
+						ProWares pw = waresService.findProWarsByNameSpecManu(
+								name, spec, value, supplierId);
+						if (pw == null) {
+							errorMsg = "第" + (i + 1) + "行数据不正确，商品不存在。";
+							break;
+						} else {
+							dto.setWaresId(pw.getId());
+						}
+					} else if (i == 9 && StringUtils.isNotBlank(value)) {
+						// 生产日期
+						dto.setProductionDate(sdf.parse(value));
+					}
 				}
+				if (errorMsg != null) {
+					break;
+				}
+				dto.setSupplierId(supplierId);
+				dto.setCreateTime(now);
+				dto.setLastUpdateTime(now);
+				dto.setStat(1);
+				masterLedger.get(master).add(dto);
 			}
-			if (errorMsg != null) {
-				break;
-			}
-			// TODO 检查参数
-			dto.setSupplierId(supplierId);
-			dto.setCreateTime(now);
-			dto.setLastUpdateTime(now);
-			dto.setStat(1);
-			masterLedger.get(master).add(dto);
 		}
 		if (errorMsg != null) {
 			// TODO 反馈用户错误信息
