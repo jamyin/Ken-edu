@@ -1,8 +1,0 @@
-{
-    "parentMenu": [
-        {
-            "menuName": "安全追溯",
-            "menuUrl": "/edu/school/list.htm?source=0"
-        }
-    ]
-}
