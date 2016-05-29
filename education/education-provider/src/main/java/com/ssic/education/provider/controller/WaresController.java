@@ -517,6 +517,9 @@ public class WaresController extends BaseController {
 		String errorMsg = null;
 		Date now = new Date();
 		for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
+			if (errorMsg != null) {
+				break;
+			}
 			ProWares dto = new ProWares();
 			HSSFRow hssfRow = hssfSheet.getRow(rowNum);
 			for (int i = 0; i < hssfRow.getLastCellNum(); i++) {

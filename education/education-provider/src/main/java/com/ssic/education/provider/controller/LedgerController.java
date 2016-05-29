@@ -126,27 +126,27 @@ public class LedgerController {
 			j.setSuccess(false);
 			return j;
 		}
-		String receiverId = eduSchoolSupplierService
-				.findSchoolIdByReceiverId(ledgers.get(0).getReceiverName(),ledgers.get(0).getSourceId());
+		String receiverId = eduSchoolSupplierService.findSchoolIdByReceiverId(
+				ledgers.get(0).getReceiverName(), ledgers.get(0).getSourceId());
 		if (receiverId == null) {
 			j.setMsg("不存在的配送点");
 			j.setSuccess(false);
 			return j;
 		}
-		int w=ledgerService.findWareBatchNo(ledgers.get(0));
-		if(w!=0){
+		int w = ledgerService.findWareBatchNo(ledgers.get(0));
+		if (w != 0) {
 			j.setMsg("已存在的配送号");
 			j.setSuccess(false);
 			return j;
 		}
-		int i=0;
-		String str="";
+		int i = 0;
+		String str = "";
 		for (LedgerDto ledger : ledgers) {
-			if(ledger.getMark()!=1){
-				str+=i+",";
+			if (ledger.getMark() != 1) {
+				str += i + ",";
 				continue;
 			}
-			if(ledger.getName()==null){
+			if (ledger.getName() == null) {
 				j.setMsg("采购品不能为空");
 				j.setSuccess(false);
 				return j;
@@ -156,14 +156,15 @@ public class LedgerController {
 			ledger.setReceiverId(receiverId);
 			ledger.setSourceId(sourceId);
 			ProWaresDto warerDto = waresService.findWaresBySupplierId(ledger);
-			if(warerDto==null){
+			if (warerDto == null) {
 				j.setMsg(ledger.getName() + "不存在的采购品");
 				j.setSuccess(false);
 				return j;
 			}
 			ledger.setWaresId(warerDto.getId());
-			if(ledger.getProductionDate()!=null){
-				if(!ledgers.get(0).getActionDate().after(ledger.getProductionDate())){
+			if (ledger.getProductionDate() != null) {
+				if (!ledgers.get(0).getActionDate()
+						.after(ledger.getProductionDate())) {
 					j.setMsg(ledger.getName() + "错误的进货日期或生产日期");
 					j.setSuccess(false);
 					return j;
@@ -195,10 +196,10 @@ public class LedgerController {
 			ledger.setCreateTime(new Date());
 			ledger.setLastUpdateTime(ledger.getCreateTime());
 			ledger.setStat(1);
-			i+=1;
+			i += 1;
 		}
-		if(str!=""){
-			for (String b: str.split(",")) {
+		if (str != "") {
+			for (String b : str.split(",")) {
 				ledgers.remove(Integer.parseInt(b));
 			}
 		}
@@ -218,13 +219,13 @@ public class LedgerController {
 		}
 		List<TImsUsersDto> driver = userService.findAllDriver(user
 				.getSourceId());
-		List<LedgerDto> list = ledgerService.findLedgerByMasterId(user.getSourceId(),
-				masterId);
+		List<LedgerDto> list = ledgerService.findLedgerByMasterId(
+				user.getSourceId(), masterId);
 		request.setAttribute("Driver", driver);
 		request.setAttribute("LedgerList", list);
 		return "ledger/ledgerEdit";
 	}
-	
+
 	@RequestMapping("/showPage")
 	public String showPage(String masterId, HttpServletRequest request,
 			HttpSession session) {
@@ -234,8 +235,8 @@ public class LedgerController {
 		}
 		List<TImsUsersDto> driver = userService.findAllDriver(user
 				.getSourceId());
-		List<LedgerDto> list = ledgerService.findLedgerByMasterId(user.getSourceId(),
-				masterId);
+		List<LedgerDto> list = ledgerService.findLedgerByMasterId(
+				user.getSourceId(), masterId);
 		request.setAttribute("Driver", driver);
 		request.setAttribute("LedgerList", list);
 		return "ledger/ledgerShow";
@@ -260,15 +261,15 @@ public class LedgerController {
 			j.setSuccess(false);
 			return j;
 		}
-		String receiverId = eduSchoolSupplierService
-				.findSchoolIdByReceiverId(ledgers.get(0).getReceiverName(),ledgers.get(0).getSourceId());
+		String receiverId = eduSchoolSupplierService.findSchoolIdByReceiverId(
+				ledgers.get(0).getReceiverName(), ledgers.get(0).getSourceId());
 		if (receiverId == null) {
 			j.setMsg("不存在的配送点");
 			j.setSuccess(false);
 			return j;
 		}
 		for (LedgerDto ledger : ledgers) {
-			if(ledger.getName()==null){
+			if (ledger.getName() == null) {
 				j.setMsg("采购品不能为空");
 				j.setSuccess(false);
 				return j;
@@ -280,8 +281,9 @@ public class LedgerController {
 			ledger.setSourceId(sourceId);
 			ProWaresDto warerDto = waresService.findWaresBySupplierId(ledger);
 			ledger.setWaresId(warerDto.getId());
-			if(ledger.getProductionDate()!=null){
-				if(!ledgers.get(0).getActionDate().after(ledger.getProductionDate())){
+			if (ledger.getProductionDate() != null) {
+				if (!ledgers.get(0).getActionDate()
+						.after(ledger.getProductionDate())) {
 					j.setMsg(ledger.getName() + "错误的进货日期或生产日期");
 					j.setSuccess(false);
 					return j;
@@ -366,39 +368,44 @@ public class LedgerController {
 
 		Date now = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.M.d");
-		
+
 		Map<String, ProLedgerMaster> noMaster = new HashMap();
 		Map<ProLedgerMaster, List<ProLedger>> masterLedger = new LinkedHashMap();
-		
+
 		List<ProLedgerMaster> list = new ArrayList();
 		String errorMsg = null;
 		for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
+			if (errorMsg != null) {
+				break;
+			}
 			ProLedgerMaster master = null;
 			ProLedger dto = new ProLedger();
 			HSSFRow hssfRow = hssfSheet.getRow(rowNum);
 			String name = null;
 			String spec = null;
-			String manufacturer = null;
-
-			String supplierCode = null;
-			String supplierName = null;
 
 			for (int i = 0; i < hssfRow.getLastCellNum(); i++) {
 				if (errorMsg != null) {
 					break;
 				}
-				
+
 				HSSFCell cell = hssfRow.getCell(i);
 				String value = ParseExcelUtil.getStringCellValue(cell);
 				if (value != null) {
 					value = value.trim();
 				}
-				
+
 				if (i == 0) {
 					// 配货号
 					master = noMaster.get(value);
 					if (master == null) {
 						master = new ProLedgerMaster();
+						master.setWareBatchNo(value);
+						master.setSourceId(supplierId);
+						master.setHaulStatus(0);
+						master.setStat(1);
+						master.setCreateTime(now);
+						master.setLastUpdateTime(now);
 						noMaster.put(value, master);
 						masterLedger.put(master, new ArrayList());
 					}
@@ -411,22 +418,39 @@ public class LedgerController {
 					name = value;
 				} else if (i == 3) {
 					// 数量
-					dto.setQuantity(new BigDecimal(value, new MathContext(2, RoundingMode.DOWN)));
+					dto.setQuantity(new BigDecimal(value, new MathContext(2,
+							RoundingMode.DOWN)));
 				} else if (i == 4) {
 					// 规格
 					spec = value;
-				} else if (i == 4) {
+				} else if (i == 5 && master.getReceiverId() == null) {
 					// 配货点
-					spec = value;
-				} else if (i == 3) {
-					// 生产企业
-					manufacturer = value;
+					String receiverId = eduSchoolSupplierService
+							.findSchoolIdByReceiverId(value, supplierId);
+					master.setReceiverId(receiverId);
+					master.setReceiverName(value);
+				} else if (i == 6 && master.getUserId() == null) {
+					// TODO 根据name取司机
+				} else if (i == 7) {
+					// 供应商名称
+					ProSupplier ps = null;
+					if (value != null) {
+						ps = supplierService.getSupplierByName(value,
+								supplierId);
+					}
 
+					if (ps != null) {
+						dto.setSupplierId(ps.getId());
+						dto.setSupplierName(ps.getSupplierName());
+					}
+				}
+
+				else if (i == 7) {
 					// 查找商品
 					ProWares pw = waresService.findProWarsByNameSpecManu(name,
-							spec, manufacturer, supplierId);
+							spec, value, supplierId);
 					if (pw == null) {
-						dto = null;
+						errorMsg = "第" + (i + 1) + "行数据不正确，商品不存在。";
 						break;
 					} else {
 						dto.setWaresId(pw.getId());
@@ -434,50 +458,24 @@ public class LedgerController {
 				} else if (i == 5) {
 					// 生产日期
 					dto.setProductionDate(sdf.parse(value));
-				} else if (i == 6) {
-					// 生产批号
-					dto.setBatchNo(value);
-				} else if (i == 7) {
-					// 供应商编码
-					supplierCode = value;
-				} else if (i == 8) {
-					// 供应商名称
-					supplierName = value;
-
-					ProSupplier ps = null;
-					if (supplierCode != null) {
-						ps = supplierService.getSupplierByCode(supplierCode,
-								supplierId);
-					} else if (supplierName != null) {
-						ps = supplierService.getSupplierByName(supplierName,
-								supplierId);
-					}
-
-					if (ps == null) {
-						// TODO 报错
-						dto = null;
-						break;
-					}
-					dto.setSupplierId(ps.getId());
-					dto.setSupplierCode(supplierCode);
-					dto.setSupplierName(ps.getSupplierName());
-				} else if (i == 9) {
-					// 追溯码
-					dto.setTraceCode(value);
 				}
 			}
-			if (dto != null) {
-				// TODO 检查参数
-				dto.setSupplierId(supplierId);
-				dto.setCreateTime(now);
-				dto.setLastUpdateTime(now);
-				dto.setStat(1);
-				list.add(dto);
+			if (errorMsg != null) {
+				break;
 			}
+			// TODO 检查参数
+			dto.setSupplierId(supplierId);
+			dto.setCreateTime(now);
+			dto.setLastUpdateTime(now);
+			dto.setStat(1);
+			masterLedger.get(master).add(dto);
 		}
-		// TODO 导入批次
+		if (errorMsg != null) {
+			// TODO 反馈用户错误信息
+		} else {
+			// TODO 导入批次
+		}
 
-		// TODO 反馈用户错误信息
 		return null;
 	}
 }
