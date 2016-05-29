@@ -56,7 +56,7 @@
 	<select id="getLedgerById" parameterType="java.lang.String" resultType="com.ssic.education.app.dto.LedgerInfoDto">
 		SELECT * from t_pro_ledger where supplier_id=#{supplierId} and wares_id=#{wares_id}
 	</select>
-	<select id="findWarseBySchoolId" parameterType="java.lang.String" resultMap="WaresList">
+	<select id="findWarseBySchoolId" parameterType="com.ssic.education.app.dto.WaresInfoDto" resultMap="WaresList">
 		SELECT id,wares_name,spec,custom_code,image FROM t_pro_wares
 		WHERE
 		id IN (

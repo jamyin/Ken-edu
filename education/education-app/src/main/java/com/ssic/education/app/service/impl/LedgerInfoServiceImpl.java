@@ -77,7 +77,7 @@ public class LedgerInfoServiceImpl implements ILedgerInfoService {
 			ledgerMaster.setResultLedger((new PageResult<ledgerDetailDto>(page, ldd)));
 			ledgerMaster.setOutset(supplierInfoDao.getSupplierName(ledgerMaster.getSourceId()));
 		}
-		//TODO 还缺少采购拍列表
+		//TODO 还缺少采购品列表
 		return ledgerMaster;
 	}
 

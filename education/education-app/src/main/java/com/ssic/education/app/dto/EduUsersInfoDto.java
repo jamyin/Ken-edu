@@ -43,5 +43,4 @@ public class EduUsersInfoDto implements Serializable {
 	private String userImage;
 	private String userNo;
 	private Integer stat;
-	private Integer isdelete;
 }

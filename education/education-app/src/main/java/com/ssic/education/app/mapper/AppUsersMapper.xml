@@ -25,7 +25,6 @@
 		WHERE
 		u.stat = 1
 		AND u.isAdmin = 1
-		AND u.isDelete = 1
 		<if test="user.password != null and user.password!=''">AND u.password = #{user.password}</if>
 		<if test="user.userAccount!=null and user.userAccount!=''">AND u.user_account = #{user.userAccount}</if>
 	</select>

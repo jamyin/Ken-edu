@@ -174,7 +174,7 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 			for (ProSupplierReceiver psr : psrList) {
 				ProSupplierExample example = new ProSupplierExample();
 				Criteria create = example.createCriteria();
-				create.andIdCardEqualTo(psr.getSupplierId());
+				create.andIdEqualTo(psr.getSupplierId());
 				create.andSupplierNameEqualTo(name);
 				create.andStatEqualTo(1);
 				List<ProSupplier> psList = mapper.selectByExample(example);

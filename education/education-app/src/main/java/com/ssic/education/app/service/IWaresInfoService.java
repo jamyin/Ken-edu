@@ -5,7 +5,9 @@ import java.util.List;
 import com.ssic.education.app.dto.WaresInfoDto;
 import com.ssic.education.app.dto.WaresListDto;
 import com.ssic.education.app.dto.WaresRelatedDto;
+import com.ssic.education.handle.pojo.ProWares;
 import com.ssic.education.utils.model.PageQuery;
+import com.ssic.education.utils.model.PageResult;
 import com.ssic.education.utils.model.Response;
 
 /**		
@@ -24,8 +26,8 @@ public interface IWaresInfoService {
 	//根据供应商ID查询商品列表
 	List<WaresInfoDto> getWaresBySupplierId(String SupplierId);
 
-	//根据供应商ID查询商品列表 带分页
-	Response<List<WaresInfoDto>> getWaresBySupplierId(String SupplierId, PageQuery query);
+	//根据学校ID查询商品列表 带分页
+	PageResult<WaresListDto> getWaresBySchoolId(String schoolId, String json) throws Exception;
 
 	//根据商品的ID查询商品信息
 	WaresRelatedDto findWarseById(String id);

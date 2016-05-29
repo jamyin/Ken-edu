@@ -116,5 +116,4 @@ public class LedgerInfoDao {
 		ProLedgerMaster ledgerMaster = ledgerMasterMapper.selectByPrimaryKey(id);
 		return BeanUtils.createBeanByTarget(ledgerMaster, LedgerMasterInfoDto.class);
 	}
-
 }
