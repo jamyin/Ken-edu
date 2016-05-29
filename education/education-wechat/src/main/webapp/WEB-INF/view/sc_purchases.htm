@@ -9,15 +9,16 @@
   </head>
 <body>
 <header class="searchbar"><input id="waresName" type="text" placeholder="请输入关键字"></header>
-<section class="tablecell">
-	<ul id="purchasesList">
+<div class="purchasing_box">
+		<ul id="purchasesList">
 		<#if resultList ??>
 			<#list resultList as data>
-				<li><label>${(data.waresName)!}</label></li>
+				<li><img src="/static/img/food_simple.jpg" border="0"><p>${(data.waresName)!}</p><span>产品编号：${(data.barCode)!}</span><span class="weight">${(data.spec)!}</span></li>
+				<!-- <li><label>${(data.waresName)!}</label></li> -->
 			</#list>
 		</#if>
 	</ul>
-</section>
+</div>
 <script type="text/javascript">
 $(function(){
 	$("#waresName").bind("keyup",function(){
@@ -32,8 +33,9 @@ $(function(){
 				var schoolList = $("#purchasesList");
 				schoolList.empty();				
 				$.each(data.data, function(index, item) {
-					$("#purchasesList").append("<li><label>"+item['waresName']+"</label></li>");
-					//$("#schoolList").append("<tr><td><a href='/wap/school/details/"+item['id']+".htm'>"+item['schoolName']+"</a></td></tr>");	
+					//<li><img src="static/img/food_simple.jpg" border="0"><p>红枣</p><span>产品编号：86910108</span><span class="weight">5g</span></li>
+					//$("#purchasesList").append("<li><label>"+item['waresName']+"</label></li>");
+					$("#purchasesList").append("<li><img src='/static/img/food_simple.jpg' border='0'><p>"+item['waresName']+"</p><span>产品编号："+item['barCode']+"</span><span class='weight'>"+item['spec']+"</span></li>");
 				});
 			}
 		});
