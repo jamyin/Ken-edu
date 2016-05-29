@@ -372,6 +372,8 @@ public class LedgerController {
 		// 当前登录用户所属供应商的id
 		String supplierId = info.getSupplierId();
 		String errorMsg = null;
+		Map<ProLedgerMaster, List<ProLedger>> masterLedger = new LinkedHashMap();
+		
 		// 读取excel
 		try (HSSFWorkbook hssfWorkbook = new HSSFWorkbook(file.getInputStream())) {
 			HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(0);
@@ -382,8 +384,7 @@ public class LedgerController {
 			Date now = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy.M.d");
 
-			Map<String, ProLedgerMaster> noMaster = new HashMap();
-			Map<ProLedgerMaster, List<ProLedger>> masterLedger = new LinkedHashMap();
+			Map<String, ProLedgerMaster> noMaster = new HashMap();		
 
 			// 缓存所有司机，数据量不大
 			List<TImsUsersDto> drivers = userService.findAllDriver(supplierId);
@@ -527,7 +528,7 @@ public class LedgerController {
 		if (errorMsg != null) {
 			// TODO 反馈用户错误信息
 		} else {
-			// TODO 导入批次
+			ledgerService.importLedger(masterLedger);
 		}
 
 		return null;
