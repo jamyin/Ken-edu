@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /* reset */
-html{font-size:10px;-webkit-tap-highlight-color: rgba(255,255,255,0);}
+html{font-size:10px;-webkit-tap-highlight-color: rgba(255,255,255,0);height:100%}
 *{margin:0; padding:0;box-sizing:border-box;}
 ol,ul,li{list-style:none;} 
 img{border:0;}
@@ -11,7 +11,7 @@ h1,h2,h3,h4,h5,h6 {font-size:100%;font-weight:normal;}
 i{font-style:normal;font-weight:normal}
 a{text-decoration:none}
 /* common */
-body{font-family:"Microsoft Yahei","Arial";font-size:1.4rem;color:#333;background:#f5f5f5;}
+body{font-family:"Microsoft Yahei","Arial";font-size:1.4rem;color:#333;background:#f5f5f5;height:100%}
 header{position:relative;width:100%;line-height:3rem;text-align:center;font-size:1.6rem;}
 header span{padding-right:30px;background:url(../img/arrow_d.png) no-repeat right center;}
 header.navgat{background:#fff;border-bottom:1px #e5e5e5 solid;}
@@ -25,6 +25,8 @@ header select{display:block;text-align:center;width:25%;margin-right:5%;height:2
 .load_more{width:100%;line-height:4rem;text-align:center;color:#999}
 .load_more.gr{background:#fff}
 .load_more.gr a{color:#60ac62;}
+.img_alert{width:100%;height:100%;background-size:contain;background-color:#000;background-repeat:no-repeat;background-position:0 center}
+
 
 
 .school_box{width:100%;overflow:hidden;background:#fff}
@@ -145,5 +147,46 @@ section.aptitude_c h2{width:100%;border-left:2px #60ac62 solid;margin-bottom:10p
 .purchasing_box ul li p{position:absolute;width:100%;padding-left:110px;padding-right:5%;top:10px;font-size:1.8rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .purchasing_box ul li span{position:absolute;width:100%;padding-left:110px;padding-right:5%;top:42px;color:#666;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .purchasing_box ul li span.weight{top:66px;}
+.purchasing_box ul li a{position:absolute;width:100%;height:100%;left:0;top:0;display:block;color:#333;z-index:2}
+
+.purchasing_c_box{position:relative;width:100%;overflow:hidden;background:#fff}
+.purchasing_c_box img{position:absolute;top:20px;left:5%;width:30%;height:auto}
+.purchasing_c_box p{width:100%;overflow:hidden;display:block;padding:20px 0 10px 40%;line-height:2.2rem;}
+
+/*dispatching*/
+.dispatching_box{width:100%;overflow:hidden;margin-top:10px}
+.dispatching_box ul{width:100%;overflow:hidden;}
+.dispatching_box ul li{position:relative;width:100%;overflow:hidden;border-top:1px #ddd solid;border-bottom:1px #ddd solid;margin-bottom:10px;background:#fff}
+.dispatching_box ul li p{width:100%;display:block;overflow:hidden;padding:10px 5%;line-height:2rem}
+.dispatching_box ul li p.oth{border-top:1px #e5e5e5 solid}
+.dispatching_box ul li a{position:absolute;width:100%;height:100%;left:0;top:0;display:block;color:#333;z-index:2}
+.dispatching_box ul li i{position:absolute;top:24px;right:5%;}
+.dispatching_box ul li i.notstart{color:red}
+.dispatching_box ul li i.end{color:#999}
+.dispatching_box ul li i.started{color:#60ac62}
+
+.dispatching_c_box{width:100%;overflow:hidden;background:#fff;border-top:1px #e5e5e5 solid}
+.dispatching_c_box .driverinfo_box{width:100%;overflow:hidden;margin-bottom:5px}
+.dispatching_c_box .driverinfo_box ul{width:100%;overflow:hidden;padding:0 5%}
+.dispatching_c_box .driverinfo_box ul li{position:relative;width:100%;overflow:hidden;margin-bottom:8px;padding-left:24px;background-repeat:no-repeat;background-position:0 0;background-size:20px 20px;font-size:1.4rem;}
+.dispatching_c_box .driverinfo_box ul li:first-child{font-size:1.6rem;height:3.5rem;line-height:3.5rem;font-weight:bold;background-image:url(../img/icon_driver.png);border-bottom:1px #e5e5e5 dashed;background-position:0 center;}
+.dispatching_c_box .driverinfo_box ul li:nth-child(2){background-image:url(../img/icon_loc.png)}
+.dispatching_c_box .driverinfo_box ul li:nth-child(3){background-image:url(../img/icon_package.png)}
+.dispatching_c_box .driverinfo_box ul li:nth-child(4){background-image:url(../img/icon_loc2.png)}
+.dispatching_c_box .driverinfo_box ul li label{position:absolute;width:64px;overflow:hidden;display:block;}
+.dispatching_c_box .driverinfo_box ul li span{wdith:100%;padding-left:64px;display:block;line-height:1.8rem}
+.dispatching_c_box .driverinfo_box .timeinfo{width:90%;overflow:hidden;border-top:1px #e5e5e5 solid;margin:5px 5% 0;padding:5px 0 0 0}
+.dispatching_c_box .driverinfo_box .timeinfo p{width:50%;overflow:hidden;display:block;float:left;margin:5px 0;background-repeat:no-repeat;background-position:20px center;background-size:20px 20px;background-image:url(../img/icon_timestart.png);padding-left:20px}
+.dispatching_c_box .driverinfo_box .timeinfo p:nth-child(1){border-right:1px #e5e5e5 solid;background-image:url(../img/icon_timeend.png);}
+.dispatching_c_box .driverinfo_box .timeinfo p span{width:100%;overflow:hidden;text-align:center;display:block;color:#666}
+.dispatching_c_box .driverinfo_box .timeinfo p span:nth-child(2){font-size:2rem;color:#60ac62;margin:2px 0}
+
+.dispatching_c_box .map{width:100%;overflow:hidden;}
+.dispatching_c_box .map img{width:100%;height:auto}
+.dispatching_c_box .goodsinfo_box{width:100%;overflow:hidden}
+.dispatching_c_box .goodsinfo_box ul{width:100%;overflow:hidden;padding:0 5%;}
+.dispatching_c_box .goodsinfo_box ul li{width:100%;overflow:hidden;border-bottom:1px #e5e5e5 solid;padding:8px 0;line-height:2rem;color:#666}
+.dispatching_c_box .goodsinfo_box ul li:last-child{border:0}
+.dispatching_c_box .goodsinfo_box ul li span{font-size:1.6rem;font-weight:bold;color:#333}
 
 

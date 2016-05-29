@@ -69,6 +69,9 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 		if (StringUtils.isNotBlank(dto.getSupplierName())){
 			criteria.andSupplierNameLike("%"+dto.getSupplierName().trim()+"%");
 		}
+		if (StringUtils.isNotBlank(dto.getSupplierName())){
+			criteria.andSupplierNameLike("%"+dto.getSupplierName().trim()+"%");
+		}
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		return mapper.countByExample(example);
 	}

@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ssic.educateion.common.dto.ProLicenseDto;
 import com.ssic.educateion.common.dto.ProWaresDto;
+import com.ssic.education.handle.service.IProLicenseService;
 import com.ssic.education.handle.service.ProWaresService;
 import com.ssic.education.utils.model.Response;
 
@@ -26,6 +28,9 @@ public class WapPurchasesController extends BaseController{
 
 	@Autowired
 	private ProWaresService proWaresService;
+	
+	@Autowired
+	private IProLicenseService iProLicenseService;
 	
 	@RequestMapping(value="/index/{schoolId}")
 	private ModelAndView index(@PathVariable String schoolId){
@@ -49,6 +54,26 @@ public class WapPurchasesController extends BaseController{
 		List<ProWaresDto> resultList = proWaresService.searchProWares(schoolId,waresName);
 		result.setData(resultList);
 		return result;
+	}
+	
+	
+	@RequestMapping(value="/details/{waresId}")
+	private ModelAndView details(@PathVariable String waresId){
+		ModelAndView mv = getModelAndView();
+		
+		//根据学校查询 对应的采购品信息
+		ProWaresDto proWaresDto = proWaresService.findById(waresId);
+
+		//资质信息
+		ProLicenseDto proLicenseDto = new ProLicenseDto();
+		proLicenseDto.setRelationId(waresId);
+		proLicenseDto.setCerSource(Short.valueOf("2"));
+		List<ProLicenseDto> resultList = iProLicenseService.searchProLicenseList(proLicenseDto);
+		
+		mv.addObject("resultList",resultList);
+		mv.addObject("proWaresDto",proWaresDto);
+		mv.setViewName("sc_purchasing_c");
+		return mv;
 	}
 	
 }

@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ssic.educateion.common.dto.EduSchoolDto;
+import com.ssic.educateion.common.dto.ProPackagesDto;
 import com.ssic.education.handle.dto.EduParentPackCommentDto;
+import com.ssic.education.handle.service.EduSchoolService;
 import com.ssic.education.handle.service.IEduParentPackCommentService;
+import com.ssic.education.handle.service.ProPackagesService;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.Response;
 
@@ -29,6 +33,13 @@ public class WapCommentController extends BaseController {
 	@Autowired
 	private IEduParentPackCommentService iEduParentPackCommentService;
 	
+	@Autowired
+	private ProPackagesService proPackagesService;
+	
+	
+	@Autowired
+	private EduSchoolService eduSchoolService;
+	
 	/**
 	 * 
 		 * 此方法描述的是：进入某一个菜的点评功能页面
@@ -39,7 +50,14 @@ public class WapCommentController extends BaseController {
 	public ModelAndView join(@PathVariable String packageId){	
 		ModelAndView mv = getModelAndView();
 
-		mv.addObject("packageId", packageId);
+		ProPackagesDto proPackageSto = proPackagesService.findById(packageId);
+		
+		String schoolId = proPackageSto.getCustomerId();//学校Id
+		EduSchoolDto schoolDto = eduSchoolService.findById(schoolId);
+		
+		
+		mv.addObject("schoolDto", schoolDto);
+		mv.addObject("proPackageSto", proPackageSto);
 		mv.setViewName("join");
 		return mv;
 	}

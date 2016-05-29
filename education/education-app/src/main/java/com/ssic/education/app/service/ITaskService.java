@@ -27,7 +27,7 @@ public interface ITaskService {
 	Integer delTask(String id);
 	
 	//修改任务阅读状态
-	Integer updateTask(String id, String receiveId);
+	Integer updateTask(String id);
 
 	//根据任务Id查询当前任务已读和未读列表
 	PageResult<EduTaskReadDto> findReadList(EduTaskReceiveDto receiveDto,
@@ -35,6 +35,9 @@ public interface ITaskService {
 
 	//发布任务
 	int sendTask(EduTaskDto eduTaskDto);
+	
+	//根据任务Id查询任务详情
+	EduTaskDto findTaskByPara(EduTaskDto eduTaskDto);
 
 }
 

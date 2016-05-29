@@ -81,10 +81,9 @@ public class TaskDao extends MyBatisBaseDao<EduTask> {
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		return mapper.countByExample(example);
 	}
-	public Integer updateTask(String id, String receiveId) {
+	public Integer updateTask(String id) {
 		EduTaskReceive receive = new EduTaskReceive();
-		receive.setId(id);
-		receive.setReceiveId(receiveId);
+		receive.setTaskId(id);
 		receive.setReadstat(1);    //设置已读
 		EduTaskReceiveExample example = new EduTaskReceiveExample();
 		return exMapper.updateByExampleSelective(receive, example);
@@ -108,6 +107,18 @@ public class TaskDao extends MyBatisBaseDao<EduTask> {
 		return exMappers.addTaskReceiveBatch(receiveDtoList);
 	}
 
-
+	public EduTask findTaskByPara(EduTaskDto eduTaskDto) {
+		EduTaskExample example = new EduTaskExample();
+		EduTaskExample.Criteria criteria = example.createCriteria();
+		if (StringUtils.isNotEmpty(eduTaskDto.getId())){
+    		criteria.andCreateIdEqualTo(eduTaskDto.getId());
+    	}
+		criteria.andStatEqualTo(DataStatus.ENABLED);
+		List<EduTask> task = mapper.selectByExample(example);
+		if(task != null && task.size() > 0){
+			return task.get(0);
+		}
+		return null;
+	}
 
 }

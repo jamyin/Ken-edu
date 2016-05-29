@@ -2,19 +2,7 @@
     "parentMenu": [
         {
             "menuName": "安全追溯",
-            "menuUrl": "/pro/supplier/search.htm"
-        },
-        {
-            "menuName": "菜谱",
             "menuUrl": "/edu/school/list.htm?source=0"
-        },
-        {
-            "menuName": "区教委",
-            "menuUrl": "/edu/school/checkList.htm?source=1&reviewed=0"
-        },
-        {
-            "menuName": "学校",
-            "menuUrl": "/pro/packages/findPage.htm"
         }
     ]
 }

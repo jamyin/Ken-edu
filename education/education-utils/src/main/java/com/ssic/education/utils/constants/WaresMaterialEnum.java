@@ -37,8 +37,8 @@ public enum WaresMaterialEnum {
      * @return 枚举value值
      */
     public static String getValueByIndex(int index){
-        WaresProdutEnum[] values = WaresProdutEnum.values();
-        for (WaresProdutEnum enu : values){
+    	WaresMaterialEnum[] values = WaresMaterialEnum.values();
+        for (WaresMaterialEnum enu : values){
             if (index == enu.getIndex()){
                 return enu.getValue();
             }

@@ -67,20 +67,20 @@ public class BaseController {
 			EduUsersDto eduUsersDto = new EduUsersDto();
 			eduUsersDto.setId(getSessionUserId());
 			eduUsersDto =  eduUsersService.getUserInfo(eduUsersDto);
-			String fileName = null;
+//			String fileName = null;
 			try {
-				if (StringUtils.isNotBlank(eduUsersDto.getSourceId()) && eduUsersDto.getSourceType() == DataStatus.DISABLED) {
-					EduCommitteeDto eduCommitteeDto = iEduCommitteeService.findById(eduUsersDto.getSourceId());
-					if (eduCommitteeDto.getType() == DataStatus.ENABLED) {
-						fileName ="0Menu.txt";
-					}
-					if (eduCommitteeDto.getType() == DataStatus.EVA_TWO) {
-						fileName =DataStatus.EVA_TWO+"menu.txt";
-					}
-				} else {
-					fileName = eduUsersDto.getSourceType()+"menu.txt";
-				}
-				 
+//				if (StringUtils.isNotBlank(eduUsersDto.getSourceId()) && eduUsersDto.getSourceType() == DataStatus.DISABLED) {
+//					EduCommitteeDto eduCommitteeDto = iEduCommitteeService.findById(eduUsersDto.getSourceId());
+//					if (eduCommitteeDto.getType() == DataStatus.ENABLED) {
+//						fileName ="0Menu.txt";
+//					}
+//					if (eduCommitteeDto.getType() == DataStatus.EVA_TWO) {
+//						fileName =DataStatus.EVA_TWO+"menu.txt";
+//					}
+//				} else {
+//					fileName = eduUsersDto.getSourceType()+"menu.txt";
+//				}
+				String fileName = eduUsersDto.getSourceType()+"menu.txt"; 
 				String path = this.getClass().getClassLoader().getResource(fileName).getPath();;
 				String menuList = FileUtils.readFileToString(new File(path));
 				ParentMenuDto parentMenuDto = JsonUtil.getObjFromJson(menuList, ParentMenuDto.class);

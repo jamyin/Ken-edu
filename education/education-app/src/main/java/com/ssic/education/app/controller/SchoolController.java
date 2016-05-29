@@ -85,7 +85,7 @@ public class SchoolController {
 	}
 
 	/**
-	 * @Title: levelList
+	 * @Title: List
 	 * @Description: 学校类型列表
 	 * @author Ken Yin  
 	 * @date 2016年5月17日 下午2:50:36
@@ -200,19 +200,21 @@ public class SchoolController {
 	 */
 	@RequestMapping("/chooseSchool")
 	@ResponseBody
-	public Response<ChooseSchoolDto>  chooseSchool(SchoolDto schoolDto, PageQuery query) {
+	public Response<ChooseSchoolDto>  chooseSchool(SchoolDto schoolDto, PageQuery query ,Integer type) {
 		Response<ChooseSchoolDto> result = new Response<ChooseSchoolDto>();
+		
 		ChooseSchoolDto chooseSchoolDto = new ChooseSchoolDto();
 		
 		PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, query);
 		chooseSchoolDto.setSchoolDto(schoolList);
 		result.setData(chooseSchoolDto);
 		
-		chooseSchoolDto.setLevelList(SchoolLevel.getAll());
-		
-		List<EduAreaDto> areaList = areaService.findAreaList();
-		chooseSchoolDto.setAreaList(areaList);
-
+		if(type != null){
+			chooseSchoolDto.setLevelList(SchoolLevel.getAll());
+			
+			List<EduAreaDto> areaList = areaService.findAreaList();
+			chooseSchoolDto.setAreaList(areaList);
+		}
 		return result;
 	}
 }

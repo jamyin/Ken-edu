@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <#include "/common/head.htm" />
+        <link rel="stylesheet" href="/static/css/style.css">
+        <link rel="stylesheet" href="/static/css/dis_edu.css">
+    </head>
+    <body>
+        <!-- <div class="header">
+    		<div class="wrap">
+    			<a class="logo" href="index.html">上海市中小学校校生午餐综合管理平台</a>
+    			<div class="p_status">
+    				<a class="p_center" href="pcenter.html">个人中心</a>  |  <a class="logout" href="###">退出</a>
+    			</div>
+    		</div>
+    	</div>
+        <div class="nav">
+          <div class="wrap">
+            <a class="" href="index.html">首页</a>
+            <a class="cur" href="search_supplier.html">安全追溯</a>
+            <a class="" href="index.html">菜谱</a>
+            <a class="" href="index.html">健康宣教</a>
+            <a class="" href="index.html">通告公示</a>
+            <a class="" href="index.html">任务传达</a>
+            <a class="" href="index.html">发布</a>
+          </div>
+        </div> -->
+        <#include "/common/nav.htm" />
+        <div class="breadcrumb">
+            <span>当前位置:</span>
+            <a href="#">安全追溯</a>
+            <span> &gt; </span>
+            <a href="#">采购品列表</a>
+            <span> &gt; </span>
+            <a href="#">增加委托经营单位</a>
+        </div>
+        <div class="main_wrap">
+
+            <h2>新增委托经营单位</h2>
+            <div class="content_wrap">
+                <div class="tab_wrap">
+                    <div class="tab_content_full">
+                        <h2>基本信息</h2>
+                        <p> <span class="key">委托经营单位</span>：<span class="select">选择</span> </p>
+                        <p> <span class="key">供应商名称</span>：<span class="value">${(proSupplierdto.supplierName)!} </span></p>
+                        <p> <span class="key">地址</span>：<span class="value"> ${(proSupplierdto.address)!} </span></p>
+                        <p> <span class="key">供应商简称</span>：<span class="value"> </span></p>
+                        <p> <span class="key">联系人</span>：<span class="value">  </span></p>
+                        <p> <span class="key">电话</span>：<span class="value">${(proSupplierdto.contactWay)!} </span></p>
+
+                        <h2>证件编号</h2>
+                        <p> <span class="key">餐饮服务证号</span>：<span class="value"> ${(proSupplierdto.foodServiceCode)!} </span></p>
+                        <p> <span class="key">食品经营许可证</span>：<span class="value"> ${(proSupplierdto.foodBusinessCode)!}</span></p>
+                        <p> <span class="key">食品流通证号</span>：<span class="value"> ${(proSupplierdto.foodCirculationCode)!} </span></p>
+                        <p> <span class="key">食品生产证号</span>：<span class="value"> ${(proSupplierdto.foodProduceCode)!} </span></p>
+                        <p> <span class="key">工商执照号</span>：<span class="value"> ${(proSupplierdto.businessLicense)!} </span></p>
+
+                        <div class="subbt">
+                            <a>关联</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="background">
+            <div class="select_panel wide">
+                <h2>选择联系人</h2><span class="close"><img src="/static/img/button_close.png" /></span>
+                <div class="content_wrap2">
+                    <section class="line">
+                        <input type="text" name="search">
+                        <input class="search2" type="submit" name="name" value="搜索">
+                        <div class="checkwrap2">
+                            <ul>
+                            	<#if results??>
+                            		<#list results as supplier>
+                            			<li>
+		                                    <label for="shisan">${(supplier.supplierName)!}</label>
+		                                    <input id="${(supplier.id)!}" name="shisan" type="radio" value="${(supplier.id)!}" />
+		                                </li>
+                            		</#list>
+                            	</#if>
+                            </ul>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+
+       <#include "/common/footer.htm" />
+        <script src="/static/js/jquery-2.1.3.min.js"></script>
+        <script type="text/javascript">
+            $(function(){
+            	var supplierId;
+                $(".select").click(function(){
+                    $(".background").show();
+                });
+
+                $(".background .close").click(function(){
+                    $(".background").hide();
+                });
+                $(".background .content_wrap2 .checkwrap2 label").click(function(){
+                	supplierId = $(this).closest('li').find('input').val();
+                    $(".background").fadeOut('fast');
+                });
+                $(".subbt").click(function(){
+                	if (supplierId == null || supplierId == '') {
+                		alert("请选择关联公司！");
+                		return;
+                	}
+                	$.ajax({
+    					url:'/edu/school/addShoolSupplier.htm',
+    					type:"POST",
+    					dataType:"json",
+    					data : {schoolId:'${(eduSchoolSupplierDto.schoolId)!}',supplierId:supplierId},
+    					async: false,
+    					success:function(data){
+    						if(data.status==200){
+    							alert("关联成功!");
+    							window.location.href = "/edu/school/details.htm?source=1";
+    						}else{
+    							alert("关联失败!");
+    						}
+    					}
+    				});
+                })
+            });
+        </script>
+    </body>
+</html>

@@ -143,7 +143,8 @@ public class EduSchoolController extends BaseController{
 		return mv;
 	}
 	
-	@RequestMapping("/schoolSupplier")
+	@RequestMapping("/addShoolSupplier")
+	@ResponseBody
 	public Response<String> schoolSupplier(EduSchoolSupplierDto eduSchoolSupplierDto) {
 		Response<String> res = new Response<String>();
 		int result = iEduSchoolSupplierService.save(eduSchoolSupplierDto);
@@ -168,7 +169,8 @@ public class EduSchoolController extends BaseController{
 	  @return
 	 */
 	@RequestMapping(value = "/details")
-	public ModelAndView details(ProPackagesDto dto,PageQuery query) throws ParseException{
+	public ModelAndView details(HttpServletRequest request, HttpServletResponse response,
+    		HttpSession session, ProPackagesDto dto,PageQuery query) throws ParseException{
 		query.setPageSize(5);
 		ModelAndView mv = getModelAndView();
 		SimpleDateFormat sdf=new SimpleDateFormat(DateUtils.YMD_DASH);  
@@ -177,6 +179,11 @@ public class EduSchoolController extends BaseController{
 			dto.setSupplyDate(sdf.parse(dto.getSupplyDateStr()));
 		} else {
 			dto.setSupplyDate(new Date());
+		}
+		if (StringUtils.isBlank(dto.getCustomerId()) && dto.getSource() == DataStatus.ENABLED) {
+			String id = (String) getRequest().getSession().getAttribute(SessionConstants.LOGIN_USER_INFO);
+			EduUsersDto usersdto = getLoginUser(request, response, session, id);
+			dto.setCustomerId(usersdto.getSourceId());
 		}
 		EduSchoolDto eduSchoolDto = eduSchoolService.findById(dto.getCustomerId());
 		List<ProSupplierDto> proSupplierDtos = eduSchoolService.getSupplier(dto.getCustomerId());
@@ -195,12 +202,7 @@ public class EduSchoolController extends BaseController{
 		LedgerDto ledgerDto = new LedgerDto();
 		ledgerDto.setReceiverId(dto.getCustomerId());
 		PageResult<LedgerDto> ledgerDtos = proLedgerService.selectLedgerPage(ledgerDto,query);
-		if (dto.getSource() == DataStatus.DISABLED) {
-			mv.setViewName("/school/menu_city");
-		}
-		if (dto.getSource() == DataStatus.ENABLED) {
-			mv.setViewName("/school/menu_city");
-		}		
+		mv.setViewName("/school/menu_city");
 		mv.addObject("dto", dto);
 		mv.addObject("mWares", mWares);
 		mv.addObject("eduSchoolSupplierDtos", eduSchoolSupplierDtos);
@@ -229,8 +231,15 @@ public class EduSchoolController extends BaseController{
 	}
 	
 	@RequestMapping(value = "/checkList")
-	public ModelAndView checkList(SupplierReviewedDto dto, PageQuery page) {
+	public ModelAndView checkList(HttpServletRequest request, HttpServletResponse response,
+    		HttpSession session,SupplierReviewedDto dto, PageQuery page) {
 		ModelAndView mv = getModelAndView();
+		String id = (String) getRequest().getSession().getAttribute(SessionConstants.LOGIN_USER_INFO);
+		EduUsersDto usersdto = getLoginUser(request, response, session, id);
+		if (StringUtils.isNotBlank(usersdto.getSourceId()) && !usersdto.getSourceId().equals("1") 
+				&& usersdto.getSourceType() == DataStatus.DISABLED) {
+			dto.setCommitteeId(usersdto.getSourceId());
+		}	
 		PageResult<SupplierReviewedDto> result = eduSchoolService.list(dto, page);
 		mv.addObject("pageList", result);
 		mv.addObject("dto", dto);
@@ -292,6 +301,25 @@ public class EduSchoolController extends BaseController{
 		
 		return mv;
 	}
+	
+	@RequestMapping(value = "/addSupplier")
+	public ModelAndView addSupplier(EduSchoolSupplierDto eduSchoolSupplierDto,PageQuery page) {
+		ModelAndView mv = getModelAndView();
+		ProSupplierDto proSupplierdto = new ProSupplierDto();
+		if (StringUtils.isNotBlank(eduSchoolSupplierDto.getSupplierId())) {
+			 proSupplierdto = proSupplierService.findById(eduSchoolSupplierDto.getSupplierId());
+		}		
+		ProSupplierDto dto = new ProSupplierDto();
+		dto.setReviewed((byte)1);
+		dto.setSupplierName(eduSchoolSupplierDto.getSupplierName());
+		List<ProSupplierDto> results = proSupplierService.findAll(dto);
+		mv.addObject("results", results);
+		mv.addObject("eduSchoolSupplierDto", eduSchoolSupplierDto);
+		mv.addObject("proSupplierdto", proSupplierdto);
+		mv.setViewName("/school/add_offer_company");
+		return mv;
+	}
+	
 	
 	/**
 	 * 

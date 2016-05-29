@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,user-scalable=no" />
+    <title>供应商资质</title>
+    <link href="/static/css/style.css" rel="stylesheet" />
+    <script src="/static/js/jquery-2.1.3.min.js"></script>
+  </head>
+<body>
+	<header class="navgat"><a class="back" href="javascript:window.history.go(-1)"></a>${(proWaresDto.waresName)!}</header>
+	<div class="purchasing_c_box">
+		<img src="/static/img/food_simple.jpg" border="0">
+		<p>
+			名称：${(proWaresDto.waresName)!}<br>
+			产品编码：86910001<br>
+			产品分类：畜产品及其制品<br>
+			规格：${(proWaresDto.spec)!}<br>
+			保质期：${(proWaresDto.shelfLife)!}${(proWaresDto.unit)!}<br>
+			英文名称：<br>
+			生产企业：${(proWaresDto.manufacturer)!}<br>
+			商品包装条码：${(proWaresDto.customCode)!}<br>
+			产地：${(proWaresDto.place)!} 
+		</p>
+	</div>
+	<section class="tablecell">
+		<ul>
+			<#if resultList ??>
+				<#list resultList as result>
+					<li><a href="#" data-path="${(result.licPic)!}" data-name="${(result.licName)!}" onclick="loadImage(this);"></a><label>${(result.licName)!}</label><span>${(result.licNo)!}</span></li>		
+				</#list>
+			</#if>		
+<!-- 		<li><a href="###"></a><label>检验检测报告</label></li>
+			<li><a href="###"></a><label>生产许可证</label></li> 
+-->
+		</ul>
+	</section>
+</body>
+<script>
+	$(function(){
+		$('.load_more').on('click', function(){
+			//ajax请求
+		})
+	})
+</script>
+<script type="text/javascript" src="/static/js/loadImage.js"></script>
+</html>

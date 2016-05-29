@@ -59,8 +59,8 @@ public class TaskServiceImpl implements ITaskService{
 	}
 
 	@Override
-	public Integer updateTask(String id, String receiveId) {
-		return taskDao.updateTask(id, receiveId);
+	public Integer updateTask(String id) {
+		return taskDao.updateTask(id);
 	}
 
 	@Override
@@ -103,6 +103,16 @@ public class TaskServiceImpl implements ITaskService{
 			return 1;
 		}
 		return 0;
+	}
+
+	@Override
+	public EduTaskDto findTaskByPara(EduTaskDto eduTaskDto) {
+		EduTask eduTask = taskDao.findTaskByPara(eduTaskDto);
+		if(eduTask == null){
+			return null;
+		} 
+		EduTaskDto dto = BeanUtils.createBeanByTarget(eduTask, EduTaskDto.class);
+		return dto;
 	}
 
 	

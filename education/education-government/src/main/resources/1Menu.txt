@@ -2,15 +2,11 @@
     "parentMenu": [
         {
             "menuName": "安全追溯",
-            "menuUrl": "/pro/supplier/search.htm"
+            "menuUrl": "/edu/school/details.htm?source=1"
         },
         {
-            "menuName": "菜谱",
-            "menuUrl": "/edu/school/list.htm?source=0"
-        },
-        {
-            "menuName": "Brett",
-            "menuUrl": "McLaughlin"
+            "menuName": "菜谱录入",
+            "menuUrl": "/pro/packages/findPage.htm"
         }
     ]
 }

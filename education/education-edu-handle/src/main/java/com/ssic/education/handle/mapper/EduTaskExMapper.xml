@@ -26,5 +26,4 @@
 			AND a.readstat = #{readstat}
 		</if>	
 	</sql>
-	
 </mapper>

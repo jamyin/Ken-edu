@@ -6,6 +6,20 @@
 	 <script src="/static/js/jquery-2.1.3.min.js" charset="utf-8"></script>
 	 <script src="/static/js/jquery-ui.min.js"></script>
 	 <link href="/static/css/jquery-ui.min.css" rel="stylesheet" />
+	  <style media="screen">
+        .offer_add {
+            padding: 5px;
+            background:#60ac62;
+            float: right;
+            cursor: pointer;
+        }
+      .offer_delete {
+          display: inline-block;
+          float: right;
+          margin-left: 20px;
+          color: #60ac62!important;
+      }
+  </style>
 </head>
 <body>
   <<!-- div class="header">
@@ -35,15 +49,19 @@
     </div>
 
     <h1 class="con-tt">
-      <span class="title">实验小学</span>
+      <span class="title">${(eduSchoolDto.schoolName)!}</span>
+      <#if dto.source == 1>
+      <a href="addSupplier.htm?schoolId=${(eduSchoolDto.id)!}&supplierId=${(eduSchoolSupplierDtos.supplierId)!}"><span class="offer_add">新增委托经营单位</span></a>
+      </#if>
     </h1>
 
     <div class="menu_box">
       <div class="subbar">
-        <p class="lef">学校名称：${(eduSchoolDto.schoolName)!}</p><p class="rig">供应商名称：<#if proSupplierDtos??>
+        <p class="lef">学校名称：${(eduSchoolDto.schoolName)!}</p><#if (dto.source == 1) && (eduSchoolSupplierDtos.supplierId??)><a class="offer_delete">删除</a> </#if><p class="rig">供应商名称：<#if (proSupplierDtos??) && (proSupplierDtos?size>0)>
 					<#list proSupplierDtos as supplier>
 						<a href="/pro/supplier/detail.htm?id=${(supplier.id)!}&source=1">${(supplier.supplierName)!}</a>
 					</#list>
+				<#else><span style="color: red;">暂无</span>
 				</#if></p>
       </div>
       <div class="menu_list">
@@ -235,6 +253,24 @@
                 $(".nav").find("a:eq(2)").addClass("cur");
 
                 fix_table();
+                
+                $(".offer_delete").click(function(){
+                	$.ajax({
+    					url:'/edu/school/addShoolSupplier.htm',
+    					type:"POST",
+    					dataType:"json",
+    					data : {schoolId:'${(eduSchoolSupplierDtos.schoolId)!}',supplierId:'${(eduSchoolSupplierDtos.supplierId)!}'},
+    					async: false,
+    					success:function(data){
+    						if(data.status==200){
+    							alert("关联成功!");
+    							window.location.href = "/edu/school/details.htm?source=1";
+    						}else{
+    							alert("关联失败!");
+    						}
+    					}
+    				});
+                })
               });
               function changeDate(){
           		var date = $('#date').val();
