@@ -18,7 +18,7 @@ import com.ssic.education.utils.model.PageResult;
  */
 @Data
 @ToString
-public class SchoolDto {
+public class SchoolPackageDto {
 	
 	private EduSchoolDto eduSchoolDto;
 	private EduCanteenDto eduCanteenDto;

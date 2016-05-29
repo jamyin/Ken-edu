@@ -171,7 +171,7 @@ else
 		parent.$.messager.confirm('询问', '您是否要删除当前用户？', function(b) {
 			if (b) {
 				var currentUserId = '${sessionInfo.id}';/*当前登录用户的ID*/
-				if (currentUserId != id) {
+				
 					parent.$.messager.progress({
 						title : '提示',
 						text : '数据处理中，请稍后....'
@@ -187,7 +187,7 @@ else
 						}
 						parent.$.messager.progress('close');
 					}, 'JSON');
-				} 
+				
 			}
 		});
 	}

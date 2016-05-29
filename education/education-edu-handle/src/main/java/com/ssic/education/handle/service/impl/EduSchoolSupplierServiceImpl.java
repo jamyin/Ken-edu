@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssic.educateion.common.dto.EduSchoolSupplierDto;
-import com.ssic.educateion.common.dto.LedgerDto;
+import com.ssic.educateion.common.dto.SupplierDto;
 import com.ssic.education.handle.dao.EduSchoolSupplierDao;
 import com.ssic.education.handle.pojo.EduSchoolSupplier;
 import com.ssic.education.handle.service.IEduSchoolSupplierService;
@@ -44,6 +44,13 @@ public class EduSchoolSupplierServiceImpl implements IEduSchoolSupplierService{
 	public int save (EduSchoolSupplierDto eduSchoolSupplierDto) {
 		EduSchoolSupplier enEduSchoolSupplier = BeanUtils.createBeanByTarget(eduSchoolSupplierDto, EduSchoolSupplier.class);
 		return eduSchoolSupplierDao.updateByPrimaryKeySelective(enEduSchoolSupplier);
+	}
+
+
+	@Override
+	public List<SupplierDto> searchEduSchoolSupplierListDto(
+			String schoolId) {
+		return eduSchoolSupplierDao.searchEduSchoolSupplierListDto(schoolId);
 	}
 
 

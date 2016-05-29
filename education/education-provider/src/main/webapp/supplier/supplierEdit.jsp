@@ -41,19 +41,19 @@
 					<td><input name="supplierName" type="text" placeholder="请输入供应商名称" class="easyui-validatebox span2" data-options="required:true" value="${ProSupplie.supplierName}" ></td>
 				
 						<th>供应商编码</th>
-						<td><input name="supplierCode" type="text" class="easyui-validatebox span2" data-options="required:true" value="${ProSupplie.supplierCode}" ></td>
+						<td><input name="supplierCode" type="text" class="easyui-validatebox span2"  value="${ProSupplie.supplierCode}" ></td>
 			
 				<tr>
 					<th>供应商地址</th>
 					<td><input name="address" type="text" placeholder="请输入供应商地址" class="easyui-validatebox span2" data-options="required:true" value="${ProSupplie.address}" ></td>
 					<th>法人代表</th>
-						<td><input name="corporation" type="text" placeholder="请输入法人代表" class="easyui-validatebox span2" data-options="required:true" value="${ProSupplie.corporation}" ></td>					
+						<td><input name="corporation" type="text" placeholder="请输入法人代表" class="easyui-validatebox span2"  value="${ProSupplie.corporation}" ></td>					
 				</tr>
 				<tr>
 					<th>联系方式</th>
-						<td><input name="contactWay" type="text" placeholder="请输入联系方式" class="easyui-validatebox span2" data-options="required:true" value="${ProSupplie.contactWay}" ></td>
+						<td><input name="contactWay" type="text" placeholder="请输入联系方式" class="easyui-validatebox span2"  value="${ProSupplie.contactWay}" ></td>
 				<th>工商执照号</th>
-					<td><input name="businessLicense" type="text" placeholder="请输入工商执照号" class="easyui-validatebox span2" data-options="required:true" value="${ProSupplie.businessLicense}"></td>
+					<td><input name="businessLicense" type="text" placeholder="请输入工商执照号" class="easyui-validatebox span2"  value="${ProSupplie.businessLicense}"></td>
 						
 				</tr>
 			
@@ -61,16 +61,16 @@
 		
 				<tr>
 				<th>餐饮服务证号</th>
-						<td><input name="foodServiceCode" type="text" class="easyui-validatebox span2" data-options="required:true" value="${ProSupplie.foodServiceCode}" ></td>
+						<td><input name="foodServiceCode" type="text" class="easyui-validatebox span2"  value="${ProSupplie.foodServiceCode}" ></td>
 				
 					<th>食品经营许可证号</th>
-						<td><input name="foodBusinessCode" type="text" class="easyui-validatebox span2" data-options="required:true" value="${ProSupplie.foodBusinessCode}" ></td>
+						<td><input name="foodBusinessCode" type="text" class="easyui-validatebox span2"  value="${ProSupplie.foodBusinessCode}" ></td>
 					</tr>
 				<tr>
 					<th>食品流通证号</th>
-						<td><input name="foodCirculationCode" type="text" class="easyui-validatebox span2" data-options="required:true" value="${ProSupplie.foodCirculationCode}" ></td>
+						<td><input name="foodCirculationCode" type="text" class="easyui-validatebox span2"  value="${ProSupplie.foodCirculationCode}" ></td>
 					<th>食品生产证号</th>
-						<td><input name="foodProduceCode" type="text" class="easyui-validatebox span2" data-options="required:true" value="${ProSupplie.foodProduceCode}" ></td>
+						<td><input name="foodProduceCode" type="text" class="easyui-validatebox span2" value="${ProSupplie.foodProduceCode}" ></td>
 						
 						</tr>
 									

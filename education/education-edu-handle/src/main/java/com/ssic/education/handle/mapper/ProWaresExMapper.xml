@@ -25,4 +25,11 @@
 	<select id="findWarseBySupplier" resultMap="BaseResultMap" parameterType="java.lang.String">
 		select * from t_pro_warse where spplier_id=#{supplierId}
 	</select>
+	
+	<select id="searchProWares" resultMap="BaseResultMap">
+		SELECT * FROM `t_pro_wares` ware WHERE   EXISTS  (SELECT * FROM `t_pro_school_ware` sc_ware WHERE sc_ware.`school_id` = #{schoolId}  AND ware.`id` = sc_ware.`ware_id`)
+		<if test="waresName != null" >
+			and ware.wares_name LIKE '%${waresName}%'; 
+		</if>
+	</select>
 </mapper>

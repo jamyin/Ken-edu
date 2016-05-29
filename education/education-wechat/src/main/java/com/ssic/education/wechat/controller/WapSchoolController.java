@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ssic.educateion.common.dto.EduCanteenDto;
 import com.ssic.educateion.common.dto.EduSchoolDto;
 import com.ssic.educateion.common.dto.EduSchoolSupplierDto;
+import com.ssic.educateion.common.dto.SupplierDto;
 import com.ssic.education.handle.dto.EduParentScChDto;
 import com.ssic.education.handle.service.EduSchoolService;
 import com.ssic.education.handle.service.IEduCanteenService;
@@ -65,17 +66,13 @@ public class WapSchoolController extends BaseController{
 		}
 		String schoolId = dataList.get(0).getSchoolId();
 
-		HashMap<String,Object> propertyMap = copyObject(schoolId);
-		
-		mv.addObject("eduSchoolDto", propertyMap.get("eduSchoolDto"));
-		mv.addObject("eduCanteenDto", propertyMap.get("eduCanteenDto"));
-		mv.addObject("eduSchoolSupplierDto", propertyMap.get("eduSchoolSupplierDto"));
+		copyObject(mv,schoolId);
 		
 		mv.setViewName("school");
 		return mv;
 	}
 	
-	public HashMap<String,Object> copyObject(String schoolId){
+	public void copyObject(ModelAndView mv,String schoolId){
 		HashMap<String,Object> map = new HashMap<String,Object>();
 		//学校详细信息
 		EduSchoolDto eduSchoolDto = eduSchoolService.findById(schoolId);
@@ -90,11 +87,14 @@ public class WapSchoolController extends BaseController{
 		//学校对应的供应商信息
 		EduSchoolSupplierDto eduSchoolSupplierDto = new EduSchoolSupplierDto();
 		eduSchoolSupplierDto.setSchoolId(schoolId);
-		eduSchoolSupplierDto = iEduSchoolSupplierService.searchEduSchoolSupplierDto(eduSchoolSupplierDto);
-		map.put("eduSchoolSupplierDto", eduSchoolSupplierDto);
+//		eduSchoolSupplierDto = iEduSchoolSupplierService.searchEduSchoolSupplierDto(eduSchoolSupplierDto);
+		List<SupplierDto> supplierList = iEduSchoolSupplierService.searchEduSchoolSupplierListDto(schoolId);
+		map.put("supplierList", supplierList);
 		
-		return map;
-		
+		mv.addObject("eduSchoolDto", eduSchoolDto);
+		mv.addObject("eduCanteenDto",eduCanteenDto);
+		mv.addObject("supplierList", supplierList);		
+
 	}
 	
 	
@@ -102,11 +102,7 @@ public class WapSchoolController extends BaseController{
 	public ModelAndView school(@PathVariable String schoolId){
 		ModelAndView mv = getModelAndView();
 		
-		HashMap<String,Object> propertyMap = copyObject(schoolId);
-
-		mv.addObject("eduSchoolDto", propertyMap.get("eduSchoolDto"));
-		mv.addObject("eduCanteenDto", propertyMap.get("eduCanteenDto"));
-		mv.addObject("eduSchoolSupplierDto", propertyMap.get("eduSchoolSupplierDto"));
+		copyObject(mv,schoolId);
 		
 		mv.setViewName("school");
 		return mv;

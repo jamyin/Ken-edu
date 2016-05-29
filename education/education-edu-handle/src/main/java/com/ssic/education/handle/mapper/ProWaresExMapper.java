@@ -29,6 +29,14 @@ public interface ProWaresExMapper {
 	 * @date 2016年5月12日 下午4:46:27
 	 */
 	List<ProWaresDto> findWarseBySupplier(@Param("supplierId") String supplierId);
+
+	/**
+	 * 
+		 * 此方法描述的是：根据学校查询 对应的采购品信息
+		 * @author: cwftalus@163.com
+		 * @version: 2016年5月29日 上午11:20:10
+	 */
+	List<ProWaresDto> searchProWares(@Param("schoolId") String schoolId,@Param("waresName") String waresName);
 	
 	
 }

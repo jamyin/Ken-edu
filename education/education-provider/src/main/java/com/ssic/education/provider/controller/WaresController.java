@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -505,88 +506,107 @@ public class WaresController extends BaseController {
 				ConfigUtil.SESSIONINFONAME);
 		// 当前登录用户所属供应商的id
 		String supplierId = info.getSupplierId();
-		// 读取excel
-		HSSFWorkbook hssfWorkbook = new HSSFWorkbook(file.getInputStream());
-		HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(0);
-		if (hssfSheet == null) {
-			return null;
-		}
-
+		String errorMsg = null;
 		// 转换excel到list
 		List<ProWares> list = new ArrayList();
-		String errorMsg = null;
-		Date now = new Date();
-		for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
-			if (errorMsg != null) {
-				break;
+
+		// 读取excel
+		try (HSSFWorkbook hssfWorkbook = new HSSFWorkbook(file.getInputStream())) {
+			HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(0);
+			if (hssfSheet == null) {
+				return null;
 			}
-			ProWares dto = new ProWares();
-			HSSFRow hssfRow = hssfSheet.getRow(rowNum);
-			for (int i = 0; i < hssfRow.getLastCellNum(); i++) {
+
+			Date now = new Date();
+			for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
 				if (errorMsg != null) {
 					break;
 				}
-				HSSFCell cell = hssfRow.getCell(i);
-				String value = ParseExcelUtil.getStringCellValue(cell);
-				if (value != null) {
-					value = value.trim();
-				}
-				if (i == 0) {
-					// 产品名称
-					dto.setWaresName(value);
-				} else if (i == 1) {
-					// 产品规格
-					dto.setSpec(value);
-				} else if (i == 2) {
-					// 采购品分类
-					dto.setWaresType(ProductClass.fromName(value));
-				} else if (i == 3) {
-					// 生产企业
-					dto.setManufacturer(value);
-					// 检查这个商品是否存在，如果存在不导入
-					ProWares pw = waresService.findProWarsByNameSpecManu(
-							dto.getWaresName(), dto.getSpec(),
-							dto.getManufacturer(), supplierId);
-					if (pw != null) {
-						errorMsg = "第" + (i + 1) + "行数据不正确，商品已存在。";
+				ProWares dto = new ProWares();
+				HSSFRow hssfRow = hssfSheet.getRow(rowNum);
+				for (int i = 0; i < hssfRow.getLastCellNum(); i++) {
+					if (errorMsg != null) {
 						break;
 					}
-				} else if (i == 4) {
-					// 英文名称
-					dto.setEnName(value);
-				} else if (i == 5) {
-					// 商品包装条码
-					dto.setBarCode(value);
-				} else if (i == 6) {
-					// 企业自定义编码
-					dto.setCustomCode(value);
-				} else if (i == 7) {
-					// 保质期
+					HSSFCell cell = hssfRow.getCell(i);
+					String value = ParseExcelUtil.getStringCellValue(cell);
 					if (value != null) {
-						dto.setShelfLife(Integer.parseInt(value));
+						value = value.trim();
 					}
-				} else if (i == 8 && dto.getShelfLife() != null) {
-					// 保质期单位
-					dto.setUnit(value);
-				} else if (i == 9) {
-					// 产地
-					dto.setPlace(value);
+					if (i == 0) {
+						if (StringUtils.isBlank(value)) {
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，名称不能为空。";
+							break;
+						}
+						// 产品名称
+						dto.setWaresName(value);
+					} else if (i == 1) {
+						if (StringUtils.isBlank(value)) {
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，规格不能为空。";
+							break;
+						}
+						// 产品规格
+						dto.setSpec(value);
+					} else if (i == 2) {
+						if (StringUtils.isBlank(value)) {
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，分类不能为空。";
+							break;
+						}
+						// 采购品分类
+						try {
+							dto.setWaresType(ProductClass.fromName(value));
+						} catch (Exception e) {
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，分类不正确。";
+							break;
+						}
+					} else if (i == 3) {
+						// 生产企业
+						if (StringUtils.isNotBlank(value)) {
+							dto.setManufacturer(value);
+						}
+						// 检查这个商品是否存在，如果存在不导入
+						ProWares pw = waresService.findProWarsByNameSpecManu(
+								dto.getWaresName(), dto.getSpec(),
+								dto.getManufacturer(), supplierId);
+						if (pw != null) {
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，商品已存在。";
+							break;
+						}
+					} else if (i == 4 && StringUtils.isNotBlank(value)) {
+						// 英文名称
+						dto.setEnName(value);
+					} else if (i == 5 && StringUtils.isNotBlank(value)) {
+						// 商品包装条码
+						dto.setBarCode(value);
+					} else if (i == 6 && StringUtils.isNotBlank(value)) {
+						// 企业自定义编码
+						dto.setCustomCode(value);
+					} else if (i == 7 && StringUtils.isNotBlank(value)) {
+						// 保质期
+						try {
+							dto.setShelfLife(Integer.parseInt(value));
+						} catch (Exception e) {
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，保质期格式不正确。";
+							break;
+						}
+					} else if (i == 8 && dto.getShelfLife() != null) {
+						// 保质期单位
+						dto.setUnit(value);
+					} else if (i == 9 && StringUtils.isNotBlank(value)) {
+						// 产地
+						dto.setPlace(value);
+					}
 				}
+				if (errorMsg != null) {
+					break;
+				}
+				dto.setSupplierId(supplierId);
+				dto.setWay(0);
+				dto.setCreateTime(now);
+				dto.setLastUpdateTime(now);
+				dto.setStat(1);
+				list.add(dto);
 			}
-			if (errorMsg != null) {
-				break;
-			}
-			// TODO 检查参数
-			if (dto.getWaresName() == null || dto.getSpec() == null
-					|| dto.getWaresType() == null) {
-				continue;
-			}
-			dto.setSupplierId(supplierId);
-			dto.setWay(0);
-			dto.setCreateTime(now);
-			dto.setLastUpdateTime(now);
-			dto.setStat(1);
-			list.add(dto);
 		}
 
 		if (errorMsg != null) {

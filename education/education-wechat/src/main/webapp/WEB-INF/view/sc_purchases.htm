@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,user-scalable=no" />
+    <title>采购品</title>
+    <link href="/static/css/style.css" rel="stylesheet" />
+    <script src="/static/js/jquery-2.1.3.min.js"></script>
+  </head>
+<body>
+<header class="searchbar"><input id="waresName" type="text" placeholder="请输入关键字"></header>
+<section class="tablecell">
+	<ul id="purchasesList">
+		<#if resultList ??>
+			<#list resultList as data>
+				<li><label>${(data.waresName)!}</label></li>
+			</#list>
+		</#if>
+	</ul>
+</section>
+<script type="text/javascript">
+$(function(){
+	$("#waresName").bind("keyup",function(){
+		var waresName = $("#waresName").val();
+		var dataParame = {waresName:waresName};
+		$.ajax({
+			url:'/wap/purchases/search/${(schoolId)!}.htm',
+			type:"POST",
+			data : dataParame,
+			dataType:'json',
+			success:function(data){
+				var schoolList = $("#purchasesList");
+				schoolList.empty();				
+				$.each(data.data, function(index, item) {
+					$("#purchasesList").append("<li><label>"+item['waresName']+"</label></li>");
+					//$("#schoolList").append("<tr><td><a href='/wap/school/details/"+item['id']+".htm'>"+item['schoolName']+"</a></td></tr>");	
+				});
+			}
+		});
+	});
+});
+</script>
+</body>
+</html>

@@ -1,5 +1,6 @@
 package com.ssic.education.app.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +10,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ssic.educateion.common.dto.ChooseSchoolDto;
+import com.ssic.educateion.common.dto.EduAreaDto;
 import com.ssic.educateion.common.dto.EduCanteenDto;
 import com.ssic.educateion.common.dto.EduSchoolDto;
 import com.ssic.educateion.common.dto.EduSchoolSupplierDto;
 import com.ssic.educateion.common.dto.ProPackagesDto;
+import com.ssic.educateion.common.dto.SchoolDto;
 import com.ssic.education.app.constants.SchoolLevel;
-import com.ssic.education.app.dto.SchoolDto;
+import com.ssic.education.app.dto.SchoolPackageDto;
+import com.ssic.education.app.service.IAreaService;
 import com.ssic.education.app.service.ISchoolService;
 import com.ssic.education.handle.service.EduSchoolService;
 import com.ssic.education.handle.service.IEduCanteenService;
@@ -48,9 +53,12 @@ public class SchoolController {
 
 	@Autowired
 	private IEduSchoolSupplierService iEduSchoolSupplierService;
-	
+
 	@Autowired
 	private ProPackagesService proPackagesService;
+	
+	@Autowired
+	private IAreaService areaService;
 
 	/**
 	 * @Title: findSchoolList
@@ -61,9 +69,9 @@ public class SchoolController {
 	 */
 	@RequestMapping("/findSchoolList")
 	@ResponseBody
-	public Response<PageResult<EduSchoolDto>>  findSchoolList(EduSchoolDto eduSchoolDto, PageQuery query) {
-		Response<PageResult<EduSchoolDto>> result = new Response<PageResult<EduSchoolDto>>();
-		PageResult<EduSchoolDto> schoolList = schoolService.findSchoolList(eduSchoolDto, query);
+	public Response<PageResult<SchoolDto>>  findSchoolList(SchoolDto schoolDto, PageQuery query) {
+		Response<PageResult<SchoolDto>> result = new Response<PageResult<SchoolDto>>();
+		PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, query);
 		if(schoolList.getResults() != null && schoolList.getResults().size() >0 ){
 			result.setStatus(DataStatus.HTTP_SUCCESS);
 			result.setMessage("查询成功！");
@@ -77,13 +85,13 @@ public class SchoolController {
 	}
 
 	/**
-	 * @Title: classList
+	 * @Title: levelList
 	 * @Description: 学校类型列表
 	 * @author Ken Yin  
 	 * @date 2016年5月17日 下午2:50:36
 	 * @return Response<Map<Integer,String>>    返回类型
 	 */
-	@RequestMapping(value = "/classList", method = RequestMethod.GET)
+	@RequestMapping(value = "/levelList", method = RequestMethod.GET)
 	@ResponseBody
 	public Response<Map<Integer, String>> getClassType() {
 		Response<Map<Integer, String>> result = new Response<Map<Integer, String>>();
@@ -129,14 +137,14 @@ public class SchoolController {
 	 */
 	@RequestMapping(value="school")
 	@ResponseBody
-	public Response<SchoolDto> school(ProPackagesDto dto, PageQuery page){
-		Response<SchoolDto> result = new Response<SchoolDto>();
+	public Response<SchoolPackageDto> school(ProPackagesDto dto, PageQuery page){
+		Response<SchoolPackageDto> result = new Response<SchoolPackageDto>();
 		if(StringUtils.isEmpty(dto.getCustomerId())){
 			result.setStatus(DataStatus.HTTP_FAILE);
 			result.setMessage("学校Id为空！");
 			return result;
 		}
-		SchoolDto school = new SchoolDto();
+		SchoolPackageDto school = new SchoolPackageDto();
 		//学校详细信息
 		String schoolId = dto.getCustomerId();
 		EduSchoolDto eduSchoolDto = eduSchoolService.findById(schoolId);
@@ -150,14 +158,14 @@ public class SchoolController {
 		EduSchoolSupplierDto eduSchoolSupplierDto = new EduSchoolSupplierDto();
 		eduSchoolSupplierDto.setSchoolId(schoolId);
 		eduSchoolSupplierDto = iEduSchoolSupplierService.searchEduSchoolSupplierDto(eduSchoolSupplierDto);
-		
+
 		PageResult<ProPackagesDto> proPackagesDtos = proPackagesService.searchPackages(dto, page);
 
 		school.setEduSchoolDto(eduSchoolDto);
 		school.setEduCanteenDto(eduCanteenDto);
 		school.setEduSchoolSupplierDto(eduSchoolSupplierDto);
 		school.setProPackagesDto(proPackagesDtos);
-		
+
 		result.setData(school);
 		return result;
 	}
@@ -180,6 +188,31 @@ public class SchoolController {
 		}
 		result.setStatus(DataStatus.HTTP_SUCCESS);
 		result.setMessage("未查到相关记录");
+		return result;
+	}
+
+	/**
+	 * @Title: chooseSchool
+	 * @Description: app选择学校页面
+	 * @author Ken Yin  
+	 * @date 2016年5月29日 下午12:35:10
+	 * @return Response<PageResult<EduSchoolDto>>    返回类型
+	 */
+	@RequestMapping("/chooseSchool")
+	@ResponseBody
+	public Response<ChooseSchoolDto>  chooseSchool(SchoolDto schoolDto, PageQuery query) {
+		Response<ChooseSchoolDto> result = new Response<ChooseSchoolDto>();
+		ChooseSchoolDto chooseSchoolDto = new ChooseSchoolDto();
+		
+		PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, query);
+		chooseSchoolDto.setSchoolDto(schoolList);
+		result.setData(chooseSchoolDto);
+		
+		chooseSchoolDto.setLevelList(SchoolLevel.getAll());
+		
+		List<EduAreaDto> areaList = areaService.findAreaList();
+		chooseSchoolDto.setAreaList(areaList);
+
 		return result;
 	}
 }

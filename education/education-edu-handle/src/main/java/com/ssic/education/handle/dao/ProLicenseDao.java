@@ -8,6 +8,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ssic.educateion.common.dto.ProLicenseDto;
 import com.ssic.education.handle.mapper.ProLicenseExMapper;
 import com.ssic.education.handle.mapper.ProLicenseMapper;
 import com.ssic.education.handle.pojo.ProLicense;
@@ -53,5 +54,21 @@ public class ProLicenseDao extends MyBatisBaseDao<ProLicense>{
 		// TODO Auto-generated method stub
 		
 		return exmapper.alterImage(license);
+	}
+
+	public List<ProLicense> searchProLicenseList(ProLicenseDto proLicenseDto) {
+		ProLicenseExample example = new ProLicenseExample();
+		ProLicenseExample.Criteria criteria = example.createCriteria();	
+
+		if(StringUtils.isNotEmpty(proLicenseDto.getRelationId())){
+			criteria.andRelationIdEqualTo(proLicenseDto.getRelationId());
+		}
+		
+		if(proLicenseDto.getCerSource()!=null){
+			criteria.andCerSourceEqualTo(proLicenseDto.getCerSource());
+		}
+		
+		criteria.andStatEqualTo(DataStatus.ENABLED);
+		return mapper.selectByExample(example);
 	}
 }

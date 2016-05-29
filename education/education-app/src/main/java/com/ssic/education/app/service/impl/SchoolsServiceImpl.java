@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssic.educateion.common.dto.EduSchoolDto;
+import com.ssic.educateion.common.dto.SchoolDto;
 import com.ssic.education.app.service.ISchoolService;
 import com.ssic.education.handle.dao.SchoolDao;
 import com.ssic.education.handle.pojo.EduSchool;
@@ -27,13 +28,13 @@ public class SchoolsServiceImpl implements ISchoolService{
     private SchoolDao schoolDao;
 
 	@Override
-	public PageResult<EduSchoolDto> findSchoolList(EduSchoolDto eduSchoolDto,
+	public PageResult<SchoolDto> findSchoolList(SchoolDto schoolDto,
 			PageQuery query) {
-		List<EduSchool> list = schoolDao.findSchoolList(eduSchoolDto, query);
-		List<EduSchoolDto> schoolDtoList = BeanUtils.createBeanListByTarget(list, EduSchoolDto.class);
-		int total = schoolDao.selectSchoolAccount(eduSchoolDto);
+		List<EduSchool> list = schoolDao.findSchoolList(schoolDto, query);
+		List<SchoolDto> schoolDtoList = BeanUtils.createBeanListByTarget(list, SchoolDto.class);
+		int total = schoolDao.selectSchoolAccount(schoolDto);
 		query.setTotal(total);
-		return new PageResult<EduSchoolDto>(query, schoolDtoList);
+		return new PageResult<SchoolDto>(query, schoolDtoList);
 	}
 
 	@Override
@@ -45,7 +46,6 @@ public class SchoolsServiceImpl implements ISchoolService{
 		query.setTotal(total);
 		return new PageResult<EduSchoolDto>(query, dtoList);
 	}
-
 
 }
 
