@@ -1,8 +1,9 @@
 package com.ssic.education.provider.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.LinkedList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -10,8 +11,11 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
@@ -28,6 +32,7 @@ import com.ssic.educateion.common.dto.SupplierDto;
 import com.ssic.educateion.common.utils.DataGrid;
 import com.ssic.educateion.common.utils.PageHelper;
 import com.ssic.education.handle.pojo.ProLicense;
+import com.ssic.education.handle.pojo.ProSupplier;
 import com.ssic.education.handle.pojo.ProSupplierReceiver;
 import com.ssic.education.handle.service.ICreateImageService;
 import com.ssic.education.handle.service.IProLicenseService;
@@ -36,6 +41,7 @@ import com.ssic.education.handle.service.IWaresService;
 import com.ssic.education.provider.pageModel.Json;
 import com.ssic.education.provider.pageModel.SessionInfo;
 import com.ssic.education.provider.util.ConfigUtil;
+import com.ssic.education.utils.poi.ParseExcelUtil;
 import com.ssic.education.utils.util.PropertiesUtils;
 import com.ssic.education.utils.util.UUIDGenerator;
 
@@ -636,32 +642,123 @@ public class ProSupplierController {
 		// 当前登录用户所属供应商的id
 		String supplierId = info.getSupplierId();
 		String errorMsg = null;
-		List<SupplierDto> masterLedger = new LinkedList();
+		Map<String,Map<ProSupplierReceiver,ProSupplier>> map = new HashMap();
 		try (Workbook wb = WorkbookFactory.create(file.getInputStream());) {
 			Sheet sheet = wb.getSheetAt(0);
+			Date now = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy.M.d");
 			if (sheet == null) {
 				return null;
+			}
+			for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+				if (errorMsg != null) {
+					break;
+				}
+				Map< ProSupplierReceiver,ProSupplier> suppliers=new HashMap();
+				ProSupplier supplier = null;
+				ProSupplierReceiver psr=null;
+				Row row = sheet.getRow(rowNum);
+				int n = 0;
+				for (int i = 0; i < row.getLastCellNum(); i++) {
+					if (errorMsg != null) {
+						break;
+					}
+					Cell cell = row.getCell(i);
+					String value = ParseExcelUtil.getStringCellValue(cell);
+					if (value != null) {
+						value = value.trim();
+					}
+					if (i == 0) {
+						if (StringUtils.isBlank(value)) {
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，供应商名称不能为空。";
+							break;
+						}
+						ProSupplier s = supplierService.findProSupplierByName(
+								value, supplierId);
+						if (s != null) {
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，供应商名称已存在。";
+							break;
+						}
+						if (map.get(value)!= null) {
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，供应商名称重复。";
+							break;
+						}
+						supplier = new ProSupplier();
+						supplier.setSupplierName(value);
+						supplier.setCreateTime(now);
+						supplier.setLastUpdateTime(now);
+						supplier.setStat(1);
+					} else if (i == 1) {
+						if (StringUtils.isBlank(value)) {
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，供应商地址不能为空。";
+							break;
+						}
+						supplier.setAddress(value);
+					} else if (i == 2) {
+						if (StringUtils.isBlank(value)) {
+							n += 1;
+							break;
+						}
+						supplier.setFoodServiceCode(value);
+					} else if (i == 3) {
+						if (StringUtils.isBlank(value)) {
+							n += 1;
+							break;
+						}
+						supplier.setFoodBusinessCode(value);
+					} else if (i == 4) {
+						if (StringUtils.isBlank(value)) {
+							n += 1;
+							break;
+						}
+						supplier.setFoodCirculationCode(value);
+					} else if (i == 5) {
+						if (StringUtils.isBlank(value)) {
+							n += 1;
+							break;
+						}
+						supplier.setFoodProduceCode(value);
+					} else if (i == 6) {
+						if (StringUtils.isBlank(value)) {
+							if (n == 4) {
+								errorMsg = "第" + (rowNum + 1)
+										+ "行数据不正确，证件号至少一个不能为空。";
+							}
+							break;
+						}
+						supplier.setBusinessLicense(value);
+					} else if (i == 7 && !StringUtils.isBlank(value)) {
+						psr=new ProSupplierReceiver();
+						psr.setSupplierCode(value);
+					} else if (i == 8 && !StringUtils.isBlank(value)) {
+						supplier.setCorporation(value);
+					} else if (i == 9 && !StringUtils.isBlank(value)) {
+						supplier.setContactWay(value);
+					}
+				}
+				if (supplier != null && errorMsg == null) {
+					supplier.setId(UUID.randomUUID().toString());
+					if(psr==null){
+						psr=new ProSupplierReceiver();
+					}
+					psr.setSupplierId(supplier.getId());
+					psr.setReceiverId(supplierId);
+					psr.setStat(1);
+					suppliers.put(psr, supplier);
+					map.put(supplier.getSupplierName(), suppliers);
+				}
 			}
 		} catch (EncryptedDocumentException | InvalidFormatException e) {
 			errorMsg = "Excel文件格式不正确";
 		}
-
-		// InputStream inputStream = file.getInputStream();
-		//
-		// Workbook wb = null;
-		// boolean isExcel2003 = false;
-		//
-		// if (file.getOriginalFilename().matches("^.+\\.(?i)(xls)$")) {
-		// isExcel2003 = true;
-		// }
-		// try {
-		// if (isExcel2003) {
-		// wb = new HSSFWorkbook(inputStream);
-		// } else {
-		// wb = new XSSFWorkbook(inputStream);
-		// }
-		// } finally {
-		// }
+		if(errorMsg != null) {
+			j.setMsg(errorMsg);
+			j.setSuccess(false);
+		} else {
+			int r=supplierService.importSupplier(map);
+			j.setMsg("成功添加"+r+"条数据");
+			j.setSuccess(true);
+		}
 		return j;
 	}
 }
