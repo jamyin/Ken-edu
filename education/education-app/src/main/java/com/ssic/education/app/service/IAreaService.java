@@ -2,7 +2,8 @@ package com.ssic.education.app.service;
 
 import java.util.List;
 
-import com.ssic.education.app.dto.EduAreaDto;
+import com.ssic.educateion.common.dto.EduAreaDto;
+
 
 /**
 * @ClassName: IAreaService
@@ -14,7 +15,7 @@ import com.ssic.education.app.dto.EduAreaDto;
 public interface IAreaService {
 
 	//查询上海所有区县
-	List<EduAreaDto> findArea(EduAreaDto eduAreaDto);
+	List<EduAreaDto> findAreaList();
 
 }
 
