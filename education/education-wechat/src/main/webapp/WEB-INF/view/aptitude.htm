@@ -41,11 +41,15 @@
 			<ul>
 				<#if suppliList ??>
 					<#list suppliList as suppli>
-						<li class="break-line"><a href="/wap/supplier/index.htm?companyType=2&relationId=${(suppli.id)!}"></a><label>${(suppli.supplierName)!}</label><span>单位地址：${(suppli.address)!}</span></li>		
+						<li class="break-line">
+							<a href="/wap/supplier/index.htm?companyType=2&relationId=${(suppli.id)!}"></a>
+							<label>${(suppli.supplierName)!}</label>
+							<span>单位地址：${(suppli.address)!}</span>
+						</li>		
 					</#list>
 				</#if>
  			</ul>
-			<div class="load_more gr"><a href="suppliers.html">查看其它供应商</a></div>
+			<div class="load_more gr"><a href="/wap/supplier/more/${(supplierId)!}.htm">查看其它供应商</a></div>
 		</section>
 	</section>
 	</#if>	
