@@ -93,7 +93,7 @@ public class WapSupplierController extends BaseController{
 
 		
 		//根据当前供应商信息 查询该供应商对应的原料供应商信息
-		List<ProSupplierDto> suppliList = iSupplierService.searchSupplierListBySupplierId(supplierId,2,10);
+		List<ProSupplierDto> suppliList = iSupplierService.searchSupplierListBySupplierId(supplierId,null,2,10);
 
 		mv.addObject("infoObj",infoObj);
 		mv.addObject("resultList", resultList);
@@ -115,7 +115,7 @@ public class WapSupplierController extends BaseController{
 		ModelAndView mv = getModelAndView();
 	
 		//根据当前供应商信息 查询该供应商对应的原料供应商信息
-		List<ProSupplierDto> suppliList = iSupplierService.searchSupplierListBySupplierId(supplierId,2,10);
+		List<ProSupplierDto> suppliList = iSupplierService.searchSupplierListBySupplierId(supplierId,null,2,null);
 
 		mv.addObject("supplierId", supplierId);
 		mv.addObject("suppliList", suppliList);
@@ -135,7 +135,7 @@ public class WapSupplierController extends BaseController{
 		Response<List<ProSupplierDto>> result = new Response<List<ProSupplierDto>>();
 	
 		//根据当前供应商信息 查询该供应商对应的原料供应商信息
-		List<ProSupplierDto> suppliList = iSupplierService.searchSupplierListBySupplierId(supplierId,2,10);
+		List<ProSupplierDto> suppliList = iSupplierService.searchSupplierListBySupplierId(supplierId,suppliName,2,null);
 
 		result.setData(suppliList);
 		return result;

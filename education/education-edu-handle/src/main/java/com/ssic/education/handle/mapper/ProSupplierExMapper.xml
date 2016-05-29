@@ -42,6 +42,9 @@
 			SELECT * FROM `t_pro_supplier_receiver` psr WHERE  psr.`receiver_id`=#{supplierId} AND ps.`id` = psr.`supplier_id`
 		) 
 		AND ps.`supplier_type` = #{supplierType} 
+		<if test="suppliName!=null">
+			and ps.supplier_name like '%${suppliName}%'
+		</if>
 		<if test="limit!=null">
 			limit #{limit}
 		</if>

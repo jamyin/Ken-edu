@@ -76,5 +76,5 @@ public interface ISupplierService {
 		 * @param supplierType供应商类型 0为不区分，1为成品菜供应商，2为原料供应商  
 		 * @parem limit 可以为空
 	 */
-	List<ProSupplierDto> searchSupplierListBySupplierId(String supplierId,int supplierType, int limit);
+	List<ProSupplierDto> searchSupplierListBySupplierId(String supplierId,String suppliName,Integer supplierType, Integer limit);
 }
