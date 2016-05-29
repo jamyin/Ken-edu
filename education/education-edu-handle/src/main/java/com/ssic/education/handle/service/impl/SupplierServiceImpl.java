@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssic.educateion.common.dto.LedgerDto;
-import com.ssic.educateion.common.dto.ProLicenseDto;
 import com.ssic.educateion.common.dto.ProSupplierDto;
 import com.ssic.educateion.common.dto.SupplierDto;
 import com.ssic.educateion.common.utils.DataGrid;

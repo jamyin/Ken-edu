@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.ssic.educateion.common.dto.LedgerDto;
-import com.ssic.educateion.common.dto.ProLicenseDto;
 import com.ssic.educateion.common.dto.ProSupplierDto;
 import com.ssic.educateion.common.dto.SupplierDto;
 import com.ssic.educateion.common.utils.PageHelper;

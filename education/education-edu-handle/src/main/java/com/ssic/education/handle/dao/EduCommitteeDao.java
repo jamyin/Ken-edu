@@ -11,7 +11,6 @@ import com.ssic.educateion.common.dto.EduCommitteeDto;
 import com.ssic.education.handle.mapper.EduCommitteeMapper;
 import com.ssic.education.handle.pojo.EduCommittee;
 import com.ssic.education.handle.pojo.EduCommitteeExample;
-import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.mybatis.MyBatisBaseDao;
 
 @Repository

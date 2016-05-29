@@ -1,13 +1,12 @@
 package com.ssic.education.app.dto;
 
 import java.util.Date;
-import java.util.List;
-
-import com.ssic.education.utils.model.PageResult;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import com.ssic.education.utils.model.PageResult;
 
 /**		
  * <p>Title: LedgerMasterInfoDto </p>
