@@ -69,9 +69,6 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 		if (StringUtils.isNotBlank(dto.getSupplierName())){
 			criteria.andSupplierNameLike("%"+dto.getSupplierName().trim()+"%");
 		}
-		if (StringUtils.isNotBlank(dto.getSupplierName())){
-			criteria.andSupplierNameLike("%"+dto.getSupplierName().trim()+"%");
-		}
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		return mapper.countByExample(example);
 	}
@@ -167,25 +164,25 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 	}
 
 	public ProSupplier findProSupplierByName(String name, String supplierId) {
-//		ProSupplierReceiverExample psrExample = new ProSupplierReceiverExample();
-//		com.ssic.education.handle.pojo.ProSupplierReceiverExample.Criteria psrCreate = psrExample
-//				.createCriteria();
-//		psrCreate.andReceiverIdEqualTo(supplierId);
+		ProSupplierReceiverExample psrExample = new ProSupplierReceiverExample();
+		com.ssic.education.handle.pojo.ProSupplierReceiverExample.Criteria psrCreate = psrExample
+				.createCriteria();
+		psrCreate.andReceiverIdEqualTo(supplierId);
 //		psrCreate.and
-//		List<ProSupplierReceiver> psrList = srMapper
-//				.selectByExample(psrExample);
-//		if (psrList.size() != 0) {
-//			for (ProSupplierReceiver psr : psrList) {
-//				ProSupplierExample example = new ProSupplierExample();
-//				Criteria create = example.createCriteria();
-//				create.andIdCardEqualTo(psr.getSupplierId());
-//				create.andSupplierNameEqualTo(name);
-//				List<ProSupplier> psList = mapper.selectByExample(example);
-//				if (psList.size() != 0) {
-//					return psList.get(0);
-//				}
-//			}
-//		}
+		List<ProSupplierReceiver> psrList = srMapper
+				.selectByExample(psrExample);
+		if (psrList.size() != 0) {
+			for (ProSupplierReceiver psr : psrList) {
+				ProSupplierExample example = new ProSupplierExample();
+				Criteria create = example.createCriteria();
+				create.andIdCardEqualTo(psr.getSupplierId());
+				create.andSupplierNameEqualTo(name);
+				List<ProSupplier> psList = mapper.selectByExample(example);
+				if (psList.size() != 0) {
+					return psList.get(0);
+				}
+			}
+		}
 		return null;
 	}
 
