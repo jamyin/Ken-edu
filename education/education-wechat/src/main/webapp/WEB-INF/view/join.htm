@@ -69,7 +69,9 @@
 			var schoolName = $("#schoolName").val();
 			var supplyDate = $("#supplyDate").val();
 			
-			var dataParam = {supplyDate:supplyDate,schoolId:schoolId,schoolName:schoolName,packageId:packageId,flavor:flavor,health:health,weights:weights};
+			var dishes = $("#dishes").val();
+			
+			var dataParam = {dishes:dishes,supplyDate:supplyDate,schoolId:schoolId,schoolName:schoolName,packageId:packageId,flavor:flavor,health:health,weights:weights};
 			$.ajax({
 				url:'/wap/comment/comment.htm',
 				type:"POST",
