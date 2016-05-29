@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssic.educateion.common.dto.LedgerDto;
+import com.ssic.educateion.common.dto.ProLicenseDto;
 import com.ssic.educateion.common.dto.ProSupplierDto;
 import com.ssic.educateion.common.dto.SupplierDto;
 import com.ssic.educateion.common.utils.DataGrid;
@@ -168,6 +169,15 @@ public class SupplierServiceImpl implements ISupplierService {
 	public String findSupplierIdBySourceId(LedgerDto ledger) {
 		// TODO Auto-generated method stub
 		return proSupplierDao.findSupplierIdBySourceId(ledger);
+	}
+	/**
+	 * 
+	 */
+	@Override
+	public List<ProSupplierDto> searchSupplierListBySupplierId(
+			String supplierId,int supplierType, int limit) {
+		// TODO Auto-generated method stub
+		return proSupplierDao.searchSupplierListBySupplierId(supplierId,supplierType,limit);
 	}
 
 }

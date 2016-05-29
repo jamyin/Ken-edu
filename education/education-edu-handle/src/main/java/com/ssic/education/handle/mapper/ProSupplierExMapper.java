@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.ssic.educateion.common.dto.LedgerDto;
+import com.ssic.educateion.common.dto.ProLicenseDto;
 import com.ssic.educateion.common.dto.ProSupplierDto;
 import com.ssic.educateion.common.dto.SupplierDto;
 import com.ssic.educateion.common.utils.PageHelper;
@@ -28,6 +29,8 @@ public interface ProSupplierExMapper {
 	List<SupplierDto> findSupplierCodeByReceiverId(@Param("supplierId")String supplierId);
 
 	String findSupplierIdBySourceId(@Param("ledgerDto") LedgerDto ledgerDto);
+
+	List<ProSupplierDto> searchSupplierListBySupplierId(@Param("supplierId") String supplierId,@Param("supplierType") int supplierType,@Param("limit") int limit);
 	
 	
 }
