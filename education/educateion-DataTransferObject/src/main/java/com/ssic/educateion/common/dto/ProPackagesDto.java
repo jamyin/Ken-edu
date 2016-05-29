@@ -89,4 +89,8 @@ public class ProPackagesDto {
 	@Getter
 	@Setter
     private String nutritionalUnits; //拼接营养单位
+	
+	@Getter
+	@Setter
+	private Integer source;//来源0：市教委，1：区教委，2：学校
 }

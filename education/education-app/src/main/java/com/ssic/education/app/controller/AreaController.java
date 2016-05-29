@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ssic.education.app.dto.EduAreaDto;
+import com.ssic.educateion.common.dto.EduAreaDto;
 import com.ssic.education.app.service.IAreaService;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.Response;
@@ -33,11 +33,11 @@ public class AreaController {
     * @date 2016年5月12日 上午11:27:34
     * @return Response<EduTaskDto>    返回类型
     */
-    @RequestMapping("/findArea")
+    @RequestMapping("/findAreaList")
     @ResponseBody
-    public Response<List<EduAreaDto>> findArea(EduAreaDto eduAreaDto) {
+    public Response<List<EduAreaDto>> findAreaList() {
     	Response<List<EduAreaDto>> result = new Response<List<EduAreaDto>>();
-    	List<EduAreaDto> areaList = areaService.findArea(eduAreaDto);
+    	List<EduAreaDto> areaList = areaService.findAreaList();
     	if(areaList.size()>0){
     		result.setStatus(DataStatus.HTTP_SUCCESS);
     		result.setMessage("查询成功！");

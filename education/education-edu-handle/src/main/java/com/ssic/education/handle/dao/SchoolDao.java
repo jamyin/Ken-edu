@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ssic.educateion.common.dto.EduSchoolDto;
+import com.ssic.educateion.common.dto.SchoolDto;
 import com.ssic.education.handle.mapper.EduSchoolExMapper;
 import com.ssic.education.handle.mapper.EduSchoolMapper;
 import com.ssic.education.handle.pojo.EduSchool;
@@ -43,10 +44,10 @@ public class SchoolDao extends MyBatisBaseDao<EduSchool> {
 	 * @date 2016年5月13日 上午9:25:55
 	 * @return List<EduSchool>    返回类型
 	 */
-	public List<EduSchool> findSchoolList(EduSchoolDto eduSchoolDto,PageQuery query) {
+	public List<EduSchool> findSchoolList(SchoolDto schoolDto,PageQuery query) {
 		EduSchoolExample example = new EduSchoolExample();
 		EduSchoolExample.Criteria criteria = example.createCriteria();
-		assemblyParams(eduSchoolDto, criteria);
+		assemblyParams(schoolDto, criteria);
 		if(query != null && query.getPageSize() > 0){
 			example.setOrderByClause("create_time DESC limit "+query.getStartNum() +"," + query.getPageSize());
 		}
@@ -54,19 +55,19 @@ public class SchoolDao extends MyBatisBaseDao<EduSchool> {
 		return list;
 	}
 
-	private void assemblyParams(EduSchoolDto eduSchoolDto, Criteria criteria) {
-		if (null != eduSchoolDto) {
-			if (StringUtils.isNotEmpty(eduSchoolDto.getId())){
-				criteria.andIdEqualTo(eduSchoolDto.getId().trim());
+	private void assemblyParams(SchoolDto schoolDto, Criteria criteria) {
+		if (null != schoolDto) {
+			if (StringUtils.isNotEmpty(schoolDto.getId())){
+				criteria.andIdEqualTo(schoolDto.getId().trim());
 			}
-			if (StringUtils.isNotBlank(eduSchoolDto.getSchoolName())){
-				criteria.andSchoolNameLike("%"+eduSchoolDto.getSchoolName().trim()+"%");
+			if (StringUtils.isNotBlank(schoolDto.getSchoolName())){
+				criteria.andSchoolNameLike("%"+schoolDto.getSchoolName().trim()+"%");
 			}	
-			if (StringUtils.isNotBlank(eduSchoolDto.getLevel())) {
-				criteria.andLevelLike("%" + eduSchoolDto.getLevel().trim()+ "%");
+			if (StringUtils.isNotBlank(schoolDto.getLevel())) {
+				criteria.andLevelLike("%" + schoolDto.getLevel().trim()+ "%");
 			}
-			if (StringUtils.isNotBlank(eduSchoolDto.getArea())){
-				criteria.andAreaEqualTo(eduSchoolDto.getArea());
+			if (StringUtils.isNotBlank(schoolDto.getArea())){
+				criteria.andAreaEqualTo(schoolDto.getArea());
 			}	
 		}
 		criteria.andStatEqualTo(DataStatus.ENABLED);
@@ -79,10 +80,10 @@ public class SchoolDao extends MyBatisBaseDao<EduSchool> {
 	 * @date 2016年5月13日 上午9:27:48
 	 * @return int    返回类型
 	 */
-	public int selectSchoolAccount(EduSchoolDto eduSchoolDto) {
+	public int selectSchoolAccount(SchoolDto schoolDto) {
 		EduSchoolExample example = new EduSchoolExample();
 		EduSchoolExample.Criteria criteria = example.createCriteria();
-		assemblyParams(eduSchoolDto, criteria);  
+		assemblyParams(schoolDto, criteria);  
 		return mapper.countByExample(example);
 	}
 

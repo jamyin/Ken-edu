@@ -13,6 +13,8 @@ public interface IEduSchoolSupplierService {
 
 	String findSchoolIdByReceiverId(String receiverName,String sourceId);
 	
+	public int save (EduSchoolSupplierDto eduSchoolSupplierDto);
+	
 	List<SupplierDto> searchEduSchoolSupplierListDto(String schoolId);
 	
 //	List<SchoolSupplierDto> findByPage(SchoolSupplierDto schoolSupplierDto,PageHelper ph);

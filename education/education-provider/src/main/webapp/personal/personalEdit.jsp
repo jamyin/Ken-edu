@@ -8,28 +8,12 @@
 		parent.$.messager.progress('close');
 		$('#formEdit').form(
 						{																	
-							url : '${pageContext.request.contextPath}/userController/edit',
+							url : '${pageContext.request.contextPath}/userController/editMy',
 							onSubmit : function() {
 								var isValid = $(this).form('validate');
 								var error_message = '';
-							    var userAccount = $("#waresName").val();
-								if(userAccount==''){
-									error_message=error_message + '商品名称不能为空,';
-								}
-								var name = $("#spec").val();
-								if(name==''){
-									error_message = error_message +'商品规格不能为空,'; 
-								}
+							  
 								
-								var userNo = $("#shelfLife").val();
-								if(userNo==''){
-									error_message = error_message +'商品保质期不能为空,'; 
-								}
-								
-								var age = $("#unit").val();
-								if(age==''){
-									error_message = error_message +'单位不能为空,'; 
-								}
 								
 								
 							
@@ -73,6 +57,7 @@
 				style="overflow: hidden;">
 				<form id="formEdit" method="post" >
 				   <input id="id" name="id" type="hidden" value="${user.id}" />
+				   <input id="password" name="password" type="hidden" value="${user.password}" />
 					<table class="table table-hover table-condensed">
 						<tr>
 							<th>姓名</th>

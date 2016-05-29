@@ -1,9 +1,14 @@
 package com.ssic.education.government.controller;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -18,6 +23,7 @@ import com.ssic.educateion.common.dto.EduAreaDto;
 import com.ssic.educateion.common.dto.EduCanteenDto;
 import com.ssic.educateion.common.dto.EduSchoolDto;
 import com.ssic.educateion.common.dto.EduSchoolSupplierDto;
+import com.ssic.educateion.common.dto.EduUsersDto;
 import com.ssic.educateion.common.dto.LedgerDto;
 import com.ssic.educateion.common.dto.ProLicenseDto;
 import com.ssic.educateion.common.dto.ProPackagesDto;
@@ -26,6 +32,7 @@ import com.ssic.educateion.common.dto.ProWaresDto;
 import com.ssic.educateion.common.dto.SupplierReviewedDto;
 import com.ssic.education.handle.service.AreaService;
 import com.ssic.education.handle.service.EduSchoolService;
+import com.ssic.education.handle.service.EduUsersService;
 import com.ssic.education.handle.service.IEduCanteenService;
 import com.ssic.education.handle.service.IEduSchoolSupplierService;
 import com.ssic.education.handle.service.ProLedgerService;
@@ -34,6 +41,7 @@ import com.ssic.education.handle.service.ProSupplierService;
 import com.ssic.education.handle.service.ProWaresService;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.constants.SchoollevelEnum;
+import com.ssic.education.utils.constants.SessionConstants;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 import com.ssic.education.utils.model.Response;
@@ -78,6 +86,9 @@ public class EduSchoolController extends BaseController{
 	@Autowired
 	private AreaService areaService;
 	
+	@Autowired
+	private EduUsersService eduUsersService;
+	
 	/**
 	 * 
 	  @Name:  list 
@@ -89,8 +100,15 @@ public class EduSchoolController extends BaseController{
 	  @return
 	 */
 	@RequestMapping(value = "/list")
-	public ModelAndView list(EduSchoolDto dto, PageQuery page) {
+	public ModelAndView list(HttpServletRequest request, HttpServletResponse response,
+    		HttpSession session, EduSchoolDto dto, PageQuery page) {
 		ModelAndView mv = getModelAndView();
+		String id = (String) getRequest().getSession().getAttribute(SessionConstants.LOGIN_USER_INFO);
+		EduUsersDto usersdto = getLoginUser(request, response, session, id);
+		if (StringUtils.isNotBlank(usersdto.getSourceId()) && !usersdto.getSourceId().equals("1") 
+				&& usersdto.getSourceType() == DataStatus.DISABLED) {
+			dto.setCommitteeId(usersdto.getSourceId());
+		}		
 		PageResult<EduSchoolDto> result = eduSchoolService.list(dto, page);
 		List<EduAreaDto> areaDtos = areaService.queryAll();
 		mv.addObject("pageList", result);
@@ -101,6 +119,21 @@ public class EduSchoolController extends BaseController{
 		return mv;
 	}
 	
+	public EduUsersDto getLoginUser(HttpServletRequest request, HttpServletResponse response,
+    		HttpSession session, String id){
+    	if(id==null){
+    		try {
+				response.sendRedirect(request.getContextPath() + "/login.htm");
+				return null;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+    	}
+    	EduUsersDto usersDto = new EduUsersDto();
+    	usersDto.setId(id);
+    	return eduUsersService.getUserInfo(usersDto);
+    }
+	
 	@RequestMapping(value = "/canteen")
 	public ModelAndView canteen(EduCanteenDto dto) {
 		ModelAndView mv = this.getModelAndView();
@@ -109,6 +142,21 @@ public class EduSchoolController extends BaseController{
 		mv.setViewName("/school/school_list");
 		return mv;
 	}
+	
+	@RequestMapping("/schoolSupplier")
+	public Response<String> schoolSupplier(EduSchoolSupplierDto eduSchoolSupplierDto) {
+		Response<String> res = new Response<String>();
+		int result = iEduSchoolSupplierService.save(eduSchoolSupplierDto);
+		if (result == DataStatus.ENABLED) {
+			res.setStatus(DataStatus.HTTP_SUCCESS);
+			res.setMessage("添加成功！");
+		}else {
+			res.setStatus(DataStatus.HTTP_FAILE);
+			res.setMessage("添加失败！");
+		}
+		return res;
+	}
+	
 	
 	/**
 	 * 
@@ -147,7 +195,12 @@ public class EduSchoolController extends BaseController{
 		LedgerDto ledgerDto = new LedgerDto();
 		ledgerDto.setReceiverId(dto.getCustomerId());
 		PageResult<LedgerDto> ledgerDtos = proLedgerService.selectLedgerPage(ledgerDto,query);
-		mv.setViewName("/school/menu_city");		
+		if (dto.getSource() == DataStatus.DISABLED) {
+			mv.setViewName("/school/menu_city");
+		}
+		if (dto.getSource() == DataStatus.ENABLED) {
+			mv.setViewName("/school/menu_city");
+		}		
 		mv.addObject("dto", dto);
 		mv.addObject("mWares", mWares);
 		mv.addObject("eduSchoolSupplierDtos", eduSchoolSupplierDtos);
@@ -277,7 +330,7 @@ public class EduSchoolController extends BaseController{
 			res.setMessage("更新成功！");
 		}if (result == DataStatus.DISABLED) {
 			res.setStatus(DataStatus.HTTP_FAILE);
-			res.setMessage("更新成功！");
+			res.setMessage("更新失败！");
 		}
 		return res;
 	}
