@@ -11,7 +11,7 @@ public interface IEduSchoolSupplierService {
 	
 	EduSchoolSupplierDto searchEduSchoolSupplierDto(EduSchoolSupplierDto eduSchoolSupplierDto);
 
-	String findSchoolIdByReceiverId(LedgerDto ledgerDto);
+	String findSchoolIdByReceiverId(String receiverName,String sourceId);
 	
 //	List<SchoolSupplierDto> findByPage(SchoolSupplierDto schoolSupplierDto,PageHelper ph);
 //	

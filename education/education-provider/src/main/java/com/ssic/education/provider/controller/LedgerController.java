@@ -121,7 +121,7 @@ public class LedgerController {
 			return j;
 		}
 		String receiverId = eduSchoolSupplierService
-				.findSchoolIdByReceiverId(ledgers.get(0));
+				.findSchoolIdByReceiverId(ledgers.get(0).getReceiverName(),ledgers.get(0).getSourceId());
 		if (receiverId == null) {
 			j.setMsg("不存在的配送点");
 			j.setSuccess(false);
@@ -150,6 +150,11 @@ public class LedgerController {
 			ledger.setReceiverId(receiverId);
 			ledger.setSourceId(sourceId);
 			ProWaresDto warerDto = waresService.findWaresBySupplierId(ledger);
+			if(warerDto==null){
+				j.setMsg(ledger.getName() + "不存在的采购品");
+				j.setSuccess(false);
+				return j;
+			}
 			ledger.setWaresId(warerDto.getId());
 			if(ledger.getProductionDate()!=null){
 				if(!ledgers.get(0).getActionDate().after(ledger.getProductionDate())){
@@ -250,7 +255,7 @@ public class LedgerController {
 			return j;
 		}
 		String receiverId = eduSchoolSupplierService
-				.findSchoolIdByReceiverId(ledgers.get(0));
+				.findSchoolIdByReceiverId(ledgers.get(0).getReceiverName(),ledgers.get(0).getSourceId());
 		if (receiverId == null) {
 			j.setMsg("不存在的配送点");
 			j.setSuccess(false);

@@ -47,9 +47,9 @@
 		FROM t_edu_school_supplier a,t_edu_school b
 		WHERE
 		a.school_id=b.id
-		AND a.supplier_id=#{ledgerDto.sourceId}
+		AND a.supplier_id=#{sourceId}
 		AND
-		trim(b.school_name)=#{ledgerDto.receiverName}
+		trim(b.school_name)=#{receiverName}
 		AND b.stat = 1
 	</select>
 
