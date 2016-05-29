@@ -146,21 +146,16 @@ public class TaskController {
     * @date 2016年5月20日 下午5:53:55
     * @return Response<String>    返回类型
      */
-    @RequestMapping("/upadteTask/{id}/{receiveId}")
+    @RequestMapping("/upadteTask/{id}")
     @ResponseBody
-    public Response<String> upadteTask(@PathVariable("id")String id, @PathVariable("receiveId")String receiveId){
+    public Response<String> upadteTask(@PathVariable("id")String id){
     	Response<String> result = new Response<String>();
     	if(StringUtils.isEmpty(id)){
     		result.setStatus(DataStatus.HTTP_FAILE);
     		result.setMessage("任务Id为空");
     		return result;
     	}
-    	if(StringUtils.isEmpty(receiveId)){ 
-    		result.setStatus(DataStatus.HTTP_FAILE);
-    		result.setMessage("用户Id为空");
-    		return result;
-    	}
-    	Integer flag = taskService.updateTask(id, receiveId);
+    	Integer flag = taskService.updateTask(id);
     	if(flag > 0){
     		result.setStatus(DataStatus.HTTP_SUCCESS);
     		result.setMessage("修改任务成功");

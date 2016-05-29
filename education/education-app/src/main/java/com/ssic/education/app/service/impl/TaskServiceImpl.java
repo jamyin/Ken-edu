@@ -59,8 +59,8 @@ public class TaskServiceImpl implements ITaskService{
 	}
 
 	@Override
-	public Integer updateTask(String id, String receiveId) {
-		return taskDao.updateTask(id, receiveId);
+	public Integer updateTask(String id) {
+		return taskDao.updateTask(id);
 	}
 
 	@Override

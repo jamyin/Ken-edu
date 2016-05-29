@@ -81,10 +81,9 @@ public class TaskDao extends MyBatisBaseDao<EduTask> {
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		return mapper.countByExample(example);
 	}
-	public Integer updateTask(String id, String receiveId) {
+	public Integer updateTask(String id) {
 		EduTaskReceive receive = new EduTaskReceive();
-		receive.setId(id);
-		receive.setReceiveId(receiveId);
+		receive.setTaskId(id);
 		receive.setReadstat(1);    //设置已读
 		EduTaskReceiveExample example = new EduTaskReceiveExample();
 		return exMapper.updateByExampleSelective(receive, example);
