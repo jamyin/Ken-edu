@@ -14,6 +14,6 @@ public interface EduSchoolSupplierExMapper {
 
 	Long countAllLedgerAddress(@Param("ledgerAddress")LedgerAddressDto lad);
 	
-	String findSchoolIdByReceiverId(@Param("ledgerDto") LedgerDto ld);
+	String findSchoolIdByReceiverId(@Param("receiverName")String receiverName,@Param("sourceId")String sourceId);
 	
 }
