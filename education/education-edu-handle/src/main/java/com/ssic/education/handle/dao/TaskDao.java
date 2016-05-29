@@ -108,7 +108,17 @@ public class TaskDao extends MyBatisBaseDao<EduTask> {
 	}
 
 	public EduTask findTaskByPara(EduTaskDto eduTaskDto) {
-		return mapper.selectByPrimaryKey(eduTaskDto.getId());
+		EduTaskExample example = new EduTaskExample();
+		EduTaskExample.Criteria criteria = example.createCriteria();
+		if (StringUtils.isNotEmpty(eduTaskDto.getId())){
+    		criteria.andCreateIdEqualTo(eduTaskDto.getId());
+    	}
+		criteria.andStatEqualTo(DataStatus.ENABLED);
+		List<EduTask> task = mapper.selectByExample(example);
+		if(task != null && task.size() > 0){
+			return task.get(0);
+		}
+		return null;
 	}
 
 }
