@@ -307,13 +307,20 @@ public class EduSchoolController extends BaseController{
 	}
 	
 	@RequestMapping(value = "/addSupplier")
-	public ModelAndView addSupplier(String schoolId,PageQuery page) {
+	public ModelAndView addSupplier(EduSchoolSupplierDto eduSchoolSupplierDto,PageQuery page) {
 		ModelAndView mv = getModelAndView();
-		ProSupplierDto proSupplierDto = new ProSupplierDto();
-		PageResult<ProSupplierDto> results = proSupplierService.querySupplierByParams(proSupplierDto, page);
+		ProSupplierDto proSupplierdto = new ProSupplierDto();
+		if (StringUtils.isNotBlank(eduSchoolSupplierDto.getSupplierId())) {
+			 proSupplierdto = proSupplierService.findById(eduSchoolSupplierDto.getSupplierId());
+		}		
+		ProSupplierDto dto = new ProSupplierDto();
+		dto.setReviewed((byte)1);
+		dto.setSupplierName(eduSchoolSupplierDto.getSupplierName());
+		List<ProSupplierDto> results = proSupplierService.findAll(dto);
 		mv.addObject("results", results);
-		mv.addObject("schoolId", schoolId);
-		mv.setViewName("/");
+		mv.addObject("eduSchoolSupplierDto", eduSchoolSupplierDto);
+		mv.addObject("proSupplierdto", proSupplierdto);
+		mv.setViewName("/school/add_offer_company");
 		return mv;
 	}
 	

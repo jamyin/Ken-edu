@@ -13,6 +13,8 @@ public class EduSchoolSupplierDto implements Serializable {
 	private String schoolId;
 
 	private String supplierId;
+	
+	private String supplierName;
 
 	private Date createTime;
 

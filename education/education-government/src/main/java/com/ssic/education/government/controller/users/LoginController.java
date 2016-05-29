@@ -65,8 +65,10 @@ public class LoginController extends BaseController{
 						res.setMessage("用户还未审批无法登陆！");
 					}
 				}	
-				if (null != eduUser.getSourceType() && eduUser.getSourceType() == DataStatus.DISABLED) {
-					setSession(eduUser.getId());
+				if (null != eduUser.getSourceType() ) {
+					if (eduUser.getSourceType() == DataStatus.EVA_TWO || eduUser.getSourceType() == DataStatus.DISABLED) {
+						setSession(eduUser.getId());
+					}
 				}
 			}			  
 		return res;
