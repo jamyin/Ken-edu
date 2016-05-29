@@ -6,12 +6,12 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-public class EduParentScChDto implements Serializable{
+public class EduParentScChDto implements Serializable {
 
 	private String id;
 
 	private String schoolId;
-	
+
 	private String parentId;
 
 	private String schoolName;

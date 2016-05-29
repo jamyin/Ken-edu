@@ -39,9 +39,8 @@ public class TaskController {
     */
     @RequestMapping("/findTaskListById/{id}")
     @ResponseBody
-    public Response<EduTaskDto> findTaskListById(@PathVariable("id")String id,String readstat, PageQuery query) {
-    	Response<EduTaskDto> result = new Response<EduTaskDto>();
-    	EduTaskDto dto = new EduTaskDto();
+    public Response<PageResult<EduTaskDto>> findTaskListById(@PathVariable("id")String id,String readstat, PageQuery query) {
+    	Response<PageResult<EduTaskDto>> result = new Response<PageResult<EduTaskDto>>();
     	if(StringUtils.isEmpty(id)){
      		result.setStatus(DataStatus.HTTP_FAILE);
      		result.setMessage("查询Id为空");
@@ -66,11 +65,17 @@ public class TaskController {
     	if(readstat.equals("3")){
     	dataList = taskService.findSendListById(id, query);
     	}
-    	dto.setReceiveReadList(dataList);
+//    	dto.setReceiveReadList(dataList);
 //    	dto.setReceiveNotReadList(receiveNotReadList);
-    	
-		result.setData(dto);
-    	return result;
+    	if(dataList != null){
+    		result.setStatus(DataStatus.HTTP_SUCCESS);
+    		result.setMessage("查询成功");
+    		result.setData(dataList);
+    		return result;
+    	}
+    	result.setStatus(DataStatus.HTTP_FAILE);
+		result.setMessage("查询失败");
+		return result;
     }
     
     /**

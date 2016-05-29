@@ -40,7 +40,7 @@ public class EduSchoolSupplierDao  extends MyBatisBaseDao<EduSchoolSupplier>{
 		return mapper.selectByExample(example);
 	}
 
-	public String findSchoolIdByReceiverId(LedgerDto ledgerDto) {
-		return exMapper.findSchoolIdByReceiverId(ledgerDto);
+	public String findSchoolIdByReceiverId(String receiverName,String sourceId) {
+		return exMapper.findSchoolIdByReceiverId(receiverName,sourceId);
 	}
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import lombok.Getter;
 
+import org.codehaus.plexus.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -26,7 +27,10 @@ public class EduParentScChDao extends MyBatisBaseDao<EduParentScCh> {
 		EduParentScChExample example = new EduParentScChExample();
 		Criteria criteria = example.createCriteria();
 
-
+		if(!StringUtils.isEmpty(eduParentScChDto.getParentId())){
+			criteria.andParentIdEqualTo(eduParentScChDto.getParentId());
+		}
+		
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		return mapper.selectByExample(example);
 	}
