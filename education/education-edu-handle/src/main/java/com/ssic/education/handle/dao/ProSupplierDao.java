@@ -2,9 +2,11 @@ package com.ssic.education.handle.dao;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import lombok.Getter;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -18,7 +20,9 @@ import com.ssic.education.handle.mapper.ProSupplierMapper;
 import com.ssic.education.handle.mapper.ProSupplierReceiverMapper;
 import com.ssic.education.handle.pojo.ProSupplier;
 import com.ssic.education.handle.pojo.ProSupplierExample;
+import com.ssic.education.handle.pojo.ProSupplierExample.Criteria;
 import com.ssic.education.handle.pojo.ProSupplierReceiver;
+import com.ssic.education.handle.pojo.ProSupplierReceiverExample;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.mybatis.MyBatisBaseDao;
@@ -61,6 +65,9 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 		ProSupplierExample.Criteria criteria = example.createCriteria();
 		if (null != dto.getReviewed()) {
 			criteria.andReviewedEqualTo(dto.getReviewed());
+		}
+		if (StringUtils.isNotBlank(dto.getSupplierName())){
+			criteria.andSupplierNameLike("%"+dto.getSupplierName().trim()+"%");
 		}
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		return mapper.countByExample(example);
@@ -154,5 +161,41 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 			String supplierId,String suppliName, Integer supplierType,Integer limit) {
 		// TODO Auto-generated method stub
 		return exMapper.searchSupplierListBySupplierId(supplierId,suppliName,supplierType,limit);
+	}
+
+	public ProSupplier findProSupplierByName(String name, String supplierId) {
+//		ProSupplierReceiverExample psrExample = new ProSupplierReceiverExample();
+//		com.ssic.education.handle.pojo.ProSupplierReceiverExample.Criteria psrCreate = psrExample
+//				.createCriteria();
+//		psrCreate.andReceiverIdEqualTo(supplierId);
+//		psrCreate.and
+//		List<ProSupplierReceiver> psrList = srMapper
+//				.selectByExample(psrExample);
+//		if (psrList.size() != 0) {
+//			for (ProSupplierReceiver psr : psrList) {
+//				ProSupplierExample example = new ProSupplierExample();
+//				Criteria create = example.createCriteria();
+//				create.andIdCardEqualTo(psr.getSupplierId());
+//				create.andSupplierNameEqualTo(name);
+//				List<ProSupplier> psList = mapper.selectByExample(example);
+//				if (psList.size() != 0) {
+//					return psList.get(0);
+//				}
+//			}
+//		}
+		return null;
+	}
+
+	public int importSupplier(Map<String, Map<ProSupplierReceiver, ProSupplier>> map) {
+		int i=0;
+		for (String str : map.keySet()) {
+			Map<ProSupplierReceiver, ProSupplier> mpp = map.get(str);
+			for (ProSupplierReceiver psr : mpp.keySet()) {
+				srMapper.insertSelective(psr);
+				ProSupplier supplier = mpp.get(psr);
+				i+= mapper.insertSelective(supplier);
+			}
+		}
+		return i;
 	}
 }
