@@ -262,7 +262,7 @@ public class UserController extends BaseController {
 	@RequestMapping("/edit")
 	@ResponseBody
 	public Json edit(TImsUsersDto user) {
-		Json j = new Json();
+			Json j = new Json();
 		
 		if (user.getPassword().length()<6){
 			j.setSuccess(false);
@@ -306,6 +306,55 @@ public class UserController extends BaseController {
 		}
 		return j;
 	}
+	
+	
+	
+	
+	/**
+	 * 修改自己的信息
+	 * 
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping("/editMy")
+	@ResponseBody
+	public Json editMy(TImsUsersDto user) {
+			Json j = new Json();
+		
+		
+		if(user.getName().length()>10){
+			j.setSuccess(false);
+			j.setMsg("用户名称不能大于10位");
+			return j;
+		}
+		
+
+		   Pattern p = Pattern.compile("^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\\.([a-zA-Z0-9_-])+)+$");		  
+		   Matcher isMail = p.matcher(user.getEmail());
+		   if(!StringUtils.isEmpty(user.getEmail())&&!isMail.matches()){
+			   j.setSuccess(false);
+			   j.setMsg("邮箱不合法");
+			   return j;
+		   }
+		   Pattern p2 = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
+		   Matcher isMail2 = p2.matcher(user.getUserNo());
+		   if(!StringUtils.isEmpty(user.getUserNo())&&!isMail2.matches()){
+			   j.setSuccess(false);
+			   j.setMsg("手机不合法");
+			   return j;
+		   }
+		try {
+			
+			userService.edit(user);
+			j.setSuccess(true);
+			j.setMsg("编辑成功！");
+			j.setObj(user);
+		} catch (Exception e) {
+			// e.printStackTrace();
+			j.setMsg(e.getMessage());
+		}
+		return j;
+	}
 
 	/**
 	 * 删除用户
@@ -318,12 +367,12 @@ public class UserController extends BaseController {
 	public Json delete(String id, HttpSession session) {
 		SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ConfigUtil.SESSIONINFONAME);
 		Json j = new Json();
-		if (id != null && !id.equalsIgnoreCase(sessionInfo.getId())) {// 不能删除自己
-			userService.delete(id);
+		if (id != null && id.equalsIgnoreCase(sessionInfo.getId())) {// 不能删除自己			
 			j.setMsg("不能删除自己！");
 			j.setSuccess(false);
 			return j;
 		}
+		userService.delete(id);
 		j.setMsg("删除成功！");
 		j.setSuccess(true);
 		return j;
