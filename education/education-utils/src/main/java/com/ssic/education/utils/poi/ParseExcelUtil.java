@@ -1,11 +1,9 @@
 package com.ssic.education.utils.poi;
 
-import java.beans.IntrospectionException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +14,7 @@ import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
 
 /**
  * 
@@ -253,7 +252,7 @@ public class ParseExcelUtil {
 	 * 
 	 * @throws UnSupportedCellTypeException
 	 */
-	public static String getStringCellValue(HSSFCell cell) {
+	public static String getStringCellValue(Cell cell) {
 		if (cell == null) {
 			return null;
 		}
