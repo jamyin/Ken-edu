@@ -1,12 +1,17 @@
 package com.ssic.education.provider.controller;
 
 import java.io.IOException;
-import java.text.DecimalFormat;
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,6 +34,7 @@ import com.ssic.educateion.common.dto.ProWaresDto;
 import com.ssic.educateion.common.utils.DataGrid;
 import com.ssic.educateion.common.utils.PageHelper;
 import com.ssic.education.handle.pojo.ProLedger;
+import com.ssic.education.handle.pojo.ProLedgerMaster;
 import com.ssic.education.handle.pojo.ProSupplier;
 import com.ssic.education.handle.pojo.ProWares;
 import com.ssic.education.handle.service.IEduSchoolSupplierService;
@@ -353,12 +359,16 @@ public class LedgerController {
 			return null;
 		}
 
-		// 转换excel到list
-		List<ProLedger> list = new ArrayList();
 		Date now = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/M/d");
-		DecimalFormat df2 = new DecimalFormat("#.##");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.M.d");
+		
+		Map<String, ProLedgerMaster> noMaster = new HashMap();
+		Map<ProLedgerMaster, List<ProLedger>> masterLedger = new LinkedHashMap();
+		
+		List<ProLedgerMaster> list = new ArrayList();
+		String errorMsg = null;
 		for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
+			ProLedgerMaster master = null;
 			ProLedger dto = new ProLedger();
 			HSSFRow hssfRow = hssfSheet.getRow(rowNum);
 			String name = null;
@@ -369,17 +379,39 @@ public class LedgerController {
 			String supplierName = null;
 
 			for (int i = 0; i < hssfRow.getLastCellNum(); i++) {
+				if (errorMsg != null) {
+					break;
+				}
+				
 				HSSFCell cell = hssfRow.getCell(i);
 				String value = ParseExcelUtil.getStringCellValue(cell);
-
+				if (value != null) {
+					value = value.trim();
+				}
+				
 				if (i == 0) {
+					// 配货号
+					master = noMaster.get(value);
+					if (master == null) {
+						master = new ProLedgerMaster();
+						noMaster.put(value, master);
+						masterLedger.put(master, new ArrayList());
+					}
+				}
+				if (i == 1 && master.getActionDate() != null) {
 					// 进货日期
-//					dto.setActionDate(sdf.parse(value));
-				} else if (i == 1) {
+					master.setActionDate(sdf.parse(value));
+				} else if (i == 2) {
 					// 名称
 					name = value;
-				} else if (i == 2) {
+				} else if (i == 3) {
+					// 数量
+					dto.setQuantity(new BigDecimal(value, new MathContext(2, RoundingMode.DOWN)));
+				} else if (i == 4) {
 					// 规格
+					spec = value;
+				} else if (i == 4) {
+					// 配货点
 					spec = value;
 				} else if (i == 3) {
 					// 生产企业
@@ -394,10 +426,6 @@ public class LedgerController {
 					} else {
 						dto.setWaresId(pw.getId());
 					}
-				} else if (i == 4) {
-					// 数量
-					// TODO need yanggang regenerate pojo
-					// dto.setUnit(df2.parse(value));
 				} else if (i == 5) {
 					// 生产日期
 					dto.setProductionDate(sdf.parse(value));
