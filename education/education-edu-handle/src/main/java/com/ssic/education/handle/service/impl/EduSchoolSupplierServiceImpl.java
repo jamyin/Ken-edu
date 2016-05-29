@@ -11,6 +11,7 @@ import com.ssic.educateion.common.dto.SupplierDto;
 import com.ssic.education.handle.dao.EduSchoolSupplierDao;
 import com.ssic.education.handle.pojo.EduSchoolSupplier;
 import com.ssic.education.handle.service.IEduSchoolSupplierService;
+import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.util.BeanUtils;
 
 @Service
@@ -47,6 +48,13 @@ public class EduSchoolSupplierServiceImpl implements IEduSchoolSupplierService{
 		if (StringUtils.isNotBlank(enEduSchoolSupplier.getId())) {
 			return eduSchoolSupplierDao.updateByPrimaryKeySelective(enEduSchoolSupplier);
 		}
+		List<EduSchoolSupplier> eduSchoolSuppliers= eduSchoolSupplierDao.searchEduSchoolSupplierDto(eduSchoolSupplierDto);
+		if (null != eduSchoolSuppliers && eduSchoolSuppliers.size()>0) {
+			for (EduSchoolSupplier eduSchoolSupplier : eduSchoolSuppliers) {
+				eduSchoolSupplier.setStat(DataStatus.DISABLED);
+				eduSchoolSupplierDao.updateByPrimaryKeySelective(eduSchoolSupplier);
+			}
+		}		
 		return eduSchoolSupplierDao.insertSelective(enEduSchoolSupplier);
 	}
 
