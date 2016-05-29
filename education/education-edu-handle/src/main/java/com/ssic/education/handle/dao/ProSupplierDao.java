@@ -5,6 +5,7 @@ import java.util.List;
 
 import lombok.Getter;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -61,6 +62,9 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 		ProSupplierExample.Criteria criteria = example.createCriteria();
 		if (null != dto.getReviewed()) {
 			criteria.andReviewedEqualTo(dto.getReviewed());
+		}
+		if (StringUtils.isNotBlank(dto.getSupplierName())){
+			criteria.andSupplierNameLike("%"+dto.getSupplierName().trim()+"%");
 		}
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		return mapper.countByExample(example);

@@ -34,6 +34,9 @@ public class ProSupplierServiceImpl implements ProSupplierService{
 		return proSupplierDao.updateByPrimaryKeySelective(proSupplier);
 	}
 	
+	public List<ProSupplierDto> findAll(ProSupplierDto dto) {
+		return proSupplierDao.findPage(dto, null);
+	}
 
 	public List<ProSupplierDto> querySupplierByParams(ProSupplierDto params) {
 		List<ViewProSupplierWithBLOBs> viewProSuppliers = viewProSupplierDao.queryViewSupplier(params, null);

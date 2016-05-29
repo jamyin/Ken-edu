@@ -50,15 +50,18 @@
 
     <h1 class="con-tt">
       <span class="title">${(eduSchoolDto.schoolName)!}</span>
-      <span class="offer_add">新增委托经营单位</span>
+      <#if dto.source == 1>
+      <a href="addSupplier.htm?schoolId=${(eduSchoolDto.id)!}&supplierId=${(eduSchoolSupplierDtos.supplierId)!}"><span class="offer_add">新增委托经营单位</span></a>
+      </#if>
     </h1>
 
     <div class="menu_box">
       <div class="subbar">
-        <p class="lef">学校名称：${(eduSchoolDto.schoolName)!}</p><a class="offer_delete" href="#">删除</a><p class="rig">供应商名称：<#if proSupplierDtos??>
+        <p class="lef">学校名称：${(eduSchoolDto.schoolName)!}</p><#if (dto.source == 1) && (eduSchoolSupplierDtos.supplierId??)><a class="offer_delete" href="#">删除</a> </#if><p class="rig">供应商名称：<#if (proSupplierDtos??) && (proSupplierDtos?size>0)>
 					<#list proSupplierDtos as supplier>
 						<a href="/pro/supplier/detail.htm?id=${(supplier.id)!}&source=1">${(supplier.supplierName)!}</a>
 					</#list>
+				<#else><span style="color: red;">暂无</span>
 				</#if></p>
       </div>
       <div class="menu_list">

@@ -96,9 +96,13 @@
       background: url(../img/dot.png) no-repeat 0 center; }
       .panel .list li a {
         color: #333; }
-      .panel .list li .date {
+      .panel .list li > .date {
         float: right;
         margin-right: 0.6rem; }
+      .panel .list li > .del {
+        float: right;
+        margin-left: 0.6rem;
+        color: #60ac62; }
 
 .sidebar .head {
   position: relative;

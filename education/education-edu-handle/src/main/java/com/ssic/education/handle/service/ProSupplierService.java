@@ -35,5 +35,7 @@ public interface ProSupplierService {
 	PageResult<ProSupplierDto> querySupplierByParams(ProSupplierDto params, PageQuery query);
 	
 	Integer updatePS(ProSupplierDto dto);
+	
+	public List<ProSupplierDto> findAll(ProSupplierDto dto);
 
 }
