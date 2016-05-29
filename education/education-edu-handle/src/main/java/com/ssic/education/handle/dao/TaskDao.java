@@ -108,6 +108,8 @@ public class TaskDao extends MyBatisBaseDao<EduTask> {
 		return exMappers.addTaskReceiveBatch(receiveDtoList);
 	}
 
-
+	public EduTask findTaskByPara(EduTaskDto eduTaskDto) {
+		return mapper.selectByPrimaryKey(eduTaskDto.getId());
+	}
 
 }

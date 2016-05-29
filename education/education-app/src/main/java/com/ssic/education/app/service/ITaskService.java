@@ -35,6 +35,9 @@ public interface ITaskService {
 
 	//发布任务
 	int sendTask(EduTaskDto eduTaskDto);
+	
+	//根据任务Id查询任务详情
+	EduTaskDto findTaskByPara(EduTaskDto eduTaskDto);
 
 }
 

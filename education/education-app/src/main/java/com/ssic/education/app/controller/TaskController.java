@@ -79,6 +79,39 @@ public class TaskController {
     }
     
     /**
+    * @Title: findTask
+    * @Description: 根据任务Id查询任务详情
+    * @author Ken Yin  
+    * @date 2016年5月29日 下午2:41:41
+    * @return Response<EduTaskDto>    返回类型
+     */
+    @RequestMapping("/findTaskByPara")
+    @ResponseBody
+    public Response<EduTaskDto> findTaskByPara(EduTaskDto eduTaskDto) {
+    	Response<EduTaskDto> result = new Response<EduTaskDto>();
+    	if(eduTaskDto == null){
+     		result.setStatus(DataStatus.HTTP_FAILE);
+     		result.setMessage("请求参数为空");
+     		return result;
+     	}
+    	if(StringUtils.isEmpty(eduTaskDto.getId())){
+     		result.setStatus(DataStatus.HTTP_FAILE);
+     		result.setMessage("任务Id为空");
+     		return result;
+     	}
+    	EduTaskDto taskDto = taskService.findTaskByPara(eduTaskDto);
+    	if(taskDto != null){
+    		result.setStatus(DataStatus.HTTP_SUCCESS);
+    		result.setMessage("查询任务成功");
+    		result.setData(taskDto);
+    		return result;
+    	}
+    	result.setStatus(DataStatus.HTTP_SUCCESS);
+		result.setMessage("未查到相关记录");
+		return result;
+    }
+    
+    /**
     * @Title: delTask
     * @Description: 逻辑删除任务
     * @author Ken Yin  
@@ -140,7 +173,7 @@ public class TaskController {
     }
     
     /**
-    * @Title: findReadList
+    * @Title: findReceiveList
     * @Description: 根据任务Id查询当前任务已读和未读列表
     * @author Ken Yin  
     * @date 2016年5月21日 上午11:34:50

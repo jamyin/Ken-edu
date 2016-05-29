@@ -105,6 +105,16 @@ public class TaskServiceImpl implements ITaskService{
 		return 0;
 	}
 
+	@Override
+	public EduTaskDto findTaskByPara(EduTaskDto eduTaskDto) {
+		EduTask eduTask = taskDao.findTaskByPara(eduTaskDto);
+		if(eduTask == null){
+			return null;
+		} 
+		EduTaskDto dto = BeanUtils.createBeanByTarget(eduTask, EduTaskDto.class);
+		return dto;
+	}
+
 	
 }
 
