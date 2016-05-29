@@ -12,4 +12,6 @@ import com.ssic.educateion.common.dto.EduCommitteeDto;
  */
 public interface IEduCommitteeService {
 	public List<EduCommitteeDto> queryCommittee(EduCommitteeDto eduCommitteeDto);
+	
+	public EduCommitteeDto findById (String id);
 }

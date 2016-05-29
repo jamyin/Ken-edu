@@ -30,5 +30,10 @@ public class EduCommitteeServiceImpl implements IEduCommitteeService {
 		List<EduCommittee> dataList = eduCommitteeDao.queryCommittee(eduCommitteeDto);
 		return BeanUtils.createBeanListByTarget(dataList,EduCommitteeDto.class);
 	}
+	
+	public EduCommitteeDto findById (String id) {
+		EduCommittee eduCommittee = eduCommitteeDao.selectByPrimaryKey(id);
+		return BeanUtils.createBeanByTarget(eduCommittee, EduCommitteeDto.class);
+	}
 
 }

@@ -40,6 +40,11 @@ public class EduSchoolSupplierServiceImpl implements IEduSchoolSupplierService{
 	public String findSchoolIdByReceiverId(String receiverName,String sourceId) {
 		return eduSchoolSupplierDao.findSchoolIdByReceiverId(receiverName,sourceId);
 	}
+	
+	public int save (EduSchoolSupplierDto eduSchoolSupplierDto) {
+		EduSchoolSupplier enEduSchoolSupplier = BeanUtils.createBeanByTarget(eduSchoolSupplierDto, EduSchoolSupplier.class);
+		return eduSchoolSupplierDao.updateByPrimaryKeySelective(enEduSchoolSupplier);
+	}
 
 
 }

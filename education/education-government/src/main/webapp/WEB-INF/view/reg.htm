@@ -118,8 +118,8 @@
 				alert("学校地址不能为空~");
 				return;
 			}
-			var province = $.trim($("#area").val());
-			if (province.length <= 0) {
+			var area = $.trim($("#area").val());
+			if (area.length <= 0) {
 				alert("区教委不能为空~");
 				return;
 			}
@@ -178,7 +178,7 @@
 				url:"/user/regUser.htm",
 				type:"post",
 				dataType:"json",
-				data:{schoolName:schoolName,address:address,area:province,sourceType:1,level:checkStr,
+				data:{schoolName:schoolName,address:address,area:area,sourceType:1,level:checkStr,
 					canteenName:canteenName,canteenContacts:canteenContacts,phoneNumber:phoneNumber,
 					userAccount:userAccount,password:passWord,jsonLic:jsonLic,cerSource:3},
 				async: false,

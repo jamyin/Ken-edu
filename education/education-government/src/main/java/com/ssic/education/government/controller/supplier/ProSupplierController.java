@@ -87,7 +87,17 @@ public class ProSupplierController extends BaseController {
 		
 		return mv;
 	}
-
+	
+	
+	@RequestMapping(value = "/details")
+	public ModelAndView details(ProSupplierDto dto) { 
+		ModelAndView mv = getModelAndView();
+		ProSupplierDto supplier = proSupplierService.findById(dto.getId());
+		mv.addObject("supplier", supplier);
+		mv.setViewName("supplier/supplier_qualifications");
+		return mv;
+	}
+	
 	/**		
 	 * <p>Description: 原料供应商分页查询列表 </p>
 	 * 
