@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ssic.educateion.common.dto.EduSchoolDto;
 import com.ssic.education.handle.dto.EduParentScChDto;
 import com.ssic.education.handle.service.IEduParentScChService;
 import com.ssic.education.utils.constants.DataStatus;
