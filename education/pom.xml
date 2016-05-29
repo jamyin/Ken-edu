@@ -72,6 +72,7 @@
 		<gotyeapiclient.version>2.1</gotyeapiclient.version>
 		<pinyin4j.version>2.5.0</pinyin4j.version>
 		<poi.version>3.12</poi.version>
+		<xmlbeans.version>2.6.0</xmlbeans.version>
 
 		<druid.version>0.2.20</druid.version>
 		<ims.version>0.0.14-SNAPSHOT</ims.version>
@@ -414,6 +415,11 @@
 				<groupId>org.apache.poi</groupId>
 				<artifactId>poi-ooxml-schemas</artifactId>
 				<version>${poi.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.xmlbeans</groupId>
+				<artifactId>xmlbeans</artifactId>
+				<version>${xmlbeans.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
