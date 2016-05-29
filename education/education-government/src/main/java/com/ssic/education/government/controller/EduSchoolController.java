@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ssic.educateion.common.dto.EduAreaDto;
+import com.ssic.educateion.common.dto.EduCanteenDto;
 import com.ssic.educateion.common.dto.EduSchoolDto;
 import com.ssic.educateion.common.dto.EduSchoolSupplierDto;
 import com.ssic.educateion.common.dto.LedgerDto;
@@ -25,6 +26,7 @@ import com.ssic.educateion.common.dto.ProWaresDto;
 import com.ssic.educateion.common.dto.SupplierReviewedDto;
 import com.ssic.education.handle.service.AreaService;
 import com.ssic.education.handle.service.EduSchoolService;
+import com.ssic.education.handle.service.IEduCanteenService;
 import com.ssic.education.handle.service.IEduSchoolSupplierService;
 import com.ssic.education.handle.service.ProLedgerService;
 import com.ssic.education.handle.service.ProPackagesService;
@@ -57,6 +59,9 @@ public class EduSchoolController extends BaseController{
 	
 	@Autowired
 	private IEduSchoolSupplierService iEduSchoolSupplierService;
+	
+	@Autowired
+	private IEduCanteenService iEduCanteenService;
 	
 	@Autowired
 	private ProPackagesService proPackagesService;
@@ -92,6 +97,15 @@ public class EduSchoolController extends BaseController{
 		mv.addObject("areaDtos", areaDtos);
 		mv.addObject("dto", dto);
 		mv.addObject("level", SchoollevelEnum.values());
+		mv.setViewName("/school/school_list");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/canteen")
+	public ModelAndView canteen(EduCanteenDto dto) {
+		ModelAndView mv = this.getModelAndView();
+		EduCanteenDto eduCanteenDto =iEduCanteenService.searchEduCanteenDto(dto);
+		mv.addObject("eduCanteenDto", eduCanteenDto);
 		mv.setViewName("/school/school_list");
 		return mv;
 	}

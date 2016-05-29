@@ -3,8 +3,6 @@ package com.ssic.educateion.common.dto;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.ssic.education.utils.model.PageResult;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
