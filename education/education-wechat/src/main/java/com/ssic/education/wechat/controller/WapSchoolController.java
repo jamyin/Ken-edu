@@ -1,5 +1,6 @@
 package com.ssic.education.wechat.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,48 +64,49 @@ public class WapSchoolController extends BaseController{
 			return new ModelAndView("redirect:/index.htm");
 		}
 		String schoolId = dataList.get(0).getSchoolId();
-		//学校详细信息
-		EduSchoolDto eduSchoolDto = eduSchoolService.findById(schoolId);
+
+		HashMap<String,Object> propertyMap = copyObject(schoolId);
 		
-		//学校对应的食堂信息
-		EduCanteenDto eduCanteenDto = new EduCanteenDto();
-		eduCanteenDto.setSchoolId(schoolId);
-		eduCanteenDto = iEduCanteenService.searchEduCanteenDto(eduCanteenDto);
-		
-		//学校对应的供应商信息
-		EduSchoolSupplierDto eduSchoolSupplierDto = new EduSchoolSupplierDto();
-		eduSchoolSupplierDto.setSchoolId(schoolId);
-		eduSchoolSupplierDto = iEduSchoolSupplierService.searchEduSchoolSupplierDto(eduSchoolSupplierDto);
-		
-		
-		mv.addObject("eduCanteenDto", eduCanteenDto);
-		mv.addObject("eduSchoolDto", eduSchoolDto);
-		mv.addObject("eduSchoolSupplierDto", eduSchoolSupplierDto);
+		mv.addObject("eduSchoolDto", propertyMap.get("eduSchoolDto"));
+		mv.addObject("eduCanteenDto", propertyMap.get("eduCanteenDto"));
+		mv.addObject("eduSchoolSupplierDto", propertyMap.get("eduSchoolSupplierDto"));
 		
 		mv.setViewName("school");
 		return mv;
 	}
 	
-	@RequestMapping(value="school/{schoolId}")
-	public ModelAndView school(@PathVariable String schoolId){
-		ModelAndView mv = getModelAndView();
+	public HashMap<String,Object> copyObject(String schoolId){
+		HashMap<String,Object> map = new HashMap<String,Object>();
 		//学校详细信息
 		EduSchoolDto eduSchoolDto = eduSchoolService.findById(schoolId);
+		map.put("eduSchoolDto", eduSchoolDto);
 		
 		//学校对应的食堂信息
 		EduCanteenDto eduCanteenDto = new EduCanteenDto();
 		eduCanteenDto.setSchoolId(schoolId);
 		eduCanteenDto = iEduCanteenService.searchEduCanteenDto(eduCanteenDto);
+		map.put("eduCanteenDto", eduCanteenDto);
 		
 		//学校对应的供应商信息
 		EduSchoolSupplierDto eduSchoolSupplierDto = new EduSchoolSupplierDto();
 		eduSchoolSupplierDto.setSchoolId(schoolId);
 		eduSchoolSupplierDto = iEduSchoolSupplierService.searchEduSchoolSupplierDto(eduSchoolSupplierDto);
+		map.put("eduSchoolSupplierDto", eduSchoolSupplierDto);
 		
+		return map;
 		
-		mv.addObject("eduCanteenDto", eduCanteenDto);
-		mv.addObject("eduSchoolDto", eduSchoolDto);
-		mv.addObject("eduSchoolSupplierDto", eduSchoolSupplierDto);
+	}
+	
+	
+	@RequestMapping(value="school/{schoolId}")
+	public ModelAndView school(@PathVariable String schoolId){
+		ModelAndView mv = getModelAndView();
+		
+		HashMap<String,Object> propertyMap = copyObject(schoolId);
+
+		mv.addObject("eduSchoolDto", propertyMap.get("eduSchoolDto"));
+		mv.addObject("eduCanteenDto", propertyMap.get("eduCanteenDto"));
+		mv.addObject("eduSchoolSupplierDto", propertyMap.get("eduSchoolSupplierDto"));
 		
 		mv.setViewName("school");
 		return mv;
