@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <#include "/common/head.htm" />
+  <link rel="stylesheet" href="static/css/supplier_qualification.css" media="screen" charset="utf-8">
+</head>
+<body>
+  <#include "/common/nav.htm" />
+
+  <div class="wrapperA">
+    <div class="cur_postion">
+      <span class="cp">当前位置:</span><a href="#">安全追溯</a><span class="gt">&gt;</span><a href="#">采购品列表</a><span class="gt">&gt;</span><a href="#">采购品详情</a>
+    </div>
+    <h1 class="con-tt"><span class="title">上海程联餐饮有限公司</span></h1>
+    <div class="con-bd">
+      <img class="con-img" src="static/img/sample-meat_200X200.png" alt="" />
+      <ul>
+        <li><label for="">单位名称:</label><span>上海程联餐饮有限公司</span></li>
+        <li><label for="">单位地址:</label><span>上海市奉贤区海湾镇燎原农场燎星公路901号</span></li>
+        <li><label for="">工商执照:</label><span>370282400002207-A</span><a class="img_nn" href="###">图片</a></li>
+        <li><label for="">食品生产证号:</label><span>QS321201022472</span><a class="img_nn" href="###">图片</a></li>
+        <li><label for="">食品流通证号:</label><span>QS321201022472</span><a class="img_nn" href="###">图片</a></li>
+        <li><label for="">食品经营许可证号码:</label><span>321281000096297</span><a class="img_nn" href="###">图片</a></li>
+        <li><label for="">餐饮服务证号:</label><span>459868466545864</span><a class="img_nn" href="###">图片</a></li>
+        <li><label for="">法定代表人:</label><span>李理</span></li>
+        <li><label for="">联系方式:</label><span>13800138000</span></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="cover">
+    <div class="c_content">
+      <h1><span class="closeCover">×</span></h1>
+      <img class="col_1" src="static/img/qualification_20X200.png" alt="" />
+    </div>
+  </div>
+
+   <#include "/common/footer.htm" />
+
+  <script type="text/javascript">
+  $(function(){
+    // debugger;
+    $(".nav").find("a").removeClass("cur");
+    $(".nav").find("a:eq(1)").addClass("cur");
+
+    //图片弹层
+    $(".img_nn").on("click",function(){
+      var w = $(".c_content").css("width");
+      var h = $(".c_content").css("height");
+      w = "-"+parseInt(w,10)/2+"px";
+      h = "-"+parseInt(h,10)/2+"px";
+      $(".c_content").css({"margin-left":w,"margin-top":h});
+      $(".cover").css({
+        "display": "block"
+      });
+    });
+    $(".closeCover").on("click", function() {
+      $(".cover").css({
+        "display": "none"
+      });
+    });
+  })
+  </script>
+</body>
+</html>

@@ -168,7 +168,8 @@ public class EduSchoolController extends BaseController{
 	  @return
 	 */
 	@RequestMapping(value = "/details")
-	public ModelAndView details(ProPackagesDto dto,PageQuery query) throws ParseException{
+	public ModelAndView details(HttpServletRequest request, HttpServletResponse response,
+    		HttpSession session, ProPackagesDto dto,PageQuery query) throws ParseException{
 		query.setPageSize(5);
 		ModelAndView mv = getModelAndView();
 		SimpleDateFormat sdf=new SimpleDateFormat(DateUtils.YMD_DASH);  
@@ -177,6 +178,11 @@ public class EduSchoolController extends BaseController{
 			dto.setSupplyDate(sdf.parse(dto.getSupplyDateStr()));
 		} else {
 			dto.setSupplyDate(new Date());
+		}
+		if (StringUtils.isBlank(dto.getCustomerId()) && dto.getSource() == DataStatus.ENABLED) {
+			String id = (String) getRequest().getSession().getAttribute(SessionConstants.LOGIN_USER_INFO);
+			EduUsersDto usersdto = getLoginUser(request, response, session, id);
+			dto.setCustomerId(usersdto.getSourceId());
 		}
 		EduSchoolDto eduSchoolDto = eduSchoolService.findById(dto.getCustomerId());
 		List<ProSupplierDto> proSupplierDtos = eduSchoolService.getSupplier(dto.getCustomerId());
@@ -229,8 +235,15 @@ public class EduSchoolController extends BaseController{
 	}
 	
 	@RequestMapping(value = "/checkList")
-	public ModelAndView checkList(SupplierReviewedDto dto, PageQuery page) {
+	public ModelAndView checkList(HttpServletRequest request, HttpServletResponse response,
+    		HttpSession session,SupplierReviewedDto dto, PageQuery page) {
 		ModelAndView mv = getModelAndView();
+		String id = (String) getRequest().getSession().getAttribute(SessionConstants.LOGIN_USER_INFO);
+		EduUsersDto usersdto = getLoginUser(request, response, session, id);
+		if (StringUtils.isNotBlank(usersdto.getSourceId()) && !usersdto.getSourceId().equals("1") 
+				&& usersdto.getSourceType() == DataStatus.DISABLED) {
+			dto.setCommitteeId(usersdto.getSourceId());
+		}	
 		PageResult<SupplierReviewedDto> result = eduSchoolService.list(dto, page);
 		mv.addObject("pageList", result);
 		mv.addObject("dto", dto);
@@ -292,6 +305,18 @@ public class EduSchoolController extends BaseController{
 		
 		return mv;
 	}
+	
+	@RequestMapping(value = "/addSupplier")
+	public ModelAndView addSupplier(String schoolId,PageQuery page) {
+		ModelAndView mv = getModelAndView();
+		ProSupplierDto proSupplierDto = new ProSupplierDto();
+		PageResult<ProSupplierDto> results = proSupplierService.querySupplierByParams(proSupplierDto, page);
+		mv.addObject("results", results);
+		mv.addObject("schoolId", schoolId);
+		mv.setViewName("/");
+		return mv;
+	}
+	
 	
 	/**
 	 * 

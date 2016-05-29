@@ -6,6 +6,20 @@
 	 <script src="/static/js/jquery-2.1.3.min.js" charset="utf-8"></script>
 	 <script src="/static/js/jquery-ui.min.js"></script>
 	 <link href="/static/css/jquery-ui.min.css" rel="stylesheet" />
+	  <style media="screen">
+        .offer_add {
+            padding: 5px;
+            background:#60ac62;
+            float: right;
+            cursor: pointer;
+        }
+      .offer_delete {
+          display: inline-block;
+          float: right;
+          margin-left: 20px;
+          color: #60ac62!important;
+      }
+  </style>
 </head>
 <body>
   <<!-- div class="header">
@@ -35,12 +49,13 @@
     </div>
 
     <h1 class="con-tt">
-      <span class="title">实验小学</span>
+      <span class="title">${(eduSchoolDto.schoolName)!}</span>
+      <span class="offer_add">新增委托经营单位</span>
     </h1>
 
     <div class="menu_box">
       <div class="subbar">
-        <p class="lef">学校名称：${(eduSchoolDto.schoolName)!}</p><p class="rig">供应商名称：<#if proSupplierDtos??>
+        <p class="lef">学校名称：${(eduSchoolDto.schoolName)!}</p><a class="offer_delete" href="#">删除</a><p class="rig">供应商名称：<#if proSupplierDtos??>
 					<#list proSupplierDtos as supplier>
 						<a href="/pro/supplier/detail.htm?id=${(supplier.id)!}&source=1">${(supplier.supplierName)!}</a>
 					</#list>
