@@ -44,6 +44,9 @@ public class EduSchoolSupplierServiceImpl implements IEduSchoolSupplierService{
 	
 	public int save (EduSchoolSupplierDto eduSchoolSupplierDto) {
 		EduSchoolSupplier enEduSchoolSupplier = BeanUtils.createBeanByTarget(eduSchoolSupplierDto, EduSchoolSupplier.class);
+		if (StringUtils.isNotBlank(enEduSchoolSupplier.getId())) {
+			return eduSchoolSupplierDao.updateByPrimaryKeySelective(enEduSchoolSupplier);
+		}
 		return eduSchoolSupplierDao.insertSelective(enEduSchoolSupplier);
 	}
 

@@ -1,10 +1,13 @@
 package com.ssic.education.government.controller.supplier;
 
+import java.util.Map;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ssic.educateion.common.dto.ProSupplierDto;
@@ -13,6 +16,7 @@ import com.ssic.education.government.controller.BaseController;
 import com.ssic.education.handle.service.ProLedgerService;
 import com.ssic.education.handle.service.ProSupplierService;
 import com.ssic.education.handle.service.ProWaresService;
+import com.ssic.education.utils.model.MessageResp;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 
@@ -90,12 +94,13 @@ public class ProSupplierController extends BaseController {
 	
 	
 	@RequestMapping(value = "/details")
-	public ModelAndView details(ProSupplierDto dto) { 
-		ModelAndView mv = getModelAndView();
+	@ResponseBody
+	public Map<String,Object> details(ProSupplierDto dto) { 
 		ProSupplierDto supplier = proSupplierService.findById(dto.getId());
-		mv.addObject("supplier", supplier);
-		mv.setViewName("supplier/supplier_qualifications");
-		return mv;
+		if (null != supplier) {
+			return MessageResp.getMessage(true,supplier);
+		}
+		return MessageResp.getMessage(false,"查询失败！");
 	}
 	
 	/**		
