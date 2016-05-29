@@ -151,8 +151,8 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 	}
 
 	public List<ProSupplierDto> searchSupplierListBySupplierId(
-			String supplierId, int supplierType,int limit) {
+			String supplierId,String suppliName, Integer supplierType,Integer limit) {
 		// TODO Auto-generated method stub
-		return exMapper.searchSupplierListBySupplierId(supplierId,supplierType,limit);
+		return exMapper.searchSupplierListBySupplierId(supplierId,suppliName,supplierType,limit);
 	}
 }
