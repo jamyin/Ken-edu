@@ -66,6 +66,7 @@ public class LedgerService implements ILedgerService {
 			lmm.insertSelective(o);
 			List<ProLedger> list = map.get(o);
 			for (ProLedger oo : list) {
+				oo.setId(UUID.randomUUID().toString());
 				oo.setMasterId(o.getId());
 				lm.insertSelective(oo);
 			}
