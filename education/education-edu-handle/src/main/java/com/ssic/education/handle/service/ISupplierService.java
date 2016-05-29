@@ -1,6 +1,7 @@
 package com.ssic.education.handle.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.ssic.educateion.common.dto.LedgerDto;
 import com.ssic.educateion.common.dto.ProSupplierDto;
@@ -77,4 +78,9 @@ public interface ISupplierService {
 		 * @parem limit 可以为空
 	 */
 	List<ProSupplierDto> searchSupplierListBySupplierId(String supplierId,String suppliName,Integer supplierType, Integer limit);
+
+	ProSupplier findProSupplierByName(String value,String supplierId);
+
+	int importSupplier(Map<String, Map<ProSupplierReceiver, ProSupplier>> map);
+
 }

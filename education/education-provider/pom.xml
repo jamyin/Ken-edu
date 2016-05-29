@@ -152,6 +152,10 @@
 			<groupId>net.sf.ezmorph</groupId>
 			<artifactId>ezmorph</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.xmlbeans</groupId>
+			<artifactId>xmlbeans</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>com.ssic</groupId>
@@ -180,7 +184,7 @@
 			</resource>
 		</resources>
 		<plugins>
-			
+
 		</plugins>
 	</build>
 

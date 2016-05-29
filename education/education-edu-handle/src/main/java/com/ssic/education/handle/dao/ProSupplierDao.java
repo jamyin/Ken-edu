@@ -168,7 +168,6 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 		com.ssic.education.handle.pojo.ProSupplierReceiverExample.Criteria psrCreate = psrExample
 				.createCriteria();
 		psrCreate.andReceiverIdEqualTo(supplierId);
-//		psrCreate.and
 		List<ProSupplierReceiver> psrList = srMapper
 				.selectByExample(psrExample);
 		if (psrList.size() != 0) {
@@ -177,6 +176,7 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 				Criteria create = example.createCriteria();
 				create.andIdCardEqualTo(psr.getSupplierId());
 				create.andSupplierNameEqualTo(name);
+				create.andStatEqualTo(1);
 				List<ProSupplier> psList = mapper.selectByExample(example);
 				if (psList.size() != 0) {
 					return psList.get(0);
