@@ -54,4 +54,11 @@ public class ProWaresServiceImpl implements ProWaresService {
         return null;
     }
 
+
+	@Override
+	public List<ProWaresDto> searchProWares(String schoolId,String waresName) {
+		// TODO Auto-generated method stub
+		return proWaresDao.searchProWares(schoolId,waresName);
+	}
+
 }

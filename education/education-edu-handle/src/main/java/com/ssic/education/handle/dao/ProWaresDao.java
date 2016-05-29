@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ssic.educateion.common.dto.ProWaresDto;
+import com.ssic.education.handle.mapper.ProWaresExMapper;
 import com.ssic.education.handle.mapper.ProWaresMapper;
 import com.ssic.education.handle.pojo.ProWares;
 import com.ssic.education.handle.pojo.ProWaresExample;
@@ -27,6 +28,10 @@ public class ProWaresDao extends MyBatisBaseDao<ProWares>{
 	@Getter
 	@Autowired
 	private ProWaresMapper mapper;
+	
+	@Getter
+	@Autowired
+	private ProWaresExMapper mapperEx;
 
 	public List<ProWares> queryWaresByParams(ProWaresDto dto, PageQuery query) {
 		ProWaresExample example = new ProWaresExample();
@@ -73,5 +78,10 @@ public class ProWaresDao extends MyBatisBaseDao<ProWares>{
 			}
 		}
 		criteria.andStatEqualTo(DataStatus.ENABLED);
+	}
+
+	public List<ProWaresDto> searchProWares(String schoolId,String waresName) {
+		// TODO Auto-generated method stub
+		return mapperEx.searchProWares(schoolId,waresName);
 	}
 }
