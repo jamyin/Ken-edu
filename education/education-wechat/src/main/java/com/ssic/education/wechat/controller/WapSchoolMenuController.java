@@ -42,6 +42,13 @@ public class WapSchoolMenuController extends BaseController{
 		Response<List<ProPackagesDto>> response = new Response<List<ProPackagesDto>>();
 		List<ProPackagesDto> dataList =  proPackagesService.searchProSchoolPackage(customerId,timeDate);
 		
+		
+//		packageId ->  t_pro_dishes -> t_pro_wares
+//		t_pro_nutritional 营养信息
+		for(ProPackagesDto proPackageDto : dataList){
+			proPackageDto.setProDishesDtos(null);
+		}
+		
 		response.setData(dataList);
 		
 		return response;
