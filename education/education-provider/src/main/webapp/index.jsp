@@ -165,7 +165,7 @@
 				<a onclick="loadUrl(this);" data-src="waresController/manager" data-text="原料管理" class="easyui-linkbutton" plain="true" iconCls="icon-edit">原料管理</a>
 				<a onclick="loadUrl(this);" data-src="proSupplierController/manager" data-text="供应商管理" class="easyui-linkbutton" plain="true" iconCls="icon-refresh">供应商管理</a>
 				<a onclick="loadUrl(this);" data-src="ledgerController/manager" data-text="配货管理" class="easyui-linkbutton" plain="true" iconCls="icon-search">配货管理</a>
-				<a onclick="loadUrl(this);" data-src="http://www.baidu.com" data-text="轨迹管理" class="easyui-linkbutton" plain="true">轨迹管理</a>
+				
 				<a onclick="loadUrl(this);" data-src="ledgerAddressController/manager" data-text="配货点管理" class="easyui-linkbutton" plain="true" iconCls="icon-print">配货点管理</a>
 				<a onclick="loadUrl(this);" data-src="userController/manager" data-text="用户管理" class="easyui-linkbutton" plain="true" iconCls="icon-help">用户管理</a>
 				<a onclick="loadUrl(this);" data-src="personalController/manager" data-text="个人中心" class="easyui-linkbutton" plain="true" iconCls="icon-users">个人中心</a>
