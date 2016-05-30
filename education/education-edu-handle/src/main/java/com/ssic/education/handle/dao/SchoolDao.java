@@ -99,5 +99,14 @@ public class SchoolDao extends MyBatisBaseDao<EduSchool> {
 		return mappers.findSchoolDetialListAccount(id, eduSchoolDto);
 	}
 
+	public List<EduSchool> findSchoolList(SchoolDto schoolDto, PageQuery query) {
+		EduSchoolExample example = new EduSchoolExample();
+		EduSchoolExample.Criteria criteria = example.createCriteria();
+		assemblyParams(schoolDto, criteria);
+		example.setOrderByClause("create_time DESC limit "+query.getStartNum() +"," + query.getPageSize());
+		List<EduSchool> list = mapper.selectByExample(example);
+		return list;
+	}
+
 }
 

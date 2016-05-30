@@ -47,5 +47,15 @@ public class SchoolsServiceImpl implements ISchoolService{
 		return new PageResult<EduSchoolDto>(query, dtoList);
 	}
 
+	@Override
+	public PageResult<SchoolDto> findSchoolList(SchoolDto schoolDto,
+			PageQuery query) {
+		List<EduSchool> list = schoolDao.findSchoolList(schoolDto, query);
+		List<SchoolDto> schoolDtoList = BeanUtils.createBeanListByTarget(list, SchoolDto.class);
+		int total = schoolDao.selectSchoolAccount(schoolDto);
+		query.setTotal(total);
+		return new PageResult<SchoolDto>(query, schoolDtoList);
+	}
+
 }
 

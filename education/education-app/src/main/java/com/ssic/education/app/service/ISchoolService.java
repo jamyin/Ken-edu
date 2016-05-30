@@ -13,10 +13,14 @@ import com.ssic.education.utils.model.PageResult;
 *
  */
 public interface ISchoolService {
-
 	//查询所有学校列表-带分页
 	PageResult<SchoolDto> findSchoolList(SchoolDto schoolDto,
+				PageQuery query);
+
+	//查询所有学校列表
+	PageResult<SchoolDto> findSchoolList(SchoolDto schoolDto,
 			PageQuery query, Integer isPage);
+	
 	//根据学校id查学校信息（需要带出当天全部年级菜单）
 	PageResult<EduSchoolDto> findSchoolDetialList(String id,EduSchoolDto eduSchoolDto, PageQuery query);
 	
