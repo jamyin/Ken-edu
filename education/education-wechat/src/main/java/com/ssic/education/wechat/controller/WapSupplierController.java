@@ -64,19 +64,20 @@ public class WapSupplierController extends BaseController{
 			EduCanteenDto eduCanteenDto = new EduCanteenDto();
 			eduCanteenDto.setSchoolId(relationId);
 			eduCanteenDto = iEduCanteenService.searchEduCanteenDto(eduCanteenDto);
-			
-			infoObj = copyCanteenProperty(eduCanteenDto);
-			
-			List<SupplierDto> supplierList = iEduSchoolSupplierService.searchEduSchoolSupplierListDto(relationId);
-			if(!supplierList.isEmpty()){
-				supplierId = supplierList.get(0).getId();
+			if(eduCanteenDto!=null){
+				infoObj = copyCanteenProperty(eduCanteenDto);
+				
+				List<SupplierDto> supplierList = iEduSchoolSupplierService.searchEduSchoolSupplierListDto(relationId);
+				if(!supplierList.isEmpty()){
+					supplierId = supplierList.get(0).getId();
+				}
+				
+				//资质信息
+				ProLicenseDto proLicenseDto = new ProLicenseDto();
+				proLicenseDto.setRelationId(eduCanteenDto.getId());
+				proLicenseDto.setCerSource(Short.valueOf("3"));
+				resultList = iProLicenseService.searchProLicenseList(proLicenseDto);				
 			}
-			
-			//资质信息
-			ProLicenseDto proLicenseDto = new ProLicenseDto();
-			proLicenseDto.setRelationId(eduCanteenDto.getId());
-			proLicenseDto.setCerSource(Short.valueOf("3"));
-			resultList = iProLicenseService.searchProLicenseList(proLicenseDto);
 		}else if(Objects.equal(companyType, 2)){
 			//基本信息
 			ProSupplierDto proSupplierDto =  iSupplierService.searchProSupplierById(relationId);
@@ -155,12 +156,10 @@ public class WapSupplierController extends BaseController{
 
 	private InfoObj copyCanteenProperty(EduCanteenDto eduCanteenDto) {
 		InfoObj infoObj = new InfoObj();
-		if(eduCanteenDto!=null){
-			infoObj.setName(eduCanteenDto.getCanteenName());
-			infoObj.setAddress("");
-			infoObj.setMobile(eduCanteenDto.getPhoneNumber());
-			infoObj.setRelationer(eduCanteenDto.getCanteenContacts());			
-		}
+		infoObj.setName(eduCanteenDto.getCanteenName());
+		infoObj.setAddress("");
+		infoObj.setMobile(eduCanteenDto.getPhoneNumber());
+		infoObj.setRelationer(eduCanteenDto.getCanteenContacts());			
 		return infoObj;
 	}
 
