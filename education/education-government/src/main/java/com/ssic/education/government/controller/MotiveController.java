@@ -57,6 +57,9 @@ public class MotiveController extends BaseController {
 
 		// 0市教委，1学校, 2区教委
 		List<InfoList> dataList = new ArrayList<MotiveController.InfoList>();
+		if (Objects.equal(getEduUsersDto(),null)) {// 查询市教委下的区教委信息
+			return new ModelAndView("redirect:/login.htm");
+		}
 		if (Objects.equal(getEduUsersDto().getSourceType(), Byte.valueOf("0"))) {// 查询市教委下的区教委信息
 			EduCommitteeDto eduCommitteeDto = new EduCommitteeDto();
 			eduCommitteeDto.setType(Short.valueOf("2"));
@@ -70,6 +73,8 @@ public class MotiveController extends BaseController {
 			List<EduSchoolDto> resultList = eduSchoolService
 					.searchEduScholDtoList(eduSchoolDto);
 			dataList = copyProperty(resultList);
+		}else{
+			
 		}
 
 		mv.addObject("dataList", dataList);
