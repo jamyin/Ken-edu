@@ -198,6 +198,7 @@
 			width : 1000,
 			height : 500,
 			href : '${pageContext.request.contextPath}/ledgerController/addLedger',
+			style : 'overflow-y:scroll;',
 			buttons : [ {
 				text : '添加',
 				handler : function() {
