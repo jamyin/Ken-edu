@@ -8,7 +8,7 @@ function loadscMenu(){
 	var timeDate = $('#sel_date').val();
 	var dataParams = {customerId:customerId,timeDate:timeDate};
 	$.ajax({
-		url:'/wap/scMenu/search.htm?customerId='+customerId,
+		url:'/wap/scMenu/search.htm',
 		type:"POST",
 		data:dataParams,
 		dataType:'json',
