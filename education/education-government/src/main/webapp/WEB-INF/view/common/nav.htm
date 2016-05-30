@@ -6,7 +6,42 @@
         </div>
     </div>
 </div>
+
 <div class="nav">
+	<ul>
+		<li><a class="cur" href="/main.htm">首页</a></li>
+		<#if navList ??>
+        	<#list navList as data>
+        		<li class="bar${(data_index+2)}">
+        			<a href="${(data.menuUrl)!}">${(data.menuName)!}</a>
+        			<#if data.childList ??>
+        				<div class="wrap">
+        					<ul>
+        						<#list data.childList as result>
+        							<li><a href="${(result.menuUrl)!}">${(result.menuName)!}</a></li>
+        						</#list>
+        					</ul>
+        				</div>
+        			</#if>
+        		</li>
+        	</#list>
+        </#if>		
+<!-- 		<li><a class="" href="index.html">安全追溯</a></li>
+		<li class="bar3">
+			<a class="" href="index.html">通知通告</a>
+			<div class="wrap">
+				<ul>
+					<li><a href="###">健康宣教</a></li>
+					<li><a href="###">通告公示</a></li>
+					<li><a href="###">通知</a></li>
+				</ul>
+			</div>
+		</li>
+		<li class="bar4"><a class="" href="index.html">信息发布</a><div class="wrap"><ul><li><a href="###">公告发布</a></li><li><a href="###">通知发布</a></li></ul></div></li> -->
+	</ul>
+</div>
+
+<!-- <div class="nav">
     <div class="wrap">
         <a href="/main.htm">首页</a>
         <#if navList ??>
@@ -14,11 +49,5 @@
         		<a class="" href="${(data.menuUrl)!}">${(data.menuName)!}</a>
         	</#list>
         </#if>
-<!--         <a class="" href="/pro/supplier/search.htm">安全追溯</a>
-        <a class="" href="/edu/school/list.htm?source=0">菜谱</a>
-        <a class="" href="index.html">健康宣教</a>
-        <a class="" href="index.html">通告公示</a>
-        <a class="" href="index.html">任务传达</a>
-        <a class="" href="index.html">发布</a> -->
     </div>
-</div>
+</div> -->

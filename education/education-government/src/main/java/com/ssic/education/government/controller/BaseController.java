@@ -7,7 +7,6 @@ import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -17,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.common.base.Objects;
 import com.ssic.educateion.common.dto.EduAreaDto;
-import com.ssic.educateion.common.dto.EduCommitteeDto;
 import com.ssic.educateion.common.dto.EduSchoolDto;
 import com.ssic.educateion.common.dto.EduUsersDto;
 import com.ssic.education.government.controller.dto.MenuListDto;
@@ -26,7 +24,6 @@ import com.ssic.education.handle.service.AreaService;
 import com.ssic.education.handle.service.EduSchoolService;
 import com.ssic.education.handle.service.EduUsersService;
 import com.ssic.education.handle.service.IEduCommitteeService;
-import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.constants.SessionConstants;
 import com.ssic.education.utils.util.FileUtils;
 import com.ssic.education.utils.util.JsonUtil;
@@ -77,19 +74,7 @@ public class BaseController {
 			EduUsersDto eduUsersDto = new EduUsersDto();
 			eduUsersDto.setId(getSessionUserId());
 			eduUsersDto =  eduUsersService.getUserInfo(eduUsersDto);
-//			String fileName = null;
 			try {
-//				if (StringUtils.isNotBlank(eduUsersDto.getSourceId()) && eduUsersDto.getSourceType() == DataStatus.DISABLED) {
-//					EduCommitteeDto eduCommitteeDto = iEduCommitteeService.findById(eduUsersDto.getSourceId());
-//					if (eduCommitteeDto.getType() == DataStatus.ENABLED) {
-//						fileName ="0Menu.txt";
-//					}
-//					if (eduCommitteeDto.getType() == DataStatus.EVA_TWO) {
-//						fileName =DataStatus.EVA_TWO+"menu.txt";
-//					}
-//				} else {
-//					fileName = eduUsersDto.getSourceType()+"menu.txt";
-//				}
 				String fileName = eduUsersDto.getSourceType()+"menu.txt"; 
 				String path = this.getClass().getClassLoader().getResource(fileName).getPath();;
 				String menuList = FileUtils.readFileToString(new File(path));
