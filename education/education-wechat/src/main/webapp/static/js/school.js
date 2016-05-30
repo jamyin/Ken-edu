@@ -1,8 +1,16 @@
 $(function(){
+	loadscMenu();
+});
+
+
+function loadscMenu(){
 	var customerId = "000d804f-ffdc-432a-b9b7-85307a611423";
+	var timeDate = $('#sel_date').val();
+	var dataParams = {customerId:customerId,timeDate:timeDate};
 	$.ajax({
 		url:'/wap/scMenu/search.htm?customerId='+customerId,
 		type:"POST",
+		data:dataParams,
 		dataType:'json',
 		success:function(data){
 			if(data.status==200){
@@ -42,4 +50,4 @@ $(function(){
 			
 		}
 	});	
-});
+};

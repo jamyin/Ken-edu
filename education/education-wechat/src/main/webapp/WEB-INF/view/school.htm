@@ -76,16 +76,18 @@
 	</div>
 	<div class="load_more">显示更多</div>
 </body>
+
+<script type="text/javascript" src="/static/js/school.js"></script>
 <script>
 	$(function(){
 		$('.seldate').on('click', function(){
-			$(this).attr('type','date').focus()
+			$(this).attr('type','date').focus();
 		})
 		$('.seldate').on('change', function(){
-			var _val = $(this).val()
-			$('#sel_date').val(_val)
+			var _val = $(this).val();
+			$('#sel_date').val(_val);
+			loadscMenu();
 		})
 	})
 </script>
-<script type="text/javascript" src="/static/js/school.js"></script>
 </html>
