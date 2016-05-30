@@ -167,8 +167,8 @@
 				<a onclick="loadUrl(this);" data-src="ledgerController/manager" data-text="配货管理" class="easyui-linkbutton" plain="true" iconCls="icon-search">配货管理</a>
 				
 				<a onclick="loadUrl(this);" data-src="ledgerAddressController/manager" data-text="配货点管理" class="easyui-linkbutton" plain="true" iconCls="icon-print">配货点管理</a>
-				<a onclick="loadUrl(this);" data-src="userController/manager" data-text="用户管理" class="easyui-linkbutton" plain="true" iconCls="icon-help">用户管理</a>
-				<a onclick="loadUrl(this);" data-src="personalController/manager" data-text="个人中心" class="easyui-linkbutton" plain="true" iconCls="icon-users">个人中心</a>
+				<a onclick="loadUrl(this);" data-src="userController/manager" data-text="用户管理" class="easyui-linkbutton" plain="true"  iconCls="icon-user">用户管理</a>
+				<a onclick="loadUrl(this);" data-src="personalController/manager" data-text="个人中心" class="easyui-linkbutton" plain="true"  iconCls="icon-user">个人中心</a>
 				<a onclick="loadUrl(this);" data-src="corporateController/manager" data-text="我的信息" class="easyui-linkbutton" plain="true" iconCls="icon-user">我的信息</a>
 			</div>
 			<div id="index_tabs" style="overflow: hidden;">

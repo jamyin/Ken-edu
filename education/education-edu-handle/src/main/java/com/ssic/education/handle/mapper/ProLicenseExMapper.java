@@ -12,4 +12,6 @@ public interface ProLicenseExMapper {
 
 	int alterImage(@Param("proLicense") ProLicense license);
 
+	List<ProLicense> selectByRelationId(String id);
+
 }

@@ -146,7 +146,13 @@ public class ProSupplierController {
 		 * 
 		 * }
 		 */
+		ProSupplierReceiver proSupplierReceiver = new ProSupplierReceiver();		
+		proSupplierReceiver.setSupplierCode(ps.getSupplierCode());
+		proSupplierReceiver.setSupplierId(ps.getId());
+		proSupplierReceiver.setReceiverId(supplierId);
 		supplierService.updataProSupplier(ps);
+		supplierService.updataProSupplierCode(proSupplierReceiver);
+
 		j.setMsg("修改信息成功");
 		j.setSuccess(true);
 		return j;
@@ -327,6 +333,70 @@ public class ProSupplierController {
 			HttpServletResponse response) {
 		Json json = new Json();
 		ProLicense license = new ProLicense();
+		
+		//判断图片是否重复上传
+	/*	List<ProLicense> list2=	proLicenseServiceImpl.selectByRelationId(id);
+				
+		for (int i = 0; i < list2.size(); i++) {
+			if(list2.get(i).getLicName().equals("工商营业执照")){
+				json.setMsg("工商营业执照不可重复上传");
+				json.setSuccess(false);
+				return json;
+			}
+			if(list2.get(i).getLicName().equals("组织机构代码")){
+				json.setMsg("组织机构代码不可重复上传");
+				json.setSuccess(false);
+				return json;
+			}
+			if(list2.get(i).getLicName().equals("税务登记证")){
+				json.setMsg("税务登记证不可重复上传");
+				json.setSuccess(false);
+				return json;
+			}
+			if(list2.get(i).getLicName().equals("食品流通许可证")){
+				json.setMsg("食品流通许可证不可重复上传");
+				json.setSuccess(false);
+				return json;
+			}
+			if(list2.get(i).getLicName().equals("食品生产许可证")){
+				json.setMsg("食品生产许可证不可重复上传");
+				json.setSuccess(false);
+				return json;
+			}
+			if(list2.get(i).getLicName().equals("餐饮服务许可证")){
+				json.setMsg("餐饮服务许可证不可重复上传");
+				json.setSuccess(false);
+				return json;
+			}
+			if(list2.get(i).getLicName().equals("食品经营许可证")){
+				json.setMsg("食品经营许可证不可重复上传");
+				json.setSuccess(false);
+				return json;
+			}
+			if(list2.get(i).getLicName().equals("身份证")){
+				json.setMsg("身份证不可重复上传");
+				json.setSuccess(false);
+				return json;
+			}
+			if(list2.get(i).getLicName().equals("港澳居民来往内地通行证")){
+				json.setMsg("港澳居民来往内地通行证不可重复上传");
+				json.setSuccess(false);
+				return json;
+			}
+			if(list2.get(i).getLicName().equals("台湾居民往来内地通行证")){
+				json.setMsg("台湾居民往来内地通行证不可重复上传");
+				json.setSuccess(false);
+				return json;
+			}
+			if(list2.get(i).getLicName().equals("其他")){
+				json.setMsg("其他证件不可重复上传");
+				json.setSuccess(false);
+				return json;
+			}		
+		}*/
+		
+		
+		
 		Map<String, Object> map1 = createImageServiceImpl.createImage(image,
 				imgUrl1, request, response);
 		Map<String, Object> map2 = createImageServiceImpl.createImage(image,
