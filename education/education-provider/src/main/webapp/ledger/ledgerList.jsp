@@ -209,6 +209,23 @@
 		});
 	}
 
+	function importSupplier() {
+		parent.$.modalDialog({
+			title : '导入配货管理',
+			width :300,
+			height : 150,
+			href : '${pageContext.request.contextPath}/ledgerController/importPage',
+			buttons : [ {
+				text : '上传',
+				handler : function() {
+					parent.$.modalDialog.openner_dataGrid = dataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
+					var f = parent.$.modalDialog.handler.find('#importSupplier');
+					f.submit();
+				}
+			} ]
+		});
+	}
+	
 	function searchFun() {
 		dataGrid.datagrid('load', $.serializeObject($('#searchForm')));
 	}
@@ -246,18 +263,8 @@
 		</c:if>-->
 			<!-- <a onclick="batchDeleteFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'delete'">批量删除</a> -->
 		<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_add',plain:true" onclick="searchFun();">搜索</a><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_delete',plain:true" onclick="cleanFun();">清空搜索条件</a>
+		<a onclick="importSupplier();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'">导入</a>
 	</div>
 
-	<div id="menu" class="easyui-menu" style="width: 120px; display: none;">
-		<c:if test="${fn:contains(sessionInfo.resourceList, '/userController/addPage')}">
-			<div onclick="addFun();" data-options="iconCls:'pencil_add'">增加</div>
-		</c:if>
-		<c:if test="${fn:contains(sessionInfo.resourceList, '/userController/delete')}">
-			<div onclick="deleteFun();" data-options="iconCls:'pencil_delete'">删除</div>
-		</c:if>
-		<c:if test="${fn:contains(sessionInfo.resourceList, '/userController/editPage')}">
-			<div onclick="editFun();" data-options="iconCls:'pencil'">编辑</div>
-		</c:if>
-	</div>
 </body>
 </html>

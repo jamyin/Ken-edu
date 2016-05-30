@@ -87,6 +87,11 @@ public class LedgerController {
 		return "ledger/ledgerList";
 	}
 
+	@RequestMapping("/importPage")
+	public String importPage(HttpServletRequest request) {
+		return "ledger/ledgerImport";
+	}
+	
 	/**
 	 * 查询配货
 	 * 

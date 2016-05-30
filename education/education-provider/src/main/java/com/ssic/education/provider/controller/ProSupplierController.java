@@ -104,20 +104,32 @@ public class ProSupplierController {
 	@RequestMapping(value = "/proSupplierEdit")
 	@ResponseBody
 	public Json updataProSupplier(SupplierDto ps, HttpServletRequest request) {
-		Json j = null;
-		j = checkSupplier(ps);
-		if (j != null) {
+		Json j = new Json();
+		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
+				ConfigUtil.SESSIONINFONAME);
+		// 当前登录用户所属供应商的id
+		String supplierId = info.getSupplierId();
+		if(supplierId==null){
+			j.setMsg("请登录");
+			j.setSuccess(false);
 			return j;
 		}
-		j = new Json();
+		if (ps.getSupplierName() == null || ps.getSupplierName().equals("")) {
+			j.setMsg("供应商名称不能为空");
+			j.setSuccess(false);
+			return j;
+		}
+		if (ps.getAddress() == null || ps.getAddress().equals("")) {
+			j.setMsg("供应商地址不能为空");
+			j.setSuccess(false);
+			return j;
+		}
 		SupplierDto p = supplierService.findProSupplierById(ps.getId());
 		if (p == null) {
 			j.setMsg("不存在的供应商");
 			j.setSuccess(false);
 			return j;
 		}
-		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
-				ConfigUtil.SESSIONINFONAME);
 		// 查找已定义的供应商编码，供应商编码唯一
 		/*
 		 * List<SupplierDto> list=
@@ -167,24 +179,39 @@ public class ProSupplierController {
 	@RequestMapping("/saveSupplier")
 	@ResponseBody
 	public Json saveSupplier(SupplierDto ps, HttpServletRequest request) {
-		Json j = null;
-		j = checkSupplier(ps);
-		if (j != null) {
-			return j;
-		}
-		;
-		ps.setId(UUIDGenerator.getUUID());
-		ps.setSupplierType(2);
-		supplierService.saveSupplier(ps);
-		ProSupplierReceiver proSupplierReceiver = new ProSupplierReceiver();
-		proSupplierReceiver.setSupplierId(ps.getId());
+		Json j = new Json();
 		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
 				ConfigUtil.SESSIONINFONAME);
+		String supplierId = info.getSupplierId();
+		if(supplierId==null){
+			j.setMsg("请登录");
+			j.setSuccess(false);
+			return j;
+		}
+		if (ps.getSupplierName() == null || ps.getSupplierName().equals("")) {
+			j.setMsg("供应商名称不能为空");
+			j.setSuccess(false);
+			return j;
+		}
+		if (ps.getAddress() == null || ps.getAddress().equals("")) {
+			j.setMsg("供应商地址不能为空");
+			j.setSuccess(false);
+			return j;
+		}
+		ps.setId(UUIDGenerator.getUUID());
+		ps.setSupplierType(2);
+		ProSupplierReceiver proSupplierReceiver = new ProSupplierReceiver();
+		proSupplierReceiver.setSupplierId(ps.getId());
 		proSupplierReceiver.setReceiverId(info.getSupplierId());
 		proSupplierReceiver.setSupplierCode(ps.getSupplierCode());
+		ProSupplier rps = supplierService.findProSupplierByName(ps.getSupplierName(),supplierId);
+		if(rps!=null){
+			j.setMsg("供应商已存在");
+			j.setSuccess(false);
+			return j;
+		}
 		List<SupplierDto> list = supplierService
 				.findSupplierCodeByReceiverId(info.getSupplierId());
-
 		for (int i = 0; i < list.size(); i++) {
 			boolean falge = list.get(i).getSupplierCode()
 					.equalsIgnoreCase(ps.getSupplierCode());
@@ -196,28 +223,12 @@ public class ProSupplierController {
 			}
 
 		}
+		supplierService.saveSupplier(ps);
 		supplierService.saveSupplierReceiver(proSupplierReceiver);
 		j = new Json();
 		j.setMsg("添加供应商成功");
 		j.setSuccess(true);
 		return j;
-	}
-
-	private Json checkSupplier(SupplierDto ps) {
-		if (ps.getSupplierName() == null || ps.getSupplierName().equals("")) {
-			Json j = new Json();
-			j.setMsg("供应商名称不能为空");
-			j.setSuccess(false);
-			return j;
-		}
-		if (ps.getAddress() == null || ps.getAddress().equals("")) {
-			Json j = new Json();
-			j.setMsg("供应商地址不能为空");
-			j.setSuccess(false);
-			return j;
-		}
-
-		return null;
 	}
 
 	/**

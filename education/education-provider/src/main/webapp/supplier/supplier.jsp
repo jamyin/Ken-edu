@@ -303,6 +303,10 @@
 		});
 	}
 
+	function searchFun() {
+		dataGrid.datagrid('load', $.serializeObject($('#searchForm')));
+	}
+	
 	function inputImage() {
 		dataGrid.datagrid('load', $.serializeObject($('#searchForm')));
 	}
@@ -381,8 +385,8 @@
 	function importSupplier() {
 		parent.$.modalDialog({
 			title : '导入供应商',
-			width :768,
-			height : 480,
+			width :300,
+			height : 150,
 			href : '${pageContext.request.contextPath}/proSupplierController/importPage',
 			buttons : [ {
 				text : '上传',

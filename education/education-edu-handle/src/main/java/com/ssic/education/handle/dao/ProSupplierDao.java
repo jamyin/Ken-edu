@@ -198,4 +198,5 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 		}
 		return i;
 	}
+
 }

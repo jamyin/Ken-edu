@@ -161,10 +161,10 @@ AND  a.stat=1 AND  a.id=#{id}
 	</select>
 	<sql id="where_findSupplier">
 		<if test="supplierDto.supplierName!=null and  supplierDto.supplierName!=''">
-			AND supplier_name = #{supplierDto.supplierName}
+			AND supplier_name like "%"#{supplierDto.supplierName}"%"
 		</if>
 		<if test="supplierDto.address!=null and supplierDto.address!='' ">
-			AND address = #{supplierDto.address}
+			AND address like "%"#{supplierDto.address}"%"
 		</if>
 		<if test="supplierDto.supplierType!=null and supplierDto.supplierType!='' ">
 			AND supplier_type = #{supplierDto.supplierType}
