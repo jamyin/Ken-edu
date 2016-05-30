@@ -50,6 +50,10 @@ public class EduInformationListDao  extends MyBatisBaseDao<EduInformationList>{
 			criteria.andCreateIdEqualTo(eduInformationListDto.getCreateId());
 		}
 		
+		if(StringUtils.isNotEmpty(eduInformationListDto.getSourceId())){
+			criteria.andSourceIdEqualTo(eduInformationListDto.getSourceId());
+		}
+		
 	}
 
 }

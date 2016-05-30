@@ -123,8 +123,7 @@ public class MotiveController extends BaseController {
 		return response;
 	}
 
-	public List<EduInformationListDto> copyList(
-			EduInformationDto eduInformationDto) {
+	public List<EduInformationListDto> copyList(EduInformationDto eduInformationDto) {
 		List<EduInformationListDto> dList = null;
 		// if(!StringUtils.isNotEmpty(lianxiIds)){
 		String[] lianxiId = getRequest().getParameterValues("lianxiIds");
@@ -151,11 +150,16 @@ public class MotiveController extends BaseController {
 	 * @version: 2016年5月30日 上午10:42:24
 	 */
 	@RequestMapping(value = "unreaded")
-	public ModelAndView unreaded() {
+	public ModelAndView unreaded(EduInformationListDto eduInformationListDto,PageQuery pageQuery) {
 		ModelAndView mv = getModelAndView();
 
-		getSourceType(mv);
+		String sourceId = getEduUsersDto().getSourceId();//用户所属教委 或学校
+		eduInformationListDto.setSourceId(sourceId);
+		PageResult<EduInformationListDto> pageList = iEduInformationListService
+				.searchEduInformationList(eduInformationListDto,pageQuery);
 		
+		getSourceType(mv);
+		mv.addObject("pageList", pageList);
 		mv.setViewName("motive/dis_edu_motive_unreaded");
 		return mv;
 	}
