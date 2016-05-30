@@ -78,7 +78,7 @@
 								<span class="intelligent-label f-fl"><b class="ftx04"></b>区教委：</span>
 								<div class="" id="committeeList" style="float: right; margin-left: 90px;"></div>
 							</div>
-						<div class="item col-xs-12" style="margin-top:60px;">
+						<div class="item col-xs-12" style="margin-top:80px;">
 	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>工商营业执照：</span>    
 	                       <div class="f-fl item-ifo">
 	                       		<input id="file-1" name="licenseList" type="checkbox" style="display:none;"/>
