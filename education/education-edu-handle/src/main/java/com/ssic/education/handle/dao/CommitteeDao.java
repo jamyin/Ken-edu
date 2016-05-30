@@ -74,4 +74,12 @@ public class CommitteeDao extends MyBatisBaseDao<EduCommittee> {
 	public EduCommittee getbyId(String id) {
 		return mapper.selectByPrimaryKey(id);
 	}
+
+	public List<EduCommittee> findCommitteeListNoPage(
+			EduCommitteeDto eduCommitteeDto) {
+		EduCommitteeExample example = new EduCommitteeExample();
+		EduCommitteeExample.Criteria criteria = example.createCriteria();
+		assemblyParams(eduCommitteeDto, criteria);
+		return mapper.selectByExample(example);
+	}
 }
