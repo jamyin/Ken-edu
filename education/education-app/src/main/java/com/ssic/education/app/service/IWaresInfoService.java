@@ -8,7 +8,6 @@ import com.ssic.education.app.dto.WaresRelatedDto;
 import com.ssic.education.handle.pojo.ProWares;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
-import com.ssic.education.utils.model.Response;
 
 /**		
  * <p>Title: IWaresInfoService </p>

@@ -48,12 +48,19 @@ public class SuppliersServiceImpl implements ISupplierService {
 
 	@Override
 	public SupplierLicDto findSupplierInfo(String supplier_id) {
-		SupplierLicDto sld = new SupplierLicDto();
-		sld = supplierInfoDao.getSupplierInfoById(supplier_id);
-		if (sld != null) {
-			List<MaterialSupplierDto> msdList = supplierInfoDao.getSupplierListById(supplier_id);
-			sld.setMaterialSupplierList(msdList);
+		return supplierInfoDao.getSupplierById(supplier_id);
+	}
+
+	@Override
+	public PageResult<MaterialSupplierDto> findListByIds(String supplier_id, ProSupplier proSupplier, PageQuery query) {
+		List<String> list = this.supplierInfoDao.getSupplierReceiver(supplier_id);
+		if (null != list && !list.isEmpty()) {
+			List<MaterialSupplierDto> materialSupplierDto = this.supplierInfoDao.getSupplierByIds(list, proSupplier, query);
+			int total = supplierInfoDao.getSupplierByIdsCount(list, proSupplier);
+			query.setTotal(total);
+			return new PageResult<MaterialSupplierDto>(query, materialSupplierDto);
 		}
-		return sld;
+		return null;
+
 	}
 }
