@@ -39,6 +39,6 @@ public interface ISupplierService {
 	 * @author SeanYoung
 	 * @date 2016年5月30日 下午3:04:51	 
 	 */
-	PageResult<MaterialSupplierDto> findListByIds(String supplier_id, ProSupplier proSupplier, PageQuery query);
+	PageResult<MaterialSupplierDto> findListByIds(String id, ProSupplier proSupplier, PageQuery query);
 
 }

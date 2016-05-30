@@ -23,12 +23,9 @@ public class EduAppUsersServiceImpl implements IEduAppUsersService {
 	public synchronized EduAppUserDto appLogin(EduUsersInfoDto user) {
 		EduAppUserDto result = eduUsersDao.appLogin(user);
 		if (result != null) {
-			if (result.getSourceType() == 0) {
+			if (result.getSourceType() == 0 || result.getSourceType() == 2) {
 				EduCommittee ctte = committeeDao.getbyId(result.getSourceId());
 				result.setAreaCode(ctte.getAreaCode());
-				result.setEduType(ctte.getType().toString());
-			} else {
-				result.setEduType("3");
 			}
 			result.setToken(TokenUtil.getToken(user.getUserAccount()).getSignature());
 			//TODO 第一次登陆创建Token 第二次登录刷新Token 待实现
