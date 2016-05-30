@@ -42,8 +42,14 @@ public class ProPackagesController extends BaseController{
 	private INutritionalService nutritionalService;
 	
 	@RequestMapping(value = "/findPage")
-	public ModelAndView findPage(ProPackagesDto dto, PageQuery page) {
+	public ModelAndView findPage(HttpServletRequest request,HttpServletResponse response,HttpSession session,ProPackagesDto dto, PageQuery page) {
 		ModelAndView mv = this.getModelAndView();
+		String id = (String) getRequest().getSession().getAttribute(SessionConstants.LOGIN_USER_INFO);
+//		EduUsersDto usersdto = (EduUsersDto) session.getAttribute(SessionConstants.LOGIN_USER_INFO);
+		EduUsersDto usersdto = getLoginUser(request, response, session, id);
+		if (null != usersdto && StringUtils.isNotBlank(usersdto.getSourceId()) ) {
+			dto.setCustomerId(usersdto.getSourceId());
+		}
 		PageResult<ProPackagesDto> proPackagesDtos = proPackagesService.fingPackagesPage(dto, page);
 		mv.addObject("pageList", proPackagesDtos);
 		mv.setViewName("/menu/menu_typing");
