@@ -646,7 +646,6 @@ public class WaresController extends BaseController {
 		String fileName = "采购品.xlsx";
 		BufferedInputStream bis = null;
 		BufferedOutputStream bos = null;
-		String result = "";
 		String p = request.getSession().getServletContext().getRealPath("/")
 				+ "\\templates\\" + fileName;
 		try {

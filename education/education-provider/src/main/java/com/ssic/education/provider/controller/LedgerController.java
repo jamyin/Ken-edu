@@ -614,7 +614,6 @@ public class LedgerController {
 		String fileName = "配货管理.xlsx";
 		BufferedInputStream bis = null;
 		BufferedOutputStream bos = null;
-		String result = "";
 		String p = request.getSession().getServletContext().getRealPath("/")
 				+ "\\templates\\" + fileName;
 		try {

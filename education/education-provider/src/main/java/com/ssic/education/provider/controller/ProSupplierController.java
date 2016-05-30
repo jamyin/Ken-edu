@@ -799,7 +799,6 @@ public class ProSupplierController {
 		String fileName = "供货商.xlsx";
 		BufferedInputStream bis = null;
 		BufferedOutputStream bos = null;
-		String result = "";
 		String p = request.getSession().getServletContext().getRealPath("/")
 				+ "\\templates\\" + fileName;
 		try {
