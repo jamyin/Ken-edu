@@ -1,5 +1,7 @@
 package com.ssic.education.government.controller.wares;
 
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +13,11 @@ import com.ssic.educateion.common.dto.ProLedgerDto;
 import com.ssic.educateion.common.dto.ProWaresDto;
 import com.ssic.education.government.controller.BaseController;
 import com.ssic.education.government.controller.supplier.ProSupplierController;
+import com.ssic.education.handle.pojo.ProLicense;
+import com.ssic.education.handle.service.IProLicenseService;
 import com.ssic.education.handle.service.ProLedgerService;
 import com.ssic.education.handle.service.ProWaresService;
+import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 
@@ -33,6 +38,9 @@ public class WaresController extends BaseController {
 	private ProWaresService proWaresService;
 	@Autowired
 	private ProLedgerService proLedgerService;
+	
+	@Autowired
+	private IProLicenseService iProLicenseService;
 
 	/**
 	 * <p>Description: 成品/原料分页查询接口 </p>
@@ -72,8 +80,13 @@ public class WaresController extends BaseController {
 		proLedgerDto.setWaresId(id);
 		PageResult<ProLedgerDto> proLedgerDtos = proLedgerService.findLedgerPage(proLedgerDto, page);
 		mv.setViewName("/school/purchasing_goods_detail");
+		ProLicense proLicense = new ProLicense();
+		proLicense.setCerSource((short)DataStatus.EVA_TWO);
+		proLicense.setRelationId(id);
+		List<ProLicense> proLicenses = iProLicenseService.lookImage(proLicense);
 		mv.addObject("proWaresDto", proWaresDto);
 		mv.addObject("proLedgerDtos", proLedgerDtos);
+		mv.addObject("proLicenses", proLicenses);
 		return mv;
 	}
 	

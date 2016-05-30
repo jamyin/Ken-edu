@@ -13,9 +13,13 @@
     <h1 class="con-tt"><span class="title">采购品详情</span></h1>
     <div class="con-bd">
       <div class="imgs">
-        <img class="con-img" src="/static/img/sample-meat_200X200.png" alt="" />
-        <img class="con-img" src="/static/img/sample-meat_200X200.png" alt="" />
-        <img class="con-img" src="/static/img/sample-meat_200X200.png" alt="" />
+        <img class="con-img" src="${(proWaresDto.image)!}" alt="" />
+        <#if proLicenses??>
+        	<#list proLicenses as proLicense>
+        		 <img class="con-img" src="${(proLicense.licPic)!}" alt="" />
+        	</#list>
+        </#if>
+       
       </div>
       <ul>
      	<li><label for="">名称:</label><span>${(proWaresDto.waresName)!}</span></li>

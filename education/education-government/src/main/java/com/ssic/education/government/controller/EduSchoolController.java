@@ -31,12 +31,14 @@ import com.ssic.educateion.common.dto.ProPackagesDto;
 import com.ssic.educateion.common.dto.ProSupplierDto;
 import com.ssic.educateion.common.dto.ProWaresDto;
 import com.ssic.educateion.common.dto.SupplierReviewedDto;
+import com.ssic.education.handle.pojo.ProLicense;
 import com.ssic.education.handle.service.AreaService;
 import com.ssic.education.handle.service.EduSchoolService;
 import com.ssic.education.handle.service.EduUsersService;
 import com.ssic.education.handle.service.IEduCanteenService;
 import com.ssic.education.handle.service.IEduCommitteeService;
 import com.ssic.education.handle.service.IEduSchoolSupplierService;
+import com.ssic.education.handle.service.IProLicenseService;
 import com.ssic.education.handle.service.ProLedgerService;
 import com.ssic.education.handle.service.ProPackagesService;
 import com.ssic.education.handle.service.ProSupplierService;
@@ -83,6 +85,9 @@ public class EduSchoolController extends BaseController{
 	private ProSupplierService proSupplierService;
 	
 	@Autowired
+	private IProLicenseService iProLicenseService;
+	
+	@Autowired
 	private ProLedgerService proLedgerService;
 	
 	@Autowired
@@ -107,6 +112,7 @@ public class EduSchoolController extends BaseController{
 	@RequestMapping(value = "/list")
 	public ModelAndView list(HttpServletRequest request, HttpServletResponse response,
     		HttpSession session, EduSchoolDto dto, PageQuery page) {
+		dto.setLevel(dto.getLevels());
 		ModelAndView mv = getModelAndView();
 		String id = (String) getRequest().getSession().getAttribute(SessionConstants.LOGIN_USER_INFO);
 		EduUsersDto usersdto = getLoginUser(request, response, session, id);
@@ -144,8 +150,16 @@ public class EduSchoolController extends BaseController{
 	public ModelAndView canteen(EduCanteenDto dto) {
 		ModelAndView mv = this.getModelAndView();
 		EduCanteenDto eduCanteenDto =iEduCanteenService.searchEduCanteenDto(dto);
+		EduSchoolDto eduSchoolDto = eduSchoolService.findById(dto.getSchoolId());
+		
+		ProLicense proLicenseDto = new ProLicense();
+		proLicenseDto.setCerSource((short)DataStatus.MANAGERTYPE);
+		proLicenseDto.setRelationId(eduCanteenDto.getId());
+		List<ProLicense> proLicenses = iProLicenseService.lookImage(proLicenseDto);
 		mv.addObject("eduCanteenDto", eduCanteenDto);
-		mv.setViewName("/school/school_list");
+		mv.addObject("eduSchoolDto", eduSchoolDto);
+		mv.addObject("proLicenses", proLicenses);
+		mv.setViewName("/school/canteen_detail");
 		return mv;
 	}
 	
@@ -192,6 +206,9 @@ public class EduSchoolController extends BaseController{
 			dto.setCustomerId(usersdto.getSourceId());
 		}
 		EduSchoolDto eduSchoolDto = eduSchoolService.findById(dto.getCustomerId());
+		EduCanteenDto eduCanteendto = new EduCanteenDto();
+		eduCanteendto.setSchoolId(dto.getCustomerId());
+		EduCanteenDto eduCanteenDto = iEduCanteenService.searchEduCanteenDto(eduCanteendto);
 		List<ProSupplierDto> proSupplierDtos = eduSchoolService.getSupplier(dto.getCustomerId());
 		List<ProPackagesDto> proPackagesDtos = proPackagesService.getProPackages(dto);
 		EduSchoolSupplierDto eduSchoolSupplierDto = new EduSchoolSupplierDto();
@@ -215,6 +232,7 @@ public class EduSchoolController extends BaseController{
 		mv.addObject("eduSchoolDto", eduSchoolDto);
 		mv.addObject("ledgerDtos", ledgerDtos);
 		mv.addObject("proSupplierDtos", proSupplierDtos);
+		mv.addObject("eduCanteenDto", eduCanteenDto);
 		mv.addObject("level", SchoollevelEnum.values());
 		mv.addObject("proPackagesDtos", proPackagesDtos);
 		mv.addObject("mSuppliers", mSuppliers);

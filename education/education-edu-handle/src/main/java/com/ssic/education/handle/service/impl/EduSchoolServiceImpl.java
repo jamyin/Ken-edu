@@ -43,6 +43,7 @@ public class EduSchoolServiceImpl implements EduSchoolService{
 		List<SupplierReviewedDto> supplierReviewedDtoP = BeanUtils.createBeanListByTarget(resultSu, SupplierReviewedDto.class);
 		supplierReviewedDtos.addAll(supplierReviewedDtoP);
 		page.setTotal(Math.round((double)(eduSchoolDao.count(eduSchoolDto)+proSupplierDao.countSupplierListByCommittee(proSupplierDto))/2));
+		System.out.println(eduSchoolDao.count(eduSchoolDto)+"+"+proSupplierDao.countSupplierListByCommittee(proSupplierDto));
 		return new PageResult<SupplierReviewedDto>(page, supplierReviewedDtos);
 	}
 	

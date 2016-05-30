@@ -57,14 +57,25 @@
                             <form class="" action="/edu/school/checkList.htm?source=1&reviewed=0" method="post" id="myform">
                             <input type="hidden" name="currPage" id="currPage" value="1"/>
                             <#if pageList??>
-                            	<#list pageList.results as data>
-                            		<tr>
-	                                    <td> <a href="/edu/school/detail.htm?id=${(data.id)!}&schoolName=${(data.schoolName)!}&supplierName=${(data.supplierName)!}"><#if data.schoolName??> ${(data.schoolName)!} <#elseif data.supplierName??> ${(data.supplierName)!}</#if></a></td>
-	                                    <td> ${(data.address)!} </td>
-	                                    <td> <#if data.reviewed==0> 未审批 </#if></td>
-	                                    <td> ${data.createTime?string("yyyy-MM-dd")}</td>
+                            	<#if (pageList.results??) && (pageList.results?size>0)>
+	                            	<#list pageList.results as data>
+	                            		<tr>
+		                                    <td> <a href="/edu/school/detail.htm?id=${(data.id)!}&schoolName=${(data.schoolName)!}&supplierName=${(data.supplierName)!}"><#if data.schoolName??> ${(data.schoolName)!} <#elseif data.supplierName??> ${(data.supplierName)!}</#if></a></td>
+		                                    <td> ${(data.address)!} </td>
+		                                    <td> <#if data.reviewed==0> 未审批 </#if></td>
+		                                    <td> ${data.createTime?string("yyyy-MM-dd")}</td>
+		                                </tr>
+	                            	</#list>
+	                            <#else>
+	                            	<tr>
+	                                    <td></td>
+	                                    <td><span style="font-size: 16px;color: red;">暂无数据</span></td>
+	                                    <td></td>
+	                                    <td></td>
 	                                </tr>
-                            	</#list>
+                            	 </#if>
+                            <#else>
+                            	<span>暂无数据</span>
                             </#if>
                             </form>
                         </table>

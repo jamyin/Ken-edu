@@ -43,8 +43,10 @@
 
       <div class="info">
         <p class="driver"><span>${(ledgerDto.driverName)!}</span></p>
-        <p>出发点：<span></span></p>
-        <p>货物：<span></span></p>
+        <p>出发点：<span><#if proSupplierDto??>${(proSupplierDto.address)!}</#if></span></p>
+        <p>货物：<span> <#if ledgerDtos??>
+        <#list ledgerDtos as ledgerDtos>${(ledgerDtos.name)!}</#list>
+        </#if></span></p>
         <p>目的地：<span>${(ledgerDto.receiverName)!}</span></p>
         <p>到达时间：<span></span></p>
       </div>
