@@ -83,4 +83,6 @@ public interface ISupplierService {
 
 	int importSupplier(Map<String, Map<ProSupplierReceiver, ProSupplier>> map);
 
+	void updataProSupplierCode(ProSupplierReceiver proSupplierReceiver);
+
 }

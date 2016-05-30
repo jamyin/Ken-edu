@@ -184,4 +184,10 @@ public class SupplierServiceImpl implements ISupplierService {
 		return proSupplierDao.importSupplier(map);
 	}
 
+	@Override
+	public void updataProSupplierCode(ProSupplierReceiver proSupplierReceiver) {
+		// TODO Auto-generated method stub
+		psrmapper.updateByPrimaryKeySelective(proSupplierReceiver);
+	}
+
 }

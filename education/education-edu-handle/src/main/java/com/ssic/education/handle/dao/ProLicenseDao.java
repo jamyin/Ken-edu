@@ -71,4 +71,9 @@ public class ProLicenseDao extends MyBatisBaseDao<ProLicense>{
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		return mapper.selectByExample(example);
 	}
+
+	public List<ProLicense> selectByRelationId(String id) {
+		// TODO Auto-generated method stub
+		return exmapper.selectByRelationId(id);
+	}
 }

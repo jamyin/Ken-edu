@@ -42,5 +42,10 @@ public class ProLicenseServiceImpl implements IProLicenseService {
 		List<ProLicenseDto> resultList = BeanUtils.createBeanListByTarget(dataList, ProLicenseDto.class);
 		return resultList;
 	}
+	@Override
+	public List<ProLicense> selectByRelationId(String id) {
+		// TODO Auto-generated method stub
+		return dao.selectByRelationId(id);
+	}
 
 }

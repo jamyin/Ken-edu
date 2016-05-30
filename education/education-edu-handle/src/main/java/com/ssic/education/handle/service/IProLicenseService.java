@@ -18,6 +18,8 @@ public interface IProLicenseService {
 	int saveLicense(ProLicense license);
 
 	List<ProLicenseDto> searchProLicenseList(ProLicenseDto proLicenseDto);
+
+	List<ProLicense> selectByRelationId(String id);
 	
 	
 }
