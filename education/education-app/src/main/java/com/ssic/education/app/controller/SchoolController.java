@@ -1,7 +1,9 @@
 package com.ssic.education.app.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,7 @@ import com.ssic.educateion.common.dto.EduCanteenDto;
 import com.ssic.educateion.common.dto.EduCommitteeDto;
 import com.ssic.educateion.common.dto.EduSchoolDto;
 import com.ssic.educateion.common.dto.EduSchoolSupplierDto;
+import com.ssic.educateion.common.dto.MapToListDto;
 import com.ssic.educateion.common.dto.ProPackagesDto;
 import com.ssic.educateion.common.dto.SchoolDto;
 import com.ssic.education.app.constants.SchoolLevel;
@@ -212,7 +215,16 @@ public class SchoolController {
 		result.setData(chooseSchoolDto);
 		
 		if(type != null && type == 1 ){
-			chooseSchoolDto.setLevelList(SchoolLevel.getAll());
+			List<MapToListDto> levelList = new ArrayList<MapToListDto>();
+			for(Entry<Integer, String> entry: SchoolLevel.getAll().entrySet()) {
+				MapToListDto mapToListDto = new MapToListDto();
+				mapToListDto.setKey(entry.getKey());
+				mapToListDto.setValue(entry.getValue());
+				levelList.add(mapToListDto);
+			}
+			chooseSchoolDto.setLevelList(levelList);
+			
+			//chooseSchoolDto.setLevelList(SchoolLevel.getAll());
 			
 			//List<EduAreaDto> areaList = areaService.findAreaList();
 			//chooseSchoolDto.setAreaList(areaList);
