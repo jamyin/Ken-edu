@@ -200,7 +200,7 @@ public class EduSchoolController extends BaseController{
 		} else {
 			dto.setSupplyDate(new Date());
 		}
-		if (StringUtils.isBlank(dto.getCustomerId()) && dto.getSource() == DataStatus.ENABLED) {
+		if (StringUtils.isBlank(dto.getCustomerId())) {
 			String id = (String) getRequest().getSession().getAttribute(SessionConstants.LOGIN_USER_INFO);
 			EduUsersDto usersdto = getLoginUser(request, response, session, id);
 			dto.setCustomerId(usersdto.getSourceId());

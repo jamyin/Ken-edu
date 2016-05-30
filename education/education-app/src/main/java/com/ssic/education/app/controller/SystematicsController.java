@@ -1,5 +1,6 @@
 package com.ssic.education.app.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssic.education.app.constants.ProductClass;
+import com.ssic.education.app.constants.ProductList;
 import com.ssic.education.utils.model.Response;
 
 /**		
@@ -37,6 +39,21 @@ public class SystematicsController {
 	public Response<Map<Integer, String>> getDishesType() {
 		Response<Map<Integer, String>> result = new Response<Map<Integer, String>>();
 		result.setData(ProductClass.getAll());
+		return result;
+	}
+
+	/**
+	 * getDishesType：食品分类列表 原料分类列表
+	 * @return
+	 * @exception	
+	 * @author Administrator
+	 * @date 2016年5月16日 上午9:44:23
+	 */
+	@RequestMapping(value = "/DingTypelist", method = RequestMethod.GET)
+	@ResponseBody
+	public Response<List<ProductList>> Dinglist() {
+		Response<List<ProductList>> result = new Response<List<ProductList>>();
+		result.setData(ProductClass.getList());
 		return result;
 	}
 }

@@ -247,6 +247,9 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 	public List<ProPackagesDto> fingPackagesPage(ProPackagesDto dto,PageQuery page) {
 		ProPackagesExample example = new ProPackagesExample();
 		ProPackagesExample.Criteria criteria = example.createCriteria();
+		if (StringUtils.isNotBlank(dto.getCustomerId())) {
+			criteria.andCustomerIdEqualTo(dto.getCustomerId());    //查询当前学校
+		}
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		if (null != page) {
             example.setOrderByClause("stat desc,create_time desc limit " + page.getStartNum() + "," + page.getPageSize());
@@ -278,6 +281,9 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 	public long fingPackagesCount(ProPackagesDto dto) {
 		ProPackagesExample example = new ProPackagesExample();
 		ProPackagesExample.Criteria criteria = example.createCriteria();
+		if (StringUtils.isNotBlank(dto.getCustomerId())) {
+			criteria.andCustomerIdEqualTo(dto.getCustomerId());    //查询当前学校
+		}
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		return mapper.countByExample(example);
 	}

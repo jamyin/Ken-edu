@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<style>
+.panel-body {
+	font-size: 18px !important;
+}
+</style>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,7 +55,7 @@
 			 				
 			 				formatter : function(value, row, index) {
 			 					if(value!=null){
-			 					return '<font style="font-style: normal;font-weight: bolder;">'
+			 					return '<font style="font-style: normal;font-weight: bolder;font-size:18px;">'
 			 							+ value + '</font>';
 			 					}else{
 			 					return "";
@@ -63,7 +68,7 @@
 			 				
 			 				formatter : function(value, row, index) {
 			 					if(value!=null){
-			 					return '<font style="font-style: normal;font-weight: bolder;">'
+			 					return '<font style="font-style: normal;font-weight: bolder;font-size:18px;">'
 			 							+ value + '</font>';
 			 					}else{
 			 					return "";
@@ -76,7 +81,7 @@
 			 				
 			 				formatter : function(value, row, index) {
 			 					if(value!=null){
-			 					return '<font style="font-style: normal;font-weight: bolder;">'
+			 					return '<font style="font-style: normal;font-weight: bolder;font-size:18px;">'
 			 							+ value + '</font>';
 			 					}else{
 			 					return "";
@@ -91,7 +96,7 @@
 			 				
 			 				formatter : function(value, row, index) {
 			 					if(value!=null){
-			 					return '<font style="font-style: normal;font-weight: bolder;">'
+			 					return '<font style="font-style: normal;font-weight: bolder;font-size:18px;">'
 			 							+ value + '</font>';
 			 					}else{
 			 					return "";
@@ -104,7 +109,7 @@
 			 				
 			 				formatter : function(value, row, index) {
 			 					if(value!=null){
-			 					return '<font style="font-style: normal;font-weight: bolder;">'
+			 					return '<font style="font-style: normal;font-weight: bolder;font-size:18px;">'
 			 							+ value + '</font>';
 			 					}else{
 			 					return "";
@@ -118,7 +123,7 @@
 			 				
 			 				formatter : function(value, row, index) {
 			 					if(value!=null){
-			 					return '<font style="font-style: normal;font-weight: bolder;">'
+			 					return '<font style="font-style: normal;font-weight: bolder;font-size:18px;">'
 			 							+ value + '</font>';
 			 					}else{
 			 					return "";
@@ -131,7 +136,7 @@
 			 				
 			 				formatter : function(value, row, index) {
 			 					if(value!=null){
-			 					return '<font style="font-style: normal;font-weight: bolder;">'
+			 					return '<font style="font-style: normal;font-weight: bolder;font-size:18px;">'
 			 							+ value + '</font>';
 			 					}else{
 			 					return "";
@@ -144,7 +149,7 @@
 			 				
 			 				formatter : function(value, row, index) {
 			 					if(value!=null){
-			 					return '<font style="font-style: normal;font-weight: bolder;">'
+			 					return '<font style="font-style: normal;font-weight: bolder;font-size:18px;">'
 			 							+ value + '</font>';
 			 					}else{
 			 					return "";
@@ -157,7 +162,7 @@
 			 				
 			 				formatter : function(value, row, index) {
 			 					if(value!=null){
-			 					return '<font style="font-style: normal;font-weight: bolder;">'
+			 					return '<font style="font-style: normal;font-weight: bolder;font-size:18px;">'
 			 							+ value + '</font>';
 			 					}else{
 			 					return "";
@@ -170,7 +175,7 @@
 			 				
 			 				formatter : function(value, row, index) {
 			 					if(value!=null){
-			 					return '<font style="font-style: normal;font-weight: bolder;">'
+			 					return '<font style="font-style: normal;font-weight: bolder;font-size:18px;">'
 			 							+ value + '</font>';
 			 					}else{
 			 					return "";
@@ -416,11 +421,15 @@
 				</table>
 			</form>
 		</div>
-		<div data-options="region:'center',border:false">
-			<table id="dataGrid"></table>
-		</div>
+		
+			<div data-options="region:'center',border:false"  id="g">
+				<table id="dataGrid" title="供应商表单" data-options="collapsible:true" ></table>
+						<style>
+						#g .datagrid-btable tr{height: 57px;}
+				</style>
+			</div>
 	</div>
-	<div id="toolbar" style="display: none;">
+		<div id="toolbar" style="display: none;">
 		
 			<a onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'">添加</a>
 		

@@ -1,6 +1,8 @@
 package com.ssic.education.app.constants;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import lombok.Getter;
@@ -11,10 +13,15 @@ public enum ProductClass {
 			18, "酒类"), TIANJIAJI(19, "添加剂类"), QITALEI(20, "其他类");
 
 	private static final Map<Integer, String> productClassMap = new LinkedHashMap<Integer, String>();
+	private static final List<ProductList> productClassList = new ArrayList<ProductList>();
 
 	static {
-		for (ProductClass school : ProductClass.values()) {
-			productClassMap.put(school.getValue(), school.getName());
+		for (ProductClass productClass : ProductClass.values()) {
+			productClassMap.put(productClass.getValue(), productClass.getName());
+			ProductList productList = new ProductList();
+			productList.setKey(productClass.getValue());
+			productList.setValue(productClass.getName());
+			productClassList.add(productList);
 		}
 	}
 
@@ -68,4 +75,7 @@ public enum ProductClass {
 		return productClassMap;
 	}
 
+	public static List<ProductList> getList() {
+		return productClassList;
+	}
 }

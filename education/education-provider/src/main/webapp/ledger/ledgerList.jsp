@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<style>
+.panel-body {
+	font-size: 18px !important;
+}
+</style>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,50 +37,87 @@
 			checkOnSelect : false,
 			selectOnCheck : false,
 			nowrap : false,
-			frozenColumns : [ [ {
+			frozenColumns : [ [ /* {
 				field : 'masterId',
 				title : '编号',
 				width : 150,
-				checkbox : true
-			}, {
+				formatter : function(value, row, index) {
+					if(value!=null){
+					return '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">'
+							+ value + '</font>';
+					}else{
+					return "";
+							}
+				}
+			}, */ {
 				field : 'wareBatchNo',
 				title : '配送号',
 				width : 80,
-				sortable : true
+				formatter : function(value, row, index) {
+					if(value!=null){
+					return '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">'
+							+ value + '</font>';
+					}else{
+					return "";
+							}
+				}
 			} ] ],
 			columns : [ [  
 			{
 				field : 'sendDate',
 				title : '配送日期',
 				width : 80,
-				sortable : true
+				formatter : function(value, row, index) {
+					if(value!=null){
+					return '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">'
+							+ value + '</font>';
+					}else{
+					return "";
+							}
+				}
 			},
 			{
 				field : 'name',
 				title : '采购品',
 				width : 50,
-				sortable : true, 
+				formatter : function(value, row, index) {
+					if(value!=null){
+					return '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">'
+							+ value + '</font>';
+					}else{
+					return "";
+							}
+				}
 			},
 			{
 				field : 'receiverName',
 				title : '配货点',
 				width : 50,
-				sortable : true, 
+				formatter : function(value, row, index) {
+					if(value!=null){
+					return '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">'
+							+ value + '</font>';
+					}else{
+					return "";
+							}
+				}
 			},
 			{
 				field : 'haulStatus',
 				title : '状态',
 				width : 50,
-				sortable : true,
+			
 				formatter: function(value,row,index){
 					if (value==0){
-						return "未配送";
+						return  '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">未配送</font>';
 					} 
 					if (value==1){
-						return "配送中";
+					
+						return  '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">配送中</font>';
 					} 
 					if (value==2){
-						return "已配送";
+					
+						return  '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">已配送</font>';
 					} 
 				}
 
@@ -253,8 +295,11 @@
 				</table>
 			</form>
 		</div>
-		<div data-options="region:'center',border:false">
+		<div data-options="region:'center',border:false" id="g">
 			<table id="dataGrid"></table>
+			<style>
+						#g .datagrid-btable tr{height: 57px;}
+				</style>
 		</div>
 	</div>
 	<div id="toolbar" style="display: none;">

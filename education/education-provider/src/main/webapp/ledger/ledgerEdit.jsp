@@ -4,6 +4,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style>
+.panel-body {
+	font-size: 18px !important;
+}
+</style>
+<style>
 
 </style>
 <script type="text/javascript">
