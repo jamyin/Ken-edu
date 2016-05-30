@@ -179,6 +179,9 @@
     .main_wrap .tab_wrap .tab_content > form > section {
       position: relative;
       box-sizing: border-box; }
+      .main_wrap .tab_wrap .tab_content > form > section > .text_wrap1 {
+        margin-left: 107px;
+        margin-top: -16px; }
       .main_wrap .tab_wrap .tab_content > form > section #plus_bt {
         width: 28px;
         height: 28px;
