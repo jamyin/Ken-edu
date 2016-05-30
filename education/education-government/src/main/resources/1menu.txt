@@ -3,6 +3,23 @@
         {
             "menuName": "安全追溯",
             "menuUrl": "/edu/school/details.htm?source=1"
+        },{
+            "menuName": "通知公告",
+            "menuUrl": "/info/index/3.htm",
+            "childList": [
+                {
+                    "menuName": "健康宣教",
+                    "menuUrl": "/info/index/3.htm"
+                },
+                {
+                    "menuName": "通告公示",
+                    "menuUrl": "/info/index/0.htm"
+                },
+                {
+                    "menuName": "通知",
+                    "menuUrl": "/motive/release.htm"
+                }                
+            ]            
         },
         {
             "menuName": "菜谱录入",
