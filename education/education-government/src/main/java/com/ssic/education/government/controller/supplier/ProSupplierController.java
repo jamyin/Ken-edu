@@ -1,5 +1,6 @@
 package com.ssic.education.government.controller.supplier;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
@@ -101,6 +102,13 @@ public class ProSupplierController extends BaseController {
 			return MessageResp.getMessage(true,supplier);
 		}
 		return MessageResp.getMessage(false,"查询失败！");
+	}
+	
+	@RequestMapping(value = "/findAll")
+	@ResponseBody
+	public Map<String,Object> findAll(ProSupplierDto dto) { 
+		List<ProSupplierDto> proSupplierDtos = proSupplierService.findAll(dto);
+		return MessageResp.getMessage(true,proSupplierDtos);
 	}
 	
 	/**		

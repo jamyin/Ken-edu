@@ -71,16 +71,18 @@
                         <input type="text" name="search">
                         <input class="search2" type="submit" name="name" value="搜索">
                         <div class="checkwrap2">
-                            <ul>
-                            	<#if results??>
-                            		<#list results as supplier>
-                            			<li>
-		                                    <label for="shisan">${(supplier.supplierName)!}</label>
-		                                    <input id="${(supplier.id)!}" name="shisan" type="radio" value="${(supplier.id)!}" />
-		                                </li>
-                            		</#list>
-                            	</#if>
-                            </ul>
+                       		<div class="checkwrap3">
+	                        	<ul>
+	                            	<#if results??>
+	                            		<#list results as supplier>
+	                            			<li>
+			                                    <label for="shisan">${(supplier.supplierName)!}</label>
+			                                    <input id="${(supplier.id)!}" name="shisan" type="radio" value="${(supplier.id)!}" />
+			                                </li>
+	                            		</#list>
+	                            	</#if>
+	                            </ul>
+	                          </div>
                         </div>
                     </section>
 
@@ -93,14 +95,15 @@
         <script type="text/javascript">
             $(function(){
             	var supplierId;
-                $(".select").click(function(){
+                $(".tab_wrap").on('click', '.select', function(){
                     $(".background").show();
                 });
 
                 $(".background .close").click(function(){
                     $(".background").hide();
                 });
-                $(".background .content_wrap2 .checkwrap2 label").click(function(){
+                
+                $(".background .content_wrap2 .checkwrap2").on('click','label', function(){
                 	supplierId = $(this).closest('li').find('input').val();
                 	$.ajax({
     					url:'/pro/supplier/details.htm',
@@ -137,6 +140,38 @@
                 	
                     $(".background").fadeOut('fast');
                 });
+                
+                $('.line').on('click','.search2',function(){
+                	var supplierName = $('[name=search]').val();
+                	$.ajax({
+    					url:'/pro/supplier/findAll.htm',
+    					type:"POST",
+    					dataType:"json",
+    					data : {supplierName:supplierName,reviewed:1},
+    					async: false,
+    					success:function(data){
+    						if(data.success==true){
+    							result = data.msg;
+    							$(".checkwrap3").remove();
+    							var textAll = "";
+    							textAll += "<div class=\"checkwrap3\">"
+    							textAll += "<ul>"
+    							for (var i=0; i<result.length; i++) {
+    								textAll += "<li>"
+   	    							textAll += "<label for=\"shisan\">"+result[i].supplierName+"</label>"
+   	    							textAll += "<input id="+result[i].id+" name=\"shisan\" type=\"radio\" value="+result[i].id+" />"
+   	    							textAll += "</li>"
+    							}
+    							textAll += "</ul>"  
+    							textAll += "</div>"
+    							$(".checkwrap2").append(textAll);
+    						}else{
+    							alert("查询失败!");
+    						}
+    					}
+    				});
+                })
+                
                 $(document).delegate('.subbt', 'click', function(){
                 	if (supplierId == null || supplierId == '') {
                 		alert("请选择关联公司！");
