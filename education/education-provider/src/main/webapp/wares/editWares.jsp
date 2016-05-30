@@ -91,7 +91,7 @@
 								data-options="required:true"  value="${wdto.waresName}"></td>
 							<th>规格</th>
 							<td><input name="spec" type="text" placeholder="请输入规格"  id="spec"
-								class="easyui-validatebox span2"  value="${wdto.spec}"></td>
+								class="easyui-validatebox span2"  value="${wdto.spec}"  data-options="required:true" ></td>
 						</tr>
 						<tr>
 							<th>保质期</th>
