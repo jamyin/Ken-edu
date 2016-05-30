@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssic.educateion.common.dto.ChooseSchoolDto;
-import com.ssic.educateion.common.dto.EduAreaDto;
 import com.ssic.educateion.common.dto.EduCanteenDto;
+import com.ssic.educateion.common.dto.EduCommitteeDto;
 import com.ssic.educateion.common.dto.EduSchoolDto;
 import com.ssic.educateion.common.dto.EduSchoolSupplierDto;
 import com.ssic.educateion.common.dto.ProPackagesDto;
 import com.ssic.educateion.common.dto.SchoolDto;
 import com.ssic.education.app.constants.SchoolLevel;
 import com.ssic.education.app.dto.SchoolPackageDto;
-import com.ssic.education.app.service.IAreaService;
+import com.ssic.education.app.service.ICommitteeService;
 import com.ssic.education.app.service.ISchoolService;
 import com.ssic.education.handle.service.EduSchoolService;
 import com.ssic.education.handle.service.IEduCanteenService;
@@ -57,8 +57,11 @@ public class SchoolController {
 	@Autowired
 	private ProPackagesService proPackagesService;
 	
+//	@Autowired
+//	private IAreaService areaService;
+	
 	@Autowired
-	private IAreaService areaService;
+	private ICommitteeService committeeService;
 
 	/**
 	 * @Title: findSchoolList
@@ -69,9 +72,9 @@ public class SchoolController {
 	 */
 	@RequestMapping("/findSchoolList")
 	@ResponseBody
-	public Response<PageResult<SchoolDto>>  findSchoolList(SchoolDto schoolDto, PageQuery query) {
+	public Response<PageResult<SchoolDto>>  findSchoolList(SchoolDto schoolDto, PageQuery query , Integer isPage) {
 		Response<PageResult<SchoolDto>> result = new Response<PageResult<SchoolDto>>();
-		PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, query);
+		PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, query , isPage);
 		if(schoolList.getResults() != null && schoolList.getResults().size() >0 ){
 			result.setStatus(DataStatus.HTTP_SUCCESS);
 			result.setMessage("查询成功！");
@@ -193,27 +196,29 @@ public class SchoolController {
 
 	/**
 	 * @Title: chooseSchool
-	 * @Description: app选择学校页面
+	 * @Description: app选择学校页面  page =0或不传表示不分页  ; isPage =1表示分页  
 	 * @author Ken Yin  
 	 * @date 2016年5月29日 下午12:35:10
 	 * @return Response<PageResult<EduSchoolDto>>    返回类型
 	 */
 	@RequestMapping("/chooseSchool")
 	@ResponseBody
-	public Response<ChooseSchoolDto>  chooseSchool(SchoolDto schoolDto, PageQuery query ,Integer type) {
+	public Response<ChooseSchoolDto>  chooseSchool(SchoolDto schoolDto, PageQuery query ,Integer type, Integer isPage) {
 		Response<ChooseSchoolDto> result = new Response<ChooseSchoolDto>();
 		
 		ChooseSchoolDto chooseSchoolDto = new ChooseSchoolDto();
-		
-		PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, query);
+		PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, query, isPage);
 		chooseSchoolDto.setSchoolDto(schoolList);
 		result.setData(chooseSchoolDto);
 		
-		if(type != null){
+		if(type != null && type == 1 ){
 			chooseSchoolDto.setLevelList(SchoolLevel.getAll());
 			
-			List<EduAreaDto> areaList = areaService.findAreaList();
-			chooseSchoolDto.setAreaList(areaList);
+			//List<EduAreaDto> areaList = areaService.findAreaList();
+			//chooseSchoolDto.setAreaList(areaList);
+			List<EduCommitteeDto> committeeList = committeeService.findCommitteeListNoPage(new EduCommitteeDto());
+			//chooseSchoolDto.setAreaList(areaList);
+			chooseSchoolDto.setCommitteeList(committeeList);
 		}
 		return result;
 	}

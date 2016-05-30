@@ -1,8 +1,11 @@
 package com.ssic.education.app.service;
 
+import java.util.List;
+
 import com.ssic.educateion.common.dto.EduTaskDto;
 import com.ssic.educateion.common.dto.EduTaskReadDto;
 import com.ssic.educateion.common.dto.EduTaskReceiveDto;
+import com.ssic.educateion.common.dto.TaskReceivePageDto;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 
@@ -38,6 +41,8 @@ public interface ITaskService {
 	
 	//根据任务Id查询任务详情
 	EduTaskDto findTaskByPara(EduTaskDto eduTaskDto);
+
+	List<TaskReceivePageDto> findTaskReceiveByPara(String id);
 
 }
 

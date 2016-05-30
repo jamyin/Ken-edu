@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>通告公示</title>
+        <link rel="stylesheet" href="/static/css/common.css">
+        <link rel="stylesheet" href="/static/css/style.css">
+        <link rel="stylesheet" href="/static/css/dis_edu.css">
+        <link rel="stylesheet" href="/static/css/themes/default/default.css" />
+        <link rel="stylesheet" href="/static/css/plugins/code/prettify.css" />
+
+    </head>
+    <body>
+       <!--  <div class="header">
+    		<div class="wrap">
+    			<a class="logo" href="index.html">上海市中小学校校生午餐综合管理平台</a>
+    			<div class="p_status">
+    				<a class="p_center" href="pcenter.html">个人中心</a>  |  <a class="logout" href="###">退出</a>
+    			</div>
+    		</div>
+    	</div> -->
+    	
+        <#include "/common/nav.htm" />
+        
+        <div class="breadcrumb">
+            <span>当前位置:</span>
+            <a href="#">公告通知</a>
+            <span> &gt; </span>
+            <a href="#">已发通知</a>
+            <span> &gt; </span>
+            <a href="#">通知详情</a>
+        </div>
+        <div class="main_wrap">
+
+            <h2>通知详情</h2>
+            <div class="content_wrap">
+
+                <div class="tab_wrap">
+                    <ul class="side_menu">
+                        <li class="active">新建</li>
+                        <li><a href="/motive/unreaded.htm">未读</a></li>
+                        <li><a href="/motive/sended.htm">已发</a></li>
+                        <li><a href="/motive/readed.htm">已读</a></li>
+                    </ul>
+                    <div class="tab_content">
+                        <form id="submitForm" method="post">
+                        	<input type="hidden" name="content" id="content" value=""/>
+                        	<input type="hidden" name="type" id="type" value="0"/>
+                            <section class="line">
+                                <label for="to">联系人:    </label>
+                                <input type="text" name="to">
+                                <span id="plus_bt">+</span>
+                            </section>
+                            <section class="line">
+                                <label for="title">标题:    </label>
+                                <input type="text" name="title">
+                            </section>
+                            <section class="text">
+                                <label for="text">内容:    </label>
+                                <div class="text_wrap">
+                                	<script id="editor" type="text/plain" style="width:550px;height:300px;"></script>
+                                    <!-- <textarea name="text" style="width:550px"></textarea> -->
+                                </div>
+                            </section>
+                            <div class="subbt">
+                                <a id="savebutton" href="#">发布</a>
+                                <a href="#">取消</a>
+                            </div>
+                            <div class="background">
+                                <div class="select_panel">
+                                    <h2>选择联系人</h2><span class="close"><img src="/static/img/button_close.png" /></span>
+                                    <div class="content_wrap">
+                                        <section class="line">
+                                            <input type="text" name="search">
+                                            <input type="submit" name="name" value="搜索">
+                                            <div class="checkwrap">
+                                                <ul>
+                                                    <li>
+                                                        <label for="shisan">十三叔</label>
+                                                        <input name="shisan" type="checkbox" value="436543" />
+                                                    </li>
+                                                    <li>
+                                                        <label for="aa">有威</label>
+                                                        <input name="aa" type="checkbox" value="" />
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </section>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="footer">
+    		上海市中小学校学生午餐综合管理平台<br>CopyRight© 2016上海市天坊信息技术有限公司
+    	</div>
+	    <script src="/static/js/jquery-2.1.3.min.js"></script>
+	    
+	<link href="/static/umeditor1.2.2/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" charset="utf-8" src="/static/umeditor1.2.2/umeditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/static/umeditor1.2.2/umeditor.min.js"> </script>
+    <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+    <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+    <script type="text/javascript" charset="utf-8" src="/static/umeditor1.2.2/lang/zh-cn/zh-cn.js"></script>	    
+	    <!-- 
+        <script src="/static/js/kindeditor-all-min.js"></script>
+        <script src="/static/js/lang/zh-CN.js"></script>
+        <script src="/static/js/plugins/code/prettify.js"></script> -->
+        <script>
+            $(function(){
+            	
+            	var um = UM.getEditor('editor');
+            	
+            	$("#savebutton").on('click',function(){
+            		var ajaxParams = $("#submitForm").serialize();
+    				var content = um.getContent();
+    				$("#content").val(content);
+    				
+    				$.ajax({
+    					url : "/info/save.htm",
+    					type:"POST",
+    					data : ajaxParams,
+    					dataType:'json',
+    					success:function(data){
+    						if(data.status==200){
+								alert("发布成功");
+								window.location.href = "";
+    						}else{
+    							
+    						}
+    						
+    					}
+    				});
+            	});
+            	
+                $("#plus_bt").click(function(){
+                    $(".background").show();
+                });
+
+                $(".background .close").click(function(){
+                    $(".background").hide();
+                });
+
+            });
+
+        </script>
+    </body>
+</html>

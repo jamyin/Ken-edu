@@ -44,11 +44,11 @@ public class SchoolDao extends MyBatisBaseDao<EduSchool> {
 	 * @date 2016年5月13日 上午9:25:55
 	 * @return List<EduSchool>    返回类型
 	 */
-	public List<EduSchool> findSchoolList(SchoolDto schoolDto,PageQuery query) {
+	public List<EduSchool> findSchoolList(SchoolDto schoolDto,PageQuery query ,Integer isPage) {
 		EduSchoolExample example = new EduSchoolExample();
 		EduSchoolExample.Criteria criteria = example.createCriteria();
 		assemblyParams(schoolDto, criteria);
-		if(query != null && query.getPageSize() > 0){
+		if(isPage != null && isPage == 1 ){
 			example.setOrderByClause("create_time DESC limit "+query.getStartNum() +"," + query.getPageSize());
 		}
 		List<EduSchool> list = mapper.selectByExample(example);
@@ -65,6 +65,9 @@ public class SchoolDao extends MyBatisBaseDao<EduSchool> {
 			}	
 			if (StringUtils.isNotBlank(schoolDto.getLevel())) {
 				criteria.andLevelLike("%" + schoolDto.getLevel().trim()+ "%");
+			}
+			if (StringUtils.isNotBlank(schoolDto.getCommitteeId())) {
+				criteria.andCommitteeIdEqualTo(schoolDto.getCommitteeId().trim());
 			}
 			if (StringUtils.isNotBlank(schoolDto.getArea())){
 				criteria.andAreaEqualTo(schoolDto.getArea());

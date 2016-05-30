@@ -43,4 +43,13 @@
 			(#{item.id},#{item.taskId},#{item.readstat},#{item.receiveId},#{item.schoolId},#{item.createTime},#{item.lastUpdateTime},#{item.stat})
 		</foreach>
 	</insert>
+	
+	<select id="findTaskReceiveByPara" resultType="com.ssic.educateion.common.dto.TaskReceivePageDto"
+		parameterType="java.lang.String">
+		SELECT DISTINCT b.`name`,a.`task_id` as taskId, a.`readstat` FROM t_edu_task_receive a LEFT JOIN t_edu_users b ON a.receive_id = b.id 
+		WHERE a.`task_id`= #{id}
+		AND a.stat = 1 AND b.stat = 1 
+		ORDER BY a.create_time DESC
+	</select>
+	
 </mapper>

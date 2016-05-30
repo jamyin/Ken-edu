@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.ssic.educateion.common.dto.EduTaskReadDto;
 import com.ssic.educateion.common.dto.EduTaskReceiveDto;
+import com.ssic.educateion.common.dto.TaskReceivePageDto;
 import com.ssic.education.utils.model.PageQuery;
 
 public interface EduTaskReceiveExMapper {
@@ -15,5 +16,7 @@ public interface EduTaskReceiveExMapper {
 	int selectReadAccount(@Param("receiveDto") EduTaskReceiveDto receiveDto);
 
 	int addTaskReceiveBatch(@Param("list") List<EduTaskReceiveDto> list);
+
+	List<TaskReceivePageDto> findTaskReceiveByPara(@Param("id") String id);
 
 }

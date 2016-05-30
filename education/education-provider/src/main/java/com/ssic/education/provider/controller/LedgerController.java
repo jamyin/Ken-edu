@@ -87,6 +87,20 @@ public class LedgerController {
 		return "ledger/ledgerList";
 	}
 
+	@RequestMapping("/importPage")
+	public String importPage(HttpServletRequest request) {
+		return "ledger/ledgerImport";
+	}
+	
+	/**
+	 * 查询配货
+	 * 
+	 * @param ld
+	 * @param session
+	 * @param ph
+	 * @author chenminghai
+	 * @return
+	 */
 	@RequestMapping("/dataGrid")
 	@ResponseBody
 	public DataGrid dataGrid(LedgerDto ld, HttpSession session, PageHelper ph) {
@@ -111,6 +125,14 @@ public class LedgerController {
 		return "ledger/ledgerAdd";
 	}
 
+	/**
+	 * 添加配货
+	 * 
+	 * @param lm
+	 * @param session
+	 * @author chenminghai
+	 * @return
+	 */
 	@RequestMapping("/saveLedger")
 	@ResponseBody
 	public Json saveLedger(LedgerModel lm, HttpSession session) {
@@ -124,12 +146,14 @@ public class LedgerController {
 		}
 		List<LedgerDto> ledgers = lm.getLedger();
 		ledgers.get(0).setSourceId(sourceId);
+		//配送日期
 		Date actionDate = ledgers.get(0).getActionDate();
 		if (actionDate == null) {
 			j.setMsg("配送日期不能为空");
 			j.setSuccess(false);
 			return j;
 		}
+		//配送点
 		String receiverId = eduSchoolSupplierService.findSchoolIdByReceiverId(
 				ledgers.get(0).getReceiverName(), ledgers.get(0).getSourceId());
 		if (receiverId == null) {
@@ -137,12 +161,14 @@ public class LedgerController {
 			j.setSuccess(false);
 			return j;
 		}
+		//配送号
 		int w = ledgerService.findWareBatchNo(ledgers.get(0));
 		if (w != 0) {
 			j.setMsg("已存在的配送号");
 			j.setSuccess(false);
 			return j;
 		}
+		//标识
 		int i = 0;
 		String str = "";
 		for (LedgerDto ledger : ledgers) {
@@ -150,6 +176,7 @@ public class LedgerController {
 				str += i + ",";
 				continue;
 			}
+			//采购品
 			if (ledger.getName() == null) {
 				j.setMsg("采购品不能为空");
 				j.setSuccess(false);
@@ -159,6 +186,7 @@ public class LedgerController {
 			ledger.setActionDate(actionDate);
 			ledger.setReceiverId(receiverId);
 			ledger.setSourceId(sourceId);
+			//查询采购品是否存在
 			ProWaresDto warerDto = waresService.findWaresBySupplierId(ledger);
 			if (warerDto == null) {
 				j.setMsg(ledger.getName() + "不存在的采购品");
@@ -166,6 +194,7 @@ public class LedgerController {
 				return j;
 			}
 			ledger.setWaresId(warerDto.getId());
+			//进货与生产日期比较
 			if (ledger.getProductionDate() != null) {
 				if (!ledgers.get(0).getActionDate()
 						.after(ledger.getProductionDate())) {
@@ -183,7 +212,7 @@ public class LedgerController {
 				return j;
 			}
 			String num = ledger.getQuantity();
-			if (!num.matches("^[1-9][0-9]*$")) {
+			if (!num.matches("^[1-9][0-9]*(\\.)?[0-9]{0,2}$")) {
 				j.setMsg(ledger.getName() + "错误的采购数量");
 				j.setSuccess(false);
 				return j;
@@ -194,6 +223,7 @@ public class LedgerController {
 				j.setSuccess(false);
 				return j;
 			}
+			//查询供应商
 			String supplierId = supplierService
 					.findSupplierIdBySourceId(ledger);
 			ledger.setSupplierId(supplierId);
@@ -233,6 +263,15 @@ public class LedgerController {
 		return "ledger/ledgerEdit";
 	}
 
+	/**
+	 * 配货详情
+	 * 
+	 * @param masterId
+	 * @param request
+	 * @param session
+	 * @author chenminghai
+	 * @return
+	 */
 	@RequestMapping("/showPage")
 	public String showPage(String masterId, HttpServletRequest request,
 			HttpSession session) {
@@ -249,6 +288,14 @@ public class LedgerController {
 		return "ledger/ledgerShow";
 	}
 
+	/**
+	 * 更新配货
+	 * 
+	 * @param lm
+	 * @param session
+	 * @author chenminghai
+	 * @return
+	 */
 	@RequestMapping(value = "/ledgerEdit")
 	@ResponseBody
 	public Json updataLedger(LedgerModel lm, HttpSession session) {
@@ -262,12 +309,14 @@ public class LedgerController {
 		}
 		List<LedgerDto> ledgers = lm.getLedger();
 		ledgers.get(0).setSourceId(sourceId);
+		//配货日期
 		Date actionDate = ledgers.get(0).getActionDate();
 		if (actionDate == null) {
 			j.setMsg("配送日期不能为空");
 			j.setSuccess(false);
 			return j;
 		}
+		//配送点
 		String receiverId = eduSchoolSupplierService.findSchoolIdByReceiverId(
 				ledgers.get(0).getReceiverName(), ledgers.get(0).getSourceId());
 		if (receiverId == null) {
@@ -275,6 +324,7 @@ public class LedgerController {
 			j.setSuccess(false);
 			return j;
 		}
+		//采购品
 		for (LedgerDto ledger : ledgers) {
 			if (ledger.getName() == null) {
 				j.setMsg("采购品不能为空");
@@ -293,6 +343,7 @@ public class LedgerController {
 				return j;
 			}
 			ledger.setWaresId(warerDto.getId());
+			//生产日期与进货日期
 			if (ledger.getProductionDate() != null) {
 				if (!ledgers.get(0).getActionDate()
 						.after(ledger.getProductionDate())) {
@@ -310,7 +361,7 @@ public class LedgerController {
 				return j;
 			}
 			String num = ledger.getQuantity();
-			if (!num.matches("^[1-9][0-9]*$")) {
+			if (!num.matches("^[1-9][0-9]*(\\.)?[0-9]{0,2}$")) {
 				j.setMsg(ledger.getName() + "错误的采购数量");
 				j.setSuccess(false);
 				return j;
@@ -338,6 +389,14 @@ public class LedgerController {
 		return j;
 	}
 
+	/**
+	 * 删除配货
+	 * 
+	 * @param masterId
+	 * @param session
+	 * @author chenminghai
+	 * @return
+	 */
 	@RequestMapping("/deleteLedger")
 	@ResponseBody
 	public Json deleteLedger(String masterId, HttpSession session) {

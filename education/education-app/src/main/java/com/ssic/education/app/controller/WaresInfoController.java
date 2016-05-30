@@ -1,10 +1,6 @@
 package com.ssic.education.app.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,16 +14,12 @@ import com.ssic.education.app.dto.WaresInfoDto;
 import com.ssic.education.app.dto.WaresListDto;
 import com.ssic.education.app.dto.WaresRelatedDto;
 import com.ssic.education.app.service.IWaresInfoService;
-import com.ssic.education.app.util.JsonUtil;
 import com.ssic.education.handle.pojo.ProWares;
-import com.ssic.education.utils.HttpRequest;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 import com.ssic.education.utils.model.Response;
 import com.ssic.education.utils.util.StringUtils;
-
-import freemarker.template.utility.StringUtil;
 
 /**		
  * <p>Title: WaresInfoController </p>
@@ -103,7 +95,38 @@ public class WaresInfoController {
 	 */
 	@RequestMapping(value = "/purchaseList/{schoolId}", method = { RequestMethod.POST, RequestMethod.GET })
 	@ResponseBody
-	public Response<PageResult<WaresListDto>> purchaseList(@PathVariable("schoolId") String schoolId, @RequestBody String json) throws Exception {
+	public Response<PageResult<WaresListDto>> purchaseList(@PathVariable("schoolId") String schoolId, ProWares prowares, PageQuery query) throws Exception {
+		Response<PageResult<WaresListDto>> result = new Response<PageResult<WaresListDto>>();
+
+		if (StringUtils.isEmpty(schoolId)) {
+			result.setStatus(DataStatus.HTTP_FAILE);
+			result.setMessage("查询Id为空");
+			return result;
+		} else {
+			PageResult<WaresListDto> waresInfoList = waresInfoService.getWaresBySchoolId(schoolId, prowares, query);
+			if (null != waresInfoList && !waresInfoList.getResults().isEmpty()) {
+				result.setStatus(DataStatus.HTTP_SUCCESS);
+				result.setMessage("查询成功！");
+				result.setData(waresInfoList);
+				return result;
+			} else {
+				result.setStatus(DataStatus.HTTP_SUCCESS);
+				result.setMessage("未查到相关记录！");
+				return result;
+			}
+		}
+		//Map<String, Object> map = StringUtil.isEmpty(json) ? new HashMap<String, Object>() : JsonUtil.json2Obj(json, Map.class);
+	}
+
+	/**
+	 * purchaseList：采购品列表根据学校ID查询 分页类型和商品名称检索
+	 * @author SeanYoung
+	 * @throws Exception 
+	 * @date 2016年5月13日 下午12:00:30
+	 */
+	@RequestMapping(value = "/purchaseListDemo/{schoolId}", method = { RequestMethod.POST, RequestMethod.GET })
+	@ResponseBody
+	public Response<PageResult<WaresListDto>> purchaseListDemo(@PathVariable("schoolId") String schoolId, @RequestBody String json) throws Exception {
 		Response<PageResult<WaresListDto>> result = new Response<PageResult<WaresListDto>>();
 
 		if (StringUtils.isEmpty(schoolId)) {

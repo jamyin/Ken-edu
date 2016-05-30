@@ -29,6 +29,9 @@ public interface IWaresInfoService {
 	//根据学校ID查询商品列表 带分页
 	PageResult<WaresListDto> getWaresBySchoolId(String schoolId, String json) throws Exception;
 
+	//根据学校ID查询商品列表 带分页
+	PageResult<WaresListDto> getWaresBySchoolId(String schoolId, ProWares prowares, PageQuery query);
+
 	//根据商品的ID查询商品信息
 	WaresRelatedDto findWarseById(String id);
 
