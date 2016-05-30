@@ -425,10 +425,11 @@ public class LedgerController {
 	 * @author zhangjiwei
 	 * @since 2016.5.21
 	 */
-	public ModelAndView importExcel(
+	public Json importExcel(
 			@RequestParam("filename") MultipartFile file,
 			HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ParseException {
+		Json j = new Json();
 		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
 				ConfigUtil.SESSIONINFONAME);
 		// 当前登录用户所属供应商的id
@@ -490,7 +491,7 @@ public class LedgerController {
 							masterLedger.put(master, new ArrayList());
 						}
 					}
-					if (i == 1 && master.getActionDate() != null) {
+					if (i == 1 && master.getActionDate() == null) {
 						if (StringUtils.isBlank(value)) {
 							errorMsg = "第" + (rowNum + 1) + "行数据不正确，配送日期不能为空。";
 							break;
@@ -509,6 +510,7 @@ public class LedgerController {
 						}
 						// 名称
 						name = value;
+						dto.setName(name);
 					} else if (i == 3) {
 						if (StringUtils.isBlank(value)) {
 							errorMsg = "第" + (rowNum + 1) + "行数据不正确，数量不能为空。";
@@ -567,7 +569,7 @@ public class LedgerController {
 						ProWares pw = waresService.findProWarsByNameSpecManu(
 								name, spec, value, supplierId);
 						if (pw == null) {
-							errorMsg = "第" + (i + 1) + "行数据不正确，商品不存在。";
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，商品不存在。";
 							break;
 						} else {
 							dto.setWaresId(pw.getId());
@@ -591,10 +593,14 @@ public class LedgerController {
 		}
 		if (errorMsg != null) {
 			// TODO 反馈用户错误信息
+			j.setMsg(errorMsg);
+			j.setSuccess(false);
+			return j;
 		} else {
 			ledgerService.importLedger(masterLedger);
 		}
-
-		return null;
+		j.setMsg("添加成功");
+		j.setSuccess(true);
+		return j;
 	}
 }

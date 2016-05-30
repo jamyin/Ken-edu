@@ -211,7 +211,7 @@
 
 	function importSupplier() {
 		parent.$.modalDialog({
-			title : '导入配货管理',
+			title : '导入配货',
 			width :300,
 			height : 150,
 			href : '${pageContext.request.contextPath}/ledgerController/importPage',
@@ -219,7 +219,7 @@
 				text : '上传',
 				handler : function() {
 					parent.$.modalDialog.openner_dataGrid = dataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
-					var f = parent.$.modalDialog.handler.find('#importSupplier');
+					var f = parent.$.modalDialog.handler.find('#importLedger');
 					f.submit();
 				}
 			} ]
