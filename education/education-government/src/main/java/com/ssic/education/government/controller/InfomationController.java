@@ -47,6 +47,7 @@ public class InfomationController extends BaseController {
 		EduInformationDto eduInformationDto = new EduInformationDto();
 		eduInformationDto.setType(Integer.valueOf(type));
 		PageResult<EduInformationDto> pageList =  iEduInformationService.searchInfomation(eduInformationDto,pageQuery);
+		mv.addObject("type",type);
 		mv.addObject("pageList", pageList);
 		mv.setViewName("info/dis_edu_motive_index");
 		return mv;
@@ -82,6 +83,10 @@ public class InfomationController extends BaseController {
 		eduInformationDto.setContent(eduInformationDto.getEditorValue());
 		String infoId = UUIDGenerator.getUUID32Bit();
 		eduInformationDto.setId(infoId);
+		
+		eduInformationDto.setCreateAdminId(getSessionUserId());
+		eduInformationDto.setCreateAdminName(getEduUsersDto().getName());		
+		
 		int result = iEduInformationService.saveInfomation(eduInformationDto);
 		if (!(result > 0)) {
 			response.setStatus(DataStatus.HTTP_FAILE);

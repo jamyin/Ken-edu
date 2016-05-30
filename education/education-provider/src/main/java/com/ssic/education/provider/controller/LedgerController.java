@@ -1,6 +1,12 @@
 package com.ssic.education.provider.controller;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
@@ -31,7 +37,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.ssic.educateion.common.dto.LedgerDto;
 import com.ssic.educateion.common.dto.ProWaresDto;
@@ -91,7 +96,7 @@ public class LedgerController {
 	public String importPage(HttpServletRequest request) {
 		return "ledger/ledgerImport";
 	}
-	
+
 	/**
 	 * 查询配货
 	 * 
@@ -146,14 +151,14 @@ public class LedgerController {
 		}
 		List<LedgerDto> ledgers = lm.getLedger();
 		ledgers.get(0).setSourceId(sourceId);
-		//配送日期
+		// 配送日期
 		Date actionDate = ledgers.get(0).getActionDate();
 		if (actionDate == null) {
 			j.setMsg("配送日期不能为空");
 			j.setSuccess(false);
 			return j;
 		}
-		//配送点
+		// 配送点
 		String receiverId = eduSchoolSupplierService.findSchoolIdByReceiverId(
 				ledgers.get(0).getReceiverName(), ledgers.get(0).getSourceId());
 		if (receiverId == null) {
@@ -161,14 +166,14 @@ public class LedgerController {
 			j.setSuccess(false);
 			return j;
 		}
-		//配送号
+		// 配送号
 		int w = ledgerService.findWareBatchNo(ledgers.get(0));
 		if (w != 0) {
 			j.setMsg("已存在的配送号");
 			j.setSuccess(false);
 			return j;
 		}
-		//标识
+		// 标识
 		int i = 0;
 		String str = "";
 		for (LedgerDto ledger : ledgers) {
@@ -176,7 +181,7 @@ public class LedgerController {
 				str += i + ",";
 				continue;
 			}
-			//采购品
+			// 采购品
 			if (ledger.getName() == null) {
 				j.setMsg("采购品不能为空");
 				j.setSuccess(false);
@@ -186,7 +191,7 @@ public class LedgerController {
 			ledger.setActionDate(actionDate);
 			ledger.setReceiverId(receiverId);
 			ledger.setSourceId(sourceId);
-			//查询采购品是否存在
+			// 查询采购品是否存在
 			ProWaresDto warerDto = waresService.findWaresBySupplierId(ledger);
 			if (warerDto == null) {
 				j.setMsg(ledger.getName() + "不存在的采购品");
@@ -194,7 +199,7 @@ public class LedgerController {
 				return j;
 			}
 			ledger.setWaresId(warerDto.getId());
-			//进货与生产日期比较
+			// 进货与生产日期比较
 			if (ledger.getProductionDate() != null) {
 				if (!ledgers.get(0).getActionDate()
 						.after(ledger.getProductionDate())) {
@@ -223,7 +228,7 @@ public class LedgerController {
 				j.setSuccess(false);
 				return j;
 			}
-			//查询供应商
+			// 查询供应商
 			String supplierId = supplierService
 					.findSupplierIdBySourceId(ledger);
 			ledger.setSupplierId(supplierId);
@@ -309,14 +314,14 @@ public class LedgerController {
 		}
 		List<LedgerDto> ledgers = lm.getLedger();
 		ledgers.get(0).setSourceId(sourceId);
-		//配货日期
+		// 配货日期
 		Date actionDate = ledgers.get(0).getActionDate();
 		if (actionDate == null) {
 			j.setMsg("配送日期不能为空");
 			j.setSuccess(false);
 			return j;
 		}
-		//配送点
+		// 配送点
 		String receiverId = eduSchoolSupplierService.findSchoolIdByReceiverId(
 				ledgers.get(0).getReceiverName(), ledgers.get(0).getSourceId());
 		if (receiverId == null) {
@@ -324,7 +329,7 @@ public class LedgerController {
 			j.setSuccess(false);
 			return j;
 		}
-		//采购品
+		// 采购品
 		for (LedgerDto ledger : ledgers) {
 			if (ledger.getName() == null) {
 				j.setMsg("采购品不能为空");
@@ -343,7 +348,7 @@ public class LedgerController {
 				return j;
 			}
 			ledger.setWaresId(warerDto.getId());
-			//生产日期与进货日期
+			// 生产日期与进货日期
 			if (ledger.getProductionDate() != null) {
 				if (!ledgers.get(0).getActionDate()
 						.after(ledger.getProductionDate())) {
@@ -425,8 +430,7 @@ public class LedgerController {
 	 * @author zhangjiwei
 	 * @since 2016.5.21
 	 */
-	public Json importExcel(
-			@RequestParam("filename") MultipartFile file,
+	public Json importExcel(@RequestParam("filename") MultipartFile file,
 			HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ParseException {
 		Json j = new Json();
@@ -603,4 +607,42 @@ public class LedgerController {
 		j.setSuccess(true);
 		return j;
 	}
+
+//	@RequestMapping("download")
+//	public void download(HttpServletRequest request,
+//			HttpServletResponse response) {
+//		String fileName = "配货管理.xlsx";
+//		BufferedInputStream bis = null;
+//		BufferedOutputStream bos = null;
+//		String p = request.getSession().getServletContext().getRealPath("/")
+//				+ "\\templates\\" + fileName;
+//		try {
+//			bis = new BufferedInputStream(new FileInputStream(new File(request
+//					.getSession().getServletContext().getRealPath("/")
+//					+ "\\templates\\" + fileName)));
+//			bos = new BufferedOutputStream(response.getOutputStream());
+//			String encodedfileName = null;
+//			String agent = request.getHeader("USER-AGENT");
+//			if (null != agent && -1 != agent.indexOf("MSIE")) {// IE
+//				encodedfileName = java.net.URLEncoder.encode(fileName, "UTF-8");
+//			} else if (null != agent && -1 != agent.indexOf("Mozilla")) {
+//				encodedfileName = new String(fileName.getBytes("UTF-8"),
+//						"iso-8859-1");
+//			} else {
+//				encodedfileName = java.net.URLEncoder.encode(fileName, "UTF-8");
+//			}
+//			response.setHeader("Content-Disposition", "attachment; filename=\""
+//					+ encodedfileName + "\"");
+//			int byteRead = 0;
+//			byte[] buffer = new byte[8192];
+//			while ((byteRead = bis.read(buffer, 0, 8192)) != -1) {
+//				bos.write(buffer, 0, byteRead);
+//			}
+//
+//			bos.flush();
+//			bis.close();
+//			bos.close();
+//		} catch (Exception e) {
+//		}
+//	}
 }

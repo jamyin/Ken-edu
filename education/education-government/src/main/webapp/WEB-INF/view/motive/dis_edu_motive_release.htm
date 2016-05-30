@@ -37,10 +37,24 @@
 
                 <div class="tab_wrap">
                     <ul class="side_menu">
-                        <li class="active">新建</li>
+                    	<#if sourceType == 0>
+                        	<li class="active">新建</li>
+                        	<li><a href="/motive/sended.htm">已发</a></li>
+                        </#if>
+                        <#if sourceType == 1>
+	                        <li><a href="/motive/unreaded.htm">未读</a></li>
+	                        <li><a href="/motive/readed.htm">已读</a></li>                        
+                        </#if>
+                        <#if sourceType == 2>
+							<li class="active">新建</li>
+                        	<li><a href="/motive/sended.htm">已发</a></li>
+	                        <li><a href="/motive/unreaded.htm">未读</a></li>
+	                        <li><a href="/motive/readed.htm">已读</a></li>
+                        </#if>                        
+                        <!-- 
                         <li><a href="/motive/unreaded.htm">未读</a></li>
-                        <li><a href="/motive/sended.htm">已发</a></li>
                         <li><a href="/motive/readed.htm">已读</a></li>
+                         -->
                     </ul>
                     <div class="tab_content">
                         <form id="submitForm" method="post">
@@ -58,7 +72,7 @@
                             </section>
                             <section class="text">
                                 <label for="text">内容:    </label>
-                                <div class="text_wrap">
+                                <div class="text_wrap1">
                                 	<script id="editor" type="text/plain" style="width:550px;height:300px;"></script>
                                     <!-- <textarea name="text" style="width:550px"></textarea> -->
                                 </div>
@@ -72,10 +86,10 @@
                                     <h2>选择联系人</h2><span class="close"><img src="/static/img/button_close.png" /></span>
                                     <div class="content_wrap">
                                         <section class="line">
-                                            <input type="text" name="search">
-                                            <input type="button" name="name" value="搜索">
+                                            <input type="text" id="searchV" name="search">
+                                            <input id="searchName" type="button" name="name" value="搜索">
                                             <div class="checkwrap">
-                                                <ul>
+                                                <ul id="dataList">
                                                 	<#if dataList ??>
                                                 		<#list dataList as data>
 		                                                    <li>
@@ -114,20 +128,32 @@
         <script src="/static/js/plugins/code/prettify.js"></script> -->
         <script>
             $(function(){
-            	var um = UM.getEditor('editor');
-            	$(".checkwrap ul li input").on('click',function(){
-            		var lianxiList = "";
-            		var lianxiIds = "";
-            		$("input[name='lianxiIds']").each(function(){
-            		    if (true == $(this).prop("checked")) {
-            		    	lianxiList += $(this).parent().find("label").html() + ","
-            		    	//lianxiIds  += $(this).val()+ ",";
-            		    }
-            		});
-            		$("#lianxiList").val(lianxiList);
-            		//$("#lianxiIds").val(lianxiIds);
-            	});
+            	var um = UM.getEditor('editor');          	
             	
+            	loadClickFunction();
+
+            	$("#searchName").on('click',function(){
+            		var name = $("#searchV").val();
+            		var ajaxParams = {name:name}
+    				$.ajax({
+    					url : "/motive/ajaxSearch.htm",
+    					type:"POST",
+    					data : ajaxParams,
+    					dataType:'json',
+    					success:function(data){
+    						if(data.status==200){
+								var dataList = $("#dataList");
+								dataList.empty();
+								$.each(data.data, function(index, item) {
+									dataList.append("<li><label for='shisan'>"+item['name']+"</label><input name='lianxiIds' type='checkbox' value='"+item['id']+"#"+item['name']+"'/></li>");
+								});
+								loadClickFunction();
+    						}else{
+    							
+    						}
+    					}
+    				});
+            	});
             	
             	$("#savebutton").on('click',function(){
             		var ajaxParams = $("#submitForm").serialize();
@@ -160,7 +186,21 @@
                 });
 
             });
-
+            
+            function loadClickFunction(){
+            	$(".checkwrap ul li input").on('click',function(){
+            		var lianxiList = "";
+            		var lianxiIds = "";
+            		$("input[name='lianxiIds']").each(function(){
+            		    if (true == $(this).prop("checked")) {
+            		    	lianxiList += $(this).parent().find("label").html() + ","
+            		    	//lianxiIds  += $(this).val()+ ",";
+            		    }
+            		});
+            		$("#lianxiList").val(lianxiList);
+            		//$("#lianxiIds").val(lianxiIds);
+            	});            	
+            };
         </script>
     </body>
 </html>

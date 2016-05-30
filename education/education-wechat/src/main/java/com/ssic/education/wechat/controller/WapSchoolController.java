@@ -66,10 +66,10 @@ public class WapSchoolController extends BaseController{
 		}
 		String schoolId = dataList.get(0).getSchoolId();
 
-		copyObject(mv,schoolId);
+//		copyObject(mv,schoolId);
 		
-		mv.setViewName("school");
-		return mv;
+//		mv.setViewName("school");
+		return new ModelAndView("redirect:/wap/school/school/"+schoolId+".htm");
 	}
 	
 	public void copyObject(ModelAndView mv,String schoolId){

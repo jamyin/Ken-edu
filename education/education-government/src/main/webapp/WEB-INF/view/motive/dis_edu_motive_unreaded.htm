@@ -43,10 +43,24 @@
 
                 <div class="tab_wrap">
                     <ul class="side_menu">
+                    	<#if sourceType == 0>
+                        	<li><a href="/motive/release.htm">新建</a></li>
+                        	<li class="active">已发</li>
+                        </#if>
+                        <#if sourceType == 1>
+	                        <li class="active">未读</li>
+	                        <li><a href="/motive/readed.htm">已读</a></li>
+                        </#if>
+                        <#if sourceType == 2>
                         <li><a href="/motive/release.htm">新建</a></li>
+                        <li><a href="/motive/sended.htm">已发</a></li>
+                        <li class="active">未读</li>
+                        <li><a href="/motive/readed.htm">已读</a></li>
+                        </#if>                     
+<!--                         <li><a href="/motive/release.htm">新建</a></li>
                         <li class="active">未读</li>
                         <li><a href="/motive/sended.htm">已发</a></li>
-                        <li><a href="/motive/readed.htm">已读</a></li>
+                        <li><a href="/motive/readed.htm">已读</a></li> -->
                     </ul>
                     <div class="tab_content">
                         <table>
@@ -67,66 +81,6 @@
                                     </td>
                                     <td> 2016.3.15 </td>
                                 </tr>
-                                <tr>
-                                    <td class="center"> <input type="checkbox"> </td>
-                                    <td> 市教委 </td>
-                                    <td>
-                                        <a href="#">
-                                            关于食堂卫生解决管理方案
-                                        </a>
-                                    </td>
-                                    <td> 2016.3.15 </td>
-                                </tr>
-                                <tr>
-                                    <td class="center"> <input type="checkbox"> </td>
-                                    <td> 市教委 </td>
-                                    <td>
-                                        <a href="#">
-                                            关于食堂卫生解决管理方案
-                                        </a>
-                                    </td>
-                                    <td> 2016.3.15 </td>
-                                </tr>
-                                <tr>
-                                    <td class="center"> <input type="checkbox"> </td>
-                                    <td> 市教委 </td>
-                                    <td>
-                                        <a href="#">
-                                            关于食堂卫生解决管理方案
-                                        </a>
-                                    </td>
-                                    <td> 2016.3.15 </td>
-                                </tr>
-                                <tr>
-                                    <td class="center"> <input type="checkbox"> </td>
-                                    <td> 市教委 </td>
-                                    <td>
-                                        <a href="#">
-                                            关于食堂卫生解决管理方案
-                                        </a>
-                                    </td>
-                                    <td> 2016.3.15 </td>
-                                </tr>
-                                <tr>
-                                    <td class="center"> <input type="checkbox"> </td>
-                                    <td> 市教委 </td>
-                                    <td>
-                                        <a href="#">
-                                            关于食堂卫生解决管理方案
-                                        </a>
-                                    </td>
-                                    <td> 2016.3.15 </td>
-                                </tr>
-                                <tr>
-                                    <td> <input type="checkbox"> </td>
-                                    <td> 市教委 </td>
-                                    <td>
-                                        <a href="#">
-                                            关于食堂卫生解决管理方案
-                                        </a>
-                                    </td>
-                                    <td> 2016.3.15 </td>
-                                </tr>
                             </form>
                         </table>
                     </div>
@@ -138,4 +92,10 @@
     		上海市中小学校学生午餐综合管理平台<br>CopyRight© 2016上海市天坊信息技术有限公司
     	</div>
     </body>
+    <script type="text/javascript">
+	    function gotoPage(page) {
+	        $("#currPage").val(page);
+	        $("#myform").submit();
+	    }
+    </script>
 </html>

@@ -43,11 +43,62 @@ public class MotiveController extends BaseController {
 
 	@Autowired
 	private IEduInformationListService iEduInformationListService;
+	
+	
+	/**
+	 * 
+		 * 此方法描述的是：异步删除
+		 * @author: cwftalus@163.com
+		 * @version: 2016年5月30日 下午7:06:52
+	 */
+	@RequestMapping(value="ajaxDelete")
+	@ResponseBody
+	public Response<String> ajaxDelete(EduInformationListDto eduInformationListDto){
+		Response<String> response = new Response<String>();
 
+		int result = iEduInformationListService.updateEduInformationList(eduInformationListDto);
+		
+		return response;
+	}
+	
+	/**
+	 * 
+		 * 此方法描述的是：查询联系人列表异步
+		 * @author: cwftalus@163.com
+		 * @version: 2016年5月30日 下午7:06:52
+	 */
+	@RequestMapping(value="ajaxSearch")
+	@ResponseBody
+	public Response<List<InfoList>> ajaxSearch(String name){
+		Response<List<InfoList>> response = new Response<List<InfoList>>();
+		List<InfoList> dataList = new ArrayList<MotiveController.InfoList>();
+		if (Objects.equal(getEduUsersDto().getSourceType(), Byte.valueOf("0"))) {// 查询市教委下的区教委信息
+			EduCommitteeDto eduCommitteeDto = new EduCommitteeDto();
+			eduCommitteeDto.setType(Short.valueOf("2"));
+			eduCommitteeDto.setName(name);
+			List<EduCommitteeDto> resultList = iEduCommitteeService.queryCommittee(eduCommitteeDto);
+			if(resultList!=null && resultList.size()>0){
+				dataList = copyProperty(resultList);	
+			}
+		} else if (Objects.equal(getEduUsersDto().getSourceType(),Byte.valueOf("2"))) {// 查询区县教委下的学校信息
+			EduSchoolDto eduSchoolDto = new EduSchoolDto();
+			eduSchoolDto.setCommitteeId(getEduUsersDto().getSourceId());
+			eduSchoolDto.setSchoolName(name);
+			List<EduSchoolDto> resultList = eduSchoolService.searchEduScholDtoList(eduSchoolDto);
+			if(resultList!=null && resultList.size()>0){
+				dataList = copyProperty(resultList);	
+			}
+		}
+		response.setData(dataList);
+		return response;
+	}
+	
 	/**
 	 * 
 	 * 此方法描述的是：发布
-	 * 
+	 * 市教委  新建 0
+	 * 区教委  新建 未读 已读 已发 2
+	 * 学校 未读 已读 1
 	 * @author: cwftalus@163.com
 	 * @version: 2016年5月30日 上午10:41:57
 	 */
@@ -57,24 +108,37 @@ public class MotiveController extends BaseController {
 
 		// 0市教委，1学校, 2区教委
 		List<InfoList> dataList = new ArrayList<MotiveController.InfoList>();
+		if (Objects.equal(getEduUsersDto(),null)) {// 查询市教委下的区教委信息
+			return new ModelAndView("redirect:/login.htm");
+		}
 		if (Objects.equal(getEduUsersDto().getSourceType(), Byte.valueOf("0"))) {// 查询市教委下的区教委信息
 			EduCommitteeDto eduCommitteeDto = new EduCommitteeDto();
 			eduCommitteeDto.setType(Short.valueOf("2"));
-			List<EduCommitteeDto> resultList = iEduCommitteeService
-					.queryCommittee(eduCommitteeDto);
+			List<EduCommitteeDto> resultList = iEduCommitteeService.queryCommittee(eduCommitteeDto);
 			dataList = copyProperty(resultList);
 		} else if (Objects.equal(getEduUsersDto().getSourceType(),
 				Byte.valueOf("2"))) {// 查询区县教委下的学校信息
 			EduSchoolDto eduSchoolDto = new EduSchoolDto();
 			eduSchoolDto.setCommitteeId(getEduUsersDto().getSourceId());
-			List<EduSchoolDto> resultList = eduSchoolService
-					.searchEduScholDtoList(eduSchoolDto);
+			List<EduSchoolDto> resultList = eduSchoolService.searchEduScholDtoList(eduSchoolDto);
 			dataList = copyProperty(resultList);
+		}else{
+			
 		}
-
+		
+		getSourceType(mv);
+		
 		mv.addObject("dataList", dataList);
 		mv.setViewName("motive/dis_edu_motive_release");
 		return mv;
+	}
+	
+	
+	public void getSourceType(ModelAndView mv){
+		if(getEduUsersDto()!=null){
+			mv.addObject("sourceType", getEduUsersDto().getSourceType());	
+		}
+		
 	}
 
 	/**
@@ -91,6 +155,8 @@ public class MotiveController extends BaseController {
 		eduInformationDto.setContent(eduInformationDto.getEditorValue());
 		String infoId = UUIDGenerator.getUUID32Bit();
 		eduInformationDto.setId(infoId);
+		eduInformationDto.setCreateAdminId(getSessionUserId());
+		eduInformationDto.setCreateAdminName(getEduUsersDto().getName());
 		int result = iEduInformationService.saveInfomation(eduInformationDto);
 		if (!(result > 0)) {
 			response.setStatus(DataStatus.HTTP_FAILE);
@@ -104,8 +170,7 @@ public class MotiveController extends BaseController {
 		return response;
 	}
 
-	public List<EduInformationListDto> copyList(
-			EduInformationDto eduInformationDto) {
+	public List<EduInformationListDto> copyList(EduInformationDto eduInformationDto) {
 		List<EduInformationListDto> dList = null;
 		// if(!StringUtils.isNotEmpty(lianxiIds)){
 		String[] lianxiId = getRequest().getParameterValues("lianxiIds");
@@ -115,7 +180,7 @@ public class MotiveController extends BaseController {
 			EduInformationListDto dto = new EduInformationListDto();
 			dto.setInfomationId(eduInformationDto.getId());
 			dto.setInfoTitle(eduInformationDto.getTitle());
-
+			dto.setCreateId(getSessionUserId());
 			dto.setSourceId(idName[0]);
 			dto.setSourceName(idName[1]);
 			dList.add(dto);
@@ -132,9 +197,16 @@ public class MotiveController extends BaseController {
 	 * @version: 2016年5月30日 上午10:42:24
 	 */
 	@RequestMapping(value = "unreaded")
-	public ModelAndView unreaded() {
+	public ModelAndView unreaded(EduInformationListDto eduInformationListDto,PageQuery pageQuery) {
 		ModelAndView mv = getModelAndView();
 
+		String sourceId = getEduUsersDto().getSourceId();//用户所属教委 或学校
+		eduInformationListDto.setSourceId(sourceId);
+		PageResult<EduInformationListDto> pageList = iEduInformationListService
+				.searchEduInformationList(eduInformationListDto,pageQuery);
+		
+		getSourceType(mv);
+		mv.addObject("pageList", pageList);
 		mv.setViewName("motive/dis_edu_motive_unreaded");
 		return mv;
 	}
@@ -147,12 +219,13 @@ public class MotiveController extends BaseController {
 	 * @version: 2016年5月30日 上午10:42:24
 	 */
 	@RequestMapping(value = "sended")
-	public ModelAndView sended(PageQuery pageQuery) {
+	public ModelAndView sended(EduInformationListDto eduInformationListDto,PageQuery pageQuery) {
 		ModelAndView mv = getModelAndView();
 
+		eduInformationListDto.setCreateId(getSessionUserId());
 		PageResult<EduInformationListDto> pageList = iEduInformationListService
-				.searchEduInformationList(pageQuery);
-
+				.searchEduInformationList(eduInformationListDto,pageQuery);
+		getSourceType(mv);
 		mv.addObject("pageList", pageList);
 		mv.setViewName("motive/dis_edu_motive_sended");
 		return mv;
@@ -168,7 +241,7 @@ public class MotiveController extends BaseController {
 	@RequestMapping(value = "readed")
 	public ModelAndView readed() {
 		ModelAndView mv = getModelAndView();
-
+		getSourceType(mv);
 		mv.setViewName("motive/dis_edu_motive_readed");
 		return mv;
 	}

@@ -11,6 +11,8 @@ public interface IEduInformationListService {
 
 	public void saveList(List<EduInformationListDto> dataList);
 
-	public PageResult<EduInformationListDto> searchEduInformationList(
-			PageQuery pageQuery); 
+	public PageResult<EduInformationListDto> searchEduInformationList(EduInformationListDto eduInformationListDto,
+			PageQuery pageQuery);
+
+	public int updateEduInformationList(EduInformationListDto eduInformationListDto); 
 }
