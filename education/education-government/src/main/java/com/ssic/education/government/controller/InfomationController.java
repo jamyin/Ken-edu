@@ -47,6 +47,7 @@ public class InfomationController extends BaseController {
 		EduInformationDto eduInformationDto = new EduInformationDto();
 		eduInformationDto.setType(Integer.valueOf(type));
 		PageResult<EduInformationDto> pageList =  iEduInformationService.searchInfomation(eduInformationDto,pageQuery);
+		mv.addObject("type",type);
 		mv.addObject("pageList", pageList);
 		mv.setViewName("info/dis_edu_motive_index");
 		return mv;
