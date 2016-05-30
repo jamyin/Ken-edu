@@ -34,9 +34,9 @@ public class AreaController extends BaseController{
 	
 	@RequestMapping(value="/committee")
 	@ResponseBody
-	public Response<List<EduCommitteeDto>> committee() {
+	public Response<List<EduCommitteeDto>> committee(EduCommitteeDto eduCommitteeDto) {
 		Response<List<EduCommitteeDto>> result = new Response<List<EduCommitteeDto>>();
-		List<EduCommitteeDto> dataList = iEduCommitteeService.queryCommittee(null);
+		List<EduCommitteeDto> dataList = iEduCommitteeService.queryCommittee(eduCommitteeDto);
 		result.setData(dataList);
 		return result;
 	}

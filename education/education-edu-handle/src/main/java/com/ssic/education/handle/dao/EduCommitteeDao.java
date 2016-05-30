@@ -26,9 +26,13 @@ public class EduCommitteeDao extends MyBatisBaseDao<EduCommittee> {
 		 EduCommitteeExample example = new  EduCommitteeExample();
 		 EduCommitteeExample.Criteria criteria = example.createCriteria();
         //assemblyParams(eduAreaDto, criteria);
-		 
-		 if(!StringUtils.isEmpty(eduCommitteeDto.getName())){
-			 criteria.andNameLike("%" + eduCommitteeDto.getName() + "%");
+		 if(eduCommitteeDto!=null){
+			 if(!StringUtils.isEmpty(eduCommitteeDto.getName())){
+				 criteria.andNameLike("%" + eduCommitteeDto.getName() + "%");
+			 }
+			 if(eduCommitteeDto.getType()!=null){
+				 criteria.andTypeEqualTo(eduCommitteeDto.getType());
+			 }
 		 }
 		 
 		criteria.andStatEqualTo(Short.valueOf("1"));

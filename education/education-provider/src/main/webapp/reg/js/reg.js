@@ -1,6 +1,6 @@
 function laodcommittee(){
 	$.ajax({
-		url:'area/committee',
+		url:'area/committee?type=2',
 		type:"POST",
 		dataType:'json',
 		success:function(data){
