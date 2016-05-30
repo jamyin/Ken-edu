@@ -209,7 +209,7 @@ public class SchoolController {
 		chooseSchoolDto.setSchoolDto(schoolList);
 		result.setData(chooseSchoolDto);
 		
-		if(type != null){
+		if(type != null && type == 1 ){
 			chooseSchoolDto.setLevelList(SchoolLevel.getAll());
 			
 			List<EduAreaDto> areaList = areaService.findAreaList();
