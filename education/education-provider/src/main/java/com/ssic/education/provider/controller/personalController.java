@@ -56,9 +56,9 @@ public class personalController {
 	@RequestMapping("/personalEdit")
 	public String editPage(HttpServletRequest request, String id) {
 		TImsUsersDto u = userService.getUser(id);
-		if(u.getIsAdmin()==1){
+		/*if(u.getIsAdmin()==1  && u.getIsAdmin()!=null){
 			u.setUserType(null);
-		}
+		}*/
 	    request.setAttribute("user", u);
 	    
         return "personal/personalEdit";

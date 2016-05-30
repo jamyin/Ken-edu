@@ -61,6 +61,16 @@ public class BaseController {
 		return mv;
 	}
 
+	public EduUsersDto getEduUsersDto(){
+		EduUsersDto eduUsersDto = null;
+		if(!Objects.equal(getSessionUserId(), null)){
+			eduUsersDto = new EduUsersDto();
+			eduUsersDto.setId(getSessionUserId());
+			eduUsersDto =  eduUsersService.getUserInfo(eduUsersDto);
+		}
+		return eduUsersDto;
+	}
+	
 	public List<MenuListDto> getNavList(){
 		List<MenuListDto> navList = null;
 		if(!Objects.equal(getSessionUserId(), null)){

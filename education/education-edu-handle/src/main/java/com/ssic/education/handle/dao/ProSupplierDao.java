@@ -45,11 +45,20 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 	@Autowired
 	private ProSupplierReceiverMapper  srMapper;
 	
+	public List<ProSupplierDto> findSupplierListByCommittee(ProSupplierDto dto, PageQuery page) {
+		return exMapper.findSupplierListByCommittee(dto,page);
+	}
+	public long countSupplierListByCommittee(ProSupplierDto dto) {
+		return exMapper.countSupplierListByCommittee(dto);
+	}
 	public List<ProSupplierDto> findPage(ProSupplierDto dto, PageQuery page) {
 		ProSupplierExample example = new ProSupplierExample();
 		ProSupplierExample.Criteria criteria = example.createCriteria();
 		if (null != dto.getReviewed()) {
 			criteria.andReviewedEqualTo(dto.getReviewed());
+		}
+		if (StringUtils.isNotBlank(dto.getSupplierName())){
+			criteria.andSupplierNameLike("%"+dto.getSupplierName().trim()+"%");
 		}
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		if (null != page) {

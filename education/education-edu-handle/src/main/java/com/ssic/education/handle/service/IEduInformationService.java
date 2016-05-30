@@ -6,4 +6,5 @@ public interface IEduInformationService {
 
 	int saveInfomation(EduInformationDto eduInformationDto);
 
+	EduInformationDto search(String infoId);
 }

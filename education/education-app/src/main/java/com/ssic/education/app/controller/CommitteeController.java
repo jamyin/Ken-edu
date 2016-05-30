@@ -1,5 +1,7 @@
 package com.ssic.education.app.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +30,7 @@ public class CommitteeController {
     
    /**
    * @Title: findCommitteeList
-   * @Description: 查询全部区教委列表
+   * @Description: 查询全部区教委列表-带分页
    * @author Ken Yin  
    * @date 2016年5月23日 下午4:55:23
    * @return Response<PageResult<EduCommitteeDto>>    返回类型
@@ -49,6 +51,30 @@ public class CommitteeController {
     		return result;
     	}
     }
+    
+    /**
+     * @Title: findCommitteeListNoPage
+     * @Description: 查询全部区教委列表-不带分页
+     * @author Ken Yin  
+     * @date 2016年5月23日 下午4:55:23
+     * @return Response<PageResult<EduCommitteeDto>>    返回类型
+      */
+      @RequestMapping("/findCommitteeListNoPage")
+      @ResponseBody
+      public Response<List<EduCommitteeDto>>  findCommitteeListNoPage(EduCommitteeDto eduCommitteeDto) {
+      	Response<List<EduCommitteeDto>> result = new Response<List<EduCommitteeDto>>();
+      	List<EduCommitteeDto> committeeList = committeeService.findCommitteeListNoPage(eduCommitteeDto);
+      	if(committeeList != null && committeeList.size() >0 ){
+      		result.setStatus(DataStatus.HTTP_SUCCESS);
+      		result.setMessage("查询成功！");
+      		result.setData(committeeList);
+      		return result;
+      	}else{
+      		result.setStatus(DataStatus.HTTP_SUCCESS);
+      		result.setMessage("未查到相关记录！");
+      		return result;
+      	}
+      }
 
 }
 

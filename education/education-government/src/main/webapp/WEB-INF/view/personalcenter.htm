@@ -15,6 +15,7 @@
 				<span>${(userInfo.userAccount)!}</span>
 			</div>
 			<ul>
+				<li><label>原密码</label><input id="old_password" type="password" placeholder=""></li>
 				<li><label>新登录密码</label><input id="password" type="password" placeholder=""></li>
 				<li><label>确认密码</label><input id="new_password" type="password" placeholder=""></li>
 			</ul>
@@ -28,6 +29,11 @@
 		$(".submit").on('click', function(){
 			var passWord = $.trim($("#password").val());
 			var new_password = $.trim($("#new_password").val());
+			var old_password = $.trim($("#old_password").val());
+			if (old_password.length <= 0) {
+				alert("原密码不能为空~");
+				return;
+			}
 			if (passWord.length <= 0) {
 				alert("新登录密码不能为空~");
 				return;
@@ -44,7 +50,7 @@
 				url:"/user/update.htm",
 				type:"post",
 				dataType:"json",
-				data:{password:passWord},
+				data:{oldpassword:old_password,password:passWord},
 				async: false,
 				success:function(data){
 					if(data.status == 200){
@@ -52,7 +58,7 @@
 						window.location.href="/login.htm";
 						return;
 					}else {
-						alert(data.msg);
+						alert(data.message);
 					}							
 				}
 			});

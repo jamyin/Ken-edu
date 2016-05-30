@@ -22,6 +22,7 @@ public class SupplierReviewedDto implements Serializable {
 	private String schoolName;
 	private String schoolThum;
 	private String mobileNo;
+	private String area;
 	private String address;
 	private String supplierName;
     private Integer supplierType;

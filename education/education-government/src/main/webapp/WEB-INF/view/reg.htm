@@ -37,9 +37,9 @@
 				<li><label>区教委</label>
 				<select name="area"  id="area" panelheight="auto">
 					<option value="">请选择区县</option>
-		          	<#if areaDtos??>
-		          		<#list areaDtos as area>
-		          			<option value="${(area.addressCode)!}">${(area.addressName)!}</option>
+		          	<#if eduCommitteeDtos??>
+		          		<#list eduCommitteeDtos as area>
+		          			<option value="${(area.areaCode)!}">${(area.name)!}</option>
 		          		</#list>
 		          	</#if>
 				</select>
@@ -123,14 +123,12 @@
 				alert("区教委不能为空~");
 				return;
 			}
-			var checkStr="{";
 			var checked = 0;
             $('input[name="CheckboxGroup1"]:checked').each(function(){
             	checkStr += $(this).val()+","
             	checked++;
             });
             checkStr=checkStr.substring(0,checkStr.length-1);
-            checkStr +="}";
 			if (checked == 0 ) {
             	alert("学校级别不能为空~");
 				return;

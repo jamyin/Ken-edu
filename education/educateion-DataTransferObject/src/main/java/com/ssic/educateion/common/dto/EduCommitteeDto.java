@@ -23,6 +23,7 @@ public class EduCommitteeDto implements Serializable{
 	private String id;
     private String name;
     private Short type;
+    private String areaCode;
     private Date createTime;
     private Date lastUpdateTime;
     private Short stat;

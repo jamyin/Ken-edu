@@ -36,23 +36,30 @@
     </h1>
     <div class="wrapperB">
       <div class="search-bar-school">
-      <form action="/edu/school/list.htm?source=0" method="post" id="myform">
+      <#if dto.source == 0>
+      	<form action="/edu/school/list.htm?source=0&reviewed=1&schoolName=${(dto.schoolName)!}" method="post" id="myform">
+      </#if>
+      <#if dto.source == 2>
+      	<form action="/edu/school/list.htm?source=2&reviewed=1&schoolName=${(dto.schoolName)!}" method="post" id="myform">
+      </#if>
        <input type="hidden" name="currPage" id="currPage" value="1"/>
       <ul>
-        <li class="search">
-          <label for="">区县:</label>
-          <select class="" name="area" id="area" panelheight="auto">
-          	<option value="">请选择区县</option>
-          	<#if areaDtos??>
-          		<#list areaDtos as area>
-          			<option <#if area.addressCode == dto.province>selected="true"</#if> value="${(area.addressCode)!}">${(area.addressName)!}</option>
-          		</#list>
-          	</#if>
-           <!--  <option value="option">徐汇区</option>
-            <option value="option">杨浦区</option>
-            <option value="option">嘉定</option> -->
-          </select>
-        </li>
+      <#if dto.source==0 >
+	      <li class="search">
+	          <label for="">区县:</label>
+	          <select class="" name="area" id="area" panelheight="auto">
+	          	<option value="">请选择区县</option>
+	          	<#if areaDtos??>
+	          		<#list areaDtos as area>
+	          			<option <#if area.addressCode == dto.province>selected="true"</#if> value="${(area.addressCode)!}">${(area.addressName)!}</option>
+	          		</#list>
+	          	</#if>
+	           <!--  <option value="option">徐汇区</option>
+	            <option value="option">杨浦区</option>
+	            <option value="option">嘉定</option> -->
+	          </select>
+	        </li>
+      </#if>        
         <li class="search">
           <label for="">级别:</label>
           <select class="" name="level" id="level">
@@ -84,13 +91,7 @@
 		   	  <li>
 		        <span class="s_name">${(data.schoolName)!}</span>
 		        <span class="s_addr">${(data.address)!}</span>
-		        <span class="s_level"><#if level??>
-		       		<#list level as level>
-		       			<#if level.index == data.level>
-		       				${(level.value)!}
-		       			</#if>
-		       		</#list>
-		        </#if></span>
+		        <span class="s_level">${(data.levelStr)!}</span>
 		        <span class="detail"> <a href="/edu/school/details.htm?source=0&customerId=${(data.id)!}">详情</a></span>
 		      </li>	
 		   </#list>
@@ -105,14 +106,20 @@
     $(function(){
       // debugger;
       $(".nav").find("a").removeClass("cur");
-      $(".nav").find("a:eq(2)").addClass("cur");
+      $(".nav").find("a:eq(1)").addClass("cur");
       
       $('.search-bt').on('click', function() {
     	  $("#myform").submit();
       })
       $('#searchBut').on('click', function() {
     	  var schoolName = $('.search_text').val();
-    	  window.location.href ="list.htm?schoolName="+schoolName;
+    	  if(${(dto.source)!} == 0) {
+    		  window.location.href ="list.htm?source=0&reviewed=1&schoolName="+schoolName;
+    	  }
+    	  if (${(dto.source)!} == 2) {
+    		  window.location.href ="list.htm?source=2&reviewed=1&schoolName="+schoolName;
+    	  }
+    	  
       })
    	  // 跳转指定页
       $('#jump_btn').on('click', function () {

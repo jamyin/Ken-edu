@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
+
+import com.ssic.education.utils.constants.SchoollevelEnum;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,6 +35,20 @@ public class EduSchoolDto implements Serializable {
     private String longitude;
     private String latitude;
     private String level;
+    public void setLevel(String level) {
+    	String[] stringArr= level.split(",");
+    	String str="";
+    	if (stringArr.length > 0 && stringArr[0] != null && !stringArr[0].equals("")) {
+    		for (int i=0; i<stringArr.length; i++) {
+    			String levelStrs = SchoollevelEnum.getValueByIndex(Integer.valueOf(stringArr[i]));
+        		if (StringUtils.isNotBlank(levelStrs)) {
+        			str += levelStrs+" ";
+        		}
+        	}
+        	this.setLevelStr(str);
+    	}    	
+    }
+    private String levelStr;
     private String province;
     private String city;
     private String area;

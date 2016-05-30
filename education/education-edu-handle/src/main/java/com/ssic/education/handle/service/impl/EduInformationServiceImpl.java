@@ -10,7 +10,7 @@ import com.ssic.education.handle.service.IEduInformationService;
 import com.ssic.education.utils.util.BeanUtils;
 
 @Service
-public class EduInformationServiceImpl implements IEduInformationService{
+public class EduInformationServiceImpl implements IEduInformationService {
 
 	@Autowired
 	private InformationDao informationDao;
@@ -18,8 +18,15 @@ public class EduInformationServiceImpl implements IEduInformationService{
 	@Override
 	public int saveInfomation(EduInformationDto eduInformationDto) {
 		// TODO Auto-generated method stub
-		EduInformation eduInformation = BeanUtils.createBeanByTarget(eduInformationDto, EduInformation.class);
+		EduInformation eduInformation = BeanUtils.createBeanByTarget(
+				eduInformationDto, EduInformation.class);
 		return informationDao.insertSelective(eduInformation);
+	}
+
+	@Override
+	public EduInformationDto search(String infoId) {
+		EduInformation pojo = informationDao.selectByPrimaryKey(infoId);
+		return BeanUtils.createBeanByTarget(pojo, EduInformationDto.class);
 	}
 
 }

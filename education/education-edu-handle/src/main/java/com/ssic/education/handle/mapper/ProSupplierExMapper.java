@@ -8,6 +8,7 @@ import com.ssic.educateion.common.dto.LedgerDto;
 import com.ssic.educateion.common.dto.ProSupplierDto;
 import com.ssic.educateion.common.dto.SupplierDto;
 import com.ssic.educateion.common.utils.PageHelper;
+import com.ssic.education.utils.model.PageQuery;
 
 public interface ProSupplierExMapper {
 
@@ -31,5 +32,7 @@ public interface ProSupplierExMapper {
 
 	List<ProSupplierDto> searchSupplierListBySupplierId(@Param("supplierId") String supplierId,@Param("suppliName") String suppliName,@Param("supplierType") Integer supplierType,@Param("limit") Integer limit);
 	
+	List<ProSupplierDto> findSupplierListByCommittee(@Param("proSupplierDto") ProSupplierDto proSupplierDto,@Param("query") PageQuery page);
 	
+	long countSupplierListByCommittee(@Param("proSupplierDto") ProSupplierDto proSupplierDto);
 }

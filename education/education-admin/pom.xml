@@ -202,10 +202,18 @@
 	  	
 	  <profiles>
         <profile>
-            <id>dev</id>
+            <id>local</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>         
+            <build>
+                <filters>
+                    <filter>src/main/properties/local.properties</filter>
+                </filters>
+            </build>
+        </profile>
+        <profile>
+            <id>dev</id>        
             <build>
                 <filters>
                     <filter>src/main/properties/dev.properties</filter>

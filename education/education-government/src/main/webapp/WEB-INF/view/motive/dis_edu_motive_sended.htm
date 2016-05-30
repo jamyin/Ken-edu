@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="/static/css/dis_edu.css">
     </head>
     <body>
-        <div class="header">
+        <!-- <div class="header">
     		<div class="wrap">
     			<a class="logo" href="index.html">上海市中小学校校生午餐综合管理平台</a>
     			<div class="p_status">
@@ -26,7 +26,8 @@
             <a class="" href="index.html">任务传达</a>
             <a class="" href="index.html">发布</a>
           </div>
-        </div>
+        </div> -->
+        <#include "/common/nav.htm" />
         <div class="breadcrumb">
             <span>当前位置:</span>
             <a href="#">公告通知</a>
@@ -56,76 +57,20 @@
                                 <th> 时间 </th>
                             </thead>
                             <form class="" action="" method="post">
-                                <tr>
-                                    <td class="center"> <input type="checkbox"> </td>
-                                    <td> 实验小学 </td>
-                                    <td>
-                                        <a href="#">
-                                            关于食堂卫生解决管理方案
-                                        </a>
-                                    </td>
-                                    <td> 2016.3.15 </td>
-                                </tr>
-                                <tr>
-                                    <td class="center"> <input type="checkbox"> </td>
-                                    <td> 实验小学 </td>
-                                    <td>
-                                        <a href="#">
-                                            关于食堂卫生解决管理方案
-                                        </a>
-                                    </td>
-                                    <td> 2016.3.15 </td>
-                                </tr>
-                                <tr>
-                                    <td class="center"> <input type="checkbox"> </td>
-                                    <td> 实验小学 </td>
-                                    <td>
-                                        <a href="#">
-                                            关于食堂卫生解决管理方案
-                                        </a>
-                                    </td>
-                                    <td> 2016.3.15 </td>
-                                </tr>
-                                <tr>
-                                    <td class="center"> <input type="checkbox"> </td>
-                                    <td> 实验小学 </td>
-                                    <td>
-                                        <a href="#">
-                                            关于食堂卫生解决管理方案
-                                        </a>
-                                    </td>
-                                    <td> 2016.3.15 </td>
-                                </tr>
-                                <tr>
-                                    <td class="center"> <input type="checkbox"> </td>
-                                    <td> 实验小学 </td>
-                                    <td>
-                                        <a href="#">
-                                            关于食堂卫生解决管理方案
-                                        </a>
-                                    </td>
-                                    <td> 2016.3.15 </td>
-                                </tr>
-                                <tr>
-                                    <td class="center"> <input type="checkbox"> </td>
-                                    <td> 实验小学 </td>
-                                    <td>
-                                        <a href="#">
-                                            关于食堂卫生解决管理方案
-                                        </a>
-                                    </td>
-                                    <td> 2016.3.15 </td>
-                                </tr>
-                                <tr>
-                                    <td> <input type="checkbox"> </td>
-                                    <td> 实验小学 </td>
-                                    <td>
-                                        <a href="#">
-                                            关于食堂卫生解决管理方案
-                                        </a>
-                                    </td>
-                                    <td> 2016.3.15 </td>
-                                </tr>
+                            	<#if pageList ??>
+                            		<#list pageList.getResults() as result>
+	                                <tr>
+	                                    <td class="center"> <input type="checkbox"> </td>
+	                                    <td>${(result.sourceName)!} </td>
+	                                    <td>
+	                                        <a href="/motive/details/${(result.infomationId)!}.htm">
+	                                            ${(result.infoTitle)!}
+	                                        </a>
+	                                    </td>
+	                                    <td>${(result.createTime?string('yyyy-MM-dd'))!}</td>
+	                                </tr>                            			
+                            		</#list>
+                            	</#if>
                             </form>
                         </table>
                     </div>

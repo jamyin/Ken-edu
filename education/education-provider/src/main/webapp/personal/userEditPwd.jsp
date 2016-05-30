@@ -19,9 +19,10 @@
 			success : function(result) {
 				parent.$.messager.progress('close');
 				result = $.parseJSON(result);
-				if (result.success) {
+				if (result.success) {	
 					parent.$.messager.alert('提示', result.msg, 'info');
 					parent.$.modalDialog.handler.dialog('close');
+					
 				} else {
 					parent.$.messager.alert('错误', result.msg, 'error');
 				}

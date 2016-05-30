@@ -20,7 +20,7 @@
 		</div>	
 		<div class="info_box">
 			<p><span class="lb">学校地址</span>${(eduSchoolDto.address)!}&nbsp;</p>
-			<p><span class="lb">经营单位</span>${(eduCanteenDto.canteenName)!}&nbsp;<a href="/wap/supplier/index.htm?companyType=1&relationId=${(eduCanteenDto.id)!}">查看</a></p>
+			<p><span class="lb">经营单位</span>${(eduCanteenDto.canteenName)!}&nbsp;<a href="/wap/supplier/index.htm?companyType=1&relationId=${(eduSchoolDto.id)!}">查看</a></p>
 			<#if supplierList ??>
 				<#list supplierList as supplier>
 					<p><span class="lb">委托经营单位</span id="gu">${(supplier.supplierName)!}<a href="/wap/supplier/index.htm?companyType=2&relationId=${(supplier.id)!}">查看</a></p>		

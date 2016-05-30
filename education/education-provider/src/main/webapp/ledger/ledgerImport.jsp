@@ -3,7 +3,7 @@
 <script type="text/javascript">
 	$(function() {
 		parent.$.messager.progress('close');
-		$('#importSupplier').form({
+		$('#importLedger').form({
 			url : '${pageContext.request.contextPath}/ledgerController/import',
 			onSubmit : function() {
 				parent.$.messager.progress({
@@ -38,14 +38,14 @@
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
 	<div data-options="region:'center',border:false" title="" style="overflow: hidden;">
-		<form id="importSupplier" method="post" enctype="multipart/form-data">
+		<form id="importLedger" method="post" enctype="multipart/form-data">
 <table class="table table-hover table-condensed"  >
 		<tr>
 			<th>
 				导入供应商：
 			</th>
 			<td>
-				<input type="file" name="fileName">
+				<input type="file" name="filename">
 			</td>
 		</tr>
 			</table>
