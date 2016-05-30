@@ -98,11 +98,16 @@ public class InfomationController extends BaseController {
 	 * @version: 2016年5月30日 上午10:42:24
 	 */
 	@RequestMapping(value = "details/{infoId}")
-	public ModelAndView details(@PathVariable String infoId) {
+	public ModelAndView details(@PathVariable String infoId,PageQuery pageQuery) {
 		ModelAndView mv = getModelAndView();
 
 		EduInformationDto data = iEduInformationService.search(infoId);
-
+		
+		EduInformationDto eduInformationDto = new EduInformationDto();
+		eduInformationDto.setType(data.getType());
+		PageResult<EduInformationDto> pageList =  iEduInformationService.searchInfomation(eduInformationDto,pageQuery);
+		mv.addObject("pageList", pageList);
+		
 		mv.addObject("data", data);
 		mv.setViewName("info/dis_edu_motice_detail");
 		return mv;

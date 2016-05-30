@@ -30,9 +30,17 @@
                 </div>
             </div>
             <div class="sidebar">
-                    <h3 class="head yellow_head">通告公示 <a class="more" href="#">更多>></a></h3>
+                    <h3 class="head yellow_head">通告公示 <a class="more" href="/info/index/3.htm">更多>></a></h3>
                     <ul class="list">
-                        <li>
+                    	<#if pageList ??>
+                    		<#list pageList.getResults() as data>
+		                        <li>
+		                            <a href="/info/details/${(data.id)!}.htm">${(data.title)!}</a>
+		                            <span>${(data.createTime?string('yyyy-mm-dd'))!}</span>
+		                        </li>
+                    		</#list>
+                    	</#if>
+                        <!-- <li>
                             <a href="#">上海市食品安全信息追溯管理办法...</a>
                             <span>2016.4.29</span>
                         </li>
@@ -55,10 +63,10 @@
                         <li>
                             <a href="#">级食品安全风险监测情况（2015年...</a>
                             <span>2016.4.29</span>
-                        </li>
+                        </li> -->
                     </ul>
 
-                    <h3 class="head green_head">通告公示 <a class="more" href="#">更多>></a></h3>
+                   <!--  <h3 class="head green_head">通告公示 <a class="more" href="#">更多>></a></h3>
                     <ul class="list">
                         <li>
                             <a href="#">上海市食品安全信息追溯管理办法...</a>
@@ -84,7 +92,7 @@
                             <a href="#">级食品安全风险监测情况（2015年...</a>
                             <span>2016.4.29</span>
                         </li>
-                    </ul>
+                    </ul> -->
             </div>
         </div>
         <div class="footer">
