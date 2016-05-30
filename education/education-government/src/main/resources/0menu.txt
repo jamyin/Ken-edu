@@ -6,7 +6,7 @@
         },
         {
             "menuName": "通知发布",
-            "menuUrl": "/info/notice.htm"
+            "menuUrl": "/motive/release.htm"
         }
     ]
 }
