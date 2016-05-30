@@ -294,7 +294,16 @@ public class EduSchoolController extends BaseController{
 		ModelAndView mv = getModelAndView();
 		if (StringUtils.isNotBlank(dto.getSchoolName())) {
 			EduSchoolDto eduSchoolDto = eduSchoolService.findById(dto.getId());
+			EduCanteenDto eduCanteendto = new EduCanteenDto();
+			eduCanteendto.setSchoolId(dto.getId());
+			EduCanteenDto eduCanteenDto = iEduCanteenService.searchEduCanteenDto(eduCanteendto);
+			ProLicense proLicense = new ProLicense();
+			proLicense.setCerSource((short)DataStatus.MANAGERTYPE);
+			proLicense.setRelationId(dto.getId());
+			List<ProLicense> proLicenses = iProLicenseService.lookImage(proLicense);
 			mv.addObject("eduSchoolDto", eduSchoolDto);
+			mv.addObject("eduCanteenDto", eduCanteenDto);
+			mv.addObject("proLicenses", proLicenses);
 			mv.addObject("dto", dto);
 			mv.setViewName("/district/dis_edu_uncheck");
 		}

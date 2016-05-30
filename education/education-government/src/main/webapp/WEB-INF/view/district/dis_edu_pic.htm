@@ -123,8 +123,8 @@
         </div>
         <div class="background">
             <div class="panel">
-                <span class="close"><img src="static/img/button_close.png" /></span>
-                <img src="static/img/cerf.jpg" />
+                <span class="close"><img src="/static/img/button_close.png" /></span>
+                <img class="panelimg" style="width: 600px;height: 700px;" src="/static/img/cerf.jpg" />
             </div>
         </div>
         <#include "/common/footer.htm" />
@@ -132,8 +132,9 @@
         <script type="text/javascript">
             $(function(){
             	$(".nav").find("a").removeClass("cur");
-			    $(".nav").find("a:eq(3)").addClass("cur");
+			    $(".nav").find("a:eq(2)").addClass("cur");
                 $(".pic_wrap img").click(function(){
+                	$('.background .panel .panelimg').attr("src", $(this).attr("src"));
                     $(".background").show();
                 });
                 $(".background .close").click(function(){

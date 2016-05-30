@@ -181,7 +181,7 @@
 //	                        }
 //	                        $this.attr("disabled", false);
 	                        $("[name='"+fileId+"']").append("<input id=\""+fileId+"\" type=\"file\" value=\""+myObject.data.url+"\" onchange=\"selectfun(this)\" name=\"file\">");
-	                        $('#'+fileId).closest('li').find('.file').html(myObject.data.url + '<i>浏览</i>')
+	                        $('#'+fileId).closest('li').find('.file').html('上传成功<i>浏览</i>')
 //	                        $('#phoneFile').on("change",function(){
 //	                    		$("#phoneQuery").click();
 //	                    	});
