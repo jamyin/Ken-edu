@@ -80,6 +80,45 @@
     box-sizing: border-box;
     padding: 0 28px;
     background: #fff; }
+  .main_wrap .tab_wrap .release_con > form > .text > label {
+    display: inline-block;
+    width: 80px;
+    text-align: right;
+    padding-right: 10px;
+    vertical-align: top; }
+  .main_wrap .tab_wrap .release_con > form > .text > .text_wrap {
+    margin-left: 96px;
+    margin-top: -16px; }
+  .main_wrap .tab_wrap .release_con > form > .line > label {
+    display: inline-block;
+    width: 80px;
+    text-align: right;
+    padding-right: 10px;
+    vertical-align: top; }
+  .main_wrap .tab_wrap .release_con > form > .line > .plus {
+    font-size: 50px;
+    line-height: 30px;
+    font-weight: bold;
+    padding: 5px;
+    display: inline-block;
+    width: 32px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid #000;
+    cursor: pointer; }
+  .main_wrap .tab_wrap .release_con > form > .line > .radio_select {
+    padding: 5px 6px;
+    color: #666;
+    border: 1px solid #666;
+    text-align: center;
+    cursor: pointer;
+    width: auto; }
+  .main_wrap .tab_wrap .release_con > form > .line > .radio_active {
+    color: #60ac62;
+    border: 1px solid #60ac62; }
+  .main_wrap .tab_wrap .release_con > form > .line > .radio_normal {
+    color: #666;
+    border: 1px solid #666; }
   .main_wrap .tab_wrap .tab_content {
     width: 716px;
     float: left;
@@ -178,48 +217,12 @@
         width: 550px;
         padding: 10px 10px;
         height: 300px; }
-      .main_wrap .tab_wrap .tab_content > form > section .plus {
-        font-size: 50px;
-        line-height: 30px;
-        font-weight: bold;
-        padding: 5px;
-        display: inline-block;
-        width: 32px;
-        height: 30px;
-        text-align: center;
-        border: 1px solid #000;
-        cursor: pointer; }
       .main_wrap .tab_wrap .tab_content > form > section.line {
         height: 36px; }
       .main_wrap .tab_wrap .tab_content > form > section.text label {
         vertical-align: top; }
-      .main_wrap .tab_wrap .tab_content > form > section.text .text_wrap {
-        margin-left: 107px;
-        margin-top: -16px; }
-    .main_wrap .tab_wrap .tab_content .subbt {
-      text-align: center;
-      margin-top: 30px;
-      margin-left: 100px; }
-      .main_wrap .tab_wrap .tab_content .subbt a {
-        color: #60ac62;
-        border: 1px solid #60ac62;
-        border-radius: 3px;
-        padding: 8px 12px; }
   .main_wrap .tab_wrap .tab_content_full {
     width: 100%; }
-    .main_wrap .tab_wrap .tab_content_full .radio_select {
-      padding: 5px 6px;
-      color: #666;
-      border: 1px solid #666;
-      text-align: center;
-      cursor: pointer;
-      width: auto; }
-    .main_wrap .tab_wrap .tab_content_full .radio_active {
-      color: #60ac62;
-      border: 1px solid #60ac62; }
-    .main_wrap .tab_wrap .tab_content_full .radio_normal {
-      color: #666;
-      border: 1px solid #666; }
     .main_wrap .tab_wrap .tab_content_full form section > input {
       box-sizing: border-box;
       border: 1px solid #aaa;
@@ -242,6 +245,16 @@
       display: inline-block;
       width: 100px;
       text-align: right; }
+
+.subbt {
+  text-align: center;
+  margin-top: 30px;
+  margin-left: 100px; }
+  .subbt a {
+    color: #60ac62;
+    border: 1px solid #60ac62;
+    border-radius: 3px;
+    padding: 8px 12px; }
 
 .background {
   background: rgba(0, 0, 0, 0.5);
