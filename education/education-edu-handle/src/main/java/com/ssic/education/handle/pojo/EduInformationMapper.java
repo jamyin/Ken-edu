@@ -1,4 +1,4 @@
-package com.ssic.education.handle.mapper;
+package com.ssic.education.handle.pojo;
 
 import com.ssic.education.handle.pojo.EduInformation;
 import com.ssic.education.handle.pojo.EduInformationExample;
