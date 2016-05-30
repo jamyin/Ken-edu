@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping(value="info")
+@RequestMapping(value="motive")
 public class MotiveController  extends BaseController{
 
 
