@@ -47,7 +47,9 @@ public class MotiveController extends BaseController {
 	/**
 	 * 
 	 * 此方法描述的是：发布
-	 * 
+	 * 市教委  新建 0
+	 * 区教委  新建 未读 已读 已发 2
+	 * 学校 未读 已读 1
 	 * @author: cwftalus@163.com
 	 * @version: 2016年5月30日 上午10:41:57
 	 */
@@ -76,10 +78,20 @@ public class MotiveController extends BaseController {
 		}else{
 			
 		}
-
+		
+		getSourceType(mv);
+		
 		mv.addObject("dataList", dataList);
 		mv.setViewName("motive/dis_edu_motive_release");
 		return mv;
+	}
+	
+	
+	public void getSourceType(ModelAndView mv){
+		if(getEduUsersDto()!=null){
+			mv.addObject("sourceType", getEduUsersDto().getSourceType());	
+		}
+		
 	}
 
 	/**
@@ -140,6 +152,8 @@ public class MotiveController extends BaseController {
 	public ModelAndView unreaded() {
 		ModelAndView mv = getModelAndView();
 
+		getSourceType(mv);
+		
 		mv.setViewName("motive/dis_edu_motive_unreaded");
 		return mv;
 	}
@@ -157,7 +171,7 @@ public class MotiveController extends BaseController {
 
 		PageResult<EduInformationListDto> pageList = iEduInformationListService
 				.searchEduInformationList(pageQuery);
-
+		getSourceType(mv);
 		mv.addObject("pageList", pageList);
 		mv.setViewName("motive/dis_edu_motive_sended");
 		return mv;
@@ -173,7 +187,7 @@ public class MotiveController extends BaseController {
 	@RequestMapping(value = "readed")
 	public ModelAndView readed() {
 		ModelAndView mv = getModelAndView();
-
+		getSourceType(mv);
 		mv.setViewName("motive/dis_edu_motive_readed");
 		return mv;
 	}
