@@ -3,6 +3,7 @@ package com.ssic.education.government.controller;
 import java.text.ParseException;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ssic.educateion.common.dto.LedgerDto;
 import com.ssic.educateion.common.dto.ProPackagesDto;
+import com.ssic.educateion.common.dto.ProSupplierDto;
 import com.ssic.education.government.controller.supplier.ProSupplierController;
 import com.ssic.education.handle.service.ProLedgerService;
+import com.ssic.education.handle.service.ProSupplierService;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 
@@ -30,6 +33,9 @@ public class ProLedgerController extends BaseController{
 	
 	@Autowired
 	private ProLedgerService proLedgerService;
+	
+	@Autowired
+	private ProSupplierService proSupplierService;
 	
 	@RequestMapping("/findPage")
 	public ModelAndView findPage(ProPackagesDto dto,PageQuery query) throws ParseException{
@@ -53,8 +59,13 @@ public class ProLedgerController extends BaseController{
 		if (null !=ledgerDtos && ledgerDtos.size()>0) {
 			ledgerDto = ledgerDtos.get(0);
 		}
+		ProSupplierDto proSupplierDto = new ProSupplierDto();
+		if (StringUtils.isNotBlank(ledgerDto.getSupplierId())) {
+			proSupplierDto = proSupplierService.findById(ledgerDto.getSupplierId());
+		}		
 		mv.addObject("ledgerDtos", ledgerDtos);
 		mv.addObject("ledgerDto", ledgerDto);
+		mv.addObject("proSupplierDto", proSupplierDto);
 		return mv;
 	}
 }

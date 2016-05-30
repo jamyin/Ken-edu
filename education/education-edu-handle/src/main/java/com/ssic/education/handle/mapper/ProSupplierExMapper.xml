@@ -358,19 +358,23 @@ WHERE
 			a.food_produce_code_date foodProduceCodeDate,
 			a.corporation,
 			a.contact_way contactWay,
+			a.id_card idCard,
+			a.id_type idType,
+			a.contact_way contactWay,
+			a.reviewed,
 			a.longitude,
 			a.latitude,
 			a.create_time createTime, 
       		a.last_update_time lastUpdateTime, 
       		a.stat,
-		 	b.committee_id  AS committeeId
+		 	b.committee_id committeeId
 			FROM t_pro_supplier a
 			LEFT JOIN t_edu_supplier_review b ON a.id = b.supplier_id 
 			WHERE a.stat=1 AND b.stat = 1
 			<if test="proSupplierDto.committeeId!=null and proSupplierDto.committeeId!='' ">
 				AND b.committee_id = #{proSupplierDto.committeeId}
 			</if>
-			<if test="proSupplierDto.reviewed!=null and proSupplierDto.reviewed!='' ">
+			<if test="proSupplierDto.reviewed!=null">
 				AND a.reviewed = #{proSupplierDto.reviewed}
 			</if>
 			ORDER BY a.create_time desc
@@ -387,7 +391,7 @@ WHERE
 		<if test="proSupplierDto.committeeId!=null and proSupplierDto.committeeId!='' ">
 			AND b.committee_id = #{proSupplierDto.committeeId}
 		</if>
-		<if test="proSupplierDto.reviewed!=null and proSupplierDto.reviewed!='' ">
+		<if test="proSupplierDto.reviewed!=null">
 			AND a.reviewed = #{proSupplierDto.reviewed}
 		</if>
 	</select>

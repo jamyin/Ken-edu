@@ -42,7 +42,7 @@
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
 	<div data-options="region:'center',border:false" title=""
-		style="overflow: hidden;">
+		style="overflow-x: hidden; overflow-y: auto;">
 		<form id="form" method="post" >
 			<table id="ledgers" class="table table-hover table-condensed">
 				<tr>

@@ -54,16 +54,27 @@
                                 <th> 时间 </th>
                             </thead>
                             <form class="" action="" method="post">
-                            	<#if pageList??>
-                            	<#list pageList.results as data>
-                            		 <tr>
-	                                   <td><a href="/edu/school/detailed.htm?id=${(data.id)!}&schoolName=${(data.schoolName)!}&supplierName=${(data.supplierName)!}"> <#if data.schoolName??> ${(data.schoolName)!} <#elseif data.supplierName??> ${(data.supplierName)!}</#if></a></td>
-	                                    <td> ${(data.address)!} </td>
-	                                    <td> <#if data.reviewed==2> 审批不通过 </#if></td>
-	                                    <td> ${data.createTime?string("yyyy-MM-dd")}</td>
+                             <#if pageList??>
+                            	<#if (pageList.results??) && (pageList.results?size>0)>
+	                            	<#list pageList.results as data>
+	                            		 <tr>
+		                                   <td><a href="/edu/school/detailed.htm?id=${(data.id)!}&schoolName=${(data.schoolName)!}&supplierName=${(data.supplierName)!}"> <#if data.schoolName??> ${(data.schoolName)!} <#elseif data.supplierName??> ${(data.supplierName)!}</#if></a></td>
+		                                    <td> ${(data.address)!} </td>
+		                                    <td> <#if data.reviewed==2> 审批不通过 </#if></td>
+		                                    <td> ${data.createTime?string("yyyy-MM-dd")}</td>
+		                                </tr>
+	                            	</#list>
+	                            <#else>
+                            		<tr>
+	                                    <td></td>
+	                                     <td><span style="font-size: 16px;color: red;">暂无数据</span></td>
+	                                    <td></td>
+	                                    <td></td>
 	                                </tr>
-                            	</#list>
-                           		</#if>
+	                            </#if>
+                            <#else>
+                            	<span>暂无数据</span>
+                           	</#if>
                             </form>
                         </table>
                         <#include "/common/page.htm" />

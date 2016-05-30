@@ -49,9 +49,9 @@
 	          <label for="">区县:</label>
 	          <select class="" name="area" id="area" panelheight="auto">
 	          	<option value="">请选择区县</option>
-	          	<#if areaDtos??>
-	          		<#list areaDtos as area>
-	          			<option <#if area.addressCode == dto.province>selected="true"</#if> value="${(area.addressCode)!}">${(area.addressName)!}</option>
+	          	<#if eduCommitteeDtos??>
+	          		<#list eduCommitteeDtos as area>
+	          			<option <#if area.areaCode == dto.area>selected="true"</#if> value="${(area.areaCode)!}">${(area.name)!}</option>
 	          		</#list>
 	          	</#if>
 	           <!--  <option value="option">徐汇区</option>
@@ -62,7 +62,7 @@
       </#if>        
         <li class="search">
           <label for="">级别:</label>
-          <select class="" name="level" id="level">
+          <select class="" name="levels" id="levels">
           	<option value="">请选择级别</option>
           	<#if level??>
           		<#list level as level>

@@ -57,7 +57,7 @@
 
     <div class="menu_box">
       <div class="subbar">
-        <p class="lef">学校名称：${(eduSchoolDto.schoolName)!}</p><#if (dto.source == 1) && (eduSchoolSupplierDtos.supplierId??)><a style="cursor: pointer;" class="offer_delete">删除</a> </#if><p class="rig">供应商名称：<#if (proSupplierDtos??) && (proSupplierDtos?size>0)>
+        <p class="lef">学校名称：<a style="cursor: pointer;" href="canteen.htm?schoolId=${(eduSchoolDto.id)!}">${(eduCanteenDto.canteenName)!}</a></p><#if (dto.source == 1) && (eduSchoolSupplierDtos.supplierId??)><a style="cursor: pointer;" class="offer_delete">删除</a> </#if><p class="rig">供应商名称：<#if (proSupplierDtos??) && (proSupplierDtos?size>0)>
 					<#list proSupplierDtos as supplier>
 						<a href="/pro/supplier/detail.htm?id=${(supplier.id)!}&source=1">${(supplier.supplierName)!}</a>
 					</#list>

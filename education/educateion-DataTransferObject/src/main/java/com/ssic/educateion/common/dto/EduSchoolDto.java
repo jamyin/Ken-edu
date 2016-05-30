@@ -34,19 +34,23 @@ public class EduSchoolDto implements Serializable {
     private String address;
     private String longitude;
     private String latitude;
+    private String levels;
     private String level;
     public void setLevel(String level) {
-    	String[] stringArr= level.split(",");
-    	String str="";
-    	if (stringArr.length > 0 && stringArr[0] != null && !stringArr[0].equals("")) {
-    		for (int i=0; i<stringArr.length; i++) {
-    			String levelStrs = SchoollevelEnum.getValueByIndex(Integer.valueOf(stringArr[i]));
-        		if (StringUtils.isNotBlank(levelStrs)) {
-        			str += levelStrs+" ";
-        		}
-        	}
-        	this.setLevelStr(str);
-    	}    	
+    	if (StringUtils.isNotBlank(level)) {
+    		String[] stringArr= level.split(",");
+        	String str="";
+        	if (stringArr.length > 0 && stringArr[0] != null && !stringArr[0].equals("")) {
+        		for (int i=0; i<stringArr.length; i++) {
+        			String levelStrs = SchoollevelEnum.getValueByIndex(Integer.valueOf(stringArr[i]));
+            		if (StringUtils.isNotBlank(levelStrs)) {
+            			str += levelStrs+" ";
+            		}
+            	}
+            	this.setLevelStr(str);
+        	}   
+    	}
+    	 	
     }
     private String levelStr;
     private String province;

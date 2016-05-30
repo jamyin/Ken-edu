@@ -139,7 +139,9 @@ public class TaskController {
 			int notReads = 0;
 			if(receives != null && receives.size() > 0){
 				for(TaskReceivePageDto receive: receives){
-					sb.append(receive.getName()+";");
+					if(StringUtils.isNotEmpty(receive.getName())){
+						sb.append(receive.getName()+";");
+					}
 					if(receive.getReadstat() == 0){
 						notReads++;
 					}else{
@@ -147,7 +149,9 @@ public class TaskController {
 					}
 				}
 			}
-			eduTaskDto.setReceiveNames(sb.toString().substring(0, sb.toString().length()-1));   //去逗号
+			if(StringUtils.isNotEmpty(sb.toString())){
+				eduTaskDto.setReceiveNames(sb.toString().substring(0, sb.toString().length()-1));   //去逗号
+			}
 			eduTaskDto.setReads(reads);
 			eduTaskDto.setNotReads(notReads);
 
