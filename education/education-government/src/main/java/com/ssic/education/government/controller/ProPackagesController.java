@@ -1,18 +1,28 @@
 package com.ssic.education.government.controller;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ssic.educateion.common.dto.EduUsersDto;
 import com.ssic.educateion.common.dto.ProPackagesDto;
+import com.ssic.education.handle.service.EduUsersService;
 import com.ssic.education.handle.service.INutritionalService;
 import com.ssic.education.handle.service.ProPackagesService;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.constants.PackagesTypeEnum;
 import com.ssic.education.utils.constants.ProNutritionalNameEnum;
 import com.ssic.education.utils.constants.ProNutritionalUnitEnum;
+import com.ssic.education.utils.constants.SessionConstants;
 import com.ssic.education.utils.constants.SupplyPhaseEnum;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
@@ -25,7 +35,9 @@ public class ProPackagesController extends BaseController{
 	@Autowired
 	private ProPackagesService proPackagesService;
 	
-
+	@Autowired
+	private EduUsersService eduUsersService;
+	
 	@Autowired
 	private INutritionalService nutritionalService;
 	
@@ -109,8 +121,14 @@ public class ProPackagesController extends BaseController{
 	 */
 	@RequestMapping(value = "/addPackage")
 	@ResponseBody
-	public Response<String> addPackage(ProPackagesDto dto) {
+	public Response<String> addPackage(HttpServletRequest request,HttpServletResponse response,HttpSession session,ProPackagesDto dto) {
 		Response<String> res = new Response<String>();
+		String id = (String) getRequest().getSession().getAttribute(SessionConstants.LOGIN_USER_INFO);
+//		EduUsersDto usersdto = (EduUsersDto) session.getAttribute(SessionConstants.LOGIN_USER_INFO);
+		EduUsersDto usersdto = getLoginUser(request, response, session, id);
+		if (null != usersdto && StringUtils.isNotBlank(usersdto.getSourceId()) ) {
+			dto.setCustomerId(usersdto.getSourceId());
+		}
 		int flag = proPackagesService.addPackage(dto);
 		if(flag > 0){
 			res.setStatus(DataStatus.HTTP_SUCCESS);
@@ -122,4 +140,19 @@ public class ProPackagesController extends BaseController{
 			return res;
 		}
 	}
+	
+	public EduUsersDto getLoginUser(HttpServletRequest request, HttpServletResponse response,
+    		HttpSession session, String id){
+    	if(id==null){
+    		try {
+				response.sendRedirect(request.getContextPath() + "/login.htm");
+				return null;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+    	}
+    	EduUsersDto usersDto = new EduUsersDto();
+    	usersDto.setId(id);
+    	return eduUsersService.getUserInfo(usersDto);
+    }
 }
