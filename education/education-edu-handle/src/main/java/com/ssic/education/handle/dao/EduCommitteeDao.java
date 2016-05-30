@@ -4,6 +4,7 @@ import java.util.List;
 
 import lombok.Getter;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -26,7 +27,9 @@ public class EduCommitteeDao extends MyBatisBaseDao<EduCommittee> {
 		 EduCommitteeExample.Criteria criteria = example.createCriteria();
         //assemblyParams(eduAreaDto, criteria);
 		 
-		 
+		 if(!StringUtils.isEmpty(eduCommitteeDto.getName())){
+			 criteria.andNameLike("%" + eduCommitteeDto.getName() + "%");
+		 }
 		 
 		criteria.andStatEqualTo(Short.valueOf("1"));
 		 

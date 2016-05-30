@@ -43,7 +43,38 @@ public class MotiveController extends BaseController {
 
 	@Autowired
 	private IEduInformationListService iEduInformationListService;
-
+	/**
+	 * 
+		 * 此方法描述的是：查询联系人列表异步
+		 * @author: cwftalus@163.com
+		 * @version: 2016年5月30日 下午7:06:52
+	 */
+	@RequestMapping(value="ajaxSearch")
+	@ResponseBody
+	public Response<List<InfoList>> ajaxSearch(String name){
+		Response<List<InfoList>> response = new Response<List<InfoList>>();
+		List<InfoList> dataList = new ArrayList<MotiveController.InfoList>();
+		if (Objects.equal(getEduUsersDto().getSourceType(), Byte.valueOf("0"))) {// 查询市教委下的区教委信息
+			EduCommitteeDto eduCommitteeDto = new EduCommitteeDto();
+			eduCommitteeDto.setType(Short.valueOf("2"));
+			eduCommitteeDto.setName(name);
+			List<EduCommitteeDto> resultList = iEduCommitteeService.queryCommittee(eduCommitteeDto);
+			if(resultList!=null && resultList.size()>0){
+				dataList = copyProperty(resultList);	
+			}
+		} else if (Objects.equal(getEduUsersDto().getSourceType(),Byte.valueOf("2"))) {// 查询区县教委下的学校信息
+			EduSchoolDto eduSchoolDto = new EduSchoolDto();
+			eduSchoolDto.setCommitteeId(getEduUsersDto().getSourceId());
+			eduSchoolDto.setSchoolName(name);
+			List<EduSchoolDto> resultList = eduSchoolService.searchEduScholDtoList(eduSchoolDto);
+			if(resultList!=null && resultList.size()>0){
+				dataList = copyProperty(resultList);	
+			}
+		}
+		response.setData(dataList);
+		return response;
+	}
+	
 	/**
 	 * 
 	 * 此方法描述的是：发布
@@ -65,15 +96,13 @@ public class MotiveController extends BaseController {
 		if (Objects.equal(getEduUsersDto().getSourceType(), Byte.valueOf("0"))) {// 查询市教委下的区教委信息
 			EduCommitteeDto eduCommitteeDto = new EduCommitteeDto();
 			eduCommitteeDto.setType(Short.valueOf("2"));
-			List<EduCommitteeDto> resultList = iEduCommitteeService
-					.queryCommittee(eduCommitteeDto);
+			List<EduCommitteeDto> resultList = iEduCommitteeService.queryCommittee(eduCommitteeDto);
 			dataList = copyProperty(resultList);
 		} else if (Objects.equal(getEduUsersDto().getSourceType(),
 				Byte.valueOf("2"))) {// 查询区县教委下的学校信息
 			EduSchoolDto eduSchoolDto = new EduSchoolDto();
 			eduSchoolDto.setCommitteeId(getEduUsersDto().getSourceId());
-			List<EduSchoolDto> resultList = eduSchoolService
-					.searchEduScholDtoList(eduSchoolDto);
+			List<EduSchoolDto> resultList = eduSchoolService.searchEduScholDtoList(eduSchoolDto);
 			dataList = copyProperty(resultList);
 		}else{
 			
