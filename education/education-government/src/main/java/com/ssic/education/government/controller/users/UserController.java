@@ -25,7 +25,6 @@ import com.ssic.education.handle.service.AreaService;
 import com.ssic.education.handle.service.EduUsersService;
 import com.ssic.education.handle.service.IEduCommitteeService;
 import com.ssic.education.utils.constants.DataStatus;
-import com.ssic.education.utils.constants.ProDocumentTypeEnum;
 import com.ssic.education.utils.constants.SessionConstants;
 import com.ssic.education.utils.digest.MD5Coder;
 import com.ssic.education.utils.model.Response;
@@ -54,7 +53,6 @@ public class UserController extends BaseController{
 		ModelAndView mv = getModelAndView();
 		List<EduCommitteeDto> eduCommitteeDtos = iEduCommitteeService.findAll();
 		mv.addObject("eduCommitteeDtos", eduCommitteeDtos);
-		mv.addObject("documentType", ProDocumentTypeEnum.values());
 		mv.setViewName("reg");	
 		return mv;
 	}
