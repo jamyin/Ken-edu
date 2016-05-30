@@ -43,6 +43,24 @@ public class MotiveController extends BaseController {
 
 	@Autowired
 	private IEduInformationListService iEduInformationListService;
+	
+	
+	/**
+	 * 
+		 * 此方法描述的是：异步删除
+		 * @author: cwftalus@163.com
+		 * @version: 2016年5月30日 下午7:06:52
+	 */
+	@RequestMapping(value="ajaxDelete")
+	@ResponseBody
+	public Response<String> ajaxDelete(EduInformationListDto eduInformationListDto){
+		Response<String> response = new Response<String>();
+
+		int result = iEduInformationListService.updateEduInformationList(eduInformationListDto);
+		
+		return response;
+	}
+	
 	/**
 	 * 
 		 * 此方法描述的是：查询联系人列表异步

@@ -43,4 +43,10 @@ public class EduInformationListServiceImpl implements IEduInformationListService
 			return new PageResult<EduInformationListDto>(pageQuery, dataList);
 	}
 
+	@Override
+	public int updateEduInformationList(EduInformationListDto eduInformationListDto) {
+		EduInformationList eduInformationList = BeanUtils.createBeanByTarget(eduInformationListDto, EduInformationList.class);
+		return eduInformationListDao.updateByPrimaryKeySelective(eduInformationList);
+	}
+
 }
