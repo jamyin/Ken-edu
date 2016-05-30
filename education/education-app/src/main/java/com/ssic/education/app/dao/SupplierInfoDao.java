@@ -97,8 +97,10 @@ public class SupplierInfoDao {
 		if (null != ids && !ids.isEmpty()) {
 			critera.andIdIn(ids);
 		}
-		if (StringUtils.isBlank(proSupplier.getSupplierName())) {
-			critera.andSupplierNameLike("%" + proSupplier.getSupplierName() + "%");
+		if (null != proSupplier) {
+			if (StringUtils.isNotBlank(proSupplier.getSupplierName())) {
+				critera.andSupplierNameLike("%" + proSupplier.getSupplierName() + "%");
+			}
 		}
 		if (null != query) {
 			example.setOrderByClause("stat desc,create_time desc limit " + query.getStartNum() + "," + query.getPageSize());
@@ -115,8 +117,10 @@ public class SupplierInfoDao {
 		if (null != ids && !ids.isEmpty()) {
 			critera.andIdIn(ids);
 		}
-		if (StringUtils.isBlank(proSupplier.getSupplierName())) {
-			critera.andSupplierNameLike("%" + proSupplier.getSupplierName() + "%");
+		if (null != proSupplier) {
+			if (StringUtils.isNotBlank(proSupplier.getSupplierName())) {
+				critera.andSupplierNameLike("%" + proSupplier.getSupplierName() + "%");
+			}
 		}
 		critera.andStatEqualTo(DataStatus.ENABLED);
 		return SupplierMapper.countByExample(example);
@@ -125,9 +129,7 @@ public class SupplierInfoDao {
 	public List<String> getSupplierReceiver(String receiverId) {
 		ProSupplierReceiverExample example = new ProSupplierReceiverExample();
 		ProSupplierReceiverExample.Criteria criteria = example.createCriteria();
-		if (StringUtils.isBlank(receiverId)) {
-			criteria.andReceiverIdEqualTo(receiverId);
-		}
+		criteria.andReceiverIdEqualTo(receiverId);
 		List<String> list = new ArrayList<String>();
 		List<ProSupplierReceiver> supplierReceiver = supplierReceiverMapper.selectByExample(example);
 		if (null != supplierReceiver && !supplierReceiver.isEmpty()) {
