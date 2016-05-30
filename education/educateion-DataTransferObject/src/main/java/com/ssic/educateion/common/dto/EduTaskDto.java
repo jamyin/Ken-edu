@@ -37,6 +37,11 @@ public class EduTaskDto  implements Serializable {
 	
 	private String receiveId; //接收者Id
 	private Integer readstat;	//阅读状态(0:未读;1:已读)
+
+	private Integer taskType;	//任务类型(0:接收的任务;1:发送的任务)
+	private String receiveNames;   //接收者名字
+	private Integer reads;	      //已读人数
+	private Integer notReads;	  //未读人数
 	
 	//private PageResult<EduTaskDto> sendList;            //当前用户发送任务列表
 	//private PageResult<EduTaskDto> receiveReadList;        //当前用户接收任务列表 -已读   readStat=1

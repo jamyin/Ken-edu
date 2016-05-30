@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.ssic.educateion.common.dto.EduTaskDto;
 import com.ssic.educateion.common.dto.EduTaskReadDto;
 import com.ssic.educateion.common.dto.EduTaskReceiveDto;
+import com.ssic.educateion.common.dto.TaskReceivePageDto;
 import com.ssic.education.handle.mapper.EduTaskExMapper;
 import com.ssic.education.handle.mapper.EduTaskMapper;
 import com.ssic.education.handle.mapper.EduTaskReceiveExMapper;
@@ -25,7 +26,7 @@ import com.ssic.education.utils.util.StringUtils;
 
 /**
  * @ClassName: TaskDao
- * @Description: TODO(这里用一句话描述这个类的作用)
+ * @Description: 
  * @author Ken Yin
  * @date 2016年5月20日 下午4:11:04
  *
@@ -111,7 +112,7 @@ public class TaskDao extends MyBatisBaseDao<EduTask> {
 		EduTaskExample example = new EduTaskExample();
 		EduTaskExample.Criteria criteria = example.createCriteria();
 		if (StringUtils.isNotEmpty(eduTaskDto.getId())){
-    		criteria.andCreateIdEqualTo(eduTaskDto.getId());
+    		criteria.andIdEqualTo(eduTaskDto.getId());
     	}
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		List<EduTask> task = mapper.selectByExample(example);
@@ -119,6 +120,22 @@ public class TaskDao extends MyBatisBaseDao<EduTask> {
 			return task.get(0);
 		}
 		return null;
+	}
+
+	public List<TaskReceivePageDto> findTaskReceiveByPara(
+			String id) {
+		/*EduTaskReceiveExample example = new EduTaskReceiveExample();
+		EduTaskReceiveExample.Criteria criteria = example.createCriteria();
+		if (StringUtils.isNotEmpty(id)){
+    		criteria.andTaskIdEqualTo(id);
+    	}
+		criteria.andStatEqualTo(DataStatus.ENABLED);
+		List<EduTaskReceive> taskReceiveList = exMapper.selectByExample(example);
+		if(taskReceiveList != null && taskReceiveList.size() > 0){
+			return taskReceiveList;
+		}
+		return null;*/
+		return exMappers.findTaskReceiveByPara(id);
 	}
 
 }

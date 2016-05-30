@@ -1,5 +1,7 @@
 package com.ssic.education.app.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ssic.educateion.common.dto.EduTaskDto;
 import com.ssic.educateion.common.dto.EduTaskReadDto;
 import com.ssic.educateion.common.dto.EduTaskReceiveDto;
+import com.ssic.educateion.common.dto.TaskReceivePageDto;
 import com.ssic.education.app.service.ITaskService;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
@@ -100,14 +103,40 @@ public class TaskController {
      		return result;
      	}
     	EduTaskDto taskDto = taskService.findTaskByPara(eduTaskDto);
-    	if(taskDto != null){
+    	if(taskDto == null){
     		result.setStatus(DataStatus.HTTP_SUCCESS);
-    		result.setMessage("查询任务成功");
+    		result.setMessage("未查到相关任务");
     		result.setData(taskDto);
     		return result;
     	}
+    	
+    	//发送的任务(显示所有接收者和  已读人数 未读人数)
+    	if(eduTaskDto.getTaskType() == 1){
+    		//查询所有接收者
+    		List<TaskReceivePageDto> receives = taskService.findTaskReceiveByPara(eduTaskDto.getId());
+    		StringBuffer sb = new StringBuffer() ;
+    		int reads = 0;
+    		int notReads = 0;
+    		if(receives != null && receives.size() > 0){
+    			for(TaskReceivePageDto receive: receives){
+    				sb.append(receive.getName()+";");
+    				if(receive.getReadstat() == 0){
+    					notReads++;
+    				}else{
+    					reads++;
+    				}
+    			}
+    		}
+    		eduTaskDto.setReceiveNames(sb.toString().substring(0, sb.toString().length()-1));   //去逗号
+    		eduTaskDto.setReads(reads);
+    		eduTaskDto.setNotReads(notReads);
+    		
+    		//已读人数
+    		
+    	}
     	result.setStatus(DataStatus.HTTP_SUCCESS);
-		result.setMessage("未查到相关记录");
+		result.setMessage("查询成功");
+		result.setData(eduTaskDto);
 		return result;
     }
     
@@ -158,22 +187,23 @@ public class TaskController {
     	Integer flag = taskService.updateTask(id);
     	if(flag > 0){
     		result.setStatus(DataStatus.HTTP_SUCCESS);
-    		result.setMessage("修改任务成功");
+    		result.setMessage("修改阅读状态成功");
     		return result;
     	}else{
     		result.setStatus(DataStatus.HTTP_FAILE);
-    		result.setMessage("修改任务失败");
+    		result.setMessage("修改阅读状态失败");
     		return result;
     	}
     }
     
     /**
     * @Title: findReceiveList
-    * @Description: 根据任务Id查询当前任务已读和未读列表
+    * @Description: 根据任务Id查询当前任务已读和未读列表   (弃用的方法)
     * @author Ken Yin  
     * @date 2016年5月21日 上午11:34:50
     * @return Response<EduTaskReadDto>    返回类型
      */
+      @Deprecated   
       @RequestMapping("/findReceiveList/{id}")
       @ResponseBody
       public Response<EduTaskReadDto> findReadList(@PathVariable("id")String id, PageQuery query) {
@@ -225,6 +255,6 @@ public class TaskController {
     		  return result;
     	  }
       }
-    
+      
 }
 
