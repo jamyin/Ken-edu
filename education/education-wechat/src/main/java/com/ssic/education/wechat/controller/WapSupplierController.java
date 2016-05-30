@@ -155,10 +155,12 @@ public class WapSupplierController extends BaseController{
 
 	private InfoObj copyCanteenProperty(EduCanteenDto eduCanteenDto) {
 		InfoObj infoObj = new InfoObj();
-		infoObj.setName(eduCanteenDto.getCanteenName());
-		infoObj.setAddress("");
-		infoObj.setMobile(eduCanteenDto.getPhoneNumber());
-		infoObj.setRelationer(eduCanteenDto.getCanteenContacts());
+		if(eduCanteenDto!=null){
+			infoObj.setName(eduCanteenDto.getCanteenName());
+			infoObj.setAddress("");
+			infoObj.setMobile(eduCanteenDto.getPhoneNumber());
+			infoObj.setRelationer(eduCanteenDto.getCanteenContacts());			
+		}
 		return infoObj;
 	}
 
