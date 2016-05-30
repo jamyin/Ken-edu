@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<style>
+.panel-body {
+	font-size: 18px !important;
+}
+</style>
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,14 +84,14 @@ else
 			        	   return "<img src="+row.image+" />";
 			           }
 				}
-			}, */ {
+			}, */{
 				field : 'waresName',
 				title : '商品名称',
 				width : 120,
 				
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font style="font-style: normal;font-weight: bolder;">'
+					return '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -98,7 +103,7 @@ else
 				width : 150,
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font style="font-style: normal;font-weight: bolder;">'
+					return '<font style="font-style: normal;font-weight: bolder; font-size:18px;">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -110,7 +115,7 @@ else
 				width : 150,
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font style="font-style: normal;font-weight: bolder;">'
+					return '<font style="font-style: normal;font-weight: bolder;font-size:18px;">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -122,7 +127,7 @@ else
 				width : 150,
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font style="font-style: normal;font-weight: bolder;word-wrap:break-word;white-space:normal;">'
+					return '<font style="font-style: normal;font-weight: bolder;word-wrap:break-word;white-space:normal;font-size:18px;">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -134,7 +139,7 @@ else
 				width : 150,
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font style="font-style: normal;font-weight: bolder;word-wrap:break-word;white-space:normal;">'
+					return '<font style="font-style: normal;font-weight: bolder;word-wrap:break-word;white-space:normal;font-size:18px;">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -145,7 +150,7 @@ else
 				title : '商品分类',
 				width : 100,
 				formatter : function(value, row, index) {
-					return	'<font style="font-style: normal;font-weight: bolder;word-wrap:break-word;white-space:normal;">'
+					return	'<font style="font-style: normal;font-weight: bolder;word-wrap:break-word;white-space:normal;font-size:18px;">'
 					+ value + '</font>'
 				}
 			},/*{
@@ -166,7 +171,7 @@ else
 				width : 150,
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font style="font-style: normal;font-weight: bolder;">'
+					return '<font style="font-style: normal;font-weight: bolder;font-size:18px;">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -190,7 +195,7 @@ else
 				width : 110,
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font style="font-style: normal;font-weight: bolder;">'
+					return '<font font-size:14px style="font-style: normal;font-weight: bolder;font-size:18px;">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -202,7 +207,7 @@ else
 				width : 110,
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font style="font-style: normal;font-weight: bolder;">'
+					return '<font style="font-style: normal;font-weight: bolder;font-size:18px;">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -575,8 +580,11 @@ else
 			<a class="btn btn-mini btn-light" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="icon-download-alt"></i>导出</a>
 			<a href="${pageContext.request.contextPath}/templates/采购品.xlsx" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'">下载模板</a>
 		</div>		
-		<div data-options="region:'center',border:false">
-			<table id="dataGrid" title="采购品表单" data-options="collapsible:true" ></table>
+		<div data-options="region:'center',border:false" id="g">
+							<table id="dataGrid" title="采购品表单" data-options="collapsible:true" ></table>
+							<style>
+						#g .datagrid-btable tr{height: 57px;}
+				</style>
 		</div>
 	</div>
 	

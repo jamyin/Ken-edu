@@ -17,4 +17,7 @@ public interface INutritionalService {
 	public List<ProNutritionalDto> selectAllNutritional();
 	//查询所有营养单位
 	public List<ProNutritionalDto> selectAllNutritionalUnit();
+	
+	public List<ProNutritionalDto> searchNutritional(
+			List<String> packageIdList);
 }

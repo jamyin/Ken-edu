@@ -43,4 +43,11 @@ public class NutritionalServiceImpl implements INutritionalService {
 		return dtoList;
 	}
 
+	@Override
+	public List<ProNutritionalDto> searchNutritional(List<String> packageIdList) {
+		List<ProNutritional> list = proNutritionalDao.searchNutritional(packageIdList);
+		List<ProNutritionalDto> dtoList = BeanUtils.createBeanListByTarget(list, ProNutritionalDto.class);
+		return dtoList;
+	}
+
 }
