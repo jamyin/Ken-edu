@@ -282,7 +282,7 @@ else
 		} else {//点击操作里面的删除图标会触发这个
 			dataGrid.datagrid('unselectAll').datagrid('uncheckAll');
 		}
-		parent.$.messager.confirm('询问', '您是否要删除当前用户？', function(b) {
+		parent.$.messager.confirm('询问', '您是否要删除该原料？', function(b) {
 			if (b) {
 				var currentUserId = '${sessionInfo.id}';/*当前登录用户的ID*/
 				if (currentUserId != id) {
@@ -517,12 +517,16 @@ else
 </head>
 <body>
 	<div class="easyui-layout" data-options="fit : true,border : false">
-		<div data-options="region:'north',title:'查询条件',border:false" style="height: 160px; overflow: hidden;">
+		<div data-options="region:'north',title:'查询条件',border:false" style="height: 80px; overflow: hidden;">
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">
 					<tr>
 						<th>商品名称</th>
 						<td><input id="waresName" name="waresName" placeholder="可以商品名称" class="easyui-validatebox"  style="width: 215px;"/></td>
+						 <th>企业编码</th>
+					     <td><input id="customCode" name="customCode" placeholder="可以查询企业编码" class="easyui-validatebox"  style="width: 215px;"/></td>
+						 
+						 
 						  <th>商品类别</th>
 					    <td>
 					       <select id="waresType" class="easyui-combobox"  name="waresType"  data-options="width:140,height:29,editable:false,panelHeight:'auto'"
@@ -551,13 +555,10 @@ else
 							</select>
 					    </td>
 					</tr>
-					<tr>
-					     <th>企业编码</th>
-					     <td><input id="customCode" name="customCode" placeholder="可以查询企业编码" class="easyui-validatebox"  style="width: 215px;"/></td>
-					     	</tr>		
+				
 				</table>
 			</form>
-				<table class=" table-hover table-condensed" style="width:200px;">
+				<!-- <table class=" table-hover table-condensed" style="width:200px;">
 					<tr style="width:200px;">
 						<td  style="width:100px;height:32px">
 							<a href="javascript:void(0);"  onclick="searchFun();" class="easyui-linkbutton" iconCls="icon-search" style="width:100px;height:32px">查询</a>
@@ -566,7 +567,7 @@ else
 							<a href="javascript:void(0);"  onclick="cleanFun();" class="easyui-linkbutton " iconCls="brick_delete" style="width:100px;height:32px">重置</a>
 						</td>						
 					</tr>		
-				</table>			
+				</table>		 -->	
 		</div>
 		<div id="toolbar" style="display: none;">
 				<a onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'">添加</a>
@@ -576,6 +577,9 @@ else
 		
 			<!-- <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_add',plain:true" onclick="searchFun();">搜索</a>
 			<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_delete',plain:true" onclick="cleanFun();">清空搜索条件</a> -->
+			<a href="javascript:void(0);"  onclick="searchFun();" class="easyui-linkbutton" iconCls="icon-search" >查询</a>
+		<a href="javascript:void(0);"  onclick="cleanFun();" class="easyui-linkbutton " iconCls="brick_delete" >重置</a>
+		
 			<a onclick="importSupplier();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'">导入</a>
 			<a class="btn btn-mini btn-light" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="icon-download-alt"></i>导出</a>
 			<a href="${pageContext.request.contextPath}/templates/采购品.xlsx" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'">下载模板</a>

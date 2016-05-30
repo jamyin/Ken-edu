@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<style>
+.panel-body {
+	font-size: 18px !important;
+}
+</style>
 <!DOCTYPE html>
 <html>
 <head>
@@ -206,9 +211,11 @@ else
 <body>
 	<div class="easyui-layout" data-options="fit : true,border : false">
 		
-		<div data-options="region:'center',border:false">
+		<div data-options="region:'center',border:false"  id="g">
 			<table id="dataGrid" title="个人中心" data-options="collapsible:true" >
-			
+				<style>
+						#g .datagrid-btable tr{height: 57px;}
+				</style>
 			</table>
 		</div>
 	</div>

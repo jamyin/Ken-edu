@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<style>
+.panel-body {
+	font-size: 18px !important;
+}
+</style>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,34 +30,62 @@
 			checkOnSelect : false,
 			selectOnCheck : false,
 			nowrap : false,
-			frozenColumns : [ [ {
+			frozenColumns : [ [ /* {
 				field : 'id',
 				title : '编号',
 				width : 150,
 				checkbox : true
-			}, {
+			}, */ {
 				field : 'schoolName',
 				title : '名称',
 				width : 80,
-				sortable : true
+				formatter : function(value, row, index) {
+					if(value!=null){
+					return '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">'
+							+ value + '</font>';
+					}else{
+					return "";
+							}
+				}
 			} ] ],
 			columns : [ [ {
 				field : 'address',
 				title : '地址',
 				width : 60,
-				sortable : true
+				formatter : function(value, row, index) {
+					if(value!=null){
+					return '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">'
+							+ value + '</font>';
+					}else{
+					return "";
+							}
+				}
 			}, 
 			{
 				field : 'contacts',
 				title : '联系人',
 				width : 50,
-				sortable : true
+				formatter : function(value, row, index) {
+					if(value!=null){
+					return '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">'
+							+ value + '</font>';
+					}else{
+					return "";
+							}
+				}
 			},
 			{
 				field : 'mobileNo',
 				title : '联系电话',
 				width : 50,
-				sortable : true
+				formatter : function(value, row, index) {
+					if(value!=null){
+					return '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">'
+							+ value + '</font>';
+					}else{
+					return "";
+							}
+				}
 			}] ],
 			toolbar : '#toolbar',
 			onLoadSuccess : function() {
@@ -97,8 +130,11 @@
 				</table>
 			</form>
 		</div>
-		<div data-options="region:'center',border:false">
+		<div data-options="region:'center',border:false"  id="g">
 			<table id="dataGrid"></table>
+			<style>
+						#g .datagrid-btable tr{height: 57px;}
+				</style>
 		</div>
 	</div>
 	<div id="toolbar" style="display: none;">
