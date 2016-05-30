@@ -1,17 +1,14 @@
-﻿/*
+/*
 SQLyog Enterprise - MySQL GUI v6.06 Beta 1
 Host - 5.5.42-log : Database - new_edu
 *********************************************************************
 Server version : 5.5.42-log
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
 /*!40101 SET SQL_MODE=''*/;
-
-create database if not exists `new_edu`;
-
-USE `new_edu`;
 
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
@@ -235,6 +232,23 @@ CREATE TABLE `t_edu_information` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='教委发布的新闻资讯信息公示公告表';
 
+/*Table structure for table `t_edu_information_list` */
+
+DROP TABLE IF EXISTS `t_edu_information_list`;
+
+CREATE TABLE `t_edu_information_list` (
+  `id` varchar(36) NOT NULL,
+  `infomation_id` varchar(36) DEFAULT NULL,
+  `info_title` varchar(100) DEFAULT NULL,
+  `source_id` varchar(36) DEFAULT NULL,
+  `source_name` varchar(100) DEFAULT NULL,
+  `create_id` varchar(36) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `last_update_time` datetime DEFAULT NULL,
+  `stat` int(4) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='通知公告对应的人员或组织信息';
+
 /*Table structure for table `t_edu_menu` */
 
 DROP TABLE IF EXISTS `t_edu_menu`;
@@ -387,7 +401,7 @@ CREATE TABLE `t_edu_school` (
   `city` varchar(50) DEFAULT NULL COMMENT '市',
   `province` varchar(50) DEFAULT NULL COMMENT '区',
   `supplier_id` varchar(36) DEFAULT NULL COMMENT '学校食堂在供应商表的id',
-  `reviewed` tinyint(4) DEFAULT NULL COMMENT '是否审核通过',
+  `reviewed` tinyint(4) DEFAULT NULL COMMENT '是否审核通过0：未审核，1：审核通过，2：审核不通过',
   `create_time` datetime DEFAULT NULL,
   `last_update_time` datetime DEFAULT NULL,
   `stat` int(11) DEFAULT NULL COMMENT '是否失效',
@@ -651,7 +665,7 @@ CREATE TABLE `t_pro_license` (
   `id` varchar(36) NOT NULL COMMENT '主键ID',
   `lic_name` varchar(60) DEFAULT NULL COMMENT '证书名称',
   `lic_no` varchar(60) DEFAULT NULL COMMENT '证书号码',
-  `lic_type` int(2) DEFAULT NULL COMMENT '证书类型 类型数据待定',
+  `lic_type` int(2) DEFAULT NULL COMMENT '证书类型 0:餐饮服务证、1:食品经营许可证、2:食品流通证、3:食品生产证、4:工商执照',
   `lic_end_date` date DEFAULT NULL COMMENT '证书有效期截止日',
   `lic_pic` varchar(400) DEFAULT NULL COMMENT '证书图片',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
@@ -919,7 +933,6 @@ CREATE TABLE `t_pro_supplier_receiver` (
   `receiver_code` varchar(60) DEFAULT NULL COMMENT '收货商编码',
   `create_time` datetime DEFAULT NULL,
   `last_update_time` datetime DEFAULT NULL,
-  `stat` int(4) NOT NULL,
   PRIMARY KEY (`supplier_id`,`receiver_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
