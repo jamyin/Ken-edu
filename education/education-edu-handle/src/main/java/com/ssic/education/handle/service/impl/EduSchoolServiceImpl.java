@@ -36,13 +36,13 @@ public class EduSchoolServiceImpl implements EduSchoolService{
 		EduSchoolDto eduSchoolDto = BeanUtils.createBeanByTarget(dto, EduSchoolDto.class);
 		ProSupplierDto proSupplierDto = BeanUtils.createBeanByTarget(dto, ProSupplierDto.class);
 		List<EduSchoolDto> results = eduSchoolDao.findPage(eduSchoolDto, page);
-		List<ProSupplierDto> resultSu = proSupplierDao.findPage(proSupplierDto, page);
+		List<ProSupplierDto> resultSu = proSupplierDao.findSupplierListByCommittee(proSupplierDto, page);
 		List<SupplierReviewedDto> supplierReviewedDtos = new ArrayList<SupplierReviewedDto>();
 		List<SupplierReviewedDto> supplierReviewedDtoE = BeanUtils.createBeanListByTarget(results, SupplierReviewedDto.class);
 		supplierReviewedDtos.addAll(supplierReviewedDtoE);
 		List<SupplierReviewedDto> supplierReviewedDtoP = BeanUtils.createBeanListByTarget(resultSu, SupplierReviewedDto.class);
 		supplierReviewedDtos.addAll(supplierReviewedDtoP);
-		page.setTotal(Math.round((double)(eduSchoolDao.count(eduSchoolDto)+proSupplierDao.count(proSupplierDto))/2));
+		page.setTotal(Math.round((double)(eduSchoolDao.count(eduSchoolDto)+proSupplierDao.countSupplierListByCommittee(proSupplierDto))/2));
 		return new PageResult<SupplierReviewedDto>(page, supplierReviewedDtos);
 	}
 	

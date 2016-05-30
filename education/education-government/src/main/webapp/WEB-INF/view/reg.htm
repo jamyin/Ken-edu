@@ -123,14 +123,12 @@
 				alert("区教委不能为空~");
 				return;
 			}
-			var checkStr="{";
 			var checked = 0;
             $('input[name="CheckboxGroup1"]:checked').each(function(){
             	checkStr += $(this).val()+","
             	checked++;
             });
             checkStr=checkStr.substring(0,checkStr.length-1);
-            checkStr +="}";
 			if (checked == 0 ) {
             	alert("学校级别不能为空~");
 				return;

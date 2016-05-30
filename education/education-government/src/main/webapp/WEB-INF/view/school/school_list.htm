@@ -36,7 +36,12 @@
     </h1>
     <div class="wrapperB">
       <div class="search-bar-school">
-      <form action="/edu/school/list.htm?source=0" method="post" id="myform">
+      <#if dto.source == 0>
+      	<form action="/edu/school/list.htm?source=0&reviewed=1&schoolName=${(dto.schoolName)!}" method="post" id="myform">
+      </#if>
+      <#if dto.source == 2>
+      	<form action="/edu/school/list.htm?source=2&reviewed=1&schoolName=${(dto.schoolName)!}" method="post" id="myform">
+      </#if>
        <input type="hidden" name="currPage" id="currPage" value="1"/>
       <ul>
       <#if dto.source==0 >
@@ -86,13 +91,7 @@
 		   	  <li>
 		        <span class="s_name">${(data.schoolName)!}</span>
 		        <span class="s_addr">${(data.address)!}</span>
-		        <span class="s_level"><#if level??>
-		       		<#list level as level>
-		       			<#if level.index == data.level>
-		       				${(level.value)!}
-		       			</#if>
-		       		</#list>
-		        </#if></span>
+		        <span class="s_level">${(data.levelStr)!}</span>
 		        <span class="detail"> <a href="/edu/school/details.htm?source=0&customerId=${(data.id)!}">详情</a></span>
 		      </li>	
 		   </#list>
@@ -115,7 +114,7 @@
       $('#searchBut').on('click', function() {
     	  var schoolName = $('.search_text').val();
     	  if(${(dto.source)!} == 0) {
-    		  window.location.href ="list.htm?source=0&schoolName="+schoolName;
+    		  window.location.href ="list.htm?source=0&reviewed=1&schoolName="+schoolName;
     	  }
     	  if (${(dto.source)!} == 2) {
     		  window.location.href ="list.htm?source=2&reviewed=1&schoolName="+schoolName;

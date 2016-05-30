@@ -336,7 +336,59 @@ WHERE
 		b.supplier_name=#{ledgerDto.supplierName}
 		AND b.stat = 1
 	</select>
+	 
+	<select id="findSupplierListByCommittee" resultType="com.ssic.educateion.common.dto.ProSupplierDto" parameterType="com.ssic.educateion.common.dto.ProSupplierDto">
+		SELECT
+			a.id,
+			a.supplier_name supplierName,
+			a.address,
+			a.provinces,
+			a.city,
+			a.area,
+			a.supplier_type supplierType,
+			a.business_license businessLicense,
+			a.organization_code organizationCode,
+			a.food_service_code foodServiceCode,
+			a.food_service_code_date foodServiceCodeDate,
+			a.food_business_code foodBusinessCode,
+			a.food_business_code_date foodBusinessCodeDate,
+			a.food_circulation_code foodCirculationCode,
+			a.food_circulation_code_date foodCirculationCodeDate,
+			a.food_produce_code foodProduceCode,
+			a.food_produce_code_date foodProduceCodeDate,
+			a.corporation,
+			a.contact_way contactWay,
+			a.longitude,
+			a.latitude,
+			a.create_time createTime, 
+      		a.last_update_time lastUpdateTime, 
+      		a.stat,
+		 	b.committee_id  AS committeeId
+			FROM t_pro_supplier a
+			LEFT JOIN t_edu_supplier_review b ON a.id = b.supplier_id 
+			WHERE a.stat=1 AND b.stat = 1
+			<if test="proSupplierDto.committeeId!=null and proSupplierDto.committeeId!='' ">
+				AND b.committee_id = #{proSupplierDto.committeeId}
+			</if>
+			<if test="proSupplierDto.reviewed!=null and proSupplierDto.reviewed!='' ">
+				AND a.reviewed = #{proSupplierDto.reviewed}
+			</if>
+			ORDER BY a.create_time desc
+			<if test="query != null">
+	       		LIMIT  #{query.startNum}, #{query.pageSize}
+	        </if>
+	</select>
 	
-	
-	
+	<select id="countSupplierListByCommittee" resultType="java.lang.Long" parameterType="com.ssic.educateion.common.dto.ProSupplierDto">
+		SELECT count(*)
+		FROM t_pro_supplier a
+		LEFT JOIN t_edu_supplier_review b ON a.id = b.supplier_id 
+		WHERE a.stat=1 AND b.stat = 1
+		<if test="proSupplierDto.committeeId!=null and proSupplierDto.committeeId!='' ">
+			AND b.committee_id = #{proSupplierDto.committeeId}
+		</if>
+		<if test="proSupplierDto.reviewed!=null and proSupplierDto.reviewed!='' ">
+			AND a.reviewed = #{proSupplierDto.reviewed}
+		</if>
+	</select>
 </mapper>

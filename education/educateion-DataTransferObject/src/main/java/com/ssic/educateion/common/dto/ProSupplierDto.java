@@ -15,6 +15,8 @@ public class ProSupplierDto implements Serializable {
 
 	private String supplierName;
 
+	private String committeeId;
+	
 	private String address;
 
 	private Integer supplierType;
