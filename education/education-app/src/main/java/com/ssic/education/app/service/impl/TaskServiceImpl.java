@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.ssic.educateion.common.dto.EduTaskDto;
 import com.ssic.educateion.common.dto.EduTaskReadDto;
 import com.ssic.educateion.common.dto.EduTaskReceiveDto;
+import com.ssic.educateion.common.dto.TaskReceivePageDto;
 import com.ssic.education.app.service.ITaskService;
 import com.ssic.education.handle.dao.TaskDao;
 import com.ssic.education.handle.pojo.EduTask;
@@ -21,7 +22,7 @@ import com.ssic.education.utils.util.UUIDGenerator;
 
 /**	
 * @ClassName: SchoolServiceImpl
-* @Description: TODO(这里用一句话描述这个类的作用)
+* @Description: 
 * @author Ken Yin
 * @date 2016年5月12日 下午2:20:58
 *
@@ -112,6 +113,16 @@ public class TaskServiceImpl implements ITaskService{
 			return null;
 		} 
 		EduTaskDto dto = BeanUtils.createBeanByTarget(eduTask, EduTaskDto.class);
+		return dto;
+	}
+
+	@Override
+	public List<TaskReceivePageDto> findTaskReceiveByPara(String id) {
+		List<TaskReceivePageDto> receiveList = taskDao.findTaskReceiveByPara(id);
+		if(receiveList == null){
+			return null;
+		} 
+		List<TaskReceivePageDto> dto = BeanUtils.createBeanListByTarget(receiveList, TaskReceivePageDto.class);
 		return dto;
 	}
 
