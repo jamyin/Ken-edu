@@ -29,7 +29,7 @@ public class LedgerMasterListDto {
 	private String userId;//驾驶员ID 
 	private String sourceId;//企业ID
 	private String outset;//出发点
-	private String stock;
+	private String stock;//
 	private String wareBatchNo; //商品运送批次
 	private Integer haulStatus;//运送状态	
 }

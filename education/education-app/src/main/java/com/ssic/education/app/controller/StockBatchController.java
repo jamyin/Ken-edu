@@ -78,7 +78,7 @@ public class StockBatchController {
 	 * @param query
 	 * @return
 	 * @exception	
-	 * @author Administrator
+	 * @author SeanYoung
 	 * @date 2016年5月27日 下午2:39:55
 	 */
 	@RequestMapping(value = "/master/{id}", method = RequestMethod.GET)
