@@ -2,7 +2,37 @@
     "parentMenu": [        
         {
             "menuName": "安全追溯",
-            "menuUrl": "/edu/school/list.htm?source=2&reviewed=1"
+            "menuUrl": "/edu/school/list.htm?source=0"
+        },{
+            "menuName": "通知公告",
+            "menuUrl": "/info/index/3.htm",
+            "childList": [
+                {
+                    "menuName": "健康宣教",
+                    "menuUrl": "/info/index/3.htm"
+                },
+                {
+                    "menuName": "通告公示",
+                    "menuUrl": "/info/index/0.htm"
+                },
+                {
+                    "menuName": "通知",
+                    "menuUrl": "/motive/release.htm"
+                }                
+            ]            
+        },{
+            "menuName": "信息发布",
+            "menuUrl": "/info/release.htm",
+            "childList": [
+                {
+                    "menuName": "公告发布",
+                    "menuUrl": "/info/release.htm"
+                },
+                {
+                    "menuName": "通知发布",
+                    "menuUrl": "/motive/release.htm"
+                }                
+            ]            
         },
         {
             "menuName": "审批",
