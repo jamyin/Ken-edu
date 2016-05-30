@@ -36,10 +36,10 @@ public class EduInformationListServiceImpl implements IEduInformationListService
 	}
 
 	@Override
-	public PageResult<EduInformationListDto> searchEduInformationList(PageQuery pageQuery) {		
-			List<EduInformationList> results = eduInformationListDao.searchEduInformationList(pageQuery);
+	public PageResult<EduInformationListDto> searchEduInformationList(EduInformationListDto eduInformationListDto,PageQuery pageQuery) {		
+			List<EduInformationList> results = eduInformationListDao.searchEduInformationList(eduInformationListDto,pageQuery);
 			List<EduInformationListDto> dataList = BeanUtils.createBeanListByTarget(results, EduInformationListDto.class);
-			pageQuery.setTotal(eduInformationListDao.count());
+			pageQuery.setTotal(eduInformationListDao.count(eduInformationListDto));
 			return new PageResult<EduInformationListDto>(pageQuery, dataList);
 	}
 

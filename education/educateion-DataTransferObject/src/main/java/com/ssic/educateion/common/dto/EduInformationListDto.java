@@ -78,6 +78,9 @@ public class EduInformationListDto implements Serializable{
      *
      * @mbggenerated Mon May 30 13:41:47 CST 2016
      */
+    
+    private String createId;
+    
     public String getId() {
         return id;
     }

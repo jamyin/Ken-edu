@@ -108,6 +108,8 @@ public class MotiveController extends BaseController {
 		eduInformationDto.setContent(eduInformationDto.getEditorValue());
 		String infoId = UUIDGenerator.getUUID32Bit();
 		eduInformationDto.setId(infoId);
+		eduInformationDto.setCreateAdminId(getSessionUserId());
+		eduInformationDto.setCreateAdminName(getEduUsersDto().getName());
 		int result = iEduInformationService.saveInfomation(eduInformationDto);
 		if (!(result > 0)) {
 			response.setStatus(DataStatus.HTTP_FAILE);
@@ -132,7 +134,7 @@ public class MotiveController extends BaseController {
 			EduInformationListDto dto = new EduInformationListDto();
 			dto.setInfomationId(eduInformationDto.getId());
 			dto.setInfoTitle(eduInformationDto.getTitle());
-
+			dto.setCreateId(getSessionUserId());
 			dto.setSourceId(idName[0]);
 			dto.setSourceName(idName[1]);
 			dList.add(dto);
@@ -166,11 +168,12 @@ public class MotiveController extends BaseController {
 	 * @version: 2016年5月30日 上午10:42:24
 	 */
 	@RequestMapping(value = "sended")
-	public ModelAndView sended(PageQuery pageQuery) {
+	public ModelAndView sended(EduInformationListDto eduInformationListDto,PageQuery pageQuery) {
 		ModelAndView mv = getModelAndView();
 
+		eduInformationListDto.setCreateId(getSessionUserId());
 		PageResult<EduInformationListDto> pageList = iEduInformationListService
-				.searchEduInformationList(pageQuery);
+				.searchEduInformationList(eduInformationListDto,pageQuery);
 		getSourceType(mv);
 		mv.addObject("pageList", pageList);
 		mv.setViewName("motive/dis_edu_motive_sended");

@@ -83,6 +83,10 @@ public class InfomationController extends BaseController {
 		eduInformationDto.setContent(eduInformationDto.getEditorValue());
 		String infoId = UUIDGenerator.getUUID32Bit();
 		eduInformationDto.setId(infoId);
+		
+		eduInformationDto.setCreateAdminId(getSessionUserId());
+		eduInformationDto.setCreateAdminName(getEduUsersDto().getName());		
+		
 		int result = iEduInformationService.saveInfomation(eduInformationDto);
 		if (!(result > 0)) {
 			response.setStatus(DataStatus.HTTP_FAILE);
