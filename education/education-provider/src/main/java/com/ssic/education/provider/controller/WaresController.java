@@ -640,42 +640,42 @@ public class WaresController extends BaseController {
 	}
 	
 	
-	@RequestMapping("download")
-	public void download(HttpServletRequest request,
-			HttpServletResponse response) {
-		String fileName = "采购品.xlsx";
-		BufferedInputStream bis = null;
-		BufferedOutputStream bos = null;
-		String p = request.getSession().getServletContext().getRealPath("/")
-				+ "\\templates\\" + fileName;
-		try {
-			bis = new BufferedInputStream(new FileInputStream(new File(request
-					.getSession().getServletContext().getRealPath("/")
-					+ "\\templates\\" + fileName)));
-			bos = new BufferedOutputStream(response.getOutputStream());
-			String encodedfileName = null;
-			String agent = request.getHeader("USER-AGENT");
-			if (null != agent && -1 != agent.indexOf("MSIE")) {// IE
-				encodedfileName = java.net.URLEncoder.encode(fileName, "UTF-8");
-			} else if (null != agent && -1 != agent.indexOf("Mozilla")) {
-				encodedfileName = new String(fileName.getBytes("UTF-8"),
-						"iso-8859-1");
-			} else {
-				encodedfileName = java.net.URLEncoder.encode(fileName, "UTF-8");
-			}
-			response.setHeader("Content-Disposition", "attachment; filename=\""
-					+ encodedfileName + "\"");
-			int byteRead = 0;
-			byte[] buffer = new byte[8192];
-			while ((byteRead = bis.read(buffer, 0, 8192)) != -1) {
-				bos.write(buffer, 0, byteRead);
-			}
-
-			bos.flush();
-			bis.close();
-			bos.close();
-		} catch (Exception e) {
-		}
-	}
+//	@RequestMapping("download")
+//	public void download(HttpServletRequest request,
+//			HttpServletResponse response) {
+//		String fileName = "采购品.xlsx";
+//		BufferedInputStream bis = null;
+//		BufferedOutputStream bos = null;
+//		String p = request.getSession().getServletContext().getRealPath("/")
+//				+ "\\templates\\" + fileName;
+//		try {
+//			bis = new BufferedInputStream(new FileInputStream(new File(request
+//					.getSession().getServletContext().getRealPath("/")
+//					+ "\\templates\\" + fileName)));
+//			bos = new BufferedOutputStream(response.getOutputStream());
+//			String encodedfileName = null;
+//			String agent = request.getHeader("USER-AGENT");
+//			if (null != agent && -1 != agent.indexOf("MSIE")) {// IE
+//				encodedfileName = java.net.URLEncoder.encode(fileName, "UTF-8");
+//			} else if (null != agent && -1 != agent.indexOf("Mozilla")) {
+//				encodedfileName = new String(fileName.getBytes("UTF-8"),
+//						"iso-8859-1");
+//			} else {
+//				encodedfileName = java.net.URLEncoder.encode(fileName, "UTF-8");
+//			}
+//			response.setHeader("Content-Disposition", "attachment; filename=\""
+//					+ encodedfileName + "\"");
+//			int byteRead = 0;
+//			byte[] buffer = new byte[8192];
+//			while ((byteRead = bis.read(buffer, 0, 8192)) != -1) {
+//				bos.write(buffer, 0, byteRead);
+//			}
+//
+//			bos.flush();
+//			bis.close();
+//			bos.close();
+//		} catch (Exception e) {
+//		}
+//	}
 	
 }
