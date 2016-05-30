@@ -72,7 +72,7 @@
 						<tr>
 							<th>保质期</th>
 							<td><input name="shelfLife" type="text" placeholder="请输入保质期" id="shelfLife"
-								class="easyui-validatebox span2" ></td>
+								class="easyui-validatebox span2"  data-options="required:true" ></td>
 							<th>保质期单位</th>
 							<td><select id="unit" class="easyui-combobox" name="unit"  data-options="width:140,height:29,editable:false,panelHeight:'auto'"
 								data-options="required:true">
