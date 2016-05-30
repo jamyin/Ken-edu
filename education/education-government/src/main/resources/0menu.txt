@@ -6,11 +6,11 @@
         },
         {
             "menuName": "健康宣教",
-            "menuUrl": "/info/index.htm"
+            "menuUrl": "/info/index/3.htm"
         },
         {
             "menuName": "通告公示",
-            "menuUrl": "/info/index.htm"
+            "menuUrl": "/info/index/0.htm"
         },
         {
             "menuName": "通知",
