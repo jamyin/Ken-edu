@@ -37,9 +37,9 @@
 				<li><label>区教委</label>
 				<select name="area"  id="area" panelheight="auto">
 					<option value="">请选择区县</option>
-		          	<#if areaDtos??>
-		          		<#list areaDtos as area>
-		          			<option value="${(area.addressCode)!}">${(area.addressName)!}</option>
+		          	<#if eduCommitteeDtos??>
+		          		<#list eduCommitteeDtos as area>
+		          			<option value="${(area.areaCode)!}">${(area.name)!}</option>
 		          		</#list>
 		          	</#if>
 				</select>

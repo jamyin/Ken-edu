@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,11 +17,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.common.base.Objects;
 import com.ssic.educateion.common.dto.EduAreaDto;
+import com.ssic.educateion.common.dto.EduCommitteeDto;
 import com.ssic.educateion.common.dto.EduUsersDto;
 import com.ssic.educateion.common.dto.EduUsersRegDto;
 import com.ssic.education.government.controller.BaseController;
 import com.ssic.education.handle.service.AreaService;
 import com.ssic.education.handle.service.EduUsersService;
+import com.ssic.education.handle.service.IEduCommitteeService;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.constants.SessionConstants;
 import com.ssic.education.utils.digest.MD5Coder;
@@ -42,11 +45,14 @@ public class UserController extends BaseController{
 	@Autowired
 	private AreaService areaService;
 	
+	@Autowired
+	private IEduCommitteeService iEduCommitteeService;
+	
 	@RequestMapping(value="oreg")
 	public ModelAndView oreg(){
 		ModelAndView mv = getModelAndView();
-		List<EduAreaDto> areaDtos = areaService.queryAll();
-		mv.addObject("areaDtos", areaDtos);
+		List<EduCommitteeDto> eduCommitteeDtos = iEduCommitteeService.findAll();
+		mv.addObject("eduCommitteeDtos", eduCommitteeDtos);
 		mv.setViewName("reg");	
 		return mv;
 	}
@@ -125,8 +131,16 @@ public class UserController extends BaseController{
     		HttpSession session,EduUsersDto usersDto) throws Exception {
 		Response<String> res = new Response<String>();
 		String md5oldPwd = MD5Coder.encodeMD5Hex(usersDto.getPassword());
+		String md5oldOldPwd = MD5Coder.encodeMD5Hex(usersDto.getOldpassword());
 		String id = (String) getRequest().getSession().getAttribute(SessionConstants.LOGIN_USER_INFO);
 		EduUsersDto usersdto = getLoginUser(request, response, session, id);
+		if (StringUtils.isNotBlank(usersdto.getId()) && StringUtils.isNotBlank(usersdto.getPassword())) {
+			if (!md5oldOldPwd.equals(usersdto.getPassword())) {
+				res.setStatus(DataStatus.HTTP_FAILE);
+				res.setMessage("原密码不正确请重新输入！");
+				return res;
+			}
+		}
 		usersDto.setPassword(md5oldPwd);
 		usersDto.setId(usersdto.getId());
 		Integer result = eduUsersService.update(usersDto);
@@ -135,7 +149,7 @@ public class UserController extends BaseController{
 			res.setMessage("更新成功！");
 		}if (result == DataStatus.DISABLED) {
 			res.setStatus(DataStatus.HTTP_FAILE);
-			res.setMessage("更新成功！");
+			res.setMessage("更新失败！");
 		}
 		return res;
 	}

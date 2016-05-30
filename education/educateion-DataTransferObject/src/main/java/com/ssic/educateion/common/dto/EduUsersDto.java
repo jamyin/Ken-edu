@@ -160,5 +160,7 @@ public class EduUsersDto implements Serializable{
      * @mbggenerated Sat May 21 16:50:26 CST 2016
      */
     private Integer isdelete;
+    
+    private String oldpassword;
 
 }

@@ -14,4 +14,6 @@ public interface IEduCommitteeService {
 	public List<EduCommitteeDto> queryCommittee(EduCommitteeDto eduCommitteeDto);
 	
 	public EduCommitteeDto findById (String id);
+	
+	public List<EduCommitteeDto> findAll();
 }

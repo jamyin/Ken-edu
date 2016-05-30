@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ssic.educateion.common.dto.EduAreaDto;
 import com.ssic.educateion.common.dto.EduCanteenDto;
+import com.ssic.educateion.common.dto.EduCommitteeDto;
 import com.ssic.educateion.common.dto.EduSchoolDto;
 import com.ssic.educateion.common.dto.EduSchoolSupplierDto;
 import com.ssic.educateion.common.dto.EduUsersDto;
@@ -34,6 +35,7 @@ import com.ssic.education.handle.service.AreaService;
 import com.ssic.education.handle.service.EduSchoolService;
 import com.ssic.education.handle.service.EduUsersService;
 import com.ssic.education.handle.service.IEduCanteenService;
+import com.ssic.education.handle.service.IEduCommitteeService;
 import com.ssic.education.handle.service.IEduSchoolSupplierService;
 import com.ssic.education.handle.service.ProLedgerService;
 import com.ssic.education.handle.service.ProPackagesService;
@@ -70,6 +72,9 @@ public class EduSchoolController extends BaseController{
 	
 	@Autowired
 	private IEduCanteenService iEduCanteenService;
+
+	@Autowired
+	private IEduCommitteeService iEduCommitteeService;
 	
 	@Autowired
 	private ProPackagesService proPackagesService;
@@ -105,14 +110,15 @@ public class EduSchoolController extends BaseController{
 		ModelAndView mv = getModelAndView();
 		String id = (String) getRequest().getSession().getAttribute(SessionConstants.LOGIN_USER_INFO);
 		EduUsersDto usersdto = getLoginUser(request, response, session, id);
-		if (StringUtils.isNotBlank(usersdto.getSourceId()) && !usersdto.getSourceId().equals("1") 
-				&& usersdto.getSourceType() == DataStatus.DISABLED) {
-			dto.setCommitteeId(usersdto.getSourceId());
+		if (null != dto.getSource() && dto.getSource() == DataStatus.EVA_TWO 
+				&& null != usersdto.getSourceType() && usersdto.getSourceType() == DataStatus.EVA_TWO) {
+			EduCommitteeDto EduCommitteeDto = iEduCommitteeService.findById(usersdto.getSourceId());
+			dto.setArea(EduCommitteeDto.getAreaCode());
 		}		
 		PageResult<EduSchoolDto> result = eduSchoolService.list(dto, page);
-		List<EduAreaDto> areaDtos = areaService.queryAll();
+		List<EduCommitteeDto> eduCommitteeDtos = iEduCommitteeService.findAll();
 		mv.addObject("pageList", result);
-		mv.addObject("areaDtos", areaDtos);
+		mv.addObject("eduCommitteeDtos", eduCommitteeDtos);
 		mv.addObject("dto", dto);
 		mv.addObject("level", SchoollevelEnum.values());
 		mv.setViewName("/school/school_list");
@@ -236,9 +242,9 @@ public class EduSchoolController extends BaseController{
 		ModelAndView mv = getModelAndView();
 		String id = (String) getRequest().getSession().getAttribute(SessionConstants.LOGIN_USER_INFO);
 		EduUsersDto usersdto = getLoginUser(request, response, session, id);
-		if (StringUtils.isNotBlank(usersdto.getSourceId()) && !usersdto.getSourceId().equals("1") 
-				&& usersdto.getSourceType() == DataStatus.DISABLED) {
-			dto.setCommitteeId(usersdto.getSourceId());
+		if (StringUtils.isNotBlank(usersdto.getSourceId()) && null != usersdto.getSourceType() && usersdto.getSourceType() == DataStatus.EVA_TWO) {
+			EduCommitteeDto EduCommitteeDto = iEduCommitteeService.findById(usersdto.getSourceId());
+			dto.setArea(EduCommitteeDto.getAreaCode());
 		}	
 		PageResult<SupplierReviewedDto> result = eduSchoolService.list(dto, page);
 		mv.addObject("pageList", result);
