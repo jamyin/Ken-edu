@@ -30,10 +30,25 @@ public class CommitteeServiceImpl implements ICommitteeService{
 	public PageResult<EduCommitteeDto> findCommitteeList(
 			EduCommitteeDto eduCommitteeDto, PageQuery query) {
 		List<EduCommittee> list = committeeDao.findCommitteeList(eduCommitteeDto, query);
+		if(list == null){
+			return null;
+		}
 		List<EduCommitteeDto> schoolDtoList = BeanUtils.createBeanListByTarget(list, EduCommitteeDto.class);
 		int total = committeeDao.selectCommitteeAccount(eduCommitteeDto);
 		query.setTotal(total);
 		return new PageResult<EduCommitteeDto>(query, schoolDtoList);
+	}
+
+	
+	@Override
+	public List<EduCommitteeDto> findCommitteeListNoPage(
+			EduCommitteeDto eduCommitteeDto) {
+		List<EduCommittee> list = committeeDao.findCommitteeListNoPage(eduCommitteeDto);
+		if(list == null){
+			return null;
+		}
+		List<EduCommitteeDto> schoolDtoList = BeanUtils.createBeanListByTarget(list, EduCommitteeDto.class);
+		return schoolDtoList;
 	}
 
 }

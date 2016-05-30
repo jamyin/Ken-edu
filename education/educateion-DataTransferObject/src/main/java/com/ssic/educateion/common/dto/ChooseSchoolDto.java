@@ -25,7 +25,6 @@ public class ChooseSchoolDto implements Serializable {
 
 	private PageResult<SchoolDto>  schoolDto;
 	private Map<Integer, String> levelList;    
-	private List<EduAreaDto> areaList;
-
-
+	//private List<EduAreaDto> areaList;
+	private List<EduCommitteeDto> committeeList;
 }

@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssic.educateion.common.dto.ChooseSchoolDto;
-import com.ssic.educateion.common.dto.EduAreaDto;
 import com.ssic.educateion.common.dto.EduCanteenDto;
+import com.ssic.educateion.common.dto.EduCommitteeDto;
 import com.ssic.educateion.common.dto.EduSchoolDto;
 import com.ssic.educateion.common.dto.EduSchoolSupplierDto;
 import com.ssic.educateion.common.dto.ProPackagesDto;
 import com.ssic.educateion.common.dto.SchoolDto;
 import com.ssic.education.app.constants.SchoolLevel;
 import com.ssic.education.app.dto.SchoolPackageDto;
-import com.ssic.education.app.service.IAreaService;
+import com.ssic.education.app.service.ICommitteeService;
 import com.ssic.education.app.service.ISchoolService;
 import com.ssic.education.handle.service.EduSchoolService;
 import com.ssic.education.handle.service.IEduCanteenService;
@@ -57,8 +57,11 @@ public class SchoolController {
 	@Autowired
 	private ProPackagesService proPackagesService;
 	
+//	@Autowired
+//	private IAreaService areaService;
+	
 	@Autowired
-	private IAreaService areaService;
+	private ICommitteeService committeeService;
 
 	/**
 	 * @Title: findSchoolList
@@ -212,8 +215,11 @@ public class SchoolController {
 		if(type != null && type == 1 ){
 			chooseSchoolDto.setLevelList(SchoolLevel.getAll());
 			
-			List<EduAreaDto> areaList = areaService.findAreaList();
-			chooseSchoolDto.setAreaList(areaList);
+			//List<EduAreaDto> areaList = areaService.findAreaList();
+			//chooseSchoolDto.setAreaList(areaList);
+			List<EduCommitteeDto> committeeList = committeeService.findCommitteeListNoPage(new EduCommitteeDto());
+			//chooseSchoolDto.setAreaList(areaList);
+			chooseSchoolDto.setCommitteeList(committeeList);
 		}
 		return result;
 	}
