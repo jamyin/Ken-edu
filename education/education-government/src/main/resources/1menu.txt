@@ -2,7 +2,7 @@
     "parentMenu": [
         {
             "menuName": "安全追溯",
-            "menuUrl": "/edu/school/details.htm?source=1"
+            "menuUrl": "/edu/school/details.htm?source=1&reviewed=1"
         },
         {
             "menuName": "菜谱录入",

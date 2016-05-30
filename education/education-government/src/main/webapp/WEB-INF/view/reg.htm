@@ -62,12 +62,12 @@
 					<label><i>*</i>证件类型</label>
 					<ul class="c_type">
 						<li name="phoneFile1">
-						<select>
-							<option id="type1">证件类型1</option>
-							<option id="type2" selected>证件类型2</option>
-							<option id="type3">证件类型3</option>
-							<option id="type4">证件类型4</option>
-							<option id="type5">证件类型5</option>
+						<select class="licType1">
+							<option value="0">餐饮服务证</option>
+							<option value="1">食品经营许可证</option>
+							<option value="2">食品流通证</option>
+							<option value="3">食品生产证</option>
+							<option value="4">工商执照</option>
 						</select>
 						<label class="file" for="phoneFile1">未选择文件<i>浏览</i></label>
 						<input id="phoneFile1" type="file" name="file" onchange="selectfun(this)"><span class="add">+</span>
@@ -97,12 +97,13 @@
 			if(_tag == 'add'){
 				var _ind = $(this).closest('ul').find('li').length + 1
 				//alert(_ind)
-				$('.c_type').append('<li name="phoneFile'+ _ind +'"><select><option>证件类型1</option><option>证件类型2</option><option>证件类型3</option><option>证件类型4</option><option>证件类型5</option></select><label class="file" for="phoneFile'+ _ind +'">未选择文件<i>浏览</i></label><input id="phoneFile'+ _ind +'"  type="file" name="file" onchange="selectfun(this)"><span class="remove">-</span><a id="phoneQuery'+ _ind +'"></a></li>')
+				$('.c_type').append('<li name="phoneFile'+ _ind +'"><select class="licType'+  _ind +'" id=""><option value=\"0\">餐饮服务证</option><option value=\"1\">食品经营许可证</option><option value=\"2\">食品流通证</option><option value=\"3\">食品生产证</option><option value=\"4\">工商执照</option>></select><label class="file" for="phoneFile'+ _ind +'">未选择文件<i>浏览</i></label><input id="phoneFile'+ _ind +'"  type="file" name="file" onchange="selectfun(this)"><span class="remove">-</span><a id="phoneQuery'+ _ind +'"></a></li>')
 			}else if(_tag == 'remove'){
 				$(this).closest('li').remove()
 				for(var i=0; i<$('.c_type').find('li').length;i++){
 					$('.c_type li').eq(i).find('input').attr('id','phoneFile'+(i+1))
 					$('.c_type li').eq(i).find('label.file').attr('for','phoneFile'+(i+1))
+					$('.c_type li').eq(i).find('select').attr('class','licType'+(i+1))
 				}
 			}
 		})
@@ -123,22 +124,25 @@
 				alert("区教委不能为空~");
 				return;
 			}
+			var checkStr='';
 			var checked = 0;
             $('input[name="CheckboxGroup1"]:checked').each(function(){
-            	checkStr += $(this).val()+","
-            	checked++;
+            	if ($(this).val() != null && $(this).val() != '' && $(this).val() != 'undefined') {
+            		checkStr += $(this).val()+","
+                	checked++;
+            	}            	
             });
             checkStr=checkStr.substring(0,checkStr.length-1);
 			if (checked == 0 ) {
             	alert("学校级别不能为空~");
 				return;
             } 
-			var _ind = $(this).closest('ul').find('li').length + 1;
+			var _ind = $('.c_type').closest('ul').find('li').length;
 			var jsonLic;
 			jsonLic = '[';
 			for (i=1; i<=_ind; i++) {
 				if ($.trim($('#phoneFile1').attr("value")).length >0 && $('#phoneFile1').attr("value") != 'undefined') {
-					jsonLic += '{\"licPic\":\"' +$('#phoneFile'+i+'').attr("value")+'\"},';
+					jsonLic += '{\"licPic\":\"' +$('#phoneFile'+i+'').attr("value")+'\",'+'\"licType\":\"' +$('.licType'+i+'').val()+'\",'+'\"licName\":\"' +$('.licType'+i+'').find("option:selected").text()+'\"},';
 				}				
 			}
 			jsonLic += ']';

@@ -3,7 +3,11 @@
     <head>
 <#include "/common/head.htm" />
         <link rel="stylesheet" href="/static/css/style.css">
-        <link rel="stylesheet" href="/static/css/dis_edu.css">
+        <link rel="stylesheet" href="/static/css/dis_edu.css">  
+        <style type="text/css">
+		a:link {color:black;}
+		.page .page_to_go{border: 1px;}
+		</style>
     </head>
     <body>
         <!--  <div class="header">
@@ -69,7 +73,7 @@
 	                            <#else>
 	                            	<tr>
 	                                    <td></td>
-	                                    <td><span style="font-size: 16px;color: red;">暂无数据</span></td>
+	                                    <td><span style="font-size: 16px;color: red">暂无数据</span></td>
 	                                    <td></td>
 	                                    <td></td>
 	                                </tr>
@@ -90,7 +94,7 @@
     $(function(){
       // debugger;
       $(".nav").find("a").removeClass("cur");
-      $(".nav").find("a:eq(3)").addClass("cur");
+      $(".nav").find("a:eq(2)").addClass("cur");
       
       $('.search-bt').on('click', function() {
     	  $("#myform").submit();
