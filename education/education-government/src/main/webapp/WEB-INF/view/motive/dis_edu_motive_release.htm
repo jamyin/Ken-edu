@@ -46,9 +46,10 @@
                         <form id="submitForm" method="post">
                         	<input type="hidden" name="content" id="content" value=""/>
                         	<input type="hidden" name="type" id="type" value="0"/>
+                        	<!-- <input type="hidden" name="lianxiIds" id="lianxiIds" value=""/> -->
                             <section class="line">
                                 <label for="to">联系人:    </label>
-                                <input type="text" name="to">
+                                <input id="lianxiList" type="text" name="to">
                                 <span id="plus_bt">+</span>
                             </section>
                             <section class="line">
@@ -72,17 +73,17 @@
                                     <div class="content_wrap">
                                         <section class="line">
                                             <input type="text" name="search">
-                                            <input type="submit" name="name" value="搜索">
+                                            <input type="button" name="name" value="搜索">
                                             <div class="checkwrap">
                                                 <ul>
-                                                    <li>
-                                                        <label for="shisan">十三叔</label>
-                                                        <input name="shisan" type="checkbox" value="436543" />
-                                                    </li>
-                                                    <li>
-                                                        <label for="aa">有威</label>
-                                                        <input name="aa" type="checkbox" value="" />
-                                                    </li>
+                                                	<#if dataList ??>
+                                                		<#list dataList as data>
+		                                                    <li>
+		                                                        <label for="shisan">${(data.name)!}</label>
+		                                                        <input name="lianxiIds" type="checkbox" value="${(data.id)!}#${(data.name)!}" />
+		                                                    </li>                                                			
+                                                		</#list>
+                                                	</#if>
                                                 </ul>
                                             </div>
                                         </section>
@@ -113,8 +114,20 @@
         <script src="/static/js/plugins/code/prettify.js"></script> -->
         <script>
             $(function(){
-            	
             	var um = UM.getEditor('editor');
+            	$(".checkwrap ul li input").on('click',function(){
+            		var lianxiList = "";
+            		var lianxiIds = "";
+            		$("input[name='lianxiIds']").each(function(){
+            		    if (true == $(this).prop("checked")) {
+            		    	lianxiList += $(this).parent().find("label").html() + ","
+            		    	//lianxiIds  += $(this).val()+ ",";
+            		    }
+            		});
+            		$("#lianxiList").val(lianxiList);
+            		//$("#lianxiIds").val(lianxiIds);
+            	});
+            	
             	
             	$("#savebutton").on('click',function(){
             		var ajaxParams = $("#submitForm").serialize();
@@ -122,7 +135,7 @@
     				$("#content").val(content);
     				
     				$.ajax({
-    					url : "/info/save.htm",
+    					url : "/motive/save.htm",
     					type:"POST",
     					data : ajaxParams,
     					dataType:'json',
