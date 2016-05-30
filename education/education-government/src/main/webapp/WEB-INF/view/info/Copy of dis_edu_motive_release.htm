@@ -24,23 +24,20 @@
         
         <div class="breadcrumb">
             <span>当前位置:</span>
-            <a href="#">公告通知</a>
-            <span> &gt; </span>
+            <a href="#">公告发布</a>
+<!--             <span> &gt; </span>
             <a href="#">已发通知</a>
             <span> &gt; </span>
-            <a href="#">通知详情</a>
+            <a href="#">通知详情</a> -->
         </div>
         <div class="main_wrap">
 
-            <h2>通知详情</h2>
+            <h2>公告发布</h2>
             <div class="content_wrap">
 
                 <div class="tab_wrap">
                     <ul class="side_menu">
                         <li class="active">新建</li>
-                        <li><a href="/motive/unreaded.htm">未读</a></li>
-                        <li><a href="/motive/sended.htm">已发</a></li>
-                        <li><a href="/motive/readed.htm">已读</a></li>
                     </ul>
                     <div class="tab_content">
                         <form id="submitForm" method="post">
@@ -48,13 +45,13 @@
                         	<input type="hidden" name="type" id="type" value="0"/>
                         	<!-- <input type="hidden" name="lianxiIds" id="lianxiIds" value=""/> -->
                             <section class="line">
-                                <label for="to">联系人:    </label>
-                                <input id="lianxiList" type="text" name="to">
-                                <span id="plus_bt">+</span>
+                                <label for="title">标题:</label>
+								<input type="text" name="title">
                             </section>
                             <section class="line">
-                                <label for="title">标题:    </label>
-                                <input type="text" name="title">
+                                <label for="title">类别:</label>
+                                <div><input type="radio" name="title">健康宣教<input type="radio" name="title">健康宣教</div>
+                                                                
                             </section>
                             <section class="text">
                                 <label for="text">内容:    </label>
@@ -66,30 +63,6 @@
                             <div class="subbt">
                                 <a id="savebutton" href="#">发布</a>
                                 <a href="#">取消</a>
-                            </div>
-                            <div class="background">
-                                <div class="select_panel">
-                                    <h2>选择联系人</h2><span class="close"><img src="/static/img/button_close.png" /></span>
-                                    <div class="content_wrap">
-                                        <section class="line">
-                                            <input type="text" name="search">
-                                            <input type="button" name="name" value="搜索">
-                                            <div class="checkwrap">
-                                                <ul>
-                                                	<#if dataList ??>
-                                                		<#list dataList as data>
-		                                                    <li>
-		                                                        <label for="shisan">${(data.name)!}</label>
-		                                                        <input name="lianxiIds" type="checkbox" value="${(data.id)!}#${(data.name)!}" />
-		                                                    </li>                                                			
-                                                		</#list>
-                                                	</#if>
-                                                </ul>
-                                            </div>
-                                        </section>
-
-                                    </div>
-                                </div>
                             </div>
                         </form>
                     </div>
@@ -114,20 +87,7 @@
         <script src="/static/js/plugins/code/prettify.js"></script> -->
         <script>
             $(function(){
-            	var um = UM.getEditor('editor');
-            	$(".checkwrap ul li input").on('click',function(){
-            		var lianxiList = "";
-            		var lianxiIds = "";
-            		$("input[name='lianxiIds']").each(function(){
-            		    if (true == $(this).prop("checked")) {
-            		    	lianxiList += $(this).parent().find("label").html() + ","
-            		    	//lianxiIds  += $(this).val()+ ",";
-            		    }
-            		});
-            		$("#lianxiList").val(lianxiList);
-            		//$("#lianxiIds").val(lianxiIds);
-            	});
-            	
+            	var um = UM.getEditor('editor');          	
             	
             	$("#savebutton").on('click',function(){
             		var ajaxParams = $("#submitForm").serialize();
@@ -135,7 +95,7 @@
     				$("#content").val(content);
     				
     				$.ajax({
-    					url : "/motive/save.htm",
+    					url : "/info/save.htm",
     					type:"POST",
     					data : ajaxParams,
     					dataType:'json',

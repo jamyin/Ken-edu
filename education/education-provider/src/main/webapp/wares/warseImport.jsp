@@ -3,8 +3,8 @@
 <script type="text/javascript">
 	$(function() {
 		parent.$.messager.progress('close');
-		$('#importLedger').form({
-			url : '${pageContext.request.contextPath}/ledgerController/import',
+		$('#importWare').form({
+			url : '${pageContext.request.contextPath}/waresController/import',
 			onSubmit : function() {
 				parent.$.messager.progress({
 					title : '提示',
@@ -38,7 +38,7 @@
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
 	<div data-options="region:'center',border:false" title="" style="overflow: hidden;">
-		<form id="importLedger" method="post" enctype="multipart/form-data">
+		<form id="importWare" method="post" enctype="multipart/form-data">
 <table class="table table-hover table-condensed"  >
 		<tr>
 			<th>

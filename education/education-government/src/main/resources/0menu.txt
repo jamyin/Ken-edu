@@ -5,7 +5,23 @@
             "menuUrl": "/edu/school/list.htm?source=0"
         },
         {
-            "menuName": "通知发布",
+            "menuName": "健康宣教",
+            "menuUrl": "/info/index/3.htm"
+        },
+        {
+            "menuName": "通告公示",
+            "menuUrl": "/info/index/0.htm"
+        },
+        {
+            "menuName": "通知",
+            "menuUrl": "/info/release.htm"
+        },        
+        {
+            "menuName": "信息发布",
+            "menuUrl": "/info/release.htm"
+        },
+        {
+            "menuName": "信息发布",
             "menuUrl": "/motive/release.htm"
         }
     ]

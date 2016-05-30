@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>通告公示</title>
+        <link rel="stylesheet" href="/static/css/common.css">
+        <link rel="stylesheet" href="/static/css/style.css">
+        <link rel="stylesheet" href="/static/css/panel.css">
+    </head>
+    <body>
+        
+        <#include "/common/nav.htm" />
+        
+        <div class="breadcrumb">
+            <span>当前位置:</span>
+            <a href="#">健康宣教</a>
+            <span> &gt; </span>
+            <a href="#">通知公告</a>
+        </div>
+        <div class="main_wrap">
+            <div class="panel">
+                <h2>通告公示 <a class="more" href="#">删除</a></h2>
+                <ul class="list">
+                	<#if pageList ??>
+                		<#list pageList.getResults() as data>
+		                    <li>
+		                        <a href="/info/details/${(data.id)!}.htm">${(data.title)!}</a>
+		                        <span class="date">${(data.createTime?string('yyyy-MM-dd'))!}</span>
+		                    </li>                			
+                		</#list>
+                	</#if>
+                </ul>
+            </div>
+        </div>
+        <div class="footer">
+    		上海市中小学校学生午餐综合管理平台<br>CopyRight© 2016上海市天坊信息技术有限公司
+    	</div>
+    </body>
+</html>

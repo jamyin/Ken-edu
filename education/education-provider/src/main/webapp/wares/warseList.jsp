@@ -481,6 +481,24 @@ else
 			} ]
 		});
 	}
+	
+	function importSupplier() {
+		parent.$.modalDialog({
+			title : '导入采购品',
+			width :300,
+			height : 150,
+			href : '${pageContext.request.contextPath}/waresController/importPage',
+			buttons : [ {
+				text : '上传',
+				handler : function() {
+					parent.$.modalDialog.openner_dataGrid = dataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
+					var f = parent.$.modalDialog.handler.find('#importWare');
+					f.submit();
+				}
+			} ]
+		});
+	}
+	
 	//导出excel
 	function toExcel(){
 	
@@ -553,6 +571,7 @@ else
 		
 			<!-- <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_add',plain:true" onclick="searchFun();">搜索</a>
 			<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_delete',plain:true" onclick="cleanFun();">清空搜索条件</a> -->
+			<a onclick="importSupplier();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'">导入</a>
 			<a class="btn btn-mini btn-light" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="icon-download-alt"></i>导出</a>
 		</div>		
 		<div data-options="region:'center',border:false">

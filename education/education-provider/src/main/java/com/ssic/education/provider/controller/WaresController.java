@@ -78,6 +78,11 @@ public class WaresController extends BaseController {
 		return "wares/warseList";
 	}
 
+	@RequestMapping("/importPage")
+	public String importPage(HttpServletRequest request) {
+		return "wares/warseImport";
+	}
+	
 	/**
 	 * 查询原料详情
 	 * 
@@ -501,10 +506,11 @@ public class WaresController extends BaseController {
 	 * @author zhangjiwei
 	 * @since 2016.5.21
 	 */
-	public ModelAndView importExcel(
+	public Json importExcel(
 			@RequestParam("filename") MultipartFile file,
 			HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
+		Json j=new Json();
 		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
 				ConfigUtil.SESSIONINFONAME);
 		// 当前登录用户所属供应商的id
@@ -616,11 +622,16 @@ public class WaresController extends BaseController {
 
 		if (errorMsg != null) {
 			// TODO 反馈用户错误信息
+			j.setMsg(errorMsg);
+			j.setSuccess(false);
+			return j;
 		} else {
 			// 导入商品
 			waresService.addProWares(list);
+			j.setMsg("成功添加数据");
+			j.setSuccess(true);
+			return j;
 		}
 
-		return null;
 	}
 }

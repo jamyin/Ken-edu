@@ -13,6 +13,7 @@ import com.ssic.educateion.common.dto.ProWaresDto;
 import com.ssic.education.app.dto.MaterialSupplierDto;
 import com.ssic.education.app.dto.SupplierLicDto;
 import com.ssic.education.app.service.ISupplierService;
+import com.ssic.education.handle.pojo.ProSupplier;
 import com.ssic.education.handle.service.ProWaresService;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
@@ -159,18 +160,18 @@ public class SupplierController {
 	 */
 	@RequestMapping("/findSupplierList/{id}")
 	@ResponseBody
-	public Response<List<MaterialSupplierDto>> findSupplierList(@PathVariable("id") String id) {
-		Response<List<MaterialSupplierDto>> result = new Response<List<MaterialSupplierDto>>();
+	public Response<PageResult<MaterialSupplierDto>> findSupplierList(@PathVariable("id") String id, ProSupplier supplier, PageQuery query) {
+		Response<PageResult<MaterialSupplierDto>> result = new Response<PageResult<MaterialSupplierDto>>();
 		if (StringUtils.isEmpty(id)) {
 			result.setStatus(DataStatus.HTTP_FAILE);
 			result.setMessage("查询Id为空");
 			return result;
 		}
-		SupplierLicDto supplier = supplierService.findSupplierInfo(id);
-		if (supplier != null && supplier.getMaterialSupplierList() != null) {
+		PageResult<MaterialSupplierDto> PageResult = this.supplierService.findListByIds(id, supplier, query);
+		if (PageResult != null) {
 			result.setStatus(DataStatus.HTTP_SUCCESS);
 			result.setMessage("查询成功！");
-			result.setData(supplier.getMaterialSupplierList());
+			result.setData(PageResult);
 			return result;
 		}
 		result.setStatus(DataStatus.HTTP_SUCCESS);

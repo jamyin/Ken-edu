@@ -126,7 +126,7 @@
 		} else {//点击操作里面的删除图标会触发这个
 			dataGrid.datagrid('unselectAll').datagrid('uncheckAll');
 		}
-		parent.$.messager.confirm('询问', '您是否要删除当前废弃油脂？', function(b) {
+		parent.$.messager.confirm('询问', '您是否要删除当前配送？', function(b) {
 			if (b) {
 				var currentUserId = '${sessionInfo.id}';/*当前登录用户的ID*/
 				if (currentUserId != id) {
@@ -198,6 +198,7 @@
 			width : 1000,
 			height : 500,
 			href : '${pageContext.request.contextPath}/ledgerController/addLedger',
+			style : 'overflow-y:scroll;',
 			buttons : [ {
 				text : '添加',
 				handler : function() {
@@ -211,7 +212,7 @@
 
 	function importSupplier() {
 		parent.$.modalDialog({
-			title : '导入配货管理',
+			title : '导入配货',
 			width :300,
 			height : 150,
 			href : '${pageContext.request.contextPath}/ledgerController/importPage',
@@ -219,7 +220,7 @@
 				text : '上传',
 				handler : function() {
 					parent.$.modalDialog.openner_dataGrid = dataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
-					var f = parent.$.modalDialog.handler.find('#importSupplier');
+					var f = parent.$.modalDialog.handler.find('#importLedger');
 					f.submit();
 				}
 			} ]

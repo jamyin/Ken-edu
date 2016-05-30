@@ -48,7 +48,6 @@ public class SupplierDao extends MyBatisBaseDao<ProSupplier> {
 		ProSupplierExample example = new ProSupplierExample();
 		ProSupplierExample.Criteria criteria = example.createCriteria();
         assemblyParams(proSupplierDto, criteria);
-		//example.setOrderByClause("create_time DESC");
         if(null != query){
         	example.setOrderByClause("create_time DESC limit "+query.getStartNum() +"," + query.getPageSize());
 		}
