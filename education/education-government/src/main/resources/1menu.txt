@@ -5,7 +5,7 @@
             "menuUrl": "/edu/school/details.htm?source=1"
         },{
             "menuName": "通知公告",
-            "menuUrl": "/info/index/3.htm",
+            "menuUrl": "##",
             "childList": [
                 {
                     "menuName": "健康宣教",
