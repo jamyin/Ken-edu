@@ -31,6 +31,7 @@ public class EduInformationDto implements Serializable {
 	private Date lastUpdateTime;
 	private Integer stat;
 	private String content;
+	private String editorValue;
 
 
 }
