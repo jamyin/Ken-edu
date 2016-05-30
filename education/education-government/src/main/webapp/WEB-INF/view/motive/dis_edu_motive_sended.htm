@@ -56,7 +56,8 @@
                                 <th> 标题 </th>
                                 <th> 时间 </th>
                             </thead>
-                            <form class="" action="" method="post">
+                            <form id="myform" class="" action="/motive/sended.htm" method="post">
+                            	<input type="hidden" name="currPage" id="currPage" value="1"/>
                             	<#if pageList ??>
                             		<#list pageList.getResults() as result>
 	                                <tr>
@@ -73,6 +74,7 @@
                             	</#if>
                             </form>
                         </table>
+                        <#include "/common/page.htm" />
                     </div>
                 </div>
             </div>
@@ -82,4 +84,10 @@
     		上海市中小学校学生午餐综合管理平台<br>CopyRight© 2016上海市天坊信息技术有限公司
     	</div>
     </body>
+<script type="text/javascript">
+function gotoPage(page) {
+    $("#currPage").val(page);
+    $("#myform").submit();
+}
+</script>    
 </html>
