@@ -84,6 +84,24 @@ public class WaresInfoServiceImpl implements IWaresInfoService {
 		}
 	}
 
+	/** 
+	 * 根据供应商ID查询商品列表 带分页
+	* (non-Javadoc)   
+	 * @throws Exception 
+	* @see com.ssic.education.app.service.IWaresInfoService#getWaresBySupplierId(java.lang.String, com.ssic.education.utils.model.PageQuery)   
+	*/
+	@Override
+	public PageResult<WaresListDto> getWaresBySchoolId(String schoolId, ProWares prowares, PageQuery query) {
+		List<String> schoolWares = this.schoolWaresDao.findSchoolWaresBySchoolId(schoolId);
+		if (schoolWares != null && !schoolWares.isEmpty()) {
+			List<ProWares> wares = waresInfoDao.findWarseInSchool(schoolWares, prowares, query);
+			List<WaresListDto> wareListDto = BeanUtils.createBeanListByTarget(wares, WaresListDto.class);
+			return new PageResult<WaresListDto>(query, wareListDto);
+		} else {
+			return null;
+		}
+	}
+
 	@Override
 	public WaresRelatedDto findWarseById(String id) {
 		WaresRelatedDto wrd = waresInfoDao.findWarseById(id);
