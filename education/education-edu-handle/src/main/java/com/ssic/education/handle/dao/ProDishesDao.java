@@ -7,11 +7,15 @@ import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ssic.educateion.common.dto.ProDishesDto;
 import com.ssic.educateion.common.dto.ProWaresDto;
 import com.ssic.education.handle.mapper.ProDishesExMapper;
 import com.ssic.education.handle.mapper.ProDishesMapper;
 import com.ssic.education.handle.pojo.ProDishes;
+import com.ssic.education.handle.pojo.ProDishesExample;
+import com.ssic.education.handle.pojo.ProDishesExample.Criteria;
 import com.ssic.education.handle.pojo.ProWares;
+import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.mybatis.MyBatisBaseDao;
 
@@ -44,5 +48,15 @@ public class ProDishesDao extends MyBatisBaseDao<ProDishes>{
 
 	public int addDishesBatch(List<ProDishes> dishesList) {
 		return exMapper.addDishesBatch(dishesList);
+	}
+
+	public List<ProDishes> searchDishes(List<String> packageIdList) {
+		ProDishesExample example = new ProDishesExample();
+		Criteria criteria = example.createCriteria();
+		
+		criteria.andPackageIdIn(packageIdList);
+		
+		criteria.andStatEqualTo(DataStatus.ENABLED);
+		return mapper.selectByExample(example);
 	}
 }
