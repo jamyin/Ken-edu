@@ -14,9 +14,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ssic.educateion.common.dto.ProSupplierDto;
 import com.ssic.educateion.common.dto.ProWaresDto;
 import com.ssic.education.government.controller.BaseController;
+import com.ssic.education.handle.pojo.ProLicense;
+import com.ssic.education.handle.service.IProLicenseService;
 import com.ssic.education.handle.service.ProLedgerService;
 import com.ssic.education.handle.service.ProSupplierService;
 import com.ssic.education.handle.service.ProWaresService;
+import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.MessageResp;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
@@ -41,6 +44,9 @@ public class ProSupplierController extends BaseController {
 	private ProLedgerService proLedgerService;
 	@Autowired
 	private ProWaresService proWaresService;
+	
+	@Autowired
+	private IProLicenseService iProLicenseService;
 
 	/**
 	 * <p>Description: 供应商资质分页查询接口 </p>
@@ -80,12 +86,17 @@ public class ProSupplierController extends BaseController {
  		PageResult<ProWaresDto> mWares = queryWares(dto.getId(), query, false);
 //		PageResult<ProWaresDto> pWares = queryWares(dto.getId(), query, true);
 		PageResult<ProSupplierDto> mSuppliers = queryMaterialSupplier(dto, query);
+		ProLicense proLicense = new ProLicense();
+		proLicense.setCerSource((short)DataStatus.DISABLED);
+		proLicense.setRelationId(dto.getId());
+		List<ProLicense> proLicenses = iProLicenseService.lookImage(proLicense);
 		mv.addObject("supplier", supplier);
 		mv.addObject("mWares", mWares);
+		mv.addObject("proLicenses", proLicenses);
 //		mv.addObject("pWares", pWares);
 		mv.addObject("mSuppliers", mSuppliers);
 		if (null != dto.getSource() && dto.getSource() == 1) {
-			mv.setViewName("supplier/supplier_qualifications");
+			mv.setViewName("supplier/supplier_detail");
 		}else {
 			mv.setViewName("supplier/supplier_qualification");
 		}
