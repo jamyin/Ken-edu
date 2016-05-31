@@ -195,8 +195,6 @@ else
 					parent.$.modalDialog.openner_dataGrid = dataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
 					var f = parent.$.modalDialog.handler.find('#editCurrentUserPwdForm');
 					f.submit();
-					var f2 = parent.$.modalDialog.handler.find('#editCurrentUserPwdForm');
-					f2.submit();
 				}
 			} ]
 		});
