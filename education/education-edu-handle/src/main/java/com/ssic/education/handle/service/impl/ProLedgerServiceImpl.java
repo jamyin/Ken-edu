@@ -62,4 +62,10 @@ public class ProLedgerServiceImpl implements ProLedgerService{
 		}
 		return null;
 	}
+
+	@Override
+	public List<ProLedgerDto> searchProLedger(List<String> ledgerMasterIds) {
+		List<ProLedger> results = proLedgerDao.searchProLedger(ledgerMasterIds);
+		return BeanUtils.createBeanListByTarget(results, ProLedgerDto.class);
+	}
 }
