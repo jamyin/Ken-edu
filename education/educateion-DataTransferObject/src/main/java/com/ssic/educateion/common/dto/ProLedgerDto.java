@@ -47,5 +47,7 @@ public class ProLedgerDto implements Serializable {
 	private Date lastUpdateTime;
 
 	private Integer stat;
+	
+	private String driverName;
 
 }

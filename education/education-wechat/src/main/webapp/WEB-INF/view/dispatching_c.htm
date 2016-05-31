@@ -5,31 +5,58 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,user-scalable=no" />
     <title>供应商资质</title>
-    <link href="static/css/style.css" rel="stylesheet" />
-    <script src="static/js/jquery-2.1.3.min.js"></script>
+    <link href="/static/css/style.css" rel="stylesheet" />
+    <script src="/static/js/jquery-2.1.3.min.js"></script>
   </head>
 <body>
-	<header class="navgat"><a class="back" href="dispatching.html"></a>配送信息</header>
+	<header class="navgat"><a class="back" href="/wap/ledger/list/${(resultDto.receiverId)!}.htm"></a>配送信息</header>
 	<div class="dispatching_box">
 		<ul>
-			<li><a href="dispatching_c.html"></a><p>配送号：20160506001<br>配送日期：2016-05-06</p><i class="started">配送中</i></li>
+			<li><a href="##"></a><p>配送号：${(resultDto.wareBatchNo)!}<br>配送日期：${(resultDto.startTime?string('yyyy-MM-dd'))!}</p>
+				<#if resultDto.haulStatus == 0>
+					<i class="notstart">未配送</i>
+				</#if>
+				<#if resultDto.haulStatus == 1>
+					<i class="notstart">配送中</i>
+				</#if>
+				<#if resultDto.haulStatus == 2>
+					<i class="notstart">已配送</i>
+				</#if>	
+			</li>
 		</ul>
 	</div>
 	
 	<div class="dispatching_c_box">
 		<div class="driverinfo_box">
 			<ul>
-				<li>张司机</li>
+				<li>${(resultDto.driverName)!}</li>
 				<li><label>出发地：</label><span>上海爱森肉食品有限公司有限公司上海爱森肉食品有限公司上海爱森肉食品有限公司食品有限公司上</span></li>
-				<li><label>货物：</label><span>黑猪颈背肉、冬瓜</span></li>
+				<li>
+					<label>货物：</label>
+					<span>
+						<#if resultDto.getResltList() ??>
+							<#list resultDto.getResltList()  as data>
+								${(data.name)!} 、
+							</#list>
+						</#if>
+					</span>
+				</li>
 				<li><label>目的地：</label><span>上海天坊食品制造有限公司</span></li>
 			</ul>
 			<div class="timeinfo">
-				<p><span>出发时间</span><span>8:50</span><span>2016-05-06</span></p>
-				<p><span>到达时间</span><span>9:50</span><span>2016-05-06</span></p>
+				<p>
+					<span>出发时间</span>
+					<span>8:50</span>
+					<span>${(resultDto.startTime?string('yyyy-MM-dd'))!}</span>
+				</p>
+				<p>
+					<span>到达时间</span>
+					<span>9:50</span>
+					<span>${(resultDto.endTime?string('yyyy-MM-dd'))!}</span>
+				</p>
 			</div>
 		</div>
-		<div class="map"><img src="static/img/map_simple.jpg" border="0"></div>
+		<div class="map"><img src="/static/img/map_simple.jpg" border="0"></div>
 		<div class="goodsinfo_box">
 			<ul>
 				<li><span>猪肉</span><br>数量：50kg<br>生产日期：20160530<br>生产企业：爱森猪肉厂<br>采购供应商：爱森猪肉厂</li>

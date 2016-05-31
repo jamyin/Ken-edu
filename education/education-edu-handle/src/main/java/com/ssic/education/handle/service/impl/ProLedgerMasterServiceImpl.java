@@ -23,4 +23,10 @@ public class ProLedgerMasterServiceImpl implements IProLedgerMasterService {
 		return BeanUtils.createBeanListByTarget(resultList, ProLedgerMasterDto.class);
 	}
 
+	@Override
+	public ProLedgerMasterDto searchProLedgerMasterDto(String masterId) {
+		ProLedgerMaster pojo = proLedgerMasterDao.selectByPrimaryKey(masterId); 
+		return BeanUtils.createBeanByTarget(pojo, ProLedgerMasterDto.class); 
+	}
+
 }
