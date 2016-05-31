@@ -42,7 +42,7 @@ public class EduSchoolDao extends MyBatisBaseDao<EduSchool> {
         EduSchoolExample.Criteria criteria = example.createCriteria();
         assemblyParams(dto, criteria);
         if (null != page) {
-            example.setOrderByClause("stat desc,create_time desc limit " + page.getStartNum() + "," + page.getPageSize());
+            example.setOrderByClause("create_time desc limit " + page.getStartNum() + "," + page.getPageSize());
         } else {
             example.setOrderByClause("create_time desc");
         }
