@@ -93,4 +93,8 @@ public class ProPackagesDto {
 	@Getter
 	@Setter
 	private Integer source;//来源0：市教委，1：区教委，2：学校
+	
+	@Getter
+	@Setter
+	private float Comment;
 }
