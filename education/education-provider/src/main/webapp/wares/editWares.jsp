@@ -130,21 +130,21 @@
 						<tr>
 							<th>生产企业</th>
 							<td><input name="manufacturer" type="text" placeholder="请输入生产企业" id="manufacturer"
-								class="easyui-validatebox span2" data-options="required:true" value="${wdto.manufacturer}"></td>
+								class="easyui-validatebox span2" value="${wdto.manufacturer}"></td>
 								<th>条形码</th>
 							<td><input name="barCode" type="text" id="barCode"
 								placeholder="请输入条形码" class="easyui-validatebox span2"
-								data-options="required:true" value="${wdto.barCode}"></td>
+								value="${wdto.barCode}"></td>
 							
 						</tr>
 						<tr>
 							<th>企业自定义代码</th>
 						    <td><input name="customCode" type="text" placeholder="请输入自定义代码" id="customCode"
-								class="easyui-validatebox span2" data-options="required:true" value="${wdto.customCode}"></td>
+								class="easyui-validatebox span2" value="${wdto.customCode}"></td>
 							<th>产地</th>
 							<td><input name="place" type="text" id="place"
 								placeholder="请输入产地" class="easyui-validatebox span2"
-								data-options="required:true" value="${wdto.place}"></td>
+								value="${wdto.place}"></td>
 						</tr>
 						<tr>
 							<th>英文名</th>

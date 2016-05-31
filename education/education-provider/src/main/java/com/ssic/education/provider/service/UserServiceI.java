@@ -144,6 +144,8 @@ public interface UserServiceI {
 	public TImsUsersDto getUser(String id);
 	public String findUserRole(String userId);
 
+	int findByNameCount(TImsUsersDto user);
+
 
 	
 	/**
