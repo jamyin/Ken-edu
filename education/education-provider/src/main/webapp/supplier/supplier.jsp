@@ -404,6 +404,13 @@
 		});
 	}
 	
+	function toExcel(){
+		
+		var supplierName = $("#supplierName").val();
+		var address = $("#address").val();
+		window.location.href='${pageContext.request.contextPath}/proSupplierController/excel.do?supplierName='+supplierName+'&address='+address+'';
+	}
+	
 </script>
 </head>
 <body>
@@ -414,9 +421,9 @@
 			
 					<tr>
 						<th>名称</th>
-						<td><input class="span2" name="supplierName" /></td>
+						<td><input id="supplierName" class="span2" name="supplierName" /></td>
 						<th>地址</th>
-						<td><input class="span2" name="address" /></td>
+						<td><input id="address" class="span2" name="address" /></td>
 					</tr>							
 				</table>
 			</form>
@@ -436,6 +443,7 @@
 
 		<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_add',plain:true" onclick="searchFun();">搜索</a><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_delete',plain:true" onclick="cleanFun();">清空搜索条件</a>
 		<a onclick="importSupplier();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'">导入</a>
+		<a class="btn btn-mini btn-light" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="icon-download-alt"></i>导出</a>
 		<a href="${pageContext.request.contextPath}/templates/供应商.xlsx" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'">下载模板</a>
 	</div>
 

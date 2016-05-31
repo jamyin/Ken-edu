@@ -1,11 +1,8 @@
 package com.ssic.education.provider.controller;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -15,12 +12,11 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.DataFormat;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -31,12 +27,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ssic.educateion.common.dto.ImageInfoDto;
 import com.ssic.educateion.common.dto.ProSupplierDto;
+import com.ssic.educateion.common.dto.ProWaresDto;
 import com.ssic.educateion.common.dto.SupplierDto;
 import com.ssic.educateion.common.utils.DataGrid;
 import com.ssic.educateion.common.utils.PageHelper;
+import com.ssic.educateion.common.utils.PageHelperDto;
 import com.ssic.education.handle.pojo.ProLicense;
 import com.ssic.education.handle.pojo.ProSupplier;
 import com.ssic.education.handle.pojo.ProSupplierReceiver;
@@ -47,13 +46,16 @@ import com.ssic.education.handle.service.IWaresService;
 import com.ssic.education.provider.pageModel.Json;
 import com.ssic.education.provider.pageModel.SessionInfo;
 import com.ssic.education.provider.util.ConfigUtil;
+import com.ssic.education.provider.util.ProductClass;
 import com.ssic.education.utils.poi.ParseExcelUtil;
+import com.ssic.education.utils.util.ObjectExcelView;
+import com.ssic.education.utils.util.PageData;
 import com.ssic.education.utils.util.PropertiesUtils;
 import com.ssic.education.utils.util.UUIDGenerator;
 
 @Controller
 @RequestMapping("/proSupplierController")
-public class ProSupplierController {
+public class ProSupplierController extends BaseController{
 	@Autowired
 	private IWaresService waresService;
 	@Autowired
@@ -861,6 +863,63 @@ public class ProSupplierController {
 			j.setSuccess(true);
 		}
 		return j;
+	}
+	
+	@RequestMapping(value = "/excel")
+	@ResponseBody
+	public ModelAndView exportExcel(SupplierDto supplierDto,
+			HttpServletRequest request) {
+		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
+				ConfigUtil.SESSIONINFONAME);
+		supplierDto.setReceiverId(info.getSupplierId());
+		ModelAndView mv = null;
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		try {
+			Map<String, Object> dataMap = new HashMap<String, Object>();
+			List<String> titles = new ArrayList<String>();
+			titles.add("供应商名称");
+			titles.add("供应商地址");
+			titles.add("餐饮服务证号");
+			titles.add("食品经营许可证号");
+			titles.add("食品流通证号");
+			titles.add("食品生产证号");
+			titles.add("工商执照号");
+			titles.add("供应商编码");
+			titles.add("联系人");
+			titles.add("电话");
+			dataMap.put("titles", titles);
+
+			DataGrid dg = supplierService.findProSupplier(supplierDto,
+					null);
+			List<SupplierDto> expList = dg.getRows();
+			List<PageData> varList = new ArrayList<PageData>();
+			if (!CollectionUtils.isEmpty(expList)) {
+				for (int i = 0; i < expList.size(); i++) {
+					PageData vpd = new PageData();
+					vpd.put("var1", expList.get(i).getSupplierName());
+					vpd.put("var2", expList.get(i).getAddress());
+					vpd.put("var3", expList.get(i).getFoodServiceCode());
+					vpd.put("var4", expList.get(i).getFoodBusinessCode());
+					vpd.put("var5", expList.get(i).getFoodCirculationCode());
+					vpd.put("var6",
+							expList.get(i).getFoodProduceCode());
+					vpd.put("var7", expList.get(i).getBusinessLicense());
+					vpd.put("var8", expList.get(i).getSupplierCode());
+					vpd.put("var9", expList.get(i).getCorporation());
+					vpd.put("var10", expList.get(i).getContactWay());
+					varList.add(vpd);
+				}
+			}
+			dataMap.put("varList", varList);
+			ObjectExcelView erv = new ObjectExcelView(); // 执行excel操作
+
+			mv = new ModelAndView(erv, dataMap);
+
+		} catch (Exception e) {
+
+		}
+		return mv;
 	}
 	
 //	@RequestMapping("download")

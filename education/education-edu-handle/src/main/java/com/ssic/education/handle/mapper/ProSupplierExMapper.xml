@@ -96,7 +96,7 @@
 		b.supplier_id=a.id
 		<include refid="where_findSupplier"></include>
 		ORDER BY   a.create_time DESC
-		<if test="ph.rows!=0 and ph!=null">
+		<if test="ph!=null and ph.rows!=0">
 			limit #{ph.beginRow},#{ph.rows}
 		</if>
 	</select>

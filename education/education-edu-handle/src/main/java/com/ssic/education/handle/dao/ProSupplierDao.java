@@ -39,77 +39,83 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 	@Getter
 	@Autowired
 	private ProSupplierMapper mapper;
-	
+
 	@Autowired
 	private ProSupplierExMapper exMapper;
 	@Autowired
-	private ProSupplierReceiverMapper  srMapper;
-	
-	public List<ProSupplierDto> findSupplierListByCommittee(ProSupplierDto dto, PageQuery page) {
-		return exMapper.findSupplierListByCommittee(dto,page);
+	private ProSupplierReceiverMapper srMapper;
+
+	public List<ProSupplierDto> findSupplierListByCommittee(ProSupplierDto dto,
+			PageQuery page) {
+		return exMapper.findSupplierListByCommittee(dto, page);
 	}
+
 	public long countSupplierListByCommittee(ProSupplierDto dto) {
 		return exMapper.countSupplierListByCommittee(dto);
 	}
+
 	public List<ProSupplierDto> findPage(ProSupplierDto dto, PageQuery page) {
 		ProSupplierExample example = new ProSupplierExample();
 		ProSupplierExample.Criteria criteria = example.createCriteria();
 		if (null != dto.getReviewed()) {
 			criteria.andReviewedEqualTo(dto.getReviewed());
 		}
-		if (StringUtils.isNotBlank(dto.getSupplierName())){
-			criteria.andSupplierNameLike("%"+dto.getSupplierName().trim()+"%");
+		if (StringUtils.isNotBlank(dto.getSupplierName())) {
+			criteria.andSupplierNameLike("%" + dto.getSupplierName().trim()
+					+ "%");
 		}
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		if (null != page) {
-            example.setOrderByClause("stat desc,create_time desc limit " + page.getStartNum() + "," + page.getPageSize());
-        } else {
-            example.setOrderByClause("create_time desc");
-        }
-		return BeanUtils.createBeanListByTarget(mapper.selectByExample(example), ProSupplierDto.class);
+			example.setOrderByClause("stat desc,create_time desc limit "
+					+ page.getStartNum() + "," + page.getPageSize());
+		} else {
+			example.setOrderByClause("create_time desc");
+		}
+		return BeanUtils.createBeanListByTarget(
+				mapper.selectByExample(example), ProSupplierDto.class);
 	}
-	
+
 	public long count(ProSupplierDto dto) {
 		ProSupplierExample example = new ProSupplierExample();
 		ProSupplierExample.Criteria criteria = example.createCriteria();
 		if (null != dto.getReviewed()) {
 			criteria.andReviewedEqualTo(dto.getReviewed());
 		}
-		if (StringUtils.isNotBlank(dto.getSupplierName())){
-			criteria.andSupplierNameLike("%"+dto.getSupplierName().trim()+"%");
+		if (StringUtils.isNotBlank(dto.getSupplierName())) {
+			criteria.andSupplierNameLike("%" + dto.getSupplierName().trim()
+					+ "%");
 		}
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		return mapper.countByExample(example);
 	}
-	/*private void assemblyParams(ProSupplierDto proSupplierDto, ProSupplierExample.Criteria criteria) {
-		if (null != proSupplierDto) {
-			if (StringUtils.isNotEmpty(proSupplierDto.getId())){
-				criteria.andIdEqualTo(proSupplierDto.getId().trim());
-			}
-			if (StringUtils.isNotEmpty(proSupplierDto.getArea())){
-				criteria.andAreaEqualTo(proSupplierDto.getArea().trim());
-			}
-			if (StringUtils.isNotBlank(proSupplierDto.getSupplierName())){
-				criteria.andSupplierNameLike("%"+proSupplierDto.getSupplierName().trim()+"%");
-			}
-			if (StringUtils.isNotBlank(proSupplierDto.getAddress())){
-				criteria.andAddressLike("%"+proSupplierDto.getAddress().trim()+"%");
-			}
-			if (StringUtils.isNotBlank(proSupplierDto.getSchoolIds())){
-				criteria.andSchoolIdsLike("%"+proSupplierDto.getSchoolIds().trim()+"%");
-			}
-			if (null != proSupplierDto.getReviewed()) {
-			}
-		}
-	}*/
+
+	/*
+	 * private void assemblyParams(ProSupplierDto proSupplierDto,
+	 * ProSupplierExample.Criteria criteria) { if (null != proSupplierDto) { if
+	 * (StringUtils.isNotEmpty(proSupplierDto.getId())){
+	 * criteria.andIdEqualTo(proSupplierDto.getId().trim()); } if
+	 * (StringUtils.isNotEmpty(proSupplierDto.getArea())){
+	 * criteria.andAreaEqualTo(proSupplierDto.getArea().trim()); } if
+	 * (StringUtils.isNotBlank(proSupplierDto.getSupplierName())){
+	 * criteria.andSupplierNameLike
+	 * ("%"+proSupplierDto.getSupplierName().trim()+"%"); } if
+	 * (StringUtils.isNotBlank(proSupplierDto.getAddress())){
+	 * criteria.andAddressLike("%"+proSupplierDto.getAddress().trim()+"%"); } if
+	 * (StringUtils.isNotBlank(proSupplierDto.getSchoolIds())){
+	 * criteria.andSchoolIdsLike("%"+proSupplierDto.getSchoolIds().trim()+"%");
+	 * } if (null != proSupplierDto.getReviewed()) { } } }
+	 */
 
 	public DataGrid findProSupplier(SupplierDto supplierDto, PageHelper ph) {
-		DataGrid dataGrid=new DataGrid();
-		Long total=(long) exMapper.findProSupplier(supplierDto,new PageHelper()).size();
+		DataGrid dataGrid = new DataGrid();
+		Long total = (long) exMapper.findProSupplier(supplierDto,
+				new PageHelper()).size();
 		dataGrid.setTotal(total);
-		int beginRow=(ph.getPage()-1)*ph.getRows();
-		ph.setBeginRow(beginRow);
-		dataGrid.setRows(exMapper.findProSupplier(supplierDto,ph));
+		if (ph != null) {
+			int beginRow = (ph.getPage() - 1) * ph.getRows();
+			ph.setBeginRow(beginRow);
+		}
+		dataGrid.setRows(exMapper.findProSupplier(supplierDto, ph));
 		return dataGrid;
 	}
 
@@ -137,9 +143,9 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 		ps.setCreateTime(new Date());
 		ps.setLastUpdateTime(ps.getCreateTime());
 		ps.setStat(1);
-		ProSupplier supplier =new ProSupplier();
+		ProSupplier supplier = new ProSupplier();
 		BeanUtils.copyProperties(ps, supplier);
-		
+
 		return mapper.insertSelective(supplier);
 	}
 
@@ -157,7 +163,7 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 		// TODO Auto-generated method stub
 		return exMapper.findSupplierCodeByReceiverId(supplierId);
 	}
-	
+
 	public ProSupplier findSupplierById(String sourceId) {
 		return mapper.selectByPrimaryKey(sourceId);
 	}
@@ -167,9 +173,11 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 	}
 
 	public List<ProSupplierDto> searchSupplierListBySupplierId(
-			String supplierId,String suppliName, Integer supplierType,Integer limit) {
+			String supplierId, String suppliName, Integer supplierType,
+			Integer limit) {
 		// TODO Auto-generated method stub
-		return exMapper.searchSupplierListBySupplierId(supplierId,suppliName,supplierType,limit);
+		return exMapper.searchSupplierListBySupplierId(supplierId, suppliName,
+				supplierType, limit);
 	}
 
 	public ProSupplier findProSupplierByName(String name, String supplierId) {
@@ -195,14 +203,15 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 		return null;
 	}
 
-	public int importSupplier(Map<String, Map<ProSupplierReceiver, ProSupplier>> map) {
-		int i=0;
+	public int importSupplier(
+			Map<String, Map<ProSupplierReceiver, ProSupplier>> map) {
+		int i = 0;
 		for (String str : map.keySet()) {
 			Map<ProSupplierReceiver, ProSupplier> mpp = map.get(str);
 			for (ProSupplierReceiver psr : mpp.keySet()) {
 				srMapper.insertSelective(psr);
 				ProSupplier supplier = mpp.get(psr);
-				i+= mapper.insertSelective(supplier);
+				i += mapper.insertSelective(supplier);
 			}
 		}
 		return i;
