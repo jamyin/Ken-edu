@@ -46,12 +46,12 @@
 			<div class="timeinfo">
 				<p>
 					<span>出发时间</span>
-					<span>8:50</span>
+					<span>${(resultDto.startTime?string('HH:mm'))!}</span>
 					<span>${(resultDto.startTime?string('yyyy-MM-dd'))!}</span>
 				</p>
 				<p>
 					<span>到达时间</span>
-					<span>9:50</span>
+					<span>${(resultDto.endTime?string('HH:mm'))!}</span>
 					<span>${(resultDto.endTime?string('yyyy-MM-dd'))!}</span>
 				</p>
 			</div>
