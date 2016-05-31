@@ -30,7 +30,9 @@ public class EduTaskReceiveDao  extends MyBatisBaseDao<EduTaskReceive>{
 		EduTaskReceiveExample.Criteria criteria = example.createCriteria();
 		
 		queryBySql(criteria,eduTaskReceiveDto);
-		
+        if(pageQuery != null && pageQuery.getPageSize() > 0){
+        	example.setOrderByClause(" create_time DESC limit "+pageQuery.getStartNum() +"," + pageQuery.getPageSize());
+		}
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		return mapper.selectByExample(example);
 	}

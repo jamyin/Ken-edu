@@ -273,7 +273,7 @@ public class MotiveController extends BaseController {
 	public ModelAndView details(@PathVariable String infoId) {
 		ModelAndView mv = getModelAndView();
 
-		EduInformationDto data = iEduInformationService.search(infoId);
+		EduTaskDto data = iTaskService.search(infoId);
 
 		mv.addObject("data", data);
 		mv.setViewName("motive/dis_edu_motice_detail");
