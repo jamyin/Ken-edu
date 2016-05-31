@@ -1,6 +1,8 @@
 package com.ssic.education.handle.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import lombok.Getter;
@@ -23,6 +25,7 @@ import com.ssic.education.handle.pojo.ProLedger;
 import com.ssic.education.handle.pojo.ProLedgerExample;
 import com.ssic.education.handle.pojo.ProLedgerMaster;
 import com.ssic.education.handle.pojo.ProLedgerMasterExample;
+import com.ssic.education.handle.pojo.ProLedgerMasterExample.Criteria;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.mybatis.MyBatisBaseDao;
@@ -179,6 +182,24 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 		criteria.andStatEqualTo(1);
 		List<ProLedgerMaster> list = lmMapper.selectByExample(example);
 		return list.size();
+	}
+
+	public Map<ProLedgerMaster,List<ProLedger>> findExportProSupplier(LedgerDto ld) {
+		Map<ProLedgerMaster,List<ProLedger>> map=new HashMap();
+		ProLedgerMasterExample example = new ProLedgerMasterExample();
+		ProLedgerMasterExample.Criteria plmCriteria = example.createCriteria();
+		plmCriteria.andSourceIdEqualTo(ld.getSourceId());
+		plmCriteria.andStatEqualTo(1);
+		List<ProLedgerMaster> lmList = lmMapper.selectByExample(example);
+		for (ProLedgerMaster plm : lmList) {
+			ProLedgerExample plExample=new ProLedgerExample();
+			ProLedgerExample.Criteria plCriteria=plExample.createCriteria();
+			plCriteria.andMasterIdEqualTo(plm.getId());
+			plCriteria.andStatEqualTo(1);
+			List<ProLedger> list = mapper.selectByExample(plExample);
+			map.put(plm, list);
+		}
+		return map;
 	}
 
 }
