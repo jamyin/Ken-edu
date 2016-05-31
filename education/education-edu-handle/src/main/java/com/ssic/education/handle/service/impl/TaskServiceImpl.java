@@ -1,4 +1,4 @@
-package com.ssic.education.app.service.impl;
+package com.ssic.education.handle.service.impl;
 
 import java.util.List;
 
@@ -9,10 +9,10 @@ import com.ssic.educateion.common.dto.EduTaskDto;
 import com.ssic.educateion.common.dto.EduTaskReadDto;
 import com.ssic.educateion.common.dto.EduTaskReceiveDto;
 import com.ssic.educateion.common.dto.TaskReceivePageDto;
-import com.ssic.education.app.service.ITaskService;
 import com.ssic.education.handle.dao.TaskDao;
 import com.ssic.education.handle.pojo.EduTask;
 import com.ssic.education.handle.pojo.EduTaskReceive;
+import com.ssic.education.handle.service.ITaskService;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
