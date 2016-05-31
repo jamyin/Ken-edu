@@ -7,6 +7,11 @@ function selectGradeList(thisObj){
 	loadscMenu();
 }
 
+function jumpUrl(_this){
+	var customerId = $(_this).val();
+	window.location.href = "/wap/school/school/"+customerId+".htm";
+}
+
 function loadscMenu(){
 	var customerId = "000d804f-ffdc-432a-b9b7-85307a611423";
 	var timeDate = $('#sel_date').val();

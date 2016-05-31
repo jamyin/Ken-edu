@@ -13,6 +13,7 @@ import com.ssic.educateion.common.dto.ProWaresDto;
 import com.ssic.education.app.dto.MaterialSupplierDto;
 import com.ssic.education.app.dto.SupplierLicDto;
 import com.ssic.education.app.service.ISupplierService;
+import com.ssic.education.handle.pojo.ProLicense;
 import com.ssic.education.handle.pojo.ProSupplier;
 import com.ssic.education.handle.service.ProWaresService;
 import com.ssic.education.utils.constants.DataStatus;
@@ -176,6 +177,15 @@ public class SupplierController {
 		}
 		result.setStatus(DataStatus.HTTP_SUCCESS);
 		result.setMessage("未查到相关记录！");
+		return result;
+	}
+
+	@RequestMapping("/findImage")
+	@ResponseBody
+	public Response<String> findLicImage(ProLicense license) {
+		Response<String> result = new Response<String>();
+		String str = this.supplierService.findLicByLicType(license);
+		result.setData(str);
 		return result;
 	}
 }

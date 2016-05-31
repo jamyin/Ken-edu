@@ -44,6 +44,8 @@ public class EduTaskDto  implements Serializable {
 	private String receiveNames;   //接收者名字
 	private Integer reads;	      //已读人数
 	private Integer notReads;	  //未读人数
+	private String readNames;   //接收者名字
+	private String notReadNames;   //接收者名字
 	
 	private Integer sourceType;	  //用户类型   0教委;1学校;2区委
 	

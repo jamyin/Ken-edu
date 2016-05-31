@@ -73,28 +73,31 @@ public class WapSchoolController extends BaseController{
 	}
 	
 	public void copyObject(ModelAndView mv,String schoolId){
-		HashMap<String,Object> map = new HashMap<String,Object>();
+		
+		//查看家长关注的学校
+		EduParentScChDto eduParentScChDto = new EduParentScChDto();
+		eduParentScChDto.setParentId(parentId);
+		List<EduParentScChDto> dataList = iEduParentScChService.searchParentScChDtoList(eduParentScChDto);
+		
+		
 		//学校详细信息
 		EduSchoolDto eduSchoolDto = eduSchoolService.findById(schoolId);
-		map.put("eduSchoolDto", eduSchoolDto);
 		
 		//学校对应的食堂信息
 		EduCanteenDto eduCanteenDto = new EduCanteenDto();
 		eduCanteenDto.setSchoolId(schoolId);
 		eduCanteenDto = iEduCanteenService.searchEduCanteenDto(eduCanteenDto);
-		map.put("eduCanteenDto", eduCanteenDto);
 		
 		//学校对应的供应商信息
 		EduSchoolSupplierDto eduSchoolSupplierDto = new EduSchoolSupplierDto();
 		eduSchoolSupplierDto.setSchoolId(schoolId);
 //		eduSchoolSupplierDto = iEduSchoolSupplierService.searchEduSchoolSupplierDto(eduSchoolSupplierDto);
 		List<SupplierDto> supplierList = iEduSchoolSupplierService.searchEduSchoolSupplierListDto(schoolId);
-		map.put("supplierList", supplierList);
 		
 		mv.addObject("eduSchoolDto", eduSchoolDto);
 		mv.addObject("eduCanteenDto",eduCanteenDto);
 		mv.addObject("supplierList", supplierList);		
-
+		mv.addObject("dataList", dataList);
 	}
 	
 	
