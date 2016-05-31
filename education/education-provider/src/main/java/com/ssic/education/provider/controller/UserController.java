@@ -219,7 +219,7 @@ public class UserController extends BaseController {
 			   j.setMsg("手机不合法");
 			   return j;
 		   }
-
+		
 	
 		try {
 			int number=userService.findByNameCount(user);
@@ -229,7 +229,11 @@ public class UserController extends BaseController {
 				j.setObj(user);
 				return j;
 			}
-			
+			   if(StringUtils.isEmpty(user.getUserType())){
+				   j.setSuccess(false);
+				   j.setMsg("用户角色不能为空");
+				   return j;
+			   }
 			
 			
 			SessionInfo info = (SessionInfo) request.getSession().getAttribute(ConfigUtil.SESSIONINFONAME);
