@@ -162,14 +162,26 @@
 		<%-- <div data-options="region:'west',href:'${pageContext.request.contextPath}/layout/west.jsp',split:true" title="模块导航" style="width: 200px; overflow: hidden;"></div> --%>
 		<div data-options="region:'center'" title="欢迎使用团餐供应商系统" style="overflow: hidden;">
 			<div style="padding:5px;background:#fafafa;width:100%;border:1px solid #ccc">
-				<a onclick="loadUrl(this);" data-src="waresController/manager" data-text="原料管理" class="easyui-linkbutton" plain="true" iconCls="icon-edit">原料管理</a>
-				<a onclick="loadUrl(this);" data-src="proSupplierController/manager" data-text="供应商管理" class="easyui-linkbutton" plain="true" iconCls="icon-refresh">供应商管理</a>
-				<a onclick="loadUrl(this);" data-src="ledgerController/manager" data-text="配货管理" class="easyui-linkbutton" plain="true" iconCls="icon-search">配货管理</a>
+				<a onclick="loadUrl(this);" data-src="waresController/manager" data-text="原料管理" class="easyui-linkbutton" plain="true" iconCls="icon-edit">
+								<font  style="font-style: normal;font-weight: bolder;font-size:18px;">原料管理</font>
+				</a>
+				<a onclick="loadUrl(this);" data-src="proSupplierController/manager" data-text="供应商管理" class="easyui-linkbutton" plain="true" iconCls="icon-refresh">
+				<font  style="font-style: normal;font-weight: bolder;font-size:18px;">供应商管理</font>
+				</a>
+				<a onclick="loadUrl(this);" data-src="ledgerController/manager" data-text="配货管理" class="easyui-linkbutton" plain="true" iconCls="icon-search">
+				<font  style="font-style: normal;font-weight: bolder;font-size:18px;">配货管理</font>
+				</a>
 				
-				<a onclick="loadUrl(this);" data-src="ledgerAddressController/manager" data-text="配货点管理" class="easyui-linkbutton" plain="true" iconCls="icon-print">配货点管理</a>
-				<a onclick="loadUrl(this);" data-src="userController/manager" data-text="用户管理" class="easyui-linkbutton" plain="true"  iconCls="icon-user">用户管理</a>
-				<a onclick="loadUrl(this);" data-src="personalController/manager" data-text="个人中心" class="easyui-linkbutton" plain="true"  iconCls="icon-user">个人中心</a>
-				<a onclick="loadUrl(this);" data-src="corporateController/manager" data-text="我的信息" class="easyui-linkbutton" plain="true" iconCls="icon-user">我的信息</a>
+				<a onclick="loadUrl(this);" data-src="ledgerAddressController/manager" data-text="配货点管理" class="easyui-linkbutton" plain="true" iconCls="icon-print">
+				<font  style="font-style: normal;font-weight: bolder;font-size:18px;">配货点管理</font>
+				</a>
+				<a onclick="loadUrl(this);" data-src="userController/manager" data-text="用户管理" class="easyui-linkbutton" plain="true"  iconCls="icon-user"><font  style="font-style: normal;font-weight: bolder;font-size:18px;">用户管理</font></a>
+				<a onclick="loadUrl(this);" data-src="personalController/manager" data-text="个人中心" class="easyui-linkbutton" plain="true"  iconCls="icon-user"><font  style="font-style: normal;font-weight: bolder;font-size:18px;">个人中心</font></a>
+				<a onclick="loadUrl(this);" data-src="corporateController/manager" data-text="我的信息" class="easyui-linkbutton" plain="true" iconCls="icon-user">
+				<font  style="font-style: normal;font-weight: bolder;font-size:18px;">
+				我的信息</font>
+				
+				</a>
 			</div>
 			<div id="index_tabs" style="overflow: hidden;">
 				<div title="首页" data-options="border:false" style="overflow: hidden;">

@@ -57,17 +57,17 @@ public class ProSupplierController extends BaseController {
 	 * @date 2016/5/13 13:54
 	 * @version 1.0
 	 */
-	@RequestMapping(value = "search")
-	public ModelAndView search(ProSupplierDto params, PageQuery query){
-		ModelAndView mv = getModelAndView();
-		PageResult<ProSupplierDto> datas = proSupplierService.querySupplierByParams(params, query);
-		mv.addObject("pageList", datas);
-		mv.addObject("params", params);
-		mv.addObject("areas", queryAllareas());
-		mv.addObject("schools", queryAllschools());
-		mv.setViewName("supplier/search_supplier");
-		return mv;
-	}
+//	@RequestMapping(value = "search")
+//	public ModelAndView search(ProSupplierDto params, PageQuery query){
+//		ModelAndView mv = getModelAndView();
+//		PageResult<ProSupplierDto> datas = proSupplierService.querySupplierByParams(params, query);
+//		mv.addObject("pageList", datas);
+//		mv.addObject("params", params);
+//		mv.addObject("areas", queryAllareas());
+//		mv.addObject("schools", queryAllschools());
+//		mv.setViewName("supplier/search_supplier");
+//		return mv;
+//	}
 
 	/**
 	 * 供应商资质详情
@@ -136,6 +136,7 @@ public class ProSupplierController extends BaseController {
 	public ModelAndView list(ProSupplierDto dto, PageQuery query) {
 		ModelAndView mv = getModelAndView();
 		PageResult<ProSupplierDto> mSuppliers = queryMaterialSupplier(dto, query);
+		mv.addObject("dto", dto);
 		mv.addObject("pageList", mSuppliers);
 		mv.setViewName("supplier/supplier_list");
 		return mv;
@@ -172,8 +173,8 @@ public class ProSupplierController extends BaseController {
 	 * @version 1.0
 	 */
 	private PageResult<ProSupplierDto> queryMaterialSupplier(ProSupplierDto dto, PageQuery query){
-		query.setPageSize(PAGESIZE_SUPPLIER);
-		PageResult<ProSupplierDto> results = proLedgerService.findPage(dto, query);
+//		query.setPageSize(PAGESIZE_WARES);
+		PageResult<ProSupplierDto> results = proSupplierService.findSupplierPageBySchoolId(dto, query);
 		return results;
 	}
 }

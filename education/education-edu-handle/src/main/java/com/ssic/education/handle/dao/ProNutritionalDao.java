@@ -48,7 +48,10 @@ public class ProNutritionalDao extends MyBatisBaseDao<ProNutritional> {
 		ProNutritionalExample example = new ProNutritionalExample();
 		ProNutritionalExample.Criteria criteria = example.createCriteria();
 		
-		criteria.andPackageIdIn(packageIdList);
+		if(packageIdList!=null && packageIdList.size()>0){
+			criteria.andPackageIdIn(packageIdList);	
+		}
+		
 		
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		example.setOrderByClause("create_time desc");

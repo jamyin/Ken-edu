@@ -1,6 +1,7 @@
 package com.ssic.education.app.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -14,9 +15,7 @@ import com.ssic.educateion.common.dto.EduCommitteeDto;
 import com.ssic.educateion.common.dto.EduTaskDto;
 import com.ssic.educateion.common.dto.EduTaskReadDto;
 import com.ssic.educateion.common.dto.EduTaskReceiveDto;
-import com.ssic.educateion.common.dto.EduUsersDto;
 import com.ssic.educateion.common.dto.SchoolDto;
-import com.ssic.educateion.common.dto.TaskReceivePageDto;
 import com.ssic.education.app.constants.SchoolLevel;
 import com.ssic.education.app.dto.MapToListDto;
 import com.ssic.education.app.dto.TaskReceiveDto;
@@ -29,6 +28,7 @@ import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 import com.ssic.education.utils.model.Response;
 import com.ssic.education.utils.util.StringUtils;
+import com.ssic.education.utils.util.UUIDGenerator;
 
 /**
  * @ClassName: TaskController
@@ -132,15 +132,19 @@ public class TaskController {
 
 		//发送的任务(显示所有接收者和  已读人数 未读人数)
 		if(eduTaskDto.getTaskType() == 1){
-			//查询所有接收者
-			List<TaskReceivePageDto> receives = taskService.findTaskReceiveByPara(eduTaskDto.getId());
+			/*
+			 * List<TaskReceivePageDto> receives = taskService.findTaskReceiveByPara(eduTaskDto.getId());
+			 */
+			EduTaskReceiveDto eduTaskReceiveDto = new EduTaskReceiveDto();
+			eduTaskReceiveDto.setTaskId(eduTaskDto.getId());
+			List<EduTaskReceiveDto> receives = taskService.findTaskReceiveList(eduTaskReceiveDto);
 			StringBuffer sb = new StringBuffer() ;
 			int reads = 0;
 			int notReads = 0;
 			if(receives != null && receives.size() > 0){
-				for(TaskReceivePageDto receive: receives){
-					if(StringUtils.isNotEmpty(receive.getName())){
-						sb.append(receive.getName()+";");
+				for(EduTaskReceiveDto receive: receives){
+					if(StringUtils.isNotEmpty(receive.getReceiveName())){
+						sb.append(receive.getReceiveName()+";");
 					}
 					if(receive.getReadstat() == 0){
 						notReads++;
@@ -150,17 +154,14 @@ public class TaskController {
 				}
 			}
 			if(StringUtils.isNotEmpty(sb.toString())){
-				eduTaskDto.setReceiveNames(sb.toString().substring(0, sb.toString().length()-1));   //去逗号
+				taskDto.setReceiveNames(sb.toString().substring(0, sb.toString().length()-1));   //去逗号
 			}
-			eduTaskDto.setReads(reads);
-			eduTaskDto.setNotReads(notReads);
-
-			//已读人数
-
+			taskDto.setReads(reads);
+			taskDto.setNotReads(notReads);
 		}
 		result.setStatus(DataStatus.HTTP_SUCCESS);
 		result.setMessage("查询成功");
-		result.setData(eduTaskDto);
+		result.setData(taskDto);
 		return result;
 	}
 
@@ -259,7 +260,7 @@ public class TaskController {
 	 * @date 2016年5月30日 下午1:27:53
 	 * @return Response<String>    返回类型
 	 */
-	@RequestMapping("/chooseReceive")
+	/*@RequestMapping("/chooseReceive")
 	@ResponseBody
 	public Response<TaskReceiveDto> chooseReceive(String id, String level,PageQuery query) {
 		Response<TaskReceiveDto> result = new Response<TaskReceiveDto>();
@@ -320,6 +321,57 @@ public class TaskController {
 		result.setStatus(DataStatus.HTTP_FAILE);
 		result.setMessage("用户类型不存在");
 		return result;
+	}*/
+	
+	@RequestMapping("/chooseReceive")
+	@ResponseBody
+	public Response<TaskReceiveDto> chooseReceive(Integer sourceType, String level,PageQuery query) {
+		Response<TaskReceiveDto> result = new Response<TaskReceiveDto>();
+		TaskReceiveDto taskReceiveDto = new TaskReceiveDto();
+		if(sourceType == null){
+			result.setStatus(DataStatus.HTTP_FAILE);
+			result.setMessage("教委或学校类型为空");
+			return result;
+		}
+		
+		//当前用户是市教委
+		if(sourceType == 0){
+			EduCommitteeDto committeeDto = new EduCommitteeDto();
+			committeeDto.setType((short) 2);
+			List<EduCommitteeDto> committeeList = committeeService.findCommitteeListNoPage(committeeDto);
+			taskReceiveDto.setEduCommitteeList(committeeList);
+
+			result.setStatus(DataStatus.HTTP_SUCCESS);
+			result.setData(taskReceiveDto);
+			result.setMessage("成功获取区教委列表");
+			return result;
+		}
+		//当前用户是区教委,则获取学校列表
+		if(sourceType == 1){
+			//获取学校类型level列表   
+			List<MapToListDto> levelList = new ArrayList<MapToListDto>();
+			for(Entry<Integer, String> entry: SchoolLevel.getAll().entrySet()) {
+				MapToListDto mapToListDto = new MapToListDto();
+				mapToListDto.setKey(entry.getKey());
+				mapToListDto.setValue(entry.getValue());
+				levelList.add(mapToListDto);
+			}
+			taskReceiveDto.setLevelList(levelList);
+			//获取学校列表
+			SchoolDto schoolDto = new SchoolDto();
+			schoolDto.setLevel(level);
+			PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, query);
+			taskReceiveDto.setSchoolList(schoolList);
+
+			result.setStatus(DataStatus.HTTP_SUCCESS);
+			result.setData(taskReceiveDto);
+			result.setMessage("成功获取学校列表");
+			return result;
+
+		}
+		result.setStatus(DataStatus.HTTP_FAILE);
+		result.setMessage("用户类型不存在");
+		return result;
 	}
 
 	/**
@@ -333,13 +385,69 @@ public class TaskController {
 	@ResponseBody
 	public Response<String> sendTask(EduTaskDto eduTaskDto) {
 		Response<String> result = new Response<String>();
-		if(StringUtils.isEmpty(eduTaskDto.getReceiveId())){
+		if(eduTaskDto == null){
+			result.setStatus(DataStatus.HTTP_FAILE);
+			result.setMessage("参数为空");
+			return result;
+		}
+		if(StringUtils.isEmpty(eduTaskDto.getReceiveIdsNames()) ){
 			result.setStatus(DataStatus.HTTP_FAILE);
 			result.setMessage("任务接收者为空");
 			return result;
 		}
-		int flag = taskService.sendTask(eduTaskDto);
-		if(flag > 0){
+		if(StringUtils.isEmpty(eduTaskDto.getSendIdsNames()) ){
+			result.setStatus(DataStatus.HTTP_FAILE);
+			result.setMessage("任务发送者为空");
+			return result;
+		}
+		int addReceiveFlag = 0;
+		
+		//接收者id和名字
+		String receiveIdsNames = eduTaskDto.getReceiveIdsNames();
+		String receiveIds = receiveIdsNames.substring(0,receiveIdsNames.length()-1);   //去逗号
+		String idsNames[] = receiveIds.split(",");    //获取接收者Id 和name
+		int length = idsNames.length;
+		eduTaskDto.setId(UUIDGenerator.getUUID());
+		eduTaskDto.setCreateTime(new Date());
+		eduTaskDto.setStat(DataStatus.ENABLED);
+		
+		//发送者id和名字
+		String sendIdsNames = eduTaskDto.getSendIdsNames();   
+		String sendIdsNames_[] = sendIdsNames.split(";");    //获取接收者Id 和name
+		eduTaskDto.setCreateId(sendIdsNames_[0]);
+		eduTaskDto.setCreateName(sendIdsNames_[1]);
+		
+		String id = taskService.sendTask(eduTaskDto);
+		
+		if(id != null){
+			List<EduTaskReceiveDto> receiveDtoList = new ArrayList<EduTaskReceiveDto>();
+			/*EduCommitteeDto committeeDto = new EduCommitteeDto();
+			List<EduCommitteeDto> list = committeeService.findCommitteeListNoPage(committeeDto);
+			String sendName = "";
+			if(list !=null && list.size()> 0){
+				sendName = list.get(0).getName();
+			}*/
+			//市教委发送给区教委
+				for(String i: idsNames){
+					EduTaskReceiveDto receiveDto = new EduTaskReceiveDto();
+					String idsNames_[] = i.split(";");
+					receiveDto.setReceiveId(idsNames_[0]);
+					receiveDto.setReceiveName(idsNames_[1]);
+					receiveDto.setTaskId(eduTaskDto.getId());
+					
+					receiveDto.setTaskTitle(eduTaskDto.getTitle());
+					receiveDto.setSendName(sendIdsNames_[1]);
+					
+					receiveDto.setId(UUIDGenerator.getUUID());
+					receiveDto.setReadstat(DataStatus.DISABLED);
+					receiveDto.setCreateTime(new Date());
+					receiveDto.setStat(DataStatus.ENABLED);
+					receiveDtoList.add(receiveDto);
+				}
+				 addReceiveFlag = taskService.addTaskReceiveBatch(receiveDtoList);
+		}
+		
+		if(addReceiveFlag == length){
 			result.setStatus(DataStatus.HTTP_SUCCESS);
 			result.setMessage("发布任务成功");
 			return result;

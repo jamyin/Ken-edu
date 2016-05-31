@@ -54,7 +54,9 @@ public class ProDishesDao extends MyBatisBaseDao<ProDishes>{
 		ProDishesExample example = new ProDishesExample();
 		Criteria criteria = example.createCriteria();
 		
-		criteria.andPackageIdIn(packageIdList);
+		if(packageIdList!=null && packageIdList.size()>0){
+			criteria.andPackageIdIn(packageIdList);
+		}
 		
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		return mapper.selectByExample(example);

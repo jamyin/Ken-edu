@@ -95,6 +95,19 @@ public class TaskDao extends MyBatisBaseDao<EduTask> {
 		return exMappers.findReadList(receiveDto,
 				query);
 	}
+	
+	public List<EduTaskReceive> findTaskReceiveList(EduTaskReceive task) {
+		EduTaskReceiveExample example = new EduTaskReceiveExample();
+		EduTaskReceiveExample.Criteria criteria = example.createCriteria();
+		if (StringUtils.isNotEmpty(task.getId())){
+    		criteria.andIdEqualTo(task.getId());
+    	}
+		if (StringUtils.isNotEmpty(task.getTaskId())){
+    		criteria.andTaskIdEqualTo(task.getTaskId());
+    	}
+		criteria.andStatEqualTo(DataStatus.ENABLED);
+		return exMapper.selectByExample(example);
+	}
 
 	public int selectReadAccount(EduTaskReceiveDto receiveDto) {
 		return exMappers.selectReadAccount(receiveDto);

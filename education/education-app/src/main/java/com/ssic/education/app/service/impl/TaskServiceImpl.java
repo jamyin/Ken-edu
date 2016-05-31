@@ -1,7 +1,5 @@
 package com.ssic.education.app.service.impl;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +12,11 @@ import com.ssic.educateion.common.dto.TaskReceivePageDto;
 import com.ssic.education.app.service.ITaskService;
 import com.ssic.education.handle.dao.TaskDao;
 import com.ssic.education.handle.pojo.EduTask;
+import com.ssic.education.handle.pojo.EduTaskReceive;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 import com.ssic.education.utils.util.BeanUtils;
-import com.ssic.education.utils.util.UUIDGenerator;
 
 /**	
 * @ClassName: SchoolServiceImpl
@@ -72,16 +70,29 @@ public class TaskServiceImpl implements ITaskService{
 		query.setTotal(total);
 		return new PageResult<EduTaskReadDto>(query, list);
 	}
+	
+	@Override
+	public List<EduTaskReceiveDto> findTaskReceiveList(
+			EduTaskReceiveDto receiveDto) {
+		EduTaskReceive task = BeanUtils.createBeanByTarget(receiveDto, EduTaskReceive.class);
+		List<EduTaskReceive> eduTaskReceiveList = taskDao.findTaskReceiveList(task);
+		if(eduTaskReceiveList == null || eduTaskReceiveList.size() <=0 ){
+			return null;
+		}
+		List<EduTaskReceiveDto> dtoList = BeanUtils.createBeanListByTarget(eduTaskReceiveList, EduTaskReceiveDto.class);
+		return dtoList;
+	}
 
 	@Override
-	public int sendTask(EduTaskDto eduTaskDto) {
-		
-		eduTaskDto.setId(UUIDGenerator.getUUID());
-		eduTaskDto.setCreateTime(new Date());
-		eduTaskDto.setStat(DataStatus.ENABLED);
+	public String sendTask(EduTaskDto eduTaskDto) {
 		EduTask eduTask = BeanUtils.createBeanByTarget(eduTaskDto, EduTask.class);
 		int flag = taskDao.addTask(eduTask);
-		int addReceiveFlag = 0;
+		if(flag > 0){
+			return eduTaskDto.getId();
+		}
+		return null;
+		/*int addReceiveFlag = 0;
+		
 		if(flag > 0){
 			String receiveId = eduTaskDto.getReceiveId();
 			String receiveIds = receiveId.substring(0,receiveId.length()-1);   //去逗号
@@ -91,6 +102,11 @@ public class TaskServiceImpl implements ITaskService{
 				EduTaskReceiveDto receiveDto = new EduTaskReceiveDto();
 				receiveDto.setReceiveId(id);
 				receiveDto.setTaskId(eduTaskDto.getId());
+				
+				receiveDto.setTaskTitle(eduTaskDto.getTitle());
+				
+				receiveDto.setSendName(sendName);
+				receiveDto.setReceiveName(receiveName);
 				
 				receiveDto.setId(UUIDGenerator.getUUID());
 				receiveDto.setReadstat(DataStatus.DISABLED);
@@ -103,7 +119,7 @@ public class TaskServiceImpl implements ITaskService{
 		if(flag >0 && addReceiveFlag > 0){
 			return 1;
 		}
-		return 0;
+		return 0;*/
 	}
 
 	@Override
@@ -126,6 +142,10 @@ public class TaskServiceImpl implements ITaskService{
 		return dto;
 	}
 
-	
+	@Override
+	public int addTaskReceiveBatch(List<EduTaskReceiveDto> receiveDtoList) {
+		return taskDao.addTaskReceiveBatch(receiveDtoList);
+	}
+
 }
 

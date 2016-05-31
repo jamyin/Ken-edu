@@ -12,13 +12,15 @@
     <h1 class="con-tt">
       <span class="title">供应商列表</span>
       <span>
-         <input type="hidden" name="supplierId" value="${(params.supplierId)!}"/>
-          <input class="search" type="button">
-          <input class="search_text" type="text" name="supplierName" value="${(params.supplierName)!}" placeholder="请输入关键字">
+         <input type="hidden" name="supplierId" value="${(dto.id)!}"/>
+          <input id="searchBut" class="search" type="button">
+          <input class="search_text" type="text" name="supplierName" value="${(dto.supplierName)!}" placeholder="请输入关键字">
       </span>
     </h1>
 
     <div class="wrapperB">
+    <form action="list.htm?id=${(dto.id)!}&supplierName=${(dto.supplierName)!}" method="post" id="myform">
+     <input type="hidden" name="currPage" id="currPage" value="1"/>
       <ul class="sulplier_ul">
         <li class="head">
           <span class="name">原料供应商名称</span>
@@ -35,6 +37,7 @@
           </#list>
         </#if>
       </ul>
+    </form>
     </div>
 
     <#include "/common/page.htm" />
@@ -51,6 +54,11 @@
         $("#myform").submit();
       });
 
+      $('#searchBut').on('click', function() {
+    	  var supplierName = $('.search_text').val();
+    	  window.location.href ="list.htm?id="+ $('input[name=supplierId]').val()+"&supplierName="+supplierName;   	  
+      })
+      
       // 跳转指定页
       $('#jump_btn').on('click', function () {
         var jump_num = $('#jump_num').val();
@@ -75,7 +83,7 @@
     })
 
     function gotoPage(page) {
-      $("currPage").val(page);
+      $("#currPage").val(page);
       $("#myform").submit();
     }
   </script>
