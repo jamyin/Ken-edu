@@ -19,4 +19,6 @@ public interface ProLedgerService {
 	public PageResult<LedgerDto> selectLedgerPage(LedgerDto dto,PageQuery page);
 	
 	public List<LedgerDto> findById(LedgerDto dto) ;
+
+	public List<ProLedgerDto> searchProLedger(List<String> ledgerMasterIds);
 }

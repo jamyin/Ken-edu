@@ -238,6 +238,12 @@ public class UserServiceImpl implements UserServiceI {
 		return null;
 	}
 
+	@Override
+	public int findByNameCount(TImsUsersDto user) {
+		// TODO Auto-generated method stub
+		return userDao.findByNameCount(user);
+	}
+
 	
 	
 

@@ -13,15 +13,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssic.educateion.common.dto.ChooseSchoolDto;
-import com.ssic.educateion.common.dto.EduCanteenDto;
 import com.ssic.educateion.common.dto.EduCommitteeDto;
 import com.ssic.educateion.common.dto.EduSchoolDto;
-import com.ssic.educateion.common.dto.EduSchoolSupplierDto;
 import com.ssic.educateion.common.dto.MapToListDto;
 import com.ssic.educateion.common.dto.ProPackagesDto;
 import com.ssic.educateion.common.dto.SchoolDto;
 import com.ssic.education.app.constants.SchoolLevel;
-import com.ssic.education.app.dto.SchoolPackageDto;
 import com.ssic.education.app.service.ICommitteeService;
 import com.ssic.education.app.service.ISchoolService;
 import com.ssic.education.handle.service.EduSchoolService;
@@ -29,6 +26,7 @@ import com.ssic.education.handle.service.IEduCanteenService;
 import com.ssic.education.handle.service.IEduSchoolSupplierService;
 import com.ssic.education.handle.service.ProPackagesService;
 import com.ssic.education.utils.constants.DataStatus;
+import com.ssic.education.utils.constants.PackagesTypeEnum;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 import com.ssic.education.utils.model.Response;
@@ -143,19 +141,18 @@ public class SchoolController {
 	 */
 	@RequestMapping(value="school")
 	@ResponseBody
-	public Response<SchoolPackageDto> school(ProPackagesDto dto, PageQuery page){
-		Response<SchoolPackageDto> result = new Response<SchoolPackageDto>();
+	public Response<EduSchoolDto> school(ProPackagesDto dto, PageQuery page){
+		Response<EduSchoolDto> result = new Response<EduSchoolDto>();
 		if(StringUtils.isEmpty(dto.getCustomerId())){
 			result.setStatus(DataStatus.HTTP_FAILE);
 			result.setMessage("学校Id为空！");
 			return result;
 		}
-		SchoolPackageDto school = new SchoolPackageDto();
 		//学校详细信息
 		String schoolId = dto.getCustomerId();
 		EduSchoolDto eduSchoolDto = eduSchoolService.findById(schoolId);
 
-		//学校对应的食堂信息
+		/*//学校对应的食堂信息
 		EduCanteenDto eduCanteenDto = new EduCanteenDto();
 		eduCanteenDto.setSchoolId(schoolId);
 		eduCanteenDto = iEduCanteenService.searchEduCanteenDto(eduCanteenDto);
@@ -163,16 +160,23 @@ public class SchoolController {
 		//学校对应的供应商信息
 		EduSchoolSupplierDto eduSchoolSupplierDto = new EduSchoolSupplierDto();
 		eduSchoolSupplierDto.setSchoolId(schoolId);
-		eduSchoolSupplierDto = iEduSchoolSupplierService.searchEduSchoolSupplierDto(eduSchoolSupplierDto);
-
+		eduSchoolSupplierDto = iEduSchoolSupplierService.searchEduSchoolSupplierDto(eduSchoolSupplierDto);*/
+		
+		List<MapToListDto> typeList = new ArrayList<MapToListDto>();
+		for(Entry<Integer, String> entry: PackagesTypeEnum.getAll().entrySet()) {
+			MapToListDto mapToListDto = new MapToListDto();
+			mapToListDto.setKey(entry.getKey());
+			mapToListDto.setValue(entry.getValue());
+			typeList.add(mapToListDto);
+		}
+		eduSchoolDto.setTypeList(typeList);
 		PageResult<ProPackagesDto> proPackagesDtos = proPackagesService.searchPackages(dto, page);
 
-		school.setEduSchoolDto(eduSchoolDto);
-		school.setEduCanteenDto(eduCanteenDto);
-		school.setEduSchoolSupplierDto(eduSchoolSupplierDto);
-		school.setProPackagesDto(proPackagesDtos);
+		//school.setEduCanteenDto(eduCanteenDto);
+		//school.setEduSchoolSupplierDto(eduSchoolSupplierDto);
+		eduSchoolDto.setPackagesList(proPackagesDtos);
 
-		result.setData(school);
+		result.setData(eduSchoolDto);
 		return result;
 	}
 

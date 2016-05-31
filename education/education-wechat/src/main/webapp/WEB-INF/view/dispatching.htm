@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,user-scalable=no" />
+    <title>供应商资质</title>
+    <link href="/static/css/style.css" rel="stylesheet" />
+    <script src="/static/js/jquery-2.1.3.min.js"></script>
+  </head>
+<body>
+	<div class="dispatching_box">
+		<ul>
+			<#if resultList ??>
+				<#list resultList as result>
+					<li>
+						<a href="dispatching_c.html"></a>
+						<p>配送号：${(result.wareBatchNo)!}<br>配送日期：${(result.startTime?string('yyyy-MM-dd'))!}</p>
+						<p class="oth">
+							出发地：上海天坊食品制造有限公司<br>采购品：
+							<#if result.getResltList() ??>
+								<#list result.getResltList()  as data>
+									${(data.name)!} 、
+								</#list>
+							</#if>
+							<!-- 黑猪颈背肉、冬瓜 -->
+						</p>
+						<#if result.haulStatus == 0>
+							<i class="notstart">未配送</i>
+						</#if>
+						<#if result.haulStatus == 1>
+							<i class="notstart">配送中</i>
+						</#if>
+						<#if result.haulStatus == 2>
+							<i class="notstart">已配送</i>
+						</#if>												
+					</li>
+<!-- 					<li><a href="dispatching_c.html"></a><p>配送号：20160506001<br>配送日期：2016-05-06</p><p class="oth">出发地：上海天坊食品制造有限公司<br>采购品：黑猪颈背肉、冬瓜</p><i class="end">已配送</i></li>
+					<li><a href="dispatching_c.html"></a><p>配送号：20160506001<br>配送日期：2016-05-06</p><p class="oth">出发地：上海天坊食品制造有限公司<br>采购品：黑猪颈背肉、冬瓜</p><i class="notstart">未配送</i></li>					
+ -->
+ 				</#list>
+			</#if>
+		</ul>
+	</div>
+</body>
+<script>
+	$(function(){
+	});
+</script>
+</html>
