@@ -161,7 +161,6 @@ public class WaresController extends BaseController {
 			j.setMsg("商品类型不能为空");
 			return j;
 		}
-
 		DataSourceHolderUtil.setToMaster();
 		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
 				ConfigUtil.SESSIONINFONAME);
