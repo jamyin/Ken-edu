@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.xml.crypto.Data;
+
 import lombok.Getter;
 
 import org.apache.commons.lang.StringUtils;
@@ -18,6 +20,8 @@ import com.google.gson.reflect.TypeToken;
 import com.ssic.educateion.common.dto.ProDishesDto;
 import com.ssic.educateion.common.dto.ProNutritionalDto;
 import com.ssic.educateion.common.dto.ProPackagesDto;
+import com.ssic.education.handle.dto.EduParentPackCommentDto;
+import com.ssic.education.handle.mapper.EduParentPackCommentExMapper;
 import com.ssic.education.handle.mapper.EduParentPackCommentMapper;
 import com.ssic.education.handle.mapper.EduSchoolExMapper;
 import com.ssic.education.handle.mapper.ProDishesExMapper;
@@ -75,6 +79,9 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 	
 	@Autowired
 	private EduParentPackCommentMapper eppcMapper;
+	
+	@Autowired
+	private EduParentPackCommentExMapper eppcExMapper;
 	
 	@Transactional
 	public void delete(String id) {
@@ -155,6 +162,17 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 		}			
 		for (ProPackagesDto propackagesDto:propackagesDtos) {
 			ArrayList<ProPackagesDto> proArrayList = new ArrayList<ProPackagesDto>();
+			EduParentPackCommentDto eduParentPackCommentDto = new EduParentPackCommentDto();
+			eduParentPackCommentDto.setPackageId(propackagesDto.getId());
+			Object sum = eppcExMapper.packagesComment(eduParentPackCommentDto);
+			if (sum != null) {
+				long listSize = findListByPackages(propackagesDto.getId());
+				float b = (float)Math.round((double)((int)sum/3)/listSize);
+				propackagesDto.setComment(b);
+			} else {
+				propackagesDto.setComment(DataStatus.DISABLED);
+			}
+			
 			for (ProPackagesDto proPackagesDto : proPackagesDtos) {
 				if (propackagesDto.getSupplyPhase() == proPackagesDto.getSupplyPhase()) {
 					proArrayList.add(proPackagesDto);

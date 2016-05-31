@@ -440,6 +440,7 @@ public class ProSupplierController extends BaseController{
 			license.setLicPic(imageurl1);
 			license.setRelationId(id);
 			license.setStat(1);
+			license.setLicType(4);
 			license.setCreateTime(new Date());
 			license.setLastUpdateTime(new Date());
 			license.setCerSource((short) 0);
@@ -452,6 +453,7 @@ public class ProSupplierController extends BaseController{
 			license.setLicPic(imageurl2);
 			license.setRelationId(id);
 			license.setStat(1);
+			license.setLicType(5);
 			license.setCreateTime(new Date());
 			license.setLastUpdateTime(new Date());
 			license.setCerSource((short) 0);
@@ -464,6 +466,7 @@ public class ProSupplierController extends BaseController{
 			license.setLicPic(imageurl3);
 			license.setRelationId(id);
 			license.setStat(1);
+			license.setLicType(6);
 			license.setCreateTime(new Date());
 			license.setLastUpdateTime(new Date());
 			license.setCerSource((short) 0);
@@ -476,6 +479,7 @@ public class ProSupplierController extends BaseController{
 			license.setLicPic(imageurl4);
 			license.setRelationId(id);
 			license.setStat(1);
+			license.setLicType(2);
 			license.setCreateTime(new Date());
 			license.setLastUpdateTime(new Date());
 			license.setCerSource((short) 0);
@@ -488,6 +492,7 @@ public class ProSupplierController extends BaseController{
 			license.setLicPic(imageurl5);
 			license.setRelationId(id);
 			license.setStat(1);
+			license.setLicType(3);
 			license.setCreateTime(new Date());
 			license.setLastUpdateTime(new Date());
 			license.setCerSource((short) 0);
@@ -500,6 +505,7 @@ public class ProSupplierController extends BaseController{
 			license.setLicPic(imageurl6);
 			license.setRelationId(id);
 			license.setStat(1);
+			license.setLicType(0);
 			license.setCreateTime(new Date());
 			license.setLastUpdateTime(new Date());
 			license.setCerSource((short) 0);
@@ -512,6 +518,7 @@ public class ProSupplierController extends BaseController{
 			license.setLicPic(imageurl7);
 			license.setRelationId(id);
 			license.setStat(1);
+			license.setLicType(1);
 			license.setCreateTime(new Date());
 			license.setLastUpdateTime(new Date());
 			license.setCerSource((short) 0);
@@ -524,6 +531,7 @@ public class ProSupplierController extends BaseController{
 			license.setLicPic(imageurl8);
 			license.setRelationId(id);
 			license.setStat(1);
+			license.setLicType(9);
 			license.setCreateTime(new Date());
 			license.setLastUpdateTime(new Date());
 			license.setCerSource((short) 0);
@@ -536,6 +544,7 @@ public class ProSupplierController extends BaseController{
 			license.setLicPic(imageurl9);
 			license.setRelationId(id);
 			license.setStat(1);
+			license.setLicType(10);
 			license.setCreateTime(new Date());
 			license.setLastUpdateTime(new Date());
 			license.setCerSource((short) 0);
@@ -548,6 +557,7 @@ public class ProSupplierController extends BaseController{
 			license.setLicPic(imageurl10);
 			license.setRelationId(id);
 			license.setStat(1);
+			license.setLicType(11);
 			license.setCreateTime(new Date());
 			license.setLastUpdateTime(new Date());
 			license.setCerSource((short) 0);
@@ -560,6 +570,7 @@ public class ProSupplierController extends BaseController{
 			license.setLicPic(imageurl11);
 			license.setRelationId(id);
 			license.setStat(1);
+			license.setLicType(12);
 			license.setCreateTime(new Date());
 			license.setLastUpdateTime(new Date());
 			license.setCerSource((short) 0);
@@ -573,7 +584,7 @@ public class ProSupplierController extends BaseController{
 	}
 
 	/**
-	 * 上传图片
+	 * 修改图片
 	 */
 	@RequestMapping("/alterImage")
 	@ResponseBody
@@ -640,75 +651,70 @@ public class ProSupplierController extends BaseController{
 			license.setLicName("组织机构代码");
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
-			license.setLicPic(imageurl1);
+			license.setLicPic(imageurl2);
 			proLicenseServiceImpl.alterImage(license);
 		}
 		if (imageurl3 != null && imageurl3 != "") {
 			license.setLicName("税务登记证");
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
-			license.setLicPic(imageurl1);
+			license.setLicPic(imageurl3);
 			proLicenseServiceImpl.alterImage(license);
 		}
 		if (imageurl4 != null && imageurl4 != "") {
 			license.setLicName("食品流通许可证");
-			license.setLicPic(imageurl3);
 			license.setRelationId(id);
-			license.setStat(1);
-			license.setCreateTime(new Date());
-			license.setLastUpdateTime(new Date());
 			license.setCerSource((short) 0);
-			String uuid = UUID.randomUUID().toString();
-			license.setId(uuid);
-			proLicenseServiceImpl.updateImage(license);
+			license.setLicPic(imageurl4);
+			proLicenseServiceImpl.alterImage(license);
 		}
 		if (imageurl5 != null && imageurl5 != "") {
 			license.setLicName("食品生产许可证");
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
-			license.setLicPic(imageurl1);
+			license.setLicPic(imageurl5);
 			proLicenseServiceImpl.alterImage(license);
 		}
 		if (imageurl6 != null && imageurl6 != "") {
 			license.setLicName("餐饮服务许可证");
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
-			license.setLicPic(imageurl1);
+			license.setLicPic(imageurl6);
 			proLicenseServiceImpl.alterImage(license);
 		}
 		if (imageurl7 != null && imageurl7 != "") {
 			license.setLicName("食品经营许可证");
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
-			license.setLicPic(imageurl1);
+			license.setLicPic(imageurl7);
 			proLicenseServiceImpl.alterImage(license);
 		}
 		if (imageurl8 != null && imageurl8 != "") {
 			license.setLicName("身份证");
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
-			license.setLicPic(imageurl1);
+			license.setLicPic(imageurl8);
 			proLicenseServiceImpl.alterImage(license);
 		}
 		if (imageurl9 != null && imageurl9 != "") {
 			license.setLicName("港澳居民来往内地通行证");
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
-			license.setLicPic(imageurl1);
+			license.setLicPic(imageurl9);
 			proLicenseServiceImpl.alterImage(license);
 		}
 		if (imageurl10 != null && imageurl10 != "") {
 			license.setLicName("台湾居民往来内地通行证");
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
-			license.setLicPic(imageurl1);
+			license.setLicPic(imageurl10);
 			proLicenseServiceImpl.alterImage(license);
 		}
 		if (imageurl11 != null && imageurl11 != "") {
 			license.setLicName("其他");
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
-			license.setLicPic(imageurl1);
+			license.setLicPic(imageurl11);
 			proLicenseServiceImpl.alterImage(license);
 		}
 		json.setMsg("上传图片成功");

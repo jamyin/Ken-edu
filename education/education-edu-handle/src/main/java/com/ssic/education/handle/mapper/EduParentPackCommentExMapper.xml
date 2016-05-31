@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssic.education.handle.mapper.EduParentPackCommentExMapper">
+	
+	<!-- <select id="list" resultMap=" com.ssic.educateion.common.dto.EduInformationDto" >		
+				SELECT
+					id AS id,
+					title AS title,
+					pic AS pic,
+					summary AS summary,
+					content AS content,
+					type AS type,
+					create_admin_id AS createAdminId,
+					create_admin_name AS createAdminName
+				FROM
+					t_edu_information a
+				WHERE
+					a.stat = 1
+
+	</select> -->
+	
+	<select id="packagesComment" resultType="java.lang.Object" parameterType="com.ssic.education.handle.dto.EduParentPackCommentDto">
+		SELECT sum(flavor+health+weights) as total 
+		FROM t_edu_parent_pack_comment
+		WHERE 
+		<if test="eduParentPackCommentDto.packageId!=null and eduParentPackCommentDto.packageId!='' ">
+			package_id =  #{eduParentPackCommentDto.packageId}
+		</if>
+	</select>
+
+</mapper>

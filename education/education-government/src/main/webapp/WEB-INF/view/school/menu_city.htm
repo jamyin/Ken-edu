@@ -104,13 +104,13 @@
 									</span>
 									<span class="evaluate">
 						             <span class="starts">
-						               <i class="star on"></i>
-						               <i class="star on"></i>
-						               <i class="star on"></i>
-						               <i class="star on"></i>
-						               <i class="star"></i>
+						               <i class="star <#if proPackages.comment >=0 && proPackages.comment <1 >on</#if>"></i>
+						               <i class="star <#if proPackages.comment >=1 && proPackages.comment <2 >on</#if>"></i>
+						               <i class="star <#if proPackages.comment >=2 && proPackages.comment <3 >on</#if>""></i>
+						               <i class="star <#if proPackages.comment >=3 && proPackages.comment <4 >on</#if>""></i>
+						               <i class="star <#if proPackages.comment >=4 && proPackages.comment <5 >on</#if>""></i>
 						             </span>
-						             <i class="points">4.9</i>
+						             <i class="points">${(proPackages.comment)!}</i>
 						           </span>
 								</li>
 							</#list>										
