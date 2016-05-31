@@ -405,7 +405,6 @@
 	}
 	
 	function toExcel(){
-		
 		var supplierName = $("#supplierName").val();
 		var address = $("#address").val();
 		window.location.href='${pageContext.request.contextPath}/proSupplierController/excel.do?supplierName='+supplierName+'&address='+address+'';
