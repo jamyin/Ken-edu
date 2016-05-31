@@ -37,7 +37,7 @@ public class EduCommitteeDao extends MyBatisBaseDao<EduCommittee> {
 		 
 		criteria.andStatEqualTo(Short.valueOf("1"));
 		 
-        example.setOrderByClause("name ASC");
+        //example.setOrderByClause("name ASC");
 		return mapper.selectByExample(example);
 	}
 	
