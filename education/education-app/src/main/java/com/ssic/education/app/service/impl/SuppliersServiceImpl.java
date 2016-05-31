@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ssic.educateion.common.dto.ProSupplierDto;
 import com.ssic.education.app.dao.SupplierInfoDao;
+import com.ssic.education.app.dto.AppLicenseDto;
 import com.ssic.education.app.dto.MaterialSupplierDto;
 import com.ssic.education.app.dto.SupplierLicDto;
 import com.ssic.education.app.service.ISupplierService;
@@ -47,6 +48,11 @@ public class SuppliersServiceImpl implements ISupplierService {
 		return supplierDao.findSupplierDetail(id);
 	}
 
+	/**
+	 * 查询供应商资质
+	 * (non-Javadoc)   
+	 * @see com.ssic.education.app.service.ISupplierService#findSupplierInfo(java.lang.String)
+	 */
 	@Override
 	public SupplierLicDto findSupplierInfo(String supplier_id) {
 		SupplierLicDto supplierLicDto = new SupplierLicDto();
@@ -54,6 +60,18 @@ public class SuppliersServiceImpl implements ISupplierService {
 		PageQuery query = new PageQuery();
 		query.setPageSize(3);
 		PageResult<MaterialSupplierDto> findSupplierList = this.findListByIds(supplierLicDto.getId(), null, query);
+		List<ProLicense> list = supplierInfoDao.getLic(supplierLicDto.getId());
+		if (null != list && !list.isEmpty()) {
+			for (ProLicense proLicense : list) {
+				if (null != proLicense.getLicPic()) {
+					String host = "http://192.168.1.242";
+					String pic = host + proLicense.getLicPic();
+					proLicense.setLicPic(pic);
+				}
+			}
+			List<AppLicenseDto> applic = BeanUtils.createBeanListByTarget(list, AppLicenseDto.class);
+			supplierLicDto.setAppLicense(applic);
+		}
 		supplierLicDto.setMaterialSupplierList(findSupplierList);
 		return supplierLicDto;
 	}
@@ -69,17 +87,5 @@ public class SuppliersServiceImpl implements ISupplierService {
 		}
 		return null;
 
-	}
-
-	public String findLicByLicType(ProLicense license) {
-		List<ProLicense> licenseList = this.supplierInfoDao.getLic(license);
-		if (null != licenseList && !licenseList.isEmpty()) {
-			if (licenseList.size() > 2) {
-				return "重复";
-			} else {
-				return licenseList.get(0).getLicPic();
-			}
-		}
-		return null;
 	}
 }

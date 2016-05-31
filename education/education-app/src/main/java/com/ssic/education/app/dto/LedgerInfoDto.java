@@ -18,46 +18,25 @@ import lombok.NoArgsConstructor;
  * <p>修改时间：2016年5月16日 下午3:00:43</p>
  * <p>修改备注：</p>
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class LedgerInfoDto {
 
+public @Data class LedgerInfoDto {
 	private String id;
-
 	private String waresId;
-
 	private String name;
-
 	private String spce;
-
 	private Integer actionType;
-
 	private Date actionDate;
-	
 	private String supplierId;
-
 	private String supplierCode;
-
 	private String supplierName;
-
 	private Integer quantity;
-
 	private Date productionDate;
-
 	private String batchNo;
-
 	private String receiverId;
-
 	private String receiverCode;
-
 	private String receiverName;
-
 	private String traceCode;
-
 	private Date createTime;
-
 	private Date lastUpdateTime;
-
 	private Integer stat;
 }

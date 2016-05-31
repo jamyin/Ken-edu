@@ -95,6 +95,8 @@ public class WaresInfoServiceImpl implements IWaresInfoService {
 		List<String> schoolWares = this.schoolWaresDao.findSchoolWaresBySchoolId(schoolId);
 		if (schoolWares != null && !schoolWares.isEmpty()) {
 			List<ProWares> wares = waresInfoDao.findWarseInSchool(schoolWares, prowares, query);
+			int total = waresInfoDao.findWarseInSchoolCount(schoolWares, prowares);
+			query.setTotal(total);
 			List<WaresListDto> wareListDto = BeanUtils.createBeanListByTarget(wares, WaresListDto.class);
 			return new PageResult<WaresListDto>(query, wareListDto);
 		} else {
@@ -106,7 +108,7 @@ public class WaresInfoServiceImpl implements IWaresInfoService {
 	public WaresRelatedDto findWarseById(String id) {
 		WaresRelatedDto wrd = waresInfoDao.findWarseById(id);
 		wrd.setInsReport(licDao.getLicbyType(wrd.getId(), 31));
-		//wrd.setProLic(licDao.getLicbyType(wrd.getId(), 30));
+		wrd.setProLic(licDao.getLicbyType(wrd.getId(), 30));
 		return wrd;
 	}
 
