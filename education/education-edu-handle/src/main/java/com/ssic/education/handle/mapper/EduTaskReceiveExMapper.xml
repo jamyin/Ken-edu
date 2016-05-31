@@ -32,15 +32,15 @@
 			AND a.readstat = #{receiveDto.readstat}
 		</if>
 	</sql>
-
 	<insert id="addTaskReceiveBatch" parameterType="java.util.List">
-		INSERT INTO t_edu_task_receive (id,
-		task_id,readstat,receive_id,school_id, create_time, last_update_time,
-		stat)
+		INSERT INTO t_edu_task_receive (id,	task_id, readstat, receive_id, school_id, task_title, receive_name, send_name, 
+		create_time, last_update_time, stat)
 		VALUES
 		<foreach collection="list" item="item" index="index"
 			separator=",">
-			(#{item.id},#{item.taskId},#{item.readstat},#{item.receiveId},#{item.schoolId},#{item.createTime},#{item.lastUpdateTime},#{item.stat})
+			(#{item.id},#{item.taskId},#{item.readstat},#{item.receiveId},#{item.schoolId},
+			#{item.taskTitle},#{item.receiveName},#{item.sendName},
+			#{item.createTime},#{item.lastUpdateTime},#{item.stat})
 		</foreach>
 	</insert>
 	

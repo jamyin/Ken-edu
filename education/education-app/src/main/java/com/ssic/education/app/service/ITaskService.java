@@ -37,12 +37,17 @@ public interface ITaskService {
 			PageQuery query);
 
 	//发布任务
-	int sendTask(EduTaskDto eduTaskDto);
+	String sendTask(EduTaskDto eduTaskDto);
 	
 	//根据任务Id查询任务详情
 	EduTaskDto findTaskByPara(EduTaskDto eduTaskDto);
-
+	
+	//连接用户表
 	List<TaskReceivePageDto> findTaskReceiveByPara(String id);
+	
+	List<EduTaskReceiveDto> findTaskReceiveList(EduTaskReceiveDto receiveDto);
+
+	int addTaskReceiveBatch(List<EduTaskReceiveDto> receiveDtoList);
 
 }
 

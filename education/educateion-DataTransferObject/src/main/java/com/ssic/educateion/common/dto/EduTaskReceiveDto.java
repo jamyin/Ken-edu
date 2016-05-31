@@ -20,23 +20,18 @@ import lombok.NoArgsConstructor;
 public class EduTaskReceiveDto implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-
 	private String id;
-	
 	private String taskId;
-
 	private Integer readstat;
-
 	private String receiveId;
-
 	private String schoolId;
-
 	private Date createTime;
-
 	private Date lastUpdateTime;
-
 	private Integer stat;
-
+	
+	private String taskTitle;
+    private String receiveName;
+    private String sendName;
 
 }
 
