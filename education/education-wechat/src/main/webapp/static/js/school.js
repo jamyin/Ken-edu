@@ -2,11 +2,16 @@ $(function(){
 	loadscMenu();
 });
 
+function selectGradeList(thisObj){
+	$("#gradeId").val($(thisObj).val());
+	loadscMenu();
+}
 
 function loadscMenu(){
 	var customerId = "000d804f-ffdc-432a-b9b7-85307a611423";
 	var timeDate = $('#sel_date').val();
-	var dataParams = {customerId:customerId,timeDate:timeDate};
+	var gradeType = $('#gradeId').val();
+	var dataParams = {customerId:customerId,timeDate:timeDate,type:gradeType};
 	$.ajax({
 		url:'/wap/scMenu/search.htm',
 		type:"POST",

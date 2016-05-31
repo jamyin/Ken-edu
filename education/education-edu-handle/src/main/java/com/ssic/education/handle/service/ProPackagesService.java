@@ -19,7 +19,7 @@ public interface ProPackagesService {
 	public ProPackagesDto findById (String id);
 
 	public List<ProPackagesDto> searchProSchoolPackage(String customerId,
-			String timeDate);
+			String timeDate,Integer type);
 	
 	public void delete(String id);
 	

@@ -69,8 +69,8 @@ public class ProPackagesServiceImpl implements ProPackagesService{
 	}
 	
 	@Override
-	public List<ProPackagesDto> searchProSchoolPackage(String customerId,String timeDate) {
-		List<ProPackages> dataList = proPackagesDao.searchProSchoolPackage(customerId,timeDate);
+	public List<ProPackagesDto> searchProSchoolPackage(String customerId,String timeDate,Integer type) {
+		List<ProPackages> dataList = proPackagesDao.searchProSchoolPackage(customerId,timeDate,type);
 		List<ProPackagesDto> resultList = BeanUtils.createBeanListByTarget(dataList, ProPackagesDto.class);
 		return resultList;
 	}

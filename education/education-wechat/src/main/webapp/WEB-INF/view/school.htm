@@ -32,7 +32,8 @@
 	<div class="calendar_box">
 		<p><label><span>选择日期</span></label><input class="seldate" type="text" value="2015年04月29日"><input id="sel_date" type="text" value=""></p>
 		<p><label><span>选择年级</span></label>
-			<select id="sel_class">
+			<input type="hidden" id="gradeId" value="0"/>
+			<select id="sel_class" onchange="selectGradeList(this);">
 				<#assign keys=gradeList?keys>
 				<#list keys as key>
 					<option value="${gradeList[key]}">${key}</option>
