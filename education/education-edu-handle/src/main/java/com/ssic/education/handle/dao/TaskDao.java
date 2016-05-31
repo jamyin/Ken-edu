@@ -7,6 +7,7 @@ import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ssic.educateion.common.dto.EduInformationDto;
 import com.ssic.educateion.common.dto.EduTaskDto;
 import com.ssic.educateion.common.dto.EduTaskReadDto;
 import com.ssic.educateion.common.dto.EduTaskReceiveDto;
@@ -15,6 +16,8 @@ import com.ssic.education.handle.mapper.EduTaskExMapper;
 import com.ssic.education.handle.mapper.EduTaskMapper;
 import com.ssic.education.handle.mapper.EduTaskReceiveExMapper;
 import com.ssic.education.handle.mapper.EduTaskReceiveMapper;
+import com.ssic.education.handle.pojo.EduInformation;
+import com.ssic.education.handle.pojo.EduInformationExample;
 import com.ssic.education.handle.pojo.EduTask;
 import com.ssic.education.handle.pojo.EduTaskExample;
 import com.ssic.education.handle.pojo.EduTaskReceive;
@@ -150,5 +153,38 @@ public class TaskDao extends MyBatisBaseDao<EduTask> {
 		return null;*/
 		return exMappers.findTaskReceiveByPara(id);
 	}
+	
+	
+	
+	public List<EduTask> findInformationList(EduTaskDto eduInformationDto,PageQuery query) {
+		EduTaskExample example = new EduTaskExample();
+		EduTaskExample.Criteria criteria = example.createCriteria();
+        assemblyParams(eduInformationDto, criteria);
+        if(query != null && query.getPageSize() > 0){
+        	example.setOrderByClause("create_time DESC limit "+query.getStartNum() +"," + query.getPageSize());
+		}
+		List<EduTask> list = mapper.selectByExample(example);
+		return list;
+	}
+
+	private void assemblyParams(EduTaskDto eduInformationDto, EduTaskExample.Criteria criteria) {
+		if (null != eduInformationDto) {
+        	if (StringUtils.isNotEmpty(eduInformationDto.getId())){
+        		criteria.andIdEqualTo(eduInformationDto.getId().trim());
+        	}
+        	if (StringUtils.isNotBlank(eduInformationDto.getTitle())){
+        		criteria.andTitleLike("%"+eduInformationDto.getTitle().trim()+"%");
+        	}	
+		}
+		criteria.andStatEqualTo(DataStatus.ENABLED);
+	}
+
+	public int selectInformationAccount(EduTaskDto eduInformationDto) {
+		EduTaskExample example = new EduTaskExample();
+		EduTaskExample.Criteria criteria = example.createCriteria();
+        assemblyParams(eduInformationDto, criteria);  
+        return mapper.countByExample(example);
+	}
+	
 
 }

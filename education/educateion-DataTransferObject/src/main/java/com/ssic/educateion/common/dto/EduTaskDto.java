@@ -49,6 +49,8 @@ public class EduTaskDto  implements Serializable {
 	
 	private Integer sourceType;	  //用户类型   0教委;1学校;2区委
 	
+	private String editorValue;
+	
 	//private PageResult<EduTaskDto> sendList;            //当前用户发送任务列表
 	//private PageResult<EduTaskDto> receiveReadList;        //当前用户接收任务列表 -已读   readStat=1
 	//private PageResult<EduTaskDto> receiveNotReadList;         //当前用户接收任务列表 -未读    readStat=0

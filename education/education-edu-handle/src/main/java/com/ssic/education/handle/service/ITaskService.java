@@ -2,6 +2,7 @@ package com.ssic.education.handle.service;
 
 import java.util.List;
 
+import com.ssic.educateion.common.dto.EduInformationDto;
 import com.ssic.educateion.common.dto.EduTaskDto;
 import com.ssic.educateion.common.dto.EduTaskReadDto;
 import com.ssic.educateion.common.dto.EduTaskReceiveDto;
@@ -48,6 +49,28 @@ public interface ITaskService {
 	List<EduTaskReceiveDto> findTaskReceiveList(EduTaskReceiveDto receiveDto);
 
 	int addTaskReceiveBatch(List<EduTaskReceiveDto> receiveDtoList);
+	/**
+	 * 
+		 * 此方法描述的是：web task 任务通知保存
+		 * @author: cwftalus@163.com
+		 * @version: 2016年5月31日 下午3:02:50
+	 */
+	int saveInfomation(EduTaskDto eduTaskDto);
+	/**
+	 * 
+		 * 此方法描述的是：web task 查询
+		 * @author: cwftalus@163.com
+		 * @version: 2016年5月31日 下午3:02:50
+	 */
+	EduTaskDto search(String taskId);
+
+	/**
+	 * 
+		 * 此方法描述的是：web task 分页查询
+		 * @author: cwftalus@163.com
+		 * @version: 2016年5月31日 下午3:02:50
+	 */
+	PageResult<EduTaskDto> searchInfomation(EduTaskDto eduTaskDto,PageQuery pageQuery);
 
 }
 

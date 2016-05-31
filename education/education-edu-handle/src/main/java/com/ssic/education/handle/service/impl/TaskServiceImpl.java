@@ -5,11 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssic.educateion.common.dto.EduInformationDto;
 import com.ssic.educateion.common.dto.EduTaskDto;
 import com.ssic.educateion.common.dto.EduTaskReadDto;
 import com.ssic.educateion.common.dto.EduTaskReceiveDto;
 import com.ssic.educateion.common.dto.TaskReceivePageDto;
 import com.ssic.education.handle.dao.TaskDao;
+import com.ssic.education.handle.pojo.EduInformation;
 import com.ssic.education.handle.pojo.EduTask;
 import com.ssic.education.handle.pojo.EduTaskReceive;
 import com.ssic.education.handle.service.ITaskService;
@@ -147,5 +149,28 @@ public class TaskServiceImpl implements ITaskService{
 		return taskDao.addTaskReceiveBatch(receiveDtoList);
 	}
 
+	
+	@Override
+	public int saveInfomation(EduTaskDto eduTaskDto) {
+		// TODO Auto-generated method stub
+		EduTask eduInformation = BeanUtils.createBeanByTarget(
+				eduTaskDto, EduTask.class);
+		return taskDao.insertSelective(eduInformation);
+	}
+
+	@Override
+	public EduTaskDto search(String infoId) {
+		EduTask pojo = taskDao.selectByPrimaryKey(infoId);
+		return BeanUtils.createBeanByTarget(pojo, EduTaskDto.class);
+	}
+
+	@Override
+	public PageResult<EduTaskDto> searchInfomation(EduTaskDto eduTaskDto,PageQuery pageQuery) {		
+		List<EduTask> results = taskDao.findInformationList(eduTaskDto,pageQuery);
+		List<EduTaskDto> dataList = BeanUtils.createBeanListByTarget(results, EduTaskDto.class);
+		pageQuery.setTotal(taskDao.selectInformationAccount(eduTaskDto));
+		return new PageResult<EduTaskDto>(pageQuery, dataList);
+	}	
+	
 }
 

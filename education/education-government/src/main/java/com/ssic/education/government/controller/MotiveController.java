@@ -16,12 +16,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.common.base.Objects;
 import com.ssic.educateion.common.dto.EduCommitteeDto;
 import com.ssic.educateion.common.dto.EduInformationDto;
-import com.ssic.educateion.common.dto.EduInformationListDto;
 import com.ssic.educateion.common.dto.EduSchoolDto;
+import com.ssic.educateion.common.dto.EduTaskDto;
+import com.ssic.educateion.common.dto.EduTaskReceiveDto;
 import com.ssic.education.handle.service.EduSchoolService;
 import com.ssic.education.handle.service.IEduCommitteeService;
-import com.ssic.education.handle.service.IEduInformationListService;
 import com.ssic.education.handle.service.IEduInformationService;
+import com.ssic.education.handle.service.ITaskReceiveService;
+import com.ssic.education.handle.service.ITaskService;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
@@ -41,8 +43,14 @@ public class MotiveController extends BaseController {
 	@Autowired
 	private IEduInformationService iEduInformationService;
 	
+//	@Autowired
+//	private ITaskReceiveService iTaskReceiveService;
+	
 	@Autowired
-	private IEduInformationListService iEduInformationListService;
+	private ITaskService iTaskService;
+	
+	@Autowired
+	private ITaskReceiveService iTaskReceiveService;
 	
 	
 	/**
@@ -53,10 +61,10 @@ public class MotiveController extends BaseController {
 	 */
 	@RequestMapping(value="ajaxDelete")
 	@ResponseBody
-	public Response<String> ajaxDelete(EduInformationListDto eduInformationListDto){
+	public Response<String> ajaxDelete(EduTaskReceiveDto eduTaskReceiveDto){
 		Response<String> response = new Response<String>();
 
-		int result = iEduInformationListService.updateEduInformationList(eduInformationListDto);
+		int result = iTaskReceiveService.updateEduTaskReceive(eduTaskReceiveDto);
 		
 		return response;
 	}
@@ -150,39 +158,47 @@ public class MotiveController extends BaseController {
 	 */
 	@RequestMapping(value = "save")
 	@ResponseBody
-	public Response<String> save(EduInformationDto eduInformationDto) {
+	public Response<String> save(EduTaskDto eduTaskDto) {
 		Response<String> response = new Response<String>();
-		eduInformationDto.setContent(eduInformationDto.getEditorValue());
+		eduTaskDto.setContent(eduTaskDto.getEditorValue());
+		
 		String infoId = UUIDGenerator.getUUID32Bit();
-		eduInformationDto.setId(infoId);
-		eduInformationDto.setCreateAdminId(getSessionUserId());
-		eduInformationDto.setCreateAdminName(getEduUsersDto().getName());
-		int result = iEduInformationService.saveInfomation(eduInformationDto);
+		eduTaskDto.setId(infoId);
+		eduTaskDto.setCreateId(getSessionUserId());
+		eduTaskDto.setCreateName(getEduUsersDto().getName());
+
+//		int result = iEduInformationService.saveInfomation(eduTaskDto);
+		int result = iTaskService.saveInfomation(eduTaskDto);
 		if (!(result > 0)) {
 			response.setStatus(DataStatus.HTTP_FAILE);
 		} else {
 			// String lianxiIds = getRequest().getParameter("lianxiIds");
-			List<EduInformationListDto> dataList = copyList(eduInformationDto);
+			List<EduTaskReceiveDto> dataList = copyList(eduTaskDto);
 			if (dataList != null) {
-				iEduInformationListService.saveList(dataList);
+				iTaskReceiveService.saveList(dataList);
 			}
 		}
 		return response;
 	}
 
-	public List<EduInformationListDto> copyList(EduInformationDto eduInformationDto) {
-		List<EduInformationListDto> dList = null;
+	public List<EduTaskReceiveDto> copyList(EduTaskDto eduTaskDto) {
+		List<EduTaskReceiveDto> dList = null;
 		// if(!StringUtils.isNotEmpty(lianxiIds)){
 		String[] lianxiId = getRequest().getParameterValues("lianxiIds");
-		dList = new ArrayList<EduInformationListDto>();
+		dList = new ArrayList<EduTaskReceiveDto>();
 		for (String lxId : lianxiId) {
 			String[] idName = lxId.split("#");
-			EduInformationListDto dto = new EduInformationListDto();
-			dto.setInfomationId(eduInformationDto.getId());
-			dto.setInfoTitle(eduInformationDto.getTitle());
-			dto.setCreateId(getSessionUserId());
-			dto.setSourceId(idName[0]);
-			dto.setSourceName(idName[1]);
+			EduTaskReceiveDto dto = new EduTaskReceiveDto();
+			dto.setTaskId(eduTaskDto.getId());
+			dto.setTaskTitle(eduTaskDto.getTitle());
+			dto.setReceiveId(idName[0]);
+			dto.setReceiveName(idName[1]);
+			dto.setSendName(eduTaskDto.getCreateName());
+//			dto.setInfomationId(eduTaskDto.getId());
+//			dto.setInfoTitle(eduTaskDto.getTitle());
+//			dto.setCreateId(getSessionUserId());
+//			dto.setSourceId(idName[0]);
+//			dto.setSourceName(idName[1]);
 			dList.add(dto);
 		}
 		// }
@@ -197,13 +213,14 @@ public class MotiveController extends BaseController {
 	 * @version: 2016年5月30日 上午10:42:24
 	 */
 	@RequestMapping(value = "unreaded")
-	public ModelAndView unreaded(EduInformationListDto eduInformationListDto,PageQuery pageQuery) {
+	public ModelAndView unreaded(EduTaskReceiveDto eduTaskReceiveDto,PageQuery pageQuery) {
 		ModelAndView mv = getModelAndView();
 
 		String sourceId = getEduUsersDto().getSourceId();//用户所属教委 或学校
-		eduInformationListDto.setSourceId(sourceId);
-		PageResult<EduInformationListDto> pageList = iEduInformationListService
-				.searchEduInformationList(eduInformationListDto,pageQuery);
+		eduTaskReceiveDto.setReceiveId(sourceId);
+		
+//		PageResult<EduInformationListDto> pageList = iTaskReceiveService.searchEduTaskReceive(eduInformationListDto,pageQuery);
+		PageResult<EduTaskReceiveDto> pageList = iTaskReceiveService.searchEduTaskReceive(eduTaskReceiveDto,pageQuery);
 		
 		getSourceType(mv);
 		mv.addObject("pageList", pageList);
@@ -219,12 +236,11 @@ public class MotiveController extends BaseController {
 	 * @version: 2016年5月30日 上午10:42:24
 	 */
 	@RequestMapping(value = "sended")
-	public ModelAndView sended(EduInformationListDto eduInformationListDto,PageQuery pageQuery) {
+	public ModelAndView sended(EduTaskReceiveDto eduTaskReceiveDto,PageQuery pageQuery) {
 		ModelAndView mv = getModelAndView();
-
-		eduInformationListDto.setCreateId(getSessionUserId());
-		PageResult<EduInformationListDto> pageList = iEduInformationListService
-				.searchEduInformationList(eduInformationListDto,pageQuery);
+		
+//		eduInformationListDto.setCreateId(getSessionUserId());
+		PageResult<EduTaskReceiveDto> pageList = iTaskReceiveService.searchEduTaskReceive(eduTaskReceiveDto,pageQuery);
 		getSourceType(mv);
 		mv.addObject("pageList", pageList);
 		mv.setViewName("motive/dis_edu_motive_sended");

@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ssic.educateion.common.dto.EduInformationDto;
 import com.ssic.education.handle.service.EduSchoolService;
 import com.ssic.education.handle.service.IEduCommitteeService;
-import com.ssic.education.handle.service.IEduInformationListService;
+import com.ssic.education.handle.service.ITaskReceiveService;
 import com.ssic.education.handle.service.IEduInformationService;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
@@ -32,7 +32,7 @@ public class InfomationController extends BaseController {
 	private EduSchoolService eduSchoolService;
 
 	@Autowired
-	private IEduInformationListService iEduInformationListService;
+	private ITaskReceiveService iEduInformationListService;
 
 	/**
 	 * 

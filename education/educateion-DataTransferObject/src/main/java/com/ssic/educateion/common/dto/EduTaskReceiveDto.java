@@ -32,6 +32,5 @@ public class EduTaskReceiveDto implements Serializable{
 	private String taskTitle;
     private String receiveName;
     private String sendName;
-
 }
 
