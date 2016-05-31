@@ -11,7 +11,24 @@
 <body>
 	<#include "constant.htm" />
 		
-	<header><span>${(eduSchoolDto.schoolName)!}</span></header>
+	<!-- <header><span>${(eduSchoolDto.schoolName)!}</span></header> -->
+	<header>
+		<select id="sel_school" onchange="jumpUrl(this);">
+			<#if dataList ??>
+				<#list dataList as data>
+					<#if data.schoolId == eduSchoolDto.id>
+						<option value="${(data.schoolId)!}" selected="selected">${(data.schoolName)!}</option>
+					<#else>
+						<option value="${(data.schoolId)!}">${(data.schoolName)!}</option>
+					</#if>		
+				</#list>
+			</#if>
+<!-- 			<option>静安区第一小学</option>
+			<option>静安区第二小学</option>
+			<option>静安区第三小学</option>
+			<option>静安区第四小学</option>
+ -->	</select>
+	</header>
 	<div class="school_box">
 		<img src="/static/img/school_simple.jpg" border="0">
 		<div class="info_bar">
