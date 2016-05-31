@@ -30,6 +30,19 @@
 		AND  a.relation_id=#{proLicense.relationId}
 		AND a.cer_source = #{proLicense.cerSource}		
 	</update>	
+			<select id="selectByRelationId"  parameterType="String"   resultType="com.ssic.education.handle.pojo.ProLicense">
+			SELECT
+				a.lic_name AS licName
+				FROM
+					t_pro_license a
+				WHERE
+					a.relation_id = #{id}
+			
+			
+			</select>
+			
+			
+			
 			
 
 </mapper>
