@@ -30,7 +30,9 @@
 
 		<include refid="where_findWares"></include>
 		order by a.create_time desc
-		limit #{page.beginRow},#{page.rows}
+		<if test="page!=null">
+			limit #{page.beginRow},#{page.rows}
+		</if>
 		<!-- limit #{page.beginRow},#{page.rows} -->
 	</select>
 	<select id="findAllWaresCount" resultType="int">
@@ -98,7 +100,10 @@
 		t_pro_wares a
 		WHERE
 		wares_name=#{ledger.name}
+		AND spec=#{ledger.spce}
+		AND manufacturer=#{ledger.productionName}
 		AND supplier_id=#{ledger.sourceId}
+		AND stat=1
 	</select>
 
 

@@ -237,7 +237,7 @@
 	function addFun() {
 		parent.$.modalDialog({
 			title : '添加配货',
-			width : 1000,
+			width : 1030,
 			height : 500,
 			href : '${pageContext.request.contextPath}/ledgerController/addLedger',
 			style : 'overflow-y:scroll;',
