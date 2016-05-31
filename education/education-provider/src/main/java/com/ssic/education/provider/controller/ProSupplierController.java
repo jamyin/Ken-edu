@@ -645,6 +645,7 @@ public class ProSupplierController extends BaseController{
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl1);
+			license.setLastUpdateTime(new Date());
 			proLicenseServiceImpl.alterImage(license);
 		}
 		if (imageurl2 != null && imageurl2 != "") {
@@ -652,6 +653,7 @@ public class ProSupplierController extends BaseController{
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl2);
+			license.setLastUpdateTime(new Date());
 			proLicenseServiceImpl.alterImage(license);
 		}
 		if (imageurl3 != null && imageurl3 != "") {
@@ -659,6 +661,7 @@ public class ProSupplierController extends BaseController{
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl3);
+			license.setLastUpdateTime(new Date());
 			proLicenseServiceImpl.alterImage(license);
 		}
 		if (imageurl4 != null && imageurl4 != "") {
@@ -666,6 +669,7 @@ public class ProSupplierController extends BaseController{
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl4);
+			license.setLastUpdateTime(new Date());
 			proLicenseServiceImpl.alterImage(license);
 		}
 		if (imageurl5 != null && imageurl5 != "") {
@@ -673,6 +677,7 @@ public class ProSupplierController extends BaseController{
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl5);
+			license.setLastUpdateTime(new Date());
 			proLicenseServiceImpl.alterImage(license);
 		}
 		if (imageurl6 != null && imageurl6 != "") {
@@ -680,6 +685,7 @@ public class ProSupplierController extends BaseController{
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl6);
+			license.setLastUpdateTime(new Date());
 			proLicenseServiceImpl.alterImage(license);
 		}
 		if (imageurl7 != null && imageurl7 != "") {
@@ -687,6 +693,7 @@ public class ProSupplierController extends BaseController{
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl7);
+			license.setLastUpdateTime(new Date());
 			proLicenseServiceImpl.alterImage(license);
 		}
 		if (imageurl8 != null && imageurl8 != "") {
@@ -694,6 +701,7 @@ public class ProSupplierController extends BaseController{
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl8);
+			license.setLastUpdateTime(new Date());
 			proLicenseServiceImpl.alterImage(license);
 		}
 		if (imageurl9 != null && imageurl9 != "") {
@@ -701,6 +709,7 @@ public class ProSupplierController extends BaseController{
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl9);
+			license.setLastUpdateTime(new Date());
 			proLicenseServiceImpl.alterImage(license);
 		}
 		if (imageurl10 != null && imageurl10 != "") {
@@ -708,6 +717,7 @@ public class ProSupplierController extends BaseController{
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl10);
+			license.setLastUpdateTime(new Date());
 			proLicenseServiceImpl.alterImage(license);
 		}
 		if (imageurl11 != null && imageurl11 != "") {
@@ -715,6 +725,7 @@ public class ProSupplierController extends BaseController{
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl11);
+			license.setLastUpdateTime(new Date());
 			proLicenseServiceImpl.alterImage(license);
 		}
 		json.setMsg("上传图片成功");
