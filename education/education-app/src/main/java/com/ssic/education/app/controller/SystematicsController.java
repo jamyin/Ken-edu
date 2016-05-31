@@ -31,7 +31,7 @@ public class SystematicsController {
 	 * getDishesType：食品分类列表 原料分类列表
 	 * @return
 	 * @exception	
-	 * @author Administrator
+	 * @author SeanYoung
 	 * @date 2016年5月16日 上午9:44:23
 	 */
 	@RequestMapping(value = "/typelist", method = RequestMethod.GET)
@@ -46,7 +46,7 @@ public class SystematicsController {
 	 * getDishesType：食品分类列表 原料分类列表
 	 * @return
 	 * @exception	
-	 * @author Administrator
+	 * @author SeanYoung
 	 * @date 2016年5月16日 上午9:44:23
 	 */
 	@RequestMapping(value = "/DingTypelist", method = RequestMethod.GET)

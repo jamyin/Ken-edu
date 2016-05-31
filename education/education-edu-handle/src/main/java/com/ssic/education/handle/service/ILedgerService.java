@@ -25,4 +25,6 @@ public interface ILedgerService {
 	
 	int importLedger(Map<ProLedgerMaster, List<ProLedger>> map);
 
+	Map<ProLedgerMaster,List<ProLedger>> findExportProSupplier(LedgerDto ld);
+
 }

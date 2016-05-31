@@ -295,13 +295,16 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 	}
 
 	public List<ProPackages> searchProSchoolPackage(String customerId,
-			String timeDate) {
+			String timeDate,Integer type) {
 		ProPackagesExample example = new ProPackagesExample();
 		ProPackagesExample.Criteria criteria = example.createCriteria();
 		
 		if(StringUtils.isNotEmpty(customerId)){
 			criteria.andCustomerIdEqualTo(customerId);	
 		}
+		if(type!=null){
+			criteria.andTypeEqualTo(type);	
+		}		
 		if(!StringUtils.isNotEmpty(timeDate)){
 			Date date = new Date();
 			timeDate = DateUtils.format(date, DateUtils.YMD_DASH);

@@ -33,14 +33,14 @@ import com.ssic.education.utils.util.UUIDGenerator;
 public class MotiveController extends BaseController {
 
 	@Autowired
-	private IEduInformationService iEduInformationService;
-
-	@Autowired
 	private IEduCommitteeService iEduCommitteeService;
 
 	@Autowired
 	private EduSchoolService eduSchoolService;
 
+	@Autowired
+	private IEduInformationService iEduInformationService;
+	
 	@Autowired
 	private IEduInformationListService iEduInformationListService;
 	

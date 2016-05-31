@@ -46,10 +46,10 @@ public class WapSchoolMenuController extends BaseController{
 	 */
 	@RequestMapping(value="search")
 	@ResponseBody
-	public Response<List<ProPackagesDto>> search(String customerId,String timeDate){
+	public Response<List<ProPackagesDto>> search(String customerId,String timeDate,Integer type){
 		
 		Response<List<ProPackagesDto>> response = new Response<List<ProPackagesDto>>();
-		List<ProPackagesDto> dataList =  proPackagesService.searchProSchoolPackage(customerId,timeDate);
+		List<ProPackagesDto> dataList =  proPackagesService.searchProSchoolPackage(customerId,timeDate,type);
 		
 		
 //		packageId ->  t_pro_dishes -> t_pro_wares

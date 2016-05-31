@@ -21,8 +21,8 @@ import com.ssic.education.app.dto.MapToListDto;
 import com.ssic.education.app.dto.TaskReceiveDto;
 import com.ssic.education.app.service.ICommitteeService;
 import com.ssic.education.app.service.ISchoolService;
-import com.ssic.education.app.service.ITaskService;
 import com.ssic.education.handle.service.EduUsersService;
+import com.ssic.education.handle.service.ITaskService;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
@@ -139,6 +139,8 @@ public class TaskController {
 			eduTaskReceiveDto.setTaskId(eduTaskDto.getId());
 			List<EduTaskReceiveDto> receives = taskService.findTaskReceiveList(eduTaskReceiveDto);
 			StringBuffer sb = new StringBuffer() ;
+			StringBuffer sb_read = new StringBuffer() ;
+			StringBuffer sb_notRead = new StringBuffer() ;
 			int reads = 0;
 			int notReads = 0;
 			if(receives != null && receives.size() > 0){
@@ -147,8 +149,10 @@ public class TaskController {
 						sb.append(receive.getReceiveName()+";");
 					}
 					if(receive.getReadstat() == 0){
+						sb_read.append(receive.getReceiveName()+";");
 						notReads++;
 					}else{
+						sb_notRead.append(receive.getReceiveName()+";");
 						reads++;
 					}
 				}
@@ -156,6 +160,8 @@ public class TaskController {
 			if(StringUtils.isNotEmpty(sb.toString())){
 				taskDto.setReceiveNames(sb.toString().substring(0, sb.toString().length()-1));   //去逗号
 			}
+			taskDto.setReadNames(sb_read.toString());
+			taskDto.setNotReadNames(sb_notRead.toString());
 			taskDto.setReads(reads);
 			taskDto.setNotReads(notReads);
 		}

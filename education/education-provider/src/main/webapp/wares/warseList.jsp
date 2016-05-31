@@ -100,7 +100,7 @@ else
 			}, {
 				field : 'spec',
 				title : '规格',
-				width : 150,
+				width : 50,
 				formatter : function(value, row, index) {
 					if(value!=null){
 					return '<font style="font-style: normal;font-weight: bolder; font-size:18px;">'
@@ -124,7 +124,7 @@ else
 			},{
 				field : 'shelfLife',
 				title : '保质期',
-				width : 150,
+				width : 50,
 				formatter : function(value, row, index) {
 					if(value!=null){
 					return '<font style="font-style: normal;font-weight: bolder;word-wrap:break-word;white-space:normal;font-size:18px;">'
@@ -136,7 +136,7 @@ else
 			},{
 				field : 'unit',
 				title : '保质期单位',
-				width : 150,
+				width : 50,
 				formatter : function(value, row, index) {
 					if(value!=null){
 					return '<font style="font-style: normal;font-weight: bolder;word-wrap:break-word;white-space:normal;font-size:18px;">'
@@ -148,7 +148,7 @@ else
 			}, {
 				field : 'waresTypeName',
 				title : '商品分类',
-				width : 100,
+				width : 120,
 				formatter : function(value, row, index) {
 					return	'<font style="font-style: normal;font-weight: bolder;word-wrap:break-word;white-space:normal;font-size:18px;">'
 					+ value + '</font>'
@@ -217,7 +217,7 @@ else
 			,{
 				field : 'action',
 				title : '操作',
-				width : 140,
+				width : 100,
 				formatter : function(value, row, index) {
 					var str = '';
 					if ($.canEdit) {

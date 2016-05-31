@@ -11,6 +11,7 @@ import com.ssic.education.app.dto.MaterialSupplierDto;
 import com.ssic.education.app.dto.SupplierLicDto;
 import com.ssic.education.app.service.ISupplierService;
 import com.ssic.education.handle.dao.SupplierDao;
+import com.ssic.education.handle.pojo.ProLicense;
 import com.ssic.education.handle.pojo.ProSupplier;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
@@ -68,5 +69,17 @@ public class SuppliersServiceImpl implements ISupplierService {
 		}
 		return null;
 
+	}
+
+	public String findLicByLicType(ProLicense license) {
+		List<ProLicense> licenseList = this.supplierInfoDao.getLic(license);
+		if (null != licenseList && !licenseList.isEmpty()) {
+			if (licenseList.size() > 2) {
+				return "重复";
+			} else {
+				return licenseList.get(0).getLicPic();
+			}
+		}
+		return null;
 	}
 }

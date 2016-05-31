@@ -38,7 +38,7 @@
 			}, */ {
 				field : 'schoolName',
 				title : '名称',
-				width : 80,
+				width : 150,
 				formatter : function(value, row, index) {
 					if(value!=null){
 					return '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">'
@@ -51,7 +51,7 @@
 			columns : [ [ {
 				field : 'address',
 				title : '地址',
-				width : 60,
+				width : 180,
 				formatter : function(value, row, index) {
 					if(value!=null){
 					return '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">'

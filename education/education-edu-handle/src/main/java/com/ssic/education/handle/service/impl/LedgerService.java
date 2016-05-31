@@ -74,4 +74,9 @@ public class LedgerService implements ILedgerService {
 		return 0;
 	}
 
+	@Override
+	public Map<ProLedgerMaster,List<ProLedger>> findExportProSupplier(LedgerDto ld) {
+		return ledgerDao.findExportProSupplier(ld);
+	}
+
 }
