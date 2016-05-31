@@ -9,10 +9,8 @@ import com.ssic.educateion.common.dto.ProLicenseDto;
 import com.ssic.educateion.common.dto.ProSupplierDto;
 import com.ssic.education.handle.dao.ProLicenseDao;
 import com.ssic.education.handle.dao.ProSupplierDao;
-import com.ssic.education.handle.dao.ViewProSupplierDao;
 import com.ssic.education.handle.pojo.ProLicense;
 import com.ssic.education.handle.pojo.ProSupplier;
-import com.ssic.education.handle.pojo.ViewProSupplierWithBLOBs;
 import com.ssic.education.handle.service.ProSupplierService;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
@@ -24,8 +22,7 @@ public class ProSupplierServiceImpl implements ProSupplierService{
 
 	@Autowired
 	private ProSupplierDao proSupplierDao;
-	@Autowired
-	private ViewProSupplierDao viewProSupplierDao;
+
 	@Autowired
 	private ProLicenseDao proLicenseDao;
 
