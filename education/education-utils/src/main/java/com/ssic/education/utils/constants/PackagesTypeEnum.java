@@ -1,5 +1,11 @@
 package com.ssic.education.utils.constants;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * @ClassName: packagesTypeEnum
  * @Description: 套餐类型枚举类
@@ -9,25 +15,17 @@ package com.ssic.education.utils.constants;
  */
 public enum PackagesTypeEnum {
 	DOMESTIC(0, "国内班"),INTERNATIONAL(1, "国际班"),STAFF(2, "教工");
+	
+	@Getter
+	@Setter
 	private int index;
+	
+	@Getter
+	@Setter
 	private String value;
+	
 	PackagesTypeEnum(int index, String value){
 		this.index = index;
-		this.value = value;
-	}
-	public int getIndex() {
-		return index;
-	}
-
-	public void setIndex(int index) {
-		this.index = index;
-	}
-
-	public String getValue() {
-		return value;
-	}
-
-	public void setValue(String value) {
 		this.value = value;
 	}
 
@@ -44,5 +42,17 @@ public enum PackagesTypeEnum {
 			}
 		}
 		return null;
+	}
+	
+	 private static final Map<Integer, String> packagesTypeMap = new LinkedHashMap<Integer, String>();
+	    
+     static{
+         	for(PackagesTypeEnum packages : PackagesTypeEnum.values()){
+         		packagesTypeMap.put(packages.getIndex(), packages.getValue());
+         	}
+     }
+	public static Map<Integer, String> getAll() {
+	    
+	    return packagesTypeMap;		
 	}
 }

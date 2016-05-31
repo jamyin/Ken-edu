@@ -219,9 +219,23 @@ public class UserController extends BaseController {
 			   j.setMsg("手机不合法");
 			   return j;
 		   }
-
+		
 	
 		try {
+			int number=userService.findByNameCount(user);
+			if(number>0){
+				j.setSuccess(false);
+				j.setMsg("用户名不能重复");
+				j.setObj(user);
+				return j;
+			}
+			   if(StringUtils.isEmpty(user.getUserType())){
+				   j.setSuccess(false);
+				   j.setMsg("用户角色不能为空");
+				   return j;
+			   }
+			
+			
 			SessionInfo info = (SessionInfo) request.getSession().getAttribute(ConfigUtil.SESSIONINFONAME);
 			user.setSourceId(info.getSupplierId());
 				//添加t_admin_uses
@@ -245,7 +259,7 @@ public class UserController extends BaseController {
 	@RequestMapping("/editPage")
 	public String editPage(HttpServletRequest request, String id) {
 		TImsUsersDto u = userService.getUser(id);
-		if(u.getIsAdmin()==1){
+		if(u.getIsAdmin()==1  && u.getIsAdmin()==null){
 			u.setUserType(null);
 		}
 	    request.setAttribute("user", u);

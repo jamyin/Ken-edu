@@ -10,6 +10,8 @@ public class ProLedgerDto implements Serializable {
 
 	private String id;
 
+	private String masterId;
+	
 	private String waresId;
 
 	private String name;
@@ -45,5 +47,7 @@ public class ProLedgerDto implements Serializable {
 	private Date lastUpdateTime;
 
 	private Integer stat;
+	
+	private String driverName;
 
 }

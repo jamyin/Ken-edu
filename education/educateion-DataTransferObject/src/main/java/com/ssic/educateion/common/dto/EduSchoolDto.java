@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 
 import com.ssic.education.utils.constants.SchoollevelEnum;
+import com.ssic.education.utils.model.PageResult;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,6 +37,7 @@ public class EduSchoolDto implements Serializable {
     private String latitude;
     private String levels;
     private String level;
+    public List<MapToListDto> typeList;
     public void setLevel(String level) {
     	if (StringUtils.isNotBlank(level)) {
     		String[] stringArr= level.split(",");
@@ -63,6 +65,7 @@ public class EduSchoolDto implements Serializable {
     private Integer stat;
 	
 	private List<ProPackagesDto> packagesDtoList;
+	private PageResult<ProPackagesDto> packagesList;; //分页
 	
 	private Integer source;
 	private String waresName;

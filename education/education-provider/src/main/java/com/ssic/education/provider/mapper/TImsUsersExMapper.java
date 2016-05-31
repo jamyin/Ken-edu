@@ -28,5 +28,7 @@ public interface TImsUsersExMapper {
 
 	List<TImsUsersDto> findAllDriver(String sourceId);
 
+	int findByNameCount(@Param("users")TImsUsersDto user);
+
 //	List<ProjectDto> findByUserId(String userId);
 }

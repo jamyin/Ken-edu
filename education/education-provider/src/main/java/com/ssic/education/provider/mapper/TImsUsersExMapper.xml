@@ -15,6 +15,20 @@
 		source_id
 		=#{ledgerDto.sourceId}
 	</select>
+	
+	
+		<select id="findByNameCount" resultType="int">
+		SELECT
+		count(1)
+		FROM
+		t_pro_users
+		WHERE
+		stat = 1
+		AND
+		user_account=#{users.userAccount}
+	</select>
+	
+	
 	<select id="findBy" resultType="com.ssic.education.provider.dto.TImsUsersDto">
 		select users.id as id, age as age,create_time as
 		createdatetime,source_id as sourceId,gender as gender,isAdmin as isAdmin,isDelete as

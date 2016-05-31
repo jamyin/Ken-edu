@@ -230,4 +230,17 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 		return map;
 	}
 
+	public List<ProLedger> searchProLedger(List<String> ledgerMasterIds) {
+		ProLedgerExample example = new ProLedgerExample();
+		ProLedgerExample.Criteria criteria = example.createCriteria();
+		
+		if (ledgerMasterIds!=null && ledgerMasterIds.size()>0) {
+			 criteria.andMasterIdIn(ledgerMasterIds);
+		}
+		criteria.andStatEqualTo(DataStatus.ENABLED);
+
+
+		return mapper.selectByExample(example);
+	}
+
 }
