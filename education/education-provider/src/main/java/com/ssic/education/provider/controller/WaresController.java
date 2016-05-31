@@ -297,7 +297,7 @@ public class WaresController extends BaseController {
 		
 		ProLicense license = new ProLicense();
 		//判断图片是否重复上传
-/*		List<ProLicense> list2=	proLicenseServiceImpl.selectByRelationId(id);
+	List<ProLicense> list2 = proLicenseServiceImpl.selectByRelationId(id);
 				
 		for (int i = 0; i < list2.size(); i++) {
 			if(list2.get(i).getLicName().equals("商品图片")){
@@ -315,7 +315,7 @@ public class WaresController extends BaseController {
 				json.setSuccess(false);
 				return json;
 			}
-		}*/
+		}
 		Map<String, Object> map1 = createImageServiceImpl.createImage(image,
 				spImgUrl, request, response);
 		Map<String, Object> map2 = createImageServiceImpl.createImage(image,
@@ -474,18 +474,18 @@ public class WaresController extends BaseController {
 			List<String> titles = new ArrayList<String>();
 			titles.add("名称");
 			titles.add("规格");
+			titles.add("采购品分类");
 			titles.add("生产企业");
+			titles.add("英文名");
+			titles.add("商品包装条码");
+			titles.add("产品编码");
 			titles.add("保质期");
 			titles.add("保质期单位");
-			titles.add("商品分类");
-			titles.add("企业自定义编码");
-			titles.add("商品条形码");
-			titles.add("英文名");
 			titles.add("产地");
 			dataMap.put("titles", titles);
 
 			List<ProWaresDto> expList = waresService.findAllWares(proWaresDto,
-					phdto);
+					null);
 
 			List<PageData> varList = new ArrayList<PageData>();
 			if (!CollectionUtils.isEmpty(expList)) {
@@ -493,14 +493,14 @@ public class WaresController extends BaseController {
 					PageData vpd = new PageData();
 					vpd.put("var1", expList.get(i).getWaresName());
 					vpd.put("var2", expList.get(i).getSpec());
-					vpd.put("var3", expList.get(i).getManufacturer());
-					vpd.put("var4", expList.get(i).getShelfLife());
-					vpd.put("var5", expList.get(i).getUnit());
+					vpd.put("var3", ProductClass.getName(expList.get(i).getWaresType()));
+					vpd.put("var4", expList.get(i).getManufacturer());
+					vpd.put("var5", expList.get(i).getEnName());
 					vpd.put("var6",
-							ProductClass.getName(expList.get(i).getWaresType()));
+							expList.get(i).getBarCode());
 					vpd.put("var7", expList.get(i).getCustomCode());
-					vpd.put("var8", expList.get(i).getBarCode());
-					vpd.put("var9", expList.get(i).getEnName());
+					vpd.put("var8", expList.get(i).getShelfLife());
+					vpd.put("var9", expList.get(i).getUnit());
 					vpd.put("var10", expList.get(i).getPlace());
 					varList.add(vpd);
 				}
