@@ -271,6 +271,9 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 		if (StringUtils.isNotBlank(dto.getCustomerId())) {
 			criteria.andCustomerIdEqualTo(dto.getCustomerId());    //查询当前学校
 		}
+		if(dto.getType() != null){
+			criteria.andTypeEqualTo(dto.getType());          //类型
+		}
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		if (null != page) {
             example.setOrderByClause("stat desc,create_time desc limit " + page.getStartNum() + "," + page.getPageSize());
