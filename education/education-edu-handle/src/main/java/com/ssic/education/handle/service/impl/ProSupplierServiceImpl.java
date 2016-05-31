@@ -38,14 +38,14 @@ public class ProSupplierServiceImpl implements ProSupplierService{
 		return proSupplierDao.findPage(dto, null);
 	}
 
-	public List<ProSupplierDto> querySupplierByParams(ProSupplierDto params) {
-		List<ViewProSupplierWithBLOBs> viewProSuppliers = viewProSupplierDao.queryViewSupplier(params, null);
-
-		if (null != viewProSuppliers && viewProSuppliers.size() > 0){
-			return BeanUtils.createBeanListByTarget(viewProSuppliers, ProSupplierDto.class);
-		}
-		return null;
-	}
+//	public List<ProSupplierDto> querySupplierByParams(ProSupplierDto params) {
+//		List<ViewProSupplierWithBLOBs> viewProSuppliers = viewProSupplierDao.queryViewSupplier(params, null);
+//
+//		if (null != viewProSuppliers && viewProSuppliers.size() > 0){
+//			return BeanUtils.createBeanListByTarget(viewProSuppliers, ProSupplierDto.class);
+//		}
+//		return null;
+//	}
 
 	public PageResult<ProSupplierDto> findSupplierPageBySchoolId(ProSupplierDto dto, PageQuery query) {
 		List<ProSupplierDto> results = proSupplierDao.findSupplierListBySchoolId(dto, query);
@@ -53,18 +53,40 @@ public class ProSupplierServiceImpl implements ProSupplierService{
 		return new PageResult<>(query, results);
 	}
 	
-	public PageResult<ProSupplierDto> querySupplierByParams(ProSupplierDto params, PageQuery query) {
-		int total = viewProSupplierDao.countViewSupplier(params);
-		if (total > 0) {
-			query.setTotal(total);
-			List<ViewProSupplierWithBLOBs> viewProSuppliers = viewProSupplierDao.queryViewSupplier(params, query);
-			if (null != viewProSuppliers && viewProSuppliers.size() > 0) {
-				List<ProSupplierDto> result = BeanUtils.createBeanListByTarget(viewProSuppliers, ProSupplierDto.class);
-				return new PageResult<>(query, result);
-			}
-		}
-		return null;
-	}
+//	public PageResult<ProSupplierDto> querySupplierByParams(ProSupplierDto params, PageQuery query) {
+//		int total = viewProSupplierDao.countViewSupplier(params);
+//		if (total > 0) {
+//			query.setTotal(total);
+//			List<ViewProSupplierWithBLOBs> viewProSuppliers = viewProSupplierDao.queryViewSupplier(params, query);
+//			if (null != viewProSuppliers && viewProSuppliers.size() > 0) {
+//				List<ProSupplierDto> result = BeanUtils.createBeanListByTarget(viewProSuppliers, ProSupplierDto.class);
+//				return new PageResult<>(query, result);
+//			}
+//		}
+//		return null;
+//	}
+//	public List<ProSupplierDto> querySupplierByParams(ProSupplierDto params) {
+//		List<ViewProSupplierWithBLOBs> viewProSuppliers = viewProSupplierDao.queryViewSupplier(params, null);
+//
+//		if (null != viewProSuppliers && viewProSuppliers.size() > 0){
+//			return BeanUtils.createBeanListByTarget(viewProSuppliers, ProSupplierDto.class);
+//		}
+//		return null;
+//	}
+//
+//	
+//	public PageResult<ProSupplierDto> querySupplierByParams(ProSupplierDto params, PageQuery query) {
+//		int total = viewProSupplierDao.countViewSupplier(params);
+//		if (total > 0) {
+//			query.setTotal(total);
+//			List<ViewProSupplierWithBLOBs> viewProSuppliers = viewProSupplierDao.queryViewSupplier(params, query);
+//			if (null != viewProSuppliers && viewProSuppliers.size() > 0) {
+//				List<ProSupplierDto> result = BeanUtils.createBeanListByTarget(viewProSuppliers, ProSupplierDto.class);
+//				return new PageResult<>(query, result);
+//			}
+//		}
+//		return null;
+//	}
 	
 	public ProSupplierDto findById(String id) {
 		ProSupplier proSupplier =  proSupplierDao.selectByPrimaryKey(id);

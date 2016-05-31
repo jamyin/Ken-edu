@@ -280,7 +280,7 @@
 </head>
 <body>
 	<div class="easyui-layout" data-options="fit : true,border : false">
-		<div data-options="region:'north',title:'查询条件',border:false" style="height: 100px; overflow: hidden;">
+		<div data-options="region:'north',title:'查询条件',border:false" style="height: 80px; overflow: hidden;">
 			
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">
@@ -296,7 +296,7 @@
 			</form>
 		</div>
 		<div data-options="region:'center',border:false" id="g">
-			<table id="dataGrid"></table>
+			<table id="dataGrid"  data-options="collapsible:true"  title="配货管理表单" ></table>
 			<style>
 						#g .datagrid-btable tr{height: 57px;}
 				</style>
