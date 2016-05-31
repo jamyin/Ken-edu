@@ -13,8 +13,6 @@ import com.ssic.education.app.dto.WaresListDto;
 import com.ssic.education.app.dto.WaresRelatedDto;
 import com.ssic.education.app.mapper.WaresInfoExMapper;
 import com.ssic.education.handle.mapper.ProWaresMapper;
-import com.ssic.education.handle.pojo.ProLedger;
-import com.ssic.education.handle.pojo.ProLedgerExample;
 import com.ssic.education.handle.pojo.ProWares;
 import com.ssic.education.handle.pojo.ProWaresExample;
 import com.ssic.education.utils.constants.DataStatus;

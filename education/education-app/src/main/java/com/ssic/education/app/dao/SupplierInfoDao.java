@@ -15,8 +15,11 @@ import com.ssic.education.app.dto.SupplierLicDto;
 import com.ssic.education.app.mapper.SupplierInfoExMapper;
 import com.ssic.education.handle.mapper.ProLedgerMapper;
 import com.ssic.education.handle.mapper.ProLedgerMasterMapper;
+import com.ssic.education.handle.mapper.ProLicenseMapper;
 import com.ssic.education.handle.mapper.ProSupplierMapper;
 import com.ssic.education.handle.mapper.ProSupplierReceiverMapper;
+import com.ssic.education.handle.pojo.ProLicense;
+import com.ssic.education.handle.pojo.ProLicenseExample;
 import com.ssic.education.handle.pojo.ProSupplier;
 import com.ssic.education.handle.pojo.ProSupplierExample;
 import com.ssic.education.handle.pojo.ProSupplierReceiver;
@@ -46,20 +49,25 @@ public class SupplierInfoDao {
 
 	@Getter
 	@Autowired
+	private ProLedgerMapper ledgerMapper;
+
+	@Getter
+	@Autowired
+	private ProLicenseMapper licenseMapper;
+
+	@Getter
+	@Autowired
 	private ProSupplierMapper SupplierMapper;
 
 	@Getter
 	@Autowired
 	private ProLedgerMasterMapper ledgerMasterMapper;
-	@Getter
-	@Autowired
-	private ProLedgerMapper ledgerMapper;
+
 	@Getter
 	@Autowired
 	private ProSupplierReceiverMapper supplierReceiverMapper;
 
 	/**
-	 * 
 	 * getSupplierInfoById：供应商资质查询
 	 * @param supplier_id
 	 * @author SeanYounG
@@ -144,6 +152,20 @@ public class SupplierInfoDao {
 
 	public List<MaterialSupplierDto> getSupplierListById(String supplier_id) {
 		return mapper.getSupplierListById(supplier_id);
+	}
+
+	public List<ProLicense> getLic(ProLicense license) {
+		ProLicenseExample example = new ProLicenseExample();
+		ProLicenseExample.Criteria criteria = example.createCriteria();
+		if (StringUtils.isNotBlank(license.getRelationId())) {
+			criteria.andRelationIdEqualTo(license.getRelationId());
+			criteria.andCerSourceEqualTo((short) 0);
+		}
+		if (null != license.getLicType() && license.getLicType() != 0) {
+			criteria.andLicTypeEqualTo(license.getLicType());
+		}
+		criteria.andStatEqualTo(DataStatus.ENABLED);
+		return licenseMapper.selectByExample(example);
 	}
 
 	public String getSupplierName(String supplierId) {
