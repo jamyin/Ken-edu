@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
 .panel-body {
-	font-size: 18px !important;
+	font-size: 13px !important;
 }
 </style>
 <script type="text/javascript">
@@ -49,10 +49,10 @@
 							var lastId = $(lastTr).attr("id");
 							var nextId=parseInt(lastId.substring(6))+1;
 							var a=$(lastTr).html().replace(/ledger\[[0-9]+]/g,"ledger["+nextId+"]");
-							var b="<tr id='ledger"+nextId+"'>"+a.replace('<td><a id="addLedger" ><font size="15" >+</font></a></td>',"")+"</tr>";
+							var b="<tr id='ledger"+nextId+"'>"+a.replace('<td><a id="addLedger" ><font size="8" >+</font></a></td>',"")+"</tr>";
 							var c=b.replace(/title=""/g,"");
 							$(c).insertAfter($(lastTr));
-							$("<a id='subtract' onclick='subtractLedger(this);' data-id='ledger"+nextId+"' style='text-decoration:none;' ><font size='15' >-</font></a>").replaceAll("#ledger"+nextId+" a");
+							$("<a id='subtract' onclick='subtractLedger(this);' data-id='ledger"+nextId+"' style='text-decoration:none;' ><font size='8' >-</font></a>").replaceAll("#ledger"+nextId+" a");
 							$.parser.parse();
 						});
 	});
@@ -115,7 +115,7 @@
 						placeholder="点击选择日期" class="easyui-validatebox span2"
 						onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})"
 						readonly="readonly"></td>
-					<td><a id="addLedger" style='text-decoration:none;' ><font size="15" >+</font></a></td>
+					<td><a id="addLedger" style='text-decoration:none;' ><font size="8" >+</font></a></td>
 					<td><input type="hidden" name="ledger[0].mark" value="1" ></td>
 				</tr>
 				</table>
