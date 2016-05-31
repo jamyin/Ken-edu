@@ -82,9 +82,9 @@
 						<tr>
 						<th>账户权限</th>
 						<td>
-						<label><input name="userType" type="radio" value="0" />管理员 </label> </td>
+						<label><input name="userType" type="radio" value="0" data-options="required:true"/>管理员 </label> </td>
 						<td>
-						<label><input name="userType" type="radio" value="1" />驾驶员</label> 
+						<label><input name="userType" type="radio" value="1" data-options="required:true"/>驾驶员</label> 
 						</td>
 						</tr>
 						<tr>
