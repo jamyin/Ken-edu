@@ -81,7 +81,7 @@
 			<#list proPackagesDtos as proPackages>
 				<div class="lunch row">
 				<#if proPackages.supplyPhase??>
-					<label class="ct1"><#if proPackages.supplyPhase == 1>午餐</#if><#if proPackages.supplyPhase == 3>晚餐</#if></label>
+					<label class="ct1"><#if proPackages.supplyPhase == 0>早餐</#if><#if proPackages.supplyPhase == 1>午餐</#if><#if proPackages.supplyPhase == 2>午后甜点</#if><#if proPackages.supplyPhase == 3>晚餐</#if><#if proPackages.supplyPhase == 3>夜宵</#if></label>
 					<ul>
 						<#if proPackages.proPackagesDtos??>
 							<#list proPackages.proPackagesDtos as packages>

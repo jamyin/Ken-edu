@@ -18,6 +18,7 @@ import com.google.gson.reflect.TypeToken;
 import com.ssic.educateion.common.dto.ProDishesDto;
 import com.ssic.educateion.common.dto.ProNutritionalDto;
 import com.ssic.educateion.common.dto.ProPackagesDto;
+import com.ssic.education.handle.mapper.EduParentPackCommentMapper;
 import com.ssic.education.handle.mapper.EduSchoolExMapper;
 import com.ssic.education.handle.mapper.ProDishesExMapper;
 import com.ssic.education.handle.mapper.ProDishesMapper;
@@ -25,6 +26,8 @@ import com.ssic.education.handle.mapper.ProNutritionalExMapper;
 import com.ssic.education.handle.mapper.ProNutritionalMapper;
 import com.ssic.education.handle.mapper.ProPackagesMapper;
 import com.ssic.education.handle.mapper.ProWaresMapper;
+import com.ssic.education.handle.pojo.EduParentPackComment;
+import com.ssic.education.handle.pojo.EduParentPackCommentExample;
 import com.ssic.education.handle.pojo.ProDishes;
 import com.ssic.education.handle.pojo.ProDishesExample;
 import com.ssic.education.handle.pojo.ProNutritional;
@@ -69,6 +72,9 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 	
 	@Autowired
 	private ProNutritionalExMapper nuExMapper;
+	
+	@Autowired
+	private EduParentPackCommentMapper eppcMapper;
 	
 	@Transactional
 	public void delete(String id) {
@@ -354,5 +360,15 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 			proPackagesDto.setProNutritionalDtos(proNutritionalDtos);
 		}
 		return proPackagesDtos;
+	}
+	
+	public long findListByPackages(String packageId) {
+		EduParentPackCommentExample example = new EduParentPackCommentExample();
+		EduParentPackCommentExample.Criteria criteria = example.createCriteria();
+		if (StringUtils.isNotBlank(packageId)) {
+			criteria.andPackageIdEqualTo(packageId);
+		}
+		criteria.andStatEqualTo(DataStatus.ENABLED);
+		return eppcMapper.countByExample(example);
 	}
 }
