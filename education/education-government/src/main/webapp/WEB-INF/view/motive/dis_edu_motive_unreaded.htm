@@ -6,6 +6,10 @@
         <link rel="stylesheet" href="/static/css/common.css">
         <link rel="stylesheet" href="/static/css/style.css">
         <link rel="stylesheet" href="/static/css/dis_edu.css">
+        <style type="text/css">
+		a:link, a:visited {color:#333;}
+		.page .page_to_go{border: 1px;}
+		</style>
     </head>
     <body>
 <!--         <div class="header">
@@ -44,18 +48,18 @@
                 <div class="tab_wrap">
                     <ul class="side_menu">
                     	<#if sourceType == 0>
-                        	<li><a href="/motive/release.htm">新建</a></li>
+                        	<a href="/motive/release.htm"><li>新建</li></a>
                         	<li class="active">已发</li>
                         </#if>
                         <#if sourceType == 1>
 	                        <li class="active">未读</li>
-	                        <li><a href="/motive/readed.htm">已读</a></li>
+	                        <a href="/motive/readed.htm"><li>已读</li></a>
                         </#if>
                         <#if sourceType == 2>
-                        <li><a href="/motive/release.htm">新建</a></li>
-                        <li><a href="/motive/sended.htm">已发</a></li>
+                        <a href="/motive/release.htm"><li>新建</li></a>
+                        <a href="/motive/sended.htm"><li>已发</li></a>
                         <li class="active">未读</li>
-                        <li><a href="/motive/readed.htm">已读</a></li>
+                        <a href="/motive/readed.htm"><li>已读</li></a>
                         </#if>                     
 <!--                         <li><a href="/motive/release.htm">新建</a></li>
                         <li class="active">未读</li>

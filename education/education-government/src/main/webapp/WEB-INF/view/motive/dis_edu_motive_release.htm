@@ -8,7 +8,10 @@
         <link rel="stylesheet" href="/static/css/dis_edu.css">
         <link rel="stylesheet" href="/static/css/themes/default/default.css" />
         <link rel="stylesheet" href="/static/css/plugins/code/prettify.css" />
-
+		<style type="text/css">
+		a:link, a:visited {color:#333;}
+		.page .page_to_go{border: 1px;}
+		</style>
     </head>
     <body>
        <!--  <div class="header">
@@ -39,17 +42,17 @@
                     <ul class="side_menu">
                     	<#if sourceType == 0>
                         	<li class="active">新建</li>
-                        	<li><a href="/motive/sended.htm">已发</a></li>
+                        	<a href="/motive/sended.htm"><li>已发</li></a>
                         </#if>
                         <#if sourceType == 1>
-	                        <li><a href="/motive/unreaded.htm">未读</a></li>
-	                        <li><a href="/motive/readed.htm">已读</a></li>                        
+	                       <a href="/motive/unreaded.htm"><li>未读</li></a>
+	                       <a href="/motive/readed.htm"><li>已读</li></a>               
                         </#if>
                         <#if sourceType == 2>
 							<li class="active">新建</li>
-                        	<li><a href="/motive/sended.htm">已发</a></li>
-	                        <li><a href="/motive/unreaded.htm">未读</a></li>
-	                        <li><a href="/motive/readed.htm">已读</a></li>
+                        	<a href="/motive/sended.htm"><li>已发</li></a>
+	                        <a href="/motive/unreaded.htm"><li>未读</li></a>
+	                        <a href="/motive/readed.htm"><li>已读</li></a>
                         </#if>                        
                         <!-- 
                         <li><a href="/motive/unreaded.htm">未读</a></li>
