@@ -1,8 +1,7 @@
 /*
-SQLyog Enterprise - MySQL GUI v6.06 Beta 1
-Host - 5.5.42-log : Database - new_edu
+SQLyog Ultimate v11.27 (32 bit)
+MySQL - 5.5.42-log : Database - new_edu
 *********************************************************************
-Server version : 5.5.42-log
 */
 
 
@@ -10,9 +9,10 @@ Server version : 5.5.42-log
 
 /*!40101 SET SQL_MODE=''*/;
 
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 /*Table structure for table `t_admin_menu` */
 
 DROP TABLE IF EXISTS `t_admin_menu`;
@@ -145,9 +145,7 @@ CREATE TABLE `t_admin_users_role` (
   `stat` int(11) DEFAULT '1' COMMENT '是否有效 1 有效 0失效',
   PRIMARY KEY (`id`),
   KEY `FK_cst9w4q9kmdknxckc42i1iclo` (`role_id`),
-  KEY `FK_hln6xj2t05u8g67fl2v1j46o3` (`user_id`),
-  CONSTRAINT `t_admin_users_role_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `t_admin_role` (`id`),
-  CONSTRAINT `t_admin_users_role_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `t_admin_users` (`id`)
+  KEY `FK_hln6xj2t05u8g67fl2v1j46o3` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Table structure for table `t_edu_area` */
@@ -239,10 +237,11 @@ DROP TABLE IF EXISTS `t_edu_information_list`;
 CREATE TABLE `t_edu_information_list` (
   `id` varchar(36) NOT NULL,
   `infomation_id` varchar(36) DEFAULT NULL,
-  `info_title` varchar(100) DEFAULT NULL,
-  `source_id` varchar(36) DEFAULT NULL,
-  `source_name` varchar(100) DEFAULT NULL,
-  `create_id` varchar(36) DEFAULT NULL,
+  `info_title` varchar(100) DEFAULT NULL COMMENT '标题',
+  `source_id` varchar(36) DEFAULT NULL COMMENT '来源Id 教委 或学校',
+  `source_name` varchar(100) DEFAULT NULL COMMENT '来源名称',
+  `create_id` varchar(36) DEFAULT NULL COMMENT '创建者Id',
+  `is_read` int(4) DEFAULT '0' COMMENT '是否读取 1是 0 否',
   `create_time` datetime DEFAULT NULL,
   `last_update_time` datetime DEFAULT NULL,
   `stat` int(4) DEFAULT NULL,
@@ -509,9 +508,12 @@ DROP TABLE IF EXISTS `t_edu_task_receive`;
 CREATE TABLE `t_edu_task_receive` (
   `id` varchar(36) NOT NULL COMMENT '主键id',
   `task_id` varchar(36) DEFAULT NULL COMMENT '任务Id',
+  `task_title` varchar(100) DEFAULT NULL COMMENT '任务通知的标题',
   `readstat` int(4) DEFAULT '0' COMMENT '阅读状态(0:未读;1:已读)',
   `receive_id` varchar(36) DEFAULT NULL COMMENT '接收者Id',
-  `school_id` varchar(36) DEFAULT NULL COMMENT '组织Id(学校Id)',
+  `receive_name` varchar(100) DEFAULT NULL COMMENT '接收者名称 学校或教委',
+  `send_name` varchar(100) DEFAULT NULL COMMENT '发送者名称 学校或教委',
+  `school_id` varchar(36) DEFAULT NULL COMMENT '组织Id(学校Id) 暂时不用',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `last_update_time` datetime DEFAULT NULL COMMENT '最后更新时间',
   `stat` int(1) NOT NULL DEFAULT '1' COMMENT '数据状态',
@@ -651,6 +653,8 @@ CREATE TABLE `t_pro_ledger_master` (
   `source_id` varchar(36) DEFAULT NULL COMMENT '企业ID',
   `ware_batch_no` varchar(36) DEFAULT NULL COMMENT '发货批次',
   `haul_status` int(11) DEFAULT NULL COMMENT '配送状态 0 未配送 1配送中 2 已配送',
+  `start_time` datetime DEFAULT NULL COMMENT '配送开始时间',
+  `end_time` datetime DEFAULT NULL COMMENT '配送结束时间',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `last_update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `stat` int(11) DEFAULT NULL COMMENT '是否有效',
@@ -740,7 +744,7 @@ CREATE TABLE `t_pro_packages` (
   `grade` smallint(6) DEFAULT NULL COMMENT '年级',
   `supply_date` date DEFAULT NULL COMMENT '供应日期',
   `supply_phase` smallint(6) DEFAULT NULL COMMENT '供应阶段，0：早餐，1：午餐，2：午后甜点，3：晚餐，4：夜宵',
-  `create_time` date DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `last_update_time` datetime DEFAULT NULL COMMENT '最后修改日期',
   `stat` int(4) DEFAULT NULL COMMENT '是否有效',
   PRIMARY KEY (`id`)
@@ -988,9 +992,7 @@ CREATE TABLE `t_pro_users_role` (
   `stat` int(11) DEFAULT '1' COMMENT '是否有效 1 有效 0失效',
   PRIMARY KEY (`id`),
   KEY `FK_cst9w4q9kmdknxckc42i1iclo` (`role_id`),
-  KEY `FK_hln6xj2t05u8g67fl2v1j46o3` (`user_id`),
-  CONSTRAINT `t_pro_users_role_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `t_pro_role` (`id`),
-  CONSTRAINT `t_pro_users_role_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `t_pro_users` (`id`)
+  KEY `FK_hln6xj2t05u8g67fl2v1j46o3` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户权限表';
 
 /*Table structure for table `t_pro_wares` */
@@ -1038,75 +1040,7 @@ CREATE TABLE `t_pro_waste_recycler` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Table structure for table `v_sup_sch_area` */
-
-DROP TABLE IF EXISTS `v_sup_sch_area`;
-
-/*!50001 DROP VIEW IF EXISTS `v_sup_sch_area` */;
-/*!50001 DROP TABLE IF EXISTS `v_sup_sch_area` */;
-
-/*!50001 CREATE TABLE `v_sup_sch_area` (
-  `id` varchar(36) NOT NULL COMMENT '主键ID',
-  `supplier_name` varchar(60) DEFAULT NULL COMMENT '供应商名称',
-  `address` varchar(120) DEFAULT NULL COMMENT '供应商地址',
-  `provinces` varchar(36) DEFAULT NULL COMMENT '省',
-  `city` varchar(36) DEFAULT NULL COMMENT '市',
-  `area` varchar(36) DEFAULT NULL COMMENT '区',
-  `supplier_type` int(11) DEFAULT NULL COMMENT '供应商类型 0为不区分，1为成品菜供应商，2为原料供应商',
-  `business_license` varchar(20) DEFAULT NULL COMMENT '工商执照号',
-  `organization_code` varchar(60) DEFAULT NULL COMMENT '组织机构代码',
-  `corporation` varchar(20) DEFAULT NULL COMMENT '法人代表',
-  `contact_way` varchar(20) DEFAULT NULL COMMENT '联系方式',
-  `longitude` varchar(20) DEFAULT NULL COMMENT '精度',
-  `latitude` varchar(20) DEFAULT NULL COMMENT '维度',
-  `create_time` datetime NOT NULL COMMENT '创建时间',
-  `last_update_time` datetime DEFAULT NULL COMMENT '最后更新时间',
-  `stat` int(11) DEFAULT NULL COMMENT '是否有效',
-  `school_id` varchar(36) COMMENT '主键ID',
-  `school_name` varchar(50) DEFAULT NULL COMMENT '学校名称',
-  `area_name` varchar(36) DEFAULT NULL COMMENT '区域名称'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 */;
-
-/*Table structure for table `v_sup_sch_area_group` */
-
-DROP TABLE IF EXISTS `v_sup_sch_area_group`;
-
-/*!50001 DROP VIEW IF EXISTS `v_sup_sch_area_group` */;
-/*!50001 DROP TABLE IF EXISTS `v_sup_sch_area_group` */;
-
-/*!50001 CREATE TABLE `v_sup_sch_area_group` (
-  `id` varchar(36) NOT NULL COMMENT '主键ID',
-  `supplier_name` varchar(60) DEFAULT NULL COMMENT '供应商名称',
-  `address` varchar(120) DEFAULT NULL COMMENT '供应商地址',
-  `provinces` varchar(36) DEFAULT NULL COMMENT '省',
-  `city` varchar(36) DEFAULT NULL COMMENT '市',
-  `area` varchar(36) DEFAULT NULL COMMENT '区',
-  `area_name` varchar(36) DEFAULT NULL COMMENT '区域名称',
-  `supplier_type` int(11) DEFAULT NULL COMMENT '供应商类型 0为不区分，1为成品菜供应商，2为原料供应商',
-  `business_license` varchar(20) DEFAULT NULL COMMENT '工商执照号',
-  `organization_code` varchar(60) DEFAULT NULL COMMENT '组织机构代码',
-  `corporation` varchar(20) DEFAULT NULL COMMENT '法人代表',
-  `contact_way` varchar(20) DEFAULT NULL COMMENT '联系方式',
-  `longitude` varchar(20) DEFAULT NULL COMMENT '精度',
-  `latitude` varchar(20) DEFAULT NULL COMMENT '维度',
-  `create_time` datetime NOT NULL COMMENT '创建时间',
-  `school_ids` text,
-  `school_names` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 */;
-
-/*View structure for view v_sup_sch_area */
-
-/*!50001 DROP TABLE IF EXISTS `v_sup_sch_area` */;
-/*!50001 DROP VIEW IF EXISTS `v_sup_sch_area` */;
-
-/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`ims`@`%.%.%.%` SQL SECURITY DEFINER VIEW `v_sup_sch_area` AS select `sup`.`id` AS `id`,`sup`.`supplier_name` AS `supplier_name`,`sup`.`address` AS `address`,`sup`.`provinces` AS `provinces`,`sup`.`city` AS `city`,`sup`.`area` AS `area`,`sup`.`supplier_type` AS `supplier_type`,`sup`.`business_license` AS `business_license`,`sup`.`organization_code` AS `organization_code`,`sup`.`corporation` AS `corporation`,`sup`.`contact_way` AS `contact_way`,`sup`.`longitude` AS `longitude`,`sup`.`latitude` AS `latitude`,`sup`.`create_time` AS `create_time`,`sup`.`last_update_time` AS `last_update_time`,`sup`.`stat` AS `stat`,`sch`.`id` AS `school_id`,`sch`.`school_name` AS `school_name`,`a`.`address_name` AS `area_name` from ((`t_pro_supplier` `sup` left join (`t_edu_school_supplier` `tmp` left join `t_edu_school` `sch` on((`tmp`.`school_id` = `sch`.`id`))) on((`sup`.`id` = `tmp`.`supplier_id`))) left join `t_edu_area` `a` on((`sup`.`area` = `a`.`address_code`))) where ((`sup`.`stat` = 1) and (`a`.`stat` = 1) and (`sch`.`stat` = 1) and (`tmp`.`stat` = 1)) order by `sup`.`create_time` desc */;
-
-/*View structure for view v_sup_sch_area_group */
-
-/*!50001 DROP TABLE IF EXISTS `v_sup_sch_area_group` */;
-/*!50001 DROP VIEW IF EXISTS `v_sup_sch_area_group` */;
-
-/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`ims`@`%.%.%.%` SQL SECURITY DEFINER VIEW `v_sup_sch_area_group` AS select `v_sup_sch_area`.`id` AS `id`,`v_sup_sch_area`.`supplier_name` AS `supplier_name`,`v_sup_sch_area`.`address` AS `address`,`v_sup_sch_area`.`provinces` AS `provinces`,`v_sup_sch_area`.`city` AS `city`,`v_sup_sch_area`.`area` AS `area`,`v_sup_sch_area`.`area_name` AS `area_name`,`v_sup_sch_area`.`supplier_type` AS `supplier_type`,`v_sup_sch_area`.`business_license` AS `business_license`,`v_sup_sch_area`.`organization_code` AS `organization_code`,`v_sup_sch_area`.`corporation` AS `corporation`,`v_sup_sch_area`.`contact_way` AS `contact_way`,`v_sup_sch_area`.`longitude` AS `longitude`,`v_sup_sch_area`.`latitude` AS `latitude`,`v_sup_sch_area`.`create_time` AS `create_time`,group_concat(`v_sup_sch_area`.`school_id` separator ',') AS `school_ids`,group_concat(`v_sup_sch_area`.`school_name` separator ',') AS `school_names` from `v_sup_sch_area` group by `v_sup_sch_area`.`id` */;
-
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
