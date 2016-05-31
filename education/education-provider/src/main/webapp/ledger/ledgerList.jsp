@@ -52,7 +52,7 @@
 			}, */ {
 				field : 'wareBatchNo',
 				title : '配送号',
-				width : 80,
+				width : 150,
 				formatter : function(value, row, index) {
 					if(value!=null){
 					return '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">'
@@ -66,7 +66,7 @@
 			{
 				field : 'sendDate',
 				title : '配送日期',
-				width : 80,
+				width : 50,
 				formatter : function(value, row, index) {
 					if(value!=null){
 					return '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">'
@@ -79,7 +79,7 @@
 			{
 				field : 'name',
 				title : '采购品',
-				width : 50,
+				width : 150,
 				formatter : function(value, row, index) {
 					if(value!=null){
 					return '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">'
@@ -92,7 +92,7 @@
 			{
 				field : 'receiverName',
 				title : '配货点',
-				width : 50,
+				width : 150,
 				formatter : function(value, row, index) {
 					if(value!=null){
 					return '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">'
@@ -105,7 +105,7 @@
 			{
 				field : 'haulStatus',
 				title : '状态',
-				width : 50,
+				width : 30,
 			
 				formatter: function(value,row,index){
 					if (value==0){

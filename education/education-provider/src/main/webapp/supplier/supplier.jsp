@@ -51,7 +51,7 @@
 			             {
 			 				field : 'supplierName',
 			 				title : '供应商名称',
-			 				width : 120,
+			 				width : 180,
 			 				
 			 				formatter : function(value, row, index) {
 			 					if(value!=null){
@@ -77,7 +77,7 @@
 			 			},{
 			 				field : 'address',
 			 				title : '供应商地址',
-			 				width : 120,
+			 				width : 180,
 			 				
 			 				formatter : function(value, row, index) {
 			 					if(value!=null){
@@ -92,7 +92,7 @@
 			 			{
 			 				field : 'corporation',
 			 				title : '法人代表',
-			 				width : 120,
+			 				width : 80,
 			 				
 			 				formatter : function(value, row, index) {
 			 					if(value!=null){
@@ -105,7 +105,7 @@
 			 			},{
 			 				field : 'contactWay',
 			 				title : '联系方式',
-			 				width : 120,
+			 				width : 110,
 			 				
 			 				formatter : function(value, row, index) {
 			 					if(value!=null){
