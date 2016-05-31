@@ -206,16 +206,26 @@ public class TaskController {
 	 * @date 2016年5月20日 下午5:53:55
 	 * @return Response<String>    返回类型
 	 */
-	@RequestMapping("/upadteTask/{id}")
+	@RequestMapping("/upadteTask")
 	@ResponseBody
-	public Response<String> upadteTask(@PathVariable("id")String id){
+	public Response<String> upadteTask(EduTaskReceiveDto receiveDto){
 		Response<String> result = new Response<String>();
-		if(StringUtils.isEmpty(id)){
+		if(receiveDto == null){
+			result.setStatus(DataStatus.HTTP_FAILE);
+			result.setMessage("参数为空");
+			return result;
+		}
+		if(StringUtils.isEmpty(receiveDto.getTaskId()) ){
 			result.setStatus(DataStatus.HTTP_FAILE);
 			result.setMessage("任务Id为空");
 			return result;
 		}
-		Integer flag = taskService.updateTask(id);
+		if(StringUtils.isEmpty(receiveDto.getReceiveId())){
+			result.setStatus(DataStatus.HTTP_FAILE);
+			result.setMessage("阅读者Id为空");
+			return result;
+		}
+		Integer flag = taskService.updateTask(receiveDto);
 		if(flag > 0){
 			result.setStatus(DataStatus.HTTP_SUCCESS);
 			result.setMessage("修改阅读状态成功");
@@ -353,7 +363,7 @@ public class TaskController {
 			return result;
 		}
 		//当前用户是区教委,则获取学校列表
-		if(sourceType == 1){
+		if(sourceType == 2){
 			//获取学校类型level列表   
 			List<MapToListDto> levelList = new ArrayList<MapToListDto>();
 			for(Entry<Integer, String> entry: SchoolLevel.getAll().entrySet()) {
