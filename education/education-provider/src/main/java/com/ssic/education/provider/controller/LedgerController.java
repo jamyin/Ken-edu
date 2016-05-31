@@ -69,7 +69,7 @@ import com.ssic.education.utils.util.PageData;
  */
 @Controller
 @RequestMapping("/ledgerController")
-public class LedgerController extends BaseController {
+public class LedgerController {
 
 	@Autowired
 	private ISupplierService supplierService;
@@ -142,12 +142,12 @@ public class LedgerController extends BaseController {
 	public Json saveLedger(LedgerModel lm, HttpSession session) {
 		Json j = new Json();
 		TImsUsersDto user = (TImsUsersDto) session.getAttribute("user");
-		String sourceId = user.getSourceId();
-		if (sourceId == null) {
+		if (user == null) {
 			j.setMsg("尚未登录");
 			j.setSuccess(false);
 			return j;
 		}
+		String sourceId = user.getSourceId();
 		List<LedgerDto> ledgers = lm.getLedger();
 		ledgers.get(0).setSourceId(sourceId);
 		// 配送日期
@@ -310,12 +310,12 @@ public class LedgerController extends BaseController {
 	public Json updataLedger(LedgerModel lm, HttpSession session) {
 		Json j = new Json();
 		TImsUsersDto user = (TImsUsersDto) session.getAttribute("user");
-		String sourceId = user.getSourceId();
-		if (sourceId == null) {
+		if (user == null) {
 			j.setMsg("尚未登录");
 			j.setSuccess(false);
 			return j;
 		}
+		String sourceId = user.getSourceId();
 		List<LedgerDto> ledgers = lm.getLedger();
 		ledgers.get(0).setSourceId(sourceId);
 		// 配货日期
@@ -618,7 +618,7 @@ public class LedgerController extends BaseController {
 				ConfigUtil.SESSIONINFONAME);
 		ld.setSourceId(info.getSupplierId());
 		ModelAndView mv = null;
-		PageData pd = this.getPageData();
+		PageData pd = new PageData();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.M.d");
 		try {
 			Map<String, Object> dataMap = new HashMap<String, Object>();

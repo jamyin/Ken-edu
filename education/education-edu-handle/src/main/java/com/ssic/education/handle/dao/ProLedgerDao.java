@@ -1,5 +1,6 @@
 package com.ssic.education.handle.dao;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +26,8 @@ import com.ssic.education.handle.pojo.ProLedger;
 import com.ssic.education.handle.pojo.ProLedgerExample;
 import com.ssic.education.handle.pojo.ProLedgerMaster;
 import com.ssic.education.handle.pojo.ProLedgerMasterExample;
-import com.ssic.education.handle.pojo.ProLedgerMasterExample.Criteria;
+import com.ssic.education.handle.pojo.ProSchoolWare;
+import com.ssic.education.handle.pojo.ProSchoolWareExample;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.mybatis.MyBatisBaseDao;
@@ -80,24 +82,28 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 	}
 
 	public int saveLedger(List<LedgerDto> ledger) {
-		// // 采购品与学校
-		// ProSchoolWare psw = new ProSchoolWare();
-		// psw.setSchoolId(ledger.get(0).getReceiverId());
-		// psw.setWareId(ledger.get(i).getWaresId());
-		// psw.setSourceId(ledger.get(i).getSourceId());
-		// ProSchoolWareExample example = new ProSchoolWareExample();
-		// ProSchoolWareExample.Criteria criteria = example.createCriteria();
-		// criteria.andSchoolIdEqualTo(psw.getSchoolId());
-		// criteria.andWareIdEqualTo(psw.getWareId());
-		// criteria.andSourceIdEqualTo(psw.getSourceId());
-		// List<ProSchoolWare> list = swMapper.selectByExample(example);
-		// if (list.size() == 0) {
-		// psw.setId(UUID.randomUUID().toString());
-		// psw.setCreateTime(new Date());
-		// psw.setLastUpdateTime(psw.getCreateTime());
-		// psw.setStat(1);
-		// swMapper.insert(psw);
-		// }
+		// 采购品与学校
+		for (LedgerDto ledgerDto : ledger) {
+			ProSchoolWare psw = new ProSchoolWare();
+			psw.setSchoolId(ledgerDto.getReceiverId());
+			psw.setWareId(ledgerDto.getWaresId());
+			psw.setSourceId(ledgerDto.getSourceId());
+			psw.setSupplierId(ledgerDto.getSupplierId());
+			ProSchoolWareExample example = new ProSchoolWareExample();
+			ProSchoolWareExample.Criteria criteria = example.createCriteria();
+			criteria.andSchoolIdEqualTo(psw.getSchoolId());
+			criteria.andWareIdEqualTo(psw.getWareId());
+			criteria.andSourceIdEqualTo(psw.getSourceId());
+			criteria.andSupplierIdEqualTo(psw.getSupplierId());
+			List<ProSchoolWare> list = swMapper.selectByExample(example);
+			if (list.size() == 0) {
+				psw.setId(UUID.randomUUID().toString());
+				psw.setCreateTime(new Date());
+				psw.setLastUpdateTime(psw.getCreateTime());
+				psw.setStat(1);
+				swMapper.insert(psw);
+			}
+		}
 		ledger.get(0).setId(UUID.randomUUID().toString());
 		ledger.get(0).setHaulStatus(0);
 		lmExMapper.insertLedgerMaster(ledger.get(0));
@@ -134,18 +140,20 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		return mapper.countByExample(example);
 	}
-	
+
 	public List<LedgerDto> selectLedgerList(LedgerDto ledgerDto) {
 		return lmExMapper.selectLedgerList(ledgerDto);
 	}
-	
-	public List<LedgerDto> selectLedgerListOrderby(LedgerDto ledgerDto,PageQuery page) {
+
+	public List<LedgerDto> selectLedgerListOrderby(LedgerDto ledgerDto,
+			PageQuery page) {
 		return lmExMapper.selectLedgerListOrderby(ledgerDto, page);
 	}
-	
+
 	public long countLedgerListOrderby(LedgerDto ledgerDto) {
 		return lmExMapper.countLedgerListOrderby(ledgerDto);
 	}
+
 	public List<ProSupplierDto> findPage(ProSupplierDto dto, PageQuery page) {
 		return exMapper.selectSupplierByReceiverId(dto, page);
 	}
@@ -161,6 +169,25 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 	public int updataLedger(List<LedgerDto> ledgers) {
 		lmExMapper.updateLedgerMaster(ledgers.get(0));
 		for (LedgerDto ledger : ledgers) {
+			ProSchoolWare psw = new ProSchoolWare();
+			psw.setSchoolId(ledger.getReceiverId());
+			psw.setWareId(ledger.getWaresId());
+			psw.setSourceId(ledger.getSourceId());
+			psw.setSupplierId(ledger.getSupplierId());
+			ProSchoolWareExample example = new ProSchoolWareExample();
+			ProSchoolWareExample.Criteria criteria = example.createCriteria();
+			criteria.andSchoolIdEqualTo(psw.getSchoolId());
+			criteria.andWareIdEqualTo(psw.getWareId());
+			criteria.andSourceIdEqualTo(psw.getSourceId());
+			criteria.andSupplierIdEqualTo(psw.getSupplierId());
+			List<ProSchoolWare> list = swMapper.selectByExample(example);
+			if (list.size() == 0) {
+				psw.setId(UUID.randomUUID().toString());
+				psw.setCreateTime(new Date());
+				psw.setLastUpdateTime(psw.getCreateTime());
+				psw.setStat(1);
+				swMapper.insert(psw);
+			}
 			exMapper.updateLedger(ledger);
 		}
 		return 0;
@@ -184,16 +211,17 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 		return list.size();
 	}
 
-	public Map<ProLedgerMaster,List<ProLedger>> findExportProSupplier(LedgerDto ld) {
-		Map<ProLedgerMaster,List<ProLedger>> map=new HashMap();
+	public Map<ProLedgerMaster, List<ProLedger>> findExportProSupplier(
+			LedgerDto ld) {
+		Map<ProLedgerMaster, List<ProLedger>> map = new HashMap();
 		ProLedgerMasterExample example = new ProLedgerMasterExample();
 		ProLedgerMasterExample.Criteria plmCriteria = example.createCriteria();
 		plmCriteria.andSourceIdEqualTo(ld.getSourceId());
 		plmCriteria.andStatEqualTo(1);
 		List<ProLedgerMaster> lmList = lmMapper.selectByExample(example);
 		for (ProLedgerMaster plm : lmList) {
-			ProLedgerExample plExample=new ProLedgerExample();
-			ProLedgerExample.Criteria plCriteria=plExample.createCriteria();
+			ProLedgerExample plExample = new ProLedgerExample();
+			ProLedgerExample.Criteria plCriteria = plExample.createCriteria();
 			plCriteria.andMasterIdEqualTo(plm.getId());
 			plCriteria.andStatEqualTo(1);
 			List<ProLedger> list = mapper.selectByExample(plExample);
