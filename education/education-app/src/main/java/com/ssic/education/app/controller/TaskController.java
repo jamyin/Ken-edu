@@ -149,10 +149,10 @@ public class TaskController {
 						sb.append(receive.getReceiveName()+";");
 					}
 					if(receive.getReadstat() == 0){
-						sb_read.append(receive.getReceiveName()+";");
+						sb_notRead.append(receive.getReceiveName()+";");
 						notReads++;
 					}else{
-						sb_notRead.append(receive.getReceiveName()+";");
+						sb_read.append(receive.getReceiveName()+";");
 						reads++;
 					}
 				}
