@@ -334,6 +334,7 @@ public class WaresController extends BaseController {
 			license.setLicPic(imageurl1);
 			license.setRelationId(id);
 			license.setStat(1);
+			license.setLicType(8);
 			license.setCreateTime(new Date());
 			license.setLastUpdateTime(new Date());
 			license.setCerSource((short) 2);
@@ -346,6 +347,7 @@ public class WaresController extends BaseController {
 			license.setLicPic(imageurl2);
 			license.setRelationId(id);
 			license.setStat(1);
+			license.setLicType(7);
 			license.setCreateTime(new Date());
 			license.setLastUpdateTime(new Date());
 			license.setCerSource((short) 2);
@@ -358,6 +360,7 @@ public class WaresController extends BaseController {
 			license.setLicPic(imageurl3);
 			license.setRelationId(id);
 			license.setStat(1);
+			license.setLicType(3);
 			license.setCreateTime(new Date());
 			license.setLastUpdateTime(new Date());
 			license.setCerSource((short) 2);

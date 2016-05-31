@@ -440,6 +440,7 @@ public class ProSupplierController extends BaseController{
 			license.setLicPic(imageurl1);
 			license.setRelationId(id);
 			license.setStat(1);
+			license.setLicType(4);
 			license.setCreateTime(new Date());
 			license.setLastUpdateTime(new Date());
 			license.setCerSource((short) 0);
@@ -452,6 +453,7 @@ public class ProSupplierController extends BaseController{
 			license.setLicPic(imageurl2);
 			license.setRelationId(id);
 			license.setStat(1);
+			license.setLicType(5);
 			license.setCreateTime(new Date());
 			license.setLastUpdateTime(new Date());
 			license.setCerSource((short) 0);
@@ -464,6 +466,7 @@ public class ProSupplierController extends BaseController{
 			license.setLicPic(imageurl3);
 			license.setRelationId(id);
 			license.setStat(1);
+			license.setLicType(6);
 			license.setCreateTime(new Date());
 			license.setLastUpdateTime(new Date());
 			license.setCerSource((short) 0);
@@ -476,6 +479,7 @@ public class ProSupplierController extends BaseController{
 			license.setLicPic(imageurl4);
 			license.setRelationId(id);
 			license.setStat(1);
+			license.setLicType(2);
 			license.setCreateTime(new Date());
 			license.setLastUpdateTime(new Date());
 			license.setCerSource((short) 0);
@@ -488,6 +492,7 @@ public class ProSupplierController extends BaseController{
 			license.setLicPic(imageurl5);
 			license.setRelationId(id);
 			license.setStat(1);
+			license.setLicType(3);
 			license.setCreateTime(new Date());
 			license.setLastUpdateTime(new Date());
 			license.setCerSource((short) 0);
@@ -500,6 +505,7 @@ public class ProSupplierController extends BaseController{
 			license.setLicPic(imageurl6);
 			license.setRelationId(id);
 			license.setStat(1);
+			license.setLicType(0);
 			license.setCreateTime(new Date());
 			license.setLastUpdateTime(new Date());
 			license.setCerSource((short) 0);
@@ -512,6 +518,7 @@ public class ProSupplierController extends BaseController{
 			license.setLicPic(imageurl7);
 			license.setRelationId(id);
 			license.setStat(1);
+			license.setLicType(1);
 			license.setCreateTime(new Date());
 			license.setLastUpdateTime(new Date());
 			license.setCerSource((short) 0);
@@ -524,6 +531,7 @@ public class ProSupplierController extends BaseController{
 			license.setLicPic(imageurl8);
 			license.setRelationId(id);
 			license.setStat(1);
+			license.setLicType(9);
 			license.setCreateTime(new Date());
 			license.setLastUpdateTime(new Date());
 			license.setCerSource((short) 0);
@@ -536,6 +544,7 @@ public class ProSupplierController extends BaseController{
 			license.setLicPic(imageurl9);
 			license.setRelationId(id);
 			license.setStat(1);
+			license.setLicType(10);
 			license.setCreateTime(new Date());
 			license.setLastUpdateTime(new Date());
 			license.setCerSource((short) 0);
@@ -548,6 +557,7 @@ public class ProSupplierController extends BaseController{
 			license.setLicPic(imageurl10);
 			license.setRelationId(id);
 			license.setStat(1);
+			license.setLicType(11);
 			license.setCreateTime(new Date());
 			license.setLastUpdateTime(new Date());
 			license.setCerSource((short) 0);
@@ -560,6 +570,7 @@ public class ProSupplierController extends BaseController{
 			license.setLicPic(imageurl11);
 			license.setRelationId(id);
 			license.setStat(1);
+			license.setLicType(12);
 			license.setCreateTime(new Date());
 			license.setLastUpdateTime(new Date());
 			license.setCerSource((short) 0);
@@ -573,7 +584,7 @@ public class ProSupplierController extends BaseController{
 	}
 
 	/**
-	 * 上传图片
+	 * 修改图片
 	 */
 	@RequestMapping("/alterImage")
 	@ResponseBody
