@@ -179,13 +179,4 @@ public class SupplierController {
 		result.setMessage("未查到相关记录！");
 		return result;
 	}
-
-	@RequestMapping("/findImage")
-	@ResponseBody
-	public Response<String> findLicImage(ProLicense license) {
-		Response<String> result = new Response<String>();
-		String str = this.supplierService.findLicByLicType(license);
-		result.setData(str);
-		return result;
-	}
 }

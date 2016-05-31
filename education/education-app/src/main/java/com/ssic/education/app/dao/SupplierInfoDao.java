@@ -154,15 +154,12 @@ public class SupplierInfoDao {
 		return mapper.getSupplierListById(supplier_id);
 	}
 
-	public List<ProLicense> getLic(ProLicense license) {
+	public List<ProLicense> getLic(String relationId) {
 		ProLicenseExample example = new ProLicenseExample();
 		ProLicenseExample.Criteria criteria = example.createCriteria();
-		if (StringUtils.isNotBlank(license.getRelationId())) {
-			criteria.andRelationIdEqualTo(license.getRelationId());
+		if (StringUtils.isNotBlank(relationId)) {
+			criteria.andRelationIdEqualTo(relationId);
 			criteria.andCerSourceEqualTo((short) 0);
-		}
-		if (null != license.getLicType() && license.getLicType() != 0) {
-			criteria.andLicTypeEqualTo(license.getLicType());
 		}
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		return licenseMapper.selectByExample(example);

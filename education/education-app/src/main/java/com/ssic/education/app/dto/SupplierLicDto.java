@@ -1,5 +1,7 @@
 package com.ssic.education.app.dto;
 
+import java.util.List;
+
 import com.ssic.education.utils.model.PageResult;
 
 import lombok.AllArgsConstructor;
@@ -26,15 +28,8 @@ public class SupplierLicDto {
 	private String supplierName; //单位名称
 	private String address; //单位地址
 	private Integer supplierType; //供应商类型
-	private String businessLicense; //工商营业执照
-	private String organizationCode; //组织机构代码证
-	private String foodServiceCode;//餐饮服务证号
-	private String foodBusinessCode;//食品经营许可证号
-	private String foodCirculationCode;//食品流通证号
-	private String foodProduceCode;//食品生产证号
 	private String corporation;//法人代表
-	private String idCard; // 身份证号
-	private String idType;//身份证类型
 	private String contactWay;//联系方式
+	private List<AppLicenseDto> appLicense;
 	private PageResult<MaterialSupplierDto> materialSupplierList;
 }

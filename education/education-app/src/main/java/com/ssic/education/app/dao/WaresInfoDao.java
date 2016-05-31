@@ -88,4 +88,23 @@ public class WaresInfoDao extends MyBatisBaseDao<WaresInfoDto> {
 
 		return WarseInLedger;
 	}
+
+	public int findWarseInSchoolCount(List<String> schoolWares, ProWares proWares) {
+		ProWaresExample example = new ProWaresExample();
+		ProWaresExample.Criteria criteria = example.createCriteria();
+		if (null != proWares) {
+			if (StringUtils.isNotBlank(proWares.getWaresName())) {
+				criteria.andWaresNameLike("%" + proWares.getWaresName() + "%");
+			}
+			if (proWares.getWaresType() != null) {
+				criteria.andWaresTypeEqualTo(proWares.getWaresType());
+			}
+		}
+		if (schoolWares != null && !schoolWares.isEmpty()) {
+			criteria.andIdIn(schoolWares);
+		}
+		criteria.andStatEqualTo(DataStatus.ENABLED);
+
+		return mapper.countByExample(example);
+	}
 }

@@ -42,5 +42,4 @@ public interface ISupplierService {
 	 */
 	PageResult<MaterialSupplierDto> findListByIds(String id, ProSupplier proSupplier, PageQuery query);
 
-	String findLicByLicType(ProLicense license);
 }
