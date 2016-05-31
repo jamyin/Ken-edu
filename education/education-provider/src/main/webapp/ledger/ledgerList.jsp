@@ -269,6 +269,13 @@
 		});
 	}
 	
+	function toExcel(){
+		var actionDate = $("#actionDate").val();
+		var nextDate = $("#nextDate").val();
+		var receiverName = $("#receiverName").val();
+		window.location.href='${pageContext.request.contextPath}/ledgerController/excel.do?actionDate='+actionDate+'&nextDate='+nextDate+'&receiverName='+receiverName+'';
+	}
+	
 	function searchFun() {
 		dataGrid.datagrid('load', $.serializeObject($('#searchForm')));
 	}
@@ -280,23 +287,23 @@
 </head>
 <body>
 	<div class="easyui-layout" data-options="fit : true,border : false">
-		<div data-options="region:'north',title:'查询条件',border:false" style="height: 100px; overflow: hidden;">
+		<div data-options="region:'north',title:'查询条件',border:false" style="height: 80px; overflow: hidden;">
 			
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">
 					<tr>
 						<th>配货日期</th>
-						<td><input class="span2" name="actionDate" placeholder="点击选择日期" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" readonly="readonly"/></td>
+						<td><input id="actionDate" class="span2" name="actionDate" placeholder="点击选择日期" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" readonly="readonly"/></td>
 						<th>至</th>
-						<td><input class="span2" name="nextDate" placeholder="点击选择日期" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" readonly="readonly"/></td>
+						<td><input id="nextDate" class="span2" name="nextDate" placeholder="点击选择日期" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" readonly="readonly"/></td>
 						<th>配货点</th>
-						<td><input class="span2" name="receiverName" /></td>
+						<td><input id="receiverName" class="span2" name="receiverName" /></td>
 					</tr>
 				</table>
 			</form>
 		</div>
 		<div data-options="region:'center',border:false" id="g">
-			<table id="dataGrid"></table>
+			<table id="dataGrid"  data-options="collapsible:true"  title="配货管理表单" ></table>
 			<style>
 						#g .datagrid-btable tr{height: 57px;}
 				</style>
@@ -310,6 +317,7 @@
 			<!-- <a onclick="batchDeleteFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'delete'">批量删除</a> -->
 		<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_add',plain:true" onclick="searchFun();">搜索</a><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_delete',plain:true" onclick="cleanFun();">清空搜索条件</a>
 		<a onclick="importSupplier();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'">导入</a>
+		<a class="btn btn-mini btn-light" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="icon-download-alt"></i>导出</a>
 		<a href="${pageContext.request.contextPath}/templates/配货管理.xlsx" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'">下载模板</a>
 	</div>
 
