@@ -18,10 +18,7 @@ import lombok.NoArgsConstructor;
  * <p>修改时间：2016年5月16日 下午3:00:43</p>
  * <p>修改备注：</p>
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class LedgerListDto {
+public @Data class LedgerListDto {
 
 	private String id; //主键
 
@@ -36,7 +33,7 @@ public class LedgerListDto {
 	private Integer quantity; //数量
 
 	private Date productionDate;//生成日期
-	
+
 	private String productionName;//生产单位
 
 	private String batchNo;//生产批号

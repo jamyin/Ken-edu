@@ -5,13 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ssic.educateion.common.dto.EduInformationDto;
 import com.ssic.educateion.common.dto.EduTaskDto;
 import com.ssic.educateion.common.dto.EduTaskReadDto;
 import com.ssic.educateion.common.dto.EduTaskReceiveDto;
 import com.ssic.educateion.common.dto.TaskReceivePageDto;
 import com.ssic.education.handle.dao.TaskDao;
-import com.ssic.education.handle.pojo.EduInformation;
 import com.ssic.education.handle.pojo.EduTask;
 import com.ssic.education.handle.pojo.EduTaskReceive;
 import com.ssic.education.handle.service.ITaskService;
@@ -60,8 +58,9 @@ public class TaskServiceImpl implements ITaskService{
 	}
 
 	@Override
-	public Integer updateTask(String id) {
-		return taskDao.updateTask(id);
+	public Integer updateTask(EduTaskReceiveDto receiveDto) {
+		EduTaskReceive task = BeanUtils.createBeanByTarget(receiveDto, EduTaskReceive.class);
+		return taskDao.updateTask(task);
 	}
 
 	@Override

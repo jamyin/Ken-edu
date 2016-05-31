@@ -23,7 +23,10 @@
 		<set>
 			<if test="proLicense.licPic != null  and proLicense.licPic!=''">
 				a.lic_pic = #{proLicense.licPic}
-			</if>			
+			</if>	
+			<if test="proLicense.lastUpdateTime != null  and proLicense.lastUpdateTime!=''">
+				a.last_update_time = #{proLicense.lastUpdateTime}
+			</if>		
 		</set>
 		where 
 		 a.lic_name=#{proLicense.licName}  

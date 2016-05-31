@@ -2,7 +2,6 @@ package com.ssic.education.handle.service;
 
 import java.util.List;
 
-import com.ssic.educateion.common.dto.EduInformationDto;
 import com.ssic.educateion.common.dto.EduTaskDto;
 import com.ssic.educateion.common.dto.EduTaskReadDto;
 import com.ssic.educateion.common.dto.EduTaskReceiveDto;
@@ -31,8 +30,8 @@ public interface ITaskService {
 	Integer delTask(String id);
 	
 	//修改任务阅读状态
-	Integer updateTask(String id);
-
+	Integer updateTask(EduTaskReceiveDto receiveDto);
+	
 	//根据任务Id查询当前任务已读和未读列表
 	PageResult<EduTaskReadDto> findReadList(EduTaskReceiveDto receiveDto,
 			PageQuery query);

@@ -38,7 +38,8 @@ public class WaresServiceImpl implements IWaresService {
 		ProWaresExample.Criteria c = ex.createCriteria();
 		c.andWaresNameEqualTo(name);
 		c.andSpecEqualTo(spec);
-		c.andManufacturerEqualTo(manufacturer);
+		if(manufacturer!=null && manufacturer!=null){
+		c.andManufacturerEqualTo(manufacturer);}
 		c.andWayEqualTo(0);
 		c.andSupplierIdEqualTo(supplierId);
 		c.andStatEqualTo(1);

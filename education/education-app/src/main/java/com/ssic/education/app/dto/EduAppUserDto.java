@@ -1,11 +1,6 @@
 package com.ssic.education.app.dto;
 
-import java.io.Serializable;
-
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
 
 /**		
  * <p>Title: EduAppUserDto </p>
@@ -19,11 +14,8 @@ import lombok.NoArgsConstructor;
  * <p>修改时间：2016年5月20日 上午11:17:55</p>
  * <p>修改备注：</p>
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class EduAppUserDto implements Serializable {
-	private static final long serialVersionUID = 1L;
+
+public @Data class EduAppUserDto {
 	private String id;
 	private String sourceId;
 	private Integer sourceType;

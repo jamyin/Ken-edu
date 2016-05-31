@@ -18,10 +18,7 @@ import lombok.NoArgsConstructor;
  * <p>修改时间：2016年5月25日 下午5:44:02</p>
  * <p>修改备注：</p>
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class LedgerMasterListDto {
+public @Data class LedgerMasterListDto {
 	private String id; //ID
 	private Date actionDate; //配送日期
 	private String receiverId;//收获商ID

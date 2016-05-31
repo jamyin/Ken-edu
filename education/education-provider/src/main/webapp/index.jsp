@@ -163,7 +163,7 @@
 		<div data-options="region:'center'" title="欢迎使用团餐供应商系统" style="overflow: hidden;">
 			<div style="padding:5px;background:#fafafa;width:100%;border:1px solid #ccc">
 				<a onclick="loadUrl(this);" data-src="waresController/manager" data-text="原料管理" class="easyui-linkbutton" plain="true" iconCls="icon-edit">
-								<font  style="font-style: normal;font-weight: bolder;font-size:18px;">原料管理</font>
+								<font  style="font-style: normal;font-weight: bolder;font-size:18px;">采购品管理</font>
 				</a>
 				<a onclick="loadUrl(this);" data-src="proSupplierController/manager" data-text="供应商管理" class="easyui-linkbutton" plain="true" iconCls="icon-refresh">
 				<font  style="font-style: normal;font-weight: bolder;font-size:18px;">供应商管理</font>

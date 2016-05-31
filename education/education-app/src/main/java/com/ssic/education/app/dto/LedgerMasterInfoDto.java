@@ -2,10 +2,7 @@ package com.ssic.education.app.dto;
 
 import java.util.Date;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import com.ssic.education.utils.model.PageResult;
 
 /**		
@@ -20,10 +17,7 @@ import com.ssic.education.utils.model.PageResult;
  * <p>修改时间：2016年5月26日 下午6:09:44</p>
  * <p>修改备注：</p>
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class LedgerMasterInfoDto {
+public @Data class LedgerMasterInfoDto {
 	private String id;
 	private Date actionDate; //配送日期
 	private String wareBatchNo; //商品运送批次
@@ -35,6 +29,7 @@ public class LedgerMasterInfoDto {
 	private String outset;//出发点
 	private String stock;//菜品
 	private Integer haulStatus;//运送状态	
-	private Date lastUpdateTime;//
+	private Date startTime; //开始时间
+	private Date endTime;//结束时间
 	private PageResult<ledgerDetailDto> resultLedger;
 }

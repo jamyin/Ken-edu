@@ -7,7 +7,6 @@ import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.ssic.educateion.common.dto.EduInformationDto;
 import com.ssic.educateion.common.dto.EduTaskDto;
 import com.ssic.educateion.common.dto.EduTaskReadDto;
 import com.ssic.educateion.common.dto.EduTaskReceiveDto;
@@ -16,8 +15,6 @@ import com.ssic.education.handle.mapper.EduTaskExMapper;
 import com.ssic.education.handle.mapper.EduTaskMapper;
 import com.ssic.education.handle.mapper.EduTaskReceiveExMapper;
 import com.ssic.education.handle.mapper.EduTaskReceiveMapper;
-import com.ssic.education.handle.pojo.EduInformation;
-import com.ssic.education.handle.pojo.EduInformationExample;
 import com.ssic.education.handle.pojo.EduTask;
 import com.ssic.education.handle.pojo.EduTaskExample;
 import com.ssic.education.handle.pojo.EduTaskReceive;
@@ -85,11 +82,16 @@ public class TaskDao extends MyBatisBaseDao<EduTask> {
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		return mapper.countByExample(example);
 	}
-	public Integer updateTask(String id) {
-		EduTaskReceive receive = new EduTaskReceive();
-		receive.setTaskId(id);
-		receive.setReadstat(1);    //设置已读
+	public Integer updateTask(EduTaskReceive receive) {
+		receive.setReadstat(DataStatus.ENABLED);      //设置已读
 		EduTaskReceiveExample example = new EduTaskReceiveExample();
+		EduTaskReceiveExample.Criteria criteria = example.createCriteria();
+		if (StringUtils.isNotEmpty(receive.getTaskId())){
+    		criteria.andTaskIdEqualTo(receive.getTaskId());
+    	}
+		if (StringUtils.isNotEmpty(receive.getReceiveId())){
+    		criteria.andReceiveIdEqualTo(receive.getReceiveId());
+    	}
 		return exMapper.updateByExampleSelective(receive, example);
 	}
 

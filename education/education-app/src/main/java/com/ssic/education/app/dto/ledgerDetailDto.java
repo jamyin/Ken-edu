@@ -2,9 +2,7 @@ package com.ssic.education.app.dto;
 
 import java.util.Date;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**		
  * <p>Title: ledgerDetailDto </p>
@@ -18,10 +16,8 @@ import lombok.NoArgsConstructor;
  * <p>修改时间：2016年5月26日 下午6:21:04</p>
  * <p>修改备注：</p>
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class ledgerDetailDto {
+
+public @Data class ledgerDetailDto {
 	private String id;
 	private String masterId;
 	private String name;

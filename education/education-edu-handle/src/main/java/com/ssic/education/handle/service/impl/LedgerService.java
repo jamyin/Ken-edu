@@ -1,5 +1,6 @@
 package com.ssic.education.handle.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -13,8 +14,11 @@ import com.ssic.educateion.common.utils.PageHelper;
 import com.ssic.education.handle.dao.ProLedgerDao;
 import com.ssic.education.handle.mapper.ProLedgerMapper;
 import com.ssic.education.handle.mapper.ProLedgerMasterMapper;
+import com.ssic.education.handle.mapper.ProSchoolWareMapper;
 import com.ssic.education.handle.pojo.ProLedger;
 import com.ssic.education.handle.pojo.ProLedgerMaster;
+import com.ssic.education.handle.pojo.ProSchoolWare;
+import com.ssic.education.handle.pojo.ProSchoolWareExample;
 import com.ssic.education.handle.service.ILedgerService;
 
 @Service
@@ -28,6 +32,9 @@ public class LedgerService implements ILedgerService {
 
 	@Autowired
 	private ProLedgerMapper lm;
+	
+	@Autowired
+	private ProSchoolWareMapper swMapper;
 
 	@Override
 	public DataGrid findAllLedger(LedgerDto ld, PageHelper ph) {
@@ -66,6 +73,25 @@ public class LedgerService implements ILedgerService {
 			lmm.insertSelective(o);
 			List<ProLedger> list = map.get(o);
 			for (ProLedger oo : list) {
+				ProSchoolWare psw = new ProSchoolWare();
+				psw.setSchoolId(o.getReceiverId());
+				psw.setWareId(oo.getWaresId());
+				psw.setSourceId(o.getSourceId());
+				psw.setSupplierId(oo.getSupplierId());
+				ProSchoolWareExample example = new ProSchoolWareExample();
+				ProSchoolWareExample.Criteria criteria = example.createCriteria();
+				criteria.andSchoolIdEqualTo(psw.getSchoolId());
+				criteria.andWareIdEqualTo(psw.getWareId());
+				criteria.andSourceIdEqualTo(psw.getSourceId());
+				criteria.andSupplierIdEqualTo(psw.getSupplierId());
+				List<ProSchoolWare> pslist = swMapper.selectByExample(example);
+				if (pslist.size() == 0) {
+					psw.setId(UUID.randomUUID().toString());
+					psw.setCreateTime(new Date());
+					psw.setLastUpdateTime(psw.getCreateTime());
+					psw.setStat(1);
+					swMapper.insert(psw);
+				}
 				oo.setId(UUID.randomUUID().toString());
 				oo.setMasterId(o.getId());
 				lm.insertSelective(oo);
