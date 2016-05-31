@@ -148,6 +148,11 @@ public class UserDao {
 		}
 	}
 
+	public int findByNameCount(TImsUsersDto user) {
+		// TODO Auto-generated method stub
+		return tImsUsersExMapper.findByNameCount(user);
+	}
+
 	
 	/**
 	 * 通过userId查找项目信息	 
