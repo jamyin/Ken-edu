@@ -136,6 +136,7 @@ public class ProSupplierController extends BaseController {
 	public ModelAndView list(ProSupplierDto dto, PageQuery query) {
 		ModelAndView mv = getModelAndView();
 		PageResult<ProSupplierDto> mSuppliers = queryMaterialSupplier(dto, query);
+		mv.addObject("dto", dto);
 		mv.addObject("pageList", mSuppliers);
 		mv.setViewName("supplier/supplier_list");
 		return mv;
@@ -172,8 +173,8 @@ public class ProSupplierController extends BaseController {
 	 * @version 1.0
 	 */
 	private PageResult<ProSupplierDto> queryMaterialSupplier(ProSupplierDto dto, PageQuery query){
-		query.setPageSize(PAGESIZE_SUPPLIER);
-		PageResult<ProSupplierDto> results = proLedgerService.findPage(dto, query);
+//		query.setPageSize(PAGESIZE_WARES);
+		PageResult<ProSupplierDto> results = proSupplierService.findSupplierPageBySchoolId(dto, query);
 		return results;
 	}
 }
