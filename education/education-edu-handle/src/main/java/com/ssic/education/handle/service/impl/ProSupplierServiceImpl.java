@@ -47,6 +47,11 @@ public class ProSupplierServiceImpl implements ProSupplierService{
 		return null;
 	}
 
+	public PageResult<ProSupplierDto> findSupplierPageBySchoolId(ProSupplierDto dto, PageQuery query) {
+		List<ProSupplierDto> results = proSupplierDao.findSupplierListBySchoolId(dto, query);
+		query.setTotal(proSupplierDao.countSupplierListBySchoolId(dto));
+		return new PageResult<>(query, results);
+	}
 	
 	public PageResult<ProSupplierDto> querySupplierByParams(ProSupplierDto params, PageQuery query) {
 		int total = viewProSupplierDao.countViewSupplier(params);

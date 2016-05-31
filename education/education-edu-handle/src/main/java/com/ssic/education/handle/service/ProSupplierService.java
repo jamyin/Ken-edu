@@ -37,5 +37,8 @@ public interface ProSupplierService {
 	Integer updatePS(ProSupplierDto dto);
 	
 	public List<ProSupplierDto> findAll(ProSupplierDto dto);
+	
+	
+	public PageResult<ProSupplierDto> findSupplierPageBySchoolId(ProSupplierDto dto, PageQuery query);
 
 }

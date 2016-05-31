@@ -91,5 +91,5 @@ public class ProSupplierDto implements Serializable {
 
 	private String idType;
 
-
+	private String schoolId;
 }

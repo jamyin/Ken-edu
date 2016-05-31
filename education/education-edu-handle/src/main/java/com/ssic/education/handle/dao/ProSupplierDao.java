@@ -45,6 +45,14 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 	@Autowired
 	private ProSupplierReceiverMapper  srMapper;
 	
+	public List<ProSupplierDto> findSupplierListBySchoolId(ProSupplierDto dto, PageQuery page){
+		return exMapper.findSupplierListBySchoolId(dto, page);
+	}
+	
+	public long countSupplierListBySchoolId(ProSupplierDto dto) {
+		return exMapper.countSupplierListBySchoolId(dto);
+	}
+	
 	public List<ProSupplierDto> findSupplierListByCommittee(ProSupplierDto dto, PageQuery page) {
 		return exMapper.findSupplierListByCommittee(dto,page);
 	}

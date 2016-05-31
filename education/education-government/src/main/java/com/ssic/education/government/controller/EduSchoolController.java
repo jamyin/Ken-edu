@@ -249,8 +249,7 @@ public class EduSchoolController extends BaseController{
 	}
 	
 	private PageResult<ProSupplierDto> queryMaterialSupplier(ProSupplierDto dto, PageQuery query){
-		query.setPageSize(10);
-		PageResult<ProSupplierDto> results = proLedgerService.findPage(dto, query);
+		PageResult<ProSupplierDto> results = proSupplierService.findSupplierPageBySchoolId(dto, query);
 		return results;
 	}
 	
