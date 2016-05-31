@@ -335,7 +335,7 @@ public class ProSupplierController {
 		ProLicense license = new ProLicense();
 		
 		//判断图片是否重复上传
-	/*	List<ProLicense> list2=	proLicenseServiceImpl.selectByRelationId(id);
+		List<ProLicense> list2=	proLicenseServiceImpl.selectByRelationId(id);
 				
 		for (int i = 0; i < list2.size(); i++) {
 			if(list2.get(i).getLicName().equals("工商营业执照")){
@@ -393,7 +393,7 @@ public class ProSupplierController {
 				json.setSuccess(false);
 				return json;
 			}		
-		}*/
+		}
 		
 		
 		

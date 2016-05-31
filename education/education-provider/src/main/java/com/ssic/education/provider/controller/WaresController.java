@@ -297,7 +297,7 @@ public class WaresController extends BaseController {
 		
 		ProLicense license = new ProLicense();
 		//判断图片是否重复上传
-/*		List<ProLicense> list2=	proLicenseServiceImpl.selectByRelationId(id);
+	List<ProLicense> list2 = proLicenseServiceImpl.selectByRelationId(id);
 				
 		for (int i = 0; i < list2.size(); i++) {
 			if(list2.get(i).getLicName().equals("商品图片")){
@@ -315,7 +315,7 @@ public class WaresController extends BaseController {
 				json.setSuccess(false);
 				return json;
 			}
-		}*/
+		}
 		Map<String, Object> map1 = createImageServiceImpl.createImage(image,
 				spImgUrl, request, response);
 		Map<String, Object> map2 = createImageServiceImpl.createImage(image,
