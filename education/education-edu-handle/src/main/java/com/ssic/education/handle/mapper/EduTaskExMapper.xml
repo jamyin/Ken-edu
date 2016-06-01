@@ -18,7 +18,7 @@
 		FROM t_edu_task_receive a   
 		LEFT JOIN t_edu_task b ON a.task_id = b.id
 		WHERE a.receive_id =#{id} AND a.stat = 1 AND b.stat = 1 
-	<include refid="where_conditions"></include>
+	<!-- <include refid="where_conditions"></include> -->
 	</select>
 	
 	<!-- <sql id="where_conditions">
