@@ -24,7 +24,7 @@
 
 	<select id="findWarseListByParam" resultMap="BaseResultMap" parameterType="com.ssic.education.handle.dto.ProSchoolWareDto">
 		select * 
-		from t_pro_warse a
+		from t_pro_wares a
 		LEFT JOIN t_pro_school_ware b on a.id = b.ware_id
 		where a.stat = 1 and b.stat=1
 		<if test="proSchoolWareDto.schoolId != null  and proSchoolWareDto.schoolId !=''">
@@ -44,7 +44,7 @@
 	
 	<select id="countWarseListByParam" resultType="java.lang.Long" parameterType="com.ssic.education.handle.dto.ProSchoolWareDto">
 		select count(*) 
-		from t_pro_warse a
+		from t_pro_wares a
 		LEFT JOIN t_pro_school_ware b on a.id = b.ware_id
 		where a.stat = 1 and b.stat=1
 		<if test="proSchoolWareDto.schoolId != null  and proSchoolWareDto.schoolId !=''">
