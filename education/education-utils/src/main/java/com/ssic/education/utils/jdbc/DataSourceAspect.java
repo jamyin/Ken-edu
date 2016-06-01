@@ -16,6 +16,7 @@ public class DataSourceAspect {
 	protected static final Log logger = LogFactory.getLog(DataSourceAspect.class);
 	
 	private static final Pattern slaveMethodsPattern = Pattern.compile("^(count|select|find|search|get|achieve|query)([A-Z].*)*$");
+	
 
 	public void before(JoinPoint point)
     {
@@ -35,11 +36,11 @@ public class DataSourceAspect {
                 DynamicDataSourceHolder.putDataSource(data.value());
                 logger.info(data.value());
             } else if(isSlaveMethod(methodName)){
-            	 DynamicDataSourceHolder.putDataSource("slave");
-            	 logger.info("slave");
+            	 DynamicDataSourceHolder.putDataSource(DataSourceHolderUtil.SLAVE_KEY);
+            	 logger.debug("slave");
             } else {
-            	DynamicDataSourceHolder.putDataSource("master");
-           	 	logger.info("master");
+            	DynamicDataSourceHolder.putDataSource(DataSourceHolderUtil.MASTER_KEY);
+           	 	logger.debug("master");
             }
             
         } catch (Throwable e) {
