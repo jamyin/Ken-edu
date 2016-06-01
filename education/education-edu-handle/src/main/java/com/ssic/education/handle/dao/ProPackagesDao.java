@@ -274,6 +274,9 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 		if(dto.getType() != null){
 			criteria.andTypeEqualTo(dto.getType());          //类型
 		}
+		if(StringUtils.isNotBlank(dto.getSupplyDateStr())){
+			criteria.andSupplyDateEqualTo(DateUtils.parse(dto.getSupplyDateStr(), DateUtils.YMD_DASH));          //套餐日期
+		}
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		if (null != page) {
             example.setOrderByClause("stat desc,create_time desc limit " + page.getStartNum() + "," + page.getPageSize());
