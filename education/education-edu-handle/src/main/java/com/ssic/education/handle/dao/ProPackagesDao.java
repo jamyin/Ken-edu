@@ -316,6 +316,59 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		return mapper.countByExample(example);
 	}
+	
+	public List<ProPackagesDto> findPackagesPage(ProPackagesDto dto,PageQuery page) {
+		ProPackagesExample example = new ProPackagesExample();
+		ProPackagesExample.Criteria criteria = example.createCriteria();
+		if (StringUtils.isNotBlank(dto.getCustomerId())) {
+			criteria.andCustomerIdEqualTo(dto.getCustomerId());    //查询当前学校
+		}
+		if(dto.getType() != null){
+			criteria.andTypeEqualTo(dto.getType());          //类型
+		}
+		if(StringUtils.isNotBlank(dto.getSupplyDateStr())){
+			criteria.andSupplyDateEqualTo(DateUtils.parse(dto.getSupplyDateStr(), DateUtils.YMD_DASH));          //套餐日期
+		}
+//		else{
+//			criteria.andSupplyDateEqualTo(DateUtils.parse(DateUtils.format(new Date(), DateUtils.YMD_DASH), DateUtils.YMD_DASH));	  //不传则默认查询当天
+//		}
+		criteria.andStatEqualTo(DataStatus.ENABLED);
+		if (null != page) {
+            example.setOrderByClause("stat desc,create_time desc limit " + page.getStartNum() + "," + page.getPageSize());
+        } else {
+            example.setOrderByClause("create_time desc");
+        }
+		List<ProPackagesDto> proPackagesDtos =BeanUtils.createBeanListByTarget(mapper.selectByExample(example), ProPackagesDto.class);
+		for (ProPackagesDto proPackagesDto : proPackagesDtos) {
+			ProDishesExample exampleDis = new ProDishesExample();
+			ProDishesExample.Criteria criteriaDis = exampleDis.createCriteria();
+			if (StringUtils.isNotBlank(proPackagesDto.getId())) {
+				criteriaDis.andPackageIdEqualTo(proPackagesDto.getId());
+			}	
+			criteriaDis.andStatEqualTo(DataStatus.ENABLED);
+			List<ProDishesDto> proDishesDtos = BeanUtils.createBeanListByTarget(disMapper.selectByExample(exampleDis), ProDishesDto.class);
+			proPackagesDto.setProDishesDtos(proDishesDtos);
+			ProNutritionalExample exampleNu = new ProNutritionalExample();
+			ProNutritionalExample.Criteria criteriaNu = exampleNu.createCriteria();
+			if (StringUtils.isNotBlank(proPackagesDto.getId())) {
+				criteriaNu.andPackageIdEqualTo(proPackagesDto.getId());
+			}
+			criteriaNu.andStatEqualTo(DataStatus.ENABLED);
+			List<ProNutritionalDto> proNutritionalDtos = BeanUtils.createBeanListByTarget(nuMapper.selectByExample(exampleNu), ProNutritionalDto.class);
+			proPackagesDto.setProNutritionalDtos(proNutritionalDtos);
+		}
+		return proPackagesDtos;
+	}
+	
+	public long findPackagesCount(ProPackagesDto dto) {
+		ProPackagesExample example = new ProPackagesExample();
+		ProPackagesExample.Criteria criteria = example.createCriteria();
+		if (StringUtils.isNotBlank(dto.getCustomerId())) {
+			criteria.andCustomerIdEqualTo(dto.getCustomerId());    //查询当前学校
+		}
+		criteria.andStatEqualTo(DataStatus.ENABLED);
+		return mapper.countByExample(example);
+	}
 
 	public List<ProPackages> searchProSchoolPackage(String customerId,
 			String timeDate,Integer type) {

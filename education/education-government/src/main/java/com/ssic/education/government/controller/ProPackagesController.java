@@ -50,7 +50,7 @@ public class ProPackagesController extends BaseController{
 		if (null != usersdto && StringUtils.isNotBlank(usersdto.getSourceId()) ) {
 			dto.setCustomerId(usersdto.getSourceId());
 		}
-		PageResult<ProPackagesDto> proPackagesDtos = proPackagesService.fingPackagesPage(dto, page);
+		PageResult<ProPackagesDto> proPackagesDtos = proPackagesService.findPackagesPage(dto, page);
 		mv.addObject("pageList", proPackagesDtos);
 		mv.setViewName("/menu/menu_typing");
 		return mv;
