@@ -69,9 +69,12 @@
 							
 							<td>食品流通许可证<input type="file" name="imgUrl4"  id="imgUrl4"  accept="image/*" />	</td>
 							<td>食品生产许可证<input type="file" name="imgUrl5"  id="imgUrl5"  accept="image/*" />	</td>
-							<td>餐饮服务许可证	<input type="file" name="imgUrl6"  id="imgUrl6"  accept="image/*" />	</td>
+							<td>餐饮服务许可证	<input type="file" name="imgUrl6"  id="imgUrl6"  accept="image/*" />	</td>						
+						</tr>
+						<tr>
 							<td>食品经营许可证<input type="file" name="imgUrl7"  id="imgUrl7"  accept="image/*" />	</td>
 						</tr>
+						
 					
 				<tr>	<th>法定代表人/负责人/业主证件</th></tr>
 						<tr>							
