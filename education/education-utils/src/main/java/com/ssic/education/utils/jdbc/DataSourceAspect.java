@@ -31,17 +31,17 @@ public class DataSourceAspect {
             Method m = classz[0].getMethod(method, parameterTypes);
             String methodName = m.getName();
             
+            String dstr = null;
             if (m != null && m.isAnnotationPresent(DataSource.class)) {
                 DataSource data = m.getAnnotation(DataSource.class);               
-                DynamicDataSourceHolder.putDataSource(data.value());
-                logger.info(data.value());
+                dstr = data.value();
             } else if(isSlaveMethod(methodName)){
-            	 DynamicDataSourceHolder.putDataSource(DataSourceHolderUtil.SLAVE_KEY);
-            	 logger.debug("slave");
+            	dstr = DataSourceHolderUtil.SLAVE_KEY;
             } else {
-            	DynamicDataSourceHolder.putDataSource(DataSourceHolderUtil.MASTER_KEY);
-           	 	logger.debug("master");
+            	dstr = DataSourceHolderUtil.MASTER_KEY;
             }
+            DynamicDataSourceHolder.putDataSource(dstr);
+            logger.debug(dstr);
             
         } catch (Throwable e) {
             throw new SystemException(e);
