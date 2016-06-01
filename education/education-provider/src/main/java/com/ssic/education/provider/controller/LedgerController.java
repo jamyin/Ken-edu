@@ -631,8 +631,10 @@ public class LedgerController {
 			HttpServletResponse response) {
 		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
 				ConfigUtil.SESSIONINFONAME);
+		if(info==null){
+			return null;
+		}
 		ld.setSourceId(info.getSupplierId());
-		ModelAndView mv =null;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.M.d");
 		Date date = new Date();
 		String filename = Tools.date2Str(date, "yyyyMMddHHmmss");
@@ -644,7 +646,6 @@ public class LedgerController {
 		Workbook workbook = new HSSFWorkbook();
 		sheet = (HSSFSheet) workbook.createSheet("配货管理");
 		try {
-			Map<String, Object> dataMap = new HashMap<String, Object>();
 			List<String> titles = new ArrayList<String>();
 			titles.add("配货号");
 			titles.add("配货日期");
@@ -656,7 +657,6 @@ public class LedgerController {
 			titles.add("供应商名称");
 			titles.add("生产单位");
 			titles.add("生产日期");
-			dataMap.put("titles", titles);
 			int len = titles.size();
 			HSSFCellStyle headerStyle = (HSSFCellStyle) workbook.createCellStyle(); // 标题样式
 			headerStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);

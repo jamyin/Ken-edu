@@ -1,6 +1,7 @@
 package com.ssic.education.provider.controller;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,6 +16,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.EncryptedDocumentException;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFDataFormat;
+import org.apache.poi.hssf.usermodel.HSSFFont;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -51,6 +59,7 @@ import com.ssic.education.utils.poi.ParseExcelUtil;
 import com.ssic.education.utils.util.ObjectExcelView;
 import com.ssic.education.utils.util.PageData;
 import com.ssic.education.utils.util.PropertiesUtils;
+import com.ssic.education.utils.util.Tools;
 import com.ssic.education.utils.util.UUIDGenerator;
 
 @Controller
@@ -900,15 +909,24 @@ public class ProSupplierController extends BaseController{
 	@RequestMapping(value = "/excel")
 	@ResponseBody
 	public ModelAndView exportExcel(SupplierDto supplierDto,
-			HttpServletRequest request) {
+			HttpServletRequest request,HttpServletResponse response) {
 		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
 				ConfigUtil.SESSIONINFONAME);
+		if (info == null) {
+			return null;
+		}
 		supplierDto.setReceiverId(info.getSupplierId());
-		ModelAndView mv = null;
-		PageData pd = new PageData();
-		pd = this.getPageData();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.M.d");
+		Date date = new Date();
+		String filename = Tools.date2Str(date, "yyyyMMddHHmmss");
+		HSSFSheet sheet;
+		HSSFCell cell;
+		response.setContentType("application/octet-stream");
+		response.setHeader("Content-Disposition", "attachment;filename="
+				+ filename + ".xls");
+		Workbook workbook = new HSSFWorkbook();
+		sheet = (HSSFSheet) workbook.createSheet("供货商");
 		try {
-			Map<String, Object> dataMap = new HashMap<String, Object>();
 			List<String> titles = new ArrayList<String>();
 			titles.add("供应商名称");
 			titles.add("供应商地址");
@@ -920,8 +938,29 @@ public class ProSupplierController extends BaseController{
 			titles.add("供应商编码");
 			titles.add("联系人");
 			titles.add("电话");
-			dataMap.put("titles", titles);
-
+			int len = titles.size();
+			HSSFCellStyle headerStyle = (HSSFCellStyle) workbook
+					.createCellStyle(); // 标题样式
+			headerStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+			headerStyle.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+			HSSFFont headerFont = (HSSFFont) workbook.createFont(); // 标题字体
+			headerFont.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+			headerFont.setFontHeightInPoints((short) 11);
+			headerStyle.setFont(headerFont);
+			short width = 20, height = 25 * 20;
+			sheet.setDefaultColumnWidth(width);
+			HSSFRow sheetRow = sheet.createRow(0);
+			for (int i = 0; i < len; i++) { // 设置标题
+				String title = titles.get(i);
+				cell = sheetRow.createCell(i);
+				cell.setCellStyle(headerStyle);
+				cell.setCellType(HSSFCell.CELL_TYPE_STRING);
+				cell.setCellValue(title);
+			}
+			sheet.getRow(0).setHeight(height);
+			HSSFCellStyle contentStyle = (HSSFCellStyle) workbook
+					.createCellStyle(); // 内容样式
+			contentStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
 			DataGrid dg = supplierService.findProSupplier(supplierDto,
 					null);
 			List<SupplierDto> expList = dg.getRows();
@@ -943,15 +982,33 @@ public class ProSupplierController extends BaseController{
 					varList.add(vpd);
 				}
 			}
-			dataMap.put("varList", varList);
-			ObjectExcelView erv = new ObjectExcelView(); // 执行excel操作
+			for (int i = 0; i < varList.size(); i++) {
+				HSSFRow row = sheet.createRow(i + 1);
+				PageData vpd = varList.get(i);
+				for (int j = 0; j < len; j++) {
+					String varstr = vpd.getString("var" + (j + 1)) != null ? vpd
+							.getString("var" + (j + 1)) : "";
+					cell = row.createCell(j);
+					HSSFCellStyle cellStyle2 = (HSSFCellStyle) workbook
+							.createCellStyle();
+					HSSFDataFormat format = (HSSFDataFormat) workbook
+							.createDataFormat();
+					cellStyle2.setDataFormat(format.getFormat("@"));
+					cell.setCellStyle(cellStyle2);
+					cell.setCellType(HSSFCell.CELL_TYPE_STRING);
+					cell.setCellValue(varstr);
 
-			mv = new ModelAndView(erv, dataMap);
+				}
 
+			}
+			OutputStream os = response.getOutputStream();
+			workbook.write(os);
+			os.flush();
+			os.close();
 		} catch (Exception e) {
 
 		}
-		return mv;
+		return null;
 	}
 	
 //	@RequestMapping("download")
