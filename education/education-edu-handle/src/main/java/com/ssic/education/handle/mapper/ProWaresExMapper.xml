@@ -42,7 +42,7 @@
         </if>
 	</select>
 	
-	<select id="countWarseListByParam" resultMap="java.lang.Long" parameterType="com.ssic.education.handle.dto.ProSchoolWareDto">
+	<select id="countWarseListByParam" resultType="java.lang.Long" parameterType="com.ssic.education.handle.dto.ProSchoolWareDto">
 		select count(*) 
 		from t_pro_warse a
 		LEFT JOIN t_pro_school_ware b on a.id = b.ware_id
