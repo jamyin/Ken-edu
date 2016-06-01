@@ -22,6 +22,42 @@
 		<result column="remark" property="remark" jdbcType="VARCHAR" />
 	</resultMap>
 
+	<select id="findWarseListByParam" resultMap="BaseResultMap" parameterType="com.ssic.education.handle.dto.ProSchoolWareDto">
+		select * 
+		from t_pro_wares a
+		LEFT JOIN t_pro_school_ware b on a.id = b.ware_id
+		where a.stat = 1 and b.stat=1
+		<if test="proSchoolWareDto.schoolId != null  and proSchoolWareDto.schoolId !=''">
+			AND b.school_id = #{proSchoolWareDto.schoolId}
+		</if>
+		<if test="proSchoolWareDto.sourceId != null  and proSchoolWareDto.sourceId !=''">
+			AND b.source_id = #{proSchoolWareDto.sourceId}
+		</if>
+		<if test="proSchoolWareDto.supplierId != null  and proSchoolWareDto.supplierId !=''">
+			AND b.supplier_id = #{proSchoolWareDto.supplierId}
+		</if>
+		ORDER BY a.create_time desc
+		<if test="query != null">
+       		LIMIT  #{query.startNum}, #{query.pageSize}
+        </if>
+	</select>
+	
+	<select id="countWarseListByParam" resultType="java.lang.Long" parameterType="com.ssic.education.handle.dto.ProSchoolWareDto">
+		select count(*) 
+		from t_pro_wares a
+		LEFT JOIN t_pro_school_ware b on a.id = b.ware_id
+		where a.stat = 1 and b.stat=1
+		<if test="proSchoolWareDto.schoolId != null  and proSchoolWareDto.schoolId !=''">
+			AND b.school_id = #{proSchoolWareDto.schoolId}
+		</if>
+		<if test="proSchoolWareDto.sourceId != null  and proSchoolWareDto.sourceId !=''">
+			AND b.source_id = #{proSchoolWareDto.sourceId}
+		</if>
+		<if test="proSchoolWareDto.supplierId != null  and proSchoolWareDto.supplierId !=''">
+			AND b.supplier_id = #{proSchoolWareDto.supplierId}
+		</if>
+	</select>
+
 	<select id="findWarseBySupplier" resultMap="BaseResultMap" parameterType="java.lang.String">
 		select * from t_pro_warse where spplier_id=#{supplierId}
 	</select>

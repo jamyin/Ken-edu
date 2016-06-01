@@ -3,6 +3,7 @@ package com.ssic.education.handle.service;
 import java.util.List;
 
 import com.ssic.educateion.common.dto.ProWaresDto;
+import com.ssic.education.handle.dto.ProSchoolWareDto;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 
@@ -39,4 +40,6 @@ public interface ProWaresService {
 		 * @param SELECT * FROM `t_pro_wares` ware WHERE   EXISTS  (SELECT * FROM `t_pro_school_ware` sc_ware WHERE sc_ware.`school_id` = '000d804f-ffdc-432a-b9b7-85307a611423'  AND ware.`id` = sc_ware.`ware_id`)
 	 */
 	List<ProWaresDto> searchProWares(String schoolId,String waresName);
+	
+	public PageResult<ProWaresDto> findWarsePageByParam(ProSchoolWareDto proSchoolWareDto,PageQuery query);
 }

@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.ssic.educateion.common.dto.ProWaresDto;
+import com.ssic.education.handle.dto.ProSchoolWareDto;
+import com.ssic.education.utils.model.PageQuery;
 
 /**
  * 		
@@ -38,5 +40,7 @@ public interface ProWaresExMapper {
 	 */
 	List<ProWaresDto> searchProWares(@Param("schoolId") String schoolId,@Param("waresName") String waresName);
 	
+	List<ProWaresDto> findWarseListByParam(@Param("proSchoolWareDto") ProSchoolWareDto proSchoolWareDto,@Param("query") PageQuery query);
 	
+	long countWarseListByParam(@Param("proSchoolWareDto") ProSchoolWareDto proSchoolWareDto);
 }

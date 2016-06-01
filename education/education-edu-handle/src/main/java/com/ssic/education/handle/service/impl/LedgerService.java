@@ -91,6 +91,13 @@ public class LedgerService implements ILedgerService {
 					psw.setLastUpdateTime(psw.getCreateTime());
 					psw.setStat(1);
 					swMapper.insert(psw);
+				}else{
+					for (ProSchoolWare sw : pslist) {
+						ProSchoolWare psw1 = new ProSchoolWare();
+						psw1.setId(sw.getId());
+						psw1.setLastUpdateTime(new Date());
+						swMapper.updateByPrimaryKeySelective(psw1);
+					}
 				}
 				oo.setId(UUID.randomUUID().toString());
 				oo.setMasterId(o.getId());

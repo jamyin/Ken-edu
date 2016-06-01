@@ -27,6 +27,7 @@
 		<property name="defaultAutoCommit" value="false" />
     </bean>
     
+    <!--  
     <bean id="slavedataSource"
         class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="${slave.datasource.driverClassName}" />
@@ -34,20 +35,19 @@
         <property name="username" value="${slave.datasource.username}" />
         <property name="password" value="${slave.datasource.password}" />
         
-		<!-- Connection Pooling Info -->
 		<property name="initialSize" value="${initialSize}" />
 		<property name="maxActive" value="${maxActive}" />
 		<property name="maxIdle" value="${maxIdle}" />
 		<property name="maxWait" value="${maxWait}" />
 		<property name="poolPreparedStatements" value="true" />
 		<property name="defaultAutoCommit" value="false" />
-    </bean>
+    </bean>-->
 	
-	<bean id="dataSource" class="com.ssic.base.datasource.DynamicDataSource">
+	<bean id="dataSource" class="com.ssic.education.utils.jdbc.DynamicDataSource">
         <property name="targetDataSources">  
               <map key-type="java.lang.String">                   
                  <entry key="master" value-ref="masterdataSource"/>  
-                 <entry key="slave" value-ref="slavedataSource"/>                
+                 <!-- <entry key="slave" value-ref="slavedataSource"/>   -->              
               </map>        
         </property>  
         <property name="defaultTargetDataSource" ref="masterdataSource"/>  

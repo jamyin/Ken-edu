@@ -102,6 +102,13 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 				psw.setLastUpdateTime(psw.getCreateTime());
 				psw.setStat(1);
 				swMapper.insert(psw);
+			} else {
+				for (ProSchoolWare sw : list) {
+					ProSchoolWare psw1 = new ProSchoolWare();
+					psw1.setId(sw.getId());
+					psw1.setLastUpdateTime(new Date());
+					swMapper.updateByPrimaryKeySelective(psw1);
+				}
 			}
 		}
 		ledger.get(0).setId(UUID.randomUUID().toString());
@@ -187,6 +194,13 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 				psw.setLastUpdateTime(psw.getCreateTime());
 				psw.setStat(1);
 				swMapper.insert(psw);
+			} else {
+				for (ProSchoolWare sw : list) {
+					ProSchoolWare psw1 = new ProSchoolWare();
+					psw1.setId(sw.getId());
+					psw1.setLastUpdateTime(new Date());
+					swMapper.updateByPrimaryKeySelective(psw1);
+				}
 			}
 			exMapper.updateLedger(ledger);
 		}
@@ -233,12 +247,11 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 	public List<ProLedger> searchProLedger(List<String> ledgerMasterIds) {
 		ProLedgerExample example = new ProLedgerExample();
 		ProLedgerExample.Criteria criteria = example.createCriteria();
-		
-		if (ledgerMasterIds!=null && ledgerMasterIds.size()>0) {
-			 criteria.andMasterIdIn(ledgerMasterIds);
+
+		if (ledgerMasterIds != null && ledgerMasterIds.size() > 0) {
+			criteria.andMasterIdIn(ledgerMasterIds);
 		}
 		criteria.andStatEqualTo(DataStatus.ENABLED);
-
 
 		return mapper.selectByExample(example);
 	}

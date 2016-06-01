@@ -59,7 +59,7 @@
 					
 					<tr>
 					<th>联系人</th>
-						<td><input name="corporation" type="text" placeholder="请输入法人代表" class="easyui-validatebox span2" ></td>
+						<td><input name="corporation" type="text" placeholder="请输入联系人" class="easyui-validatebox span2" ></td>
 						
 				
 						</tr>	

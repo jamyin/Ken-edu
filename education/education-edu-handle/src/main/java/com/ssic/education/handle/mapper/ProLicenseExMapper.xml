@@ -22,10 +22,10 @@
 		update t_pro_license AS a
 		<set>
 			<if test="proLicense.licPic != null  and proLicense.licPic!=''">
-				a.lic_pic = #{proLicense.licPic}
+				a.lic_pic = #{proLicense.licPic},
 			</if>	
 			<if test="proLicense.lastUpdateTime != null  and proLicense.lastUpdateTime!=''">
-				a.last_update_time = #{proLicense.lastUpdateTime}
+				a.last_update_time = #{proLicense.lastUpdateTime},
 			</if>		
 		</set>
 		where 

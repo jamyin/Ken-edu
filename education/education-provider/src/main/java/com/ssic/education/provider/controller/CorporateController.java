@@ -26,6 +26,8 @@ import com.ssic.education.handle.service.IProLicenseService;
 import com.ssic.education.handle.service.ISupplierService;
 import com.ssic.education.provider.dto.TImsUsersDto;
 import com.ssic.education.provider.pageModel.Json;
+import com.ssic.education.provider.pageModel.SessionInfo;
+import com.ssic.education.provider.util.ConfigUtil;
 import com.ssic.education.utils.util.PropertiesUtils;
 
 @Controller
@@ -119,7 +121,7 @@ public class CorporateController {
 	 */
 	@RequestMapping("/alterImage")
 	@ResponseBody
-	public Json alterImage(String id,
+	public Json alterImage(
 			@RequestParam(value = "imgUrl1") MultipartFile imgUrl1,
 			@RequestParam(value = "imgUrl2") MultipartFile imgUrl2,
 			@RequestParam(value = "imgUrl3") MultipartFile imgUrl3,
@@ -134,6 +136,13 @@ public class CorporateController {
 			ImageInfoDto image, HttpServletRequest request,
 			HttpServletResponse response) {
 		Json json = new Json();
+		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
+				ConfigUtil.SESSIONINFONAME);
+		if(info==null){
+			json.setMsg("尚未登录");
+			json.setSuccess(false);
+			return json;
+		}
 		ProLicense license = new ProLicense();
 		Map<String, Object> map1 = createImageServiceImpl.createImage(image,
 				imgUrl1, request, response);
@@ -171,6 +180,7 @@ public class CorporateController {
 		String imageurl10 = (String) map10.get("image_url");
 		String imageurl11 = (String) map11.get("image_url");
 
+		String id=info.getSupplierId();
 		if (imageurl1 != null && imageurl1 != "") {
 			license.setLicName("工商营业执照");
 			license.setRelationId(id);
