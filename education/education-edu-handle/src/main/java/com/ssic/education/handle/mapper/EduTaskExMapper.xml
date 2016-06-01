@@ -5,8 +5,8 @@
 		SELECT a.receive_id AS receiveId, a.readstat, b.id, b.content,b.create_id , b.create_name AS createName,b.create_time AS createTime,b.last_update_time AS lastUpdateTime, b.pic, b.stat, b.summary, b.title 
 		FROM t_edu_task_receive a   
 		LEFT JOIN t_edu_task b ON a.task_id = b.id 
-		WHERE a.receive_id =#{id} AND a.stat = 1 AND b.stat = 1 
-		<include refid="where_conditions"></include>
+		WHERE a.receive_id =#{id} AND a.readstat = #{readstat} AND a.stat = 1 AND b.stat = 1 
+		<!-- <include refid="where_conditions"></include> -->
 		ORDER BY a.create_time DESC
 		<if test="query != null">
         LIMIT  #{query.startNum}, #{query.pageSize}
@@ -21,9 +21,6 @@
 	<include refid="where_conditions"></include>
 	</select>
 	
-	<sql id="where_conditions">
-		<if test="readstat != '' ">
-			AND a.readstat = #{readstat}
-		</if>	
-	</sql>
+	<!-- <sql id="where_conditions">
+	</sql> -->
 </mapper>
