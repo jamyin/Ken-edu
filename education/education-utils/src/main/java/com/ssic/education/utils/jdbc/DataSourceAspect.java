@@ -41,7 +41,7 @@ public class DataSourceAspect {
             	dstr = DataSourceHolderUtil.MASTER_KEY;
             }
             DynamicDataSourceHolder.putDataSource(dstr);
-            logger.info(dstr);
+            logger.debug(dstr);
             
         } catch (Throwable e) {
             throw new SystemException(e);
