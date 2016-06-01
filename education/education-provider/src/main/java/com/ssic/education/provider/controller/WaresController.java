@@ -295,26 +295,7 @@ public class WaresController extends BaseController {
 		Json json = new Json();
 		
 		ProLicense license = new ProLicense();
-		//判断图片是否重复上传
-	List<ProLicense> list2 = proLicenseServiceImpl.selectByRelationId(id);
-				
-		for (int i = 0; i < list2.size(); i++) {
-			if(list2.get(i).getLicName().equals("商品图片")){
-				json.setMsg("商品图片不可重复上传");
-				json.setSuccess(false);
-				return json;
-			}
-			if(list2.get(i).getLicName().equals("检测检验报告")){
-				json.setMsg("检测检验报告不可重复上传");
-				json.setSuccess(false);
-				return json;
-			}
-			if(list2.get(i).getLicName().equals("生产许可证")){
-				json.setMsg("生产许可证不可重复上传");
-				json.setSuccess(false);
-				return json;
-			}
-		}
+
 		Map<String, Object> map1 = createImageServiceImpl.createImage(image,
 				spImgUrl, request, response);
 		Map<String, Object> map2 = createImageServiceImpl.createImage(image,
@@ -326,7 +307,29 @@ public class WaresController extends BaseController {
 		String imageurl2 = (String) map2.get("image_url");
 		String imageurl3 = (String) map3.get("image_url");
 		List<String> list = new ArrayList<String>();
-	
+		//判断图片是否重复上传
+	List<ProLicense> list2 = proLicenseServiceImpl.selectByRelationId(id);
+				
+		for (int i = 0; i < list2.size(); i++) {
+			if(imageurl1!=null){
+			if(list2.get(i).getLicName().equals("商品图片")){
+				json.setMsg("商品图片不可重复上传");
+				json.setSuccess(false);
+				return json;
+			}}
+			if(imageurl2!=null){
+			if(list2.get(i).getLicName().equals("检测检验报告")){
+				json.setMsg("检测检验报告不可重复上传");
+				json.setSuccess(false);
+				return json;
+			}}
+			if(imageurl3!=null){
+			if(list2.get(i).getLicName().equals("生产许可证")){
+				json.setMsg("生产许可证不可重复上传");
+				json.setSuccess(false);
+				return json;
+			}}
+		}
 	
 		if (imageurl1 != null && imageurl1 != "") {
 			license.setLicName("商品图片");

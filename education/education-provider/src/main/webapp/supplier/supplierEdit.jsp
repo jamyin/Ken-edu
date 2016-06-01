@@ -51,8 +51,8 @@
 				<tr>
 					<th>供应商地址</th>
 					<td><input name="address" type="text" placeholder="请输入供应商地址" class="easyui-validatebox span2" data-options="required:true"  value="${ProSupplie.address}" ></td>
-					<th>法人代表</th>
-						<td><input name="corporation" type="text" placeholder="请输入法人代表" class="easyui-validatebox span2"  value="${ProSupplie.corporation}" ></td>					
+					<th>联系人</th>
+						<td><input name="corporation" type="text" placeholder="请输入联系人" class="easyui-validatebox span2"  value="${ProSupplie.corporation}" ></td>					
 				</tr>
 				<tr>
 					<th>联系方式</th>

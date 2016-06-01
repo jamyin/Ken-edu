@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.common.base.Objects;
-import com.ssic.educateion.common.dto.EduAreaDto;
 import com.ssic.educateion.common.dto.EduCommitteeDto;
 import com.ssic.educateion.common.dto.EduUsersDto;
 import com.ssic.educateion.common.dto.EduUsersRegDto;
@@ -65,7 +64,7 @@ public class UserController extends BaseController{
 		if(isTrue){//新增
 			usersDto.setPassword(MD5Coder.encodeMD5Hex(usersDto.getPassword()));
 			EduUsersDto eduUsersDto = eduUsersService.save(usersDto);
-			setSession(eduUsersDto.getId());
+			//setSession(eduUsersDto.getId());
 			res.setStatus(DataStatus.HTTP_SUCCESS);
 			res.setMessage("注册成功！");
 		} else {

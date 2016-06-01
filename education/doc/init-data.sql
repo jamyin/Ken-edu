@@ -3,7 +3,7 @@ START TRANSACTION;
 #初始化教委
 insert into t_edu_committee(id,name,area_code,type,create_time,last_update_time,stat) values
 (UUID(),'上海市教委','310100',1,now(),now(),1),
-(UUID(),'黄埔区教委','310101',2,now(),now(),1),
+(UUID(),'黄浦区教委','310101',2,now(),now(),1),
 (UUID(),'静安区教委','310106',2,now(),now(),1),
 (UUID(),'徐汇区教委','310104',2,now(),now(),1),
 (UUID(),'长宁区教委','310105',2,now(),now(),1),
@@ -24,7 +24,7 @@ insert into t_edu_committee(id,name,area_code,type,create_time,last_update_time,
 insert into t_edu_users(id,name,user_account,password,source_id,source_type,isAdmin,create_time,last_update_time,stat)
 select UUID(),name,name,md5("123456"),id,0,1,now(),now(),1 from t_edu_committee where name = '上海市教委';
 insert into t_edu_users(id,name,user_account,password,source_id,source_type,isAdmin,create_time,last_update_time,stat)
-select UUID(),name,name,md5("123456"),id,2,1,now(),now(),1 from t_edu_committee where name = '黄埔区教委';
+select UUID(),name,name,md5("123456"),id,2,1,now(),now(),1 from t_edu_committee where name = '黄浦区教委';
 insert into t_edu_users(id,name,user_account,password,source_id,source_type,isAdmin,create_time,last_update_time,stat)
 select UUID(),name,name,md5("123456"),id,2,1,now(),now(),1 from t_edu_committee where name = '静安区教委';
 insert into t_edu_users(id,name,user_account,password,source_id,source_type,isAdmin,create_time,last_update_time,stat)

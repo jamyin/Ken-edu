@@ -336,66 +336,6 @@ public class ProSupplierController extends BaseController{
 		Json json = new Json();
 		ProLicense license = new ProLicense();
 		
-		//判断图片是否重复上传
-		List<ProLicense> list2=	proLicenseServiceImpl.selectByRelationId(id);
-				
-		for (int i = 0; i < list2.size(); i++) {
-			if(list2.get(i).getLicName().equals("工商营业执照")){
-				json.setMsg("工商营业执照不可重复上传");
-				json.setSuccess(false);
-				return json;
-			}
-			if(list2.get(i).getLicName().equals("组织机构代码")){
-				json.setMsg("组织机构代码不可重复上传");
-				json.setSuccess(false);
-				return json;
-			}
-			if(list2.get(i).getLicName().equals("税务登记证")){
-				json.setMsg("税务登记证不可重复上传");
-				json.setSuccess(false);
-				return json;
-			}
-			if(list2.get(i).getLicName().equals("食品流通许可证")){
-				json.setMsg("食品流通许可证不可重复上传");
-				json.setSuccess(false);
-				return json;
-			}
-			if(list2.get(i).getLicName().equals("食品生产许可证")){
-				json.setMsg("食品生产许可证不可重复上传");
-				json.setSuccess(false);
-				return json;
-			}
-			if(list2.get(i).getLicName().equals("餐饮服务许可证")){
-				json.setMsg("餐饮服务许可证不可重复上传");
-				json.setSuccess(false);
-				return json;
-			}
-			if(list2.get(i).getLicName().equals("食品经营许可证")){
-				json.setMsg("食品经营许可证不可重复上传");
-				json.setSuccess(false);
-				return json;
-			}
-			if(list2.get(i).getLicName().equals("身份证")){
-				json.setMsg("身份证不可重复上传");
-				json.setSuccess(false);
-				return json;
-			}
-			if(list2.get(i).getLicName().equals("港澳居民来往内地通行证")){
-				json.setMsg("港澳居民来往内地通行证不可重复上传");
-				json.setSuccess(false);
-				return json;
-			}
-			if(list2.get(i).getLicName().equals("台湾居民往来内地通行证")){
-				json.setMsg("台湾居民往来内地通行证不可重复上传");
-				json.setSuccess(false);
-				return json;
-			}
-			if(list2.get(i).getLicName().equals("其他")){
-				json.setMsg("其他证件不可重复上传");
-				json.setSuccess(false);
-				return json;
-			}		
-		}
 		
 		
 		
@@ -435,6 +375,80 @@ public class ProSupplierController extends BaseController{
 		String imageurl10 = (String) map10.get("image_url");
 		String imageurl11 = (String) map11.get("image_url");
 
+		//判断图片是否重复上传
+				List<ProLicense> list2=	proLicenseServiceImpl.selectByRelationId(id);
+					
+				for (int i = 0; i < list2.size(); i++) {
+					if(imageurl1!=null){
+					if(list2.get(i).getLicName().equals("工商营业执照")){
+						json.setMsg("工商营业执照不可重复上传");
+						json.setSuccess(false);
+						return json;
+					}}
+				if(imageurl2!=null){
+					if(list2.get(i).getLicName().equals("组织机构代码")){
+						json.setMsg("组织机构代码不可重复上传");
+						json.setSuccess(false);
+						return json;
+					}}
+				if(imageurl3!=null){
+					if(list2.get(i).getLicName().equals("税务登记证")){
+						json.setMsg("税务登记证不可重复上传");
+						json.setSuccess(false);
+						return json;
+					}}
+				if(imageurl4!=null){
+					if(list2.get(i).getLicName().equals("食品流通许可证")){
+						json.setMsg("食品流通许可证不可重复上传");
+						json.setSuccess(false);
+						return json;
+					}}
+				if(imageurl5!=null){
+					if(list2.get(i).getLicName().equals("食品生产许可证")){
+						json.setMsg("食品生产许可证不可重复上传");
+						json.setSuccess(false);
+						return json;
+					}}
+				if(imageurl6!=null){
+					if(list2.get(i).getLicName().equals("餐饮服务许可证")){
+						json.setMsg("餐饮服务许可证不可重复上传");
+						json.setSuccess(false);
+						return json;
+					}}
+				if(imageurl7!=null){
+					if(list2.get(i).getLicName().equals("食品经营许可证")){
+						json.setMsg("食品经营许可证不可重复上传");
+						json.setSuccess(false);
+						return json;
+					}}
+				if(imageurl8!=null){
+					if(list2.get(i).getLicName().equals("身份证")){
+						json.setMsg("身份证不可重复上传");
+						json.setSuccess(false);
+						return json;
+					}}
+				if(imageurl9!=null){
+					if(list2.get(i).getLicName().equals("港澳居民来往内地通行证")){
+						json.setMsg("港澳居民来往内地通行证不可重复上传");
+						json.setSuccess(false);
+						return json;
+					}}
+				if(imageurl10!=null){
+					if(list2.get(i).getLicName().equals("台湾居民往来内地通行证")){
+						json.setMsg("台湾居民往来内地通行证不可重复上传");
+						json.setSuccess(false);
+						return json;
+					}}
+				if(imageurl11!=null){
+					if(list2.get(i).getLicName().equals("其他")){
+						json.setMsg("其他证件不可重复上传");
+						json.setSuccess(false);
+						return json;
+					}	}	
+				}
+				
+		
+		
 		if (imageurl1 != null && imageurl1 != "") {
 			license.setLicName("工商营业执照");
 			license.setLicPic(imageurl1);
@@ -473,6 +487,7 @@ public class ProSupplierController extends BaseController{
 			String uuid = UUID.randomUUID().toString();
 			license.setId(uuid);
 			proLicenseServiceImpl.updateImage(license);
+			
 		}
 		if (imageurl4 != null && imageurl4 != "") {
 			license.setLicName("食品流通许可证");
