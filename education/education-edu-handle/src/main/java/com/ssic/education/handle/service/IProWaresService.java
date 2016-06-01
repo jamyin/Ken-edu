@@ -3,6 +3,9 @@ package com.ssic.education.handle.service;
 import java.util.List;
 
 import com.ssic.educateion.common.dto.ProWaresDto;
+import com.ssic.education.handle.dto.ProSchoolWareDto;
+import com.ssic.education.utils.model.PageQuery;
+import com.ssic.education.utils.model.PageResult;
 
 /**		
  * <p>Title: IProWaresService </p>
@@ -18,4 +21,6 @@ import com.ssic.educateion.common.dto.ProWaresDto;
  */
 public interface IProWaresService {
 	public List<ProWaresDto> findWarseBySupplier(String Supplier);
+	
+	public PageResult<ProWaresDto> findWarsePageByParam(ProSchoolWareDto proSchoolWareDto,PageQuery query);
 }

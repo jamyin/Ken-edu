@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ssic.educateion.common.dto.ProWaresDto;
+import com.ssic.education.handle.dto.ProSchoolWareDto;
 import com.ssic.education.handle.mapper.ProWaresExMapper;
 import com.ssic.education.handle.mapper.ProWaresMapper;
 import com.ssic.education.handle.pojo.ProWares;
@@ -33,6 +34,14 @@ public class ProWaresDao extends MyBatisBaseDao<ProWares>{
 	@Autowired
 	private ProWaresExMapper mapperEx;
 
+	public List<ProWaresDto> findWarseListByParam(ProSchoolWareDto proSchoolWareDto,PageQuery query) {
+		return mapperEx.findWarseListByParam(proSchoolWareDto, query);
+	}
+	
+	public long countWarseListByParam(ProSchoolWareDto proSchoolWareDto) {
+		return mapperEx.countWarseListByParam(proSchoolWareDto);
+	}
+	
 	public List<ProWares> queryWaresByParams(ProWaresDto dto, PageQuery query) {
 		ProWaresExample example = new ProWaresExample();
 		ProWaresExample.Criteria criteria = example.createCriteria();

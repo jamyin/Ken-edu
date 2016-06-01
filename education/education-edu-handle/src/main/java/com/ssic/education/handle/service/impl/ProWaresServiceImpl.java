@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.ssic.educateion.common.dto.ProWaresDto;
 import com.ssic.education.handle.dao.ProWaresDao;
+import com.ssic.education.handle.dto.ProSchoolWareDto;
 import com.ssic.education.handle.pojo.ProWares;
 import com.ssic.education.handle.service.ProWaresService;
 import com.ssic.education.utils.model.PageQuery;
@@ -19,7 +20,7 @@ public class ProWaresServiceImpl implements ProWaresService {
 
     @Autowired
     private ProWaresDao proWaresDao;
-
+    
     public ProWaresDto findById(String id) {
     	if (StringUtils.isNotBlank(id)) {
     		ProWares proWares = proWaresDao.selectByPrimaryKey(id);
@@ -54,6 +55,11 @@ public class ProWaresServiceImpl implements ProWaresService {
         return null;
     }
 
+    public PageResult<ProWaresDto> findWarsePageByParam(ProSchoolWareDto proSchoolWareDto,PageQuery query) {
+    	List<ProWaresDto> results = proWaresDao.findWarseListByParam(proSchoolWareDto, query);
+    	query.setTotal(proWaresDao.countWarseListByParam(proSchoolWareDto));
+    	return new PageResult<ProWaresDto>(query, results);
+    }
 
 	@Override
 	public List<ProWaresDto> searchProWares(String schoolId,String waresName) {
