@@ -97,6 +97,9 @@ public class WaresInfoController {
 	@ResponseBody
 	public Response<PageResult<WaresListDto>> purchaseList(@PathVariable("schoolId") String schoolId, ProWares prowares, PageQuery query) throws Exception {
 		Response<PageResult<WaresListDto>> result = new Response<PageResult<WaresListDto>>();
+		System.out.println(schoolId);
+		System.out.println(prowares.getWaresName());
+		System.out.println(prowares.getWaresType());
 
 		if (StringUtils.isEmpty(schoolId)) {
 			result.setStatus(DataStatus.HTTP_FAILE);
