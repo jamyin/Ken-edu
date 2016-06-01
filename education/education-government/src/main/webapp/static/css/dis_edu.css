@@ -47,7 +47,6 @@
 
 .main_wrap .tab_wrap {
   display: inline-block;
-  width: 100%;
   padding: 0;
   border: none;
   background: #ebebeb; }
@@ -80,6 +79,17 @@
     box-sizing: border-box;
     padding: 0 28px;
     background: #fff; }
+    .main_wrap .tab_wrap .tab_content_full > h2, .main_wrap .tab_wrap .info_content > h2 {
+      color: #333333;
+      text-indent: 12px;
+      font-size: 20px;
+      margin-top: 30px;
+      margin-bottom: 10px;
+      font-weight: bold;
+      border-left: 4px solid #60ac62; }
+    .main_wrap .tab_wrap .tab_content_full > p, .main_wrap .tab_wrap .info_content > p {
+      line-height: 38px;
+      text-indent: 40px; }
   .main_wrap .tab_wrap .release_con > form > .text > label {
     display: inline-block;
     width: 80px;
@@ -124,7 +134,8 @@
     float: left;
     box-sizing: border-box;
     padding: 0 28px;
-    background: #fff; }
+    background: #fff;
+    min-height: 200px; }
     .main_wrap .tab_wrap .tab_content > h1 {
       text-align: center;
       font-size: 28px;
@@ -278,9 +289,11 @@
     bottom: 0;
     margin: auto;
     z-index: 2;
-    width: 240px;
+    width: 310px;
     height: 500px;
     overflow: visible; }
+    .background .select_panel .subbt {
+      margin: 20px auto 5px; }
     .background .select_panel.wide {
       width: 400px; }
     .background .select_panel h2 {
@@ -311,7 +324,7 @@
           box-sizing: border-box;
           border: 1px solid #aaa;
           display: inline-block;
-          width: 120px;
+          width: 200px;
           height: 30px;
           padding: 0 10px; }
         .background .select_panel .content_wrap > .line input[type="submit"], .background .select_panel .content_wrap2 > .line input[type="submit"] {
@@ -341,16 +354,30 @@
           line-height: 30px;
           position: absolute; }
         .background .select_panel .content_wrap > .line > .checkwrap, .background .select_panel .content_wrap > .line .checkwrap2, .background .select_panel .content_wrap2 > .line > .checkwrap, .background .select_panel .content_wrap2 > .line .checkwrap2 {
-          text-align: right;
+          text-align: left;
           border: 1px solid #999;
           overflow-y: scroll;
           margin-top: 20px;
           max-height: 300px;
           padding: 10px 20px 10px;
           box-sizing: border-box; }
-          .background .select_panel .content_wrap > .line > .checkwrap > ul > li > label, .background .select_panel .content_wrap > .line .checkwrap2 > ul > li > label, .background .select_panel .content_wrap2 > .line > .checkwrap > ul > li > label, .background .select_panel .content_wrap2 > .line .checkwrap2 > ul > li > label {
-            color: #333;
-            width: auto; }
+          .background .select_panel .content_wrap > .line > .checkwrap > ul > li, .background .select_panel .content_wrap > .line .checkwrap2 > ul > li, .background .select_panel .content_wrap2 > .line > .checkwrap > ul > li, .background .select_panel .content_wrap2 > .line .checkwrap2 > ul > li {
+            display: block;
+            clear: both;
+            width: 100%;
+            overflow: hidden;
+            box-sizing: border-box; }
+            .background .select_panel .content_wrap > .line > .checkwrap > ul > li > label, .background .select_panel .content_wrap > .line .checkwrap2 > ul > li > label, .background .select_panel .content_wrap2 > .line > .checkwrap > ul > li > label, .background .select_panel .content_wrap2 > .line .checkwrap2 > ul > li > label {
+              width: 85%;
+              color: #333;
+              text-align: left;
+              height: 24px;
+              line-height: 24px;
+              overflow: hidden;
+              display: inline-block; }
+            .background .select_panel .content_wrap > .line > .checkwrap > ul > li > input, .background .select_panel .content_wrap > .line .checkwrap2 > ul > li > input, .background .select_panel .content_wrap2 > .line > .checkwrap > ul > li > input, .background .select_panel .content_wrap2 > .line .checkwrap2 > ul > li > input {
+              height: 25px;
+              display: inline-block; }
           .background .select_panel .content_wrap > .line > .checkwrap > label, .background .select_panel .content_wrap > .line .checkwrap2 > label, .background .select_panel .content_wrap2 > .line > .checkwrap > label, .background .select_panel .content_wrap2 > .line .checkwrap2 > label {
             color: #333;
             position: relative;

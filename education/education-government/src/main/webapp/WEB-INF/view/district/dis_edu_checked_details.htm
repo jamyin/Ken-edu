@@ -36,17 +36,17 @@
         </div>
         <div class="main_wrap">
 
-            <#if eduSchoolDto.reviewed == 1>
+            <#if dto.reviewed == 1>
 				 <h2>审批通过单位</h2>
             </#if>
-            <#if eduSchoolDto.reviewed == 2>
+            <#if dto.reviewed == 2>
               	 <h2>审批不通过单位</h2>
             </#if>
             <div class="content_wrap">
                 <div class="tab_wrap">
                     <ul class="side_menu">
                         <li class="active">信息</li>
-                       <a href="/edu/school/license.htm?relationId=${(dto.id)!}&schoolName=${(dto.schoolName)!}&reviewed=${(proSupplierDto.reviewed)!}&supplierName=${(dto.supplierName)!}&cerSource=1"><li>图片</li></a>
+                       <a href="/edu/school/license.htm?relationId=${(dto.id)!}&schoolName=${(dto.schoolName)!}&reviewed=${(dto.reviewed)!}&supplierName=${(dto.supplierName)!}"><li>图片</li></a>
                     </ul>
                     <div class="tab_content">
                     <#if proSupplierDto.supplierName??>
@@ -63,21 +63,24 @@
                         </#if>
                         <h2>基本信息</h2>
                         <p> 地址：${(proSupplierDto.address)!} </p>
-                        <p> 联系人姓名： </p>
-                        <p> 电话： </p>
+                        <p> 联系人姓名：${(proSupplierDto.corporation)!} </p>
+                        <p> 电话：${(proSupplierDto.contactWay)!} </p>
 
-                        <h2>证件类型</h2>
-                        <p> 食品经营许可证：  </p>
-                        <p> 食品流通证号：  </p>
-                        <p> 食品生产证号：  </p>
-                        <p> 工商执照号：  </p>
+                         <#if (proLicenses??) && (proLicenses?size>0)>
+	                        <h2>证件类型</h2>
+	                        <#list proLicenses as proLicense>
+	                        	<p> ${(proLicense.licName)!}： ${(proLicense.licNo)!} </p>
+	                        </#list>
+                        </#if>
                     </#if>
-                    <#if proSupplierDto.reviewed == 1>
-						 <a id="disNotPass" style="cursor:pointer;">不通过</a>
-		            </#if>
-		            <#if proSupplierDto.reviewed == 2>
-		              	 <a id="disPass" style="cursor:pointer;">通过</a>
-		            </#if>
+                    <div class="subbt">
+	                    <#if proSupplierDto.reviewed == 1>
+							 <a id="disNotPass" style="cursor:pointer;">不通过</a>
+			            </#if>
+			            <#if proSupplierDto.reviewed == 2>
+			              	 <a id="disPass" style="cursor:pointer;">通过</a>
+			            </#if>
+			        </div>
                         <!-- <h1>济南鲁伊肉类有限公司</h1>
                         <div class="status">
                             <span>审核状态：已通过</span>
