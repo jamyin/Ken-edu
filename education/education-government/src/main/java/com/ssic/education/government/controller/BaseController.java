@@ -3,25 +3,19 @@ package com.ssic.education.government.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.common.base.Objects;
-import com.ssic.educateion.common.dto.EduAreaDto;
-import com.ssic.educateion.common.dto.EduSchoolDto;
 import com.ssic.educateion.common.dto.EduUsersDto;
 import com.ssic.education.government.controller.dto.MenuListDto;
 import com.ssic.education.government.controller.dto.ParentMenuDto;
-import com.ssic.education.handle.service.AreaService;
-import com.ssic.education.handle.service.EduSchoolService;
 import com.ssic.education.handle.service.EduUsersService;
 import com.ssic.education.handle.service.IEduCommitteeService;
 import com.ssic.education.utils.constants.SessionConstants;
@@ -34,13 +28,6 @@ public class BaseController {
 	protected Logger logger = Logger.getLogger(BaseController.class);
 	public static final String EDU_ALLAREAS = "edu_allAreas";
 	public static final String EDU_ALLSCHOOLS = "edu_allSchools";
-
-	@Autowired
-	private RedisTemplate<String, Object> redisTemplate;
-	@Autowired
-	private AreaService areaService;
-	@Autowired
-	private EduSchoolService schoolService;
 	
 	@Autowired
 	private EduUsersService eduUsersService;
@@ -123,27 +110,5 @@ public class BaseController {
 	public static void logAfter(Logger logger){
 		logger.info("end");
 		logger.info("");
-	}
-
-	public List<EduAreaDto> queryAllareas(){
-		List<EduAreaDto> areas= null;
-		if (null != redisTemplate.opsForValue().get(EDU_ALLAREAS)){
-			areas = (List<EduAreaDto>)redisTemplate.opsForValue().get(EDU_ALLAREAS);
-		}else{
-			areas = areaService.queryAll();
-			redisTemplate.opsForValue().set(EDU_ALLAREAS, areas, 1, TimeUnit.HOURS);
-		}
-		return areas;
-	}
-
-	public List<EduSchoolDto> queryAllschools(){
-		List<EduSchoolDto> schools= null;
-		if (null != redisTemplate.opsForValue().get(EDU_ALLSCHOOLS)){
-			schools = (List<EduSchoolDto>)redisTemplate.opsForValue().get(EDU_ALLSCHOOLS);
-		}else{
-			schools = schoolService.queryAll();
-			redisTemplate.opsForValue().set(EDU_ALLSCHOOLS, schools, 1, TimeUnit.HOURS);
-		}
-		return schools;
 	}
 }

@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,8 +27,6 @@ public class BaseController {
 	
 	public static final String parentId = "1";//家长Id 为微信openId 目前默认1 测试使用
 
-	@Autowired
-	private RedisTemplate<String, Object> redisTemplate;
 	@Autowired
 	private AreaService areaService;
 	@Autowired

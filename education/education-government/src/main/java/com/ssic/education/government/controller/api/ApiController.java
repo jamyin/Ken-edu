@@ -4,13 +4,14 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ssic.educateion.common.dto.EduAreaDto;
 import com.ssic.educateion.common.dto.EduSchoolDto;
 import com.ssic.education.government.controller.BaseController;
+import com.ssic.education.handle.service.EduSchoolService;
 import com.ssic.education.utils.model.Response;
 
 /**
@@ -29,6 +30,9 @@ import com.ssic.education.utils.model.Response;
 @RequestMapping(value = "api")
 public class ApiController extends BaseController {
     protected static final Log logger = LogFactory.getLog(ApiController.class);
+    
+	@Autowired
+	private EduSchoolService schoolService;
 
     /**
      * <p>Description: 返回地区接口 </p>
@@ -38,14 +42,14 @@ public class ApiController extends BaseController {
      * @date 2016/5/13 13:18
      * @version 1.0
      */
-    @RequestMapping(value = "areas")
-    @ResponseBody
-    public Response<List<EduAreaDto>> areas(){
-        Response<List<EduAreaDto>> response = new Response<List<EduAreaDto>>();
-        List<EduAreaDto> datas = queryAllareas();
-        response.setData(datas);
-        return response;
-    }
+//    @RequestMapping(value = "areas")
+//    @ResponseBody
+//    public Response<List<EduAreaDto>> areas(){
+//        Response<List<EduAreaDto>> response = new Response<List<EduAreaDto>>();
+//        List<EduAreaDto> datas = queryAllareas();
+//        response.setData(datas);
+//        return response;
+//    }
 
     /**
      * <p>Description: 返回全部学校接口 </p>
@@ -59,7 +63,7 @@ public class ApiController extends BaseController {
     @ResponseBody
     public Response<List<EduSchoolDto>> schools(){
         Response<List<EduSchoolDto>> response = new Response<List<EduSchoolDto>>();
-        List<EduSchoolDto> datas = queryAllschools();
+        List<EduSchoolDto> datas = schoolService.queryAll();
         response.setData(datas);
         return response;
     }
