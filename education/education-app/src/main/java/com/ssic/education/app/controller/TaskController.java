@@ -108,6 +108,7 @@ public class TaskController {
 	 * @date 2016年5月29日 下午2:41:41
 	 * @return Response<EduTaskDto>    返回类型
 	 */
+	@Deprecated
 	@RequestMapping("/findTaskByPara")
 	@ResponseBody
 	public Response<EduTaskDto> findTaskByPara(EduTaskDto eduTaskDto) {
