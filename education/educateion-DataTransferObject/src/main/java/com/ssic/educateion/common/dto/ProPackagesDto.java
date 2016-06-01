@@ -19,6 +19,10 @@ public class ProPackagesDto {
 	@Getter
 	@Setter
     private String supplierId;
+	
+	@Getter
+	@Setter
+	private String sourceId;
 
 	@Getter
 	@Setter
