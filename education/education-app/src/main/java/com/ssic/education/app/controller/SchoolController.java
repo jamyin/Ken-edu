@@ -57,10 +57,10 @@ public class SchoolController {
 
 	@Autowired
 	private ProPackagesService proPackagesService;
-	
-//	@Autowired
-//	private IAreaService areaService;
-	
+
+	//	@Autowired
+	//	private IAreaService areaService;
+
 	@Autowired
 	private ICommitteeService committeeService;
 
@@ -161,7 +161,7 @@ public class SchoolController {
 		EduSchoolSupplierDto eduSchoolSupplierDto = new EduSchoolSupplierDto();
 		eduSchoolSupplierDto.setSchoolId(schoolId);
 		eduSchoolSupplierDto = iEduSchoolSupplierService.searchEduSchoolSupplierDto(eduSchoolSupplierDto);*/
-		
+
 		List<MapToListDto> typeList = new ArrayList<MapToListDto>();
 		for(Entry<Integer, String> entry: PackagesTypeEnum.getAll().entrySet()) {
 			MapToListDto mapToListDto = new MapToListDto();
@@ -210,15 +210,61 @@ public class SchoolController {
 	 */
 	@RequestMapping("/chooseSchool")
 	@ResponseBody
-	public Response<ChooseSchoolDto>  chooseSchool(SchoolDto schoolDto, PageQuery query ,Integer type, Integer isPage) {
+	public Response<ChooseSchoolDto>  chooseSchool(SchoolDto schoolDto, PageQuery query ,Integer type, Integer sourceType) {
 		Response<ChooseSchoolDto> result = new Response<ChooseSchoolDto>();
-		
 		ChooseSchoolDto chooseSchoolDto = new ChooseSchoolDto();
-		PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, query, isPage);
-		chooseSchoolDto.setSchoolDto(schoolList);
-		result.setData(chooseSchoolDto);
-		
-		if(type != null && type == 1 ){
+
+		//市教委选择学校
+		if(sourceType == 0){
+			//Type:为1则学校信息,区域信息和学校级别都会查出来; 不传则只查学校信息
+			if(type != null && type == 1){
+				//显示学校级别列表
+				List<MapToListDto> levelList = showSchoolLevel();
+				chooseSchoolDto.setLevelList(levelList);
+
+				//显示区教委
+				EduCommitteeDto eduCommitteeDto = new EduCommitteeDto();
+				eduCommitteeDto.setType((short) 2);      //只查区教委列表
+				List<EduCommitteeDto> committeeList = committeeService.findCommitteeListNoPage(eduCommitteeDto);
+				chooseSchoolDto.setCommitteeList(committeeList);
+
+				//学校列表
+				PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, query);
+				chooseSchoolDto.setSchoolDto(schoolList);
+				result.setData(chooseSchoolDto);
+			}else{
+				//学校列表  -查所有
+				schoolDto.setCommitteeId(null);
+				schoolDto.setLevel(null);
+				PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, query);
+				chooseSchoolDto.setSchoolDto(schoolList);
+				result.setData(chooseSchoolDto);
+			}
+
+		}
+
+		//区教委选择学校
+		if(sourceType == 1){
+			//Type:为1则学校信息,区域信息和学校级别都会查出来; 不传则只查学校信息
+			if(type != null && type == 1){
+				//显示学校级别列表
+				List<MapToListDto> levelList = showSchoolLevel();
+				chooseSchoolDto.setLevelList(levelList);
+
+				//学校列表
+				PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, query);
+				chooseSchoolDto.setSchoolDto(schoolList);
+				result.setData(chooseSchoolDto);
+			}else{
+				//学校列表
+				PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, query);
+				chooseSchoolDto.setSchoolDto(schoolList);
+				result.setData(chooseSchoolDto);
+			}
+		}
+
+
+		/*if(type != null && type == 1 ){
 			List<MapToListDto> levelList = new ArrayList<MapToListDto>();
 			for(Entry<Integer, String> entry: SchoolLevel.getAll().entrySet()) {
 				MapToListDto mapToListDto = new MapToListDto();
@@ -227,16 +273,29 @@ public class SchoolController {
 				levelList.add(mapToListDto);
 			}
 			chooseSchoolDto.setLevelList(levelList);
-			
 			//chooseSchoolDto.setLevelList(SchoolLevel.getAll());
-			
-			//List<EduAreaDto> areaList = areaService.findAreaList();
-			//chooseSchoolDto.setAreaList(areaList);
 			List<EduCommitteeDto> committeeList = committeeService.findCommitteeListNoPage(new EduCommitteeDto());
-			//chooseSchoolDto.setAreaList(areaList);
 			chooseSchoolDto.setCommitteeList(committeeList);
-		}
+		}*/
 		return result;
+	}
+
+	/**
+	 * @Title: showSchoolLevel
+	 * @Description: TODO(这里用一句话描述这个方法的作用)
+	 * @author Ken Yin  
+	 * @date 2016年6月1日 下午4:15:08
+	 * @return List<MapToListDto>    返回类型
+	 */ 
+	private List<MapToListDto> showSchoolLevel() {
+		List<MapToListDto> levelList = new ArrayList<MapToListDto>();
+		for(Entry<Integer, String> entry: SchoolLevel.getAll().entrySet()) {
+			MapToListDto mapToListDto = new MapToListDto();
+			mapToListDto.setKey(entry.getKey());
+			mapToListDto.setValue(entry.getValue());
+			levelList.add(mapToListDto);
+		}
+		return levelList;
 	}
 }
 
