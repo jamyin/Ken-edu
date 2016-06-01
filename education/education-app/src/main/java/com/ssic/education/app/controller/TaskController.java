@@ -343,7 +343,7 @@ public class TaskController {
 	@ResponseBody
 	public Response<TaskReceiveDto> chooseReceive(Integer sourceType, String level,PageQuery query, String committeeId) {
 		Response<TaskReceiveDto> result = new Response<TaskReceiveDto>();
-		if(level != null && level.equals(-1)){
+		if(level != null && level.equals("-1")){
 			level = null;
 		}
 		TaskReceiveDto taskReceiveDto = new TaskReceiveDto();
