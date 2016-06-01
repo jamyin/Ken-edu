@@ -67,31 +67,14 @@ else
 				hidden:true,
 			
 			}]],
-			columns : [[  /*  {
-				field : 'userNo',
-				title : '员工编号',
-				width : 150,
-				hidden: true
-			}, */  /* {
-				field : 'waresImage',
-				title : '商品图片',
-				width : 150,
-				formatter : function(value, row, index) {
-					  if(row.image==null || row.image==""){
-			        	   return "";
-			           }else{
-			        	 
-			        	   return "<img src="+row.image+" />";
-			           }
-				}
-			}, */{
+			columns : [[  {
 				field : 'waresName',
-				title : '商品名称',
+				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">商品名称</font>',
 				width : 120,
 				
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">'
+					return '<font  style="font-style: normal;font-size:16px;">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -99,11 +82,11 @@ else
 				}
 			}, {
 				field : 'spec',
-				title : '规格',
+				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">规格</font>',
 				width : 50,
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font style="font-style: normal;font-weight: bolder; font-size:18px;">'
+					return '<font style="font-style: normal;  font-size:16px;">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -111,11 +94,11 @@ else
 				}
 			},{
 				field : 'manufacturer',
-				title : '生产企业',
+				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">生产企业</font>',
 				width : 150,
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font style="font-style: normal;font-weight: bolder;font-size:18px;">'
+					return '<font style="font-style: normal; font-size:16px;">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -123,11 +106,11 @@ else
 				}
 			},{
 				field : 'shelfLife',
-				title : '保质期',
+				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">保质期</font>',
 				width : 50,
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font style="font-style: normal;font-weight: bolder;word-wrap:break-word;white-space:normal;font-size:18px;">'
+					return '<font style="font-style: normal; word-wrap:break-word;white-space:normal;font-size:16px;">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -135,11 +118,11 @@ else
 				}
 			},{
 				field : 'unit',
-				title : '保质期单位',
+				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">单位</font>',
 				width : 50,
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font style="font-style: normal;font-weight: bolder;word-wrap:break-word;white-space:normal;font-size:18px;">'
+					return '<font style="font-style: normal; word-wrap:break-word;white-space:normal;font-size:16px;">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -147,43 +130,31 @@ else
 				}
 			}, {
 				field : 'waresTypeName',
-				title : '商品分类',
+				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">商品分类</font>',
 				width : 120,
 				formatter : function(value, row, index) {
-					return	'<font style="font-style: normal;font-weight: bolder;word-wrap:break-word;white-space:normal;font-size:18px;">'
+					return	'<font style="font-style: normal; word-wrap:break-word;white-space:normal;font-size:16px;">'
 					+ value + '</font>'
 				}
-			},/*{
-				field : 'remark',
-				title : '备注',
-				width : 120,
-				formatter : function(value, row, index) {
-					if(value!=null){
-					return '<font style="font-style: normal;font-weight: bolder;">'
-							+ value + '</font>';
-					}else{
-					return "";
-							}
-				}
-			},*/{
+			},{
 				field : 'customCode',
-				title : '企业自定义代码',
+				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">企业自定义代码</font>',
 				width : 150,
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font style="font-style: normal;font-weight: bolder;font-size:18px;">'
-							+ value + '</font>';
+					return'<font style="font-style: normal;font-size:16px; ">'
+					+ value + '</font>';
 					}else{
 					return "";
 							}
 				}
 			} ,{
 				field : 'barCode',
-				title : '商品条形码',
+				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">商品条形码</font>',
 				width : 150,
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font style="font-style: normal;font-weight: bolder;">'
+					return '<font style="font-style: normal;font-size:16px; ">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -191,23 +162,23 @@ else
 				}
 			},{
 				field : 'enName',
-				title : '英文名',
+				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">英文名</font>',
 				width : 110,
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font font-size:14px style="font-style: normal;font-weight: bolder;font-size:18px;">'
-							+ value + '</font>';
+					return'<font style="font-size:16px; ">'
+					+ value + '</font>';
 					}else{
 					return "";
 							}
 				}
 			},{
 				field : 'place',
-				title : '产地',
-				width : 110,
+				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">产地</font>',
+				width : 50,
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font style="font-style: normal;font-weight: bolder;font-size:18px;">'
+					return '<font style="font-style: normal; font-size:16px;">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -216,7 +187,7 @@ else
 			}
 			,{
 				field : 'action',
-				title : '操作',
+				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">操作</font>',
 				width : 100,
 				formatter : function(value, row, index) {
 					var str = '';
@@ -331,31 +302,7 @@ else
 			} ]
 		});
 	}
-	/* 
-	function lookSupplier(id) {
-		if (id == undefined) {
-			var rows = dataGrid.datagrid('getSelections');
-			id = rows[0].id;
-		} else {
-			dataGrid.datagrid('unselectAll').datagrid('uncheckAll');
-		}
-		parent.$.modalDialog({
-			title : '查看供应商',
-			width :768,
-			height : 480,
-			href : '${pageContext.request.contextPath}/waresController/lookSupplier?id='+ id,
-			buttons : [ {
-				text : '编辑',
-				handler : function() {
-					parent.$.modalDialog.openner_dataGrid = dataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
-					var f = parent.$.modalDialog.handler.find('#formEdit');
-					f.submit();
-					var f2 = parent.$.modalDialog.handler.find('#projectFormEdit');
-					f2.submit();
-				}
-			} ]
-		});
-	} */
+	
 	function editImage(id) {
 		if (id == undefined) {
 			var rows = dataGrid.datagrid('getSelections');
@@ -517,21 +464,21 @@ else
 </head>
 <body>
 	<div class="easyui-layout" data-options="fit : true,border : false">
-		<div data-options="region:'north',title:'查询条件',border:false" style="height: 80px; overflow: hidden;">
+		<div data-options="region:'north',border:false" title="<font  style='font-style: normal;font-weight: bolder;font-size:18px;'>查询条件</font>"  style="height: 80px; overflow: hidden;">
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">
 					<tr>
 						<th>商品名称</th>
-						<td><input id="waresName" name="waresName" placeholder="可以商品名称" class="easyui-validatebox"  style="width: 215px;"/></td>
+						<td><input id="waresName" name="waresName" placeholder="查询商品名称" class="easyui-validatebox"  style="width: 215px;"/></td>
 						 <th>企业编码</th>
-					     <td><input id="customCode" name="customCode" placeholder="可以查询企业编码" class="easyui-validatebox"  style="width: 215px;"/></td>
+					     <td><input id="customCode" name="customCode" placeholder="查询企业编码" class="easyui-validatebox"  style="width: 215px;"/></td>
 						 
 						 
 						  <th>商品类别</th>
 					    <td>
-					       <select id="waresType" class="easyui-combobox"  name="waresType"  data-options="width:140,height:29,editable:false,panelHeight:'auto'"
+					       <select id="waresType" class="easyui-combobox"  name="waresType"  data-options="width:210,height:24,editable:false,panelHeight:'auto'"
 								data-options="required:true"  >	
-								<option value="">请选择商品分类</option>							
+								<option value="">请选择商品类别</option>							
 							    <option value="1">畜产品及其制品</option>   
 							    <option value="2">禽及其产品、制品</option>   
 							    <option value="3">蔬菜</option>   
@@ -554,40 +501,27 @@ else
 							    <option value="20">其他类</option>   
 							</select>
 					    </td>
-					</tr>
+					    <td>
+					    	<a href="javascript:void(0);"  onclick="searchFun();" class="easyui-linkbutton" iconCls="icon-search" ><font  style='font-style: normal;font-weight: bolder;font-size:18px;'>查询</font></a>
+					</td></tr>
 				
 				</table>
 			</form>
-				<!-- <table class=" table-hover table-condensed" style="width:200px;">
-					<tr style="width:200px;">
-						<td  style="width:100px;height:32px">
-							<a href="javascript:void(0);"  onclick="searchFun();" class="easyui-linkbutton" iconCls="icon-search" style="width:100px;height:32px">查询</a>
-						</td>
-						<td  style="width:100px;height:32px">
-							<a href="javascript:void(0);"  onclick="cleanFun();" class="easyui-linkbutton " iconCls="brick_delete" style="width:100px;height:32px">重置</a>
-						</td>						
-					</tr>		
-				</table>		 -->	
+				
 		</div>
 		<div id="toolbar" style="display: none;">
-				<a onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'">添加</a>
-			<!--<c:if test="${fn:contains(sessionInfo.resourceList, '/userController/grantPage')}">
-				<a onclick="batchGrantFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'tux'">批量授权</a>
-			</c:if>-->
+				<a class="btn btn-mini btn-light" onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'" iconCls="icon-search" ><font  style='font-style: normal;font-weight: bolder;font-size:16px;'>添加</font> </a>
 		
-			<!-- <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_add',plain:true" onclick="searchFun();">搜索</a>
-			<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_delete',plain:true" onclick="cleanFun();">清空搜索条件</a> -->
-			<a href="javascript:void(0);"  onclick="searchFun();" class="easyui-linkbutton" iconCls="icon-search" >查询</a>
-		<a href="javascript:void(0);"  onclick="cleanFun();" class="easyui-linkbutton " iconCls="brick_delete" >重置</a>
-		
-			<a onclick="importSupplier();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'">导入</a>
-			<a class="btn btn-mini btn-light" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="icon-download-alt"></i>导出</a>
-			<a href="${pageContext.request.contextPath}/templates/采购品.xlsx" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'">下载模板</a>
+			<a  class="btn btn-mini btn-light" onclick="importSupplier();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'"><font  style='font-style: normal;font-weight: bolder;font-size:18px;'>导入</font></a>
+			<a class="btn btn-mini btn-light" onclick="toExcel();" title="导出到EXCEL"><font  style='font-style: normal;font-weight: bolder;font-size:16px;'>导出</font></a>
+			<a class="btn btn-mini btn-light"  href="${pageContext.request.contextPath}/templates/采购品.xlsx" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'"><font  style='font-style: normal;font-weight: bolder;font-size:16px;'>下载模板</font></a>
 		</div>		
 		<div data-options="region:'center',border:false" id="g">
-							<table id="dataGrid" title="采购品表单" data-options="collapsible:true" ></table>
+							<table id="dataGrid" title="<font  style='font-style: normal;font-weight: bolder;font-size:16px;'>采购品表单</font>" data-options="collapsible:true" >
+						
+							</table>
 							<style>
-						#g .datagrid-btable tr{height: 57px;}
+						#g .datagrid-btable tr{height: 45px;}
 				</style>
 		</div>
 	</div>
