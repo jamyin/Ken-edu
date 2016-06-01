@@ -11,25 +11,36 @@
 		<result column="user_image" property="userImage" jdbcType="VARCHAR" />
 	</resultMap>
 
-
-	<select id="selectLoginInfo" resultMap="LoginMap" parameterType="com.ssic.education.app.dto.EduUsersInfoDto">
+	<select id="selectLoginInfo" resultMap="LoginMap"
+		parameterType="com.ssic.education.app.dto.EduUsersInfoDto">
 		SELECT
-		u.id AS id,
-		u. NAME AS NAME,
-		u.source_id AS source_id,
-		u.source_type AS source_type,
-		u.gender AS gender,
-		u.pj_no AS pj_no,
-		u.user_image AS user_image
-		FROM t_edu_users u
+			u.id AS id,
+			u.NAME AS NAME,
+			u.source_id AS source_id,
+			u.source_type AS source_type,
+			u.gender AS gender,
+			u.pj_no AS pj_no,
+			u.user_image AS user_image
+		FROM
+			t_edu_users u
 		WHERE
-		u.stat = 1
-		AND u.isAdmin = 1
-		<if test="user.password != null and user.password!=''">AND u.password = #{user.password}</if>
-		<if test="user.userAccount!=null and user.userAccount!=''">AND u.user_account = #{user.userAccount}</if>
+			u.stat = 1
+		<if test="user.password != null and user.password!=''">
+			AND u.password = #{user.password}
+		</if>
+		<if test="user.userAccount!=null and user.userAccount!=''">
+			AND u.user_account = #{user.userAccount}
+		</if>
 	</select>
 
 	<update id="updatePwd" parameterType="com.ssic.education.app.dto.EduUsersInfoDto">
-		UPDATE t_edu_users u SET u.password =#{user.password} WHERE u.user_account=#{user.userAccount}
+		UPDATE
+			t_edu_users u
+		SET
+			u.password =#{user.password}
+		WHERE
+				u.stat = 1
+			AND	u.user_account=#{user.userAccount}
+		
 	</update>
 </mapper>

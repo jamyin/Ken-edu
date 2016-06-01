@@ -8,16 +8,20 @@ import org.springframework.stereotype.Service;
 import com.ssic.education.app.dao.AppSchoolWaresDao;
 import com.ssic.education.app.dao.LedgerInfoDao;
 import com.ssic.education.app.dao.LicDao;
+import com.ssic.education.app.dao.SupplierInfoDao;
 import com.ssic.education.app.dao.WaresInfoDao;
+import com.ssic.education.app.dto.AppLicenseDto;
 import com.ssic.education.app.dto.WaresInfoDto;
 import com.ssic.education.app.dto.WaresListDto;
 import com.ssic.education.app.dto.WaresRelatedDto;
 import com.ssic.education.app.service.IWaresInfoService;
 import com.ssic.education.app.util.JsonUtil;
+import com.ssic.education.handle.pojo.ProLicense;
 import com.ssic.education.handle.pojo.ProWares;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 import com.ssic.education.utils.util.BeanUtils;
+import com.ssic.education.utils.util.StringUtils;
 
 /**		
  * <p>Title: WaresInfoServiceImpl </p>
@@ -45,6 +49,9 @@ public class WaresInfoServiceImpl implements IWaresInfoService {
 
 	@Autowired
 	private AppSchoolWaresDao schoolWaresDao;
+
+	@Autowired
+	private SupplierInfoDao supplierInfoDto;
 
 	/**
 	 * 根据供应商ID查询商品列表
@@ -107,8 +114,20 @@ public class WaresInfoServiceImpl implements IWaresInfoService {
 	@Override
 	public WaresRelatedDto findWarseById(String id) {
 		WaresRelatedDto wrd = waresInfoDao.findWarseById(id);
-		wrd.setInsReport(licDao.getLicbyType(wrd.getId(), 31));
-		wrd.setProLic(licDao.getLicbyType(wrd.getId(), 30));
+		//wrd.setInsReport(licDao.getLicbyType(wrd.getId(), 31));
+		//wrd.setProLic(licDao.getLicbyType(wrd.getId(), 30));
+		List<ProLicense> list = supplierInfoDto.getWaresLic(wrd.getId(), (short) 2);
+		if (null != list && !list.isEmpty()) {
+			List<AppLicenseDto> licList = BeanUtils.createBeanListByTarget(list, AppLicenseDto.class);
+			for (AppLicenseDto appLicenseDto : licList) {
+				String host = "http://192.168.1.242";
+				if (StringUtils.isNotBlank(appLicenseDto.getLicPic())) {
+					String pic = host + appLicenseDto.getLicPic();
+					appLicenseDto.setLicPic(pic);
+				}
+			}
+			wrd.setLicense(licList);
+		}
 		return wrd;
 	}
 

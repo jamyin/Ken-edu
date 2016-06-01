@@ -1,5 +1,6 @@
 package com.ssic.education.app.dto;
 
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,10 +18,8 @@ import lombok.NoArgsConstructor;
  * <p>修改时间：2016年5月16日 下午2:39:32</p>
  * <p>修改备注：</p>
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class WaresRelatedDto {
+
+public @Data class WaresRelatedDto {
 	/**主键*/
 	private String id;
 	/**商品名称*/
@@ -48,8 +47,10 @@ public class WaresRelatedDto {
 	/**商品图片*/
 	private String image;
 	/**检测检验报告*/
-	private String insReport;
+	//private String insReport;
 	/**生产许可证*/
-	private String proLic;
+	//private String proLic;
+
+	private List<AppLicenseDto> license;
 
 }
