@@ -55,6 +55,12 @@ public class ProPackagesServiceImpl implements ProPackagesService{
 		return new PageResult<>(page, results);
 	}
 	
+	public PageResult<ProPackagesDto> findPackagesPage(ProPackagesDto dto, PageQuery page) {
+		List<ProPackagesDto> results = proPackagesDao.findPackagesPage(dto, page);
+		page.setTotal(proPackagesDao.findPackagesCount(dto));
+		return new PageResult<>(page, results);
+	}
+	
 	public void save(ProPackagesDto dto, String jsonWares, String jsonNutritional){
 		proPackagesDao.eidt(dto, jsonWares, jsonNutritional);	
 	}

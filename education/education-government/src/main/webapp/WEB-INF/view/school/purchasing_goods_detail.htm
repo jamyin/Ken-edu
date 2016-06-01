@@ -7,9 +7,9 @@
 <body>
   <#include "/common/nav.htm" />
   <div class="wrapperA">
-    <div class="cur_postion">
-      <span class="cp">当前位置:</span><a href="#">安全追溯</a><span class="gt">&gt;</span><a href="#">采购品列表</a><span class="gt">&gt;</span><a href="#">采购品详情</a>
-    </div>
+    <!-- <div class="cur_postion">
+      <span class="cp">当前位置:</span><a href="#">安全追溯</a><span class="gt">&gt;</span><a href="/edu/school/list.htm?source=2&reviewed=1">学校列表</a><span class="gt">&gt;</span><a href="#">采购品详情</a>
+    </div> -->
     <h1 class="con-tt"><span class="title">采购品详情</span></h1>
     <div class="con-bd">
       <div class="imgs">
@@ -50,7 +50,7 @@
     $(function(){
       // debugger;
       $(".nav").find("a").removeClass("cur");
-      $(".nav").find("a:eq(2)").addClass("cur");
+      $(".nav").find("a:eq(1)").addClass("cur");
     })
   </script>
 </body>

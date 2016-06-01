@@ -46,6 +46,7 @@
 
 <!--upload上传图片--uploadify插件和 RSA类型文件上传插件:ajaxFileUploadV2.1-->
 <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/uploadify/uploadify.css" />
+<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/new_style.css" />
 <script type="text/javascript" 	src="${pageContext.request.contextPath}/uploadify/jquery.uploadify.min.js"></script>
 <script type="text/javascript" 	src="${pageContext.request.contextPath}/uploadify/jquery.uploadify.js"></script>
 <script type="text/javascript"   src="${pageContext.request.contextPath}/uploadify/AjaxFileUploaderV2.1/ajaxfileupload.js"></script>
