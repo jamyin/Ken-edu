@@ -1,18 +1,28 @@
 package com.ssic.education.provider.controller;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.EncryptedDocumentException;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFDataFormat;
+import org.apache.poi.hssf.usermodel.HSSFFont;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -31,6 +41,8 @@ import com.ssic.educateion.common.dto.ImageInfoDto;
 import com.ssic.educateion.common.dto.ProWaresDto;
 import com.ssic.educateion.common.dto.SupplierDto;
 import com.ssic.educateion.common.utils.PageHelperDto;
+import com.ssic.education.handle.pojo.ProLedger;
+import com.ssic.education.handle.pojo.ProLedgerMaster;
 import com.ssic.education.handle.pojo.ProLicense;
 import com.ssic.education.handle.pojo.ProWares;
 import com.ssic.education.handle.service.ICreateImageService;
@@ -50,6 +62,7 @@ import com.ssic.education.utils.util.BeanUtils;
 import com.ssic.education.utils.util.ObjectExcelView;
 import com.ssic.education.utils.util.PageData;
 import com.ssic.education.utils.util.PropertiesUtils;
+import com.ssic.education.utils.util.Tools;
 import com.ssic.education.utils.util.UUIDGenerator;
 
 @Controller
@@ -81,7 +94,7 @@ public class WaresController extends BaseController {
 	public String importPage(HttpServletRequest request) {
 		return "wares/warseImport";
 	}
-	
+
 	/**
 	 * 查询原料详情
 	 * 
@@ -293,7 +306,7 @@ public class WaresController extends BaseController {
 			ImageInfoDto image, HttpServletRequest request,
 			HttpServletResponse response) {
 		Json json = new Json();
-		
+
 		ProLicense license = new ProLicense();
 
 		Map<String, Object> map1 = createImageServiceImpl.createImage(image,
@@ -307,30 +320,33 @@ public class WaresController extends BaseController {
 		String imageurl2 = (String) map2.get("image_url");
 		String imageurl3 = (String) map3.get("image_url");
 		List<String> list = new ArrayList<String>();
-		//判断图片是否重复上传
-	List<ProLicense> list2 = proLicenseServiceImpl.selectByRelationId(id);
-				
+		// 判断图片是否重复上传
+		List<ProLicense> list2 = proLicenseServiceImpl.selectByRelationId(id);
+
 		for (int i = 0; i < list2.size(); i++) {
-			if(imageurl1!=null){
-			if(list2.get(i).getLicName().equals("商品图片")){
-				json.setMsg("商品图片不可重复上传");
-				json.setSuccess(false);
-				return json;
-			}}
-			if(imageurl2!=null){
-			if(list2.get(i).getLicName().equals("检测检验报告")){
-				json.setMsg("检测检验报告不可重复上传");
-				json.setSuccess(false);
-				return json;
-			}}
-			if(imageurl3!=null){
-			if(list2.get(i).getLicName().equals("生产许可证")){
-				json.setMsg("生产许可证不可重复上传");
-				json.setSuccess(false);
-				return json;
-			}}
+			if (imageurl1 != null) {
+				if (list2.get(i).getLicName().equals("商品图片")) {
+					json.setMsg("商品图片不可重复上传");
+					json.setSuccess(false);
+					return json;
+				}
+			}
+			if (imageurl2 != null) {
+				if (list2.get(i).getLicName().equals("检测检验报告")) {
+					json.setMsg("检测检验报告不可重复上传");
+					json.setSuccess(false);
+					return json;
+				}
+			}
+			if (imageurl3 != null) {
+				if (list2.get(i).getLicName().equals("生产许可证")) {
+					json.setMsg("生产许可证不可重复上传");
+					json.setSuccess(false);
+					return json;
+				}
+			}
 		}
-	
+
 		if (imageurl1 != null && imageurl1 != "") {
 			license.setLicName("商品图片");
 			license.setLicPic(imageurl1);
@@ -466,16 +482,24 @@ public class WaresController extends BaseController {
 	@RequestMapping(value = "/excel")
 	@ResponseBody
 	public ModelAndView exportExcel(ProWaresDto proWaresDto,
-			HttpServletRequest request) {
+			HttpServletRequest request, HttpServletResponse response) {
 		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
 				ConfigUtil.SESSIONINFONAME);
+		if (info == null) {
+			return null;
+		}
 		proWaresDto.setSupplierId(info.getSupplierId());
-		PageHelperDto phdto = new PageHelperDto();
-		ModelAndView mv = this.getModelAndView();
-		PageData pd = new PageData();
-		pd = this.getPageData();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.M.d");
+		Date date = new Date();
+		String filename = Tools.date2Str(date, "yyyyMMddHHmmss");
+		HSSFSheet sheet;
+		HSSFCell cell;
+		response.setContentType("application/octet-stream");
+		response.setHeader("Content-Disposition", "attachment;filename="
+				+ filename + ".xls");
+		Workbook workbook = new HSSFWorkbook();
+		sheet = (HSSFSheet) workbook.createSheet("采购品");
 		try {
-			Map<String, Object> dataMap = new HashMap<String, Object>();
 			List<String> titles = new ArrayList<String>();
 			titles.add("名称");
 			titles.add("规格");
@@ -487,22 +511,42 @@ public class WaresController extends BaseController {
 			titles.add("保质期");
 			titles.add("保质期单位");
 			titles.add("产地");
-			dataMap.put("titles", titles);
-
+			int len = titles.size();
+			HSSFCellStyle headerStyle = (HSSFCellStyle) workbook
+					.createCellStyle(); // 标题样式
+			headerStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+			headerStyle.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+			HSSFFont headerFont = (HSSFFont) workbook.createFont(); // 标题字体
+			headerFont.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+			headerFont.setFontHeightInPoints((short) 11);
+			headerStyle.setFont(headerFont);
+			short width = 20, height = 25 * 20;
+			sheet.setDefaultColumnWidth(width);
+			HSSFRow sheetRow = sheet.createRow(0);
+			for (int i = 0; i < len; i++) { // 设置标题
+				String title = titles.get(i);
+				cell = sheetRow.createCell(i);
+				cell.setCellStyle(headerStyle);
+				cell.setCellType(HSSFCell.CELL_TYPE_STRING);
+				cell.setCellValue(title);
+			}
+			sheet.getRow(0).setHeight(height);
+			HSSFCellStyle contentStyle = (HSSFCellStyle) workbook
+					.createCellStyle(); // 内容样式
+			contentStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
 			List<ProWaresDto> expList = waresService.findAllWares(proWaresDto,
 					null);
-
 			List<PageData> varList = new ArrayList<PageData>();
 			if (!CollectionUtils.isEmpty(expList)) {
 				for (int i = 0; i < expList.size(); i++) {
 					PageData vpd = new PageData();
 					vpd.put("var1", expList.get(i).getWaresName());
 					vpd.put("var2", expList.get(i).getSpec());
-					vpd.put("var3", ProductClass.getName(expList.get(i).getWaresType()));
+					vpd.put("var3",
+							ProductClass.getName(expList.get(i).getWaresType()));
 					vpd.put("var4", expList.get(i).getManufacturer());
 					vpd.put("var5", expList.get(i).getEnName());
-					vpd.put("var6",
-							expList.get(i).getBarCode());
+					vpd.put("var6", expList.get(i).getBarCode());
 					vpd.put("var7", expList.get(i).getCustomCode());
 					vpd.put("var8", expList.get(i).getShelfLife());
 					vpd.put("var9", expList.get(i).getUnit());
@@ -510,15 +554,33 @@ public class WaresController extends BaseController {
 					varList.add(vpd);
 				}
 			}
-			dataMap.put("varList", varList);
-			ObjectExcelView erv = new ObjectExcelView(); // 执行excel操作
+			for (int i = 0; i < varList.size(); i++) {
+				HSSFRow row = sheet.createRow(i + 1);
+				PageData vpd = varList.get(i);
+				for (int j = 0; j < len; j++) {
+					String varstr = vpd.getString("var" + (j + 1)) != null ? vpd
+							.getString("var" + (j + 1)) : "";
+					cell = row.createCell(j);
+					HSSFCellStyle cellStyle2 = (HSSFCellStyle) workbook
+							.createCellStyle();
+					HSSFDataFormat format = (HSSFDataFormat) workbook
+							.createDataFormat();
+					cellStyle2.setDataFormat(format.getFormat("@"));
+					cell.setCellStyle(cellStyle2);
+					cell.setCellType(HSSFCell.CELL_TYPE_STRING);
+					cell.setCellValue(varstr);
 
-			mv = new ModelAndView(erv, dataMap);
+				}
 
+			}
+			OutputStream os = response.getOutputStream();
+			workbook.write(os);
+			os.flush();
+			os.close();
 		} catch (Exception e) {
 
 		}
-		return mv;
+		return null;
 	}
 
 	@RequestMapping(value = "/import")
@@ -533,11 +595,10 @@ public class WaresController extends BaseController {
 	 * @author zhangjiwei
 	 * @since 2016.5.21
 	 */
-	public Json importExcel(
-			@RequestParam("filename") MultipartFile file,
+	public Json importExcel(@RequestParam("filename") MultipartFile file,
 			HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
-		Json j=new Json();
+		Json j = new Json();
 		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
 				ConfigUtil.SESSIONINFONAME);
 		// 当前登录用户所属供应商的id
@@ -662,44 +723,42 @@ public class WaresController extends BaseController {
 
 	}
 
-	
-	
-//	@RequestMapping("download")
-//	public void download(HttpServletRequest request,
-//			HttpServletResponse response) {
-//		String fileName = "采购品.xlsx";
-//		BufferedInputStream bis = null;
-//		BufferedOutputStream bos = null;
-//		String p = request.getSession().getServletContext().getRealPath("/")
-//				+ "\\templates\\" + fileName;
-//		try {
-//			bis = new BufferedInputStream(new FileInputStream(new File(request
-//					.getSession().getServletContext().getRealPath("/")
-//					+ "\\templates\\" + fileName)));
-//			bos = new BufferedOutputStream(response.getOutputStream());
-//			String encodedfileName = null;
-//			String agent = request.getHeader("USER-AGENT");
-//			if (null != agent && -1 != agent.indexOf("MSIE")) {// IE
-//				encodedfileName = java.net.URLEncoder.encode(fileName, "UTF-8");
-//			} else if (null != agent && -1 != agent.indexOf("Mozilla")) {
-//				encodedfileName = new String(fileName.getBytes("UTF-8"),
-//						"iso-8859-1");
-//			} else {
-//				encodedfileName = java.net.URLEncoder.encode(fileName, "UTF-8");
-//			}
-//			response.setHeader("Content-Disposition", "attachment; filename=\""
-//					+ encodedfileName + "\"");
-//			int byteRead = 0;
-//			byte[] buffer = new byte[8192];
-//			while ((byteRead = bis.read(buffer, 0, 8192)) != -1) {
-//				bos.write(buffer, 0, byteRead);
-//			}
-//
-//			bos.flush();
-//			bis.close();
-//			bos.close();
-//		} catch (Exception e) {
-//		}
-//	}
-	
+	// @RequestMapping("download")
+	// public void download(HttpServletRequest request,
+	// HttpServletResponse response) {
+	// String fileName = "采购品.xlsx";
+	// BufferedInputStream bis = null;
+	// BufferedOutputStream bos = null;
+	// String p = request.getSession().getServletContext().getRealPath("/")
+	// + "\\templates\\" + fileName;
+	// try {
+	// bis = new BufferedInputStream(new FileInputStream(new File(request
+	// .getSession().getServletContext().getRealPath("/")
+	// + "\\templates\\" + fileName)));
+	// bos = new BufferedOutputStream(response.getOutputStream());
+	// String encodedfileName = null;
+	// String agent = request.getHeader("USER-AGENT");
+	// if (null != agent && -1 != agent.indexOf("MSIE")) {// IE
+	// encodedfileName = java.net.URLEncoder.encode(fileName, "UTF-8");
+	// } else if (null != agent && -1 != agent.indexOf("Mozilla")) {
+	// encodedfileName = new String(fileName.getBytes("UTF-8"),
+	// "iso-8859-1");
+	// } else {
+	// encodedfileName = java.net.URLEncoder.encode(fileName, "UTF-8");
+	// }
+	// response.setHeader("Content-Disposition", "attachment; filename=\""
+	// + encodedfileName + "\"");
+	// int byteRead = 0;
+	// byte[] buffer = new byte[8192];
+	// while ((byteRead = bis.read(buffer, 0, 8192)) != -1) {
+	// bos.write(buffer, 0, byteRead);
+	// }
+	//
+	// bos.flush();
+	// bis.close();
+	// bos.close();
+	// } catch (Exception e) {
+	// }
+	// }
+
 }

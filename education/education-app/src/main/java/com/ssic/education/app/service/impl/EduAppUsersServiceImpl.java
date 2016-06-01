@@ -10,6 +10,7 @@ import com.ssic.education.app.service.IEduAppUsersService;
 import com.ssic.education.app.token.TokenUtil;
 import com.ssic.education.handle.dao.CommitteeDao;
 import com.ssic.education.handle.pojo.EduCommittee;
+import com.ssic.education.utils.util.StringUtils;
 
 @Service
 public class EduAppUsersServiceImpl implements IEduAppUsersService {
@@ -25,7 +26,11 @@ public class EduAppUsersServiceImpl implements IEduAppUsersService {
 		if (result != null) {
 			if (result.getSourceType() == 0 || result.getSourceType() == 2) {
 				EduCommittee ctte = committeeDao.getbyId(result.getSourceId());
-				result.setAreaCode(ctte.getAreaCode());
+				if (ctte != null) {
+					if (StringUtils.isNotBlank(ctte.getAreaCode())) {
+						result.setAreaCode(ctte.getAreaCode());
+					}
+				}
 			}
 			result.setToken(TokenUtil.getToken(user.getUserAccount()).getSignature());
 			//TODO 第一次登陆创建Token 第二次登录刷新Token 待实现

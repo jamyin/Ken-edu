@@ -32,6 +32,8 @@ public class EduInformationDto implements Serializable {
 	private Integer stat;
 	private String content;
 	private String editorValue;
+	
+	private String[] pics;    //多张图片
 
 
 }

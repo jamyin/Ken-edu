@@ -12,6 +12,8 @@ import com.ssic.education.handle.pojo.EduInformation;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 import com.ssic.education.utils.util.BeanUtils;
+import com.ssic.education.utils.util.PropertiesUtils;
+import com.ssic.education.utils.util.StringUtils;
 
 /**
  * @ClassName: InformationServiceImpl
@@ -30,10 +32,25 @@ public class InformationServiceImpl implements IInformationService{
 	public PageResult<EduInformationDto> findInformationList(EduInformationDto eduInformationDto,
 			PageQuery query) {
 		List<EduInformation> list = informationDao.findInformationList(eduInformationDto, query);
-		List<EduInformationDto> InformationDtoList = BeanUtils.createBeanListByTarget(list, EduInformationDto.class);
+		if(list == null || list.size() <= 0){
+			return null;
+		}
+		List<EduInformationDto> informationDtoList = BeanUtils.createBeanListByTarget(list, EduInformationDto.class);
+		String realPath = PropertiesUtils.getProperty("upload.look.url");                    //拼接图片显示路径
+		for (EduInformationDto dto : informationDtoList) {
+			if(StringUtils.isNotEmpty(dto.getPic())){
+				String pics[] = dto.getPic().split(";");
+				if(pics.length >0){
+					for(String pic: pics){
+						pic = realPath + pic;
+					}
+					dto.setPics(pics);                       //pics用于存放多张图片的路径
+				}
+			}
+		}
 		int total = informationDao.selectInformationAccount(eduInformationDto);
 		query.setTotal(total);
-		return new PageResult<EduInformationDto>(query, InformationDtoList);
+		return new PageResult<EduInformationDto>(query, informationDtoList);
 	}
 
 	@Override
