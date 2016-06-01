@@ -1,9 +1,7 @@
 package com.ssic.education.app.dto;
 
 import java.util.List;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * 		
@@ -38,6 +36,8 @@ public @Data class WaresRelatedDto {
 	private Integer way;
 	/**商品类别*/
 	private Integer waresType;
+	/**商品名称**/
+	private String typeName;
 	/**企业自定义编码*/
 	private String customCode;
 	/**产地*/
