@@ -94,7 +94,11 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 			criteria.andSchoolIdEqualTo(psw.getSchoolId());
 			criteria.andWareIdEqualTo(psw.getWareId());
 			criteria.andSourceIdEqualTo(psw.getSourceId());
-			criteria.andSupplierIdEqualTo(psw.getSupplierId());
+			if (psw.getSupplierId() != null) {
+				criteria.andSupplierIdEqualTo(psw.getSupplierId());
+			} else {
+				criteria.andSupplierIdIsNull();
+			}
 			List<ProSchoolWare> list = swMapper.selectByExample(example);
 			if (list.size() == 0) {
 				psw.setId(UUID.randomUUID().toString());
@@ -186,7 +190,11 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 			criteria.andSchoolIdEqualTo(psw.getSchoolId());
 			criteria.andWareIdEqualTo(psw.getWareId());
 			criteria.andSourceIdEqualTo(psw.getSourceId());
-			criteria.andSupplierIdEqualTo(psw.getSupplierId());
+			if (psw.getSupplierId() != null) {
+				criteria.andSupplierIdEqualTo(psw.getSupplierId());
+			} else {
+				criteria.andSupplierIdIsNull();
+			}
 			List<ProSchoolWare> list = swMapper.selectByExample(example);
 			if (list.size() == 0) {
 				psw.setId(UUID.randomUUID().toString());
@@ -215,7 +223,7 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 		return r;
 	}
 
-	public int findWareBatchNo(String wareBatchNo,String sourceId) {
+	public int findWareBatchNo(String wareBatchNo, String sourceId) {
 		ProLedgerMasterExample example = new ProLedgerMasterExample();
 		ProLedgerMasterExample.Criteria criteria = example.createCriteria();
 		criteria.andWareBatchNoEqualTo(wareBatchNo);

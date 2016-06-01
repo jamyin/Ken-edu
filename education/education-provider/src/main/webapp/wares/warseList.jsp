@@ -469,16 +469,16 @@ else
 				<table class="table table-hover table-condensed" style="display: none;">
 					<tr>
 						<th>商品名称</th>
-						<td><input id="waresName" name="waresName" placeholder="可以商品名称" class="easyui-validatebox"  style="width: 215px;"/></td>
+						<td><input id="waresName" name="waresName" placeholder="查询商品名称" class="easyui-validatebox"  style="width: 215px;"/></td>
 						 <th>企业编码</th>
-					     <td><input id="customCode" name="customCode" placeholder="可以查询企业编码" class="easyui-validatebox"  style="width: 215px;"/></td>
+					     <td><input id="customCode" name="customCode" placeholder="查询企业编码" class="easyui-validatebox"  style="width: 215px;"/></td>
 						 
 						 
 						  <th>商品类别</th>
 					    <td>
 					       <select id="waresType" class="easyui-combobox"  name="waresType"  data-options="width:210,height:24,editable:false,panelHeight:'auto'"
 								data-options="required:true"  >	
-								<option value="">请选择商品分类</option>							
+								<option value="">请选择商品类别</option>							
 							    <option value="1">畜产品及其制品</option>   
 							    <option value="2">禽及其产品、制品</option>   
 							    <option value="3">蔬菜</option>   
