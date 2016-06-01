@@ -276,6 +276,8 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 		}
 		if(StringUtils.isNotBlank(dto.getSupplyDateStr())){
 			criteria.andSupplyDateEqualTo(DateUtils.parse(dto.getSupplyDateStr(), DateUtils.YMD_DASH));          //套餐日期
+		}else{
+			criteria.andSupplyDateEqualTo(DateUtils.parse(DateUtils.format(new Date(), DateUtils.YMD_DASH), DateUtils.YMD_DASH));	  //不传则默认查询当天
 		}
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		if (null != page) {
