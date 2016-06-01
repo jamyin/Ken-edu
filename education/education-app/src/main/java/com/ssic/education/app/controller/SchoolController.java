@@ -213,7 +213,11 @@ public class SchoolController {
 	public Response<ChooseSchoolDto>  chooseSchool(SchoolDto schoolDto, PageQuery query ,Integer type, Integer sourceType) {
 		Response<ChooseSchoolDto> result = new Response<ChooseSchoolDto>();
 		ChooseSchoolDto chooseSchoolDto = new ChooseSchoolDto();
-
+		if(sourceType == null){
+			result.setStatus(DataStatus.HTTP_FAILE);
+			result.setMessage("教委类型为空");
+			return result;
+		}
 		//市教委选择学校
 		if(sourceType == 0){
 			//Type:为1则学校信息,区域信息和学校级别都会查出来; 不传则只查学校信息
