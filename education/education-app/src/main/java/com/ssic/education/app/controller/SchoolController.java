@@ -212,6 +212,10 @@ public class SchoolController {
 	@ResponseBody
 	public Response<ChooseSchoolDto>  chooseSchool(SchoolDto schoolDto, PageQuery query ,Integer type, Integer sourceType) {
 		Response<ChooseSchoolDto> result = new Response<ChooseSchoolDto>();
+		//处理level全选传-1
+		if(StringUtils.isNotEmpty(schoolDto.getLevel()) && schoolDto.getLevel().equals("-1")){
+			schoolDto.setLevel(null);
+		}
 		ChooseSchoolDto chooseSchoolDto = new ChooseSchoolDto();
 		if(sourceType == null){
 			result.setStatus(DataStatus.HTTP_FAILE);
@@ -247,8 +251,8 @@ public class SchoolController {
 
 		}
 
-		//区教委选择学校
-		if(sourceType == 1){
+		//区教委选择学校  注sourceType为用户的类型
+		if(sourceType == 2){
 			//Type:为1则学校信息,区域信息和学校级别都会查出来; 不传则只查学校信息
 			if(type != null && type == 1){
 				//显示学校级别列表
