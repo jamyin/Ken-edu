@@ -15,7 +15,7 @@
       <div class="dis_info">
         <span class="d_1"><label for="">配送号：</label><span class="d_2">${(ledgerDto.wareBatchNo)!}</span></span>
         <span class="d_1"><label for="">配货日期：</label><span class="d_2">${ledgerDto.actionDate?string("yyyy-MM-dd")}</span></span>
-        <span class="d_1"><label for="">出发点：</label><span class="d_2">${(ledgerDto.wareBatchNo)!}</span></span>
+        <span class="d_1"><label for="">出发点：</label><span class="d_2">${(proSupplierDto.supplierName)!}</span></span>
         <span class="d_1"><label for="">状态：</label><span class="d_2"><#if ledgerDto.haulStatus == 0>未配送 </#if><#if ledgerDto.haulStatus == 1>配送中</#if><#if ledgerDto.haulStatus == 2>已配送</#if></span></span>
       </div>
       <ul class="distribution_ul">
@@ -43,18 +43,25 @@
 
       <div class="info">
         <p class="driver"><span>${(ledgerDto.driverName)!}</span></p>
-        <p>出发点：<span><#if proSupplierDto??>${(proSupplierDto.address)!}</#if></span></p>
+        <p>出发点：<span><#if proSupplierDto??>${(proSupplierDto.supplierName)!}</#if></span></p>
+        <p>出发时间：<span>${(ledgerDto.startTime)!}</span></p>
         <p>货物：<span> <#if ledgerDtos??>
-        <#list ledgerDtos as ledgerDtos>${(ledgerDtos.name)!}</#list>
+        <#list ledgerDtos as ledgerDtos>${(ledgerDtos.name)!}&nbsp;</#list>
         </#if></span></p>
         <p>目的地：<span>${(ledgerDto.receiverName)!}</span></p>
-        <p>到达时间：<span></span></p>
+        <p>到达时间：<span>${(ledgerDto.endTime)!}</span></p>
       </div>
       <div class="map"><img src="/static/img/map.jpg" border="0"></div>
     </div>
   </div>
 
   <#include "/common/footer.htm" />
-
+ <script type="text/javascript">
+  $(function(){
+    // debugger;
+    $(".nav").find("a").removeClass("cur");
+    $(".nav").find("a:eq(1)").addClass("cur");
+  })
+    </script>
 </body>
 </html>

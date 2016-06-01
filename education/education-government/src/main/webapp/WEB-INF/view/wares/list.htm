@@ -8,7 +8,7 @@
 <#include "/common/nav.htm" />
 
   <div class="wrapperA">
-    <form action="/pro/wares/waresPages.htm" method="post" id="myform">
+    <form action="/pro/wares/waresPages.htm?schoolId=${(params.schoolId)!}&sourceId=${(params.sourceId)!}" method="post" id="myform">
       <h1 class="con-tt"><span class="title"><#if params.dishes>成品<#else>原料</#if>列表</span>
         <span>
           <input type="hidden" name="dishes" value="${(params.dishes)!}"/>

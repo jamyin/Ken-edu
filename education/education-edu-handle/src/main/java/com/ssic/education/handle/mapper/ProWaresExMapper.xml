@@ -36,14 +36,18 @@
 		<if test="proSchoolWareDto.supplierId != null  and proSchoolWareDto.supplierId !=''">
 			AND b.supplier_id = #{proSchoolWareDto.supplierId}
 		</if>
-		ORDER BY a.create_time desc
+		<if test="proSchoolWareDto.waresName != null  and proSchoolWareDto.waresName !=''">
+			AND a.wares_name like "%"#{proSchoolWareDto.waresName}"%"
+		</if>
+		GROUP BY b.ware_id
+		ORDER BY b.create_time desc
 		<if test="query != null">
        		LIMIT  #{query.startNum}, #{query.pageSize}
         </if>
 	</select>
 	
 	<select id="countWarseListByParam" resultType="java.lang.Long" parameterType="com.ssic.education.handle.dto.ProSchoolWareDto">
-		select count(*) 
+		select count(*) from (SELECT a.id, COUNT(*) counts 
 		from t_pro_wares a
 		LEFT JOIN t_pro_school_ware b on a.id = b.ware_id
 		where a.stat = 1 and b.stat=1
@@ -56,6 +60,10 @@
 		<if test="proSchoolWareDto.supplierId != null  and proSchoolWareDto.supplierId !=''">
 			AND b.supplier_id = #{proSchoolWareDto.supplierId}
 		</if>
+		<if test="proSchoolWareDto.waresName != null  and proSchoolWareDto.waresName !=''">
+			AND a.wares_name like "%"#{proSchoolWareDto.waresName}"%"
+		</if>
+		GROUP BY b.ware_id) t
 	</select>
 
 	<select id="findWarseBySupplier" resultMap="BaseResultMap" parameterType="java.lang.String">

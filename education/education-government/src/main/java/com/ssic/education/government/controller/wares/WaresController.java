@@ -13,6 +13,7 @@ import com.ssic.educateion.common.dto.ProLedgerDto;
 import com.ssic.educateion.common.dto.ProWaresDto;
 import com.ssic.education.government.controller.BaseController;
 import com.ssic.education.government.controller.supplier.ProSupplierController;
+import com.ssic.education.handle.dto.ProSchoolWareDto;
 import com.ssic.education.handle.pojo.ProLicense;
 import com.ssic.education.handle.service.IProLicenseService;
 import com.ssic.education.handle.service.ProLedgerService;
@@ -53,11 +54,11 @@ public class WaresController extends BaseController {
 	 * @version 1.0
 	 */
 	@RequestMapping(value = "waresPages")
-	public ModelAndView waresPage(ProWaresDto params, PageQuery query){
+	public ModelAndView waresPage(ProSchoolWareDto proSchoolWareDto, PageQuery query){
 		ModelAndView mv = getModelAndView();
-		PageResult<ProWaresDto> datas = proWaresService.queryWaresByParams(params, query);
+		PageResult<ProWaresDto> datas = proWaresService.findWarsePageByParam(proSchoolWareDto, query);
 		mv.addObject("pageList", datas);
-		mv.addObject("params", params);
+		mv.addObject("params", proSchoolWareDto);
 		mv.setViewName("wares/list");
 		return mv;
 	}
