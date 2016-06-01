@@ -60,6 +60,7 @@ public class EduUsersServiceImpl implements EduUsersService {
 		EduUsers eduUsers = BeanUtils.createBeanByTarget(usersDto, EduUsers.class);
 		eduUsers.setSourceId(eduSchool.getId());
 		eduUsers.setName(eduSchool.getSchoolName());
+		eduUsers.setIsadmin(1);
 		eduUsersDao.insertSelective(eduUsers);
 		EduCanteen eduCanteen = BeanUtils.createBeanByTarget(usersDto, EduCanteen.class);
 		eduCanteen.setSchoolId(eduSchool.getId());
