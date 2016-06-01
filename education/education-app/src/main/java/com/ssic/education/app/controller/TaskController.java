@@ -341,7 +341,7 @@ public class TaskController {
 	
 	@RequestMapping("/chooseReceive")
 	@ResponseBody
-	public Response<TaskReceiveDto> chooseReceive(Integer sourceType, String level,PageQuery query, String committeeId) {
+	public Response<TaskReceiveDto> chooseReceive(Integer sourceType, String level,PageQuery query, String committeeId ,String schoolName) {
 		Response<TaskReceiveDto> result = new Response<TaskReceiveDto>();
 		if(level != null && level.equals("-1")){
 			level = null;
@@ -378,8 +378,11 @@ public class TaskController {
 			taskReceiveDto.setLevelList(levelList);
 			//获取学校列表
 			SchoolDto schoolDto = new SchoolDto();
-			schoolDto.setLevel(level);
-			schoolDto.setCommitteeId(committeeId);    //设置区教委
+			schoolDto.setLevel(level);                  
+			schoolDto.setCommitteeId(committeeId);   				 //设置区教委
+			if(StringUtils.isNotEmpty(schoolName)){ 
+				schoolDto.setSchoolName(schoolName);                //学校名
+			}
 			PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, query);
 			taskReceiveDto.setSchoolList(schoolList);
 
