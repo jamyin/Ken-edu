@@ -54,6 +54,9 @@
 		<if test="ledgerDto.masterId != null  and ledgerDto.masterId !=''">
 			AND b.id = #{ledgerDto.masterId}
 		</if>
+		<if test="ledgerDto.sourceId != null  and ledgerDto.sourceId !=''">
+			AND b.source_id = #{ledgerDto.sourceId}
+		</if>
 		<if test="ledgerDto.receiverName != null  and ledgerDto.receiverName !=''">
 			AND b.receiver_name like "%"#{ledgerDto.receiverName}"%"
 		</if>
@@ -72,6 +75,9 @@
 		</if>
 		<if test="ledgerDto.masterId != null  and ledgerDto.masterId !=''">
 			AND b.id = #{ledgerDto.masterId}
+		</if>
+		<if test="ledgerDto.sourceId != null  and ledgerDto.sourceId !=''">
+			AND b.source_id = #{ledgerDto.sourceId}
 		</if>
 		<if test="ledgerDto.receiverName != null  and ledgerDto.receiverName !=''">
 			AND b.receiver_name like "%"#{ledgerDto.receiverName}"%"

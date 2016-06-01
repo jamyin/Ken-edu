@@ -20,7 +20,7 @@
     </h1>
 
     <div class="wrapperB">
-    <form action="/pro/ledger/findPage.htm?customerId=${(dto.customerId)!}" method="post" id="myform">
+    <form action="/pro/ledger/findPage.htm?customerId=${(dto.customerId)!}&sourceId=${(dto.sourceId)!}" method="post" id="myform">
        <input type="hidden" name="currPage" id="currPage" value="1"/>
       <ul class="distribution_ul">
       	<li class="head">
@@ -65,7 +65,7 @@
     })
     $('#searchBut').on('click', function() {
   	  var schoolName = $('.search_text').val();
-  	  window.location.href ="findPage.htm?waresNames="+schoolName+"&customerId=${(dto.customerId)!}";
+  	  window.location.href ="findPage.htm?waresNames="+schoolName+"&customerId=${(dto.customerId)!}&sourceId=${(dto.sourceId)!}";
     })
  	  // 跳转指定页
     $('#jump_btn').on('click', function () {

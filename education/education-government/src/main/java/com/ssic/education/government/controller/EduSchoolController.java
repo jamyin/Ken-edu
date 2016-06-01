@@ -218,15 +218,17 @@ public class EduSchoolController extends BaseController{
 		proSchoolWareDto.setSchoolId(dto.getCustomerId());		
 		ProSupplierDto proSupplierDto = new ProSupplierDto();
 		PageResult<ProSupplierDto> mSuppliers = new PageResult<ProSupplierDto>();
+		LedgerDto ledgerDto = new LedgerDto();
+		ledgerDto.setReceiverId(dto.getCustomerId());
 		if (null != eduSchoolSupplierDtos && StringUtils.isNotBlank(eduSchoolSupplierDtos.getSupplierId())) {
 //			 mWares = queryWares(eduSchoolSupplierDtos.getSupplierId(), query, false);
 			 proSupplierDto.setId(eduSchoolSupplierDtos.getSupplierId());
 			 proSchoolWareDto.setSourceId(eduSchoolSupplierDtos.getSupplierId());
 			 mSuppliers = queryMaterialSupplier(proSupplierDto, query);
+			 ledgerDto.setSourceId(eduSchoolSupplierDtos.getSupplierId());
 		}
 		PageResult<ProWaresDto> mWares = proWaresService.findWarsePageByParam(proSchoolWareDto, query);
-		LedgerDto ledgerDto = new LedgerDto();
-		ledgerDto.setReceiverId(dto.getCustomerId());
+		
 		PageResult<LedgerDto> ledgerDtos = proLedgerService.selectLedgerPage(ledgerDto,query);
 		mv.setViewName("/school/menu_city");
 		mv.addObject("dto", dto);
