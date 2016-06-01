@@ -330,7 +330,7 @@
 		}
 		parent.$.modalDialog({
 			title : '上传图片',
-			width :768,
+			width :800,
 			height : 480,
 			href : '${pageContext.request.contextPath}/proSupplierController/inputImage?id='+ id,
 			buttons : [ {
@@ -371,7 +371,7 @@
 		}
 		parent.$.modalDialog({
 			title : '修改图片信息',
-			width :768,
+			width :800,
 			height : 480,
 			href : '${pageContext.request.contextPath}/proSupplierController/editImage?id='+ id,
 			buttons : [ {

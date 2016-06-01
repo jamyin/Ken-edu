@@ -215,11 +215,11 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 		return r;
 	}
 
-	public int findWareBatchNo(LedgerDto ledgerDto) {
+	public int findWareBatchNo(String wareBatchNo,String sourceId) {
 		ProLedgerMasterExample example = new ProLedgerMasterExample();
 		ProLedgerMasterExample.Criteria criteria = example.createCriteria();
-		criteria.andWareBatchNoEqualTo(ledgerDto.getWareBatchNo());
-		criteria.andSourceIdEqualTo(ledgerDto.getSourceId());
+		criteria.andWareBatchNoEqualTo(wareBatchNo);
+		criteria.andSourceIdEqualTo(sourceId);
 		criteria.andStatEqualTo(1);
 		List<ProLedgerMaster> list = lmMapper.selectByExample(example);
 		return list.size();

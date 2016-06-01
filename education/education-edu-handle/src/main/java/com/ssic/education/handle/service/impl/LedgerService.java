@@ -62,8 +62,8 @@ public class LedgerService implements ILedgerService {
 	}
 
 	@Override
-	public int findWareBatchNo(LedgerDto ledgerDto) {
-		return ledgerDao.findWareBatchNo(ledgerDto);
+	public int findWareBatchNo(String wareBatchNo,String sourceId) {
+		return ledgerDao.findWareBatchNo(wareBatchNo,sourceId);
 	}
 
 	@Override

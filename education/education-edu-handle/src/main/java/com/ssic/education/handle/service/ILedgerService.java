@@ -21,7 +21,7 @@ public interface ILedgerService {
 
 	int deleteLedger(String sourceId, String wareBatchNo);
 
-	int findWareBatchNo(LedgerDto ledgerDto);
+	int findWareBatchNo(String wareBatchNo,String sourceId);
 	
 	int importLedger(Map<ProLedgerMaster, List<ProLedger>> map);
 
