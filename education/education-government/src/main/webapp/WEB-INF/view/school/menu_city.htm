@@ -143,7 +143,7 @@
                   </li>
                   <#if ledgerDtos??>
                   	<#list ledgerDtos.results as ledgerDto>
-                  		<li class="head">
+                  		<li>
 	                      <span class="dis_no">${(ledgerDto.wareBatchNo)!}</span>
 	                      <span class="dis_date">${ledgerDto.actionDate?string("yyyy-MM-dd")}</span>
 	                      <span class="dis_goods ellipsis"><#if ledgerDto.ledgerDtos??>

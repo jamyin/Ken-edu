@@ -303,7 +303,9 @@ public class EduSchoolController extends BaseController{
 			EduCanteenDto eduCanteenDto = iEduCanteenService.searchEduCanteenDto(eduCanteendto);
 			ProLicense proLicense = new ProLicense();
 			proLicense.setCerSource((short)DataStatus.MANAGERTYPE);
-			proLicense.setRelationId(dto.getId());
+			if (null != eduCanteenDto && StringUtils.isNotBlank(eduCanteenDto.getId())) {
+				proLicense.setRelationId(eduCanteenDto.getId());
+			}			
 			List<ProLicense> proLicenses = iProLicenseService.lookImage(proLicense);
 			mv.addObject("eduSchoolDto", eduSchoolDto);
 			mv.addObject("eduCanteenDto", eduCanteenDto);
@@ -326,13 +328,29 @@ public class EduSchoolController extends BaseController{
 		ModelAndView mv = getModelAndView();
 		if (StringUtils.isNotBlank(dto.getSchoolName())) {
 			EduSchoolDto eduSchoolDto = eduSchoolService.findById(dto.getId());
+			EduCanteenDto eduCanteendto = new EduCanteenDto();
+			eduCanteendto.setSchoolId(dto.getId());
+			EduCanteenDto eduCanteenDto = iEduCanteenService.searchEduCanteenDto(eduCanteendto);
+			ProLicense proLicense = new ProLicense();
+			proLicense.setCerSource((short)DataStatus.MANAGERTYPE);
+			if (null != eduCanteenDto && StringUtils.isNotBlank(eduCanteenDto.getId())) {
+				proLicense.setRelationId(eduCanteenDto.getId());
+			}			
+			List<ProLicense> proLicenses = iProLicenseService.lookImage(proLicense);
 			mv.addObject("eduSchoolDto", eduSchoolDto);
+			mv.addObject("eduCanteenDto", eduCanteenDto);
+			mv.addObject("proLicenses", proLicenses);
 			mv.addObject("dto", dto);
 			mv.setViewName("/district/dis_edu_checked_detail");
 		}
 		if (StringUtils.isNotBlank(dto.getSupplierName())) {
 			ProSupplierDto proSupplierDto = proSupplierService.findById(dto.getId());
+			ProLicense proLicense = new ProLicense();
+			proLicense.setCerSource((short)DataStatus.DISABLED);
+			proLicense.setRelationId(dto.getId());			
+			List<ProLicense> proLicenses = iProLicenseService.lookImage(proLicense);
 			mv.addObject("proSupplierDto", proSupplierDto);
+			mv.addObject("proLicenses", proLicenses);
 			mv.addObject("dto", dto);
 			mv.setViewName("/district/dis_edu_checked_details");
 		}
@@ -371,11 +389,30 @@ public class EduSchoolController extends BaseController{
 	@RequestMapping(value = "/license")
 	public ModelAndView getProLicenseBySchId(ProLicenseDto dto) {
 		ModelAndView mv = getModelAndView();		
-		List<ProLicenseDto> proLicenseDtos = eduSchoolService.getProLicenseBySchId(dto);
-		mv.addObject("proLicenseDtos", proLicenseDtos);
-		mv.addObject("data", dto);
-		mv.setViewName("/district/dis_edu_pic");
+		if (StringUtils.isNotBlank(dto.getSchoolName())) {
+			EduCanteenDto eduCanteendto = new EduCanteenDto();
+			eduCanteendto.setSchoolId(dto.getRelationId());
+			EduCanteenDto eduCanteenDto = iEduCanteenService.searchEduCanteenDto(eduCanteendto);
+			ProLicense proLicense = BeanUtils.createBeanByTarget(dto, ProLicense.class);
+			proLicense.setCerSource((short)DataStatus.MANAGERTYPE);
+			if (null != eduCanteenDto && StringUtils.isNotBlank(eduCanteenDto.getId())) {
+				proLicense.setRelationId(eduCanteenDto.getId());
+			}		
+			List<ProLicense> proLicenseDtos = iProLicenseService.lookImage(proLicense);
+			mv.addObject("proLicenseDtos", proLicenseDtos);
+			mv.addObject("data", dto);
+			mv.setViewName("/district/dis_edu_pic");
+		}		
+		if (StringUtils.isNotBlank(dto.getSupplierName())) {
+			ProLicense proLicense = BeanUtils.createBeanByTarget(dto, ProLicense.class);
+			proLicense.setCerSource((short)DataStatus.DISABLED);
+			List<ProLicense> proLicenseDtos = iProLicenseService.lookImage(proLicense);
+			mv.addObject("proLicenseDtos", proLicenseDtos);
+			mv.addObject("data", dto);
+			mv.setViewName("/district/dis_edu_pic");			
+		}
 		return mv;
+		
 	}
 	
 	@RequestMapping(value = "/update")

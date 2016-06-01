@@ -4,6 +4,23 @@
 <html>
 <head>
 <title></title>
+<style>
+ul.my_info {
+	text-align:center;
+}
+.name {
+	display:inline-block;
+	width:120px;
+	text-align:right;
+	margin-right:10px;
+}
+.cert {
+	display:inline-block;
+	width:120px;
+	text-align:right;
+	margin-right:10px;
+}
+</style>
 <jsp:include page="../inc.jsp"></jsp:include>
 <script type="text/javascript">
 
@@ -54,55 +71,42 @@
 </script>
 </head>
 <body>
-	<div >
-		<table class="table table-hover table-condensed">
-			<tr style='height:100px;'>
-				<th style="text-align:right; vertical-align:middle;"><a onclick="edit()">编辑</a></th>
-				<th style='text-align:center; vertical-align:middle;'><a onclick="showPic()">查看图片</a></th>
-				<th style='text-align:left; vertical-align:middle;'><a onclick="editPic()">编辑图片</a></th>
-			</tr>
-			<tr>
-				<th style="text-align:right;">${Corporate.supplierName }</th>
-				<td></td>
-			</tr>
-			<tr>
-				<th style="text-align:right;">单位地址:</th>
-				<td style='text-align:center;'>${Corporate.address }</td>
-				<td></td>
-			</tr>
-			<tr>
-				<th style="text-align:right;">联系人姓名:</th>
-				<td style='text-align:center;'>${Corporate.corporation }</td>
-				<td></td>
-			</tr>
-			<tr>
-				<th style="text-align:right;">电话:</th>
-				<td style='text-align:center;'>${Corporate.contactWay }</td>
-				<td></td>
-			</tr>
-			<tr>
-				<th style="text-align:right;">证件类型:</th>
-				<th style='text-align:center;'>食品经营许可证:</th>
-				<td >${Corporate.foodBusinessCode }</td>
-			</tr>
-			<tr>
-				<th></th>
-				<th style='text-align:center;'>食品流通证号:</th>
-				<td>${Corporate.foodCirculationCode }</td>
-			</tr>
-			<tr>
-				<th></th>
-				<th style='text-align:center;'>食品生产证号:</th>
-				<td>${Corporate.foodProduceCode }</td>
-			</tr>
-			<tr>
-				<th ></th>
-				<th style='text-align:center;'>工商执照号:</th>
-				<td>${Corporate.businessLicense }</td>
-			</tr>
-			<tr ></tr>
-		</table>
-		<div id="aa"></div>
+<div>
+	<div id="aa"></div>
+	<h2>${Corporate.supplierName }</h2>
+	<div class="">
+	<a id="btn"  class="easyui-linkbutton" data-options="iconCls:'icon-edit'"  onclick="edit()">编辑</a>
+	<a id="btn"  class="easyui-linkbutton" data-options="iconCls:'icon-picture'"  onclick="showPic()">查看图片</a>
+	<a id="btn"  class="easyui-linkbutton" data-options="iconCls:'icon-edit'"  onclick="editPic()">编辑图片</a>  
 	</div>
+	
+	<ul class="easyui-datalist my_info">
+		<li>
+			<span class="name">单位地址：</span><span class="value">${Corporate.address }</span>
+		</li>
+		<li>
+			<span class="name">联系人姓名:	</span><span class="value">${Corporate.corporation }</span>
+		</li>
+		<li>
+			<span class="name">电话:	</span><span class="value">${Corporate.contactWay }</span>
+		</li>
+		<li>
+			<span class="name">证件类型:	</span><span class="value"></span>
+		</li>
+		<li>
+			<span class="cert">食品经营许可证:	</span><span class="value">${Corporate.foodBusinessCode }</span>
+		</li>
+		<li>
+			<span class="cert">食品流通证号:	</span><span class="value">${Corporate.foodCirculationCode }</span>
+		</li>
+		<li>
+			<span class="cert">食品生产证号:	</span><span class="value">${Corporate.foodProduceCode }</span>
+		</li>
+		<li>
+			<span class="cert">工商执照号:	</span><span class="value">${Corporate.businessLicense }</span>
+		</li>
+	</ul>
+		
+</div>
 </body>
 </html>

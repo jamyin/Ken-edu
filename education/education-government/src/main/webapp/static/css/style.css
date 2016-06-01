@@ -25,7 +25,7 @@ body{background:#f3f3f3}
 
 .nav > ul > li > a{display:block;color:#605f5f;}
 .nav > ul > li > a.cur{border-bottom:4px #7ca860 solid;line-height:50px;color:#7ca860}
-.nav > ul > li > .wrap{display:none;position:absolute;width:100%;background:#fff;top:55px;left:0;z-index:99;height:36px;line-height:36px;}
+.nav > ul > li > .wrap{display:none;position:absolute;width:100%;background:#fff;top:54px;left:0;z-index:99;border-top:1px #60ac62 solid;height:36px;line-height:36px;}
 .nav > ul > li > .wrap > ul{width:1000px;height:36px;margin:0 auto}
 .nav > ul > li > .wrap > ul li{float:left;margin-right:30px}
 .nav > ul > li > .wrap > ul > li > a{color:#666}

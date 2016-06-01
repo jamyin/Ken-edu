@@ -377,7 +377,7 @@ WHERE
 			<if test="proSupplierDto.reviewed!=null">
 				AND a.reviewed = #{proSupplierDto.reviewed}
 			</if>
-			ORDER BY a.create_time desc
+			ORDER BY b.last_update_time desc,b.create_time desc
 			<if test="query != null">
 	       		LIMIT  #{query.startNum}, #{query.pageSize}
 	        </if>

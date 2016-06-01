@@ -1,6 +1,7 @@
 package com.ssic.education.provider.controller;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
@@ -20,6 +21,13 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.EncryptedDocumentException;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFDataFormat;
+import org.apache.poi.hssf.usermodel.HSSFFont;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -36,7 +44,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ssic.educateion.common.dto.LedgerDto;
 import com.ssic.educateion.common.dto.ProWaresDto;
-import com.ssic.educateion.common.dto.SupplierDto;
 import com.ssic.educateion.common.utils.DataGrid;
 import com.ssic.educateion.common.utils.PageHelper;
 import com.ssic.education.handle.pojo.ProLedger;
@@ -54,8 +61,8 @@ import com.ssic.education.provider.pageModel.SessionInfo;
 import com.ssic.education.provider.service.UserServiceI;
 import com.ssic.education.provider.util.ConfigUtil;
 import com.ssic.education.utils.poi.ParseExcelUtil;
-import com.ssic.education.utils.util.ObjectExcelView;
 import com.ssic.education.utils.util.PageData;
+import com.ssic.education.utils.util.Tools;
 
 /**
  * 
@@ -166,7 +173,8 @@ public class LedgerController {
 			return j;
 		}
 		// 配送号
-		int w = ledgerService.findWareBatchNo(ledgers.get(0));
+		int w = ledgerService.findWareBatchNo(ledgers.get(0).getWareBatchNo(),
+				ledgers.get(0).getSourceId());
 		if (w != 0) {
 			j.setMsg("已存在的配送号");
 			j.setSuccess(false);
@@ -485,6 +493,12 @@ public class LedgerController {
 							break;
 						}
 						// 配货号
+						int w = ledgerService
+								.findWareBatchNo(value, supplierId);
+						if (w != 0) {
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，配货号已存在。";
+							break;
+						}
 						master = noMaster.get(value);
 						if (master == null) {
 							master = new ProLedgerMaster();
@@ -613,15 +627,25 @@ public class LedgerController {
 
 	@RequestMapping(value = "/excel")
 	@ResponseBody
-	public ModelAndView exportExcel(LedgerDto ld, HttpServletRequest request) {
+	public ModelAndView exportExcel(LedgerDto ld, HttpServletRequest request,
+			HttpServletResponse response) {
 		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
 				ConfigUtil.SESSIONINFONAME);
+		if(info==null){
+			return null;
+		}
 		ld.setSourceId(info.getSupplierId());
-		ModelAndView mv = null;
-		PageData pd = new PageData();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.M.d");
+		Date date = new Date();
+		String filename = Tools.date2Str(date, "yyyyMMddHHmmss");
+		HSSFSheet sheet;
+		HSSFCell cell;
+		response.setContentType("application/octet-stream");
+		response.setHeader("Content-Disposition", "attachment;filename="
+				+ filename + ".xls");
+		Workbook workbook = new HSSFWorkbook();
+		sheet = (HSSFSheet) workbook.createSheet("配货管理");
 		try {
-			Map<String, Object> dataMap = new HashMap<String, Object>();
 			List<String> titles = new ArrayList<String>();
 			titles.add("配货号");
 			titles.add("配货日期");
@@ -633,7 +657,27 @@ public class LedgerController {
 			titles.add("供应商名称");
 			titles.add("生产单位");
 			titles.add("生产日期");
-			dataMap.put("titles", titles);
+			int len = titles.size();
+			HSSFCellStyle headerStyle = (HSSFCellStyle) workbook.createCellStyle(); // 标题样式
+			headerStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+			headerStyle.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+			HSSFFont headerFont = (HSSFFont) workbook.createFont(); // 标题字体
+			headerFont.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+			headerFont.setFontHeightInPoints((short) 11);
+			headerStyle.setFont(headerFont);
+			short width = 20, height = 25 * 20;
+			sheet.setDefaultColumnWidth(width);
+			HSSFRow sheetRow = sheet.createRow(0);
+			for (int i = 0; i < len; i++) { // 设置标题
+				String title = titles.get(i);
+				cell = sheetRow.createCell(i);
+				cell.setCellStyle(headerStyle);
+				cell.setCellType(HSSFCell.CELL_TYPE_STRING);
+				cell.setCellValue(title);
+			}
+			sheet.getRow(0).setHeight(height);
+			HSSFCellStyle contentStyle = (HSSFCellStyle) workbook.createCellStyle(); // 内容样式
+			contentStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
 			Map<ProLedgerMaster, List<ProLedger>> map = ledgerService
 					.findExportProSupplier(ld);
 			List<PageData> varList = new ArrayList<PageData>();
@@ -650,7 +694,8 @@ public class LedgerController {
 					for (ProLedger pl : map.get(plm)) {
 						PageData vpd = new PageData();
 						vpd.put("var1", plm.getWareBatchNo());
-						vpd.put("var2", sdf.format(plm.getActionDate()).toString());
+						vpd.put("var2", sdf.format(plm.getActionDate())
+								.toString());
 						vpd.put("var3", pl.getName());
 						vpd.put("var4", pl.getQuantity());
 						vpd.put("var5", pl.getSpce());
@@ -658,21 +703,106 @@ public class LedgerController {
 						vpd.put("var7", driver);
 						vpd.put("var8", pl.getSupplierName());
 						vpd.put("var9", pl.getProductionName());
-						vpd.put("var10", sdf.format(pl.getProductionDate()).toString());
+						vpd.put("var10", sdf.format(pl.getProductionDate())
+								.toString());
 						varList.add(vpd);
 					}
 				}
 			}
-			dataMap.put("varList", varList);
-			ObjectExcelView erv = new ObjectExcelView(); // 执行excel操作
-
-			mv = new ModelAndView(erv, dataMap);
-
+			for(int i=0; i<varList.size(); i++){
+				HSSFRow row = sheet.createRow(i+1);
+	            PageData vpd = varList.get(i);
+	            for(int j=0;j<len;j++){
+	                String varstr = vpd.getString("var"+(j+1)) != null ? vpd.getString("var"+(j+1)) : "";
+	                cell =row.createCell(j);
+	                if(j!=3){
+	                	HSSFCellStyle cellStyle2 = (HSSFCellStyle) workbook.createCellStyle();  
+	                	HSSFDataFormat format = (HSSFDataFormat) workbook.createDataFormat();  
+	                	cellStyle2.setDataFormat(format.getFormat("@")); 
+	                	cell.setCellStyle(cellStyle2);
+	                	cell.setCellType(HSSFCell.CELL_TYPE_STRING);
+	                	cell.setCellValue(varstr);
+	                	continue;
+	                }
+	                cell.setCellStyle(contentStyle);
+	                cell.setCellType(HSSFCell.CELL_TYPE_STRING);
+                	cell.setCellValue(varstr);
+	            }
+	            
+	        }
+			OutputStream os = response.getOutputStream();
+			workbook.write(os);
+			os.flush();
+			os.close();
 		} catch (Exception e) {
 
 		}
-		return mv;
+		return null;
 	}
+
+	// @RequestMapping(value = "/excel")
+	// @ResponseBody
+	// public ModelAndView exportExcel(LedgerDto ld, HttpServletRequest request)
+	// {
+	// SessionInfo info = (SessionInfo) request.getSession().getAttribute(
+	// ConfigUtil.SESSIONINFONAME);
+	// ld.setSourceId(info.getSupplierId());
+	// ModelAndView mv = null;
+	// PageData pd = new PageData();
+	// SimpleDateFormat sdf = new SimpleDateFormat("yyyy.M.d");
+	// try {
+	// Map<String, Object> dataMap = new HashMap<String, Object>();
+	// List<String> titles = new ArrayList<String>();
+	// titles.add("配货号");
+	// titles.add("配货日期");
+	// titles.add("采购品名称");
+	// titles.add("数量");
+	// titles.add("规格");
+	// titles.add("配货点");
+	// titles.add("驾驶员");
+	// titles.add("供应商名称");
+	// titles.add("生产单位");
+	// titles.add("生产日期");
+	// dataMap.put("titles", titles);
+	// Map<ProLedgerMaster, List<ProLedger>> map = ledgerService
+	// .findExportProSupplier(ld);
+	// List<PageData> varList = new ArrayList<PageData>();
+	// List<TImsUsersDto> drivers = userService.findAllDriver(info
+	// .getSupplierId());
+	// if (!CollectionUtils.sizeIsEmpty(map)) {
+	// for (ProLedgerMaster plm : map.keySet()) {
+	// String driver = null;
+	// for (TImsUsersDto user : drivers) {
+	// if (user.getId().equals(plm.getUserId())) {
+	// driver = user.getName();
+	// }
+	// }
+	// for (ProLedger pl : map.get(plm)) {
+	// PageData vpd = new PageData();
+	// vpd.put("var1", "'"+plm.getWareBatchNo());
+	// vpd.put("var2", sdf.format(plm.getActionDate()).toString());
+	// vpd.put("var3", pl.getName());
+	// vpd.put("var4", pl.getQuantity());
+	// vpd.put("var5", pl.getSpce());
+	// vpd.put("var6", plm.getReceiverName());
+	// vpd.put("var7", driver);
+	// vpd.put("var8", pl.getSupplierName());
+	// vpd.put("var9", pl.getProductionName());
+	// vpd.put("var10", sdf.format(pl.getProductionDate()).toString());
+	// varList.add(vpd);
+	// }
+	// }
+	// }
+	// dataMap.put("varList", varList);
+	// ObjectExcelView erv = new ObjectExcelView(); // 执行excel操作
+	//
+	// mv = new ModelAndView(erv, dataMap);
+	//
+	// } catch (Exception e) {
+	//
+	// }
+	// return mv;
+	// }
 
 	// @RequestMapping("download")
 	// public void download(HttpServletRequest request,

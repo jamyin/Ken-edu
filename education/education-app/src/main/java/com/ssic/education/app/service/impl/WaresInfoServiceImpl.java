@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssic.education.app.constants.ProductClass;
 import com.ssic.education.app.dao.AppSchoolWaresDao;
 import com.ssic.education.app.dao.LedgerInfoDao;
 import com.ssic.education.app.dao.LicDao;
@@ -111,11 +112,15 @@ public class WaresInfoServiceImpl implements IWaresInfoService {
 		}
 	}
 
+	/**
+	 * 根据ID查询商品信息
+	 */
 	@Override
 	public WaresRelatedDto findWarseById(String id) {
 		WaresRelatedDto wrd = waresInfoDao.findWarseById(id);
-		//wrd.setInsReport(licDao.getLicbyType(wrd.getId(), 31));
-		//wrd.setProLic(licDao.getLicbyType(wrd.getId(), 30));
+		if (wrd.getWaresType() != null) {
+			wrd.setTypeName(ProductClass.getName(wrd.getWaresType()));
+		}
 		List<ProLicense> list = supplierInfoDto.getWaresLic(wrd.getId(), (short) 2);
 		if (null != list && !list.isEmpty()) {
 			List<AppLicenseDto> licList = BeanUtils.createBeanListByTarget(list, AppLicenseDto.class);
@@ -128,12 +133,12 @@ public class WaresInfoServiceImpl implements IWaresInfoService {
 			}
 			wrd.setLicense(licList);
 		}
+
 		return wrd;
 	}
 
 	@Override
 	public List<WaresListDto> findWarseBySchoolId(String schoolId) {
-		// TODO 添加方法注释
 		return waresInfoDao.findWarseBySchoolId(schoolId);
 	}
 

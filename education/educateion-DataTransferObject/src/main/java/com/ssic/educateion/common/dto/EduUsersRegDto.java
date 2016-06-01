@@ -65,6 +65,8 @@ public class EduUsersRegDto implements Serializable{
     private String level;
     
     private String area;
+    
+    private String committeeId;
 
     //证件信息
     private String jsonLic;

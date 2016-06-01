@@ -63,7 +63,7 @@
         <li class="search">
           <label for="">级别:</label>
           <select class="" name="levels" id="levels">
-          	<option value="">请选择级别</option>
+          	<option value="">全    部</option>
           	<#if level??>
           		<#list level as level>
           			<option <#if level.index == dto.level>selected="true"</#if> value="${(level.index)!}">${(level.value)!}</option>
