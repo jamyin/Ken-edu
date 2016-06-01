@@ -30,6 +30,7 @@ import com.ssic.educateion.common.dto.ProPackagesDto;
 import com.ssic.educateion.common.dto.ProSupplierDto;
 import com.ssic.educateion.common.dto.ProWaresDto;
 import com.ssic.educateion.common.dto.SupplierReviewedDto;
+import com.ssic.education.handle.dto.ProSchoolWareDto;
 import com.ssic.education.handle.pojo.ProLicense;
 import com.ssic.education.handle.service.AreaService;
 import com.ssic.education.handle.service.EduSchoolService;
@@ -213,14 +214,17 @@ public class EduSchoolController extends BaseController{
 		EduSchoolSupplierDto eduSchoolSupplierDto = new EduSchoolSupplierDto();
 		eduSchoolSupplierDto.setSchoolId(dto.getCustomerId());
 		EduSchoolSupplierDto eduSchoolSupplierDtos= iEduSchoolSupplierService.searchEduSchoolSupplierDto(eduSchoolSupplierDto);
-		PageResult<ProWaresDto> mWares = new PageResult<ProWaresDto>();
+		ProSchoolWareDto proSchoolWareDto = new ProSchoolWareDto();
+		proSchoolWareDto.setSchoolId(dto.getCustomerId());		
 		ProSupplierDto proSupplierDto = new ProSupplierDto();
 		PageResult<ProSupplierDto> mSuppliers = new PageResult<ProSupplierDto>();
 		if (null != eduSchoolSupplierDtos && StringUtils.isNotBlank(eduSchoolSupplierDtos.getSupplierId())) {
-			 mWares = queryWares(eduSchoolSupplierDtos.getSupplierId(), query, false);
+//			 mWares = queryWares(eduSchoolSupplierDtos.getSupplierId(), query, false);
 			 proSupplierDto.setId(eduSchoolSupplierDtos.getSupplierId());
+			 proSchoolWareDto.setSourceId(eduSchoolSupplierDtos.getSupplierId());
 			 mSuppliers = queryMaterialSupplier(proSupplierDto, query);
 		}
+		PageResult<ProWaresDto> mWares = proWaresService.findWarsePageByParam(proSchoolWareDto, query);
 		LedgerDto ledgerDto = new LedgerDto();
 		ledgerDto.setReceiverId(dto.getCustomerId());
 		PageResult<LedgerDto> ledgerDtos = proLedgerService.selectLedgerPage(ledgerDto,query);
@@ -238,14 +242,14 @@ public class EduSchoolController extends BaseController{
 		return mv;
 	}
 	
-	private PageResult<ProWaresDto> queryWares(String supplierId, PageQuery query, boolean dishes){
-		query.setPageSize(10);
-		ProWaresDto params = new ProWaresDto();
-		params.setSupplierId(supplierId);
-//		params.setDishes(dishes);
-		PageResult<ProWaresDto> results = proWaresService.queryWaresByParams(params, query);
-		return results;
-	}
+//	private PageResult<ProWaresDto> queryWares(String supplierId, PageQuery query, boolean dishes){
+//		query.setPageSize(10);
+//		ProWaresDto params = new ProWaresDto();
+//		params.setSupplierId(supplierId);
+////		params.setDishes(dishes);
+//		PageResult<ProWaresDto> results = proWaresService.findWarsePageByParam(params, query);
+//		return results;
+//	}
 	
 	private PageResult<ProSupplierDto> queryMaterialSupplier(ProSupplierDto dto, PageQuery query){
 		PageResult<ProSupplierDto> results = proSupplierService.findSupplierPageBySchoolId(dto, query);
