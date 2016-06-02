@@ -17,5 +17,5 @@ public interface ITaskReceiveService {
 
 	public int updateEduTaskReceive(EduTaskReceiveDto eduTaskReceiveDto);
 	
-	public EduTaskReceiveDto searchEduTaskReceive(EduTaskReceiveDto eduTaskReceiveDto); 
+	public List<EduTaskReceiveDto> searchEduTaskReceive(EduTaskReceiveDto eduTaskReceiveDto); 
 }

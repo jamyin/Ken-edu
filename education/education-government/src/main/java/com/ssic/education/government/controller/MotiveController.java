@@ -2,6 +2,7 @@ package com.ssic.education.government.controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import lombok.Data;
@@ -15,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.common.base.Objects;
 import com.ssic.educateion.common.dto.EduCommitteeDto;
-import com.ssic.educateion.common.dto.EduInformationDto;
 import com.ssic.educateion.common.dto.EduSchoolDto;
 import com.ssic.educateion.common.dto.EduTaskDto;
 import com.ssic.educateion.common.dto.EduTaskReceiveDto;
@@ -290,13 +290,47 @@ public class MotiveController extends BaseController {
 		EduTaskReceiveDto eduTaskReceiveDto = new EduTaskReceiveDto();
 		eduTaskReceiveDto.setReceiveId(sourceId);
 		eduTaskReceiveDto.setTaskId(infoId);
-		eduTaskReceiveDto = iTaskReceiveService.searchEduTaskReceive(eduTaskReceiveDto);
-		eduTaskReceiveDto.setReadstat(DataStatus.ENABLED);
-		iTaskReceiveService.updateEduTaskReceive(eduTaskReceiveDto);
+		List<EduTaskReceiveDto> dataList = iTaskReceiveService.searchEduTaskReceive(eduTaskReceiveDto);
+		if(dataList!=null && dataList.size()>0){
+			eduTaskReceiveDto = dataList.get(0);
+			eduTaskReceiveDto.setReadstat(DataStatus.ENABLED);
+			iTaskReceiveService.updateEduTaskReceive(eduTaskReceiveDto);			
+		}
 
+		//获取已读未读 数据
+		EduTaskReceiveDto listDto = new EduTaskReceiveDto();
+		listDto.setTaskId(infoId);
+		List<EduTaskReceiveDto> resultList = iTaskReceiveService.searchEduTaskReceive(listDto);
+		HashMap<String,Integer> readMap = copyListToMap(resultList);
+		mv.addObject("readMap", readMap);
 		mv.addObject("data", data);
 		mv.setViewName("motive/dis_edu_motice_detail");
 		return mv;
+	}
+
+	private HashMap<String, Integer> copyListToMap(List<EduTaskReceiveDto> resultList) {
+		HashMap<String,Integer> readMap = new HashMap<String,Integer>();
+		int read = 0;
+		int unread = 0;
+		for(EduTaskReceiveDto mapDto :resultList){
+			if(Objects.equal(mapDto.getReadstat(),DataStatus.ENABLED)){
+				if(readMap.containsKey("read")){
+					read = readMap.get("read");
+					readMap.put("read",read+1);
+				}else{
+					readMap.put("read",1);
+				}
+			}
+			if(Objects.equal(mapDto.getReadstat(),DataStatus.DISABLED)){
+				if(readMap.containsKey("unread")){
+					unread = readMap.get("unread");
+					readMap.put("unread",unread+1);
+				}else{
+					readMap.put("unread",1);
+				}
+			}
+		}
+		return readMap;
 	}
 
 	public List<InfoList> copyProperty(Object xObj) {
