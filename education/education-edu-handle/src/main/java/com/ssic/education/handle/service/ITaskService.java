@@ -69,7 +69,7 @@ public interface ITaskService {
 		 * @author: cwftalus@163.com
 		 * @version: 2016年5月31日 下午3:02:50
 	 */
-	PageResult<EduTaskDto> searchInfomation(EduTaskDto eduTaskDto,PageQuery pageQuery);
+	PageResult<EduTaskDto> searchTask(EduTaskDto eduTaskDto,PageQuery pageQuery);
 
 }
 
