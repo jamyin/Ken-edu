@@ -100,7 +100,9 @@
                                                 </ul>
                                             </div>
                                         </section>
-
+										<div class="subbt">
+                                            <a href="#">确定</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -180,6 +182,10 @@
                     $(".background").show();
                 });
 
+                $(".subbt").click(function(){
+                    $(".background").hide();
+                });
+                
                 $(".background .close").click(function(){
                     $(".background").hide();
                 });
