@@ -62,11 +62,11 @@
 					<table class="table table-hover table-condensed">
 						<tr>
 
-							<th>姓名</th>
+							<th>*姓名</th>
 							<td><input name="name" type="text" id="name"
 								placeholder="请输入姓名" class="easyui-validatebox span2"
 								data-options="required:true" ></td>
-							<th>用户名</th>
+							<th>*用户名</th>
 							<td>
 							<input name="userAccount" type="text" placeholder="请输入用户名"  id="userAccount"
 								class="easyui-validatebox span2"  data-options="required:true"></td>
@@ -82,7 +82,7 @@
 							
 						</tr>
 						<tr>
-						<th>账户权限</th>
+						<th>*账户权限</th>
 						<td>
 						<label><input id ="guanliyuan"  name="userType" type="radio" value="0"  data-options="required:true"/>管理员 </label> </td>
 						<td>
