@@ -81,7 +81,8 @@
 	                                    <td>
 	                                    	<#if result.getTaskReceiceList() ??>
 	                                    		<#list result.getTaskReceiceList() as data>
-	                                    			${(data.receiveName)!} 、
+	                                    			<#assign receiveName = receiveName + data.receiveName+"、">
+	                                    			${receiveName?substring(0,20)}.
 	                                    		</#list>
 	                                    	</#if>
 	                                    </td>
