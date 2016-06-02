@@ -4,9 +4,6 @@
             "menuName": "安全追溯",
             "menuUrl": "/edu/school/list.htm?source=2&reviewed=1"
         },{
-            "menuName": "审批",
-            "menuUrl": "/edu/school/checkList.htm?source=1&reviewed=0"
-        },{
             "menuName": "通知公告",
             "menuUrl": "##",
             "childList": [
@@ -36,6 +33,9 @@
                     "menuUrl": "/motive/release.htm"
                 }                
             ]            
+        },{
+            "menuName": "审批",
+            "menuUrl": "/edu/school/checkList.htm?source=1&reviewed=0"
         }
     ]
 }

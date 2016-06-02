@@ -2,7 +2,7 @@
     <div class="wrap">
         <a class="logo" href="/main.htm">上海市中小学校校生午餐综合管理平台</a>
         <div class="p_status">
-            <a class="p_center" href="/user/userInfo.htm">个人中心</a>  |  <a class="logout" href="/login_out.htm">退出</a>
+            <a class="p_center" href="/user/userInfo.htm">${(eduUsersDto.userAccount)!}</a>  |  <a class="logout" href="/login_out.htm">退出</a>
         </div>
     </div>
 </div>
@@ -18,7 +18,7 @@
         				<div class="wrap">
         					<ul>
         						<#list data.childList as result>
-        							<li><a href="${(result.menuUrl)!}">${(result.menuName)!}</a></li>
+        							<li ><a href="${(result.menuUrl)!}">${(result.menuName)!}</a></li>
         						</#list>
         					</ul>
         				</div>

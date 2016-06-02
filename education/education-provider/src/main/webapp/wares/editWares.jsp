@@ -6,7 +6,14 @@
 .panel-body {
 	font-size: 18px !important;
 }
+.table th, .table td {
+    border-top: none!important;
+}
+.panel-body.panel-body-noheader.panel-body-noborder.layout-body {
+	padding:20px!important;
+}
 </style>
+
 <script type="text/javascript">
 
 	$(function() {
@@ -78,7 +85,7 @@
 	});
 	
 </script>
-		<div class="easyui-layout" data-options="fit:true,border:false">
+		<div class="easyui-layout" data-options="fit:true,border:false" style="padding:20px;">
 			<div data-options="region:'center',border:false" title=""
 				style="overflow: hidden;">
 				<form id="formEdit" method="post" >
@@ -131,14 +138,14 @@
 							<th>生产企业</th>
 							<td><input name="manufacturer" type="text" placeholder="请输入生产企业" id="manufacturer"
 								class="easyui-validatebox span2" value="${wdto.manufacturer}"></td>
-								<th>条形码</th>
+								<th>产品包装条形码</th>
 							<td><input name="barCode" type="text" id="barCode"
 								placeholder="请输入条形码" class="easyui-validatebox span2"
 								value="${wdto.barCode}"></td>
 							
 						</tr>
 						<tr>
-							<th>企业自定义代码</th>
+							<th>产品编码</th>
 						    <td><input name="customCode" type="text" placeholder="请输入自定义代码" id="customCode"
 								class="easyui-validatebox span2" value="${wdto.customCode}"></td>
 							<th>产地</th>
@@ -635,14 +642,11 @@
 
 		</div>
 
-<div id="toolbar" style="display: none;">
 
-	<div style="height: 2px;"></div>
-
-	<a onclick="redos();" href="javascript:void(0);"
-		class="easyui-linkbutton"
-		data-options="plain:true,iconCls:'resultset_next'">展开</a> <a
-		onclick="undos();" href="javascript:void(0);"
-		class="easyui-linkbutton"
-		data-options="plain:true,iconCls:'resultset_previous'">折叠</a>
-</div>
+<script type="text/javascript">
+$(function(){
+	$("td,th").css("vertical-align","middle");
+	$('td input').css("margin-top","8px");
+	$('table tr:first:child td').css("border-top","none");
+});
+</script>

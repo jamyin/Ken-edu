@@ -6,6 +6,12 @@
 .panel-body {
 	font-size: 18px !important;
 }
+.table th, .table td {
+    border-top: none!important;
+}
+.panel-body.panel-body-noheader.panel-body-noborder.layout-body {
+	padding:20px!important;
+}
 </style>
 <script type="text/javascript">
 
@@ -67,10 +73,10 @@
 						<tr>
 							<th>姓名</th>
 							<td><input name="name" type="text" id="name"
-								placeholder="请输入商品名称" class="easyui-validatebox span2"
+								placeholder="请输入姓名" class="easyui-validatebox span2"
 								data-options="required:true"  value="${user.name}"></td>
 							<th>用户名</th>
-							<td><input name="userAccount" type="text" placeholder="请输入规格"  id="userAccount"
+							<td><input name="userAccount" type="text" placeholder="请输入用户名"  id="userAccount"
 								class="easyui-validatebox span2"  value="${user.userAccount}"></td>
 						</tr>
 						
@@ -91,5 +97,11 @@
 			</div>
 
 		</div>
-
+<script type="text/javascript">
+$(function(){
+	$("td,th").css("vertical-align","middle");
+	$('td input').css("margin-top","8px");
+	$('table tr:first:child td').css("border-top","none");
+});
+</script>
 

@@ -25,7 +25,10 @@
                     <h1>${(data.title)!}</h1>
                     <p class="date"> ${(data.createTime?string('yyyy-MM-dd'))!} </p>
                     <div class="text">
-                    	<img alt="" src="${(wwwdomain)!}${(data.pic)!}" style="width: 400px;height:300px;"/>
+                    	<#if data.pic ??>
+                    		<img alt="" src="${(wwwdomain)!}${(data.pic)!}" style="width: 400px;height:300px;text-align: center;"/>
+                    	</#if>
+                    	
 						${(data.content)!}
                     </div>
                 </div>
@@ -100,4 +103,11 @@
     		上海市中小学校学生午餐综合管理平台<br>CopyRight© 2016上海市天坊信息技术有限公司
     	</div>
     </body>
+    <script type="text/javascript">
+   		$(function(){
+	      // debugger;
+	      $(".nav").find("a").removeClass("cur");
+	      $(".nav").find("a:eq(2)").addClass("cur");
+	    })
+    </script>   
 </html>

@@ -13,12 +13,14 @@
     </div>
     <h1 class="con-tt"><span class="title">${(supplier.supplierName)!}</span></h1>
     <div class="con-bd">
-    <#if proLicenses??>
+    <#if (proLicenses??) && (proLicenses?size>0)>
         <#list proLicenses as proLicense>
 	        <#if proLicense_index == 0>
 	     		 <img class="con-img" src="${(proLicense.licPic)!}" alt="" />
 	     	 </#if>
     	</#list>
+    <#else>
+   	 	<img class="con-img" src="/static/img/default.png" alt="" />
      </#if>
       <ul>
         <li><label>单位名称:</label><span>${(supplier.supplierName)!}</span></li>

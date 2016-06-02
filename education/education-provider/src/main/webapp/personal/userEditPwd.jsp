@@ -4,6 +4,12 @@
 .panel-body {
 	font-size: 18px !important;
 }
+.table th, .table td {
+    border-top: none!important;
+}
+.panel-body.panel-body-noheader.panel-body-noborder.layout-body {
+	padding:20px!important;
+}
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -71,3 +77,10 @@
 		</c:if>
 	</div>
 </div>
+<script type="text/javascript">
+$(function(){
+	$("td,th").css("vertical-align","middle");
+	$('td input').css("margin-top","8px");
+	$('table tr:first:child td').css("border-top","none");
+});
+</script>

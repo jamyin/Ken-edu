@@ -28,7 +28,7 @@
         <div class="breadcrumb">
             <span>当前位置:</span>
             <span> &gt; </span>
-            <a href="#">通知发布</a>
+            <a href="#">发布通知</a>
         </div>
         <div class="main_wrap">
 
@@ -58,7 +58,6 @@
                     </ul>
                     <div class="tab_content">
                         <form id="submitForm" method="post">
-                        	<input type="hidden" name="content" id="content" value=""/>
                         	<input type="hidden" name="type" id="type" value="0"/>
                         	<!-- <input type="hidden" name="lianxiIds" id="lianxiIds" value=""/> -->
                             <section class="line">
@@ -101,7 +100,9 @@
                                                 </ul>
                                             </div>
                                         </section>
-
+										<div class="subbt">
+                                            <a href="#">确定</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -129,7 +130,9 @@
         <script>
             $(function(){
             	//var um = UM.getEditor('editor');          	
-            	
+            	// debugger;
+		      $(".nav").find("a").removeClass("cur");
+		      $(".nav").find("a:eq(6)").addClass("cur");
             	loadClickFunction();
 
             	$("#searchName").on('click',function(){
@@ -157,8 +160,8 @@
             	
             	$("#savebutton").on('click',function(){
             		var ajaxParams = $("#submitForm").serialize();
-    				var content = um.getContent();
-    				$("#content").val(content);
+    				//var content = um.getContent();
+    				//$("#content").val(content);
     				
     				$.ajax({
     					url : "/motive/save.htm",
@@ -181,6 +184,10 @@
                     $(".background").show();
                 });
 
+                $(".subbt").click(function(){
+                    $(".background").hide();
+                });
+                
                 $(".background .close").click(function(){
                     $(".background").hide();
                 });

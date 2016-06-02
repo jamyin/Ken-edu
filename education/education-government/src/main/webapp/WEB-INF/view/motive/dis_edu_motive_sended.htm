@@ -35,7 +35,7 @@
         <div class="breadcrumb">
             <span>当前位置:</span>
             <span> &gt; </span>
-            <a href="#">已读通知</a>
+            <a href="#">已发通知</a>
         </div>
         <div class="main_wrap">
 
@@ -84,7 +84,11 @@
 	                                    			<#assign receiveName = receiveName + data.receiveName+"、">
 	                                    		</#list>
 	                                    		<#if receiveName ??>
-	                                    			${receiveName?substring(0,15)}...
+	                                    			<#if receiveName?length gt 15>
+	                                    				<a title="${(receiveName)!}">${receiveName?substring(0,15)}...</a>
+	                                    			<#else>
+	                                    				${(receiveName)!}
+	                                    			</#if>
 	                                    		</#if>
 	                                    	</#if>
 	                                    </td>
