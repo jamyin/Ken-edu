@@ -5,7 +5,7 @@ import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.ssic.education.app.dto.EduAppUserDto;
+import com.ssic.education.app.dto.AppEduUserDto;
 import com.ssic.education.app.dto.EduUsersInfoDto;
 import com.ssic.education.app.mapper.AppUsersMapper;
 import com.ssic.education.handle.mapper.EduUsersMapper;
@@ -21,8 +21,8 @@ public class AppEduUsersDao {
 	@Getter
 	private EduUsersMapper usersMapper;
 
-	public EduAppUserDto appLogin(EduUsersInfoDto userDto) {
-		EduAppUserDto appUser = appUsersMapper.selectLoginInfo(userDto);
+	public AppEduUserDto appLogin(EduUsersInfoDto userDto) {
+		AppEduUserDto appUser = appUsersMapper.selectLoginInfo(userDto);
 		return appUser;
 	}
 }

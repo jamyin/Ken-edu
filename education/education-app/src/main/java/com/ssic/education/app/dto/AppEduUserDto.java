@@ -20,7 +20,7 @@ import lombok.Data;
  */
 @Data
 @RedisKeyPrefix(prefixValue = "Edu:User:{token}")
-public class EduAppUserDto implements Serializable {
+public class AppEduUserDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String id;
 	private String sourceId;

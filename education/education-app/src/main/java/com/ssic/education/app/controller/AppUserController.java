@@ -2,13 +2,15 @@ package com.ssic.education.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ssic.education.app.dto.EduAppUserDto;
+import com.ssic.education.app.dto.AppEduUserDto;
 import com.ssic.education.app.dto.EduUsersInfoDto;
+import com.ssic.education.app.dto.AppProUserDto;
 import com.ssic.education.app.service.IAppUsersService;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.Response;
@@ -29,7 +31,9 @@ public class AppUserController extends BaseController {
 	@Autowired
 	private IAppUsersService appUserService;
 	@Autowired
-	private WdRedisDao<EduAppUserDto> redisdao;
+	private WdRedisDao<AppEduUserDto> eduRedisdao;
+	@Autowired
+	private WdRedisDao<AppProUserDto> proRedisdao;
 
 	/**
 	 * 教委APP用户登录接口
@@ -39,16 +43,16 @@ public class AppUserController extends BaseController {
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
-	public Response<EduAppUserDto> login(@RequestParam(required = true) String account, @RequestParam(required = true) String password) {
+	public Response<AppEduUserDto> login(@RequestParam(required = true) String account, @RequestParam(required = true) String password) {
 		EduUsersInfoDto user = new EduUsersInfoDto();
-		Response<EduAppUserDto> result = new Response<EduAppUserDto>();
+		Response<AppEduUserDto> result = new Response<AppEduUserDto>();
 		user.setUserAccount(account);
 		user.setPassword(password);
-		EduAppUserDto userdto = appUserService.appLogin(user);
+		AppEduUserDto userdto = appUserService.appLogin(user);
 		result.setData(userdto);
 		if (userdto != null) {
-			redisdao.set(userdto, 60);
-			EduAppUserDto g = redisdao.get(userdto.getToken(), EduAppUserDto.class);
+			eduRedisdao.set(userdto, 5040);
+			AppEduUserDto g = eduRedisdao.get(userdto.getToken(), AppEduUserDto.class);
 			System.out.println(g.getName() + g.getToken());
 			result.setStatus(DataStatus.HTTP_SUCCESS);
 			result.setMessage("登录成功！");
@@ -91,10 +95,13 @@ public class AppUserController extends BaseController {
 	 * 教委APP用户注销接口
 	 * @return
 	 */
-	@RequestMapping(value = "/eduLogout", method = RequestMethod.GET)
+	@RequestMapping(value = "/eduLogout/{token}", method = RequestMethod.GET)
 	@ResponseBody
-	public Response<String> eduLogout() {
-		return null;
+	public void eduLogout(@PathVariable("token") String token) {
+		AppEduUserDto eduAppUser = eduRedisdao.get(token, AppEduUserDto.class);
+		if (eduAppUser != null) {
+			eduRedisdao.delete(eduAppUser, AppEduUserDto.class);
+		}
 	}
 
 	/**
@@ -105,7 +112,7 @@ public class AppUserController extends BaseController {
 	 */
 	@RequestMapping(value = "/proLogin", method = RequestMethod.POST)
 	@ResponseBody
-	public Response<EduAppUserDto> proLogin(@RequestParam(required = true) String account, @RequestParam(required = true) String password) {
+	public Response<AppEduUserDto> proLogin(@RequestParam(required = true) String account, @RequestParam(required = true) String password) {
 		return null;
 	}
 
@@ -126,9 +133,12 @@ public class AppUserController extends BaseController {
 	 * 团餐公司APP注销接口
 	 * @return
 	 */
-	@RequestMapping(value = "/proLogout", method = RequestMethod.GET)
+	@RequestMapping(value = "/proLogout/{token}", method = RequestMethod.GET)
 	@ResponseBody
-	public Response<String> proLogout() {
-		return null;
+	public void proLogout(@PathVariable("token") String token) {
+		AppProUserDto proAppUser = proRedisdao.get(token, AppProUserDto.class);
+		if (proAppUser != null) {
+			proRedisdao.delete(proAppUser, AppProUserDto.class);
+		}
 	}
 }
