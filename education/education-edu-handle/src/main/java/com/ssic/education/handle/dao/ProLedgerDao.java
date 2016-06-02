@@ -272,4 +272,8 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 		return mapper.updateByPrimaryKeySelective(pl);
 	}
 
+	public int upSaveLedger(List<LedgerDto> ledgers) {
+		return 0;
+	}
+
 }

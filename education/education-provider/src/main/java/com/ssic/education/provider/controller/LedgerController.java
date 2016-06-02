@@ -343,17 +343,27 @@ public class LedgerController {
 		}
 		List<LedgerDto> list = ledgerService.findLedgerByMasterId(
 				user.getSourceId(), ledgers.get(0).getMasterId());
+		//标识
+		int n = 0;
+		String str = "";
+		String ui="";
+		String di="";
 		for (LedgerDto ledger : ledgers) {
 			if (ledger.getMark() != 1) {
+				str+=n+",";
 				continue;
 			}
 			int i=0;
 			for (LedgerDto ledgerDto : list) {
-				if(ledgerDto.getId()!=ledger.getId()){
+				if(!ledgerDto.getId().equals(ledger.getId())){
 					i+=1;
+				}else{
+					di+=i+",";
+					ui+=n+",";
 				}
 				if(i==list.size()){
-					ledgerService.upDeleteLedger(ledger.getId());
+					
+					ledgerService.upSaveLedger(ledgers);
 				}
 			}
 			// 采购品
@@ -411,8 +421,33 @@ public class LedgerController {
 			ledger.setCreateTime(null);
 			ledger.setLastUpdateTime(ledger.getCreateTime());
 			ledger.setStat(1);
+			n+=1;
 		}
-		ledgerService.updataLedger(ledgers);
+		if (str != "") {
+			for (String b : str.split(",")) {
+				LedgerDto remove = ledgers.remove(Integer.parseInt(b));
+			}
+		}
+		if(di!=""){
+			List<LedgerDto> ls=new ArrayList();
+			int x=0;
+			for (String c : di.split(",")) {
+				list.remove(Integer.parseInt(c)-x);
+				x++;
+			}
+			int y=0;
+			for (String c : ui.split(",")) {
+				LedgerDto remove = ledgers.remove(Integer.parseInt(c)-y);
+				ls.add(remove);
+				y++;
+			}
+			ledgerService.updataLedger(ls);
+			for (LedgerDto ledgerDto : list) {
+				ledgerService.upDeleteLedger(ledgerDto.getId());
+			}
+		}else{
+			ledgerService.updataLedger(ledgers);
+		}
 		j = new Json();
 		j.setMsg("修改供应商成功");
 		j.setSuccess(true);
