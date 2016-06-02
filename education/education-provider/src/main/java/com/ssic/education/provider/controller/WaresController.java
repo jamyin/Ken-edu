@@ -256,7 +256,7 @@ public class WaresController extends BaseController {
 		Json j = new Json();
 		DataSourceHolderUtil.setToMaster();
 		waresService.deleteWares(waresDto);
-		j.setMsg("删除用户成功");
+		j.setMsg("删除采购品成功");
 		j.setSuccess(true);
 		return j;
 	}

@@ -6,6 +6,8 @@
 	font-size: 18px !important;
 }
 </style>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,7 +76,7 @@ else
 				
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font  style="font-style: normal;font-size:16px;">'
+					return '<font  style="font-style: normal;font-size:15px;">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -86,7 +88,7 @@ else
 				width : 50,
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font style="font-style: normal;  font-size:16px;">'
+					return '<font style="font-style: normal;  font-size:15px;">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -98,7 +100,7 @@ else
 				width : 150,
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font style="font-style: normal; font-size:16px;">'
+					return '<font style="font-style: normal; font-size:15px;">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -110,7 +112,7 @@ else
 				width : 50,
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font style="font-style: normal; word-wrap:break-word;white-space:normal;font-size:16px;">'
+					return '<font style="font-style: normal; word-wrap:break-word;white-space:normal;font-size:15px;">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -122,7 +124,7 @@ else
 				width : 50,
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font style="font-style: normal; word-wrap:break-word;white-space:normal;font-size:16px;">'
+					return '<font style="font-style: normal; word-wrap:break-word;white-space:normal;font-size:15px;">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -133,7 +135,7 @@ else
 				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">商品分类</font>',
 				width : 120,
 				formatter : function(value, row, index) {
-					return	'<font style="font-style: normal; word-wrap:break-word;white-space:normal;font-size:16px;">'
+					return	'<font style="font-style: normal; word-wrap:break-word;white-space:normal;font-size:15px;">'
 					+ value + '</font>'
 				}
 			},{
@@ -142,7 +144,7 @@ else
 				width : 150,
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return'<font style="font-style: normal;font-size:16px; ">'
+					return'<font style="font-style: normal;font-size:15px; ">'
 					+ value + '</font>';
 					}else{
 					return "";
@@ -154,7 +156,7 @@ else
 				width : 150,
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font style="font-style: normal;font-size:16px; ">'
+					return '<font style="font-style: normal;font-size:15px; ">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -166,7 +168,7 @@ else
 				width : 110,
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return'<font style="font-size:16px; ">'
+					return'<font style="font-size:15px; ">'
 					+ value + '</font>';
 					}else{
 					return "";
@@ -178,7 +180,7 @@ else
 				width : 50,
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font style="font-style: normal; font-size:16px;">'
+					return '<font style="font-style: normal; font-size:15px;">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -253,7 +255,7 @@ else
 		} else {//点击操作里面的删除图标会触发这个
 			dataGrid.datagrid('unselectAll').datagrid('uncheckAll');
 		}
-		parent.$.messager.confirm('询问', '您是否要删除该原料？', function(b) {
+		parent.$.messager.confirm('询问', '您是否要删除该采购品？', function(b) {
 			if (b) {
 				var currentUserId = '${sessionInfo.id}';/*当前登录用户的ID*/
 				if (currentUserId != id) {
@@ -509,12 +511,16 @@ else
 			</form>
 				
 		</div>
-		<div id="toolbar" style="display: none;">
-				<a class="btn btn-mini btn-light" onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'" iconCls="icon-search" ><font  style='font-style: normal;font-weight: bolder;font-size:16px;'>添加</font> </a>
+		<div id="toolbar" style="display: none;" class="div-height" >
 		
+				<a class="btn btn-mini btn-light" onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'" iconCls="icon-search" ><font  style='font-style: normal;font-weight: bolder;font-size:16px;'>添加</font> </a>
+				&nbsp;
 			<a  class="btn btn-mini btn-light" onclick="importSupplier();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'"><font  style='font-style: normal;font-weight: bolder;font-size:18px;'>导入</font></a>
+			&nbsp;
 			<a class="btn btn-mini btn-light" onclick="toExcel();" title="导出到EXCEL"><font  style='font-style: normal;font-weight: bolder;font-size:16px;'>导出</font></a>
+			&nbsp;
 			<a class="btn btn-mini btn-light"  href="${pageContext.request.contextPath}/templates/采购品.xlsx" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'"><font  style='font-style: normal;font-weight: bolder;font-size:16px;'>下载模板</font></a>
+
 		</div>		
 		<div data-options="region:'center',border:false" id="g">
 							<table id="dataGrid" title="<font  style='font-style: normal;font-weight: bolder;font-size:16px;'>采购品表单</font>" data-options="collapsible:true" >
