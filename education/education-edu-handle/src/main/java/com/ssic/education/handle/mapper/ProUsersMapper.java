@@ -1,7 +1,7 @@
-package com.ssic.education.provider.mapper;
+package com.ssic.education.handle.mapper;
 
-import com.ssic.education.provider.pojo.ProUsers;
-import com.ssic.education.provider.pojo.ProUsersExample;
+import com.ssic.education.handle.pojo.ProUsers;
+import com.ssic.education.handle.pojo.ProUsersExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

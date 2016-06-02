@@ -1,4 +1,4 @@
-package com.ssic.education.provider.pojo;
+package com.ssic.education.handle.pojo;
 
 import java.util.ArrayList;
 import java.util.Date;
