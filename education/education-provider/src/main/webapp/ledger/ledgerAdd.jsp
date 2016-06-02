@@ -8,6 +8,9 @@
 .table th, .table td {
     border-top: none!important;
 }
+.panel-body.panel-body-noheader.panel-body-noborder.layout-body {
+	padding:20px!important;
+}
 </style>
 <script type="text/javascript">
 	$(function() {
