@@ -93,4 +93,13 @@ public class ProWaresDao extends MyBatisBaseDao<ProWares>{
 		// TODO Auto-generated method stub
 		return mapperEx.searchProWares(schoolId,waresName);
 	}
+
+	public List<ProWares> searchWarseList(List<String> wareIds) {
+		ProWaresExample example = new ProWaresExample();
+		ProWaresExample.Criteria criteria = example.createCriteria();
+		
+		criteria.andIdIn(wareIds);
+		
+		return mapper.selectByExample(example);
+	}
 }

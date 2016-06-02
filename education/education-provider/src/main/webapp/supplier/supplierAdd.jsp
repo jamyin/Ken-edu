@@ -4,6 +4,9 @@
 .panel-body {
 	font-size: 18px !important;
 }
+.table th, .table td {
+    border-top: none!important;
+}
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -45,58 +48,53 @@
 	<div data-options="region:'center',border:false" title="" style="overflow: hidden;">
 		<form id="form" method="post">
 <table class="table table-hover table-condensed" border="0" >
-					<tr>
+					<tr>					
 					<th>*供应商名称</th>
-						<td><input name="supplierName" type="text" placeholder="请输入供应商名称" class="easyui-validatebox span2" data-options="required:true" ></td>
-											
-					</tr>
-					<tr>
-					
+					<td><input name="supplierName" type="text"  class="easyui-validatebox span2" data-options="required:true" ></td>
+				
+						<th>供应商编码</th>
+						<td><input name="supplierCode" type="text" class="easyui-validatebox span2"  ></td>
+			
+				<tr>
 					<th>*供应商地址</th>
-						<td><input name="address" type="text" placeholder="请输入供应商地址" class="easyui-validatebox span2" data-options="required:true" ></td>			
-					
-					</tr>
-					
-					<tr>
+					<td><input name="address" type="text" class="easyui-validatebox span2" data-options="required:true"   ></td>
 					<th>联系人</th>
-						<td><input name="corporation" type="text" placeholder="请输入联系人" class="easyui-validatebox span2" ></td>
-						
-				
-						</tr>	
-						<tr>
-						
-				<th>电话</th>
-						<td><input name="contactWay" type="text" placeholder="请输入联系方式" class="easyui-validatebox span2" ></td>			
-							
-						</tr>	
-			<tr>
-				<th>供应商编码</th>
-						<td><input name="SupplierCode" type="text" class="easyui-validatebox span2"  ></td>
+						<td><input name="corporation" type="text"  class="easyui-validatebox span2"  ></td>		
 				</tr>
-							<tr>
-				
+				<tr>
+					<th>联系方式</th>
+						<td><input name="contactWay" type="text"  class="easyui-validatebox span2"  ></td>
 				<th>工商执照号</th>
-						<td><input name="businessLicense" type="text"  ></td>
-						</tr>
+					<td><input name="businessLicense" type="text"  class="easyui-validatebox span2"  ></td>
+						
+				</tr>
+			
+				
+		
 				<tr>
 				<th>餐饮服务证号</th>
-					<td><input name="foodServiceCode" type="text"  ></td>
-					</tr>
-					<tr>
-				<th>食品经营许可证号</th>
-						<td><input name="foodBusinessCode" type="text"  ></td>
+						<td><input name="foodServiceCode" type="text" class="easyui-validatebox span2"  ></td>
+				
+					<th>食品经营许可证号</th>
+						<td><input name="foodBusinessCode" type="text" class="easyui-validatebox span2"  ></td>
 					</tr>
 				<tr>
 					<th>食品流通证号</th>
-						<td><input name="foodCirculationCode" type="text"   ></td>
+						<td><input name="foodCirculationCode" type="text" class="easyui-validatebox span2"   ></td>
+					<th>食品生产证号</th>
+						<td><input name="foodProduceCode" type="text" class="easyui-validatebox span2" ></td>
 						
-					</tr>
-					<tr>
-						<th>食品生产证号</th>
-						<td><input name="foodProduceCode" type="text" ></td>				
-					</tr>
+						</tr>
 			</table>
 	
 		</form>
 	</div>
 </div>
+
+<script type="text/javascript">
+$(function(){
+	$("td,th").css("vertical-align","middle");
+	$('td input').css("margin-top","8px");
+	$('table tr:first:child td').css("border-top","none");
+});
+</script>

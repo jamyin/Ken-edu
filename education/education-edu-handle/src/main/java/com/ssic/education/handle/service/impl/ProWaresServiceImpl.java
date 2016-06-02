@@ -67,4 +67,11 @@ public class ProWaresServiceImpl implements ProWaresService {
 		return proWaresDao.searchProWares(schoolId,waresName);
 	}
 
+
+	@Override
+	public List<ProWaresDto> searchWarseList(List<String> wareIds) {
+		List<ProWares> dataList = proWaresDao.searchWarseList(wareIds);;
+		return BeanUtils.createBeanListByTarget(dataList, ProWaresDto.class);
+	}
+
 }
