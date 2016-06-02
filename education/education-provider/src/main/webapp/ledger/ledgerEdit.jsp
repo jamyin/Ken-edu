@@ -7,6 +7,12 @@
 .panel-body {
 	font-size: 13px !important;
 }
+.table th, .table td {
+    border-top: none!important;
+}
+.panel-body.panel-body-noheader.panel-body-noborder.layout-body {
+	padding:20px!important;
+}
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -49,7 +55,7 @@
 							var lastTr = $("tr:last");
 							var lastId = $(lastTr).attr("id");
 							var nextId=parseInt(lastId.substring(6))+1;
-							var a=$(lastTr).html().replace(/ledger\[[0-9]+]/g,"ledger["+nextId+"]");
+							var a=ledgerTr().replace(/ledger\[[0-9]+]/g,"ledger["+nextId+"]");
 							var b="<tr id='ledger"+nextId+"'>"+a.replace('<td><a id="addLedger" ><font size="8" >+</font></a></td>',"")+"</tr>";
 							var c=b.replace(/title=""/g,"");
 							$(c).insertAfter($(lastTr));
@@ -58,10 +64,15 @@
 									$(this).removeAttr("value");
 								}
 							});
-							$("<a id='subtract' onclick='subtractLedger(this);' data-id='ledger"+nextId+"' style='text-decoration:none;' ><font size='8' >-</font></a>").replaceAll("#ledger"+nextId+" a");
+							$("<a onclick='subtractLedger(this);' data-id='ledger"+nextId+"' style='text-decoration:none;' ><font size='8' >-</font></a>").replaceAll("#ledger"+nextId+" a");
 							$.parser.parse();
 						});
 	});
+	
+	function ledgerTr(){
+		var ltr='<tr id="ledger0"><th style="width:70px;">采购品：</th><td style="width:95px;"><input name="ledger[0].name" style="width:95px;" type="text" placeholder="请输入采购品" class="easyui-validatebox span2" data-options="required:true"></td><th style="width:70px;">数量：</th><td style="width:95px;"><input name="ledger[0].quantity" style="width:95px;" type="text" placeholder="请输入数量" class="easyui-validatebox span2" data-options="required:true"></td><th style="width:70px;">规格：</th><td style="width:95px;"><input name="ledger[0].spce" style="width:95px;" type="text" placeholder="请输入规格" class="easyui-validatebox span2" data-options="required:true"></td><th style="width:70px;">采购品供应商：</th><td style="width:95px;"><input name="ledger[0].supplierName" style="width:95px;" type="text" placeholder="请输入供应商" class="easyui-validatebox span2"></td><th style="width:70px;">生产企业：</th><td style="width:95px;"><input name="ledger[0].productionName" style="width:95px;" type="text" placeholder="请输入生产单位" class="easyui-validatebox span2"></td><th style="width:70px;">生产日期：</th><td style="width:95px;"><input name="ledger[0].productionDate" style="width:95px;" type="text" placeholder="点击选择日期" class="easyui-validatebox span2" onclick="WdatePicker({readOnly:true,dateFmt:"yyyy-MM-dd"})" readonly="readonly"></td><td><a id="addLedger" style="text-decoration:none;" ><font size="8" >+</font></a></td><td><input type="hidden" name="ledger[0].mark" value="1" ></td></tr>';
+		return ltr;
+	}
 	
 	function subtractLedger(_this){
 		var id=$(_this).attr("data-id");
