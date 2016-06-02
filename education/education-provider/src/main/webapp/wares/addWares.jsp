@@ -5,6 +5,9 @@
 .panel-body {
 	font-size: 18px !important;
 }
+.table th, .table td {
+    border-top: none!important;
+}
 </style>
 
 <script type="text/javascript">
@@ -55,7 +58,7 @@
 </script>
 		<div class="easyui-layout" data-options="fit:true,border:false"  >
 			<div data-options="region:'center',border:false" title=""
-				style="border-color:red;">
+				style="padding:20px;">
 				<form id="form" method="post"  >
 				   <input id="id" name="id" type="hidden" value="${id}" />
 					<table class="table table-hover table-condensed"  >
@@ -85,7 +88,7 @@
 						</tr>
 						
 						<tr>
-							<th>企业自定义代码</th>
+							<th>产品编码</th>
 						    <td><input name="customCode" type="text" placeholder="请输入自定义代码" id="customCode"
 								class="easyui-validatebox span2" ></td>
 							<th>产地</th>
@@ -129,7 +132,7 @@
 							<td>	<input name="enName" type="text" id="enName"
 								placeholder="请输入英文名" class="easyui-validatebox span2"
 								></td>
-							<th>条形码</th>
+							<th>产品包装条形码</th>
 							<td><input name="barCode" type="text" id="barCode"
 								placeholder="请输入条形码" class="easyui-validatebox span2"
 								></td>
@@ -141,4 +144,10 @@
 			</div>
 
 		</div>
-
+<script type="text/javascript">
+$(function(){
+	$("td,th").css("vertical-align","middle");
+	$('td input').css("margin-top","8px");
+	$('table tr:first:child td').css("border-top","none");
+});
+</script>
