@@ -76,28 +76,28 @@ text-align: right;
 					<th>食品经营许可证:</th>
 					<td><input name="foodBusinessCode" type="text"
 						placeholder="请输入采购品" class="easyui-validatebox span2"
-						data-options="required:true" value="${Corporate.foodBusinessCode }"></td>
+						value="${Corporate.foodBusinessCode }"></td>
 				</tr>
 				<tr>
 					<th></th>
 					<th>食品流通证号:</th>
 					<td><input name="foodCirculationCode"
 						type="text" placeholder="请输入数量" class="easyui-validatebox span2"
-						data-options="required:true" value="${Corporate.foodCirculationCode }"></td>
+						value="${Corporate.foodCirculationCode }"></td>
 				</tr>
 				<tr>
 					<th></th>
 					<th>食品生产证号:</th>
 					<td><input name="foodProduceCode" type="text"
 						placeholder="请输入规格" class="easyui-validatebox span2"
-						data-options="required:true" value="${Corporate.foodProduceCode }"></td>
+						value="${Corporate.foodProduceCode }"></td>
 				</tr>
 				<tr>	
 					<th></th>
 					<th>工商执照号:</th>
 					<td><input name="businessLicense"
 						type="text" placeholder="请输入供应商" class="easyui-validatebox span2"
-						data-options="required:true" value="${Corporate.businessLicense }"></td>
+						value="${Corporate.businessLicense }"></td>
 				</tr>
 			</table>
 		</form>

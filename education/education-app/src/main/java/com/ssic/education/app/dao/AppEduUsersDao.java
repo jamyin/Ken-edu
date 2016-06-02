@@ -11,7 +11,7 @@ import com.ssic.education.app.mapper.AppUsersMapper;
 import com.ssic.education.handle.mapper.EduUsersMapper;
 
 @Repository
-public class EduAppUsersDao {
+public class AppEduUsersDao {
 
 	@Autowired
 	@Getter

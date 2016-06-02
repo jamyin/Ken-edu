@@ -1,5 +1,8 @@
 package com.ssic.education.government.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -7,11 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.common.base.Objects;
+import com.ssic.educateion.common.dto.EduCommitteeDto;
 import com.ssic.educateion.common.dto.EduInformationDto;
+import com.ssic.educateion.common.dto.EduSchoolDto;
 import com.ssic.education.handle.service.EduSchoolService;
 import com.ssic.education.handle.service.IEduCommitteeService;
-import com.ssic.education.handle.service.ITaskReceiveService;
 import com.ssic.education.handle.service.IEduInformationService;
+import com.ssic.education.handle.service.ITaskReceiveService;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
@@ -46,7 +52,11 @@ public class InfomationController extends BaseController {
 		ModelAndView mv = getModelAndView();
 		EduInformationDto eduInformationDto = new EduInformationDto();
 		eduInformationDto.setType(Integer.valueOf(type));
+		
+		List<String> sourceIds = packageSourceId();
+		eduInformationDto.setSourceIds(sourceIds);
 		PageResult<EduInformationDto> pageList =  iEduInformationService.searchInfomation(eduInformationDto,pageQuery);
+		
 		mv.addObject("type",type);
 		mv.addObject("pageList", pageList);
 		mv.setViewName("info/dis_edu_motive_index");
@@ -54,6 +64,24 @@ public class InfomationController extends BaseController {
 	}
 	
 	
+	private List<String> packageSourceId() {
+		List<String> sIds = new ArrayList<String>();
+		EduCommitteeDto eduCommitteeDto = new EduCommitteeDto();
+		eduCommitteeDto.setType(Short.valueOf("1"));
+		List<EduCommitteeDto> committeeList = iEduCommitteeService.queryCommittee(eduCommitteeDto);
+		if (Objects.equal(getEduUsersDto().getSourceType(), Byte.valueOf("0"))) {// 市教委登录的账号能看全部的信息
+		} else if (Objects.equal(getEduUsersDto().getSourceType(),Byte.valueOf("1"))) {//学校登录的能看到市教委 和 该区教委的发不的
+			EduSchoolDto eduSchoolDto = eduSchoolService.findById(getEduUsersDto().getSourceId());
+			sIds.add(committeeList.get(0).getId());
+			sIds.add(eduSchoolDto.getCommitteeId());
+		} else if (Objects.equal(getEduUsersDto().getSourceType(),Byte.valueOf("2"))) {// 区教委登录的能看市教委 和 自己发布的
+			sIds.add(committeeList.get(0).getId());
+			sIds.add(getEduUsersDto().getSourceId());		
+		}
+		return sIds;
+	}
+
+
 	/**
 	 * 
 	 * 此方法描述的是：发布
@@ -84,6 +112,7 @@ public class InfomationController extends BaseController {
 		String infoId = UUIDGenerator.getUUID32Bit();
 		eduInformationDto.setId(infoId);
 		
+		eduInformationDto.setCreateSourceId(getEduUsersDto().getSourceId());
 		eduInformationDto.setCreateAdminId(getSessionUserId());
 		eduInformationDto.setCreateAdminName(getEduUsersDto().getName());		
 		

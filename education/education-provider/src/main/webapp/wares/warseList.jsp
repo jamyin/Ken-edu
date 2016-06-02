@@ -470,14 +470,14 @@ else
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">
 					<tr>
-						<th>商品名称</th>
-						<td><input id="waresName" name="waresName" placeholder="查询商品名称" class="easyui-validatebox"  style="width: 215px;"/></td>
-						 <th>企业编码</th>
-					     <td><input id="customCode" name="customCode" placeholder="查询企业编码" class="easyui-validatebox"  style="width: 215px;"/></td>
+						<th>商品名称:
+						<input id="waresName" name="waresName" placeholder="查询商品名称" class="easyui-validatebox"  style="width: 215px;"/></th>
+						 <th>企业编码:
+					     <input id="customCode" name="customCode" placeholder="查询企业编码" class="easyui-validatebox"  style="width: 215px;"/></th>
 						 
 						 
-						  <th>商品类别</th>
-					    <td>
+						  <th>商品类别:
+					    
 					       <select id="waresType" class="easyui-combobox"  name="waresType"  data-options="width:210,height:24,editable:false,panelHeight:'auto'"
 								data-options="required:true"  >	
 								<option value="">请选择商品类别</option>							
@@ -502,10 +502,10 @@ else
 							    <option value="19">添加剂类</option>   
 							    <option value="20">其他类</option>   
 							</select>
-					    </td>
-					    <td>
-					    	<a href="javascript:void(0);"  onclick="searchFun();" class="easyui-linkbutton" iconCls="icon-search" ><font  style='font-style: normal;font-weight: bolder;font-size:18px;'>查询</font></a>
-					</td></tr>
+							&nbsp;&nbsp;&nbsp;
+							<a href="javascript:void(0);"  onclick="searchFun();" class="easyui-linkbutton" iconCls="icon-search" ><font  style='font-style: normal;font-weight: bolder;font-size:18px;'>查询</font></a>
+					    </th>
+					 </tr>
 				
 				</table>
 			</form>

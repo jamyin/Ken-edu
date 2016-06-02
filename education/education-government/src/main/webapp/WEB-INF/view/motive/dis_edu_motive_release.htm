@@ -58,7 +58,6 @@
                     </ul>
                     <div class="tab_content">
                         <form id="submitForm" method="post">
-                        	<input type="hidden" name="content" id="content" value=""/>
                         	<input type="hidden" name="type" id="type" value="0"/>
                         	<!-- <input type="hidden" name="lianxiIds" id="lianxiIds" value=""/> -->
                             <section class="line">
@@ -157,8 +156,8 @@
             	
             	$("#savebutton").on('click',function(){
             		var ajaxParams = $("#submitForm").serialize();
-    				var content = um.getContent();
-    				$("#content").val(content);
+    				//var content = um.getContent();
+    				//$("#content").val(content);
     				
     				$.ajax({
     					url : "/motive/save.htm",

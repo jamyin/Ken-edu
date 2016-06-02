@@ -30,7 +30,7 @@
                         	<input type="hidden" name="pic" id="pic" value=""/>
                             <section class="line">
                                 <label for="to">标题:</label>
-                                <input type="text" name="title">
+                                <input id="title" type="text" name="title">
                             </section>
                              <br>
                             <section class="line">
@@ -43,7 +43,7 @@
                                 <img id="pic_show" alt="" src="" style="width:100px;height:100px;"/>
                             </section>                            
                             <br>
-                            <section class="line">
+                            <section class="line" style="margin-top:60px;">
                                 <label>类别:    </label>
                                 <label class="radio_select" for="healthgive">健康宣教</label>
                                 <input id="healthgive" type="radio" name="type" value="3">
@@ -54,7 +54,7 @@
                             <section class="text">
                                 <label for="text">内容:    </label>
                                 <div class="text_wrap">
-                                    <script id="editor" type="text/plain" style="width:800px;height:300px;"></script>
+                                    <script id="editor" type="text/plain" style="width:700px;height:300px;"></script>
                                 </div>
                             </section>
                             <div class="subbt">
@@ -92,6 +92,20 @@
             	$("#savebutton").on('click',function(){
             		var ajaxParams = $("#submitForm").serialize();
     				var content = um.getContent();
+    				
+    				var title = $("#title").val();
+    				if(title=="" || title ==null){
+    					alert("标题不能为空");
+    					return false;
+    				}
+    				
+    				var heath = document.getElementById("healthgive").checked;
+    				var notice = document.getElementById("notice").checked;
+    				if(!(heath || notice)){
+    					alert("类别不能为空");
+    					return false;
+    				}
+    				
     				$.ajax({
     					url : "/info/save.htm",
     					type:"POST",

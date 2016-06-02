@@ -68,6 +68,7 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 			ProLedgerExample example = new ProLedgerExample();
 			ProLedgerExample.Criteria criteria = example.createCriteria();
 			criteria.andMasterIdEqualTo(ledgerDto.getMasterId());
+			criteria.andStatEqualTo(1);
 			List<ProLedger> leadgers = mapper.selectByExample(example);
 			String name = "";
 			for (ProLedger proLedger : leadgers) {
@@ -262,6 +263,13 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 
 		return mapper.selectByExample(example);
+	}
+
+	public int upDeleteLedger(String id) {
+		ProLedger pl = new ProLedger();
+		pl.setId(id);
+		pl.setStat(0);
+		return mapper.updateByPrimaryKeySelective(pl);
 	}
 
 }

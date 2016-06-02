@@ -192,6 +192,7 @@ public class MotiveController extends BaseController {
 		for (String lxId : lianxiId) {
 			String[] idName = lxId.split("#");
 			EduTaskReceiveDto dto = new EduTaskReceiveDto();
+			dto.setCreateId(eduTaskDto.getCreateId());
 			dto.setTaskId(eduTaskDto.getId());
 			dto.setTaskTitle(eduTaskDto.getTitle());
 			dto.setReceiveId(idName[0]);

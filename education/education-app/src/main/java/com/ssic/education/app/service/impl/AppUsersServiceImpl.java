@@ -6,14 +6,14 @@ import org.springframework.stereotype.Service;
 import com.ssic.education.app.dao.AppUsersDao;
 import com.ssic.education.app.dto.EduAppUserDto;
 import com.ssic.education.app.dto.EduUsersInfoDto;
-import com.ssic.education.app.service.IEduAppUsersService;
+import com.ssic.education.app.service.IAppUsersService;
 import com.ssic.education.app.token.TokenUtil;
 import com.ssic.education.handle.dao.CommitteeDao;
 import com.ssic.education.handle.pojo.EduCommittee;
 import com.ssic.education.utils.util.StringUtils;
 
 @Service
-public class EduAppUsersServiceImpl implements IEduAppUsersService {
+public class AppUsersServiceImpl implements IAppUsersService {
 
 	@Autowired
 	private AppUsersDao eduUsersDao;
@@ -39,7 +39,7 @@ public class EduAppUsersServiceImpl implements IEduAppUsersService {
 	}
 
 	@Override
-	public int updatePwd(String oldPwd, String account, String newPwd) {
+	public int eduUpdatePwd(String account, String oldPwd, String newPwd) {
 		EduUsersInfoDto user = new EduUsersInfoDto();
 		user.setPassword(oldPwd);
 		user.setUserAccount(account);

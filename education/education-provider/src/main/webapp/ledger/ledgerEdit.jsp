@@ -5,7 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style>
 .panel-body {
-	font-size: 15px !important;
+	font-size: 13px !important;
 }
 </style>
 <script type="text/javascript">
@@ -41,6 +41,34 @@
 							}
 						});
 	});
+	
+	$(function() {
+		$("#addLedger")
+				.click(
+						function() {
+							var lastTr = $("tr:last");
+							var lastId = $(lastTr).attr("id");
+							var nextId=parseInt(lastId.substring(6))+1;
+							var a=$(lastTr).html().replace(/ledger\[[0-9]+]/g,"ledger["+nextId+"]");
+							var b="<tr id='ledger"+nextId+"'>"+a.replace('<td><a id="addLedger" ><font size="8" >+</font></a></td>',"")+"</tr>";
+							var c=b.replace(/title=""/g,"");
+							$(c).insertAfter($(lastTr));
+							$("tr:last").find("input").each(function(){
+								if($(this).attr("name")!="ledger["+nextId+"].mark"){
+									$(this).removeAttr("value");
+								}
+							});
+							$("<a id='subtract' onclick='subtractLedger(this);' data-id='ledger"+nextId+"' style='text-decoration:none;' ><font size='8' >-</font></a>").replaceAll("#ledger"+nextId+" a");
+							$.parser.parse();
+						});
+	});
+	
+	function subtractLedger(_this){
+		var id=$(_this).attr("data-id");
+		$("#"+id).remove();
+		$.parser.parse();
+	}
+	
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
 	<div data-options="region:'center',border:false" title=""
@@ -110,7 +138,7 @@
 						value="${LedgerList[0].masterId}"></td>
 				</tr>
 				<c:forEach var="ledger" items="${LedgerList}" varStatus="status">
-					<tr>
+					<tr id="ledger${status.index}">
 						<th style='width:70px;'>采购品：</th>
 						<td style='width:100px;'><input name="ledger[${status.index }].name" type="text"
 							style='width:100px;' placeholder="请输入采购品" class="easyui-validatebox span2"
@@ -140,6 +168,15 @@
 							value="<fmt:formatDate value="${ledger.productionDate }" pattern="yyyy-MM-dd"/>"></td>
 						<td style='width:100px;'><input name="ledger[${status.index }].id" type="hidden"
 							class="easyui-validatebox span2" data-options="required:true" value="${ledger.id}"></td>
+						<td>
+							<c:if test="${status.index != 0}">
+								<a id='subtract' onclick='subtractLedger(this);' data-id='ledger${status.index }' style='text-decoration:none;' ><font size='8' >-</font></a>
+							</c:if>
+							<c:if test="${status.index == 0}">
+								<a id="addLedger" style='text-decoration:none;' ><font size="8" >+</font></a>
+							</c:if>
+						</td>
+						<td><input type="hidden" name="ledger[${status.index }].mark" value="1" ></td>
 					</tr>
 				</c:forEach>
 			</table>

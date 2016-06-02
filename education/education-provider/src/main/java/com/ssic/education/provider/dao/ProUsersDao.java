@@ -5,8 +5,8 @@ import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.ssic.education.provider.mapper.ProUsersMapper;
-import com.ssic.education.provider.pojo.ProUsers;
+import com.ssic.education.handle.mapper.ProUsersMapper;
+import com.ssic.education.handle.pojo.ProUsers;
 import com.ssic.education.utils.mybatis.MyBatisBaseDao;
 
 @Repository

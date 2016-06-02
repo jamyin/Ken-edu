@@ -13,7 +13,7 @@ import com.ssic.education.provider.mapper.TImsUserRoleExMapper;
 import com.ssic.education.provider.mapper.TImsUsersExMapper;
 import com.ssic.education.provider.pageModel.DataGrid;
 import com.ssic.education.provider.pageModel.PageHelper;
-import com.ssic.education.provider.pojo.ProUsers;
+import com.ssic.education.handle.pojo.ProUsers;
 import com.ssic.education.provider.util.MD5Util;
 import com.ssic.education.utils.util.BeanUtils;
 import com.ssic.education.utils.util.StringUtils;
