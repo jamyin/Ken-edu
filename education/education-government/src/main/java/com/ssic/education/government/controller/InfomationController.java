@@ -112,6 +112,7 @@ public class InfomationController extends BaseController {
 		String infoId = UUIDGenerator.getUUID32Bit();
 		eduInformationDto.setId(infoId);
 		
+		eduInformationDto.setCreateSourceId(getEduUsersDto().getSourceId());
 		eduInformationDto.setCreateAdminId(getSessionUserId());
 		eduInformationDto.setCreateAdminName(getEduUsersDto().getName());		
 		
