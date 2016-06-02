@@ -23,8 +23,8 @@ public class EduInformationDto implements Serializable {
 	private String id;
 	private String title;
 	private String pic;
-	private String summary;
-	private Integer type;       //(1:公告 2:卫生检查 3:健康宣教  )
+	private String summary;	
+	private Integer type;       		//(1:公告 2:卫生检查 3:健康宣教  )
 	private String createAdminId;
 	private String createAdminName;
 	private Date createTime;
@@ -33,7 +33,10 @@ public class EduInformationDto implements Serializable {
 	private String content;
 	private String editorValue;
 	
-	private String[] pics;    //多张图片
+	private String[] pics;   		    //多张图片
+	private String createSourceId;   
+	private Integer sourceType; 		    //url传进来
+	private String sourceId; 		    //url传进来
 
 
 }
