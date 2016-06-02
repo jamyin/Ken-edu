@@ -11,6 +11,13 @@
 <header class="searchbar"><input id="schoolName" type="text" placeholder="请输入关键字"></header>
 <section class="tablecell">
 	<ul id="schoolList">
+		<#if dataList ??>
+			<#list dataList as data>
+				<#if data_index lte 100>
+				<li><a href='/wap/school/details/${(data.id)!}.htm'><label>${(data.schoolName)!}</label></a></li>
+				</#if>
+			</#list>
+		</#if>
 	</ul>
 </section>
 <script type="text/javascript">
