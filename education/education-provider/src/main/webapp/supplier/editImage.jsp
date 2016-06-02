@@ -6,6 +6,9 @@
 .panel-body {
 	font-size: 18px !important;
 }
+.table th, .table td {
+    border-top: none!important;
+}
 </style>
 <script type="text/javascript">
 
