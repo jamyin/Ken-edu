@@ -130,7 +130,9 @@ public class MotiveController extends BaseController {
 			eduSchoolDto.setCommitteeId(getEduUsersDto().getSourceId());
 			eduSchoolDto.setReviewed(Byte.valueOf("1"));//审核通过的 
 			List<EduSchoolDto> resultList = eduSchoolService.searchEduScholDtoList(eduSchoolDto);
-			dataList = copyProperty(resultList);
+			if(resultList!=null && resultList.size()>0){
+				dataList = copyProperty(resultList);	
+			}
 		}else{
 			
 		}
