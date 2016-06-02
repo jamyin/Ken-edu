@@ -14,7 +14,7 @@
 		<#if dataList ??>
 			<#list dataList as data>
 				<#if data_index lte 100>
-				<li><a href='/wap/school/details/${(data.id)!}.htm'><label>${(data.schoolName)!}</label></a></li>
+				<li><a data-school="${(data.id)!}" onclick="checkSchool(this)" href='##'><label>${(data.schoolName)!}</label></a></li>
 				</#if>
 			</#list>
 		</#if>
@@ -34,13 +34,31 @@ $(function(){
 				var schoolList = $("#schoolList");
 				schoolList.empty();				
 				$.each(data.data, function(index, item) {
-					$("#schoolList").append("<li><a href='/wap/school/details/"+item['id']+".htm'><label>"+item['schoolName']+"</label></a></li>");
+					$("#schoolList").append("<li><a data-school="+item['id']+" onclick='checkSchool(this)' href='##'><label>"+item['schoolName']+"</label></a></li>");
 					//$("#schoolList").append("<tr><td><a href='/wap/school/details/"+item['id']+".htm'>"+item['schoolName']+"</a></td></tr>");	
 				});
 			}
 		});
 	});
 });
+
+
+function checkSchool(_this){
+	var schoolId = $(_this).attr("data-school");
+	$.ajax({
+		url:'wap/school/check.htm?schoolId='+schoolId,
+		type:"POST",
+		dataType:'json',
+		success:function(data){
+			if(data.status == 500){
+				alert("已经关注过,跳转至该学校");
+				window.location.href = "/wap/school/school/"+data.data+".htm";
+			}else{
+				window.location.href = "/wap/school/details/"+schoolId+".htm";
+			}
+		}
+	});
+}
 </script>
 </body>
 </html>
