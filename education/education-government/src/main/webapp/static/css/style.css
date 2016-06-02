@@ -21,18 +21,19 @@ body{background:#f3f3f3}
 
 .nav{position:relative;width:100%;background:#fff;border-bottom:1px #60ac62 solid;}
 .nav > ul{width:1000px;height:54px;margin:0 auto}
-.nav > ul > li{display:inline-block;line-height:54px;font-size:16px;margin-right:50px;width:64px;text-align:center}
+.nav > ul > li{display:inline-block;line-height:54px;font-size:16px;width:auto;text-align:center}
+.nav > ul > li:first-child{padding-left:0}
 
-.nav > ul > li > a{display:block;color:#605f5f;}
+.nav > ul > li > a{display:block;color:#605f5f;padding:0 25px;}
 .nav > ul > li > a.cur{border-bottom:4px #7ca860 solid;line-height:50px;color:#7ca860}
 .nav > ul > li > .wrap{display:none;position:absolute;width:100%;background:#fff;top:54px;left:0;z-index:99;border-top:1px #60ac62 solid;height:36px;line-height:36px;}
 .nav > ul > li > .wrap > ul{width:1000px;height:36px;margin:0 auto}
-.nav > ul > li > .wrap > ul li{float:left;margin-right:30px}
-.nav > ul > li > .wrap > ul > li > a{color:#666}
+.nav > ul > li > .wrap > ul li{float:left;margin-right:10px}
+.nav > ul > li > .wrap > ul > li > a{color:#666;font-size:14px;}
 .nav > ul > li > .wrap > ul > li > a:hover{color:#7ca860}
 .nav > ul > li:hover > .wrap{display:block}
-.nav > ul > li.bar3 > .wrap > ul{padding-left:140px;width:860px}
-.nav > ul > li.bar4 > .wrap > ul{padding-left:300px;width:700px}
+.nav > ul > li.bar3 > .wrap > ul{padding-left:180px;width:820px}
+.nav > ul > li.bar4 > .wrap > ul{padding-left:320px;width:680px}
 
 
 .wrapper{width:1000px;margin:40px auto;}

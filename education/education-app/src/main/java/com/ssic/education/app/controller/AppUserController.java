@@ -16,7 +16,7 @@ import com.ssic.education.utils.redis.WdRedisDao;
 
 /**		
  * <p>Title: UserController </p>
- * <p>Description: 用户接口控制器</p>
+ * <p>Description: APP用户接口控制器</p>
  * <p>Copyright (c) 2016 </p>
  * <p>Company: 上海天坊信息科技有限公司</p>
  * @author SeanYoung
@@ -25,14 +25,14 @@ import com.ssic.education.utils.redis.WdRedisDao;
  */
 @Controller
 @RequestMapping(value = "/user")
-public class UserController extends BaseController {
+public class AppUserController extends BaseController {
 	@Autowired
 	private IAppUsersService appUserService;
 	@Autowired
 	private WdRedisDao<EduAppUserDto> redisdao;
 
 	/**
-	 * 教委用户登录
+	 * 教委APP用户登录接口
 	 * @param account 账户
 	 * @param password 密码
 	 * @return 用户信息
@@ -62,7 +62,7 @@ public class UserController extends BaseController {
 	}
 
 	/**
-	 * 教委修改密码
+	 * 教委APP用户修改密码接口
 	 * @param oldPwd 旧密码
 	 * @param account 账户
 	 * @param newPwd 新密码
@@ -70,13 +70,13 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping(value = "/modifyPwd", method = RequestMethod.POST)
 	@ResponseBody
-	public Response<String> modifyPwd(String oldPwd, String account, String newPwd) {
+	public Response<String> modifyPwd(String account, String oldPwd, String newPwd) {
 		Response<String> result = new Response<String>();
 		if (oldPwd.equals(newPwd)) {
 			result.setStatus(DataStatus.HTTP_FAILE);
 			result.setMessage("两次密码一样");
 		} else {
-			if (appUserService.eduUpdatePwd(oldPwd, account, newPwd) == 1) {
+			if (appUserService.eduUpdatePwd(account, oldPwd, newPwd) == 1) {
 				result.setStatus(DataStatus.HTTP_SUCCESS);
 				result.setMessage("修改成功！");
 			} else {
@@ -87,4 +87,48 @@ public class UserController extends BaseController {
 		return result;
 	}
 
+	/**
+	 * 教委APP用户注销接口
+	 * @return
+	 */
+	@RequestMapping(value = "/eduLogout", method = RequestMethod.GET)
+	@ResponseBody
+	public Response<String> eduLogout() {
+		return null;
+	}
+
+	/**
+	 * 团餐公司APP登录接口
+	 * @param account
+	 * @param password
+	 * @return
+	 */
+	@RequestMapping(value = "/proLogin", method = RequestMethod.POST)
+	@ResponseBody
+	public Response<EduAppUserDto> proLogin(@RequestParam(required = true) String account, @RequestParam(required = true) String password) {
+		return null;
+	}
+
+	/**
+	 * 团餐公司APP修改密码接口
+	 * @param account
+	 * @param oldPwd
+	 * @param newPwd
+	 * @return
+	 */
+	@RequestMapping(value = "/proModifyPwd", method = RequestMethod.POST)
+	@ResponseBody
+	public Response<String> proModifyPwd(String account, String oldPwd, String newPwd) {
+		return null;
+	}
+
+	/**
+	 * 团餐公司APP注销接口
+	 * @return
+	 */
+	@RequestMapping(value = "/proLogout", method = RequestMethod.GET)
+	@ResponseBody
+	public Response<String> proLogout() {
+		return null;
+	}
 }
