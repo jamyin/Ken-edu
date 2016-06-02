@@ -38,5 +38,7 @@ public class ProLedgerMasterDto implements Serializable {
 	private Integer stat;
 	
 	private List<ProLedgerDto> resltList;
+	
+	private List<ProWaresDto> wareList;
 
 }

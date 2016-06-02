@@ -42,4 +42,6 @@ public interface ProWaresService {
 	List<ProWaresDto> searchProWares(String schoolId,String waresName);
 	
 	public PageResult<ProWaresDto> findWarsePageByParam(ProSchoolWareDto proSchoolWareDto,PageQuery query);
+
+	List<ProWaresDto> searchWarseList(List<String> wareIds);
 }

@@ -30,7 +30,7 @@
 		<div class="driverinfo_box">
 			<ul>
 				<li>${(resultDto.driverName)!}</li>
-				<li><label>出发地：</label><span>上海爱森肉食品有限公司有限公司上海爱森肉食品有限公司上海爱森肉食品有限公司食品有限公司上</span></li>
+				<li><label>出发地：</label><span>${(supplierDto.supplierName)!}</span></li>
 				<li>
 					<label>货物：</label>
 					<span>
@@ -41,7 +41,7 @@
 						</#if>
 					</span>
 				</li>
-				<li><label>目的地：</label><span>上海天坊食品制造有限公司</span></li>
+				<li><label>目的地：</label><span>${(resultDto.receiverName)!}</span></li>
 			</ul>
 			<div class="timeinfo">
 				<p>
@@ -137,11 +137,17 @@
 		</div>
 		<div class="goodsinfo_box">
 			<ul>
-				<li><span>猪肉</span><br>数量：50kg<br>生产日期：20160530<br>生产企业：爱森猪肉厂<br>采购供应商：爱森猪肉厂</li>
-				<li><span>猪肉</span><br>数量：50kg<br>生产日期：20160530<br>生产企业：爱森猪肉厂<br>采购供应商：爱森猪肉厂</li>
-				<li><span>猪肉</span><br>数量：50kg<br>生产日期：20160530<br>生产企业：爱森猪肉厂<br>采购供应商：爱森猪肉厂</li>
-				<li><span>猪肉</span><br>数量：50kg<br>生产日期：20160530<br>生产企业：爱森猪肉厂<br>采购供应商：爱森猪肉厂</li>
-				<li><span>猪肉</span><br>数量：50kg<br>生产日期：20160530<br>生产企业：爱森猪肉厂<br>采购供应商：爱森猪肉厂</li>
+				<#if resultDto.getWareList() ??>
+					<#list resultDto.getWareList()  as data>
+						<li>
+						<span>${(data.waresName)!}</span><br>
+						数量：50kg<br>
+						生产日期：20160530<br>
+						生产企业：${(data.waresName)!}<br>
+						采购供应商：${(data.waresName)!}
+						</li>
+					</#list>
+				</#if>			
 				<li><span>猪肉</span><br>数量：50kg<br>生产日期：20160530<br>生产企业：爱森猪肉厂<br>采购供应商：爱森猪肉厂</li>
 			</ul>
 		</div>
