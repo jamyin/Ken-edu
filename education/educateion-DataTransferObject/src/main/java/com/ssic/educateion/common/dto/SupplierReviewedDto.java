@@ -28,4 +28,5 @@ public class SupplierReviewedDto implements Serializable {
     private Integer supplierType;
     private Byte reviewed;//0:未审批，1：通过，2：不通过
     private Date createTime;
+    private Integer source;
 }

@@ -99,6 +99,10 @@ public class LedgerDto {
 	
 	@Setter
 	@Getter
+	private String customerId;
+	
+	@Setter
+	@Getter
 	private String sourceName;
 	
 	@Setter
@@ -128,6 +132,10 @@ public class LedgerDto {
 	@Setter
 	@Getter
 	private int haulStatus;
+	
+	@Setter
+	@Getter
+	private Integer source;//来源0：市教委，1：区教委，2：学校
 	
 	@Setter
 	@Getter

@@ -76,5 +76,7 @@ public class ProSchoolWareDto {
      * @mbggenerated Thu May 26 19:23:18 CST 2016
      */
     private Integer stat;
+    
+    private Integer source;
 
 }

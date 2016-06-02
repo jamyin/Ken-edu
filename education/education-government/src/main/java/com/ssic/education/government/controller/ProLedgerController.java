@@ -66,6 +66,7 @@ public class ProLedgerController extends BaseController{
 		}		
 		mv.addObject("ledgerDtos", ledgerDtos);
 		mv.addObject("ledgerDto", ledgerDto);
+		mv.addObject("dto", dto);
 		mv.addObject("proSupplierDto", proSupplierDto);
 		return mv;
 	}

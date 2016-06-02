@@ -7,6 +7,11 @@ import lombok.Data;
 
 @Data
 public class ProLedgerDto implements Serializable {
+	private String schoolId;
+	
+	private String sourceId;
+	
+	private Integer source;
 
 	private String id;
 
