@@ -45,11 +45,45 @@
                 <h1>${(data.title)!}</h1>
                 <p> 发件人：${(data.createName)!} </p>
                 <p> 时间：${(data.createTime?string('yyyy-MM-dd'))!} </p>
-                <span class="tips">未读:  ${(readMap.read)!0}</span>
-                <span class="tips">已读:  ${(readMap.unread)!0}</span>
+                <span id="unread" class="tips">未读:  ${(readMap.unread)!0}</span>
+                <span id="readed" class="tips">已读:  ${(readMap.read)!0}</span>
                 <div class="text">
                         <h2>${(data.title)!}</h3>
 						${(data.content)!}
+                </div>
+            </div>
+
+            <div class="background unread">
+                <div class=" content_wrap3">
+                    <h2>未读${(readMap.read)!0}</h2><span class="close"><img src="/static/img/button_close.png" /></span>
+                    <div class="content_body3">
+                        <ul>
+                        	<#if resultList ??>
+                        		<#list resultList as data>
+                        			<#if data.readstat == 0>
+                        				<li>${(data.receiveName)!}</li>
+                        			</#if>
+                        		</#list>
+                        	</#if>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="background readed">
+                <div class=" content_wrap3">
+                    <h2>已读${(readMap.unread)!0}</h2><span class="close"><img src="/static/img/button_close.png" /></span>
+                    <div class="content_body3">
+                        <ul>
+                        	<#if resultList ??>
+                        		<#list resultList as data>
+                        			<#if data.readstat == 1>
+                        				<li>${(data.receiveName)!}</li>
+                        			</#if>
+                        		</#list>
+                        	</#if>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
@@ -58,4 +92,24 @@
     		上海市中小学校学生午餐综合管理平台<br>CopyRight© 2016上海市天坊信息技术有限公司
     	</div>
     </body>
+        <script src="/static/js/jquery-2.1.3.min.js"></script>
+        <script type="text/javascript">
+            $(function(){
+
+                $("#unread").click(function(){
+                    $('.background').height($(document).height());
+                    $(".background.unread").show();
+                });
+
+                $("#readed").click(function(){
+                    $('.background').height($(document).height());
+                    $(".background.readed").show();
+                });
+
+                $(".background .close").click(function(){
+                    $(".background").hide();
+                });
+
+            });
+        </script>    
 </html>
