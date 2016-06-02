@@ -208,8 +208,9 @@ else
 		parent.$.modalDialog({
 			title : '编辑用户',
 			width :768,
-			height : 480,
+			height : 420,
 			href : '${pageContext.request.contextPath}/userController/editPage?id='+ id,
+			onOpen: function(){},
 			buttons : [ {
 				text : '保存',
 				handler : function() {
@@ -229,8 +230,9 @@ else
 		parent.$.modalDialog({
 			title : '添加用户',
 			width :768,
-			height : 480,
+			height : 420,
 			href : '${pageContext.request.contextPath}/userController/addPage',
+			onOpen: function(){},
 			buttons : [ {
 				text : '保存',
 				handler : function() {

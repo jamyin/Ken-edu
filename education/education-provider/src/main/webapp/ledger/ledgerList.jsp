@@ -207,6 +207,7 @@
 			width : 1030,
 			height : 500,
 			href : '${pageContext.request.contextPath}/ledgerController/editPage?masterId=' +id ,
+			onOpen: function(){},
 			buttons : [ {
 				text : '保存',
 				handler : function() {
@@ -240,6 +241,7 @@
 			width : 1030,
 			height : 500,
 			href : '${pageContext.request.contextPath}/ledgerController/addLedger',
+			onOpen: function(){},
 			style : 'overflow-y:scroll;',
 			buttons : [ {
 				text : '添加',
@@ -258,6 +260,7 @@
 			width :300,
 			height : 150,
 			href : '${pageContext.request.contextPath}/ledgerController/importPage',
+			onOpen: function(){},
 			buttons : [ {
 				text : '上传',
 				handler : function() {

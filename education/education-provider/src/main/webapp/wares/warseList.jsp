@@ -292,6 +292,7 @@ else
 			width :768,
 			height : 420,
 			href : '${pageContext.request.contextPath}/waresController/editWares?id='+ id,
+			onOpen: function(){},
 			buttons : [ {
 				text : '保存',
 				handler : function() {
@@ -303,6 +304,7 @@ else
 				}
 			} ]
 		});
+		
 	}
 	
 	function editImage(id) {
@@ -317,6 +319,8 @@ else
 			width :768,
 			height : 480,
 			href : '${pageContext.request.contextPath}/waresController/editImage?id='+ id,
+			onOpen: function(){},
+					
 			buttons : [ {
 				text : '上传',
 				handler : function() {
@@ -328,6 +332,7 @@ else
 				}
 			} ]
 		});
+		
 	}
 	
 	function lookImage(id) {
@@ -358,6 +363,7 @@ else
 			width :768,
 			height : 480,
 			href : '${pageContext.request.contextPath}/waresController/updateImage?id='+ id,
+			onOpen: function(){},
 			buttons : [ {
 				text : '上传',
 				handler : function() {
@@ -377,6 +383,7 @@ else
 			width :768,
 			height : 420,
 			href : '${pageContext.request.contextPath}/waresController/addWares',
+			onOpen: function(){},
 			buttons : [ {
 				text : '保存',
 				handler : function() {
@@ -425,6 +432,7 @@ else
 			width : 700,
 			height : 300,
 			href : '${pageContext.request.contextPath}/waresController/upLoadImage?id=' + id,
+			onOpen: function(){},
 			buttons : [ {
 				text : '上传',
 				handler : function() {
@@ -442,6 +450,7 @@ else
 			width :300,
 			height : 150,
 			href : '${pageContext.request.contextPath}/waresController/importPage',
+			onOpen: function(){},
 			buttons : [ {
 				text : '上传',
 				handler : function() {
@@ -473,7 +482,7 @@ else
 						<th>商品名称:
 						<input id="waresName" name="waresName" placeholder="查询商品名称" class="easyui-validatebox"  style="width: 215px;"/></th>
 						 <th>产品编码:
-					     <input id="customCode" name="customCode" placeholder="查询企业编码" class="easyui-validatebox"  style="width: 215px;"/></th>
+					     <input id="customCode" name="customCode" placeholder="查询产品编码" class="easyui-validatebox"  style="width: 215px;"/></th>
 						 
 						 
 						  <th>商品类别:

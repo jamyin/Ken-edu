@@ -278,8 +278,9 @@
 		parent.$.modalDialog({
 			title : '编辑供应商',
 			width : 700,
-			height : 550,
+			height : 420,
 			href : '${pageContext.request.contextPath}/proSupplierController/editPage?id=' + id,
+			onOpen: function(){},
 			buttons : [ {
 				text : '保存',
 				handler : function() {
@@ -295,8 +296,9 @@
 		parent.$.modalDialog({
 			title : '添加供应商',
 			width : 700,
-			height : 550,
+			height : 420,
 			href : '${pageContext.request.contextPath}/proSupplierController/addSupplier',
+			onOpen: function(){},
 			buttons : [ {
 				text : '保存',
 				handler : function() {
@@ -333,6 +335,7 @@
 			width :800,
 			height : 480,
 			href : '${pageContext.request.contextPath}/proSupplierController/inputImage?id='+ id,
+			onOpen: function(){},
 			buttons : [ {
 				text : '上传',
 				handler : function() {
@@ -358,6 +361,7 @@
 			width :768,
 			height : 480,
 			href : '${pageContext.request.contextPath}/proSupplierController/lookImage?id='+ id,
+					
 			onOpen: function(){}
 		});
 	}
@@ -374,6 +378,7 @@
 			width :800,
 			height : 480,
 			href : '${pageContext.request.contextPath}/proSupplierController/editImage?id='+ id,
+			onOpen: function(){},
 			buttons : [ {
 				text : '上传',
 				handler : function() {
@@ -393,6 +398,7 @@
 			width :300,
 			height : 150,
 			href : '${pageContext.request.contextPath}/proSupplierController/importPage',
+			onOpen: function(){},
 			buttons : [ {
 				text : '上传',
 				handler : function() {

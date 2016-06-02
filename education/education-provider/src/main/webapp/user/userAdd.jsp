@@ -5,6 +5,9 @@
 .panel-body {
 	font-size: 18px !important;
 }
+.table th, .table td {
+    border-top: none!important;
+}
 </style>
 <script type="text/javascript">
 
@@ -105,4 +108,10 @@
 			</div>
 
 		</div>
-
+<script type="text/javascript">
+$(function(){
+	$("td,th").css("vertical-align","middle");
+	$('td input').css("margin-top","8px");
+	$('table tr:first:child td').css("border-top","none");
+});
+</script>
