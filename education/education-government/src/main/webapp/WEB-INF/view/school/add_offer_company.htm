@@ -120,11 +120,11 @@
     							$(".tab_content_full").remove();
     							var textAll = "";
     							textAll += "<div class=\"tab_content_full\"> <h2>基本信息</h2><p> <span class=\"key\">委托经营单位</span>：<span class=\"select\">选择</span> </p>"
-    							textAll += "<p> <span class=\"key\">供应商名称</span>：<span class=\"value\">"+result.supplierName+" </span></p>"
+    							textAll += "<p> <span class=\"key\">供应商名称</span>：<span class=\"value\"> "+result.supplierName+" </span></p>"
     							textAll += "<p> <span class=\"key\">地址</span>：<span class=\"value\"> "+result.address+" </span></p>"
-    							textAll += "<p> <span class=\"key\">供应商简称</span>：<span class=\"value\"> </span></p>"
+    							//textAll += "<p> <span class=\"key\">供应商简称</span>：<span class=\"value\"> </span></p>"
     							textAll += "<p> <span class=\"key\">联系人</span>：<span class=\"value\">  </span></p>"
-    							textAll += "<p> <span class=\"key\">电话</span>：<span class=\"value\">"+result.contactWay+" </span></p>"
+    							textAll += "<p> <span class=\"key\">电话</span>：<span class=\"value\"> "+result.contactWay+" </span></p>"
     							textAll += "<h2>证件编号</h2>"
     							if (result.foodServiceCode != null) {
     								textAll += "<p> <span class=\"key\">餐饮服务证号</span>：<span class=\"value\">"+result.foodServiceCode+"</span></p>"
@@ -133,10 +133,10 @@
     								textAll += "<p> <span class=\"key\">食品经营许可证</span>：<span class=\"value\"> "+result.foodBusinessCode+"</span></p>"
     							}
     							if (result.foodCirculationCode != null) {
-    								textAll += " <p> <span class=\"key\">食品流通证号</span>：<span class=\"value\">  "+result.foodCirculationCode+" </span></p>"
+    								textAll += " <p> <span class=\"key\">食品流通证号</span>：<span class=\"value\"> "+result.foodCirculationCode+" </span></p>"
     							}
     							if (result.foodProduceCode != null) {
-    								textAll += "<p> <span class=\"key\">食品生产证号</span>：<span class=\"value\">"+result.foodProduceCode+" </span></p>"
+    								textAll += "<p> <span class=\"key\">食品生产证号</span>：<span class=\"value\"> "+result.foodProduceCode+" </span></p>"
     							}
 								if (result.businessLicense != null) {
 									textAll += "<p> <span class=\"key\">工商执照号</span>：<span class=\"value\"> "+result.businessLicense+"</span></p>"
