@@ -461,6 +461,7 @@ public class TaskController {
 					
 					receiveDto.setTaskTitle(eduTaskDto.getTitle());
 					receiveDto.setSendName(sendIdsNames_[1]);
+					receiveDto.setCreateId(sendIdsNames_[0]);     //插入创建者sourceId
 					
 					receiveDto.setId(UUIDGenerator.getUUID());
 					receiveDto.setReadstat(DataStatus.DISABLED);
