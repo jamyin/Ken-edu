@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssic.educateion.common.dto.ChooseSchoolDto;
+import com.ssic.educateion.common.dto.EduCanteenDto;
 import com.ssic.educateion.common.dto.EduCommitteeDto;
 import com.ssic.educateion.common.dto.EduSchoolDto;
+import com.ssic.educateion.common.dto.EduSchoolSupplierDto;
 import com.ssic.educateion.common.dto.MapToListDto;
 import com.ssic.educateion.common.dto.ProPackagesDto;
 import com.ssic.educateion.common.dto.SchoolDto;
@@ -152,7 +154,7 @@ public class SchoolController {
 		String schoolId = dto.getCustomerId();
 		EduSchoolDto eduSchoolDto = eduSchoolService.findById(schoolId);
 
-		/*//学校对应的食堂信息
+		//学校对应的食堂信息
 		EduCanteenDto eduCanteenDto = new EduCanteenDto();
 		eduCanteenDto.setSchoolId(schoolId);
 		eduCanteenDto = iEduCanteenService.searchEduCanteenDto(eduCanteenDto);
@@ -160,7 +162,7 @@ public class SchoolController {
 		//学校对应的供应商信息
 		EduSchoolSupplierDto eduSchoolSupplierDto = new EduSchoolSupplierDto();
 		eduSchoolSupplierDto.setSchoolId(schoolId);
-		eduSchoolSupplierDto = iEduSchoolSupplierService.searchEduSchoolSupplierDto(eduSchoolSupplierDto);*/
+		eduSchoolSupplierDto = iEduSchoolSupplierService.searchEduSchoolSupplierDto(eduSchoolSupplierDto);
 
 		List<MapToListDto> typeList = new ArrayList<MapToListDto>();
 		for(Entry<Integer, String> entry: PackagesTypeEnum.getAll().entrySet()) {
@@ -212,8 +214,16 @@ public class SchoolController {
 	@ResponseBody
 	public Response<ChooseSchoolDto>  chooseSchool(SchoolDto schoolDto, PageQuery query ,Integer type, Integer sourceType) {
 		Response<ChooseSchoolDto> result = new Response<ChooseSchoolDto>();
+		//处理level全选传-1
+		if(StringUtils.isNotEmpty(schoolDto.getLevel()) && schoolDto.getLevel().equals("-1")){
+			schoolDto.setLevel(null);
+		}
 		ChooseSchoolDto chooseSchoolDto = new ChooseSchoolDto();
-
+		if(sourceType == null){
+			result.setStatus(DataStatus.HTTP_FAILE);
+			result.setMessage("教委类型为空");
+			return result;
+		}
 		//市教委选择学校
 		if(sourceType == 0){
 			//Type:为1则学校信息,区域信息和学校级别都会查出来; 不传则只查学校信息
@@ -243,8 +253,8 @@ public class SchoolController {
 
 		}
 
-		//区教委选择学校
-		if(sourceType == 1){
+		//区教委选择学校  注sourceType为用户的类型
+		if(sourceType == 2){
 			//Type:为1则学校信息,区域信息和学校级别都会查出来; 不传则只查学校信息
 			if(type != null && type == 1){
 				//显示学校级别列表

@@ -292,12 +292,12 @@
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">
 					<tr>
-						<th>配货日期</th>
-						<td><input id="actionDate" class="span2" name="actionDate" placeholder="点击选择日期" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" readonly="readonly"/></td>
-						<th>至</th>
-						<td><input id="nextDate" class="span2" name="nextDate" placeholder="点击选择日期" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" readonly="readonly"/></td>
-						<th>配货点</th>
-						<td><input id="receiverName" class="span2" name="receiverName" /></td>
+						<th style="width: 500;">配货日期
+						<input id="actionDate" class="span2" name="actionDate" placeholder="点击选择日期" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" readonly="readonly"/>
+						至
+						<input id="nextDate" class="span2" name="nextDate" placeholder="点击选择日期" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" readonly="readonly"/></th>
+						<th>配货点
+						<input id="receiverName" class="span2" name="receiverName" /></th>
 					</tr>
 				</table>
 			</form>

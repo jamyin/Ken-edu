@@ -83,7 +83,11 @@ public class LedgerService implements ILedgerService {
 				criteria.andSchoolIdEqualTo(psw.getSchoolId());
 				criteria.andWareIdEqualTo(psw.getWareId());
 				criteria.andSourceIdEqualTo(psw.getSourceId());
-				criteria.andSupplierIdEqualTo(psw.getSupplierId());
+				if (psw.getSupplierId() != null) {
+					criteria.andSupplierIdEqualTo(psw.getSupplierId());
+				} else {
+					criteria.andSupplierIdIsNull();
+				}
 				List<ProSchoolWare> pslist = swMapper.selectByExample(example);
 				if (pslist.size() == 0) {
 					psw.setId(UUID.randomUUID().toString());

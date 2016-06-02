@@ -40,7 +40,7 @@ public class InformationController {
 	    public Response<PageResult<EduInformationDto>>  findInformationList(EduInformationDto eduInformationDto, PageQuery query) {
 	    	Response<PageResult<EduInformationDto>> result = new Response<PageResult<EduInformationDto>>();
 	    	PageResult<EduInformationDto> informationList = informationService.findInformationList(eduInformationDto, query);
-	    	if(informationList.getResults() != null && informationList.getResults().size() >0 ){
+	    	if(informationList != null ){
 	    		result.setStatus(DataStatus.HTTP_SUCCESS);
 	    		result.setMessage("查询成功！");
 	    		result.setData(informationList);

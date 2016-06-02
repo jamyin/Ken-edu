@@ -58,6 +58,9 @@ public class EduSchoolDao extends MyBatisBaseDao<EduSchool> {
 
     private void assemblyParams(EduSchoolDto dto, EduSchoolExample.Criteria criteria) {
         if (null != dto) {
+            if (StringUtils.isNotBlank(dto.getCommitteeId())) {
+                criteria.andCommitteeIdEqualTo(dto.getCommitteeId());
+            }
             if (StringUtils.isNotBlank(dto.getAddress())) {
                 criteria.andAddressEqualTo(dto.getAddress().trim());
             }

@@ -50,7 +50,6 @@ public class InformationDao extends MyBatisBaseDao<EduInformation> {
 	}
 
 	private void assemblyParams(EduInformationDto eduInformationDto, Criteria criteria) {
-		if (null != eduInformationDto) {
         	if (StringUtils.isNotEmpty(eduInformationDto.getId())){
         		criteria.andIdEqualTo(eduInformationDto.getId().trim());
         	}
@@ -60,7 +59,6 @@ public class InformationDao extends MyBatisBaseDao<EduInformation> {
         	if (StringUtils.isNotBlank(eduInformationDto.getTitle())){
         		criteria.andTitleLike("%"+eduInformationDto.getTitle().trim()+"%");
         	}	
-		}
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 	}
 

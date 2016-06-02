@@ -108,6 +108,7 @@ public class TaskController {
 	 * @date 2016年5月29日 下午2:41:41
 	 * @return Response<EduTaskDto>    返回类型
 	 */
+	@Deprecated
 	@RequestMapping("/findTaskByPara")
 	@ResponseBody
 	public Response<EduTaskDto> findTaskByPara(EduTaskDto eduTaskDto) {
@@ -341,8 +342,11 @@ public class TaskController {
 	
 	@RequestMapping("/chooseReceive")
 	@ResponseBody
-	public Response<TaskReceiveDto> chooseReceive(Integer sourceType, String level,PageQuery query, String committeeId) {
+	public Response<TaskReceiveDto> chooseReceive(Integer sourceType, String level,PageQuery query, String committeeId ,String schoolName) {
 		Response<TaskReceiveDto> result = new Response<TaskReceiveDto>();
+		if(level != null && level.equals("-1")){
+			level = null;
+		}
 		TaskReceiveDto taskReceiveDto = new TaskReceiveDto();
 		if(sourceType == null){
 			result.setStatus(DataStatus.HTTP_FAILE);
@@ -375,8 +379,11 @@ public class TaskController {
 			taskReceiveDto.setLevelList(levelList);
 			//获取学校列表
 			SchoolDto schoolDto = new SchoolDto();
-			schoolDto.setLevel(level);
-			schoolDto.setCommitteeId(committeeId);    //设置区教委
+			schoolDto.setLevel(level);                  
+			schoolDto.setCommitteeId(committeeId);   				 //设置区教委
+			if(StringUtils.isNotEmpty(schoolName)){ 
+				schoolDto.setSchoolName(schoolName);                //学校名
+			}
 			PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, query);
 			taskReceiveDto.setSchoolList(schoolList);
 
