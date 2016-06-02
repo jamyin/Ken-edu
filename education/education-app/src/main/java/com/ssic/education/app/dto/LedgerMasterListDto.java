@@ -2,9 +2,7 @@ package com.ssic.education.app.dto;
 
 import java.util.Date;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**		
  * <p>Title: LedgerMasterListDto </p>
@@ -23,10 +21,13 @@ public @Data class LedgerMasterListDto {
 	private Date actionDate; //配送日期
 	private String receiverId;//收获商ID
 	private String receiverName;//收货商名称
-	private String userId;//驾驶员ID 
+	private String userId;//驾驶员ID
+	private String driverName;//驾驶员名称
 	private String sourceId;//企业ID
 	private String outset;//出发点
 	private String stock;//
 	private String wareBatchNo; //商品运送批次
 	private Integer haulStatus;//运送状态	
+	private Date startTime; //开始时间
+	private Date endTime;//结束时间
 }

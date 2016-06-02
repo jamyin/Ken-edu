@@ -164,8 +164,8 @@ public class TaskServiceImpl implements ITaskService{
 	}
 
 	@Override
-	public PageResult<EduTaskDto> searchInfomation(EduTaskDto eduTaskDto,PageQuery pageQuery) {		
-		List<EduTask> results = taskDao.findInformationList(eduTaskDto,pageQuery);
+	public PageResult<EduTaskDto> searchTask(EduTaskDto eduTaskDto,PageQuery pageQuery) {		
+		List<EduTask> results = taskDao.searchTask(eduTaskDto,pageQuery);
 		List<EduTaskDto> dataList = BeanUtils.createBeanListByTarget(results, EduTaskDto.class);
 		pageQuery.setTotal(taskDao.selectInformationAccount(eduTaskDto));
 		return new PageResult<EduTaskDto>(pageQuery, dataList);

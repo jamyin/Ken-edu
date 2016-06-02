@@ -48,4 +48,15 @@ public class TaskReceiveServiceImpl implements ITaskReceiveService {
 		return eduTaskReceiveDao.updateByPrimaryKeySelective(eduTaskReceive);
 	}
 
+	@Override
+	public List<EduTaskReceiveDto> searchEduTaskReceive(EduTaskReceiveDto eduTaskReceiveDto) {		
+		List<EduTaskReceive> results = eduTaskReceiveDao.searchEduTaskReceive(eduTaskReceiveDto,null);
+		if(results!=null && results.size()>0){
+			List<EduTaskReceiveDto> dataList = BeanUtils.createBeanListByTarget(results, EduTaskReceiveDto.class);
+			return dataList;
+		}else{
+			return null;
+		}
+}
+
 }

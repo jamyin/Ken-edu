@@ -112,12 +112,12 @@
 							}
 						});
 
-						for (var i = 0; i < closeTabsTitle.length; i++) {
+					for (var i = 0; i < closeTabsTitle.length; i++) {
 							index_tabs.tabs('close', closeTabsTitle[i]);
 						}
 					}
 				});
-	});
+	}); 
 	
 	function loadUrl(_this){
 		var params = new Object();
@@ -184,7 +184,7 @@
 				</a>
 			</div>
 			<div id="index_tabs" style="overflow: hidden;">
-				<div title="首页" data-options="border:false" style="overflow: hidden;">
+				<div title="<font  style='font-style: normal;font-weight: bolder;font-size:18px;'>首页</font>" data-options="border:false" style="overflow: hidden;">
 					<iframe id="indexContext" src="${pageContext.request.contextPath}/portal/index.jsp" frameborder="0" style="border: 0; width: 100%; height: 90%;"></iframe>
 				</div>
 			</div>

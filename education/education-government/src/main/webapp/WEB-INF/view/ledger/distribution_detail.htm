@@ -8,9 +8,9 @@
 <#include "/common/nav.htm" />
 
   <div class="wrapperA">
-    <!-- <div class="cur_postion">
-      <span class="cp">当前位置:</span><a href="#">安全追溯</a><span class="gt">&gt;</span><a href="#">采购品列表</a><span class="gt">&gt;</span><a href="#">采购品详情</a>
-    </div> -->
+    <div class="cur_postion">
+      <span class="cp">当前位置:</span><a href="/edu/school/list.htm?source=${(dto.source)!}&reviewed=1">安全追溯</a><span class="gt">&gt;</span><a href="/edu/school/details.htm?source=${(dto.source)!}&customerId=${(dto.customerId)!}">学校详情</a><span class="gt">&gt;</span><a href="/pro/ledger/findPage.htm?source=${(dto.source)!}&customerId=${(dto.customerId)!}&sourceId=${(dto.sourceId)!}">配送信息列表</a><span class="gt">&gt;</span><a href="">配送信息详情</a>
+    </div>
     <div class="track_box">
       <div class="dis_info">
         <span class="d_1"><label for="">配送号：</label><span class="d_2">${(ledgerDto.wareBatchNo)!}</span></span>

@@ -60,12 +60,12 @@ else
 			columns : [[  
 			            {
 				field : 'userAccount',
-				title : '用户名',
+				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">用户名</font>',
 				width : 120,
 				
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font style="font-style: normal;font-weight: bolder;font-size:18px;">'
+					return '<font style="font-style: normal; font-size:15px;">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -74,12 +74,12 @@ else
 			}
 			,  {
 				field : 'name',
-				title : '姓名',
+				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">姓名</font>',
 				width : 120,
 				
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font style="font-style: normal;font-weight: bolder;font-size:18px;">'
+					return '<font style="font-style: normal; font-size:15px;">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -87,12 +87,12 @@ else
 				}
 			},  {
 				field : 'userNo',
-				title : '手机',
+				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">手机</font>',
 				width : 120,
 				
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font style="font-style: normal;font-weight: bolder;font-size:18px;">'
+					return '<font style="font-style: normal; font-size:15px;">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -100,12 +100,12 @@ else
 				}
 			},  {
 				field : 'email',
-				title : '邮箱',
+				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">邮箱</font>',
 				width : 120,
 				
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font style="font-style: normal;font-weight: bolder;font-size:18px;">'
+					return '<font style="font-style: normal; font-size:15px;">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -114,7 +114,7 @@ else
 			},
 			{
 				field : 'action',
-				title : '操作',
+				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">操作</font>',
 				width : 140,
 				formatter : function(value, row, index) {
 					var str = '';
@@ -210,7 +210,7 @@ else
 	<div class="easyui-layout" data-options="fit : true,border : false">
 		
 		<div data-options="region:'center',border:false"  id="g">
-			<table id="dataGrid" title="个人中心" data-options="collapsible:true" >
+			<table id="dataGrid" title="<font  style='font-style: normal;font-weight: bolder;font-size:16px;'>个人中心</font>" data-options="collapsible:true" >
 				<style>
 						#g .datagrid-btable tr{height: 57px;}
 				</style>

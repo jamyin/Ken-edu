@@ -37,11 +37,11 @@
 				checkbox : true
 			}, */ {
 				field : 'schoolName',
-				title : '名称',
+				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">名称</font>',
 				width : 150,
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">'
+					return '<font  style="font-style: normal;font-size:15px;">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -50,11 +50,11 @@
 			} ] ],
 			columns : [ [ {
 				field : 'address',
-				title : '地址',
+				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">地址</font>',
 				width : 180,
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">'
+					return '<font  style="font-style: normal;font-size:15px;">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -63,11 +63,11 @@
 			}, 
 			{
 				field : 'contacts',
-				title : '联系人',
+				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">联系人</font>',
 				width : 50,
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">'
+					return '<font  style="font-style: normal;font-size:15px;">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -76,11 +76,11 @@
 			},
 			{
 				field : 'mobileNo',
-				title : '联系电话',
+				title : '<font  style="font-style: normal;font-size:18px;">联系电话</font>',
 				width : 50,
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">'
+					return '<font  style="font-style: normal;font-size:15px;">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -119,13 +119,14 @@
 </head>
 <body>
 	<div class="easyui-layout" data-options="fit : true,border : false">
-		<div data-options="region:'north',title:'查询条件',border:false" style="height: 80px; overflow: hidden;">
+		<div data-options="region:'north',border:false"    title="<font  style='font-style: normal;font-weight: bolder;font-size:18px;'>查询条件</font>"  style="height: 80px; overflow: hidden;">
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">
 			
 					<tr>
 						<th>名称</th>
 						<td><input class="span2" name="schoolName" /></td>
+					<td><a href="javascript:void(0);"  onclick="searchFun();" class="easyui-linkbutton" iconCls="icon-search" ><font  style='font-style: normal;font-weight: bolder;font-size:18px;'>查询</font></a></td>
 					</tr>							
 				</table>
 			</form>
@@ -138,7 +139,8 @@
 		</div>
 	</div>
 	<div id="toolbar" style="display: none;">
-		<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_add',plain:true" onclick="searchFun();">过滤条件</a><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_delete',plain:true" onclick="cleanFun();">清空条件</a>
+	
+		
 	</div>
 
 </body>

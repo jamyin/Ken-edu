@@ -21,7 +21,6 @@
 				<div class="tag_m">
 					<#if proPackageSto ??>
 						<#if proPackageSto.proDishesDtos ??>
-							
 							<#list proPackageSto.proDishesDtos as data>
 								<#assign dishes = dishes + data.waresName+"#">
 								<p>${(data.waresName)!}</p>			

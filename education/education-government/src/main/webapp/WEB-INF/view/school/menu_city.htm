@@ -22,7 +22,7 @@
   </style>
 </head>
 <body>
-  <<!-- div class="header">
+  <!-- div class="header">
   <div class="wrap">
     <a class="logo" href="index.html">上海市中小学校校生午餐综合管理平台</a>
     <div class="p_status">
@@ -45,13 +45,13 @@
 
   <div class="wrapperA">
     <div class="cur_postion">
-      <span class="cp">当前位置:</span><a href="/edu/school/list.htm?source=2&reviewed=1">安全追溯</a><span class="gt">&gt;</span><a href="">学校详情</a>
+      <span class="cp">当前位置:</span><#if dto.source != 1><a href="/edu/school/list.htm?source=${(dto.source)!}&reviewed=1">安全追溯</a></#if><span class="gt">&gt;</span><a href="">学校详情</a>
     </div>
 
     <h1 class="con-tt">
       <span class="title">${(eduSchoolDto.schoolName)!}</span>
       <#if dto.source == 1>
-      <a href="addSupplier.htm?schoolId=${(eduSchoolDto.id)!}&supplierId=${(eduSchoolSupplierDtos.supplierId)!}"><span class="offer_add" style="color:#fff;">新增委托经营单位</span></a>
+      <a href="addSupplier.htm?source=${(dto.source)!}&schoolId=${(eduSchoolDto.id)!}&supplierId=${(eduSchoolSupplierDtos.supplierId)!}"><span class="offer_add" style="color:#fff;">新增委托经营单位</span></a>
       </#if>
     </h1>
 
@@ -128,7 +128,7 @@
 
                 <h1 class="con-tt">
                   <span class="title">配送信息列表</span>
-                  <a class="more" href="/pro/ledger/findPage.htm?customerId=${(dto.customerId)!}&sourceId=${(eduSchoolSupplierDtos.supplierId)!}">更多 &gt;&gt; </a>
+                  <a class="more" href="/pro/ledger/findPage.htm?source=${(dto.source)!}&customerId=${(dto.customerId)!}&sourceId=${(eduSchoolSupplierDtos.supplierId)!}">更多 &gt;&gt; </a>
                 </h1>
 
                 <div class="wrapperB">
@@ -153,7 +153,7 @@
 	                      </#if></span>
 	                      <span class="dis_start ellipsis">${(ledgerDto.supplierName)!}</span>
 	                      <span class="dis_status"><#if ledgerDto.haulStatus == 0>未配送 </#if><#if ledgerDto.haulStatus == 1>配送中</#if><#if ledgerDto.haulStatus == 2>已配送</#if></span>
-	                      <a style="cursor: pointer;" href="/pro/ledger/detail.htm?wareBatchNo=${(ledgerDto.wareBatchNo)!}"><span style="cursor: pointer;" class="detail">详情</span></a>
+	                      <a style="cursor: pointer;" href="/pro/ledger/detail.htm?wareBatchNo=${(ledgerDto.wareBatchNo)!}&source=${(dto.source)!}&customerId=${(dto.customerId)!}&sourceId=${(dto.sourceId)!}"><span style="cursor: pointer;" class="detail">详情</span></a>
 	                    </li>
                   	</#list>
                   </#if>
@@ -188,13 +188,13 @@
 
                 <h1 class="con-tt">
                   <span class="title">采购品列表</span>
-                  <a class="more" href="/pro/wares/waresPages.htm?schoolId=${(dto.customerId)!}&sourceId=${(eduSchoolSupplierDtos.supplierId)!}">更多 &gt;&gt; </a>
+                  <a class="more" href="/pro/wares/waresPages.htm?source=${(dto.source)!}&schoolId=${(dto.customerId)!}&sourceId=${(eduSchoolSupplierDtos.supplierId)!}">更多 &gt;&gt; </a>
                 </h1>
                 <div class="item-list">
                   <ul>
                   	<#if mWares??>
 		                <#list mWares.results as wares>
-			                <a href="/pro/wares/details.htm?id=${(wares.id)!}">
+			                <a href="/pro/wares/details.htm?id=${(wares.id)!}&source=${(dto.source)!}&schoolId=${(dto.customerId)!}&sourceId=${(eduSchoolSupplierDtos.sourceId)!}">
 			                    <li>
 			                        <img src="${(wares.image)!}" alt=""/>
 			                        <div class="name">${(wares.waresName)!}</div>
@@ -222,7 +222,7 @@
 
                 <h1 class="con-tt">
                   <span class="title">供应商列表</span>
-                  <a class="more" href="/pro/supplier/list.htm?id=${(eduSchoolSupplierDtos.supplierId)!}">更多 &gt;&gt; </a>
+                  <a class="more" href="/pro/supplier/list.htm?id=${(eduSchoolSupplierDtos.supplierId)!}&source=${(dto.source)!}">更多 &gt;&gt; </a>
                 </h1>
                 <div class="wrapperB">
                   <ul class="sulplier_ul">

@@ -21,5 +21,7 @@ public class EduSchoolSupplierDto implements Serializable {
 	private Date lastUpdateTime;
 
 	private Integer stat;
+	
+	private Integer source;
 
 }

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ssic.education.provider.dao.ProUsersDao;
 import com.ssic.education.provider.dto.ProUsersDto;
-import com.ssic.education.provider.pojo.ProUsers;
+import com.ssic.education.handle.pojo.ProUsers;
 import com.ssic.education.provider.service.IProUsersService;
 import com.ssic.education.provider.util.MD5Util;
 import com.ssic.education.utils.util.BeanUtils;

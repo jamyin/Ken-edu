@@ -6,6 +6,7 @@
 	font-size: 18px !important;
 }
 </style>
+
 <script type="text/javascript">
 
 	$(function() {
@@ -52,28 +53,28 @@
 	});
 
 </script>
-		<div class="easyui-layout" data-options="fit:true,border:false">
+		<div class="easyui-layout" data-options="fit:true,border:false"  >
 			<div data-options="region:'center',border:false" title=""
-				style="overflow: hidden;">
+				style="border-color:red;">
 				<form id="form" method="post"  >
 				   <input id="id" name="id" type="hidden" value="${id}" />
-					<table class="table table-hover table-condensed">
+					<table class="table table-hover table-condensed"  >
 						<tr>
 
-							<th>商品名称</th>
+							<th>*商品名称</th>
 							<td><input name="waresName" type="text" id="waresName"
 								placeholder="请输入商品名称" class="easyui-validatebox span2"
 								data-options="required:true" ></td>
-							<th>规格</th>
+							<th>*规格</th>
 							<td><input name="spec" type="text" placeholder="请输入规格"  id="spec"
 								class="easyui-validatebox span2"  data-options="required:true"></td>
 
 						</tr>
 						<tr>
-							<th>保质期</th>
+							<th>*保质期</th>
 							<td><input name="shelfLife" type="text" placeholder="请输入保质期" id="shelfLife"
 								class="easyui-validatebox span2"  data-options="required:true" ></td>
-							<th>保质期单位</th>
+							<th>*保质期单位</th>
 							<td><select id="unit" class="easyui-combobox" name="unit"  data-options="width:140,height:29,editable:false,panelHeight:'auto'"
 								data-options="required:true">
 							    <option value="年">年</option>   
@@ -96,7 +97,7 @@
 						<th>生产企业</th>
 							<td><input name="manufacturer" type="text" placeholder="请输入供应商名称" id="manufacturer"
 								class="easyui-validatebox span2" ></td>
-							<th>商品分类</th>
+							<th>*商品分类</th>
 							<td><select id="waresType" class="easyui-combobox" name="waresType"  data-options="width:140,height:29,editable:false,panelHeight:'auto'"
 								data-options="required:true">
 								<option value="">请选择商品分类</option>

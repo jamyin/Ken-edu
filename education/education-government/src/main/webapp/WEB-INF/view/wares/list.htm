@@ -8,7 +8,10 @@
 <#include "/common/nav.htm" />
 
   <div class="wrapperA">
-    <form action="/pro/wares/waresPages.htm?schoolId=${(params.schoolId)!}&sourceId=${(params.sourceId)!}" method="post" id="myform">
+   <div class="cur_postion">
+      <span class="cp">当前位置:</span><a href="/edu/school/list.htm?source=${(params.source)!}&reviewed=1">安全追溯</a><span class="gt">&gt;</span><a href="/edu/school/details.htm?source=${(dto.source)!}&customerId=${(params.schoolId)!}">学校详情</a><span class="gt">&gt;</span><a href="#">采购品列表</a>
+    </div>
+    <form action="/pro/wares/waresPages.htm?schoolId=${(params.schoolId)!}&sourceId=${(params.sourceId)!}&source=${(params.source)!}" method="post" id="myform">
       <h1 class="con-tt"><span class="title"><#if params.dishes>成品<#else>原料</#if>列表</span>
         <span>
           <input type="hidden" name="dishes" value="${(params.dishes)!}"/>
@@ -23,11 +26,11 @@
       <ul>
         <#if pageList??>
           <#list pageList.results as data>
-	          <a href="/pro/wares/details.htm?id=${(data.id)!}">
+	          <a href="/pro/wares/details.htm?id=${(data.id)!}&source=${(params.source)!}&schoolId=${(params.schoolId)!}&sourceId=${(params.sourceId)!}">
 	              <li>
 	                <img src="${(data.image)!}" alt="" />
 	                <div class="name">${(data.waresName)!}</div>
-	                <div>分类:<span>${(data.waresTypeStr)!}</span></div>
+	                <div style="font-size: 12px; overflow: hidden;">产品编码:<span>${(data.customCode)!}</span></div>
 	                <div>规格:<span>${(data.spec)!}</span></div>
 	              </li>
 	           </a>

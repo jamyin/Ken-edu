@@ -15,5 +15,7 @@ public interface ITaskReceiveService {
 	public PageResult<EduTaskReceiveDto> searchEduTaskReceive(EduTaskReceiveDto eduTaskReceiveDto,
 			PageQuery pageQuery);
 
-	public int updateEduTaskReceive(EduTaskReceiveDto eduTaskReceiveDto); 
+	public int updateEduTaskReceive(EduTaskReceiveDto eduTaskReceiveDto);
+	
+	public List<EduTaskReceiveDto> searchEduTaskReceive(EduTaskReceiveDto eduTaskReceiveDto); 
 }

@@ -13,18 +13,15 @@
     <body>
         
         <#include "/common/nav.htm" />
-        
+        <input id="wwwdomain" type="hidden" value="${(wwwdomain)!}">
         <div class="breadcrumb">
             <span>当前位置:</span>
-            <a href="#">公告通知</a>
             <span> &gt; </span>
-            <a href="#">已发通知</a>
-            <span> &gt; </span>
-            <a href="#">通知详情</a>
+            <a href="#">公告发布</a>
         </div>
         <div class="main_wrap">
 
-            <h2>通知详情</h2>
+            <h2>公告详情</h2>
             <div class="content_wrap">
 
                 <div class="tab_wrap">
@@ -40,6 +37,11 @@
                                 <label for="title">图片:    </label>
                                 <input type="file" id="id-input-file-1"/>
                             </section>
+                             <br>
+                            <section class="line">
+                                <label for="title"></label>
+                                <img id="pic_show" alt="" src="" style="width:100px;height:100px;"/>
+                            </section>                            
                             <br>
                             <section class="line">
                                 <label>类别:    </label>
@@ -90,7 +92,6 @@
             	$("#savebutton").on('click',function(){
             		var ajaxParams = $("#submitForm").serialize();
     				var content = um.getContent();
-    				$("#content").val(content);
     				$.ajax({
     					url : "/info/save.htm",
     					type:"POST",
@@ -99,7 +100,13 @@
     					success:function(data){
     						if(data.status==200){
 								alert("发布成功");
-								//window.location.href = "";
+								if(document.getElementById("healthgive").checked){
+									window.location.href = "/info/index/3.htm";
+								}else{
+									window.location.href = "/info/index/0.htm";
+								}
+								
+								//window.location.href = "/info/index/"+type+".htm";
     						}else{
     							
     						}
@@ -130,6 +137,7 @@
                     onComplete: function(event, queueID, fileObj, response, data) {
                         var dataObj = eval("("+response+")");
                         if(dataObj.status == 200){
+                        	$("#pic_show").attr("src",$("#wwwdomain").val()+dataObj.filePath);
                         	$("#pic").attr("value",dataObj.filePath);
                         	$("#file-1").attr("checked","checked");
                         }

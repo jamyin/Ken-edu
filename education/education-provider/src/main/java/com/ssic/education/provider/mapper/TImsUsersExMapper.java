@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.ssic.education.provider.dto.TImsUsersDto;
 import com.ssic.education.provider.pageModel.PageHelper;
-import com.ssic.education.provider.pojo.ProUsers;
+import com.ssic.education.handle.pojo.ProUsers;
 
 public interface TImsUsersExMapper {
 

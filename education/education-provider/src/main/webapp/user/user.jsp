@@ -59,12 +59,12 @@ else
 			columns : [[  
 			            {
 				field : 'userAccount',
-				title : '用户名',
+				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">用户名</font>',
 				width : 120,
 				
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font style="font-style: normal;font-weight: bolder;font-size:18px;">'
+					return '<font style="font-style: normal; font-size:15px;">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -73,12 +73,12 @@ else
 			}
 			,  {
 				field : 'name',
-				title : '姓名',
+				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">姓名</font>',
 				width : 120,
 				
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font style="font-style: normal;font-weight: bolder;font-size:18px;">'
+					return '<font style="font-style: normal; font-size:15px;">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -86,12 +86,12 @@ else
 				}
 			},  {
 				field : 'userNo',
-				title : '手机',
+				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">手机</font>',
 				width : 120,
 				
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font style="font-style: normal;font-weight: bolder;font-size:18px;">'
+					return '<font style="font-style: normal; font-size:15px;">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -99,12 +99,12 @@ else
 				}
 			},  {
 				field : 'email',
-				title : '邮箱',
+				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">邮箱</font>',
 				width : 120,
 				
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font style="font-style: normal;font-weight: bolder;font-size:18px;">'
+					return '<font style="font-style: normal; font-size:15px;">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -112,12 +112,12 @@ else
 				}
 			},  {
 				field : 'userTypeName',
-				title : '账号权限',
+				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">账号权限</font>',
 				width : 120,
 				
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font style="font-style: normal;font-weight: bolder;font-size:18px;">'
+					return '<font style="font-style: normal; font-size:15px;">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -127,7 +127,7 @@ else
 			,
 			{
 				field : 'action',
-				title : '操作',
+				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">操作</font>',
 				width : 140,
 				formatter : function(value, row, index) {
 					var str = '';
@@ -273,27 +273,28 @@ else
 </head>
 <body>
 	<div class="easyui-layout" data-options="fit : true,border : false">
-		<div data-options="region:'north',title:'查询条件',border:false" style="height: 80px; overflow: hidden;">
+		<div data-options="region:'north',border:false"  title="<font  style='font-style: normal;font-weight: bolder;font-size:18px;'>查询条件</font>"    style="height: 80px; overflow: hidden;">
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">
 					<tr>
 						<th>姓名</th>
 						<td><input name="name" placeholder="可以搜索名称" class="easyui-validatebox"  style="width: 215px;"/></td>
-						 </tr>					  	
-				</table>
+							<td><a href="javascript:void(0);"  onclick="searchFun();" class="easyui-linkbutton" iconCls="icon-search" ><font  style='font-style: normal;font-weight: bolder;font-size:18px;'>查询</font></a></td>
+	
+						 </tr>	
+								</table>
 			</form>
 		</div>
 		<div data-options="region:'center',border:false"  id="g">
-			<table id="dataGrid" title="用户管理" data-options="collapsible:true" ></table>
+			<table id="dataGrid" title="<font  style='font-style: normal;font-weight: bolder;font-size:16px;'>用户管理</font>" data-options="collapsible:true" ></table>
 				<style>
-						#g .datagrid-btable tr{height: 57px;}
+						#g .datagrid-btable tr{height: 45px;}
 				</style>
 		</div>
 	</div>
 	<div id="toolbar" style="display: none;">
-			<a onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'">添加</a>
-		<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_add',plain:true" onclick="searchFun();">过滤条件</a><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_delete',plain:true" onclick="cleanFun();">清空条件</a>
-	
+			<a class="btn btn-mini btn-light"  onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'"><font  style='font-style: normal;font-weight: bolder;font-size:16px;'>添加</font></a>
+
 	</div>
 
 </body>

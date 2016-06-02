@@ -43,10 +43,10 @@
             <h2>详情</h2>
             <div class="content_wrap">
                 <h1>${(data.title)!}</h1>
-                <p> 发件人：市教委 </p>
+                <p> 发件人：${(data.createName)!} </p>
                 <p> 时间：${(data.createTime?string('yyyy-MM-dd'))!} </p>
-                <span class="tips">未读:  13</span>
-                <span class="tips">已读:  13</span>
+                <span class="tips">未读:  ${(readMap.read)!0}</span>
+                <span class="tips">已读:  ${(readMap.unread)!0}</span>
                 <div class="text">
                         <h2>${(data.title)!}</h3>
 						${(data.content)!}

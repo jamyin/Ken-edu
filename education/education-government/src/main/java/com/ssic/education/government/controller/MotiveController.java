@@ -2,6 +2,7 @@ package com.ssic.education.government.controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import lombok.Data;
@@ -15,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.common.base.Objects;
 import com.ssic.educateion.common.dto.EduCommitteeDto;
-import com.ssic.educateion.common.dto.EduInformationDto;
 import com.ssic.educateion.common.dto.EduSchoolDto;
 import com.ssic.educateion.common.dto.EduTaskDto;
 import com.ssic.educateion.common.dto.EduTaskReceiveDto;
@@ -128,8 +128,11 @@ public class MotiveController extends BaseController {
 				Byte.valueOf("2"))) {// 查询区县教委下的学校信息
 			EduSchoolDto eduSchoolDto = new EduSchoolDto();
 			eduSchoolDto.setCommitteeId(getEduUsersDto().getSourceId());
+			eduSchoolDto.setReviewed(Byte.valueOf("1"));//审核通过的 
 			List<EduSchoolDto> resultList = eduSchoolService.searchEduScholDtoList(eduSchoolDto);
-			dataList = copyProperty(resultList);
+			if(resultList!=null && resultList.size()>0){
+				dataList = copyProperty(resultList);	
+			}
 		}else{
 			
 		}
@@ -160,11 +163,11 @@ public class MotiveController extends BaseController {
 	@ResponseBody
 	public Response<String> save(EduTaskDto eduTaskDto) {
 		Response<String> response = new Response<String>();
-		eduTaskDto.setContent(eduTaskDto.getEditorValue());
+//		eduTaskDto.setContent(eduTaskDto.getEditorValue());
 		
 		String infoId = UUIDGenerator.getUUID32Bit();
 		eduTaskDto.setId(infoId);
-		eduTaskDto.setCreateId(getSessionUserId());
+		eduTaskDto.setCreateId(getEduUsersDto().getSourceId());//创建者的Id修改为该登录用户的类型 教委 或学校
 		eduTaskDto.setCreateName(getEduUsersDto().getName());
 
 //		int result = iEduInformationService.saveInfomation(eduTaskDto);
@@ -194,11 +197,6 @@ public class MotiveController extends BaseController {
 			dto.setReceiveId(idName[0]);
 			dto.setReceiveName(idName[1]);
 			dto.setSendName(eduTaskDto.getCreateName());
-//			dto.setInfomationId(eduTaskDto.getId());
-//			dto.setInfoTitle(eduTaskDto.getTitle());
-//			dto.setCreateId(getSessionUserId());
-//			dto.setSourceId(idName[0]);
-//			dto.setSourceName(idName[1]);
 			dList.add(dto);
 		}
 		// }
@@ -218,7 +216,7 @@ public class MotiveController extends BaseController {
 
 		String sourceId = getEduUsersDto().getSourceId();//用户所属教委 或学校
 		eduTaskReceiveDto.setReceiveId(sourceId);
-		
+		eduTaskReceiveDto.setReadstat(DataStatus.DISABLED);
 //		PageResult<EduInformationListDto> pageList = iTaskReceiveService.searchEduTaskReceive(eduInformationListDto,pageQuery);
 		PageResult<EduTaskReceiveDto> pageList = iTaskReceiveService.searchEduTaskReceive(eduTaskReceiveDto,pageQuery);
 		
@@ -239,12 +237,41 @@ public class MotiveController extends BaseController {
 	public ModelAndView sended(EduTaskReceiveDto eduTaskReceiveDto,PageQuery pageQuery) {
 		ModelAndView mv = getModelAndView();
 		
-//		eduInformationListDto.setCreateId(getSessionUserId());
-		PageResult<EduTaskReceiveDto> pageList = iTaskReceiveService.searchEduTaskReceive(eduTaskReceiveDto,pageQuery);
+		EduTaskDto eduTaskDto = new EduTaskDto();
+		eduTaskDto.setCreateId(getEduUsersDto().getSourceId());
+		PageResult<EduTaskDto> pageList = iTaskService.searchTask(eduTaskDto, pageQuery);
+		
+		eduTaskReceiveDto.setCreateId(getEduUsersDto().getSourceId());//创建者的Id修改为该登录用户的类型 教委 或学校
+		List<EduTaskReceiveDto> dataList = iTaskReceiveService.searchEduTaskReceive(eduTaskReceiveDto);
+
+		if(dataList!=null && dataList.size()>0){
+			HashMap<String,List<EduTaskReceiveDto>> beanMapList = copyListToTaskReceiceMap(dataList);
+			
+			for(EduTaskDto task  : pageList.getResults()){
+				task.setTaskReceiceList(beanMapList.get(task.getId()));
+			}
+		}
+
 		getSourceType(mv);
 		mv.addObject("pageList", pageList);
 		mv.setViewName("motive/dis_edu_motive_sended");
 		return mv;
+	}
+
+	private HashMap<String, List<EduTaskReceiveDto>> copyListToTaskReceiceMap(List<EduTaskReceiveDto> dataList) {
+		HashMap<String,List<EduTaskReceiveDto>> readMap = new HashMap<String,List<EduTaskReceiveDto>>();
+		List<EduTaskReceiveDto> resultList = null;
+		for(EduTaskReceiveDto mapDto :dataList){
+			String keyCode = mapDto.getTaskId();
+			if(readMap.containsKey(keyCode)){
+				resultList = readMap.get(keyCode);
+			}else{
+				resultList = new ArrayList<EduTaskReceiveDto>();
+			}
+			resultList.add(mapDto);
+			readMap.put(keyCode, resultList);
+		}
+		return readMap;
 	}
 
 	/**
@@ -255,16 +282,24 @@ public class MotiveController extends BaseController {
 	 * @version: 2016年5月30日 上午10:42:24
 	 */
 	@RequestMapping(value = "readed")
-	public ModelAndView readed() {
+	public ModelAndView readed(EduTaskReceiveDto eduTaskReceiveDto,PageQuery pageQuery) {
 		ModelAndView mv = getModelAndView();
+
+		String sourceId = getEduUsersDto().getSourceId();//用户所属教委 或学校
+		eduTaskReceiveDto.setReceiveId(sourceId);
+		eduTaskReceiveDto.setReadstat(DataStatus.ENABLED);
+//		PageResult<EduInformationListDto> pageList = iTaskReceiveService.searchEduTaskReceive(eduInformationListDto,pageQuery);
+		PageResult<EduTaskReceiveDto> pageList = iTaskReceiveService.searchEduTaskReceive(eduTaskReceiveDto,pageQuery);
+		
 		getSourceType(mv);
+		mv.addObject("pageList", pageList);
 		mv.setViewName("motive/dis_edu_motive_readed");
 		return mv;
 	}
 
 	/**
 	 * 
-	 * 此方法描述的是：infomation 详情信息
+	 * 此方法描述的是：infomation 详情信息 并且修改是否读取的状态
 	 * 
 	 * @author: cwftalus@163.com
 	 * @version: 2016年5月30日 上午10:42:24
@@ -273,11 +308,59 @@ public class MotiveController extends BaseController {
 	public ModelAndView details(@PathVariable String infoId) {
 		ModelAndView mv = getModelAndView();
 
+		String sourceId = getEduUsersDto().getSourceId();
+		
 		EduTaskDto data = iTaskService.search(infoId);
+		EduTaskReceiveDto eduTaskReceiveDto = new EduTaskReceiveDto();
+		eduTaskReceiveDto.setReceiveId(sourceId);
+		eduTaskReceiveDto.setTaskId(infoId);
+		List<EduTaskReceiveDto> dataList = iTaskReceiveService.searchEduTaskReceive(eduTaskReceiveDto);
+		if(dataList!=null && dataList.size()>0){
+			eduTaskReceiveDto = dataList.get(0);
+			eduTaskReceiveDto.setReadstat(DataStatus.ENABLED);
+			iTaskReceiveService.updateEduTaskReceive(eduTaskReceiveDto);			
+		}
 
+		//获取已读未读 数据
+		EduTaskReceiveDto listDto = new EduTaskReceiveDto();
+		listDto.setTaskId(infoId);
+		List<EduTaskReceiveDto> resultList = iTaskReceiveService.searchEduTaskReceive(listDto);
+		HashMap<String,Integer> readMap = new HashMap<String, Integer>();	
+		if(resultList!=null && resultList.size()>0){
+			readMap = copyListToMap(resultList);	
+		}
+		
+		
+		mv.addObject("resultList",resultList);//已读未读的所有数据
+		mv.addObject("readMap", readMap);
 		mv.addObject("data", data);
 		mv.setViewName("motive/dis_edu_motice_detail");
 		return mv;
+	}
+
+	private HashMap<String, Integer> copyListToMap(List<EduTaskReceiveDto> resultList) {
+		HashMap<String,Integer> readMap = new HashMap<String,Integer>();
+		int read = 0;
+		int unread = 0;
+		for(EduTaskReceiveDto mapDto :resultList){
+			if(Objects.equal(mapDto.getReadstat(),DataStatus.ENABLED)){
+				if(readMap.containsKey("read")){
+					read = readMap.get("read");
+					readMap.put("read",read+1);
+				}else{
+					readMap.put("read",1);
+				}
+			}
+			if(Objects.equal(mapDto.getReadstat(),DataStatus.DISABLED)){
+				if(readMap.containsKey("unread")){
+					unread = readMap.get("unread");
+					readMap.put("unread",unread+1);
+				}else{
+					readMap.put("unread",1);
+				}
+			}
+		}
+		return readMap;
 	}
 
 	public List<InfoList> copyProperty(Object xObj) {

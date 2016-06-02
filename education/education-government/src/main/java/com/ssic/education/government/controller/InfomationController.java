@@ -1,5 +1,8 @@
 package com.ssic.education.government.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -7,11 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.common.base.Objects;
 import com.ssic.educateion.common.dto.EduInformationDto;
 import com.ssic.education.handle.service.EduSchoolService;
 import com.ssic.education.handle.service.IEduCommitteeService;
-import com.ssic.education.handle.service.ITaskReceiveService;
 import com.ssic.education.handle.service.IEduInformationService;
+import com.ssic.education.handle.service.ITaskReceiveService;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
@@ -46,6 +50,15 @@ public class InfomationController extends BaseController {
 		ModelAndView mv = getModelAndView();
 		EduInformationDto eduInformationDto = new EduInformationDto();
 		eduInformationDto.setType(Integer.valueOf(type));
+		
+		List<String> sourceIds = new ArrayList<String>();
+		if (Objects.equal(getEduUsersDto().getSourceType(), Byte.valueOf("0"))) {// 市教委登录的账号能看全部的信息
+		} else if (Objects.equal(getEduUsersDto().getSourceType(),Byte.valueOf("1"))) {//学校登录的能看到市教委 和 该区教委的发不的
+			
+		} else if (Objects.equal(getEduUsersDto().getSourceType(),Byte.valueOf("2"))) {// 区教委登录的能看市教委 和 自己发布的
+			
+		}
+		
 		PageResult<EduInformationDto> pageList =  iEduInformationService.searchInfomation(eduInformationDto,pageQuery);
 		mv.addObject("type",type);
 		mv.addObject("pageList", pageList);

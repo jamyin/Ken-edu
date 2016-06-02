@@ -2,11 +2,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
-        <title>通告公示</title>
+<#include "/common/head.htm" />
         <link rel="stylesheet" href="/static/css/common.css">
         <link rel="stylesheet" href="/static/css/style.css">
         <link rel="stylesheet" href="/static/css/panel.css">
+        <style type="text/css">
+		a:link, a:visited {color:#333;}
+		.page .page_to_go{border: 1px;}
+		</style>
     </head>
     <body>
         
@@ -14,16 +17,26 @@
         
         <div class="breadcrumb">
             <span>当前位置:</span>
-            <a href="#">健康宣教</a>
             <span> &gt; </span>
-            <a href="#">通知公告</a>
+            <#if type == 3>
+            	<a href="/info/index/${(type)!}.htm">健康宣教</a>
+            </#if>
+            <#if type == 0>
+            	<a href="/info/index/${(type)!}.htm">通告公示</a>
+            </#if>
         </div>
         <form id="myform" action="/info/index/${(type)!}.htm">
         	<input type="hidden" name="currPage" id="currPage" value="1"/>
         </form>
         <div class="wrapper">
             <div class="panel">
-                <h2>通告公示 <a class="more" href="#">删除</a></h2>
+                <!-- <h2>通告公示 <a class="more" href="#">删除</a></h2> -->
+                <#if type == 3>
+	            	<h2>健康宣教</h2> 
+	            </#if>
+	            <#if type == 0>
+	            	<h2>通告公示</h2> 
+	            </#if>
                 <ul class="list">
                 	<#if pageList ??>
                 		<#list pageList.getResults() as data>
@@ -37,11 +50,14 @@
                 <#include "/common/page.htm" />
             </div>
         </div>
-        <div class="footer">
-    		上海市中小学校学生午餐综合管理平台<br>CopyRight© 2016上海市天坊信息技术有限公司
-    	</div>
+        <#include "/common/footer.htm" />
     </body>
     <script type="text/javascript">
+   		$(function(){
+	      // debugger;
+	      $(".nav").find("a").removeClass("cur");
+	      $(".nav").find("a:eq(3)").addClass("cur");
+	    })
 	    function gotoPage(page) {
 	        $("#currPage").val(page);
 	        $("#myform").submit();
