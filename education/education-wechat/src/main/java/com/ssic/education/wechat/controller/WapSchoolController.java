@@ -1,6 +1,5 @@
 package com.ssic.education.wechat.controller;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +35,6 @@ public class WapSchoolController extends BaseController{
 	@Autowired
 	private EduSchoolService eduSchoolService;
 
-
-	
 	@Autowired
 	private IEduCanteenService iEduCanteenService;
 	
@@ -140,6 +137,24 @@ public class WapSchoolController extends BaseController{
 		}
 		return result;
 	}
+	
+	@RequestMapping(value="check")
+	@ResponseBody
+	public Response<String> check(EduParentScChDto eduParentScChDto){
+		Response<String> result = new Response<String>();
+		
+		//查询该家长 对应该学校是否已经关注 如果已经关注则调至关注页面
+		eduParentScChDto.setParentId(parentId);
+		List<EduParentScChDto> dataList = iEduParentScChService.searchParentScChDtoList(eduParentScChDto);
+
+		if(dataList!=null&& dataList.size()>0){//表示已经关注 不能进行关注
+			result.setData(dataList.get(0).getSchoolId());
+			result.setStatus(DataStatus.HTTP_FAILE);
+			result.setMessage("未找到相对应的学校信息");
+		}
+		return result;
+	}
+	
 	/**
 	 * 
 		 * 此方法描述的是：根据学校Id 获取 学校对应的详细信息
@@ -150,7 +165,6 @@ public class WapSchoolController extends BaseController{
 	public ModelAndView details(@PathVariable String schoolId){
 		ModelAndView mv = getModelAndView();
 		EduSchoolDto data = eduSchoolService.findById(schoolId);
-		
 		mv.addObject("data", data);
 		mv.setViewName("schoolDetails");
 		return mv;

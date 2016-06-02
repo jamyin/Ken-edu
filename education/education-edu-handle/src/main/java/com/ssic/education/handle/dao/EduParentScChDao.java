@@ -31,6 +31,10 @@ public class EduParentScChDao extends MyBatisBaseDao<EduParentScCh> {
 			criteria.andParentIdEqualTo(eduParentScChDto.getParentId());
 		}
 		
+		if(!StringUtils.isEmpty(eduParentScChDto.getSchoolId())){
+			criteria.andSchoolIdEqualTo(eduParentScChDto.getSchoolId());
+		}
+		
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		return mapper.selectByExample(example);
 	}

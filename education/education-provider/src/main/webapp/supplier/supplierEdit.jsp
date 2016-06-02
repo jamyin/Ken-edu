@@ -42,14 +42,14 @@
 		  <input id="id" name="id" type="hidden" value="${ProSupplie.id}" />
 			<table class="table table-hover table-condensed">
 				<tr>					
-					<th>供应商名称</th>
+					<th>*供应商名称</th>
 					<td><input name="supplierName" type="text" placeholder="请输入供应商名称" class="easyui-validatebox span2" data-options="required:true" value="${ProSupplie.supplierName}" ></td>
 				
 						<th>供应商编码</th>
 						<td><input name="supplierCode" type="text" class="easyui-validatebox span2"  value="${ProSupplie.supplierCode}" ></td>
 			
 				<tr>
-					<th>供应商地址</th>
+					<th>*供应商地址</th>
 					<td><input name="address" type="text" placeholder="请输入供应商地址" class="easyui-validatebox span2" data-options="required:true"  value="${ProSupplie.address}" ></td>
 					<th>联系人</th>
 						<td><input name="corporation" type="text" placeholder="请输入联系人" class="easyui-validatebox span2"  value="${ProSupplie.corporation}" ></td>					

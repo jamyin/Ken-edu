@@ -197,11 +197,6 @@ public class MotiveController extends BaseController {
 			dto.setReceiveId(idName[0]);
 			dto.setReceiveName(idName[1]);
 			dto.setSendName(eduTaskDto.getCreateName());
-//			dto.setInfomationId(eduTaskDto.getId());
-//			dto.setInfoTitle(eduTaskDto.getTitle());
-//			dto.setCreateId(getSessionUserId());
-//			dto.setSourceId(idName[0]);
-//			dto.setSourceName(idName[1]);
 			dList.add(dto);
 		}
 		// }
@@ -242,12 +237,41 @@ public class MotiveController extends BaseController {
 	public ModelAndView sended(EduTaskReceiveDto eduTaskReceiveDto,PageQuery pageQuery) {
 		ModelAndView mv = getModelAndView();
 		
+		EduTaskDto eduTaskDto = new EduTaskDto();
+		eduTaskDto.setCreateId(getEduUsersDto().getSourceId());
+		PageResult<EduTaskDto> pageList = iTaskService.searchTask(eduTaskDto, pageQuery);
+		
 		eduTaskReceiveDto.setCreateId(getEduUsersDto().getSourceId());//创建者的Id修改为该登录用户的类型 教委 或学校
-		PageResult<EduTaskReceiveDto> pageList = iTaskReceiveService.searchEduTaskReceive(eduTaskReceiveDto,pageQuery);
+		List<EduTaskReceiveDto> dataList = iTaskReceiveService.searchEduTaskReceive(eduTaskReceiveDto);
+
+		if(dataList!=null && dataList.size()>0){
+			HashMap<String,List<EduTaskReceiveDto>> beanMapList = copyListToTaskReceiceMap(dataList);
+			
+			for(EduTaskDto task  : pageList.getResults()){
+				task.setTaskReceiceList(beanMapList.get(task.getId()));
+			}
+		}
+
 		getSourceType(mv);
 		mv.addObject("pageList", pageList);
 		mv.setViewName("motive/dis_edu_motive_sended");
 		return mv;
+	}
+
+	private HashMap<String, List<EduTaskReceiveDto>> copyListToTaskReceiceMap(List<EduTaskReceiveDto> dataList) {
+		HashMap<String,List<EduTaskReceiveDto>> readMap = new HashMap<String,List<EduTaskReceiveDto>>();
+		List<EduTaskReceiveDto> resultList = null;
+		for(EduTaskReceiveDto mapDto :dataList){
+			String keyCode = mapDto.getTaskId();
+			if(readMap.containsKey(keyCode)){
+				resultList = readMap.get(keyCode);
+			}else{
+				resultList = new ArrayList<EduTaskReceiveDto>();
+			}
+			resultList.add(mapDto);
+			readMap.put(keyCode, resultList);
+		}
+		return readMap;
 	}
 
 	/**
@@ -301,7 +325,11 @@ public class MotiveController extends BaseController {
 		EduTaskReceiveDto listDto = new EduTaskReceiveDto();
 		listDto.setTaskId(infoId);
 		List<EduTaskReceiveDto> resultList = iTaskReceiveService.searchEduTaskReceive(listDto);
-		HashMap<String,Integer> readMap = copyListToMap(resultList);
+		HashMap<String,Integer> readMap = new HashMap<String, Integer>();	
+		if(resultList!=null && resultList.size()>0){
+			readMap = copyListToMap(resultList);	
+		}
+		
 		
 		mv.addObject("resultList",resultList);//已读未读的所有数据
 		mv.addObject("readMap", readMap);

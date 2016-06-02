@@ -217,16 +217,17 @@ public class EduSchoolController extends BaseController{
 		ProSchoolWareDto proSchoolWareDto = new ProSchoolWareDto();
 		proSchoolWareDto.setSchoolId(dto.getCustomerId());		
 		ProSupplierDto proSupplierDto = new ProSupplierDto();
+		proSupplierDto.setId(dto.getCustomerId());
 		PageResult<ProSupplierDto> mSuppliers = new PageResult<ProSupplierDto>();
 		LedgerDto ledgerDto = new LedgerDto();
 		ledgerDto.setReceiverId(dto.getCustomerId());
 		if (null != eduSchoolSupplierDtos && StringUtils.isNotBlank(eduSchoolSupplierDtos.getSupplierId())) {
 //			 mWares = queryWares(eduSchoolSupplierDtos.getSupplierId(), query, false);
 			 proSupplierDto.setId(eduSchoolSupplierDtos.getSupplierId());
-			 proSchoolWareDto.setSourceId(eduSchoolSupplierDtos.getSupplierId());
-			 mSuppliers = queryMaterialSupplier(proSupplierDto, query);
+			 proSchoolWareDto.setSourceId(eduSchoolSupplierDtos.getSupplierId());			
 			 ledgerDto.setSourceId(eduSchoolSupplierDtos.getSupplierId());
 		}
+		 mSuppliers = queryMaterialSupplier(proSupplierDto, query);
 		PageResult<ProWaresDto> mWares = proWaresService.findWarsePageByParam(proSchoolWareDto, query);
 		
 		PageResult<LedgerDto> ledgerDtos = proLedgerService.selectLedgerPage(ledgerDto,query);

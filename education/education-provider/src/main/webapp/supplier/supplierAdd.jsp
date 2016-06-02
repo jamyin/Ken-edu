@@ -46,13 +46,13 @@
 		<form id="form" method="post">
 <table class="table table-hover table-condensed" border="0" >
 					<tr>
-					<th>供应商名称</th>
+					<th>*供应商名称</th>
 						<td><input name="supplierName" type="text" placeholder="请输入供应商名称" class="easyui-validatebox span2" data-options="required:true" ></td>
 											
 					</tr>
 					<tr>
 					
-					<th>供应商地址</th>
+					<th>*供应商地址</th>
 						<td><input name="address" type="text" placeholder="请输入供应商地址" class="easyui-validatebox span2" data-options="required:true" ></td>			
 					
 					</tr>
