@@ -4,14 +4,14 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import org.apache.commons.lang.StringUtils;
 
 import com.ssic.education.utils.constants.SchoollevelEnum;
 import com.ssic.education.utils.model.PageResult;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
 * @ClassName: EduSchoolDto
@@ -77,5 +77,8 @@ public class EduSchoolDto implements Serializable {
 	private String supplyDate;       
 	private String grade; 		   //年级
 	private String supplyPhase;    //供应阶段:早中晚餐
+	
+	private EduCanteenDto eduCanteenDto;
+	private EduSchoolSupplierDto eduSchoolSupplierDto;
 	
 }
