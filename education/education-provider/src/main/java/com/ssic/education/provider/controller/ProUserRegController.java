@@ -63,6 +63,7 @@ public class ProUserRegController extends BaseController{
 		//用户信息
 		proUsersDto.setSourceId(supplierId);
 		proUsersDto.setName(supplierDto.getSupplierName());
+		proUsersDto.setIsadmin(DataStatus.ENABLED);
 		String proUserId = iProUsersService.saveProUsers(proUsersDto);
 		
 		return json;

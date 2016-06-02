@@ -58,7 +58,10 @@ public class InformationDao extends MyBatisBaseDao<EduInformation> {
         	}
         	if (StringUtils.isNotBlank(eduInformationDto.getTitle())){
         		criteria.andTitleLike("%"+eduInformationDto.getTitle().trim()+"%");
-        	}	
+        	}
+        	if (StringUtils.isNotBlank(eduInformationDto.getCreateSourceId())){
+        		criteria.andCreateSourceIdEqualTo(eduInformationDto.getCreateSourceId());
+        	}
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 	}
 
