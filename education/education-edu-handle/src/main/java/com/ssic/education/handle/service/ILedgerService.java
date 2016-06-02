@@ -27,4 +27,6 @@ public interface ILedgerService {
 
 	Map<ProLedgerMaster,List<ProLedger>> findExportProSupplier(LedgerDto ld);
 
+	int upDeleteLedger(String id);
+
 }

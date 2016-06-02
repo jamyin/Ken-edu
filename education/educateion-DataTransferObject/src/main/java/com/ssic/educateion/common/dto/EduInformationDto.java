@@ -2,6 +2,7 @@ package com.ssic.educateion.common.dto;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -37,6 +38,8 @@ public class EduInformationDto implements Serializable {
 	private String createSourceId;   
 	private Integer sourceType; 		    //url传进来
 	private String sourceId; 		    //url传进来
+	
+	private List<String> sourceIds;
 
 
 }
