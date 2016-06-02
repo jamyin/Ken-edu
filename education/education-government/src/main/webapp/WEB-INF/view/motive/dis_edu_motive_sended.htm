@@ -81,7 +81,13 @@
                             		<#list pageList.getResults() as result>
 	                                <tr>
 	                                    <td class="center"> <input type="checkbox"> </td>
-	                                    <td></td>
+	                                    <td>
+	                                    	<#if result.getTaskReceiceList() ??>
+	                                    		<#list result.getTaskReceiceList() as data>
+	                                    			${(data.receiveName)!} 、
+	                                    		</#list>
+	                                    	</#if>
+	                                    </td>
 	                                    <td>
 	                                        <a href="/motive/details/${(result.id)!}.htm">
 	                                            ${(result.title)!}

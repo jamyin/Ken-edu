@@ -269,6 +269,7 @@ public class MotiveController extends BaseController {
 				resultList = new ArrayList<EduTaskReceiveDto>();
 			}
 			resultList.add(mapDto);
+			readMap.put(keyCode, resultList);
 		}
 		return readMap;
 	}
@@ -324,7 +325,11 @@ public class MotiveController extends BaseController {
 		EduTaskReceiveDto listDto = new EduTaskReceiveDto();
 		listDto.setTaskId(infoId);
 		List<EduTaskReceiveDto> resultList = iTaskReceiveService.searchEduTaskReceive(listDto);
-		HashMap<String,Integer> readMap = copyListToMap(resultList);
+		HashMap<String,Integer> readMap = new HashMap<String, Integer>();	
+		if(resultList!=null && resultList.size()>0){
+			readMap = copyListToMap(resultList);	
+		}
+		
 		
 		mv.addObject("resultList",resultList);//已读未读的所有数据
 		mv.addObject("readMap", readMap);
