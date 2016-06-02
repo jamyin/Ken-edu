@@ -302,6 +302,8 @@ public class MotiveController extends BaseController {
 		listDto.setTaskId(infoId);
 		List<EduTaskReceiveDto> resultList = iTaskReceiveService.searchEduTaskReceive(listDto);
 		HashMap<String,Integer> readMap = copyListToMap(resultList);
+		
+		mv.addObject("resultList",resultList);//已读未读的所有数据
 		mv.addObject("readMap", readMap);
 		mv.addObject("data", data);
 		mv.setViewName("motive/dis_edu_motice_detail");
