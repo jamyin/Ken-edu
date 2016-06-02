@@ -174,8 +174,8 @@ public class SchoolController {
 		eduSchoolDto.setTypeList(typeList);
 		PageResult<ProPackagesDto> proPackagesDtos = proPackagesService.searchPackages(dto, page);
 
-		//school.setEduCanteenDto(eduCanteenDto);
-		//school.setEduSchoolSupplierDto(eduSchoolSupplierDto);
+		eduSchoolDto.setEduCanteenDto(eduCanteenDto);
+		eduSchoolDto.setEduSchoolSupplierDto(eduSchoolSupplierDto);
 		eduSchoolDto.setPackagesList(proPackagesDtos);
 
 		result.setData(eduSchoolDto);
