@@ -22,10 +22,12 @@ public class MainController extends BaseController{
 	private ModelAndView main(PageQuery pageQuery){
 		ModelAndView mv = getModelAndView();
 		EduInformationDto eduInformationDto = new EduInformationDto();
+		PageResult<EduInformationDto> pageList =  iEduInformationService.searchInfomation(eduInformationDto,pageQuery);
 		eduInformationDto.setType(Integer.valueOf(DataStatus.ENABLED));
 		PageResult<EduInformationDto> pageList1 =  iEduInformationService.searchInfomation(eduInformationDto,pageQuery);
 		eduInformationDto.setType(Integer.valueOf(DataStatus.MANAGERTYPE));
-		PageResult<EduInformationDto> pageList3 =  iEduInformationService.searchInfomation(eduInformationDto,pageQuery);		
+		PageResult<EduInformationDto> pageList3 =  iEduInformationService.searchInfomation(eduInformationDto,pageQuery);
+		mv.addObject("pageList", pageList);
 		mv.addObject("pageList1", pageList1);
 		mv.addObject("pageList3", pageList3);
 		mv.setViewName("main");
