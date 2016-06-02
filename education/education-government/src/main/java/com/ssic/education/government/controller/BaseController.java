@@ -21,6 +21,7 @@ import com.ssic.education.handle.service.IEduCommitteeService;
 import com.ssic.education.utils.constants.SessionConstants;
 import com.ssic.education.utils.util.FileUtils;
 import com.ssic.education.utils.util.JsonUtil;
+import com.ssic.education.utils.util.PropertiesUtils;
 
 
 public class BaseController {
@@ -42,6 +43,7 @@ public class BaseController {
 		ModelAndView mv = new ModelAndView();
 		
 		mv.addObject("navList", getNavList());
+		mv.addObject("wwwdomain",PropertiesUtils.getProperty("upload.look.url"));
 		return mv;
 	}
 
