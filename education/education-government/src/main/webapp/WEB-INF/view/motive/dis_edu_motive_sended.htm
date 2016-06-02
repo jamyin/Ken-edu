@@ -81,10 +81,10 @@
                             		<#list pageList.getResults() as result>
 	                                <tr>
 	                                    <td class="center"> <input type="checkbox"> </td>
-	                                    <td>${(result.receiveName)!} </td>
+	                                    <td></td>
 	                                    <td>
-	                                        <a href="/motive/details/${(result.taskId)!}.htm">
-	                                            ${(result.taskTitle)!}
+	                                        <a href="/motive/details/${(result.id)!}.htm">
+	                                            ${(result.title)!}
 	                                        </a>
 	                                    </td>
 	                                    <td>${(result.createTime?string('yyyy-MM-dd'))!}</td>

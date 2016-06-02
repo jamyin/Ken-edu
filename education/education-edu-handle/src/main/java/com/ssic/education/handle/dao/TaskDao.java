@@ -177,6 +177,9 @@ public class TaskDao extends MyBatisBaseDao<EduTask> {
         	if (StringUtils.isNotBlank(eduInformationDto.getTitle())){
         		criteria.andTitleLike("%"+eduInformationDto.getTitle().trim()+"%");
         	}	
+        	if (StringUtils.isNotBlank(eduInformationDto.getCreateId())){
+        		criteria.andCreateIdEqualTo(eduInformationDto.getCreateId());
+        	}	        	
 		}
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 	}
