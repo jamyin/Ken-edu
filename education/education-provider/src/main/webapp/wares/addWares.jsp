@@ -6,6 +6,7 @@
 	font-size: 18px !important;
 }
 </style>
+
 <script type="text/javascript">
 
 	$(function() {
@@ -52,12 +53,12 @@
 	});
 
 </script>
-		<div class="easyui-layout" data-options="fit:true,border:false">
+		<div class="easyui-layout" data-options="fit:true,border:false"  >
 			<div data-options="region:'center',border:false" title=""
-				style="overflow: hidden;">
+				style="border-color:red;">
 				<form id="form" method="post"  >
 				   <input id="id" name="id" type="hidden" value="${id}" />
-					<table class="table table-hover table-condensed">
+					<table class="table table-hover table-condensed"  >
 						<tr>
 
 							<th>*商品名称</th>

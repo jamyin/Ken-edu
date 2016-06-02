@@ -67,7 +67,7 @@ VALUES
 		#{users.id},#{users.name},#{users.password},#{users.stat},#{users.isadmin},#{users.createTime},#{users.userAccount},#{users.email},#{users.userNo},#{users.userType},#{users.sourceId})
 	</insert>
 
-	<insert id="addImsUsers" parameterType="com.ssic.education.provider.pojo.ProUsers">
+	<insert id="addImsUsers" parameterType="com.ssic.education.handle.pojo.ProUsers">
 		insert into
 		t_ims_users(id,`name`,`password`,stat,isAdmin,create_time,user_account,email,user_no,source_id)
 		values(#{users.id},#{users.name},#{users.password},#{users.stat},#{users.isAdmin},#{users.createdatetime},#{users.userAccount},#{users.email},#{users.userNo},#{users.sourceId})
