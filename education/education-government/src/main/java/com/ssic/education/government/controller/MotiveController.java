@@ -331,7 +331,12 @@ public class MotiveController extends BaseController {
 			readMap = copyListToMap(resultList);	
 		}
 		
+		boolean isowner = false;
+		if(Objects.equal(sourceId,data.getCreateId())){
+			isowner = true;
+		}
 		
+		mv.addObject("isowner", isowner);
 		mv.addObject("resultList",resultList);//已读未读的所有数据
 		mv.addObject("readMap", readMap);
 		mv.addObject("data", data);
