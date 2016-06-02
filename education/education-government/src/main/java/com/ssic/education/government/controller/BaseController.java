@@ -41,7 +41,7 @@ public class BaseController {
 	 */
 	public ModelAndView getModelAndView(){
 		ModelAndView mv = new ModelAndView();
-		
+		mv.addObject("eduUsersDto", getEduUsersDto());
 		mv.addObject("navList", getNavList());
 		mv.addObject("wwwdomain",PropertiesUtils.getProperty("upload.look.url"));
 		return mv;
