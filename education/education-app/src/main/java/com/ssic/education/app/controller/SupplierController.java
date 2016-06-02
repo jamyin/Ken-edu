@@ -1,7 +1,5 @@
 package com.ssic.education.app.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +11,6 @@ import com.ssic.educateion.common.dto.ProWaresDto;
 import com.ssic.education.app.dto.MaterialSupplierDto;
 import com.ssic.education.app.dto.SupplierLicDto;
 import com.ssic.education.app.service.ISupplierService;
-import com.ssic.education.handle.pojo.ProLicense;
 import com.ssic.education.handle.pojo.ProSupplier;
 import com.ssic.education.handle.service.ProWaresService;
 import com.ssic.education.utils.constants.DataStatus;
