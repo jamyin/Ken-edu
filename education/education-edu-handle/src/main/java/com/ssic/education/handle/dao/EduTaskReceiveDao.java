@@ -48,12 +48,20 @@ public class EduTaskReceiveDao  extends MyBatisBaseDao<EduTaskReceive>{
 	}
 
 	private void queryBySql(Criteria criteria,EduTaskReceiveDto eduTaskReceiveDto) {
-//		if(StringUtils.isNotEmpty(eduTaskReceiveDto.get){
-//			criteria.andCreateIdEqualTo(eduTaskReceiveDto.getCreateId());
-//		}
+		if(eduTaskReceiveDto.getReadstat()!=null){
+			criteria.andReadstatEqualTo(eduTaskReceiveDto.getReadstat());
+		}
+		
+		if(StringUtils.isNotEmpty(eduTaskReceiveDto.getCreateId())){
+			criteria.andCreateIdEqualTo(eduTaskReceiveDto.getCreateId());
+		}
 		
 		if(StringUtils.isNotEmpty(eduTaskReceiveDto.getReceiveId())){
 			criteria.andReceiveIdEqualTo(eduTaskReceiveDto.getReceiveId());
+		}
+		
+		if(StringUtils.isNotEmpty(eduTaskReceiveDto.getTaskId())){
+			criteria.andTaskIdEqualTo(eduTaskReceiveDto.getTaskId());
 		}
 		
 	}

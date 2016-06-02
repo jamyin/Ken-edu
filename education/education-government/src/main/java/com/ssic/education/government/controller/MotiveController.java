@@ -128,6 +128,7 @@ public class MotiveController extends BaseController {
 				Byte.valueOf("2"))) {// 查询区县教委下的学校信息
 			EduSchoolDto eduSchoolDto = new EduSchoolDto();
 			eduSchoolDto.setCommitteeId(getEduUsersDto().getSourceId());
+			eduSchoolDto.setReviewed(Byte.valueOf("1"));//审核通过的 
 			List<EduSchoolDto> resultList = eduSchoolService.searchEduScholDtoList(eduSchoolDto);
 			dataList = copyProperty(resultList);
 		}else{
@@ -164,7 +165,7 @@ public class MotiveController extends BaseController {
 		
 		String infoId = UUIDGenerator.getUUID32Bit();
 		eduTaskDto.setId(infoId);
-		eduTaskDto.setCreateId(getSessionUserId());
+		eduTaskDto.setCreateId(getEduUsersDto().getSourceId());//创建者的Id修改为该登录用户的类型 教委 或学校
 		eduTaskDto.setCreateName(getEduUsersDto().getName());
 
 //		int result = iEduInformationService.saveInfomation(eduTaskDto);
@@ -218,7 +219,7 @@ public class MotiveController extends BaseController {
 
 		String sourceId = getEduUsersDto().getSourceId();//用户所属教委 或学校
 		eduTaskReceiveDto.setReceiveId(sourceId);
-		
+		eduTaskReceiveDto.setReadstat(DataStatus.DISABLED);
 //		PageResult<EduInformationListDto> pageList = iTaskReceiveService.searchEduTaskReceive(eduInformationListDto,pageQuery);
 		PageResult<EduTaskReceiveDto> pageList = iTaskReceiveService.searchEduTaskReceive(eduTaskReceiveDto,pageQuery);
 		
@@ -239,7 +240,7 @@ public class MotiveController extends BaseController {
 	public ModelAndView sended(EduTaskReceiveDto eduTaskReceiveDto,PageQuery pageQuery) {
 		ModelAndView mv = getModelAndView();
 		
-//		eduInformationListDto.setCreateId(getSessionUserId());
+		eduTaskReceiveDto.setCreateId(getEduUsersDto().getSourceId());//创建者的Id修改为该登录用户的类型 教委 或学校
 		PageResult<EduTaskReceiveDto> pageList = iTaskReceiveService.searchEduTaskReceive(eduTaskReceiveDto,pageQuery);
 		getSourceType(mv);
 		mv.addObject("pageList", pageList);
@@ -255,16 +256,24 @@ public class MotiveController extends BaseController {
 	 * @version: 2016年5月30日 上午10:42:24
 	 */
 	@RequestMapping(value = "readed")
-	public ModelAndView readed() {
+	public ModelAndView readed(EduTaskReceiveDto eduTaskReceiveDto,PageQuery pageQuery) {
 		ModelAndView mv = getModelAndView();
+
+		String sourceId = getEduUsersDto().getSourceId();//用户所属教委 或学校
+		eduTaskReceiveDto.setReceiveId(sourceId);
+		eduTaskReceiveDto.setReadstat(DataStatus.ENABLED);
+//		PageResult<EduInformationListDto> pageList = iTaskReceiveService.searchEduTaskReceive(eduInformationListDto,pageQuery);
+		PageResult<EduTaskReceiveDto> pageList = iTaskReceiveService.searchEduTaskReceive(eduTaskReceiveDto,pageQuery);
+		
 		getSourceType(mv);
+		mv.addObject("pageList", pageList);
 		mv.setViewName("motive/dis_edu_motive_readed");
 		return mv;
 	}
 
 	/**
 	 * 
-	 * 此方法描述的是：infomation 详情信息
+	 * 此方法描述的是：infomation 详情信息 并且修改是否读取的状态
 	 * 
 	 * @author: cwftalus@163.com
 	 * @version: 2016年5月30日 上午10:42:24
@@ -273,7 +282,15 @@ public class MotiveController extends BaseController {
 	public ModelAndView details(@PathVariable String infoId) {
 		ModelAndView mv = getModelAndView();
 
+		String sourceId = getEduUsersDto().getSourceId();
+		
 		EduTaskDto data = iTaskService.search(infoId);
+		EduTaskReceiveDto eduTaskReceiveDto = new EduTaskReceiveDto();
+		eduTaskReceiveDto.setReceiveId(sourceId);
+		eduTaskReceiveDto.setTaskId(infoId);
+		eduTaskReceiveDto = iTaskReceiveService.searchEduTaskReceive(eduTaskReceiveDto);
+		eduTaskReceiveDto.setReadstat(DataStatus.ENABLED);
+		iTaskReceiveService.updateEduTaskReceive(eduTaskReceiveDto);
 
 		mv.addObject("data", data);
 		mv.setViewName("motive/dis_edu_motice_detail");
