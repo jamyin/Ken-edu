@@ -13,7 +13,7 @@
     <body>
         
         <#include "/common/nav.htm" />
-        
+        <input id="wwwdomain" type="hidden" value="${(wwwdomain)!}">
         <div class="breadcrumb">
             <span>当前位置:</span>
             <a href="#">公告通知</a>
@@ -40,6 +40,11 @@
                                 <label for="title">图片:    </label>
                                 <input type="file" id="id-input-file-1"/>
                             </section>
+                             <br>
+                            <section class="line">
+                                <label for="title"></label>
+                                <img id="pic_show" alt="" src="" style="width:100px;height:100px;"/>
+                            </section>                            
                             <br>
                             <section class="line">
                                 <label>类别:    </label>
@@ -130,6 +135,7 @@
                     onComplete: function(event, queueID, fileObj, response, data) {
                         var dataObj = eval("("+response+")");
                         if(dataObj.status == 200){
+                        	$("#pic_show").attr("src",$("#wwwdomain").val()+dataObj.filePath);
                         	$("#pic").attr("value",dataObj.filePath);
                         	$("#file-1").attr("checked","checked");
                         }
