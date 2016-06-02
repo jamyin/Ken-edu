@@ -3,8 +3,7 @@
         {
             "menuName": "安全追溯",
             "menuUrl": "/edu/school/list.htm?source=2&reviewed=1"
-        },
-        {
+        },{
             "menuName": "审批",
             "menuUrl": "/edu/school/checkList.htm?source=1&reviewed=0"
         },{
