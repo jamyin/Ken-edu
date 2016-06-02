@@ -158,7 +158,7 @@ public class TaskDao extends MyBatisBaseDao<EduTask> {
 	
 	
 	
-	public List<EduTask> findInformationList(EduTaskDto eduInformationDto,PageQuery query) {
+	public List<EduTask> searchTask(EduTaskDto eduInformationDto,PageQuery query) {
 		EduTaskExample example = new EduTaskExample();
 		EduTaskExample.Criteria criteria = example.createCriteria();
         assemblyParams(eduInformationDto, criteria);
