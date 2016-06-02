@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.sf.json.JSONArray;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -85,7 +87,7 @@ public class CorporateController {
 	}
 
 	@RequestMapping("/showPic")
-	public String showPic(SupplierDto psd, HttpServletRequest request,
+	public String showPic(HttpServletRequest request,
 			HttpSession session) {
 		TImsUsersDto user = (TImsUsersDto) session.getAttribute("user");
 		if (user == null) {
@@ -113,6 +115,24 @@ public class CorporateController {
 	 */
 	@RequestMapping("/editPic")
 	public String editPic(HttpServletRequest request, HttpSession session) {
+		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
+				ConfigUtil.SESSIONINFONAME);
+		if (info == null) {
+			return null;
+		}
+		String supplierId = info.getSupplierId();
+		ProLicense license = new ProLicense();
+		license.setRelationId(supplierId);
+		license.setCerSource((short) 0);
+		List<ProLicense> ProLicenseList = proLicenseServiceImpl
+				.lookImage(license);
+		String realPath = PropertiesUtils.getProperty("upload.look.url");
+		for (ProLicense proLicense : ProLicenseList) {
+			proLicense.setLicPic(realPath + proLicense.getLicPic());
+		}
+		
+		JSONArray jsonarray = JSONArray.fromObject(ProLicenseList);  
+		request.setAttribute("ProLicenseList", jsonarray.toString());
 		return "corporate/editImage";
 	}
 
