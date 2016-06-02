@@ -85,19 +85,19 @@
 				   <input id="id" name="id" type="hidden" value="${id}" />
 					<table class="table table-hover table-condensed">
 						<tr>
-							<th>商品名称</th>
+							<th>*商品名称</th>
 							<td><input name="waresName" type="text" id="waresName"
 								placeholder="请输入商品名称" class="easyui-validatebox span2"
 								data-options="required:true"  value="${wdto.waresName}"></td>
-							<th>规格</th>
+							<th>*规格</th>
 							<td><input name="spec" type="text" placeholder="请输入规格"  id="spec"
 								class="easyui-validatebox span2"  value="${wdto.spec}"  data-options="required:true" ></td>
 						</tr>
 						<tr>
-							<th>保质期</th>
+							<th>*保质期</th>
 							<td><input name="shelfLife" type="text" placeholder="请输入保质期" id="shelfLife"
 								class="easyui-validatebox span2" data-options="required:true" value="${wdto.shelfLife}"></td>
-							<th>保质期单位</th>
+							<th>*保质期单位</th>
 							<td><select id="unit" class="easyui-combobox" name="unit"  data-options="width:140,height:29,editable:false,panelHeight:'auto'"
 								data-options="required:true">
 							 <c:if test="${wdto.unit=='年'}">			
@@ -151,7 +151,7 @@
 							<td>	<input name="enName" type="text" id="enName"
 								placeholder="请输入英文名" class="easyui-validatebox span2"   value="${wdto.enName}"
 								></td>
-								<th>商品分类</th>
+								<th>*商品分类</th>
 						<td><select id="waresType" class="easyui-combobox" name="waresType"  data-options="width:140,height:29,editable:false,panelHeight:'auto'"
 								data-options="required:true">								
 								<c:if test="${wdto.waresType==1}">									

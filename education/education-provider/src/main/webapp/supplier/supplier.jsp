@@ -50,39 +50,39 @@
 			columns : [ [ 
 			             {
 			 				field : 'supplierName',
-			 				title : '供应商名称',
+			 				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">供应商名称</font>',
 			 				width : 180,
 			 				
 			 				formatter : function(value, row, index) {
 			 					if(value!=null){
-			 					return '<font style="font-style: normal;font-weight: bolder;font-size:18px;">'
-			 							+ value + '</font>';
+			 					return '<font style="font-style: normal; font-size:15px;">'
+								+ value + '</font>';
 			 					}else{
 			 					return "";
 			 							}
 			 				}
 			 			}, {
 			 				field : 'supplierCode',
-			 				title : '供应商编码',
+			 				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">供应商编码</font>',
 			 				width : 120,
 			 				
 			 				formatter : function(value, row, index) {
 			 					if(value!=null){
-			 					return '<font style="font-style: normal;font-weight: bolder;font-size:18px;">'
-			 							+ value + '</font>';
+			 					return '<font style="font-style: normal; font-size:15px;">'
+								+ value + '</font>';
 			 					}else{
 			 					return "";
 			 							}
 			 				}
 			 			},{
 			 				field : 'address',
-			 				title : '供应商地址',
+			 				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">供应商地址</font>',
 			 				width : 180,
 			 				
 			 				formatter : function(value, row, index) {
 			 					if(value!=null){
-			 					return '<font style="font-style: normal;font-weight: bolder;font-size:18px;">'
-			 							+ value + '</font>';
+			 					return '<font style="font-style: normal; font-size:15px;">'
+								+ value + '</font>';
 			 					}else{
 			 					return "";
 			 							}
@@ -91,26 +91,26 @@
 			 			
 			 			{
 			 				field : 'corporation',
-			 				title : '法人代表',
+			 				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">法人代表</font>',
 			 				width : 80,
 			 				
 			 				formatter : function(value, row, index) {
 			 					if(value!=null){
-			 					return '<font style="font-style: normal;font-weight: bolder;font-size:18px;">'
-			 							+ value + '</font>';
+			 					return '<font style="font-style: normal; font-size:15px;">'
+								+ value + '</font>';
 			 					}else{
 			 					return "";
 			 							}
 			 				}
 			 			},{
 			 				field : 'contactWay',
-			 				title : '联系方式',
+			 				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">联系方式</font>',
 			 				width : 110,
 			 				
 			 				formatter : function(value, row, index) {
 			 					if(value!=null){
-			 					return '<font style="font-style: normal;font-weight: bolder;font-size:18px;">'
-			 							+ value + '</font>';
+			 					return '<font style="font-style: normal; font-size:15px;">'
+								+ value + '</font>';
 			 					}else{
 			 					return "";
 			 							}
@@ -118,65 +118,65 @@
 			 			},
 			 			{
 			 				field : 'businessLicense',
-			 				title : '工商执照号',
+			 				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">工商执照号</font>',
 			 				width : 120,
 			 				
 			 				formatter : function(value, row, index) {
 			 					if(value!=null){
-			 					return '<font style="font-style: normal;font-weight: bolder;font-size:18px;">'
-			 							+ value + '</font>';
+			 					return '<font style="font-style: normal; font-size:15px;">'
+								+ value + '</font>';
 			 					}else{
 			 					return "";
 			 							}
 			 				}
 			 			},{
 			 				field : 'foodServiceCode',
-			 				title : '餐饮服务证号',
+			 				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">餐饮服务证号</font>',
 			 				width : 120,
 			 				
 			 				formatter : function(value, row, index) {
 			 					if(value!=null){
-			 					return '<font style="font-style: normal;font-weight: bolder;font-size:18px;">'
-			 							+ value + '</font>';
+			 					return '<font style="font-style: normal; font-size:15px;">'
+								+ value + '</font>';
 			 					}else{
 			 					return "";
 			 							}
 			 				}
 			 			},{
 			 				field : 'foodBusinessCode',
-			 				title : '食品经营许可证号',
+			 				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">食品经营许可证号</font>',
 			 				width : 120,
 			 				
 			 				formatter : function(value, row, index) {
 			 					if(value!=null){
-			 					return '<font style="font-style: normal;font-weight: bolder;font-size:18px;">'
-			 							+ value + '</font>';
+			 					return '<font style="font-style: normal; font-size:15px;">'
+								+ value + '</font>';
 			 					}else{
 			 					return "";
 			 							}
 			 				}
 			 			},{
 			 				field : 'foodCirculationCode',
-			 				title : '食品流通证号',
+			 				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">食品流通证号</font>',
 			 				width : 120,
 			 				
 			 				formatter : function(value, row, index) {
 			 					if(value!=null){
-			 					return '<font style="font-style: normal;font-weight: bolder;font-size:18px;">'
-			 							+ value + '</font>';
+			 					return'<font style="font-style: normal; font-size:15px;">'
+								+ value + '</font>';
 			 					}else{
 			 					return "";
 			 							}
 			 				}
 			 			},{
 			 				field : 'foodProduceCode',
-			 				title : '食品生产证号',
+			 				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">食品生产证号</font>',
 			 				width : 120,
 			 				
 			 				formatter : function(value, row, index) {
 			 					if(value!=null){
-			 					return '<font style="font-style: normal;font-weight: bolder;font-size:18px;">'
-			 							+ value + '</font>';
+			 					return '<font style="font-style: normal; font-size:15px;">'
+								+ value + '</font>';
 			 					}else{
 			 					return "";
 			 							}
@@ -184,7 +184,7 @@
 			 			},			 						
 			{
 				field : 'action',
-				title : '操作',
+				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">操作</font>',
 				width : 100,
 				formatter : function(value, row, index) {
 					var str = '';
@@ -414,7 +414,7 @@
 </head>
 <body>
 	<div class="easyui-layout" data-options="fit : true,border : false">
-		<div data-options="region:'north',title:'查询条件',border:false" style="height: 80px; overflow: hidden;">
+		<div data-options="region:'north',border:false"  title="<font  style='font-style: normal;font-weight: bolder;font-size:18px;'>查询条件</font>"   style="height: 80px; overflow: hidden;">
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">
 			
@@ -423,27 +423,29 @@
 						<td><input id="supplierName" class="span2" name="supplierName" /></td>
 						<th>地址</th>
 						<td><input id="address" class="span2" name="address" /></td>
-					</tr>							
+						
+						<td><a href="javascript:void(0);"  onclick="searchFun();" class="easyui-linkbutton" iconCls="icon-search" ><font  style='font-style: normal;font-weight: bolder;font-size:18px;'>查询</font></a></td>
+					</tr>		
+										
 				</table>
 			</form>
 		</div>
 		
 			<div data-options="region:'center',border:false"  id="g">
-				<table id="dataGrid" title="供应商表单" data-options="collapsible:true" ></table>
+				<table id="dataGrid" title="<font  style='font-style: normal;font-weight: bolder;font-size:16px;'>供应商表单</font>" data-options="collapsible:true" ></table>
 						<style>
-						#g .datagrid-btable tr{height: 57px;}
+						#g .datagrid-btable tr{height: 45px;}
 				</style>
 			</div>
 	</div>
-		<div id="toolbar" style="display: none;">
-		
-			<a onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'">添加</a>
-		
-
-		<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_add',plain:true" onclick="searchFun();">搜索</a><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_delete',plain:true" onclick="cleanFun();">清空搜索条件</a>
-		<a onclick="importSupplier();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'">导入</a>
-		<a class="btn btn-mini btn-light" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="icon-download-alt"></i>导出</a>
-		<a href="${pageContext.request.contextPath}/templates/供应商.xlsx" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'">下载模板</a>
+		<div id="toolbar" style="display: none;"  >		
+		<a onclick="addFun();"class="btn btn-mini btn-light"   href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'"><font  style='font-style: normal;font-weight: bolder;font-size:16px;'>添加</font></a>
+		&nbsp;
+		<a onclick="importSupplier();"class="btn btn-mini btn-light"   href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'"><font  style='font-style: normal;font-weight: bolder;font-size:16px;'>导入</font></a>
+		&nbsp;
+		<a class="btn btn-mini btn-light" onclick="toExcel();" title="导出到EXCEL"><font  style='font-style: normal;font-weight: bolder;font-size:16px;'>导出</font></a>
+		&nbsp;
+		<a href="${pageContext.request.contextPath}/templates/供应商.xlsx"  class="btn btn-mini btn-light"  class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'"><font  style='font-style: normal;font-weight: bolder;font-size:16px;'>下载模板</font></a>
 	</div>
 
 	
