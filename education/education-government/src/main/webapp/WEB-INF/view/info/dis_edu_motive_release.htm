@@ -95,7 +95,6 @@
             	$("#savebutton").on('click',function(){
             		var ajaxParams = $("#submitForm").serialize();
     				var content = um.getContent();
-    				$("#content").val(content);
     				$.ajax({
     					url : "/info/save.htm",
     					type:"POST",
@@ -104,7 +103,13 @@
     					success:function(data){
     						if(data.status==200){
 								alert("发布成功");
-								//window.location.href = "";
+								if(document.getElementById("healthgive").checked){
+									window.location.href = "/info/index/3.htm";
+								}else{
+									window.location.href = "/info/index/0.htm";
+								}
+								
+								//window.location.href = "/info/index/"+type+".htm";
     						}else{
     							
     						}
