@@ -74,20 +74,21 @@ public class WaresController extends BaseController {
 	  @return
 	 */
 	@RequestMapping(value = "/details")
-	private ModelAndView waresDetails(String id,PageQuery page) {
+	private ModelAndView waresDetails(ProLedgerDto dto,PageQuery page) {
 		ModelAndView mv = getModelAndView();
-		ProWaresDto proWaresDto = proWaresService.findById(id);
+		ProWaresDto proWaresDto = proWaresService.findById(dto.getId());
 		ProLedgerDto proLedgerDto = new ProLedgerDto();
-		proLedgerDto.setWaresId(id);
+		proLedgerDto.setWaresId(dto.getId());
 		PageResult<ProLedgerDto> proLedgerDtos = proLedgerService.findLedgerPage(proLedgerDto, page);
 		mv.setViewName("/school/purchasing_goods_detail");
 		ProLicense proLicense = new ProLicense();
 		proLicense.setCerSource((short)DataStatus.EVA_TWO);
-		proLicense.setRelationId(id);
+		proLicense.setRelationId(dto.getId());
 		List<ProLicense> proLicenses = iProLicenseService.lookImage(proLicense);
 		mv.addObject("proWaresDto", proWaresDto);
 		mv.addObject("proLedgerDtos", proLedgerDtos);
 		mv.addObject("proLicenses", proLicenses);
+		mv.addObject("dto", dto);
 		return mv;
 	}
 	

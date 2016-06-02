@@ -67,7 +67,6 @@ public class EduSchoolDto implements Serializable {
 	private List<ProPackagesDto> packagesDtoList;
 	private PageResult<ProPackagesDto> packagesList;; //分页
 	
-	private Integer source;
 	private String waresName;
 	private Integer waresType;
 	private String spec;
@@ -80,5 +79,5 @@ public class EduSchoolDto implements Serializable {
 	
 	private EduCanteenDto eduCanteenDto;
 	private EduSchoolSupplierDto eduSchoolSupplierDto;
-	
+	private Integer source;//来源0：市教委，1：区教委，2：学校
 }

@@ -7,9 +7,9 @@
 <body>
 <#include "/common/nav.htm" />
   <div class="wrapperA">
-    <!-- <div class="cur_postion">
-      <span class="cp">当前位置:</span><a href="#">安全追溯</a><span class="gt">&gt;</span><a href="#">采购品列表</a><span class="gt">&gt;</span><a href="#">采购品详情</a>
-    </div> -->
+    <div class="cur_postion">
+      <span class="cp">当前位置:</span><a href="/edu/school/list.htm?source=${(dto.source)!}&reviewed=1">安全追溯</a><span class="gt">&gt;</span><a href="/edu/school/details.htm?source=${(dto.source)!}&customerId=${(dto.customerId)!}">学校详情</a><span class="gt">&gt;</span><a href="#">配送信息列表</a>
+    </div>
 
     <h1 class="con-tt">
       <span class="title">配送信息列表</span>
@@ -33,7 +33,7 @@
         </li>
       	<#if pageList??>
         	<#list pageList.results as ledgerDto>
-        		<li class="head">
+        		<li>
 	             <span class="dis_no">${(ledgerDto.wareBatchNo)!}</span>
 	             <span class="dis_date">${ledgerDto.actionDate?string("yyyy-MM-dd")}</span>
 	             <span class="dis_goods ellipsis"><#if ledgerDto.ledgerDtos??>
@@ -43,7 +43,7 @@
 	             </#if></span>
 	             <span class="dis_start ellipsis">${(ledgerDto.supplierName)!}</span>
 	             <span class="dis_status"><#if ledgerDto.haulStatus == 0>未配送 </#if><#if ledgerDto.haulStatus == 1>配送中</#if><#if ledgerDto.haulStatus == 2>已配送</#if></span>
-	             <a  href="/pro/ledger/detail.htm?wareBatchNo=${(ledgerDto.wareBatchNo)!}"><span style="cursor: pointer;" class="detail">详情</span></a>
+	             <a  href="/pro/ledger/detail.htm?wareBatchNo=${(ledgerDto.wareBatchNo)!}&source=${(dto.source)!}&customerId=${(dto.customerId)!}&sourceId=${(dto.sourceId)!}"><span style="cursor: pointer;" class="detail">详情</span></a>
 	           </li>
         	</#list>
         </#if>
