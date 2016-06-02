@@ -51,11 +51,11 @@
 				}
 			}, */ {
 				field : 'wareBatchNo',
-				title : '配送号',
+				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">配送号</font>',
 				width : 150,
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">'
+					return '<font  style="font-style: normal; font-size:15px;">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -65,11 +65,11 @@
 			columns : [ [  
 			{
 				field : 'sendDate',
-				title : '配送日期',
+				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">配送日期</font>',
 				width : 50,
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">'
+					return '<font  style="font-style: normal; font-size:15px;">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -78,11 +78,11 @@
 			},
 			{
 				field : 'name',
-				title : '采购品',
+				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">采购品</font>',
 				width : 150,
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">'
+					return '<font  style="font-style: normal;font-size:15px;">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -91,11 +91,11 @@
 			},
 			{
 				field : 'receiverName',
-				title : '配货点',
+				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">配货点</font>',
 				width : 150,
 				formatter : function(value, row, index) {
 					if(value!=null){
-					return '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">'
+					return '<font  style="font-style: normal;font-size:15px;">'
 							+ value + '</font>';
 					}else{
 					return "";
@@ -104,27 +104,27 @@
 			},
 			{
 				field : 'haulStatus',
-				title : '状态',
+				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">状态</font>',
 				width : 30,
 			
 				formatter: function(value,row,index){
 					if (value==0){
-						return  '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">未配送</font>';
+						return  '<font  style="font-style: normal;font-size:15px;">未配送</font>';
 					} 
 					if (value==1){
 					
-						return  '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">配送中</font>';
+						return  '<font  style="font-style: normal;font-size:15px;">配送中</font>';
 					} 
 					if (value==2){
 					
-						return  '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">已配送</font>';
+						return  '<font  style="font-style: normal;font-size:15px;">已配送</font>';
 					} 
 				}
 
 			},
 			{
 				field : 'action',
-				title : '操作',
+				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">操作</font>',
 				width : 100,
 				formatter : function(value, row, index) {
 					var str = '';
@@ -204,7 +204,7 @@
 		}
 		parent.$.modalDialog({
 			title : '编辑配送',
-			width : 1000,
+			width : 1030,
 			height : 500,
 			href : '${pageContext.request.contextPath}/ledgerController/editPage?masterId=' +id ,
 			buttons : [ {
@@ -287,7 +287,7 @@
 </head>
 <body>
 	<div class="easyui-layout" data-options="fit : true,border : false">
-		<div data-options="region:'north',title:'查询条件',border:false" style="height: 80px; overflow: hidden;">
+		<div data-options="region:'north',border:false"  title="<font  style='font-style: normal;font-weight: bolder;font-size:18px;'>查询条件</font>"    style="height: 80px; overflow: hidden;">
 			
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">
@@ -298,27 +298,26 @@
 						<input id="nextDate" class="span2" name="nextDate" placeholder="点击选择日期" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" readonly="readonly"/></th>
 						<th>配货点
 						<input id="receiverName" class="span2" name="receiverName" /></th>
-					</tr>
+						<td><a href="javascript:void(0);"  onclick="searchFun();" class="easyui-linkbutton" iconCls="icon-search" ><font  style='font-style: normal;font-weight: bolder;font-size:18px;'>查询</font></a></td>
+		</tr>
 				</table>
 			</form>
 		</div>
 		<div data-options="region:'center',border:false" id="g">
-			<table id="dataGrid"  data-options="collapsible:true"  title="配货管理表单" ></table>
+			<table id="dataGrid"  data-options="collapsible:true"  title="<font  style='font-style: normal;font-weight: bolder;font-size:16px;'>配货管理表单</font>" ></table>
 			<style>
 						#g .datagrid-btable tr{height: 57px;}
 				</style>
 		</div>
 	</div>
 	<div id="toolbar" style="display: none;">
-			<a onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'">添加</a>
-		<!--<c:if test="${fn:contains(sessionInfo.resourceList, '/userController/grantPage')}">
-			<a onclick="batchGrantFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'tux'">批量授权</a>
-		</c:if>-->
-			<!-- <a onclick="batchDeleteFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'delete'">批量删除</a> -->
-		<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_add',plain:true" onclick="searchFun();">搜索</a><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_delete',plain:true" onclick="cleanFun();">清空搜索条件</a>
-		<a onclick="importSupplier();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'">导入</a>
-		<a class="btn btn-mini btn-light" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="icon-download-alt"></i>导出</a>
-		<a href="${pageContext.request.contextPath}/templates/配货管理.xlsx" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'">下载模板</a>
+			<a class="btn btn-mini btn-light"  onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'"><font  style='font-style: normal;font-weight: bolder;font-size:16px;'>添加</font></a>	
+		&nbsp;
+		<a class="btn btn-mini btn-light"  onclick="importSupplier();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'"><font  style='font-style: normal;font-weight: bolder;font-size:16px;'>导入</font></a>
+		&nbsp;
+		<a class="btn btn-mini btn-light"  class="btn btn-mini btn-light" onclick="toExcel();" title="导出到EXCEL"><font  style='font-style: normal;font-weight: bolder;font-size:16px;'>导出</font></a>
+		&nbsp;
+		<a  class="btn btn-mini btn-light"  href="${pageContext.request.contextPath}/templates/配货管理.xlsx" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'"><font  style='font-style: normal;font-weight: bolder;font-size:16px;'>下载模板</font></a>
 	</div>
 
 </body>
