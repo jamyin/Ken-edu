@@ -10,7 +10,7 @@ import com.ssic.education.handle.mapper.ProUsersMapper;
 import com.ssic.education.handle.pojo.ProUsers;
 
 @Repository
-public class ProAppUserDao {
+public class AppProUserDao {
 	@Autowired
 	@Getter
 	private ProUsersMapper proUserMapper;

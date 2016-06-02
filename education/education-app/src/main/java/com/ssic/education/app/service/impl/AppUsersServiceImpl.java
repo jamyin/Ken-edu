@@ -39,7 +39,7 @@ public class AppUsersServiceImpl implements IAppUsersService {
 	}
 
 	@Override
-	public int eduUpdatePwd(String oldPwd, String account, String newPwd) {
+	public int eduUpdatePwd(String account, String oldPwd, String newPwd) {
 		EduUsersInfoDto user = new EduUsersInfoDto();
 		user.setPassword(oldPwd);
 		user.setUserAccount(account);
