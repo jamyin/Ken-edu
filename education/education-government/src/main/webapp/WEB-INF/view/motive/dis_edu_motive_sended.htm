@@ -84,7 +84,11 @@
 	                                    			<#assign receiveName = receiveName + data.receiveName+"、">
 	                                    		</#list>
 	                                    		<#if receiveName ??>
-	                                    			${receiveName?substring(0,15)}...
+	                                    			<#if receiveName?length gt 15>
+	                                    				${receiveName?substring(0,15)}...
+	                                    			<#else>
+	                                    				${(receiveName)!}
+	                                    			</#if>
 	                                    		</#if>
 	                                    	</#if>
 	                                    </td>
