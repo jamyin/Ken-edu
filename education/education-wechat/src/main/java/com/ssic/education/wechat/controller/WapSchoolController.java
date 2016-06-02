@@ -1,6 +1,5 @@
 package com.ssic.education.wechat.controller;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +35,6 @@ public class WapSchoolController extends BaseController{
 	@Autowired
 	private EduSchoolService eduSchoolService;
 
-
-	
 	@Autowired
 	private IEduCanteenService iEduCanteenService;
 	
