@@ -94,7 +94,6 @@ public class WaresInfoServiceImpl implements IWaresInfoService {
 
 	/** 
 	 * 根据供应商ID查询商品列表 带分页
-	* (non-Javadoc)   
 	 * @throws Exception 
 	* @see com.ssic.education.app.service.IWaresInfoService#getWaresBySupplierId(java.lang.String, com.ssic.education.utils.model.PageQuery)   
 	*/
@@ -133,7 +132,6 @@ public class WaresInfoServiceImpl implements IWaresInfoService {
 			}
 			wrd.setLicense(licList);
 		}
-
 		return wrd;
 	}
 

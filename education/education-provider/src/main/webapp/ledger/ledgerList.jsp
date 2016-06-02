@@ -204,7 +204,7 @@
 		}
 		parent.$.modalDialog({
 			title : '编辑配送',
-			width : 1000,
+			width : 1030,
 			height : 500,
 			href : '${pageContext.request.contextPath}/ledgerController/editPage?masterId=' +id ,
 			buttons : [ {

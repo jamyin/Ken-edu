@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssic.education.app.dto.EduAppUserDto;
 import com.ssic.education.app.dto.EduUsersInfoDto;
-import com.ssic.education.app.service.IEduAppUsersService;
+import com.ssic.education.app.service.IAppUsersService;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.Response;
+import com.ssic.education.utils.redis.WdRedisDao;
 
 /**		
  * <p>Title: UserController </p>
@@ -26,10 +27,12 @@ import com.ssic.education.utils.model.Response;
 @RequestMapping(value = "/user")
 public class UserController extends BaseController {
 	@Autowired
-	private IEduAppUsersService userService;
+	private IAppUsersService appUserService;
+	@Autowired
+	private WdRedisDao<EduAppUserDto> redisdao;
 
 	/**
-	 * 用户登录
+	 * 教委用户登录
 	 * @param account 账户
 	 * @param password 密码
 	 * @return 用户信息
@@ -41,9 +44,12 @@ public class UserController extends BaseController {
 		Response<EduAppUserDto> result = new Response<EduAppUserDto>();
 		user.setUserAccount(account);
 		user.setPassword(password);
-		EduAppUserDto userdto = userService.appLogin(user);
+		EduAppUserDto userdto = appUserService.appLogin(user);
 		result.setData(userdto);
 		if (userdto != null) {
+			redisdao.set(userdto, 60);
+			EduAppUserDto g = redisdao.get(userdto.getToken(), EduAppUserDto.class);
+			System.out.println(g.getName() + g.getToken());
 			result.setStatus(DataStatus.HTTP_SUCCESS);
 			result.setMessage("登录成功！");
 			result.setData(userdto);
@@ -56,7 +62,7 @@ public class UserController extends BaseController {
 	}
 
 	/**
-	 * 修改密码
+	 * 教委修改密码
 	 * @param oldPwd 旧密码
 	 * @param account 账户
 	 * @param newPwd 新密码
@@ -70,7 +76,7 @@ public class UserController extends BaseController {
 			result.setStatus(DataStatus.HTTP_FAILE);
 			result.setMessage("两次密码一样");
 		} else {
-			if (userService.updatePwd(oldPwd, account, newPwd) == 1) {
+			if (appUserService.eduUpdatePwd(oldPwd, account, newPwd) == 1) {
 				result.setStatus(DataStatus.HTTP_SUCCESS);
 				result.setMessage("修改成功！");
 			} else {
