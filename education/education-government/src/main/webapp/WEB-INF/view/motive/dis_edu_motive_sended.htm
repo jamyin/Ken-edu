@@ -85,7 +85,7 @@
 	                                    		</#list>
 	                                    		<#if receiveName ??>
 	                                    			<#if receiveName?length gt 15>
-	                                    				${receiveName?substring(0,15)}...
+	                                    				<a title="${(receiveName)!}">${receiveName?substring(0,15)}...</a>
 	                                    			<#else>
 	                                    				${(receiveName)!}
 	                                    			</#if>
