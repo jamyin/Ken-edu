@@ -277,9 +277,9 @@ else
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">
 					<tr>
-						<th>姓名</th>
-						<td><input name="name" placeholder="可以搜索名称" class="easyui-validatebox"  style="width: 215px;"/></td>
-							<td><a href="javascript:void(0);"  onclick="searchFun();" class="easyui-linkbutton" iconCls="icon-search" ><font  style='font-style: normal;font-weight: bolder;font-size:18px;'>查询</font></a></td>
+						<th>姓名:
+						<input name="name" placeholder="可以搜索名称" class="easyui-validatebox"  style="width: 215px;"/>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);"  onclick="searchFun();" class="easyui-linkbutton" iconCls="icon-search" ><font  style='font-style: normal;font-weight: bolder;font-size:18px;'>查询</font></a></th>
+							
 	
 						 </tr>	
 								</table>

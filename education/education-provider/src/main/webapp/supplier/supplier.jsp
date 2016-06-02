@@ -419,12 +419,12 @@
 				<table class="table table-hover table-condensed" style="display: none;">
 			
 					<tr>
-						<th>名称</th>
-						<td><input id="supplierName" class="span2" name="supplierName" /></td>
-						<th>地址</th>
-						<td><input id="address" class="span2" name="address" /></td>
+						<th>
+						名称:&nbsp;<input id="supplierName" class="span3" name="supplierName" /></th>
+						<th>
+						地址:&nbsp;<input id="address" class="span2" name="address" />&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);"  onclick="searchFun();" class="easyui-linkbutton" iconCls="icon-search" ><font  style='font-style: normal;font-weight: bolder;font-size:18px;'>查询</font></a>
+						</th>
 						
-						<td><a href="javascript:void(0);"  onclick="searchFun();" class="easyui-linkbutton" iconCls="icon-search" ><font  style='font-style: normal;font-weight: bolder;font-size:18px;'>查询</font></a></td>
 					</tr>		
 										
 				</table>
