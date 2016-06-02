@@ -38,7 +38,7 @@ ul.my_info {
  		$("#aa").dialog({    
 		    title: '编辑',    
 		    width: 500,    
-		    height: 500,    
+		    height: 550,    
 		    closed: false,    
 		    cache: false,    
 		    href: '${pageContext.request.contextPath}/corporateController/editPage',    

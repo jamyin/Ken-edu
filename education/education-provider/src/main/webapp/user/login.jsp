@@ -139,11 +139,11 @@
 		
 	}
 </script>
-<div id="loginDialog" title="用户登录"
+<div id="loginDialog" title=""
 	style="width: 330px; height: 260px; overflow: hidden; display: none;">
 	<div id="loginTabs" class="easyui-tabs"
 		data-options="fit:true,border:false">
-		<div title="用户输入模式" style="overflow: hidden; padding: 10px;">
+		<div title="用户登录" style="overflow: hidden; padding: 10px;">
 			<form method="post">
 				<table class="table table-hover table-condensed">
 					<tr>
