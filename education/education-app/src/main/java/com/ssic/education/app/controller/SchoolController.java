@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssic.educateion.common.dto.ChooseSchoolDto;
+import com.ssic.educateion.common.dto.EduCanteenDto;
 import com.ssic.educateion.common.dto.EduCommitteeDto;
 import com.ssic.educateion.common.dto.EduSchoolDto;
+import com.ssic.educateion.common.dto.EduSchoolSupplierDto;
 import com.ssic.educateion.common.dto.MapToListDto;
 import com.ssic.educateion.common.dto.ProPackagesDto;
 import com.ssic.educateion.common.dto.SchoolDto;
@@ -152,7 +154,7 @@ public class SchoolController {
 		String schoolId = dto.getCustomerId();
 		EduSchoolDto eduSchoolDto = eduSchoolService.findById(schoolId);
 
-		/*//学校对应的食堂信息
+		//学校对应的食堂信息
 		EduCanteenDto eduCanteenDto = new EduCanteenDto();
 		eduCanteenDto.setSchoolId(schoolId);
 		eduCanteenDto = iEduCanteenService.searchEduCanteenDto(eduCanteenDto);
@@ -160,7 +162,7 @@ public class SchoolController {
 		//学校对应的供应商信息
 		EduSchoolSupplierDto eduSchoolSupplierDto = new EduSchoolSupplierDto();
 		eduSchoolSupplierDto.setSchoolId(schoolId);
-		eduSchoolSupplierDto = iEduSchoolSupplierService.searchEduSchoolSupplierDto(eduSchoolSupplierDto);*/
+		eduSchoolSupplierDto = iEduSchoolSupplierService.searchEduSchoolSupplierDto(eduSchoolSupplierDto);
 
 		List<MapToListDto> typeList = new ArrayList<MapToListDto>();
 		for(Entry<Integer, String> entry: PackagesTypeEnum.getAll().entrySet()) {
