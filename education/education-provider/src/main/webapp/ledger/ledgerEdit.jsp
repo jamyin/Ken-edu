@@ -7,6 +7,9 @@
 .panel-body {
 	font-size: 13px !important;
 }
+.table th, .table td {
+    border-top: none!important;
+}
 </style>
 <script type="text/javascript">
 	$(function() {

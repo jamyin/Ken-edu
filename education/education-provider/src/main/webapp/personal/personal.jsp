@@ -161,8 +161,9 @@ else
 		parent.$.modalDialog({
 			title : '编辑用户',
 			width :768,
-			height : 480,
+			height : 400,
 			href : '${pageContext.request.contextPath}/personalController/personalEdit?id='+ id,
+			onOpen: function(){},
 			buttons : [ {
 				text : '保存',
 				handler : function() {
@@ -187,8 +188,9 @@ else
 		parent.$.modalDialog({
 			title : '修改密码',
 			width :768,
-			height : 480,
+			height : 400,
 			href : '${pageContext.request.contextPath}/personalController/editCurrentUserPwdPage?id='+ id,
+			onOpen: function(){},
 			buttons : [ {
 				text : '保存',
 				handler : function() {
