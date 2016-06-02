@@ -130,7 +130,9 @@
         <script>
             $(function(){
             	//var um = UM.getEditor('editor');          	
-            	
+            	// debugger;
+		      $(".nav").find("a").removeClass("cur");
+		      $(".nav").find("a:eq(6)").addClass("cur");
             	loadClickFunction();
 
             	$("#searchName").on('click',function(){
