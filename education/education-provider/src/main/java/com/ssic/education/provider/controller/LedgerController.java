@@ -341,8 +341,22 @@ public class LedgerController {
 			j.setSuccess(false);
 			return j;
 		}
-		// 采购品
+		List<LedgerDto> list = ledgerService.findLedgerByMasterId(
+				user.getSourceId(), ledgers.get(0).getMasterId());
 		for (LedgerDto ledger : ledgers) {
+			if (ledger.getMark() != 1) {
+				continue;
+			}
+			int i=0;
+			for (LedgerDto ledgerDto : list) {
+				if(ledgerDto.getId()!=ledger.getId()){
+					i+=1;
+				}
+				if(i==list.size()){
+					ledgerService.upDeleteLedger(ledger.getId());
+				}
+			}
+			// 采购品
 			if (ledger.getName() == null) {
 				j.setMsg("采购品不能为空");
 				j.setSuccess(false);
@@ -397,8 +411,8 @@ public class LedgerController {
 			ledger.setCreateTime(null);
 			ledger.setLastUpdateTime(ledger.getCreateTime());
 			ledger.setStat(1);
-			ledgerService.updataLedger(ledgers);
 		}
+		ledgerService.updataLedger(ledgers);
 		j = new Json();
 		j.setMsg("修改供应商成功");
 		j.setSuccess(true);
@@ -419,12 +433,12 @@ public class LedgerController {
 		Json j = new Json();
 		TImsUsersDto user = (TImsUsersDto) session.getAttribute("user");
 		if (user == null) {
-			j.setMsg("供应商不能为空");
+			j.setMsg("尚未登录");
 			j.setSuccess(false);
 			return j;
 		}
 		int r = ledgerService.deleteLedger(user.getSourceId(), masterId);
-		j.setMsg("删除供应商成功");
+		j.setMsg("删除配送成功");
 		j.setSuccess(true);
 		return j;
 	}
@@ -631,7 +645,7 @@ public class LedgerController {
 			HttpServletResponse response) {
 		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
 				ConfigUtil.SESSIONINFONAME);
-		if(info==null){
+		if (info == null) {
 			return null;
 		}
 		ld.setSourceId(info.getSupplierId());
@@ -658,7 +672,8 @@ public class LedgerController {
 			titles.add("生产单位");
 			titles.add("生产日期");
 			int len = titles.size();
-			HSSFCellStyle headerStyle = (HSSFCellStyle) workbook.createCellStyle(); // 标题样式
+			HSSFCellStyle headerStyle = (HSSFCellStyle) workbook
+					.createCellStyle(); // 标题样式
 			headerStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
 			headerStyle.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
 			HSSFFont headerFont = (HSSFFont) workbook.createFont(); // 标题字体
@@ -676,7 +691,8 @@ public class LedgerController {
 				cell.setCellValue(title);
 			}
 			sheet.getRow(0).setHeight(height);
-			HSSFCellStyle contentStyle = (HSSFCellStyle) workbook.createCellStyle(); // 内容样式
+			HSSFCellStyle contentStyle = (HSSFCellStyle) workbook
+					.createCellStyle(); // 内容样式
 			contentStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
 			Map<ProLedgerMaster, List<ProLedger>> map = ledgerService
 					.findExportProSupplier(ld);
@@ -709,27 +725,30 @@ public class LedgerController {
 					}
 				}
 			}
-			for(int i=0; i<varList.size(); i++){
-				HSSFRow row = sheet.createRow(i+1);
-	            PageData vpd = varList.get(i);
-	            for(int j=0;j<len;j++){
-	                String varstr = vpd.getString("var"+(j+1)) != null ? vpd.getString("var"+(j+1)) : "";
-	                cell =row.createCell(j);
-	                if(j!=3){
-	                	HSSFCellStyle cellStyle2 = (HSSFCellStyle) workbook.createCellStyle();  
-	                	HSSFDataFormat format = (HSSFDataFormat) workbook.createDataFormat();  
-	                	cellStyle2.setDataFormat(format.getFormat("@")); 
-	                	cell.setCellStyle(cellStyle2);
-	                	cell.setCellType(HSSFCell.CELL_TYPE_STRING);
-	                	cell.setCellValue(varstr);
-	                	continue;
-	                }
-	                cell.setCellStyle(contentStyle);
-	                cell.setCellType(HSSFCell.CELL_TYPE_STRING);
-                	cell.setCellValue(varstr);
-	            }
-	            
-	        }
+			for (int i = 0; i < varList.size(); i++) {
+				HSSFRow row = sheet.createRow(i + 1);
+				PageData vpd = varList.get(i);
+				for (int j = 0; j < len; j++) {
+					String varstr = vpd.getString("var" + (j + 1)) != null ? vpd
+							.getString("var" + (j + 1)) : "";
+					cell = row.createCell(j);
+					if (j != 3) {
+						HSSFCellStyle cellStyle2 = (HSSFCellStyle) workbook
+								.createCellStyle();
+						HSSFDataFormat format = (HSSFDataFormat) workbook
+								.createDataFormat();
+						cellStyle2.setDataFormat(format.getFormat("@"));
+						cell.setCellStyle(cellStyle2);
+						cell.setCellType(HSSFCell.CELL_TYPE_STRING);
+						cell.setCellValue(varstr);
+						continue;
+					}
+					cell.setCellStyle(contentStyle);
+					cell.setCellType(HSSFCell.CELL_TYPE_STRING);
+					cell.setCellValue(varstr);
+				}
+
+			}
 			OutputStream os = response.getOutputStream();
 			workbook.write(os);
 			os.flush();
