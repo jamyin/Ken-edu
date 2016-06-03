@@ -9,6 +9,9 @@
 .table th, .table td {
     border-top: none!important;
 }
+.panel-body.panel-body-noheader.panel-body-noborder.layout-body {
+	padding:20px!important;
+}
 </style>
 
 <script type="text/javascript">
@@ -82,7 +85,7 @@
 	});
 	
 </script>
-		<div class="easyui-layout" data-options="fit:true,border:false">
+		<div class="easyui-layout" data-options="fit:true,border:false" style="padding:20px;">
 			<div data-options="region:'center',border:false" title=""
 				style="overflow: hidden;">
 				<form id="formEdit" method="post" >

@@ -54,6 +54,27 @@
     </body>
     <script type="text/javascript">
    		$(function(){
+   		  // 跳转指定页
+   		  $('#jump_btn').on('click', function () {
+   		      var jump_num = $('#jump_num').val();
+   		      if (jump_num != '') {
+   		          var reg = /^[-+]?\d*$/;
+   		          if (!reg.test(jump_num)) {
+   		              alert("对不起，您输入的跳转页数格式不正确!");//请将“整数类型”要换成你要验证的那个属性名称！
+   		              return;
+   		          }
+   		          <#if pageList?? && pageList.total gt 0>
+   		          if (jump_num > ${(pageList.totalPage)!}) {
+   		              alert("对不起，您输入的跳转页数大于总页数!");
+   		              return;
+   		          }
+   		          </#if>
+   		      } else {
+   		          alert("对不起，您输入的跳转页数!");
+   		          return;
+   		      }
+   		      gotoPage(jump_num);
+   		  });   			
 	      // debugger;
 	      $(".nav").find("a").removeClass("cur");
 	      $(".nav").find("a:eq(2)").addClass("cur");

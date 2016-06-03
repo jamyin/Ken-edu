@@ -17,7 +17,7 @@
                 },
                 {
                     "menuName": "通知",
-                    "menuUrl": "/motive/release.htm"
+                    "menuUrl": "/motive/unreaded.htm"
                 }                
             ]            
         },{

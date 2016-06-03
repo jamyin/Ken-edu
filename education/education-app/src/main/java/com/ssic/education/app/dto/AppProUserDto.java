@@ -1,10 +1,7 @@
 package com.ssic.education.app.dto;
 
 import java.io.Serializable;
-import java.util.Date;
-
 import com.ssic.education.utils.redis.RedisKeyPrefix;
-
 import lombok.Data;
 
 /**		
@@ -21,46 +18,16 @@ import lombok.Data;
  */
 @Data
 @RedisKeyPrefix(prefixValue = "Pro:User:{token}")
-public class ProAppUserDto implements Serializable {
+public class AppProUserDto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
-	private String id;
-
-	private Integer age;
-
-	private String sourceId;
-
-	private String email;
-
-	private Integer gender;
-
-	private Integer isadmin;
-
-	private String name;
-
-	private String pjNo;
-
-	private String postNo;
-
-	private String password;
-
-	private String qjyAccount;
-
-	private String userAccount;
-
-	private String userImage;
-
-	private String userNo;
-
-	private String userType;
-
-	private Integer isdelete;
-
-	private Date createTime;
-
-	private Date lastUpdateTime;
-
-	private Integer stat;
+	private String id; //主键
+	private String sourceId; //供应商ID
+	private String supplierName;
+	private String email; //邮箱
+	private String name; //姓名
+	private String userAccount; //用户名
+	private String userNo; //联系方式
+	private String job; //岗位
 
 }

@@ -29,4 +29,6 @@ public interface ILedgerService {
 
 	int upDeleteLedger(String id);
 
+	int upSaveLedger(List<LedgerDto> ledgers);
+
 }

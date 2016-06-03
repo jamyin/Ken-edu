@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssic.education.app.dao.AppUsersDao;
-import com.ssic.education.app.dto.EduAppUserDto;
+import com.ssic.education.app.dto.AppEduUserDto;
 import com.ssic.education.app.dto.EduUsersInfoDto;
 import com.ssic.education.app.service.IAppUsersService;
 import com.ssic.education.app.token.TokenUtil;
@@ -21,8 +21,8 @@ public class AppUsersServiceImpl implements IAppUsersService {
 	private CommitteeDao committeeDao;
 
 	@Override
-	public synchronized EduAppUserDto appLogin(EduUsersInfoDto user) {
-		EduAppUserDto result = eduUsersDao.appLogin(user);
+	public synchronized AppEduUserDto appLogin(EduUsersInfoDto user) {
+		AppEduUserDto result = eduUsersDao.appLogin(user);
 		if (result != null) {
 			if (result.getSourceType() == 0 || result.getSourceType() == 2) {
 				EduCommittee ctte = committeeDao.getbyId(result.getSourceId());
@@ -43,7 +43,7 @@ public class AppUsersServiceImpl implements IAppUsersService {
 		EduUsersInfoDto user = new EduUsersInfoDto();
 		user.setPassword(oldPwd);
 		user.setUserAccount(account);
-		EduAppUserDto result = eduUsersDao.appLogin(user);
+		AppEduUserDto result = eduUsersDao.appLogin(user);
 		if (result != null) {
 			user.setPassword(newPwd);
 			return eduUsersDao.updatePwd(user);

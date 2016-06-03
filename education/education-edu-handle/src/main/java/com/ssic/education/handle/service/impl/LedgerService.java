@@ -121,4 +121,9 @@ public class LedgerService implements ILedgerService {
 		return ledgerDao.upDeleteLedger(id);
 	}
 
+	@Override
+	public int upSaveLedger(List<LedgerDto> ledgers) {
+		return ledgerDao.upSaveLedger(ledgers);
+	}
+
 }

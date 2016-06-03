@@ -1,13 +1,17 @@
 package com.ssic.education.app.dao;
 
+import java.util.List;
+
 import lombok.Getter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.ssic.education.app.dto.ProAppUserDto;
 import com.ssic.education.handle.mapper.ProUsersMapper;
 import com.ssic.education.handle.pojo.ProUsers;
+import com.ssic.education.handle.pojo.ProUsersExample;
+import com.ssic.education.utils.constants.DataStatus;
+import com.ssic.education.utils.util.StringUtils;
 
 @Repository
 public class AppProUserDao {
@@ -19,8 +23,20 @@ public class AppProUserDao {
 	 * 团餐公司APP登录
 	 * @return
 	 */
-	public ProAppUserDto proUserLogin(ProUsers proUser) {
-		return null;
+	public List<ProUsers> proUserLogin(ProUsers proUser) {
+		ProUsersExample example = new ProUsersExample();
+		ProUsersExample.Criteria criteria = example.createCriteria();
+		if (proUser != null) {
+			if (StringUtils.isNotBlank(proUser.getUserAccount())) {
+				criteria.andUserAccountNotEqualTo(proUser.getUserAccount());
+			}
+			if (StringUtils.isNotBlank(proUser.getPassword())) {
+				criteria.andPasswordEqualTo(proUser.getPassword());
+			}
+			criteria.andUserTypeEqualTo("1");
+			criteria.andStatEqualTo(DataStatus.ENABLED);
+		}
+		return proUserMapper.selectByExample(example);
 	}
 
 	public int updateProPwd(ProUsers proUser) {

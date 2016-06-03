@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ssic.education.app.mapper.AppUsersMapper">
-	<resultMap id="LoginMap" type="com.ssic.education.app.dto.EduAppUserDto">
+	<resultMap id="LoginMap" type="com.ssic.education.app.dto.AppEduUserDto">
 		<id column="id" property="id" jdbcType="VARCHAR" />
 		<result column="source_id" property="sourceId" jdbcType="VARCHAR" />
 		<result column="source_type" property="sourceType" jdbcType="TINYINT" />

@@ -32,9 +32,9 @@
         
         <div class="breadcrumb">
             <span>当前位置:</span>
-            <a href="#">公告通知</a>
+<!--             <a href="#">公告通知</a>
             <span> &gt; </span>
-            <a href="#">已发通知</a>
+            <a href="#">已发通知</a> -->
             <span> &gt; </span>
             <a href="#">详情</a>
         </div>
@@ -45,8 +45,10 @@
                 <h1>${(data.title)!}</h1>
                 <p> 发件人：${(data.createName)!} </p>
                 <p> 时间：${(data.createTime?string('yyyy-MM-dd'))!} </p>
-                <span id="unread" class="tips">未读:  ${(readMap.unread)!0}</span>
-                <span id="readed" class="tips">已读:  ${(readMap.read)!0}</span>
+                <#if isowner>
+                	<span id="unread" class="tips">未读:  ${(readMap.unread)!0}</span>
+                	<span id="readed" class="tips">已读:  ${(readMap.read)!0}</span>                
+                </#if>
                 <div class="text">
                         <h2>${(data.title)!}</h3>
 						${(data.content)!}

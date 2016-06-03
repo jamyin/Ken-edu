@@ -8,6 +8,9 @@
 .table th, .table td {
     border-top: none!important;
 }
+.panel-body.panel-body-noheader.panel-body-noborder.layout-body {
+	padding:20px!important;
+}
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -55,7 +58,7 @@
 							var b="<tr id='ledger"+nextId+"'>"+a.replace('<td><a id="addLedger" ><font size="8" >+</font></a></td>',"")+"</tr>";
 							var c=b.replace(/title=""/g,"");
 							$(c).insertAfter($(lastTr));
-							$("<a id='subtract' onclick='subtractLedger(this);' data-id='ledger"+nextId+"' style='text-decoration:none;' ><font size='8' >-</font></a>").replaceAll("#ledger"+nextId+" a");
+							$("<a onclick='subtractLedger(this);' data-id='ledger"+nextId+"' style='text-decoration:none;' ><font size='8' >-</font></a>").replaceAll("#ledger"+nextId+" a");
 							$.parser.parse();
 						});
 	});
