@@ -14,7 +14,7 @@ import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.util.StringUtils;
 
 @Repository
-public class AppProUserDao {
+public class AppProUsersDao {
 	@Autowired
 	@Getter
 	private ProUsersMapper proUserMapper;
@@ -28,7 +28,7 @@ public class AppProUserDao {
 		ProUsersExample.Criteria criteria = example.createCriteria();
 		if (proUser != null) {
 			if (StringUtils.isNotBlank(proUser.getUserAccount())) {
-				criteria.andUserAccountNotEqualTo(proUser.getUserAccount());
+				criteria.andUserAccountEqualTo(proUser.getUserAccount());
 			}
 			if (StringUtils.isNotBlank(proUser.getPassword())) {
 				criteria.andPasswordEqualTo(proUser.getPassword());

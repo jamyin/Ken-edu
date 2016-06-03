@@ -29,5 +29,6 @@ public class AppProUserDto implements Serializable {
 	private String userAccount; //用户名
 	private String userNo; //联系方式
 	private String job; //岗位
+	private String token; //令牌
 
 }
