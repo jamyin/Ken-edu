@@ -58,7 +58,7 @@ public class WapSupplierController extends BaseController{
 
 		List<ProLicenseDto> resultList = null;
 		InfoObj infoObj = new InfoObj();
-		String supplierId = "";
+		String supplierId = null;
 		if(Objects.equal(companyType, 1)){
 			//基本信息
 			EduCanteenDto eduCanteenDto = new EduCanteenDto();
@@ -96,6 +96,7 @@ public class WapSupplierController extends BaseController{
 		//根据当前供应商信息 查询该供应商对应的原料供应商信息
 		List<ProSupplierDto> suppliList = iSupplierService.searchSupplierListBySupplierId(supplierId,null,2,10);
 
+		mv.addObject("companyType",companyType);
 		mv.addObject("infoObj",infoObj);
 		mv.addObject("resultList", resultList);
 		mv.addObject("suppliList", suppliList);
