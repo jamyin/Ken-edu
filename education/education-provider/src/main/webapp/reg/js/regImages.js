@@ -5,6 +5,7 @@ $(function(){
         'script':"file/upload.htm",
         'cancelImg': 'reg/uploadify/cancel.png',
         'queueID': 'fileQueue',
+        'buttonImg':'reg//uploadify/uploadp.png',
         'auto': true,
         //'multi':true,
         'buttonText': 'select',
@@ -16,7 +17,9 @@ $(function(){
         onComplete: function(event, queueID, fileObj, response, data) {
             var dataObj = eval("("+response+")");
             if(dataObj.status == 200){
+            	var showUrl = dataObj.wwwdomain+dataObj.filePath;
             	$("#file-1").attr("value","工商营业执照#"+dataObj.filePath);
+            	$("#license1").html("<a target='_' href='"+showUrl+"'>查看工商营业执照</a>");
             	$("#file-1").attr("checked","checked");
             }
         },
@@ -36,6 +39,7 @@ $(function(){
         'script':"file/upload.htm",
         'cancelImg': 'reg/uploadify/cancel.png',
         'queueID': 'fileQueue',
+        'buttonImg':'reg//uploadify/uploadp.png',
         'auto': true,
         //'multi':true,
         'buttonText': 'select',
@@ -47,7 +51,9 @@ $(function(){
         onComplete: function(event, queueID, fileObj, response, data) {
             var dataObj = eval("("+response+")");
             if(dataObj.status == 200){
+            	var showUrl = dataObj.wwwdomain+dataObj.filePath;
                 $("#file-2").val("餐饮服务许可证#"+dataObj.filePath);
+                $("#license2").html("<a target='_' href='"+showUrl+"'>查看餐饮服务许可证</a>");
                 $("#file-2").attr("checked","checked");
             }
         },
@@ -67,6 +73,7 @@ $(function(){
         'uploader': 'reg/uploadify/uploadify.swf',
         'script':"file/upload.htm",
         'cancelImg': 'reg/uploadify/cancel.png',
+        'buttonImg':'reg//uploadify/uploadp.png',
         'queueID': 'fileQueue',
         'auto': true,
         //'multi':true,
@@ -79,7 +86,9 @@ $(function(){
         onComplete: function(event, queueID, fileObj, response, data) {
             var dataObj = eval("("+response+")");
             if(dataObj.status == 200){
+            	var showUrl = dataObj.wwwdomain+dataObj.filePath;
                 $("#file-3").val("食品流通许可证#"+dataObj.filePath);
+                $("#license3").html("<a target='_' href='"+showUrl+"'>查看食品流通许可证</a>");
                 $("#file-3").attr("checked","checked");
             }
         },
@@ -98,6 +107,7 @@ $(function(){
         'uploader': 'reg/uploadify/uploadify.swf',
         'script':"file/upload.htm",
         'cancelImg': 'reg/uploadify/cancel.png',
+        'buttonImg':'reg/uploadify/uploadp.png',
         'queueID': 'fileQueue',
         'auto': true,
         //'multi':true,
@@ -110,7 +120,9 @@ $(function(){
         onComplete: function(event, queueID, fileObj, response, data) {
             var dataObj = eval("("+response+")");
             if(dataObj.status == 200){
+            	var showUrl = dataObj.wwwdomain+dataObj.filePath;
                 $("#file-4").val("食品生产许可证#"+dataObj.filePath);
+                $("#license4").html("<a target='_' href='"+showUrl+"'>查看食品生产许可证</a>");
                 $("#file-4").attr("checked","checked");         	            	
             }
         },
