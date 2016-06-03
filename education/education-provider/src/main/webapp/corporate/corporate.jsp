@@ -35,18 +35,15 @@ ul.my_info {
 	}
 
 	function edit(){
- 		$("#aa").dialog({    
-		    title: '编辑',    
+		parent.$.modalDialog({
+			title: '编辑',    
 		    width: 500,    
-		    height: 550,    
-		    closed: false,    
-		    cache: false,    
-		    href: '${pageContext.request.contextPath}/corporateController/editPage',    
-		    modal: true,
+		    height: 550,  
+		    href: '${pageContext.request.contextPath}/corporateController/editPage', 
 		    buttons : [ {
 				text : '编辑',
 				handler : function() {
-					var f = $('#form');
+					var f = parent.$.modalDialog.handler.find('#form');
 					f.submit();
 				}
 			} ]
@@ -54,7 +51,7 @@ ul.my_info {
 	} 
 	
 	function editPic(){
-		$("#aa").dialog({
+		parent.$.modalDialog({
 			title : '编辑图片',
 			width : 700,
 			height : 600,
@@ -62,7 +59,7 @@ ul.my_info {
 			buttons : [ {
 				text : '编辑',
 				handler : function() {
-					var f = $('#updateImage');
+					var f = parent.$.modalDialog.handler.find('#updateImage');
 					f.submit();
 				}
 			} ]
