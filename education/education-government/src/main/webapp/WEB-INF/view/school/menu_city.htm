@@ -85,7 +85,7 @@
 					<ul>
 						<#if proPackages.proPackagesDtos??>
 							<#list proPackages.proPackagesDtos as packages>
-									<li data="<#if proPackages.supplyPhase == 1>午餐</#if><#if proPackages.supplyPhase == 3>晚餐</#if>，<#if packages.type == 0>国内班</#if><#if packages.type == 1>国际班</#if>，<#if packages.proDishesDtos??> <#list packages.proDishesDtos as proDishes> ${(proDishes.waresName)!} </#list></#if>，<#if packages.proNutritionalDtos??>
+									<li data="<#if proPackages.supplyPhase == 0>早餐</#if><#if proPackages.supplyPhase == 1>午餐</#if><#if proPackages.supplyPhase == 2>午后甜点</#if><#if proPackages.supplyPhase == 3>晚餐</#if><#if proPackages.supplyPhase == 3>夜宵</#if>，<#if packages.type == 0>国内班</#if><#if packages.type == 1>国际班</#if>，<#if packages.proDishesDtos??> <#list packages.proDishesDtos as proDishes> ${(proDishes.waresName)!} </#list></#if>，<#if packages.proNutritionalDtos??>
 										<#list packages.proNutritionalDtos as proNutritionalDtos>
 											${(proNutritionalDtos.name)!}
 										</#list>
@@ -104,11 +104,11 @@
 									</span>
 									<span class="evaluate">
 						             <span class="starts">
-						               <i class="star <#if proPackages.comment >=0 && proPackages.comment <1 >on</#if>"></i>
-						               <i class="star <#if proPackages.comment >=1 && proPackages.comment <2 >on</#if>"></i>
-						               <i class="star <#if proPackages.comment >=2 && proPackages.comment <3 >on</#if>""></i>
-						               <i class="star <#if proPackages.comment >=3 && proPackages.comment <4 >on</#if>""></i>
-						               <i class="star <#if proPackages.comment >=4 && proPackages.comment <5 >on</#if>""></i>
+						               <i class="star <#if (proPackages.comment >0)  >on</#if>"></i>
+						               <i class="star <#if (proPackages.comment >1) >on</#if>"></i>
+						               <i class="star <#if (proPackages.comment >2) >on</#if>""></i>
+						               <i class="star <#if (proPackages.comment >3) >on</#if>""></i>
+						               <i class="star <#if (proPackages.comment >4) >on</#if>""></i>
 						             </span>
 						             <i class="points">${(proPackages.comment)!}</i>
 						           </span>
@@ -122,9 +122,24 @@
 		<#else>
 			<div class="lunch row" style="color: red;font-size:18px; text-align:center;">暂无数据</div>				
 		</#if>
-
-                  </div>
-                </div>
+            </div>
+          </div>
+           <h1 class="con-tt">
+            	<span class="title">套餐详情</span>
+           </h1>
+		<div class="menu_box">
+			<span id="moreInfo"></span>
+			<!--<img id="goods_pic" src="static/img/school.jpg" border="0">
+			<div id="goods_info"  class="info">
+				<p>名称：糖醋小排</p>
+				<p>分类：大荤</p>
+				<p>原料：排骨</p>
+				<p>规格：150g</p>
+				<p>保质期：3天</p>
+				<p>营养配比：热量320KJ/781-800千卡</p>
+				<p>供应商名称：上海联程餐饮有限公司</p>
+			</div>-->
+		</div>
 
                 <h1 class="con-tt">
                   <span class="title">配送信息列表</span>
@@ -253,6 +268,16 @@
                 $(".nav").find("a:eq(1)").addClass("cur");
 
                 fix_table();
+                
+                var _info1 = $('.row ul li').eq(0).attr('data')
+        		$('.row ul li').eq(0).addClass('cur')
+        		$('#moreInfo').html(_info1)
+        		$('.row ul').on('click', 'li',function(){
+        			var _info = $(this).attr('data')
+        			$('.row ul li').removeClass('cur')
+        			$(this).addClass('cur')
+        			$('#moreInfo').html(_info)
+        		})
                 
                 $(".offer_delete").click(function(){
                 	$.ajax({
