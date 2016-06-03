@@ -244,6 +244,7 @@ public class SchoolController {
 				chooseSchoolDto.setCommitteeList(committeeList);
 
 				//学校列表
+				schoolDto.setCommitteeId(null);   //全部学校
 				PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, query);
 				chooseSchoolDto.setSchoolDto(schoolList);
 				result.setData(chooseSchoolDto);
