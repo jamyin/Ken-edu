@@ -53,4 +53,10 @@
 	<bean id="jsonHttpMessageConverter"
 		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
 
+	<mvc:interceptors>
+	    <!-- 使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求 -->
+	    <bean class="com.ssic.education.government.handler.UserHandler"/> 	    
+	</mvc:interceptors>  
+
+
 </beans>
