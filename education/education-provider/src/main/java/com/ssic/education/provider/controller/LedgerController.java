@@ -393,6 +393,7 @@ public class LedgerController {
 					}
 				}
 			}
+			//采购数量
 			String num = ledger.getQuantity();
 			if (!num.matches("^[1-9][0-9]*(\\.)?[0-9]{0,2}$")) {
 				j.setMsg(ledger.getName() + "错误的采购数量");
@@ -409,6 +410,7 @@ public class LedgerController {
 			ledger.setLastUpdateTime(new Date());
 			ledger.setStat(1);
 			int i=0;
+			//不存在的配送品添加
 			for (LedgerDto ledgerDto : list) {
 				if(!ledgerDto.getId().equals(ledger.getId())){
 					i+=1;
@@ -429,6 +431,7 @@ public class LedgerController {
 				LedgerDto remove = ledgers.remove(Integer.parseInt(b));
 			}
 		}
+		//配送品更新删除
 		if(di!=""){
 			List<LedgerDto> ls=new ArrayList();
 			int x=0;

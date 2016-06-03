@@ -274,6 +274,36 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 	}
 
 	public int upSaveLedger(LedgerDto ld) {
+		ProSchoolWare psw = new ProSchoolWare();
+		psw.setSchoolId(ld.getReceiverId());
+		psw.setWareId(ld.getWaresId());
+		psw.setSourceId(ld.getSourceId());
+		psw.setSupplierId(ld.getSupplierId());
+		ProSchoolWareExample example = new ProSchoolWareExample();
+		ProSchoolWareExample.Criteria criteria = example.createCriteria();
+		criteria.andSchoolIdEqualTo(psw.getSchoolId());
+		criteria.andWareIdEqualTo(psw.getWareId());
+		criteria.andSourceIdEqualTo(psw.getSourceId());
+		if (psw.getSupplierId() != null) {
+			criteria.andSupplierIdEqualTo(psw.getSupplierId());
+		} else {
+			criteria.andSupplierIdIsNull();
+		}
+		List<ProSchoolWare> list = swMapper.selectByExample(example);
+		if (list.size() == 0) {
+			psw.setId(UUID.randomUUID().toString());
+			psw.setCreateTime(new Date());
+			psw.setLastUpdateTime(psw.getCreateTime());
+			psw.setStat(1);
+			swMapper.insert(psw);
+		} else {
+			for (ProSchoolWare sw : list) {
+				ProSchoolWare psw1 = new ProSchoolWare();
+				psw1.setId(sw.getId());
+				psw1.setLastUpdateTime(new Date());
+				swMapper.updateByPrimaryKeySelective(psw1);
+			}
+		}
 		ProLedger pl= BeanUtils.createBeanByTarget(ld, ProLedger.class);
 		pl.setQuantity(new BigDecimal(ld.getQuantity()));
 		pl.setId(UUID.randomUUID().toString());
