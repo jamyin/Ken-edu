@@ -12,7 +12,7 @@ i{font-style:normal}
 a{text-decoration:none}
 /* common */
 body{background:#f3f3f3}
-.header{width:100%;overflow:hidden;background:#60ac62}
+/*.header{width:100%;overflow:hidden;background:#60ac62}
 .header > .wrap{width:1000px;height:96px;margin:0 auto}
 .header > .wrap > .logo{width:450px;height:96px;display:block;padding-left:86px;background:url(../img/logo.png) no-repeat left center;line-height:96px;font-size:24px;color:#fff;float:left;}
 .header > .wrap > .p_status{float:right;width:400px;height:96px;line-height:96px;color:#fff;text-align:right}
@@ -34,7 +34,7 @@ body{background:#f3f3f3}
 .nav > ul > li:hover > .wrap{display:block}
 .nav > ul > li.bar3 > .wrap > ul{padding-left:180px;width:820px}
 .nav > ul > li.bar4 > .wrap > ul{padding-left:320px;width:680px}
-
+*/
 
 .wrapper{width:1000px;margin:40px auto;}
 .index_newsbox{position:relative;width:688px;height:216px;border:1px #d3d3d3 solid;padding:10px 10px 10px 300px;overflow:hidden;background:#fff}
@@ -124,7 +124,11 @@ a.forgot{width:100px;color:#999;position:absolute;left:50%;top:50%;margin:160px 
 /*注册*/
 .reg_box{width:898px;border:1px #d3d3d3 solid;overflow:hidden;background:#fff;padding:36px 50px;margin:0 0 30px}
 .reg_box h4{border-left:3px #60ac62 solid;display:block;padding-left:10px;font-size:16px;margin-bottom:10px;}
+.reg_box h4.cafeteria{display:none}
+.reg_box h4.cafeteria.show{display:block}
 .reg_box > ul{width:92%;overflow:hidden;margin:10px auto 40px;}
+.reg_box > ul.cafeteria{display:none}
+.reg_box > ul.cafeteria.show{display:block}
 .reg_box > ul > li{width:100%;overflow:hidden;margin:15px 0}
 .reg_box > ul > li label{width:100px;height:30px;line-height:30px;display:block;float:left;text-align:right;margin-right:10px}
 .reg_box > ul > li label.ckb{width:auto;height:30px;line-height:30px;display:inline-block;float:left;text-align:left;margin-left:10px;margin-right:0;font-size:14px}
@@ -144,3 +148,6 @@ a.forgot{width:100px;color:#999;position:absolute;left:50%;top:50%;margin:160px 
 .reg_box .submit{width:180px;height:36px;line-height:36px;display:block;margin:30px 146px;background:#60ac62;color:#fff;font-size:16px}
 
 .footer.login{position:absolute;bottom:0}
+
+.add_cafeteria{width:120px;height:26px;display:block;color:#333;line-height:26px;padding:5px;background:#e5e5e5;text-align:center;margin:-30px 0 30px 146px}
+
