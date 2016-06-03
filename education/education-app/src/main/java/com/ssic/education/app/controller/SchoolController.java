@@ -178,8 +178,10 @@ public class SchoolController {
 
 		eduSchoolDto.setEduCanteenDto(eduCanteenDto);
 		//eduSchoolDto.setEduSchoolSupplierDto(eduSchoolSupplierDto);
-		eduSchoolDto.setSupplierList(supplierList);		
-		eduSchoolDto.setPackagesList(proPackagesDtos);
+		if(supplierList != null && supplierList.size() > 0){
+			eduSchoolDto.setSupplierDto(supplierList.get(0));
+		}
+		eduSchoolDto.setPackagesList(proPackagesDtos);                  //委托供应商
 
 		result.setData(eduSchoolDto);
 		return result;

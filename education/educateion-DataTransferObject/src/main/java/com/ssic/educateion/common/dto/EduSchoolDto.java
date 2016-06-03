@@ -79,6 +79,7 @@ public class EduSchoolDto implements Serializable {
 	
 	private EduCanteenDto eduCanteenDto;
 	//private EduSchoolSupplierDto eduSchoolSupplierDto;
-	List<SupplierDto> supplierList;
+	//List<SupplierDto> supplierList;
+	private SupplierDto supplierDto;
 	private Integer source;//来源0：市教委，1：区教委，2：学校
 }
