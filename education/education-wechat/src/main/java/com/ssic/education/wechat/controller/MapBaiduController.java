@@ -21,6 +21,7 @@ import com.ssic.education.handle.service.ProLedgerService;
 import com.ssic.education.handle.service.ProSupplierService;
 import com.ssic.education.handle.service.ProWaresService;
 import com.ssic.education.utils.util.HttpClientUtil;
+import com.ssic.education.utils.util.PropertiesUtils;
 
 @Controller
 @RequestMapping(value="/wap/map")
@@ -84,7 +85,7 @@ public class MapBaiduController extends BaseController{
 		String baidu_getHistory_url = "http://api.map.baidu.com/trace/v2/track/gethistory?";
 		String startTime = String.valueOf(resultDto.getStartTime().getTime());
 		String endTime = String.valueOf(resultDto.getEndTime().getTime());
-		String reqURL = "ak=YN0mfG1VM2jrGV5jBB7RD6lKKmrDZA43&service_id=117192&entity_name="+resultDto.getId()+"&start_time="+startTime+"&end_time="+endTime+"";
+		String reqURL = "ak="+PropertiesUtils.getProperty("baidu.ditu.ak")+"&service_id="+PropertiesUtils.getProperty("baidu.ditu.serviceId")+"&entity_name="+resultDto.getId()+"&start_time="+startTime+"&end_time="+endTime+"";
 		String json = HttpClientUtil.sendGetRequest(baidu_getHistory_url+reqURL, null);
 		BaiduHistoryDto history = new Gson().fromJson(json, BaiduHistoryDto.class);
 		return history;
