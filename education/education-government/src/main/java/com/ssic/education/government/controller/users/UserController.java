@@ -1,6 +1,7 @@
 package com.ssic.education.government.controller.users;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,13 +17,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.common.base.Objects;
+import com.mysql.fabric.xmlrpc.base.Array;
+import com.ssic.educateion.common.dto.EduCanteenDto;
 import com.ssic.educateion.common.dto.EduCommitteeDto;
+import com.ssic.educateion.common.dto.EduSchoolDto;
 import com.ssic.educateion.common.dto.EduUsersDto;
 import com.ssic.educateion.common.dto.EduUsersRegDto;
 import com.ssic.education.government.controller.BaseController;
+import com.ssic.education.handle.pojo.ProLicense;
 import com.ssic.education.handle.service.AreaService;
+import com.ssic.education.handle.service.EduSchoolService;
 import com.ssic.education.handle.service.EduUsersService;
+import com.ssic.education.handle.service.IEduCanteenService;
 import com.ssic.education.handle.service.IEduCommitteeService;
+import com.ssic.education.handle.service.IProLicenseService;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.constants.SessionConstants;
 import com.ssic.education.utils.digest.MD5Coder;
@@ -47,9 +55,18 @@ public class UserController extends BaseController{
 	@Autowired
 	private IEduCommitteeService iEduCommitteeService;
 	
+	@Autowired
+	private EduSchoolService eduSchoolService;
+	
+	@Autowired
+	private IEduCanteenService iEduCanteenService;
+	
+	@Autowired
+	private IProLicenseService iProLicenseService;
+	
 	@RequestMapping(value="oreg")
 	public ModelAndView oreg(){
-		ModelAndView mv = getModelAndView();
+		ModelAndView mv = new ModelAndView();
 		List<EduCommitteeDto> eduCommitteeDtos = iEduCommitteeService.findAll();
 		mv.addObject("eduCommitteeDtos", eduCommitteeDtos);
 		mv.setViewName("reg");	
@@ -73,6 +90,17 @@ public class UserController extends BaseController{
 		}
 		return res;
 	}
+	
+	@RequestMapping(value="edit")	
+	@ResponseBody
+	public Response<String> edit(EduUsersRegDto usersDto) throws Exception{
+		Response<String> res = new Response<String>();
+		eduUsersService.edit(usersDto);
+		res.setStatus(DataStatus.HTTP_SUCCESS);
+		res.setMessage("用户名已被使用，注册失败！");
+		return res;
+	}
+	
 	@RequestMapping(value="reg")
 	public ModelAndView reg(EduUsersRegDto usersDto){
 		ModelAndView mv = getModelAndView();
@@ -106,6 +134,42 @@ public class UserController extends BaseController{
 		EduUsersDto usersdto = getLoginUser(request, response, session, id);
 		mv.addObject("userInfo", usersdto);
 		mv.setViewName("/personalcenter");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/oEditUserInfo")
+	public ModelAndView oEditUserInfo(HttpServletRequest request,HttpServletResponse response,HttpSession session,EduUsersDto usersDto) throws Exception {
+		ModelAndView mv = getModelAndView();
+		String id = (String) getRequest().getSession().getAttribute(SessionConstants.LOGIN_USER_INFO);
+//		EduUsersDto usersdto = (EduUsersDto) session.getAttribute(SessionConstants.LOGIN_USER_INFO);
+		EduUsersDto usersdto = getLoginUser(request, response, session, id);
+		EduSchoolDto eduSchoolDto = new EduSchoolDto();
+		EduCommitteeDto eduCommitteeDto = new EduCommitteeDto();
+		EduCanteenDto eduCanteenDto = new EduCanteenDto();
+		List<ProLicense> proLicenses = new ArrayList<>();
+		if (null != usersdto && StringUtils.isNotBlank(usersdto.getId())) {
+			eduSchoolDto = eduSchoolService.findById(usersdto.getSourceId());
+			if (null != eduSchoolDto && StringUtils.isNotBlank(eduSchoolDto.getCommitteeId())) {
+				eduCommitteeDto = iEduCommitteeService.findById(eduSchoolDto.getCommitteeId());
+			}
+			EduCanteenDto eduCanteendto = new EduCanteenDto();
+			eduCanteendto.setSchoolId(usersdto.getSourceId());
+			eduCanteenDto = iEduCanteenService.searchEduCanteenDto(eduCanteendto);
+			ProLicense proLicense = new ProLicense();
+			proLicense.setCerSource((short)DataStatus.MANAGERTYPE);
+			proLicense.setRelationId(usersdto.getSourceId());
+			proLicenses = iProLicenseService.lookImage(proLicense);
+		} else {
+			response.sendRedirect(request.getContextPath() + "/login.htm");
+		}
+		List<EduCommitteeDto> eduCommitteeDtos = iEduCommitteeService.findAll();
+		mv.addObject("userInfo", usersdto);
+		mv.addObject("eduSchoolDto", eduSchoolDto);
+		mv.addObject("eduCommitteeDto", eduCommitteeDto);
+		mv.addObject("eduCanteenDto", eduCanteenDto);
+		mv.addObject("proLicenses", proLicenses);
+		mv.addObject("eduCommitteeDtos", eduCommitteeDtos);
+		mv.setViewName("/personalcenter_pinfo");
 		return mv;
 	}
 	

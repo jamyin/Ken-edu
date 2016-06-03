@@ -33,7 +33,10 @@ public class EduCommitteeServiceImpl implements IEduCommitteeService {
 	
 	public EduCommitteeDto findById (String id) {
 		EduCommittee eduCommittee = eduCommitteeDao.selectByPrimaryKey(id);
-		return BeanUtils.createBeanByTarget(eduCommittee, EduCommitteeDto.class);
+		if (null != eduCommittee) {
+			return BeanUtils.createBeanByTarget(eduCommittee, EduCommitteeDto.class);
+		}
+		return null;
 	}
 	
 	public List<EduCommitteeDto> findAll(){

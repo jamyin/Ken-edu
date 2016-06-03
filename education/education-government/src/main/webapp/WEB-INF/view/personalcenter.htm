@@ -3,11 +3,38 @@
     <head>
         <#include "/common/head.htm" />
         <link rel="stylesheet" href="/static/css/style.css">
+         <link rel="stylesheet" href="/static/css/dis_edu.css">
     </head>
 <body>
 <#include "/common/nav.htm" />
-	
-	<div class="wrapper">
+	<div class="main_wrap">
+
+            <h2>个人中心</h2>
+            <div class="content_wrap">
+                <div class="tab_wrap">
+                    <ul class="side_menu">
+                        <li><a href="oEditUserInfo.htm">基本信息</a></li>
+                        <li class="active"><a href="###">修改密码</a></li>
+                    </ul>
+                    <div class="tab_content">
+                        <div class="pcenter_box">
+							<div class="portrait">
+								<p><img src="/static/img/portrait.png" border="0"></p>
+								<span>${(userInfo.userAccount)!}</span>
+							</div>
+							<ul>
+								<li><label>原密码</label><input id="old_password" type="password" placeholder=""></li>
+								<li><label>新登录密码</label><input id="password" type="password" placeholder=""></li>
+								<li><label>确认密码</label><input id="new_password" type="password" placeholder=""></li>
+							</ul>
+							<input class="submit" type="button" value="确认提交">
+						</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+	<!-- <div class="wrapper">
 		<div class="page_title"><span>个人中心</span></div>
 		<div class="pcenter_box">
 			<div class="portrait">
@@ -21,7 +48,7 @@
 			</ul>
 			<input class="submit" type="button" value="确认提交">
 			</div>
-	</div>	
+	</div>	 -->
 	<#include "/common/footer.htm" />
 <script>
 	$(function(){	

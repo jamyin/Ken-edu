@@ -111,14 +111,15 @@ a.forgot{width:100px;color:#999;position:absolute;left:50%;top:50%;margin:160px 
 
 
 /*个人中心*/
-.pcenter_box{width:898px;border:1px #d3d3d3 solid;overflow:hidden;background:#fff;padding:36px 50px;margin:0 0 30px}
-.pcenter_box .portrait{width:136px;overflow:hidden;margin:50px auto}
+.pcenter_box{width:100%;overflow:hidden;background:#fff;}
+.pcenter_box .portrait{width:136px;overflow:hidden;margin:0 auto 30px}
 .pcenter_box .portrait p{width:130px;height:130px;overflow:hidden;display:block;border:3px #d9d9d9 solid;border-radius:130px}
 .pcenter_box .portrait span{width:130px;overflow:hidden;text-align:center;display:block;margin:20px 0 0;font-size:16px}
 .pcenter_box ul{width:400px;margin:0 auto;overflow:hidden;}
 .pcenter_box ul li{width:400px;overflow:hidden;margin-bottom:15px;}
 .pcenter_box ul li label{width:100px;height:30px;line-height:30px;display:block;float:left;text-align:right;margin-right:10px;font-size:14px}
 .pcenter_box ul li input[type=text], .pcenter_box ul li input[type=password]{width:188px;height:28px;line-height:28px;padding:0 10px;display:block;float:left;border:1px #c6c6c6 solid;font-size:14px}
+.pcenter_box ul li span.dis{border:0;width:190px;height:30px;line-height:28px;padding:0 10px;display:block;float:left;font-size:14px}
 .pcenter_box .submit{width:180px;height:36px;line-height:36px;display:block;margin:20px auto;background:#60ac62;color:#fff;font-size:16px}
 
 /*注册*/
