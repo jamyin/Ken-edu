@@ -59,21 +59,26 @@ public class SuppliersServiceImpl implements ISupplierService {
 		supplierLicDto = supplierInfoDao.getSupplierById(supplier_id);
 		PageQuery query = new PageQuery();
 		query.setPageSize(3);
-		PageResult<MaterialSupplierDto> findSupplierList = this.findListByIds(supplierLicDto.getId(), null, query);
-		List<ProLicense> list = supplierInfoDao.getLic(supplierLicDto.getId());
-		if (null != list && !list.isEmpty()) {
-			for (ProLicense proLicense : list) {
-				if (null != proLicense.getLicPic()) {
-					String host = "http://192.168.1.242";
-					String pic = host + proLicense.getLicPic();
-					proLicense.setLicPic(pic);
+		if (supplierLicDto != null) {
+			PageResult<MaterialSupplierDto> findSupplierList = this.findListByIds(supplierLicDto.getId(), null, query);
+			List<ProLicense> list = supplierInfoDao.getLic(supplierLicDto.getId());
+			if (null != list && !list.isEmpty()) {
+				for (ProLicense proLicense : list) {
+					if (null != proLicense.getLicPic()) {
+						String host = "http://192.168.1.242";
+						String pic = host + proLicense.getLicPic();
+						proLicense.setLicPic(pic);
+					}
 				}
+				List<AppLicenseDto> applic = BeanUtils.createBeanListByTarget(list, AppLicenseDto.class);
+				supplierLicDto.setAppLicense(applic);
 			}
-			List<AppLicenseDto> applic = BeanUtils.createBeanListByTarget(list, AppLicenseDto.class);
-			supplierLicDto.setAppLicense(applic);
+			if (findSupplierList != null) {
+				supplierLicDto.setMaterialSupplierList(findSupplierList);
+			}
+			return supplierLicDto;
 		}
-		supplierLicDto.setMaterialSupplierList(findSupplierList);
-		return supplierLicDto;
+		return null;
 	}
 
 	@Override
@@ -84,8 +89,9 @@ public class SuppliersServiceImpl implements ISupplierService {
 			int total = supplierInfoDao.getSupplierByIdsCount(list, proSupplier);
 			query.setTotal(total);
 			return new PageResult<MaterialSupplierDto>(query, materialSupplierDto);
+		} else {
+			return null;
 		}
-		return null;
 
 	}
 }

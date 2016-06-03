@@ -80,4 +80,10 @@ public class AppUsersServiceImpl implements IAppUsersService {
 			return null;
 		}
 	}
+
+	@Override
+	public int proUpdatePwd(String account, String oldPwd, String newPwd) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
