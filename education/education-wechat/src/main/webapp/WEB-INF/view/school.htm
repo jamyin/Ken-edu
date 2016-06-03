@@ -10,9 +10,9 @@
   </head>
 <body>
 	<#include "constant.htm" />
-		
-	<!-- <header><span>${(eduSchoolDto.schoolName)!}</span></header> -->
 	<header>
+	<input id="customerId" type="hidden" value="${(eduSchoolDto.id)!}"/>
+	<span>${(eduSchoolDto.schoolName)!}</span>
 		<select id="sel_school" onchange="jumpUrl(this);">
 			<#if dataList ??>
 				<#list dataList as data>
@@ -23,11 +23,7 @@
 					</#if>		
 				</#list>
 			</#if>
-<!-- 			<option>静安区第一小学</option>
-			<option>静安区第二小学</option>
-			<option>静安区第三小学</option>
-			<option>静安区第四小学</option>
- -->	</select>
+		</select>
 	</header>
 	<div class="school_box">
 		<img src="/static/img/school_simple.jpg" border="0">
@@ -43,20 +39,30 @@
 					<p><span class="lb">委托经营单位</span id="gu">${(supplier.supplierName)!}<a href="/wap/supplier/index.htm?companyType=2&relationId=${(supplier.id)!}">查看</a></p>		
 				</#list>
 			</#if>
-			
 		</div>	
 	</div>
 	<div class="calendar_box">
-		<p><label><span>选择日期</span></label><input class="seldate" type="text" value="${.now?string('yyyy年MM月dd日')}"><input id="sel_date" type="text" value=""></p>
-		<p><label><span>选择年级</span></label>
+		<p>
+			<label><span>选择日期</span></label>
+			<i>
+				<span>${.now?string('yyyy年MM月dd日')}</span>
+				<input class="seldate" type="date" value="${.now?string('yyyy年MM月dd日')}">
+				<input id="sel_date" type="text" value="${.now?string('yyyy-MM-dd')}">
+			</i>
+		</p>
+		<p>
+			<label><span>选择年级</span></label>
 			<input type="hidden" id="gradeId" value="0"/>
-			<select id="sel_class" onchange="selectGradeList(this);">
-				<#assign keys=gradeList?keys>
-				<#list keys as key>
-					<option value="${gradeList[key]}">${key}</option>
-					<!-- ${key}=${gradeList[key]} -->
-				</#list>
-			</select>
+			<i>
+				<span>一年级</span>
+				<select id="sel_class" onchange="selectGradeList(this);">
+					<#assign keys=gradeList?keys>
+					<#list keys as key>
+						<option value="${gradeList[key]}">${key}</option>
+						<!-- ${key}=${gradeList[key]} -->
+					</#list>
+				</select>
+			</i>
 		</p>
 	</div>
 	
@@ -92,19 +98,28 @@
 			</ul>
 		</div>
 	</div>
-	<div class="load_more">显示更多</div>
+	<div class="load_more">点击显示更多</div>
 </body>
-
 <script type="text/javascript" src="/static/js/school.js"></script>
 <script>
 	$(function(){
-		$('.seldate').on('click', function(){
-			$(this).attr('type','date').focus();
-		})
+		//$('.seldate').on('click', function(){
+//			$(this).attr('type','date').focus()
+//		})
 		$('.seldate').on('change', function(){
 			var _val = $(this).val();
-			$('#sel_date').val(_val);
+			$(this).parent().find('span').text(_val);
+			$("#sel_date").val(_val);
 			loadscMenu();
+		})
+		$('.load_more').on('click', function(){
+			//ajax请求
+		})
+		$('select').on('change', function(){
+			//var _val = $(this).text();
+			var _val = $(this).find("option:selected").text();
+			$(this).parent().find('span').text(_val);
+			//loadscMenu();
 		})
 	})
 </script>

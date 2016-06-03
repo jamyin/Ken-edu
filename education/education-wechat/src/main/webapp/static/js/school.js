@@ -9,11 +9,12 @@ function selectGradeList(thisObj){
 
 function jumpUrl(_this){
 	var customerId = $(_this).val();
+	$("#customerId").val(customerId);
 	window.location.href = "/wap/school/school/"+customerId+".htm";
 }
 
 function loadscMenu(){
-	var customerId = "000d804f-ffdc-432a-b9b7-85307a611423";
+	var customerId = $("#customerId").val();
 	var timeDate = $('#sel_date').val();
 	var gradeType = $('#gradeId').val();
 	var dataParams = {customerId:customerId,timeDate:timeDate,type:gradeType};
