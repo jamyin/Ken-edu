@@ -34,7 +34,7 @@
 				<li>
 					<label>货物：</label>
 					<span>
-						<#if resultDto.getResltList() ??>
+						<#if resultDto ?? && resultDto.getResltList() ??>
 							<#list resultDto.getResltList()  as data>
 								${(data.name)!} 、
 							</#list>
@@ -72,10 +72,10 @@
 </head>
 <body>
 	<div id="allmap"></div>
-	<div id="r-result">
+	<!-- <div id="r-result">
 		<input type="button" onclick="add_overlay();" value="添加覆盖物" />
 		<input type="button" onclick="remove_overlay();" value="删除覆盖物" />
-	</div>
+	</div> -->
 </body>
 </html>
 <script type="text/javascript">
@@ -109,7 +109,7 @@
 		</div>
 		<div class="goodsinfo_box">
 			<ul>
-				<#if resultDto.getWareList() ??>
+				<#if resultDto ?? && resultDto.getWareList() ??>
 					<#list resultDto.getWareList()  as data>
 						<li>
 						<span>${(data.waresName)!}</span><br>
@@ -120,7 +120,7 @@
 						</li>
 					</#list>
 				</#if>			
-				<li><span>猪肉</span><br>数量：50kg<br>生产日期：20160530<br>生产企业：爱森猪肉厂<br>采购供应商：爱森猪肉厂</li>
+				<!-- <li><span>猪肉</span><br>数量：50kg<br>生产日期：20160530<br>生产企业：爱森猪肉厂<br>采购供应商：爱森猪肉厂</li> -->
 			</ul>
 		</div>
 	</div>

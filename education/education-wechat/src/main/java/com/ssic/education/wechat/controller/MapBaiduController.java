@@ -48,27 +48,32 @@ public class MapBaiduController extends BaseController{
 
 		ProLedgerMasterDto resultDto = iProLedgerMasterService.searchProLedgerMasterDto(masterId);
 		
-		ProSupplierDto supplierDto = proSupplierService.findById(resultDto.getSourceId());//获取企业信息
+		ProSupplierDto supplierDto = new ProSupplierDto();
 		
-		List<String> ledgerMasterIds = new ArrayList<String>();
-		ledgerMasterIds.add(masterId);
+		List<BaiduPointsDto> points = new ArrayList<BaiduPointsDto>();
 		
-		List<ProLedgerDto> resultLeList = proLedgerService.searchProLedger(ledgerMasterIds);
-		resultDto.setResltList(resultLeList);
-		
-		List<String> wareIds = new ArrayList<String>();
-		for(ProLedgerDto ledger : resultLeList){
-			wareIds.add(ledger.getWaresId());
-		}
-		if(!wareIds.isEmpty()){
-			List<ProWaresDto> wareList = proWaresService.searchWarseList(wareIds);
-			resultDto.setWareList(wareList);
-		}		
-		
-		List<BaiduPointsDto> points = getHistory(resultDto).getPoints();
-		for(BaiduPointsDto bp : points){
-			bp.setX(bp.getLocation()[0]);
-			bp.setY(bp.getLocation()[1]);
+		if(resultDto!=null){
+			supplierDto = proSupplierService.findById(resultDto.getSourceId());//获取企业信息
+			List<String> ledgerMasterIds = new ArrayList<String>();
+			ledgerMasterIds.add(masterId);
+			
+			List<ProLedgerDto> resultLeList = proLedgerService.searchProLedger(ledgerMasterIds);
+			resultDto.setResltList(resultLeList);
+			
+			List<String> wareIds = new ArrayList<String>();
+			for(ProLedgerDto ledger : resultLeList){
+				wareIds.add(ledger.getWaresId());
+			}
+			if(!wareIds.isEmpty()){
+				List<ProWaresDto> wareList = proWaresService.searchWarseList(wareIds);
+				resultDto.setWareList(wareList);
+			}		
+			
+			points = getHistory(resultDto).getPoints();
+			for(BaiduPointsDto bp : points){
+				bp.setX(bp.getLocation()[0]);
+				bp.setY(bp.getLocation()[1]);
+			}			
 		}
 		
 		mv.addObject("historyList", points);
