@@ -163,8 +163,9 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 			eduParentPackCommentDto.setPackageId(propackagesDto.getId());
 			Object sum = eppcExMapper.packagesComment(eduParentPackCommentDto);
 			if (sum != null) {
+				Integer sumInt = Integer.valueOf(sum.toString());
 				long listSize = findListByPackages(propackagesDto.getId());
-				float b = (float)Math.round((double)((int)sum/3)/listSize);
+				float b = (float)Math.round((double)(sumInt/3)/listSize);
 				propackagesDto.setComment(b);
 			} else {
 				propackagesDto.setComment(DataStatus.DISABLED);

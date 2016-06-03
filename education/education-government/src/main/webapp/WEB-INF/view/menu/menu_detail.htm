@@ -40,12 +40,12 @@
         <li><label for="">餐次:</label><span><#if data.supplyPhase == 0>早餐</#if><#if data.supplyPhase == 1>午餐</#if><#if data.supplyPhase == 2>午后甜点</#if><#if data.supplyPhase == 3>晚餐</#if><#if data.supplyPhase == 4>夜宵</#if></span></li>
         <li><label for="">菜品:</label><span><#if data.proDishesDtos??>
 		          <#list data.proDishesDtos as proDishesDto>
-		          	${(proDishesDto.waresName)!}、
+		          	${(proDishesDto.waresName)!} 
 		          </#list>
 		          </#if></span></li>
         <li><label for="">营养:</label><span><#if data.proNutritionalDtos??>
 		          <#list data.proNutritionalDtos as proNutritionalDto>
-		          	${(proNutritionalDto.name)!}:${(proNutritionalDto.weight)!}${(proNutritionalDto.unit)!}、
+		          	${(proNutritionalDto.name)!}:${(proNutritionalDto.weight)!}${(proNutritionalDto.unit)!}  
 		          </#list></#if></span></li>
       </ul>
     </div>
@@ -56,7 +56,7 @@
     $(function(){
       // debugger;
       $(".nav").find("a").removeClass("cur");
-      $(".nav").find("a:eq(2)").addClass("cur");
+      $(".nav").find("a:eq(6)").addClass("cur");
     })
   </script>
 </body>
