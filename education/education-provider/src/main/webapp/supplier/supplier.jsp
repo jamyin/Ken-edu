@@ -50,7 +50,7 @@
 			columns : [ [ 
 			             {
 			 				field : 'supplierName',
-			 				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">供应商名称</font>',
+			 				title : '<font  style="font-style: normal; font-size:18px;">供应商名称</font>',
 			 				width : 180,
 			 				
 			 				formatter : function(value, row, index) {
@@ -63,7 +63,7 @@
 			 				}
 			 			}, {
 			 				field : 'supplierCode',
-			 				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">供应商编码</font>',
+			 				title : '<font  style="font-style: normal; font-size:18px;">供应商编码</font>',
 			 				width : 120,
 			 				
 			 				formatter : function(value, row, index) {
@@ -76,7 +76,7 @@
 			 				}
 			 			},{
 			 				field : 'address',
-			 				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">供应商地址</font>',
+			 				title : '<font  style="font-style: normal; font-size:18px;">供应商地址</font>',
 			 				width : 180,
 			 				
 			 				formatter : function(value, row, index) {
@@ -91,7 +91,7 @@
 			 			
 			 			{
 			 				field : 'corporation',
-			 				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;"> 联系人</font>',
+			 				title : '<font  style="font-style: normal; font-size:18px;"> 联系人</font>',
 			 				width : 80,
 			 				
 			 				formatter : function(value, row, index) {
@@ -104,7 +104,7 @@
 			 				}
 			 			},{
 			 				field : 'contactWay',
-			 				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">联系方式</font>',
+			 				title : '<font  style="font-style: normal; font-size:18px;">联系方式</font>',
 			 				width : 110,
 			 				
 			 				formatter : function(value, row, index) {
@@ -118,7 +118,7 @@
 			 			},
 			 			{
 			 				field : 'businessLicense',
-			 				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">工商执照号</font>',
+			 				title : '<font  style="font-style: normal; font-size:18px;">工商执照号</font>',
 			 				width : 120,
 			 				
 			 				formatter : function(value, row, index) {
@@ -131,7 +131,7 @@
 			 				}
 			 			},{
 			 				field : 'foodServiceCode',
-			 				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">餐饮服务证号</font>',
+			 				title : '<font  style="font-style: normal; font-size:18px;">餐饮服务证号</font>',
 			 				width : 120,
 			 				
 			 				formatter : function(value, row, index) {
@@ -144,7 +144,7 @@
 			 				}
 			 			},{
 			 				field : 'foodBusinessCode',
-			 				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">食品经营许可证号</font>',
+			 				title : '<font  style="font-style: normal; font-size:18px;">食品经营许可证号</font>',
 			 				width : 120,
 			 				
 			 				formatter : function(value, row, index) {
@@ -157,7 +157,7 @@
 			 				}
 			 			},{
 			 				field : 'foodCirculationCode',
-			 				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">食品流通证号</font>',
+			 				title : '<font  style="font-style: normal; font-size:18px;">食品流通证号</font>',
 			 				width : 120,
 			 				
 			 				formatter : function(value, row, index) {
@@ -170,7 +170,7 @@
 			 				}
 			 			},{
 			 				field : 'foodProduceCode',
-			 				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">食品生产证号</font>',
+			 				title : '<font  style="font-style: normal; font-size:18px;">食品生产证号</font>',
 			 				width : 120,
 			 				
 			 				formatter : function(value, row, index) {
@@ -184,32 +184,32 @@
 			 			},			 						
 			{
 				field : 'action',
-				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">操作</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">操作</font>',
 				width : 100,
 				formatter : function(value, row, index) {
 					var str = '';
 					if ($.canEdit) {
-						str += $.formatString('<img onclick="editFun(\'{0}\');" src="{1}" title="编辑"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
+						str += $.formatString('<img onclick="editFun(\'{0}\');" src="{1}" title="编辑"/>', row.id, '${pageContext.request.contextPath}/icon/编辑.png');
 					}
 					str += '&nbsp;';
 					if ($.inputImage) {
-						str += $.formatString('<img onclick="inputImage(\'{0}\');" src="{1}" title="上传图片"/>',  row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/photoAndPic/photo_add.png');
+						str += $.formatString('<img onclick="inputImage(\'{0}\');" src="{1}" title="上传图片"/>',  row.id, '${pageContext.request.contextPath}/icon/上传图片.png');
 					}
 				
 					str += '&nbsp;';
 				
 					if ($.lookImage) {
-						str += $.formatString('<img onclick="lookImage(\'{0}\');" src="{1}" title="查看图片"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/photoAndPic/photo.png');
+						str += $.formatString('<img onclick="lookImage(\'{0}\');" src="{1}" title="查看图片"/>', row.id, '${pageContext.request.contextPath}/icon/查看图片.png');
 					}
 					
 					str += '&nbsp;';
 
 					if ($.editImage) {
-						str += $.formatString('<img onclick="editImage(\'{0}\');" src="{1}" title="修改图片"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/photoAndPic/picture_edit.png');
+						str += $.formatString('<img onclick="editImage(\'{0}\');" src="{1}" title="编辑图片"/>', row.id, '${pageContext.request.contextPath}/icon/编辑图片.png');
 					}	
 					str += '&nbsp;';
 					if ($.canDelete) {
-						str += $.formatString('<img onclick="deleteFun(\'{0}\');" src="{1}" title="删除"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/cancel.png');
+						str += $.formatString('<img onclick="deleteFun(\'{0}\');" src="{1}" title="删除"/>', row.id, '${pageContext.request.contextPath}/icon/删除.png');
 					}
 					
 					return str;
@@ -425,11 +425,11 @@
 				<table class="table table-hover table-condensed" style="display: none;">
 			
 					<tr>
-						<th>
-						名称:&nbsp;<input id="supplierName" class="span3" name="supplierName" /></th>
-						<th>
+						<td>
+						名称:&nbsp;<input id="supplierName" class="span3" name="supplierName" /></td>
+						<td>
 						地址:&nbsp;<input id="address" class="span2" name="address" />&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);"  onclick="searchFun();" class="easyui-linkbutton" iconCls="icon-search" ><font  style='font-style: normal;font-weight: bolder;font-size:18px;'>查询</font></a>
-						</th>
+						</td>
 						
 					</tr>		
 										
@@ -445,13 +445,13 @@
 			</div>
 	</div>
 		<div id="toolbar" style="display: none;"  >		
-		<a onclick="addFun();"class="btn btn-mini btn-light"   href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'"><font  style='font-style: normal;font-weight: bolder;font-size:16px;'>添加</font></a>
+		<a onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true"><img src="${pageContext.request.contextPath}/icon/添加.png" ></img></a>
 		&nbsp;
-		<a onclick="importSupplier();"class="btn btn-mini btn-light"   href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'"><font  style='font-style: normal;font-weight: bolder;font-size:16px;'>导入</font></a>
+		<a onclick="importSupplier();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true"><img src="${pageContext.request.contextPath}/icon/导入.png"></img></a>
 		&nbsp;
-		<a class="btn btn-mini btn-light" onclick="toExcel();" title="导出到EXCEL"><font  style='font-style: normal;font-weight: bolder;font-size:16px;'>导出</font></a>
+		<a onclick="toExcel();" title="导出到EXCEL"><img src="${pageContext.request.contextPath}/icon/导出.png"></img></a>
 		&nbsp;
-		<a href="${pageContext.request.contextPath}/templates/供应商.xlsx"  class="btn btn-mini btn-light"  class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'"><font  style='font-style: normal;font-weight: bolder;font-size:16px;'>下载模板</font></a>
+		<a href="${pageContext.request.contextPath}/templates/供应商.xlsx" class="easyui-linkbutton" data-options="plain:true"><img src="${pageContext.request.contextPath}/icon/下载模板.png"></img></a>
 	</div>
 
 	

@@ -59,7 +59,7 @@ else
 			columns : [[  
 			            {
 				field : 'userAccount',
-				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">用户名</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">用户名</font>',
 				width : 120,
 				
 				formatter : function(value, row, index) {
@@ -73,7 +73,7 @@ else
 			}
 			,  {
 				field : 'name',
-				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">姓名</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">姓名</font>',
 				width : 120,
 				
 				formatter : function(value, row, index) {
@@ -86,7 +86,7 @@ else
 				}
 			},  {
 				field : 'userNo',
-				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">手机</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">手机</font>',
 				width : 120,
 				
 				formatter : function(value, row, index) {
@@ -99,7 +99,7 @@ else
 				}
 			},  {
 				field : 'email',
-				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">邮箱</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">邮箱</font>',
 				width : 120,
 				
 				formatter : function(value, row, index) {
@@ -112,7 +112,7 @@ else
 				}
 			},  {
 				field : 'userTypeName',
-				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">账号权限</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">账号权限</font>',
 				width : 120,
 				
 				formatter : function(value, row, index) {
@@ -127,19 +127,19 @@ else
 			,
 			{
 				field : 'action',
-				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">操作</font>',
+				title : '<font  style="font-style: normal;font-size:18px;">操作</font>',
 				width : 140,
 				formatter : function(value, row, index) {
 					var str = '';
 					if ($.canEdit) {
-						str += $.formatString('<img onclick="editFun(\'{0}\');" src="{1}" title="编辑"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
+						str += $.formatString('<img onclick="editFun(\'{0}\');" src="{1}" title="编辑"/>', row.id, '${pageContext.request.contextPath}/icon/编辑.png');
 					}
 					str += '&nbsp;';
 					
 			
 					str += '&nbsp;';
 					if ($.canDelete) {
-						str += $.formatString('<img onclick="deleteFun(\'{0}\');" src="{1}" title="删除"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/cancel.png');
+						str += $.formatString('<img onclick="deleteFun(\'{0}\');" src="{1}" title="删除"/>', row.id, '${pageContext.request.contextPath}/icon/删除.png');
 					}
 					return str;
 				}
@@ -279,9 +279,9 @@ else
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">
 					<tr>
-						<th>姓名:
-						<input name="name" placeholder="可以搜索名称" class="easyui-validatebox"  style="width: 215px;"/>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);"  onclick="searchFun();" class="easyui-linkbutton" iconCls="icon-search" ><font  style='font-style: normal;font-weight: bolder;font-size:18px;'>查询</font></a></th>
-							
+						<td>姓名:
+						<input name="name" placeholder="可以搜索名称" class="easyui-validatebox"  style="width: 215px;"/>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);"  onclick="searchFun();" class="easyui-linkbutton" iconCls="icon-search" ><font  style='font-style: normal;font-size:18px;'>查询</font></a>
+							</td>
 	
 						 </tr>	
 								</table>
@@ -295,7 +295,7 @@ else
 		</div>
 	</div>
 	<div id="toolbar" style="display: none;">
-			<a class="btn btn-mini btn-light"  onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'"><font  style='font-style: normal;font-weight: bolder;font-size:16px;'>添加</font></a>
+			<a onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true"><img src="${pageContext.request.contextPath}/icon/添加.png" ></img></a>
 
 	</div>
 

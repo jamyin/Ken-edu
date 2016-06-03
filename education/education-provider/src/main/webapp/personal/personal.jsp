@@ -60,7 +60,7 @@ else
 			columns : [[  
 			            {
 				field : 'userAccount',
-				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">用户名</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">用户名</font>',
 				width : 120,
 				
 				formatter : function(value, row, index) {
@@ -74,7 +74,7 @@ else
 			}
 			,  {
 				field : 'name',
-				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">姓名</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">姓名</font>',
 				width : 120,
 				
 				formatter : function(value, row, index) {
@@ -87,7 +87,7 @@ else
 				}
 			},  {
 				field : 'userNo',
-				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">手机</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">手机</font>',
 				width : 120,
 				
 				formatter : function(value, row, index) {
@@ -100,7 +100,7 @@ else
 				}
 			},  {
 				field : 'email',
-				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">邮箱</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">邮箱</font>',
 				width : 120,
 				
 				formatter : function(value, row, index) {
@@ -114,7 +114,7 @@ else
 			},
 			{
 				field : 'action',
-				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">操作</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">操作</font>',
 				width : 140,
 				formatter : function(value, row, index) {
 					var str = '';
@@ -212,7 +212,7 @@ else
 	<div class="easyui-layout" data-options="fit : true,border : false">
 		
 		<div data-options="region:'center',border:false"  id="g">
-			<table id="dataGrid" title="<font  style='font-style: normal;font-weight: bolder;font-size:16px;'>个人中心</font>" data-options="collapsible:true" >
+			<table id="dataGrid" title="<font  style='font-style: normal;font-size:16px;'>个人中心</font>" data-options="collapsible:true" >
 				<style>
 						#g .datagrid-btable tr{height: 57px;}
 				</style>

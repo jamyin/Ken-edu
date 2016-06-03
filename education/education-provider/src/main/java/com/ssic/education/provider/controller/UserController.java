@@ -73,14 +73,14 @@ public class UserController extends BaseController {
 		TImsUsersDto u = userService.login(usersDto);
 		if (u != null) {
 			//系统管理员不需要判断
-			if(!Objects.equal(u.getIsAdmin(),DataStatus.ENABLED)){
+//			if(!Objects.equal(u.getIsAdmin(),DataStatus.ENABLED)){
 //				u.getSourceId();//用户对应的供应商Id 查看该供应商是否审核通过
 				ProSupplierDto proSupplierDto = iSupplierService.searchProSupplierById(u.getSourceId());				
 				if(!Objects.equal(proSupplierDto.getReviewed(), Byte.valueOf("1"))){
 					j.setMsg("供应商信息审核未通过,请通过之后再进行登陆");
 					return j;
 				}			
-			}			
+//			}
 			
 			j.setSuccess(true);
 			j.setMsg("登陆成功！");

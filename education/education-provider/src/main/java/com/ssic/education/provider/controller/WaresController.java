@@ -236,13 +236,18 @@ public class WaresController extends BaseController {
 	@RequestMapping("/editImage")
 	public String editImage(HttpServletRequest request, String id) {
 
-		
-		
-		
-		
-		
-		
-		
+		ProLicense license = new ProLicense();
+		license.setRelationId(id);
+		license.setCerSource((short) 2);
+		List<ProLicense> ProLicenseList = proLicenseServiceImpl
+				.lookImage(license);
+		String realPath = PropertiesUtils.getProperty("upload.look.url");
+		for (ProLicense proLicense : ProLicenseList) {
+
+			proLicense.setLicPic(realPath + proLicense.getLicPic());
+		}
+		request.setAttribute("ProLicenseList", ProLicenseList);
+
 		request.setAttribute("id", id);
 		return "wares/editImage";
 	}

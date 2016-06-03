@@ -84,6 +84,9 @@
 	                       		<input id="file-1" name="licenseList" type="checkbox" style="display:none;"/>
 	      						<input multiple type="file" id="id-input-file-1"/>
 	                        </div>
+     						<div class="f-fl item-ifo" id="license1">
+     							<!-- <a href="">查看图片</a> -->
+     						</div>
 	                    </div>
 						<div class="item col-xs-12">
 	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>餐饮服务许可证：</span>    
@@ -91,6 +94,9 @@
 	                       		<input id="file-2" name="licenseList" type="checkbox" style="display:none;"/>
 	      						<input multiple type="file" id="id-input-file-2"/>
 	                        </div>
+     						<div class="f-fl item-ifo" id="license2">
+     							<!-- <a href="">查看图片</a> -->
+     						</div>	                        
 	                    </div>
 						<div class="item col-xs-12">
 	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>食品流通许可证：</span>    
@@ -98,6 +104,9 @@
 	                       		<input id="file-3" name="licenseList" type="checkbox" style="display:none;"/>
 	      						<input multiple type="file" id="id-input-file-3"/>
 	                        </div>
+     						<div class="f-fl item-ifo" id="license3">
+     							<!-- <a href="">查看图片</a> -->
+     						</div>	                        
 	                    </div>
 						<div class="item col-xs-12">
 	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>食品生产许可证：</span>    
@@ -105,6 +114,9 @@
 	                       		<input id="file-4" name="licenseList" type="checkbox" style="display:none;"/>
 	      						<input multiple type="file" id="id-input-file-4"/>
 	                        </div>
+     						<div class="f-fl item-ifo" id="license4">
+     							<!-- <a href="">查看图片</a> -->
+     						</div>	                        
 	                    </div>	
 							<div class="item col-xs-12">
 								<span class="intelligent-label f-fl"><b class="ftx04">*</b>用户名：</span>
