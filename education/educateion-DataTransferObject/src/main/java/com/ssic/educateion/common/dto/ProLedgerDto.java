@@ -1,6 +1,7 @@
 package com.ssic.educateion.common.dto;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import lombok.Data;
@@ -33,7 +34,7 @@ public class ProLedgerDto implements Serializable {
 
 	private String supplierName;
 
-	private Integer quantity;
+	private BigDecimal quantity;
 
 	private Date productionDate;
 
