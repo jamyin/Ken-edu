@@ -14,10 +14,14 @@
 
         <div class="breadcrumb">
             <span>当前位置:</span>
-            <a href="#">通告公示</a>
             <span> &gt; </span>
-            <a href="#">通知公告</a>
-        </div>
+            <#if data.type == 3>
+            	<a href="/info/index/${(type)!}.htm">健康宣教</a>
+            </#if>
+            <#if data.type == 1>
+            	<a href="/info/index/${(type)!}.htm">通告公示</a>
+            </#if>   
+ 		</div>
         <div class="main_wrap">
             <div class="content_wrap">
                 <p class="head"> 通知公告 </p>
