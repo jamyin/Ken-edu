@@ -34,7 +34,7 @@
 				<li>
 					<label>货物：</label>
 					<span>
-						<#if resultDto.getResltList() ??>
+						<#if resultDto ?? && resultDto.getResltList() ??>
 							<#list resultDto.getResltList()  as data>
 								${(data.name)!} 、
 							</#list>
@@ -57,45 +57,59 @@
 			</div>
 		</div>
 		<div class="map">
-			<html>
-			<head>
-			<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-			<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-			<style type="text/css">
-			body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
-			</style>
-			<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=YN0mfG1VM2jrGV5jBB7RD6lKKmrDZA43"></script>
-			<title>设置驾车路线途经点</title>
-			</head>
-			<body>
-			<div id="allmap"></div>
-			</body>
-			</html>
-			<script type="text/javascript">
-			
-			// 百度地图API功能
-			var map = new BMap.Map("allmap");
-			//map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
-			map.enableScrollWheelZoom(true);
-			<#if historyList ??>
-				<#list historyList as history>
-				   <#assign obj = obj + "p"+history_index+"," />
-					var p${(history_index)!} = new BMap.Point(${(history.x)!},${(history.y)!});
-				</#list>
-			</#if>
-/* 			var p1 = new BMap.Point(117.301934,39.977552);
-			var p2 = new BMap.Point(118.508328,39.919141);
-			var p3 = new BMap.Point(116.508328,39.919141); */
-			
-			var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}});
-			var length = ${obj?length};
-			driving.search(${obj?substring(0,14)});//waypoints表示途经点
-			
-			</script>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<style type="text/css">
+		body, html{width: 100%;height: 100%;margin:0;font-family:"微软雅黑";}
+		#allmap{height:500px;width:100%;}
+		#r-result{width:100%;}
+	</style>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=YN0mfG1VM2jrGV5jBB7RD6lKKmrDZA43"></script>
+	<title>添加/删除覆盖物</title>
+</head>
+<body>
+	<div id="allmap"></div>
+	<!-- <div id="r-result">
+		<input type="button" onclick="add_overlay();" value="添加覆盖物" />
+		<input type="button" onclick="remove_overlay();" value="删除覆盖物" />
+	</div> -->
+</body>
+</html>
+<script type="text/javascript">
+	// 百度地图API功能
+	var map = new BMap.Map("allmap");
+	var point = new BMap.Point(121.462, 31.222);
+	map.centerAndZoom(point, 15);
+	map.enableScrollWheelZoom(true);
+	
+	//var marker = new BMap.Marker(new BMap.Point(121.462, 31.222)); // 创建点
+	
+	var polyline = new BMap.Polyline([
+		<#if historyList ??>
+			<#list historyList as history>
+				<#if (history_index+1) < historyList?size>
+					new BMap.Point(${(history.x)!},${(history.y)!}),
+				<#else>
+					new BMap.Point(${(history.x)!},${(history.y)!})
+				</#if>
+			</#list>
+		</#if>
+	], {strokeColor:"blue", strokeWeight:2, strokeOpacity:0.5});   //创建折线
+		
+	//添加覆盖物
+	//function add_overlay(){
+		//map.addOverlay(marker);            //增加点
+		map.addOverlay(polyline);          //增加折线
+	//}
+</script>
+
 		</div>
 		<div class="goodsinfo_box">
 			<ul>
-				<#if resultDto.getWareList() ??>
+				<#if resultDto ?? && resultDto.getWareList() ??>
 					<#list resultDto.getWareList()  as data>
 						<li>
 						<span>${(data.waresName)!}</span><br>
@@ -106,7 +120,7 @@
 						</li>
 					</#list>
 				</#if>			
-				<li><span>猪肉</span><br>数量：50kg<br>生产日期：20160530<br>生产企业：爱森猪肉厂<br>采购供应商：爱森猪肉厂</li>
+				<!-- <li><span>猪肉</span><br>数量：50kg<br>生产日期：20160530<br>生产企业：爱森猪肉厂<br>采购供应商：爱森猪肉厂</li> -->
 			</ul>
 		</div>
 	</div>

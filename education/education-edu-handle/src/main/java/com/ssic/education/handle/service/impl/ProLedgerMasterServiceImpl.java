@@ -25,8 +25,12 @@ public class ProLedgerMasterServiceImpl implements IProLedgerMasterService {
 
 	@Override
 	public ProLedgerMasterDto searchProLedgerMasterDto(String masterId) {
-		ProLedgerMaster pojo = proLedgerMasterDao.selectByPrimaryKey(masterId); 
-		return BeanUtils.createBeanByTarget(pojo, ProLedgerMasterDto.class); 
+		ProLedgerMaster pojo = proLedgerMasterDao.selectByPrimaryKey(masterId);
+		if(pojo!=null){
+			return BeanUtils.createBeanByTarget(pojo, ProLedgerMasterDto.class);
+		}else{
+			return null;
+		} 
 	}
 
 }

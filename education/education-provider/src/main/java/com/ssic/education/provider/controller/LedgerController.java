@@ -353,19 +353,6 @@ public class LedgerController {
 				str+=n+",";
 				continue;
 			}
-			int i=0;
-			for (LedgerDto ledgerDto : list) {
-				if(!ledgerDto.getId().equals(ledger.getId())){
-					i+=1;
-				}else{
-					di+=i+",";
-					ui+=n+",";
-				}
-				if(i==list.size()){
-					
-					ledgerService.upSaveLedger(ledgers);
-				}
-			}
 			// 采购品
 			if (ledger.getName() == null) {
 				j.setMsg("采购品不能为空");
@@ -419,8 +406,22 @@ public class LedgerController {
 				ledger.setSupplierName(null);
 			}
 			ledger.setCreateTime(null);
-			ledger.setLastUpdateTime(ledger.getCreateTime());
+			ledger.setLastUpdateTime(new Date());
 			ledger.setStat(1);
+			int i=0;
+			for (LedgerDto ledgerDto : list) {
+				if(!ledgerDto.getId().equals(ledger.getId())){
+					i+=1;
+				}else{
+					di+=i+",";
+					ui+=n+",";
+				}
+				if(i==list.size()){
+					ledger.setCreateTime(ledger.getLastUpdateTime());
+					ledger.setStat(1);
+					ledgerService.upSaveLedger(ledger);
+				}
+			}
 			n+=1;
 		}
 		if (str != "") {
