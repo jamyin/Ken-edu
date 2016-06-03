@@ -71,7 +71,7 @@ else
 			}]],
 			columns : [[  {
 				field : 'waresName',
-				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">商品名称</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">商品名称</font>',
 				width : 120,
 				
 				formatter : function(value, row, index) {
@@ -84,7 +84,7 @@ else
 				}
 			}, {
 				field : 'spec',
-				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">规格</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">规格</font>',
 				width : 50,
 				formatter : function(value, row, index) {
 					if(value!=null){
@@ -96,7 +96,7 @@ else
 				}
 			},{
 				field : 'manufacturer',
-				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">生产企业</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">生产企业</font>',
 				width : 150,
 				formatter : function(value, row, index) {
 					if(value!=null){
@@ -108,7 +108,7 @@ else
 				}
 			},{
 				field : 'shelfLife',
-				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">保质期</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">保质期</font>',
 				width : 50,
 				formatter : function(value, row, index) {
 					if(value!=null){
@@ -120,7 +120,7 @@ else
 				}
 			},{
 				field : 'unit',
-				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">单位</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">单位</font>',
 				width : 50,
 				formatter : function(value, row, index) {
 					if(value!=null){
@@ -132,7 +132,7 @@ else
 				}
 			}, {
 				field : 'waresTypeName',
-				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">商品分类</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">商品分类</font>',
 				width : 120,
 				formatter : function(value, row, index) {
 					return	'<font style="font-style: normal; word-wrap:break-word;white-space:normal;font-size:15px;">'
@@ -140,7 +140,7 @@ else
 				}
 			},{
 				field : 'customCode',
-				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">产品编码</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">产品编码</font>',
 				width : 150,
 				formatter : function(value, row, index) {
 					if(value!=null){
@@ -152,7 +152,7 @@ else
 				}
 			} ,{
 				field : 'barCode',
-				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">产品包装条形码</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">产品包装条形码</font>',
 				width : 150,
 				formatter : function(value, row, index) {
 					if(value!=null){
@@ -164,7 +164,7 @@ else
 				}
 			},{
 				field : 'enName',
-				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">英文名</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">英文名</font>',
 				width : 110,
 				formatter : function(value, row, index) {
 					if(value!=null){
@@ -176,7 +176,7 @@ else
 				}
 			},{
 				field : 'place',
-				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">产地</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">产地</font>',
 				width : 50,
 				formatter : function(value, row, index) {
 					if(value!=null){
@@ -189,7 +189,7 @@ else
 			}
 			,{
 				field : 'action',
-				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">操作</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">操作</font>',
 				width : 100,
 				formatter : function(value, row, index) {
 					var str = '';
@@ -476,17 +476,17 @@ else
 </head>
 <body>
 	<div class="easyui-layout" data-options="fit : true,border : false">
-		<div data-options="region:'north',border:false" title="<font  style='font-style: normal;font-weight: bolder;font-size:18px;'>查询条件</font>"  style="height: 80px; overflow: hidden;">
+		<div data-options="region:'north',border:false" title="<font  style='font-style: normal;font-size:18px;'>查询条件</font>"  style="height: 80px; overflow: hidden;">
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">
 					<tr>
-						<th>商品名称:
-						<input id="waresName" name="waresName" placeholder="查询商品名称" class="easyui-validatebox"  style="width: 215px;"/></th>
-						 <th>产品编码:
-					     <input id="customCode" name="customCode" placeholder="查询产品编码" class="easyui-validatebox"  style="width: 215px;"/></th>
+						<td>商品名称:
+						<input id="waresName" name="waresName" placeholder="查询商品名称" class="easyui-validatebox"  style="width: 215px;"/></td>
+						 <td>产品编码:
+					     <input id="customCode" name="customCode" placeholder="查询产品编码" class="easyui-validatebox"  style="width: 215px;"/></td>
 						 
 						 
-						  <th>商品类别:
+						  <td>商品类别:
 					    
 					       <select id="waresType" class="easyui-combobox"  name="waresType"  data-options="width:210,height:24,editable:false,panelHeight:'auto'"
 								data-options="required:true"  >	
@@ -514,7 +514,7 @@ else
 							</select>
 							&nbsp;&nbsp;&nbsp;
 							<a href="javascript:void(0);"  onclick="searchFun();" class="easyui-linkbutton" iconCls="icon-search" ><font  style='font-style: normal;font-weight: bolder;font-size:18px;'>查询</font></a>
-					    </th>
+					    </td>
 					 </tr>
 				
 				</table>

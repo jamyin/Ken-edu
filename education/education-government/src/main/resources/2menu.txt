@@ -13,7 +13,7 @@
                 },
                 {
                     "menuName": "通告公示",
-                    "menuUrl": "/info/index/0.htm"
+                    "menuUrl": "/info/index/1.htm"
                 },
                 {
                     "menuName": "通知",

@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ssic.educateion.common.dto.ProLicenseDto;
 import com.ssic.educateion.common.dto.ProWaresDto;
+import com.ssic.educateion.common.utils.ProductClass;
 import com.ssic.education.handle.service.IProLicenseService;
 import com.ssic.education.handle.service.ProWaresService;
 import com.ssic.education.utils.model.Response;
@@ -69,7 +70,9 @@ public class WapPurchasesController extends BaseController{
 		proLicenseDto.setRelationId(waresId);
 		proLicenseDto.setCerSource(Short.valueOf("2"));
 		List<ProLicenseDto> resultList = iProLicenseService.searchProLicenseList(proLicenseDto);
+		String wareTypeName = ProductClass.getName(proWaresDto.getWaresType());
 		
+		mv.addObject("wareTypeName",wareTypeName);
 		mv.addObject("resultList",resultList);
 		mv.addObject("proWaresDto",proWaresDto);
 		mv.setViewName("sc_purchasing_c");

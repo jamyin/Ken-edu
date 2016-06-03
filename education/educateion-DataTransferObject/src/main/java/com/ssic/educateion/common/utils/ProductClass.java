@@ -1,4 +1,4 @@
-package com.ssic.education.provider.util;
+package com.ssic.educateion.common.utils;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

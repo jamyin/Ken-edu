@@ -34,25 +34,30 @@
 			<li><a href="###"></a><label>法定代表/负责人/业主证件</label><span>2012310115320026</span></li>
  -->		</ul>
 	</section>
+	<!-- 当委托经营单位和经营单位都有数据的时候，采购品供应商只显示在委托经营单位下 -->
+	<#if companyType==1 && supplierId ??>
+	<#else>
 	<#if suppliList ??>
-	<section class="aptitude_c">
-		<h2>采购品供应商</h2>
-		<section class="tablecell">
-			<ul>
-				<#if suppliList ??>
-					<#list suppliList as suppli>
-						<li class="break-line">
-							<a href="/wap/supplier/index.htm?companyType=2&relationId=${(suppli.id)!}"></a>
-							<label>${(suppli.supplierName)!}</label>
-							<span>单位地址：${(suppli.address)!}</span>
-						</li>		
-					</#list>
-				</#if>
- 			</ul>
-			<div class="load_more gr"><a href="/wap/supplier/more/${(supplierId)!}.htm">查看其它供应商</a></div>
-		</section>
-	</section>
-	</#if>	
+			<section class="aptitude_c">
+				<h2>采购品供应商</h2>
+				<section class="tablecell">
+					<ul>
+						<#if suppliList ??>
+							<#list suppliList as suppli>
+								<li class="break-line">
+									<a href="/wap/supplier/index.htm?companyType=2&relationId=${(suppli.id)!}"></a>
+									<label>${(suppli.supplierName)!}</label>
+									<span>单位地址：${(suppli.address)!}</span>
+								</li>		
+							</#list>
+						</#if>
+		 			</ul>
+					<div class="load_more gr"><a href="/wap/supplier/more/${(supplierId)!}.htm">查看其它供应商</a></div>
+				</section>
+			</section>
+		</#if>		
+	</#if>
+	
 </body>
 <script>
 	$(function(){
