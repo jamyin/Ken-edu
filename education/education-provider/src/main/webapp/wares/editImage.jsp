@@ -56,17 +56,34 @@
 				style="overflow: hidden;">
 				<form id="updateImage" method="post"  enctype="multipart/form-data">
 				   <input id="id" name="id" type="hidden" value="${id}" />
+				   <c:forEach  var="list"  items="${ProLicenseList}">
+					<table>
+							<tr>			
+							<td>商品图片</td>
+								<td><input type="file" name="spImgUrl"  id="spImgUrl"  accept="image/*" />	</td>	
+							<c:if test="${list.licName=='商品图片' }"> 
+									<td><img  src="${list.licPic }"></td>
+									</c:if>
+									</tr>
 					
-										
-							商品图片
-								<input type="file" name="spImgUrl"  id="spImgUrl"  accept="image/*" />	<a>image</a>				
-						检测检验报告
-							<input type="file" name="jcImgUrl"  id="jcImgUrl"  accept="image/*" />
-							生产许可证
-								<input type="file" name="scImgUrl"  id="jcImgUrl"  accept="image/*" />
+					<tr>		<td>检测检验报告</td>
+							<td><input type="file" name="jcImgUrl"  id="jcImgUrl"  accept="image/*" /></td>
+								<c:if test="${list.licName=='检测检验报告' }"> 
+									<td><img  src="${list.licPic }"></td>
+									</c:if>
+							
+								</tr>
+							<tr><td>	生产许可证</td>
+							<td>	<input type="file" name="scImgUrl"  id="jcImgUrl"  accept="image/*" /></td>	
+								<c:if test="${list.licName=='生产许可证' }"> 
+									<td><img  src="${list.licPic }"></td>
+									</c:if>
+							
+							</tr>
 						
 		
-			
+			</table>
+			</c:forEach>
 				</form>
 			</div>
 
