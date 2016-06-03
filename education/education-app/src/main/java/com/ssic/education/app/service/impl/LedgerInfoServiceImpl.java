@@ -51,6 +51,24 @@ public class LedgerInfoServiceImpl implements ILedgerInfoService {
 	//查询配送信息列表
 	public PageResult<LedgerMasterListDto> findMasterList(String receiverId, PageQuery page) {
 		ProLedgerMaster ledgerMaster = new ProLedgerMaster();
+		ledgerMaster.setReceiverId(receiverId);
+		List<LedgerMasterListDto> LedgerMasterList = ledgerInfoDao.findAllMaster(ledgerMaster, page);
+		List<LedgerMasterListDto> result = new ArrayList<LedgerMasterListDto>();
+		for (LedgerMasterListDto lmld : LedgerMasterList) {
+			ProLedger Ledger = new ProLedger();
+			Ledger.setMasterId(lmld.getId());
+			List<ProLedger> ProLedgerList = ledgerInfoDao.findProLedgerList(Ledger, null);
+			lmld.setStock(listToString(ProLedgerList));
+			lmld.setOutset(supplierInfoDao.getSupplierName(lmld.getSourceId()));
+			result.add(lmld);
+		}
+		return new PageResult<LedgerMasterListDto>(page, result);
+	}
+
+	//查询驾驶员配送信息列表
+	public PageResult<LedgerMasterListDto> findMasterDriverList(String userId, PageQuery page) {
+		ProLedgerMaster ledgerMaster = new ProLedgerMaster();
+		ledgerMaster.setUserId(userId);
 		List<LedgerMasterListDto> LedgerMasterList = ledgerInfoDao.findAllMaster(ledgerMaster, page);
 		List<LedgerMasterListDto> result = new ArrayList<LedgerMasterListDto>();
 		for (LedgerMasterListDto lmld : LedgerMasterList) {

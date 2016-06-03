@@ -72,6 +72,25 @@ public class StockBatchController {
 	}
 
 	/**
+	 * 根据驾驶员查询配送列表
+	 * getMaterialInfo：一句话描述方法功能
+	 * @param receiverId
+	 * @param query
+	 * @return
+	 * @exception	
+	 * @author Administrator
+	 * @date 2016年5月27日 下午2:24:06
+	 */
+	@RequestMapping(value = "/driverlist/{userId}", method = RequestMethod.GET)
+	@ResponseBody
+	public Response<PageResult<LedgerMasterListDto>> getMaterialByUser(@PathVariable("userId") String userId, PageQuery query) {
+		Response<PageResult<LedgerMasterListDto>> result = new Response<PageResult<LedgerMasterListDto>>();
+		PageResult<LedgerMasterListDto> ledgerInfoDto = ledgerInfoService.findMasterDriverList(userId, query);
+		result.setData(ledgerInfoDto);
+		return result;
+	}
+
+	/**
 	 * 根据ID查询配送信息并带出货物列表
 	 * getMasterInfoById
 	 * @param id
