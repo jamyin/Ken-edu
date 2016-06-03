@@ -383,7 +383,7 @@ else
 			width :768,
 			height : 420,
 			href : '${pageContext.request.contextPath}/waresController/addWares',
-			onOpen: function(){},
+			
 			buttons : [ {
 				text : '保存',
 				handler : function() {
@@ -399,7 +399,8 @@ else
 				//	}
 					
 				}
-			} ]
+			} ],
+		onOpen: function(){},
 		});
 	}
 
