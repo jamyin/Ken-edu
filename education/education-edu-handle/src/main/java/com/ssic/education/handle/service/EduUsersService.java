@@ -29,4 +29,6 @@ public interface EduUsersService {
 	
 	public Integer update(EduUsersDto usersDto);
 	
+	public EduUsersRegDto edit(EduUsersRegDto usersDto);
+	
 }

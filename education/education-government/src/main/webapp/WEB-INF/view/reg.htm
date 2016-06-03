@@ -34,6 +34,8 @@
 			<ul>
 				<li><label><i>*</i>学校名称</label><input id="schoolName" type="text" placeholder=""></li>
 				<li><label><i>*</i>地址</label><input id="address" type="text" placeholder=""></li>
+				<li><label><i>*</i>联系人姓名</label><input id="contacts" type="text" placeholder=""></li>
+				<li><label><i>*</i>手机</label><input id="mobileNo" type="text" placeholder=""></li>
 				<li><label><i>*</i>区教委</label>
 				<select name="area"  id="area" panelheight="auto">
 					<option value="">请选择区县</option>
@@ -119,6 +121,16 @@
 				alert("学校地址不能为空~");
 				return;
 			}
+			var contacts = $.trim($("#contacts").val());
+			if (contacts.length <= 0) {
+				alert("联系人姓名不能为空~");
+				return;
+			}
+			var mobileNo = $.trim($("#mobileNo").val());
+			if (mobileNo.length <= 0) {
+				alert("手机不能为空~");
+				return;
+			}
 			var area = $.trim($("#area").val());
 			if (area.length <= 0) {
 				alert("区教委不能为空~");
@@ -185,8 +197,8 @@
 				url:"/user/regUser.htm",
 				type:"post",
 				dataType:"json",
-				data:{schoolName:schoolName,address:address,area:area,sourceType:1,level:checkStr,
-					canteenName:canteenName,canteenContacts:canteenContacts,phoneNumber:phoneNumber,
+				data:{schoolName:schoolName,address:address,area:area,sourceType:1,level:checkStr,mobileNo:mobileNo,
+					canteenName:canteenName,canteenContacts:canteenContacts,phoneNumber:phoneNumber,contacts:contacts,
 					userAccount:userAccount,password:passWord,jsonLic:jsonLic,cerSource:3,committeeId:committeeId},
 				async: false,
 				success:function(data){

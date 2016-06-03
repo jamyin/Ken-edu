@@ -212,7 +212,7 @@ else
 	<div class="easyui-layout" data-options="fit : true,border : false">
 		
 		<div data-options="region:'center',border:false"  id="g">
-			<table id="dataGrid" title="<font  style='font-style: normal;font-weight: bolder;font-size:16px;'>个人中心</font>" data-options="collapsible:true" >
+			<table id="dataGrid" title="<font  style='font-style: normal;font-size:16px;'>个人中心</font>" data-options="collapsible:true" >
 				<style>
 						#g .datagrid-btable tr{height: 57px;}
 				</style>

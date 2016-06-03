@@ -117,7 +117,7 @@
 					<#list resultDto.getResltList() as data>
 						<li>
 						<span>${(data.name)!}</span><br>
-						数量：${(data.quantity)!}<br>
+						数量：${(data.quantity)!}${(data.spce)!}<br>
 						生产日期：${data.productionDate?string('yyyy-MM-dd')}<br>
 						生产企业：${(data.productionName)!}<br>
 						采购供应商：${(data.supplierName)!}

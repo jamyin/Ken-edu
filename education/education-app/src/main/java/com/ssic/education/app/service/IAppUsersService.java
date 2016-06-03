@@ -13,4 +13,6 @@ public interface IAppUsersService {
 
 	public int eduUpdatePwd(String account, String oldPwd, String newPwd);
 
+	public int proUpdatePwd(String account, String oldPwd, String newPwd);
+
 }

@@ -77,6 +77,32 @@ public class EduUsersServiceImpl implements EduUsersService {
 		return BeanUtils.createBeanByTarget(eduUsers, EduUsersDto.class);
 	}
 	
+	@Transactional
+	public EduUsersRegDto edit(EduUsersRegDto usersDto) {
+		EduSchool eduSchool = BeanUtils.createBeanByTarget(usersDto, EduSchool.class);
+		eduSchool.setId(usersDto.getSchoolId());
+		eduSchoolDao.updateByPrimaryKeySelective(eduSchool);
+		EduCanteen eduCanteen = BeanUtils.createBeanByTarget(usersDto, EduCanteen.class);
+		eduCanteen.setId(usersDto.getCanteenId());
+		eduCanteenDao.updateByPrimaryKeySelective(eduCanteen);
+		List<ProLicenseDto> proLicenseDtos = new Gson().fromJson(usersDto.getJsonLic(), new TypeToken<List<ProLicenseDto>>(){}.getType());
+		for (ProLicenseDto proLicenseDto:proLicenseDtos) {
+			if (null != proLicenseDto && StringUtils.isNotBlank(proLicenseDto.getLicPic())) {
+				if (StringUtils.isNotBlank(proLicenseDto.getId())) {
+					ProLicense proLicense = BeanUtils.createBeanByTarget(proLicenseDto, ProLicense.class);
+					proLicenseDao.updateByPrimaryKeySelective(proLicense);
+				}else {
+					ProLicense proLicense = BeanUtils.createBeanByTarget(proLicenseDto, ProLicense.class);
+					proLicense.setRelationId(eduCanteen.getId());
+					proLicense.setCerSource(usersDto.getCerSource().shortValue());
+					proLicenseDao.insertSelective(proLicense);
+				}
+				
+			}
+		}
+		return usersDto;
+	}
+	
 	public EduUsersDto getUserInfo(EduUsersDto usersDto) {
 		return BeanUtils.createBeanByTarget(eduUsersDao.selectByPrimaryKey(usersDto.getId()), EduUsersDto.class);
 	}

@@ -62,21 +62,21 @@
 							<td>商品图片</td>
 								<td><input type="file" name="spImgUrl"  id="spImgUrl"  accept="image/*" />	</td>	
 							<c:if test="${list.licName=='商品图片' }"> 
-									<td><img  src="${list.licPic }"></td>
+									<td><img  src="${list.licPic }"  width="150px" height="150px"></td>
 									</c:if>
 									</tr>
 					
 					<tr>		<td>检测检验报告</td>
 							<td><input type="file" name="jcImgUrl"  id="jcImgUrl"  accept="image/*" /></td>
 								<c:if test="${list.licName=='检测检验报告' }"> 
-									<td><img  src="${list.licPic }"></td>
+									<td><img  src="${list.licPic }"   width="150px" height="150px"></td>
 									</c:if>
 							
 								</tr>
 							<tr><td>	生产许可证</td>
 							<td>	<input type="file" name="scImgUrl"  id="jcImgUrl"  accept="image/*" /></td>	
 								<c:if test="${list.licName=='生产许可证' }"> 
-									<td><img  src="${list.licPic }"></td>
+									<td><img  src="${list.licPic }"    width="150px" height="150px"></td>
 									</c:if>
 							
 							</tr>

@@ -42,4 +42,14 @@ public class AppProUsersDao {
 	public int updateProPwd(ProUsers proUser) {
 		return 0;
 	}
+
+	public int proUpdatePwd(String id, String password) {
+		ProUsersExample example = new ProUsersExample();
+		ProUsersExample.Criteria criteria = example.createCriteria();
+		criteria.andIdEqualTo(id);
+		ProUsers proUser = new ProUsers();
+		proUser.setPassword(password);
+		proUserMapper.updateByExample(proUser, example);
+		return 0;
+	}
 }

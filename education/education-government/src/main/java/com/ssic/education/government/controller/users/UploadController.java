@@ -122,12 +122,12 @@ public class UploadController {
 			throws IOException {
 		// 如果只是上传一个文件，则只需要MultipartFile类型接收文件即可，而且无需显式指定@RequestParam注解
 		// 如果想上传多个文件，那么这里就要用MultipartFile[]类型来接收文件，并且还要指定@RequestParam注解
-		String context = "/upload";
+		String context = "";
 		String realPath = PropertiesUtils.getProperty("upload.url");
 		String fileDe = DateUtils.format(new Date(), DateUtils.YMD);
 		String fileName = FileUtils.getUploadFileName(myfile.getOriginalFilename());
 		logger.info("filePaht :"+realPath + "/" +fileDe +"/"+ fileName);
-		File file = new File(realPath + "/" +context+"/"+fileDe);
+		File file = new File(realPath + "/"+fileDe);
         //如果文件夹不存在则创建    
         if(!file.exists() && !file.isDirectory()) {
             file.mkdir();    

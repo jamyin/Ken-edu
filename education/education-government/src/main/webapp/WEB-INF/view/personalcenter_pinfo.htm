@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <#include "/common/head.htm" />
+        <link rel="stylesheet" href="/static/css/style.css">
+        <link rel="stylesheet" href="/static/css/dis_edu.css">
+  		<link rel="stylesheet" href="/static/css/supplier_qualification.css" media="screen" charset="utf-8">
+  		<script src="/static/js/reg.js"></script>
+    </head>
+<body>
+<#include "/common/nav.htm" />	
+<!--         <div class="breadcrumb">
+            <span>当前位置:</span>
+            <a href="#">安全追溯</a>
+            <span> &gt; </span>
+            <a href="#">采购品列表</a>
+            <span> &gt; </span>
+            <a href="#">采购品详情</a>
+        </div>
+ -->        <div class="main_wrap">
+
+            <h2>个人中心</h2>
+            <div class="content_wrap">
+                <div class="tab_wrap">
+                    <ul class="side_menu">
+                        <li class="active"><a href="###">基本信息</a></li>
+                        <li><a href="/user/userInfo.htm">修改密码</a></li>
+                    </ul>
+                    <div class="tab_content">
+	                    <div id="info" class="reg_box show">
+	                        <!-- <p>餐饮服务号：12313233 <a class="img_nn" href="###" style="color:blue;padding-left:5px">查看图片>></a></p>
+	                        <p>食品经营许可证：12313233 <a class="img_nn" href="###" style="color:blue;padding-left:5px">查看图片>></a></p> -->
+	                        <h4>学校信息</h4>
+							<ul>
+								<li><label><i>*</i>学校名称</label><span>${(eduSchoolDto.schoolName)!}</span></li>
+								<li><label><i>*</i>地址</label><span>${(eduSchoolDto.address)!}</span></li>
+								<li><label><i>*</i>区教委</label><span>${(eduCommitteeDto.name)!}</span></li>
+								<li><label><i>*</i>联系人姓名</label><span>${(eduSchoolDto.contacts)!}</span></li>
+								<li><label><i>*</i>手机</label><span>${(eduSchoolDto.mobileNo)!}</span></li>
+								<li><label><i>*</i>级别</label><span>${(eduSchoolDto.levelStr)!} </span></li>
+							</ul>
+							<h4 class="">食堂信息</h4>
+							<ul class="">
+								<li><label>食堂名称</label><span>${(eduCanteenDto.canteenName)!}</span></li>
+								<li><label>联系人姓名</label><span>${(eduCanteenDto.canteenContacts)!}</span></li>
+								<li><label>手机</label><span>${(eduCanteenDto.phoneNumber)!}</span></li>
+								<#if (proLicenses??) && (proLicenses?size>0)>
+								<li>
+									<label>证件类型</label>
+									<ul class="c_type">
+		                        	<#list proLicenses as proLicense>
+		                        		<p>${(proLicense.licName)}：${(proLicense.licNo)} <a class="img_nn" href="###" data-value="${(proLicense.licPic)!}" style="color:blue;padding-left:5px">查看图片>></a></p>
+		                        	</#list>
+		                        	</ul>				
+								</li>
+		                        </#if>
+							</ul>
+							<input class="submit modi_btn" type="button" value="修改">
+						</div>		
+						
+						<div id="modi" class="reg_box">
+							<h4>编辑学校信息</h4>
+							<ul>
+								<input style="display:none;" type="text" id="schoolId" placeholder="" value="${(eduSchoolDto.id)!}">
+								<li><label><i>*</i>学校名称</label><input type="text" id="schoolName" placeholder="" value="${(eduSchoolDto.schoolName)!}"></li>
+								<li><label><i>*</i>地址</label><input type="text" id="address" placeholder="" value="${(eduSchoolDto.address)!}"></li>
+								<li><label><i>*</i>区教委</label>
+								<select name="area"  id="area" panelheight="auto">
+									<option value="">请选择区县</option>
+						          	<#if eduCommitteeDtos??>
+						          		<#list eduCommitteeDtos as area>
+						          			<option data-id="${(area.id)!}" <#if eduSchoolDto.area == area.areaCode>selected="selected" </#if> value="${(area.areaCode)!}">${(area.name)!}</option>
+						          		</#list>
+						          	</#if>
+								</select></li>
+								<li><label><i>*</i>联系人姓名</label><input type="text" id="contacts" placeholder="" value="${(eduSchoolDto.contacts)!}"></li>
+								<li><label><i>*</i>手机</label><input type="text" id="mobileNo" placeholder="" value="${(eduSchoolDto.mobileNo)!}"></li>
+								<li><label><i>*</i>级别</label>
+									<label class="ckb"><input type="checkbox" name="CheckboxGroup1" value="0" <#if eduSchoolDto.levelStr?index_of("幼儿园") != -1 >checked="checked"</#if> id="CheckboxGroup1_0">幼儿园</label>
+									<label class="ckb"><input type="checkbox" name="CheckboxGroup1" value="1" <#if eduSchoolDto.levelStr?index_of("小学") != -1 >checked="checked"</#if> id="CheckboxGroup1_1">小学</label>
+									<label class="ckb"><input type="checkbox" name="CheckboxGroup1" value="2" <#if eduSchoolDto.levelStr?index_of("初中") != -1 >checked="checked"</#if> id="CheckboxGroup1_2">初中</label>
+									<label class="ckb"><input type="checkbox" name="CheckboxGroup1" value="3" <#if eduSchoolDto.levelStr?index_of("高中") != -1 >checked="checked"</#if> id="CheckboxGroup1_3">高中</label>
+									<label class="ckb"><input type="checkbox" name="CheckboxGroup1" value="4" <#if eduSchoolDto.levelStr?index_of("大学") != -1 >checked="checked"</#if> id="CheckboxGroup1_4">大学</label>
+								</li>
+							</ul>
+							<h4 class="">食堂信息</h4>
+							<ul class="">
+								<input style="display:none;" type="text" id="canteenId" placeholder="" value="${(eduCanteenDto.id)!}">
+								<li><label>食堂名称</label><input type="text" id="canteenName" placeholder="" value="${(eduCanteenDto.canteenName)!}"></li>
+								<li><label>联系人姓名</label><input type="text" id="canteenContacts" placeholder="" value="${(eduCanteenDto.canteenContacts)!}"></li>
+								<li><label>手机</label><input type="text" id="phoneNumber" placeholder="" value="${(eduCanteenDto.phoneNumber)!}"></li>
+								<li>
+									<label>证件类型</label>
+									<ul class="c_type">
+									<#if (proLicenses??) && (proLicenses?size>0)>
+										<#list proLicenses as proLicense>
+											<input style="display:none;" type="text" class="proLicenseId${proLicense_index+1}" placeholder="" value="${(proLicense.id)!}">
+											<li name="phoneFile${proLicense_index+1}">
+											<select class="licType1">
+												<option value="0" <#if proLicense.licType == 0>selected="selected"</#if> >餐饮服务证</option>
+												<option value="1" <#if proLicense.licType == 1>selected="selected"</#if> >食品经营许可证</option>
+												<option value="2" <#if proLicense.licType == 2>selected="selected"</#if> >食品流通证</option>
+												<option value="3" <#if proLicense.licType == 3>selected="selected"</#if> >食品生产证</option>
+												<option value="4" <#if proLicense.licType == 4>selected="selected"</#if> >工商执照</option>
+											</select>
+											<label class="file" for="phoneFile${proLicense_index+1}">文件<i>浏览</i></label>
+											<input id="phoneFile${proLicense_index+1}" value="${(proLicense.licPic)!}" type="file" name="file" onchange="selectfun(this)"><span class="add">+</span>
+											<a id="phoneQuery1"></a>
+											</li>
+										</#list>
+									<#else>
+										<input style="display:none;" type="text" class="proLicenseId1" placeholder="" value="">
+										<li name="phoneFile1">
+											<select class="licType1">
+												<option value="" >请选择</option>
+												<option value="0" >餐饮服务证</option>
+												<option value="1">食品经营许可证</option>
+												<option value="2">食品流通证</option>
+												<option value="3">食品生产证</option>
+												<option value="4">工商执照</option>
+											</select>
+											<label class="file" for="phoneFile1">未选择文件<i>浏览</i></label>
+											<input id="phoneFile1" type="file" name="file" onchange="selectfun(this)"><span class="add">+</span>
+											<a id="phoneQuery1"></a>
+											</li>
+						          	</#if>
+									</ul>			
+								</li>
+							</ul>
+							<input class="submit save_btn" type="button" value="保存">
+						</div>
+							
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="footer">
+    		上海市中小学校学生午餐综合管理平台<br>CopyRight© 2016上海市天坊信息技术有限公司
+    	</div>
+	<div class="cover">
+    <div class="c_content">
+      <h1 style="height:40px"><span class="closeCover" style="font-size:40px">×</span></h1>
+      <img class="col_1" src="/static/img/qualification_20X200.png" alt="" />
+    </div>
+  </div>
+
+	<!--<script src="static/js/footer.js"></script>-->
+<script>
+	$(function(){			
+		
+		$('.c_type').on('click', 'span', function(){
+			var _tag = $(this).attr('class')
+			if(_tag == 'add'){
+				var _ind = $(this).closest('ul').find('li').length + 1
+				//alert(_ind)
+				$('.c_type').append('<li name="phoneFile'+ _ind +'"><select class="licType'+  _ind +'" id=""><option value=\"0\">餐饮服务证</option><option value=\"1\">食品经营许可证</option><option value=\"2\">食品流通证</option><option value=\"3\">食品生产证</option><option value=\"4\">工商执照</option>></select><label class="file" for="phoneFile'+ _ind +'">未选择文件<i>浏览</i></label><input id="phoneFile'+ _ind +'"  type="file" name="file" onchange="selectfun(this)"><span class="remove">-</span><a id="phoneQuery'+ _ind +'"></a></li>')
+			}else if(_tag == 'remove'){
+				$(this).closest('li').remove()
+				for(var i=0; i<$('.c_type').find('li').length;i++){
+					$('.c_type li').eq(i).find('input').attr('id','phoneFile'+(i+1))
+					$('.c_type li').eq(i).find('label.file').attr('for','phoneFile'+(i+1))
+					$('.c_type li').eq(i).find('select').attr('class','licType'+(i+1))
+				}
+			}
+		})
+		
+		$('.modi_btn').on('click', function(){
+			$('#info').removeClass('show')
+			$('#modi').addClass('show')
+		})
+
+		$('.save_btn').on('click', function(){			
+			var schoolId = $.trim($("#schoolId").val());
+			var canteenId = $.trim($("#canteenId").val());
+			var schoolName = $.trim($("#schoolName").val());
+			if (schoolName.length <= 0) {
+				alert("学校名称不能为空~");
+				return;
+			}
+			var address = $.trim($("#address").val());
+			if (address.length <= 0) {
+				alert("学校地址不能为空~");
+				return;
+			}
+			var contacts = $.trim($("#contacts").val());
+			if (contacts.length <= 0) {
+				alert("联系人姓名不能为空~");
+				return;
+			}
+			var mobileNo = $.trim($("#mobileNo").val());
+			if (mobileNo.length <= 0) {
+				alert("手机不能为空~");
+				return;
+			}
+			var area = $.trim($("#area").val());
+			if (area.length <= 0) {
+				alert("区教委不能为空~");
+				return;
+			}
+			var committeeId = $("#area option:selected").attr('data-id');
+			if (committeeId == 'undefined') {
+				alert(" 请选择区教委~");
+				return;
+			}
+			var checkStr='';
+			var checked = 0;
+            $('input[name="CheckboxGroup1"]:checked').each(function(){
+            	if ($(this).val() != null && $(this).val() != '' && $(this).val() != 'undefined') {
+            		checkStr += $(this).val()+","
+                	checked++;
+            	}            	
+            });
+            checkStr=checkStr.substring(0,checkStr.length-1);
+			if (checked == 0 ) {
+            	alert("学校级别不能为空~");
+				return;
+            } 
+			var _ind = $('.c_type').closest('ul').find('li').length;
+			var jsonLic;
+			jsonLic = '[';
+			for (i=1; i<=_ind; i++) {
+				if ($.trim($('#phoneFile1').attr("value")).length >0 && $('#phoneFile1').attr("value") != 'undefined') {
+					jsonLic += '{\"licPic\":\"' +$('#phoneFile'+i+'').attr("value")+'\",'+'\"id\":\"' +$('.proLicenseId'+i+'').val()+'\",'+'\"licType\":\"' +$('.licType'+i+'').val()+'\",'+'\"licName\":\"' +$('.licType'+i+'').find("option:selected").text()+'\"},';
+				}				
+			}
+			jsonLic += ']';
+			var canteenName = $.trim($("#canteenName").val());
+			if (canteenName.length <= 0) {
+				alert("食堂名称不能为空~");
+				return;
+			} 
+			var canteenContacts = $.trim($("#canteenContacts").val());
+			if (canteenContacts.length <= 0) {
+				alert("食堂联系人不能为空~");
+				return;
+			}
+			var phoneNumber = $.trim($("#phoneNumber").val());
+			if (phoneNumber.length <= 0) {
+				alert("食堂联系人手机不能为空~");
+				return;
+			}
+			$.ajax({
+				url:"/user/edit.htm",
+				type:"post",
+				dataType:"json",
+				data:{schoolName:schoolName,address:address,area:area,sourceType:1,level:checkStr,mobileNo:mobileNo,
+					canteenName:canteenName,canteenContacts:canteenContacts,phoneNumber:phoneNumber,contacts:contacts,
+					schoolId:schoolId,canteenId:canteenId,jsonLic:jsonLic,cerSource:3,committeeId:committeeId},
+				async: false,
+				success:function(data){
+					if(data.status == 200){
+						alert("编辑成功！");
+						window.location.href="/user/oEditUserInfo.htm";
+						return;
+					}else {
+						alert(data.message);
+					}							
+				}
+			});
+		})
+		//图片弹层
+		$(".img_nn").on("click",function(){
+		$(".col_1").attr("src",$(this).attr('data-value'));
+		  var w = $(".c_content").css("width");
+		  var h = $(".c_content").css("height");
+		  w = "-"+parseInt(w,10)/2+"px";
+		  h = "-"+parseInt(h,10)/2+"px";
+		  $(".c_content").css({"margin-left":w,"margin-top":h});
+		  $(".cover").css({
+			"display": "block"
+		  });
+		});
+		$(".closeCover").on("click", function() {
+		  $(".cover").css({
+			"display": "none"
+		  });
+		});
+	});
+</script>
+	
+</body>
+</html>

@@ -21,7 +21,7 @@ public class EduUsersRegDto implements Serializable{
     private String sourceId;
 
     private Byte sourceType;
-
+    
     private String email;
 
     private Integer gender;
@@ -51,6 +51,8 @@ public class EduUsersRegDto implements Serializable{
     private Integer isdelete;
     
     //食堂信息
+    private String canteenId;
+    
     private String canteenName;
 
     private String canteenContacts;
@@ -58,9 +60,15 @@ public class EduUsersRegDto implements Serializable{
     private String phoneNumber;
     
     //学校信息
+    private String schoolId;
+    
     private String schoolName;
     
     private String address;
+    
+    private String contacts;
+
+    private String mobileNo;
     
     private String level;
     

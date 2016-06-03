@@ -111,8 +111,8 @@
 						accept="image/*" /></td>
 				</tr>
 				<tr hidden="hidden" id="img1_8">
-					<td colspan="2"><img id="img1"></img></td>
-					<td colspan="2"><img id="img8"></img></td>
+					<td colspan="2"><img id="img1"   width="150px" height="150px"></img></td>
+					<td colspan="2"><img id="img8"  width="150px" height="150px"></img></td>
 				</tr>
 				<tr>
 					<th>组织机构代码</th>
@@ -123,8 +123,8 @@
 						accept="image/*" /></td>
 				</tr>
 				<tr hidden="hidden" id="img2_9">
-					<td colspan="2"><img id="img2"></img></td>
-					<td colspan="2"><img id="img9"></img></td>
+					<td colspan="2"><img id="img2"   width="150px" height="150px"></img></td>
+					<td colspan="2"><img id="img9"   width="150px" height="150px"></img></td>
 				</tr>
 				<tr>
 					<th>税务登记证</th>
@@ -135,8 +135,8 @@
 						accept="image/*" /></td>
 				</tr>
 				<tr hidden="hidden" id="img3_10">
-					<td colspan="2"><img id="img3"></img></td>
-					<td colspan="2"><img id="img10"></img></td>
+					<td colspan="2"><img id="img3"  width="150px" height="150px"></img></td>
+					<td colspan="2"><img id="img10"  width="150px" height="150px"></img></td>
 				</tr>
 				<tr>
 					<th>许可证</th>
@@ -153,8 +153,8 @@
 						accept="image/*" /></td>
 				</tr>
 				<tr hidden="hidden" id="img4_11">
-					<td colspan="2"><img id="img4"></img></td>
-					<td colspan="2"><img id="img11"></img></td>
+					<td colspan="2"><img id="img4"  width="150px" height="150px"></img></td>
+					<td colspan="2"><img id="img11"   width="150px" height="150px"></img></td>
 				</tr>
 				<tr>
 					<th>食品生产许可证</th>
@@ -162,7 +162,7 @@
 						accept="image/*" /></td>
 				</tr>
 				<tr hidden="hidden" id="img_5">
-					<td colspan="2"><img id="img5"></img></td>
+					<td colspan="2"><img id="img5"  width="150px" height="150px"></img></td>
 				</tr>
 				<tr>
 					<th>餐饮服务许可证</th>
@@ -170,7 +170,7 @@
 						accept="image/*" /></td>
 				</tr>
 				<tr hidden="hidden" id="img_6">
-					<td colspan="2"><img id="img6"></img></td>
+					<td colspan="2"><img id="img6" width="150px" height="150px"></img></td>
 				</tr>
 				<tr>
 					<th>食品经营许可证</th>
@@ -178,7 +178,7 @@
 						accept="image/*" /></td>
 				</tr>
 				<tr hidden="hidden" id="img_7">
-					<td colspan="2"><img id="img7"></img></td>
+					<td colspan="2"><img id="img7"   width="150px" height="150px"></img></td>
 				</tr>
 			</table>
 
