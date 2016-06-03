@@ -13,6 +13,8 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONArray;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.EncryptedDocumentException;
@@ -39,11 +41,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ssic.educateion.common.dto.ImageInfoDto;
 import com.ssic.educateion.common.dto.ProSupplierDto;
-import com.ssic.educateion.common.dto.ProWaresDto;
 import com.ssic.educateion.common.dto.SupplierDto;
 import com.ssic.educateion.common.utils.DataGrid;
 import com.ssic.educateion.common.utils.PageHelper;
-import com.ssic.educateion.common.utils.PageHelperDto;
 import com.ssic.education.handle.pojo.ProLicense;
 import com.ssic.education.handle.pojo.ProSupplier;
 import com.ssic.education.handle.pojo.ProSupplierReceiver;
@@ -54,9 +54,7 @@ import com.ssic.education.handle.service.IWaresService;
 import com.ssic.education.provider.pageModel.Json;
 import com.ssic.education.provider.pageModel.SessionInfo;
 import com.ssic.education.provider.util.ConfigUtil;
-import com.ssic.education.provider.util.ProductClass;
 import com.ssic.education.utils.poi.ParseExcelUtil;
-import com.ssic.education.utils.util.ObjectExcelView;
 import com.ssic.education.utils.util.PageData;
 import com.ssic.education.utils.util.PropertiesUtils;
 import com.ssic.education.utils.util.Tools;
@@ -319,7 +317,20 @@ public class ProSupplierController extends BaseController{
 	@RequestMapping("/editImage")
 	public String editImage(HttpServletRequest request, String id) {
 
+		ProLicense license = new ProLicense();
+		license.setRelationId(id);
+		license.setCerSource((short) 0);
+		List<ProLicense> ProLicenseList = proLicenseServiceImpl
+				.lookImage(license);
+		String realPath = PropertiesUtils.getProperty("upload.look.url");
+		for (ProLicense proLicense : ProLicenseList) {
+			proLicense.setLicPic(realPath + proLicense.getLicPic());
+		}
+		
+		JSONArray jsonarray = JSONArray.fromObject(ProLicenseList);  
 		request.setAttribute("id", id);
+		request.setAttribute("ProLicenseList", jsonarray.toString());
+
 		return "supplier/editImage";
 	}
 
