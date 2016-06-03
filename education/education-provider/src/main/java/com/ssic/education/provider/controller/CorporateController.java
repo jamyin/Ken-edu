@@ -102,7 +102,8 @@ public class CorporateController {
 		for (ProLicense proLicense : ProLicenseList) {
 			proLicense.setLicPic(realPath + proLicense.getLicPic());
 		}
-		request.setAttribute("ProLicenseList", ProLicenseList);
+		JSONArray jsonarray = JSONArray.fromObject(ProLicenseList);  
+		request.setAttribute("ProLicenseList", jsonarray.toString());
 		return "corporate/lookImage";
 	}
 

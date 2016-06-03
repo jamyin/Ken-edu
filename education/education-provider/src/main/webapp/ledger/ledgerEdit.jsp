@@ -70,7 +70,7 @@
 	});
 	
 	function ledgerTr(){
-		var ltr='<th style="width:70px;">采购品：</th><td style="width:95px;"><input name="ledger[0].name" style="width:95px;" type="text" placeholder="请输入采购品" class="easyui-validatebox span2" data-options="required:true"></td><th style="width:70px;">数量：</th><td style="width:95px;"><input name="ledger[0].quantity" style="width:95px;" type="text" placeholder="请输入数量" class="easyui-validatebox span2" data-options="required:true"></td><th style="width:70px;">规格：</th><td style="width:95px;"><input name="ledger[0].spce" style="width:95px;" type="text" placeholder="请输入规格" class="easyui-validatebox span2" data-options="required:true"></td><th style="width:70px;">采购品供应商：</th><td style="width:95px;"><input name="ledger[0].supplierName" style="width:95px;" type="text" placeholder="请输入供应商" class="easyui-validatebox span2"></td><th style="width:70px;">生产企业：</th><td style="width:95px;"><input name="ledger[0].productionName" style="width:95px;" type="text" placeholder="请输入生产单位" class="easyui-validatebox span2"></td><th style="width:70px;">生产日期：</th><td style="width:95px;"><input name="ledger[0].productionDate" style="width:95px;" type="text" placeholder="点击选择日期" class="easyui-validatebox span2" onclick="WdatePicker({readOnly:true,dateFmt:\'yyyy-MM-dd\'})" readonly="readonly"></td><td><a id="addLedger" style="text-decoration:none;" ><font size="8" >+</font></a></td><td><input type="hidden" name="ledger[0].mark" value="1" ></td>';
+		var ltr='<td style="width:95px;"><input name="ledger[0].name" style="width:95px;" type="text" placeholder="请输入采购品" class="easyui-validatebox span2" data-options="required:true"></td><td style="width:95px;"><input name="ledger[0].quantity" style="width:95px;" type="text" placeholder="请输入数量" class="easyui-validatebox span2" data-options="required:true"></td><td style="width:95px;"><input name="ledger[0].spce" style="width:95px;" type="text" placeholder="请输入规格" class="easyui-validatebox span2" data-options="required:true"></td><td style="width:95px;"><input name="ledger[0].supplierName" style="width:95px;" type="text" placeholder="请输入供应商" class="easyui-validatebox span2"></td><td style="width:95px;"><input name="ledger[0].productionName" style="width:95px;" type="text" placeholder="请输入生产单位" class="easyui-validatebox span2"></td><td style="width:95px;"><input name="ledger[0].productionDate" style="width:95px;" type="text" placeholder="点击选择日期" class="easyui-validatebox span2" onclick="WdatePicker({readOnly:true,dateFmt:\'yyyy-MM-dd\'})" readonly="readonly"></td><td><a id="addLedger" style="text-decoration:none;" ><font size="8" >+</font></a></td><td><input type="hidden" name="ledger[0].mark" value="1" ></td>';
 		return ltr;
 	}
 	
@@ -150,30 +150,32 @@
 				</tr>
 			</table>
 			<table id="ledgers" class="table table-hover table-condensed">
+					<tr>
+						<th style='width:70px;'>采购品：</th>
+						<th style='width:70px;'>数量：</th>
+						<th style='width:70px;'>规格：</th>
+						<th style='width:70px;'>采购品供应商：</th>
+						<th style='width:70px;'>生产企业：</th>
+						<th style='width:70px;'>生产日期：</th>
+					</tr>
 				<c:forEach var="ledger" items="${LedgerList}" varStatus="status">
 					<tr id="ledger${status.index}">
-						<th style='width:70px;'>采购品：</th>
 						<td style='width:100px;'><input name="ledger[${status.index }].name" type="text"
 							style='width:100px;' placeholder="请输入采购品" class="easyui-validatebox span2"
 							data-options="required:true" value="${ledger.name}"></td>
-						<th style='width:70px;'>数量：</th>
 						<td style='width:100px;'><input name="ledger[${status.index }].quantity"
 							style='width:100px;' type="text" placeholder="请输入数量" class="easyui-validatebox span2"
 							data-options="required:true" value="${ledger.quantity}"></td>
-						<th style='width:70px;'>规格：</th>
 						<td style='width:100px;'><input name="ledger[${status.index }].spce" type="text"
 							style='width:100px;' placeholder="请输入规格" class="easyui-validatebox span2"
 							data-options="required:true" value="${ledger.spce}"></td>
-						<th style='width:70px;'>采购品供应商：</th>
 						<td style='width:100px;'><input name="ledger[${status.index }].supplierName"
 							style='width:100px;' type="text" placeholder="请输入供应商" class="easyui-validatebox span2"
 							value="${ledger.supplierName}"></td>
-						<th style='width:70px;'>生产企业：</th>
 						<td style='width:100px;'><input name="ledger[${status.index }].productionName"
 							type="text" placeholder="请输入生产单位"
 							style='width:100px;' class="easyui-validatebox span2" 
 							value="${ledger.productionName}"></td>
-						<th style='width:70px;'>生产日期：</th>
 						<td style='width:100px;'><input name="ledger[${status.index }].productionDate"
 							style='width:100px;' type="text" placeholder="点击选择日期" class="easyui-validatebox span2"
 							onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})"
