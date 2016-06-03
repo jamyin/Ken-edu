@@ -99,26 +99,28 @@
 				</tr>
 				</table>
 			<table id="ledgers" class="table table-hover table-condensed">
-				<tr id="ledger0">
+				<tr>
 					<th style='width:70px;'>*采购品：</th>
+					<th style='width:70px;'>*数量：</th>
+					<th style='width:70px;'>*规格：</th>
+					<th style='width:70px;'>采购品供应商：</th>
+					<th style='width:70px;'>生产企业：</th>
+					<th style='width:70px;'>生产日期：</th>
+				</tr>
+				<tr id="ledger0">
 					<td style='width:95px;'><input name="ledger[0].name" style='width:95px;' type="text"
 						placeholder="请输入采购品" class="easyui-validatebox span2"
 						data-options="required:true"></td>
-					<th style='width:70px;'>*数量：</th>
 					<td style='width:95px;'><input name="ledger[0].quantity" style='width:95px;' type="text"
 						placeholder="请输入数量" class="easyui-validatebox span2"
 						data-options="required:true"></td>
-					<th style='width:70px;'>*规格：</th>
 					<td style='width:95px;'><input name="ledger[0].spce" style='width:95px;' type="text"
 						placeholder="请输入规格" class="easyui-validatebox span2"
 						data-options="required:true"></td>
-					<th style='width:70px;'>采购品供应商：</th>
 					<td style='width:95px;'><input name="ledger[0].supplierName" style='width:95px;' type="text"
 						placeholder="请输入供应商" class="easyui-validatebox span2"></td>
-					<th style='width:70px;'>生产企业：</th>
 					<td style='width:95px;'><input name="ledger[0].productionName" style='width:95px;' type="text"
 						placeholder="请输入生产单位" class="easyui-validatebox span2"></td>
-					<th style='width:70px;'>生产日期：</th>
 					<td style='width:95px;'><input name="ledger[0].productionDate" style='width:95px;' type="text"
 						placeholder="点击选择日期" class="easyui-validatebox span2"
 						onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})"

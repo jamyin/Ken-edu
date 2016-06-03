@@ -204,7 +204,7 @@
 		}
 		parent.$.modalDialog({
 			title : '编辑配送',
-			width : 1030,
+			width : 830,
 			height : 500,
 			href : '${pageContext.request.contextPath}/ledgerController/editPage?masterId=' +id ,
 			onOpen: function(){},
@@ -238,7 +238,7 @@
 	function addFun() {
 		parent.$.modalDialog({
 			title : '添加配货',
-			width : 1030,
+			width : 800,
 			height : 500,
 			href : '${pageContext.request.contextPath}/ledgerController/addLedger',
 			onOpen: function(){},
