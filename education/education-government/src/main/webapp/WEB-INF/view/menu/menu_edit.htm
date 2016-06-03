@@ -97,7 +97,7 @@
           <label for="">营养:</label>
           <div class="rt">
             <ul class="rt_ul nutritionalss">
-            <#if (data.proNutritionalDtos??) && (data.proNutritionalDtos?size > 0)>
+            <!-- <#if (data.proNutritionalDtos??) && (data.proNutritionalDtos?size > 0)>
             	<#list data.proNutritionalDtos as proNutritionalDto>
             		<#if proNutritionalDto_index == 0>
             			<li>
@@ -146,7 +146,7 @@
 	                	<#list NutritionalName as name>
 	                		<option value="${(name.index)!}">${(name.index)!}</option>
 	                	</#list>
-	                </#if> 
+	                </#if>
 	                </select>
 	                <input class="in1" type="text" id="weight0" value="${(proNutritionalDto.weight)}">
 	                <select class="s2" id="b0">
@@ -158,8 +158,31 @@
 	                </select>
 	                <span class="add">+</span>
 	              </li>
+            </#if> -->
+             <#if (data.proNutritionalDtos??) && (data.proNutritionalDtos?size > 0)>
+            	<#list data.proNutritionalDtos as proNutritionalDto>
+            	<#if proNutritionalDto_index == 0>
+            		<li>
+		                <select class="s1" id="a${proNutritionalDto_index}">	
+		                	<option selected="selected" value="${(proNutritionalDto.name)!}">${(proNutritionalDto.name)!}</option>	                	
+		                </select>
+		                <input class="in1" type="text" id="weight${proNutritionalDto_index}" value="${(proNutritionalDto.weight)}">
+		                <select class="s2" id="b${proNutritionalDto_index}">
+		               	</select>
+		               	 <span class="add">+</span>
+		            </li>
+		           <#else>
+		           	<li>
+		                <select class="s1" id="a${proNutritionalDto_index}">
+		                </select>
+		                <input class="in1" type="text" id="weight${proNutritionalDto_index}" value="${(proNutritionalDto.weight)}">
+		                <select class="s2" id="b${proNutritionalDto_index}">
+		               	</select>
+		               	<span class='decrease'>-</span>
+		            </li>
+		          </#if>
+            	</#list>
             </#if>
-              
             </ul>
           </div>
         </li>
@@ -312,11 +335,69 @@
     	yearSuffix: "年"
     }
      $.datepicker.setDefaults($.datepicker.regional["zh-CN"]);
-    $(".date").datepicker();
-    
-    
-    
+    $(".date").datepicker();    
   })
+  
+  var d1={"热量":"热量","蛋白质":"蛋白质","脂肪":"脂肪","钙":"钙","铁":"铁","锌":"锌","维生素":"维生素"};
+  var d2={"千卡":"千卡","克":"克","毫克":"毫克"};
+  var rel={"热量":["千卡"],"蛋白质":["克"],"脂肪":["克"],"钙":["毫克"],"铁":["毫克"],"锌":["毫克"],"维生素":["毫克"]}
+
+  /**
+  * 初始化第一个下拉框
+  * @param  {Objetc} data    eg： {"v1":"111","v2":"222","v3":"333"};
+  * @param  {string} selector eg："#id"
+  * @return
+  */
+  function init(data,selector,selector2){
+    var keys=Object.keys(data);
+    var str="";
+    for(var i=0;i<keys.length;i++){
+      str+="<option value="+keys[i]+">"+data[keys[i]]+"</option>"
+    }
+    $(selector).append(str);
+    initB(rel,d2,keys[0],selector2);
+  }
+  /**
+  * 根据关联关系，填充第二个下拉框
+  * @param  {[Objetc]} rel     eg： {"v1":["v7","v8"],"v2":["v8","v10"],"v3":["v7","v8","v9"]}
+  * @param  {[Objetc]} data     eg：{"v7":"777","v8":"888","v9":"999","v10":"101010"}
+  * @param  {[String]} str     第一个下拉框选中的值 eg:"v7"
+  * @param  {String} selector  第二个下拉框的选择器 eg："#id"
+  * @return
+  */
+  function initB(rel,data,str,selector){
+    var key1 = rel[str];
+    var keys=Object.keys(data),val=[],st="";
+    for(var i=0;i<keys.length;i++){
+      if(key1.indexOf(keys[i])>-1){
+        st+="<option value="+keys[i]+">"+data[keys[i]]+"</option>"
+      }
+    }
+    $(selector).empty().append(st);
+  }
+  $(".rt_ul select:first").on("change",function(){
+    // console.log("change..",$(this).val());
+    initB(rel,d2,$(this).val(),$(this).parent().find("select:last"));
+  })
+  init(d1,".rt_ul select:even",".rt_ul select:odd");
+  /**
+  * 填充下拉联动的列表
+  * @param  {[String]} selector1 第一个下拉框的选择器
+  * @param  {[String]} selector2 第二个下拉框的选择器
+  * @param  {[Objetc]} data1     第一个下拉框的数据
+  * @param  {[Objetc]} data2     第二个下拉框的数据
+  * @param  {[String]} val1      第一个下拉框的值
+  * @param  {[String]} val2      第二个下拉框的值
+  * @param  {[Objetc]} rel       下拉框的关联关系
+  * @return
+  */
+  function fillSelect(selector1,selector2,data1,data2,val1,val2,rel){
+    // console.log("come here",selector1,val1);
+    $(selector1).val(val1);
+    initB(rel,data2,val1,selector2);
+    $(selector2).val(val2);
+  }
+  fillSelect(".nutrition li:nth-child(1) select:first",".nutrition li:nth-child(1) select:last",d1,d2,"v2","m2",rel);
   </script>
 </body>
 </html>

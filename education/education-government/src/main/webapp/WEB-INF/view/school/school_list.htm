@@ -48,7 +48,7 @@
 	      <li class="search">
 	          <label for="">区县:</label>
 	          <select class="" name="area" id="area" panelheight="auto">
-	          	<option value="">请选择区县</option>
+	          	<option value="">全  部</option>
 	          	<#if eduCommitteeDtos??>
 	          		<#list eduCommitteeDtos as area>
 	          			<option <#if area.areaCode == dto.area>selected="true"</#if> value="${(area.areaCode)!}">${(area.name)!}</option>
