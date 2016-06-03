@@ -8,7 +8,7 @@ package com.ssic.education.utils.constants;
  *
  */
 public enum ProNutritionalUnitEnum {
-	MG("毫克", "毫克"),G("克", "克"),KJ("千焦", "千焦");
+	MG("毫克", "毫克"),G("克", "克"),KJ("千卡", "千卡");
 	private String index;
 	private String value;
 	ProNutritionalUnitEnum(String index, String value){

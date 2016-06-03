@@ -8,7 +8,7 @@ package com.ssic.education.utils.constants;
  *
  */
 public enum ProNutritionalNameEnum {
-	ENERGY("能量", "能量"),VITAMIN("维生素", "维生素"),PROTEIN("蛋白质", "蛋白质");
+	ENERGY("热量", "热量"),PROTEIN("蛋白质", "蛋白质"),V3("脂肪","脂肪"),V4("钙","钙"),V5("铁","铁"),V6("锌","锌"),VITAMIN("维生素", "维生素");
 	private String index;
 	private String value;
 	ProNutritionalNameEnum(String index, String value){
