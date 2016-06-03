@@ -70,10 +70,12 @@ public class MapBaiduController extends BaseController{
 			}		
 			
 			points = getHistory(resultDto).getPoints();
-			for(BaiduPointsDto bp : points){
-				bp.setX(bp.getLocation()[0]);
-				bp.setY(bp.getLocation()[1]);
-			}			
+			if(points!=null && points.size()>0){
+				for(BaiduPointsDto bp : points){
+					bp.setX(bp.getLocation()[0]);
+					bp.setY(bp.getLocation()[1]);
+				}							
+			}
 		}
 		
 		mv.addObject("historyList", points);
@@ -88,8 +90,14 @@ public class MapBaiduController extends BaseController{
 	
 	public BaiduHistoryDto getHistory(ProLedgerMasterDto resultDto){
 		String baidu_getHistory_url = "http://api.map.baidu.com/trace/v2/track/gethistory?";
-		String startTime = String.valueOf(resultDto.getStartTime().getTime());
-		String endTime = String.valueOf(resultDto.getEndTime().getTime());
+		String startTime = "";
+		String endTime = "";
+		if(resultDto.getStartTime()!=null){
+			startTime = String.valueOf(resultDto.getStartTime().getTime());	
+		}
+		if(resultDto.getStartTime()!=null){
+			endTime = String.valueOf(resultDto.getEndTime().getTime());	
+		}		
 		String reqURL = "ak="+PropertiesUtils.getProperty("baidu.ditu.ak")+"&service_id="+PropertiesUtils.getProperty("baidu.ditu.serviceId")+"&entity_name="+resultDto.getId()+"&start_time="+startTime+"&end_time="+endTime+"";
 		String json = HttpClientUtil.sendGetRequest(baidu_getHistory_url+reqURL, null);
 		BaiduHistoryDto history = new Gson().fromJson(json, BaiduHistoryDto.class);

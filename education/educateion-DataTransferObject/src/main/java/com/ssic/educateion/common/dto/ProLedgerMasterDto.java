@@ -40,5 +40,7 @@ public class ProLedgerMasterDto implements Serializable {
 	private List<ProLedgerDto> resltList;
 	
 	private List<ProWaresDto> wareList;
+	
+	private ProSupplierDto supplierDto;
 
 }

@@ -35,23 +35,40 @@ public class LedgerMasterController extends BaseController{
 		ModelAndView mv = getModelAndView();
 		ProLedgerMasterDto dto = new ProLedgerMasterDto();
 		dto.setReceiverId(receiceId);
+		//主
 		List<ProLedgerMasterDto> resultList = iProLedgerMasterService.searchProLedgerMasterDto(dto);
 		List<String> ledgerMasterIds = new ArrayList<String>();
+		List<String> sourceIds = new ArrayList<String>();
 		for(ProLedgerMasterDto master : resultList){
 			ledgerMasterIds.add(master.getId());
+			sourceIds.add(master.getSourceId());//
 		}
-
+		//从
 		List<ProLedgerDto> resultLeList = proLedgerService.searchProLedger(ledgerMasterIds);
 		HashMap<String,List<ProLedgerDto>> map = listToMap(resultLeList);
-
 		for(ProLedgerMasterDto master : resultList){
 			master.setResltList(map.get(master.getId()));
 		}
-		ProSupplierDto supplierDto = proSupplierService.findById(dto.getSourceId());
-		mv.addObject("supplierDto", supplierDto);
+
+		//查询对应的供应商信息
+		List<ProSupplierDto> supplierList = proSupplierService.searchProSupplier(sourceIds);
+		HashMap<String,ProSupplierDto> mapSupplier = listToSupplierMap(supplierList);
+		for(ProLedgerMasterDto master : resultList){
+			master.setSupplierDto(mapSupplier.get(master.getSourceId()));
+		}
+		
 		mv.addObject("resultList", resultList);
 		mv.setViewName("dispatching");
 		return mv;
+	}
+
+	private HashMap<String, ProSupplierDto> listToSupplierMap(List<ProSupplierDto> supplierList) {
+		HashMap<String, ProSupplierDto> objMap = new HashMap<String, ProSupplierDto>();
+		for(ProSupplierDto supplier : supplierList){
+			String keyCode = supplier.getId();
+			objMap.put(keyCode, supplier);
+		}
+		return objMap;
 	}
 
 	private HashMap<String, List<ProLedgerDto>> listToMap(List<ProLedgerDto> resultLeList) {
