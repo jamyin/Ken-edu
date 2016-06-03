@@ -69,12 +69,11 @@ ul.my_info {
 </head>
 <body>
 <div>
-	<div id="aa"></div>
 	<h2>${Corporate.supplierName }</h2>
 	<div class="">
-	<a id="btn"  class="easyui-linkbutton" data-options="iconCls:'icon-edit'"  onclick="edit()">编辑</a>
-	<a id="btn"  class="easyui-linkbutton" data-options="iconCls:'icon-picture'"  onclick="showPic()">查看图片</a>
-	<a id="btn"  class="easyui-linkbutton" data-options="iconCls:'icon-edit'"  onclick="editPic()">编辑图片</a>  
+	&nbsp;&nbsp;&nbsp;<a id="btn" onclick="edit()"><img title="编辑" src="${pageContext.request.contextPath}/icon/编辑.png"></img></a>&nbsp;&nbsp;&nbsp;
+	&nbsp;&nbsp;&nbsp;<a id="btn" onclick="showPic()"><img title="查看图片" src="${pageContext.request.contextPath}/icon/查看图片.png"></img></a>&nbsp;&nbsp;&nbsp;
+	&nbsp;&nbsp;&nbsp;<a id="btn" onclick="editPic()"><img title="编辑图片" src="${pageContext.request.contextPath}/icon/编辑图片.png"></img></a>  
 	</div>
 	
 	<ul class="easyui-datalist my_info">

@@ -50,13 +50,13 @@
 		</tr>
 		<tr>
 			<td>
-				<img id="img1" />	
+				<img width="200" id="img1" />	
 			</td>
 			<td>
-				<img id="img2" />	
+				<img width="200" id="img2" />	
 			</td>
 			<td>
-				<img id="img3" />	
+				<img width="200" id="img3" />	
 			</td>
 		</tr>
 		<tr>

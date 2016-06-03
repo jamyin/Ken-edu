@@ -133,11 +133,11 @@
 					}
 					str += '&nbsp;';
 					if ($.canEdit) {
-						str += $.formatString('<img onclick="editFun(\''+row.masterId+'\');" src="{1}" title="编辑"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
+						str += $.formatString('<img onclick="editFun(\''+row.masterId+'\');" src="{1}" title="编辑"/>', row.id, '${pageContext.request.contextPath}/icon/编辑.png');
 					}
 					str += '&nbsp;';
 					if ($.canDelete) {
-						str += $.formatString('<img onclick="deleteFun(\''+row.masterId+'\');" src="{1}" title="删除"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/cancel.png');
+						str += $.formatString('<img onclick="deleteFun(\''+row.masterId+'\');" src="{1}" title="删除"/>', row.id, '${pageContext.request.contextPath}/icon/删除.png');
 					}
 					return str;
 				}
@@ -314,13 +314,13 @@
 		</div>
 	</div>
 	<div id="toolbar" style="display: none;">
-			<a class="btn btn-mini btn-light"  onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'"><font  style='font-style: normal;font-weight: bolder;font-size:16px;'>添加</font></a>	
+			<a onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true"><img src="${pageContext.request.contextPath}/icon/添加.png" ></a>	
 		&nbsp;
-		<a class="btn btn-mini btn-light"  onclick="importSupplier();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'"><font  style='font-style: normal;font-weight: bolder;font-size:16px;'>导入</font></a>
+		<a onclick="importSupplier();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true"><img src="${pageContext.request.contextPath}/icon/导入.png"></img></a>
 		&nbsp;
-		<a class="btn btn-mini btn-light"  class="btn btn-mini btn-light" onclick="toExcel();" title="导出到EXCEL"><font  style='font-style: normal;font-weight: bolder;font-size:16px;'>导出</font></a>
+		<a onclick="toExcel();" title="导出到EXCEL"><img src="${pageContext.request.contextPath}/icon/导出.png"></img></a>
 		&nbsp;
-		<a  class="btn btn-mini btn-light"  href="${pageContext.request.contextPath}/templates/配货管理.xlsx" class="easyui-linkbutton" data-options="plain:true,iconCls:'pencil_add'"><font  style='font-style: normal;font-weight: bolder;font-size:16px;'>下载模板</font></a>
+		<a href="${pageContext.request.contextPath}/templates/配货管理.xlsx" class="easyui-linkbutton" data-options="plain:true"><img src="${pageContext.request.contextPath}/icon/下载模板.png"></img></a>
 	</div>
 
 </body>
