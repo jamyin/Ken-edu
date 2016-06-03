@@ -15,15 +15,21 @@
 				<#list dataList as data>
 					<li>
 						<div class="con">
+							<a href="/wap/school/school/${(data.schoolId)!}.htm">
 							<img src="/static/img/food_simple2.jpg" border="0">
 							<p class="nam">${(data.schoolName)!}</p>
 							<p class="adr">地址：${(data.schoolAddress)!}</p>
+							</a>
 						</div>
 						<div class="bar">
 							<#if data_index ==0>
-								<a class="shower cur" href="###">默认显示</a><a href="/wap/school/school/${(data.schoolId)!}.htm">编辑</a><a data-id="${(data.id)!}" data-value="${(data.schoolId)!}" href="#" onclick="doAction(this);">取消关注</a>
+								<a class="shower cur" href="###">默认显示</a>
+								<!-- <a href="/wap/school/school/${(data.schoolId)!}.htm">编辑</a> -->
+								<a data-id="${(data.id)!}" data-value="${(data.schoolId)!}" href="#" onclick="doAction(this);">取消关注</a>
 							<#else>
-								<a class="shower" href="###">默认显示</a><a href="/wap/school/school/${(data.schoolId)!}.htm">编辑</a><a data-id="${(data.id)!}" data-value="${(data.schoolId)!}" href="#" onclick="doAction(this);">取消关注</a>
+								<a class="shower" href="###">默认显示</a>
+								<!-- <a href="/wap/school/school/${(data.schoolId)!}.htm">编辑</a> -->
+								<a data-id="${(data.id)!}" data-value="${(data.schoolId)!}" href="#" onclick="doAction(this);">取消关注</a>
 							</#if>
 							
 						</div>
@@ -70,6 +76,11 @@
 </body>
 <script>
 	$(function() {
+		$('.shower').on('click', function(){
+			$(this).addClass('cur')
+			$(this).closest('li').siblings().find('.shower').removeClass('cur')
+		});
+		
 		$('.seldate').on('click', function() {
 			$(this).attr('type', 'date').focus()
 		});

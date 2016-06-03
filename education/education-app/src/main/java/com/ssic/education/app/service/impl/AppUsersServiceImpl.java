@@ -1,15 +1,22 @@
 package com.ssic.education.app.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssic.education.app.dao.AppProUsersDao;
 import com.ssic.education.app.dao.AppUsersDao;
+import com.ssic.education.app.dao.SupplierInfoDao;
 import com.ssic.education.app.dto.AppEduUserDto;
+import com.ssic.education.app.dto.AppProUserDto;
 import com.ssic.education.app.dto.EduUsersInfoDto;
 import com.ssic.education.app.service.IAppUsersService;
 import com.ssic.education.app.token.TokenUtil;
 import com.ssic.education.handle.dao.CommitteeDao;
 import com.ssic.education.handle.pojo.EduCommittee;
+import com.ssic.education.handle.pojo.ProUsers;
+import com.ssic.education.utils.util.BeanUtils;
 import com.ssic.education.utils.util.StringUtils;
 
 @Service
@@ -18,10 +25,14 @@ public class AppUsersServiceImpl implements IAppUsersService {
 	@Autowired
 	private AppUsersDao eduUsersDao;
 	@Autowired
+	private AppProUsersDao proUsersDao;
+	@Autowired
 	private CommitteeDao committeeDao;
+	@Autowired
+	private SupplierInfoDao supplierDao;
 
 	@Override
-	public synchronized AppEduUserDto appLogin(EduUsersInfoDto user) {
+	public synchronized AppEduUserDto eduLogin(EduUsersInfoDto user) {
 		AppEduUserDto result = eduUsersDao.appLogin(user);
 		if (result != null) {
 			if (result.getSourceType() == 0 || result.getSourceType() == 2) {
@@ -52,4 +63,21 @@ public class AppUsersServiceImpl implements IAppUsersService {
 		}
 	}
 
+	@Override
+	public AppProUserDto proLogin(ProUsers user) {
+		List<ProUsers> list = proUsersDao.proUserLogin(user);
+		if (null != list && !list.isEmpty()) {
+			AppProUserDto apud = BeanUtils.createBeanByTarget(list.get(0), AppProUserDto.class);
+			apud.setToken(TokenUtil.getToken(apud.getUserAccount()).getSignature());
+			if (apud.getSourceId() != null) {
+				String supplierName = supplierDao.getSupplierName(apud.getSourceId());
+				if (supplierName != null)
+					apud.setSupplierName(supplierName);
+			}
+			apud.setJob("驾驶员");
+			return apud;
+		} else {
+			return null;
+		}
+	}
 }

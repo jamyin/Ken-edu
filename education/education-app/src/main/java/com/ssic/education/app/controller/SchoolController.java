@@ -238,9 +238,9 @@ public class SchoolController {
 				chooseSchoolDto.setLevelList(levelList);
 
 				//显示区教委
-				EduCommitteeDto eduCommitteeDto = new EduCommitteeDto();
-				eduCommitteeDto.setType((short) 2);      //只查区教委列表
-				List<EduCommitteeDto> committeeList = committeeService.findCommitteeListNoPage(eduCommitteeDto);
+				//EduCommitteeDto eduCommitteeDto = new EduCommitteeDto();
+				//eduCommitteeDto.setType((short) 2);      //只查区教委列表
+				List<EduCommitteeDto> committeeList = committeeService.findCommitteeListNoPage(new EduCommitteeDto());
 				chooseSchoolDto.setCommitteeList(committeeList);
 
 				//学校列表

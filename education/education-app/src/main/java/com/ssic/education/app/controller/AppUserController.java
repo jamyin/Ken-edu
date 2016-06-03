@@ -12,6 +12,7 @@ import com.ssic.education.app.dto.AppEduUserDto;
 import com.ssic.education.app.dto.EduUsersInfoDto;
 import com.ssic.education.app.dto.AppProUserDto;
 import com.ssic.education.app.service.IAppUsersService;
+import com.ssic.education.handle.pojo.ProUsers;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.Response;
 import com.ssic.education.utils.redis.WdRedisDao;
@@ -48,12 +49,10 @@ public class AppUserController extends BaseController {
 		Response<AppEduUserDto> result = new Response<AppEduUserDto>();
 		user.setUserAccount(account);
 		user.setPassword(password);
-		AppEduUserDto userdto = appUserService.appLogin(user);
+		AppEduUserDto userdto = appUserService.eduLogin(user);
 		result.setData(userdto);
 		if (userdto != null) {
 			eduRedisdao.set(userdto, 5040);
-			AppEduUserDto g = eduRedisdao.get(userdto.getToken(), AppEduUserDto.class);
-			System.out.println(g.getName() + g.getToken());
 			result.setStatus(DataStatus.HTTP_SUCCESS);
 			result.setMessage("登录成功！");
 			result.setData(userdto);
@@ -112,8 +111,24 @@ public class AppUserController extends BaseController {
 	 */
 	@RequestMapping(value = "/proLogin", method = RequestMethod.POST)
 	@ResponseBody
-	public Response<AppEduUserDto> proLogin(@RequestParam(required = true) String account, @RequestParam(required = true) String password) {
-		return null;
+	public Response<AppProUserDto> proLogin(@RequestParam(required = true) String account, @RequestParam(required = true) String password) {
+		ProUsers user = new ProUsers();
+		Response<AppProUserDto> result = new Response<AppProUserDto>();
+		user.setUserAccount(account);
+		user.setPassword(password);
+		AppProUserDto userdto = appUserService.proLogin(user);
+		result.setData(userdto);
+		if (userdto != null) {
+			proRedisdao.set(userdto, 5040);
+			result.setStatus(DataStatus.HTTP_SUCCESS);
+			result.setMessage("登录成功！");
+			result.setData(userdto);
+			return result;
+		} else {
+			result.setStatus(DataStatus.HTTP_FAILE);
+			result.setMessage("登录失败，请检查用户名密码！");
+		}
+		return result;
 	}
 
 	/**

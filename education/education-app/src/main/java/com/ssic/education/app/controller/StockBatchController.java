@@ -62,7 +62,7 @@ public class StockBatchController {
 	 * @author Administrator
 	 * @date 2016年5月27日 下午2:24:06
 	 */
-	@RequestMapping(value = "/list/{receiverId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/list/{receiverId}", method = RequestMethod.POST)
 	@ResponseBody
 	public Response<PageResult<LedgerMasterListDto>> getMaterialInfo(@PathVariable("receiverId") String receiverId, PageQuery query) {
 		Response<PageResult<LedgerMasterListDto>> result = new Response<PageResult<LedgerMasterListDto>>();
@@ -81,7 +81,7 @@ public class StockBatchController {
 	 * @author Administrator
 	 * @date 2016年5月27日 下午2:24:06
 	 */
-	@RequestMapping(value = "/driverlist/{userId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/driverlist/{userId}", method = RequestMethod.POST)
 	@ResponseBody
 	public Response<PageResult<LedgerMasterListDto>> getMaterialByUser(@PathVariable("userId") String userId, PageQuery query) {
 		Response<PageResult<LedgerMasterListDto>> result = new Response<PageResult<LedgerMasterListDto>>();
