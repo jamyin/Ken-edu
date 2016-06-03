@@ -1,5 +1,6 @@
 package com.ssic.education.handle.dao;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -272,8 +273,11 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 		return mapper.updateByPrimaryKeySelective(pl);
 	}
 
-	public int upSaveLedger(List<LedgerDto> ledgers) {
-		return 0;
+	public int upSaveLedger(LedgerDto ld) {
+		ProLedger pl= BeanUtils.createBeanByTarget(ld, ProLedger.class);
+		pl.setQuantity(new BigDecimal(ld.getQuantity()));
+		pl.setId(UUID.randomUUID().toString());
+		return mapper.insert(pl);
 	}
 
 }
