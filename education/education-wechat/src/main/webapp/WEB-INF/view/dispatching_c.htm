@@ -35,8 +35,12 @@
 					<label>货物：</label>
 					<span>
 						<#if resultDto ?? && resultDto.getResltList() ??>
-							<#list resultDto.getResltList()  as data>
-								${(data.name)!} 、
+							<#list resultDto.getResltList() as data>
+									<#if (data_index+1) < resultDto.getResltList()?size>
+										${(data.name)!} 、
+									<#else>
+										${(data.name)!} 
+									</#if>							
 							</#list>
 						</#if>
 					</span>
