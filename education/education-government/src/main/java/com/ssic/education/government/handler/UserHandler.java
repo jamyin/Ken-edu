@@ -20,8 +20,13 @@ public class UserHandler implements HandlerInterceptor  {
 			throws java.lang.Exception {
 		Object obj = request.getSession().getAttribute(SessionConstants.LOGIN_USER_INFO);
 		String requestUrl = request.getRequestURI();
-		if(obj==null && !requestUrl.contains("login")){
-			response.sendRedirect("/login.htm");
+		if(obj==null ){
+			if(requestUrl.contains("oreg")){
+				return true;
+			}
+			if(!requestUrl.contains("login")){
+				response.sendRedirect("/login.htm");	
+			}
 //			request.getRequestDispatcher("/login.htm").forward(request, response);
 			return false;
 		}
