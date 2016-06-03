@@ -12,8 +12,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ssic.educateion.common.dto.ProLedgerDto;
 import com.ssic.educateion.common.dto.ProLedgerMasterDto;
+import com.ssic.educateion.common.dto.ProSupplierDto;
 import com.ssic.education.handle.service.IProLedgerMasterService;
 import com.ssic.education.handle.service.ProLedgerService;
+import com.ssic.education.handle.service.ProSupplierService;
 
 @Controller
 @RequestMapping(value="/wap/ledger")
@@ -25,6 +27,9 @@ public class LedgerMasterController extends BaseController{
 	@Autowired
 	private IProLedgerMasterService iProLedgerMasterService;
 	
+	@Autowired
+	private ProSupplierService proSupplierService;
+	
 	@RequestMapping(value="/list/{receiceId}")
 	public ModelAndView list(@PathVariable String receiceId){
 		ModelAndView mv = getModelAndView();
@@ -35,13 +40,15 @@ public class LedgerMasterController extends BaseController{
 		for(ProLedgerMasterDto master : resultList){
 			ledgerMasterIds.add(master.getId());
 		}
-		
+
 		List<ProLedgerDto> resultLeList = proLedgerService.searchProLedger(ledgerMasterIds);
 		HashMap<String,List<ProLedgerDto>> map = listToMap(resultLeList);
-		
+
 		for(ProLedgerMasterDto master : resultList){
 			master.setResltList(map.get(master.getId()));
 		}
+		ProSupplierDto supplierDto = proSupplierService.findById(dto.getSourceId());
+		mv.addObject("supplierDto", supplierDto);
 		mv.addObject("resultList", resultList);
 		mv.setViewName("dispatching");
 		return mv;

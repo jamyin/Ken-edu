@@ -41,7 +41,7 @@
 	<select id="searchEduSchoolSupplierListDto" resultMap="BaseResultMap">
 		SELECT * FROM t_pro_supplier ps WHERE EXISTS  
 		(
-			SELECT * FROM `t_edu_school_supplier` ess WHERE  ess.`school_id`=#{schoolId} AND ps.`id` = ess.`supplier_id`
+			SELECT * FROM `t_edu_school_supplier` ess WHERE ess.stat = 1 and  ess.`school_id`=#{schoolId} AND ps.`id` = ess.`supplier_id`
 		);
 	</select>
 	
