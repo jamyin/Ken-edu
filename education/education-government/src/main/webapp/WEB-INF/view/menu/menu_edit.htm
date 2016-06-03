@@ -374,7 +374,7 @@
     }
     $(selector).empty().append(st);
   }
-  $(".rt_ul select:first").on("change",function(){
+  $(".rt_ul select:even").on("change",function(){
     // console.log("change..",$(this).val());
     initB(rel,d2,$(this).val(),$(this).parent().find("select:last"));
   })
@@ -396,10 +396,11 @@
     initB(rel,data2,val1,selector2);
     $(selector2).val(val2);
   }
-  var contactInfoListSize = '${data.proNutritionalDtos?size}';     
+  var contactInfoListSize = '${data.proNutritionalDtos?size}';  
+  var i=1;
   if (contactInfoListSize != 0) {
 	  <#list data.proNutritionalDtos as proNutritionalDto >  
-	  	fillSelect(".nutrition li:nth-child(1) select:first",".nutrition li:nth-child(1) select:last",d1,d2,"${(proNutritionalDto.name)!}","${(proNutritionalDto.unit)!}",rel);
+	  	fillSelect(".nutrition li:nth-child(${proNutritionalDto_index+1}) select:first",".nutrition li:nth-child(${proNutritionalDto_index+1}) select:last",d1,d2,"${(proNutritionalDto.name)!}","${(proNutritionalDto.unit)!}",rel);
 	  </#list>
   }
   
