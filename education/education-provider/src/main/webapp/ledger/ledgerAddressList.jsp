@@ -37,7 +37,7 @@
 				checkbox : true
 			}, */ {
 				field : 'schoolName',
-				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">名称</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">名称</font>',
 				width : 150,
 				formatter : function(value, row, index) {
 					if(value!=null){
@@ -50,7 +50,7 @@
 			} ] ],
 			columns : [ [ {
 				field : 'address',
-				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">地址</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">地址</font>',
 				width : 180,
 				formatter : function(value, row, index) {
 					if(value!=null){
@@ -63,7 +63,7 @@
 			}, 
 			{
 				field : 'contacts',
-				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">联系人</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">联系人</font>',
 				width : 50,
 				formatter : function(value, row, index) {
 					if(value!=null){
@@ -124,8 +124,8 @@
 				<table class="table table-hover table-condensed" style="display: none;">
 			
 					<tr>
-						<th>名称:
-						<input class="span2" name="schoolName" />&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);"  onclick="searchFun();" class="easyui-linkbutton" iconCls="icon-search" ><font  style='font-style: normal;font-weight: bolder;font-size:18px;'>查询</font></a></th>
+						<td>名称:
+						<input class="span2" name="schoolName" />&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);"  onclick="searchFun();" class="easyui-linkbutton" iconCls="icon-search" ><font  style='font-style: normal;font-weight: bolder;font-size:18px;'>查询</font></a></td>
 				
 					</tr>							
 				</table>

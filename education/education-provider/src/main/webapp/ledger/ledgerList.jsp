@@ -51,7 +51,7 @@
 				}
 			}, */ {
 				field : 'wareBatchNo',
-				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">配送号</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">配送号</font>',
 				width : 150,
 				formatter : function(value, row, index) {
 					if(value!=null){
@@ -65,7 +65,7 @@
 			columns : [ [  
 			{
 				field : 'sendDate',
-				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">配送日期</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">配送日期</font>',
 				width : 50,
 				formatter : function(value, row, index) {
 					if(value!=null){
@@ -78,7 +78,7 @@
 			},
 			{
 				field : 'name',
-				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">采购品</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">采购品</font>',
 				width : 150,
 				formatter : function(value, row, index) {
 					if(value!=null){
@@ -91,7 +91,7 @@
 			},
 			{
 				field : 'receiverName',
-				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">配货点</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">配货点</font>',
 				width : 150,
 				formatter : function(value, row, index) {
 					if(value!=null){
@@ -104,7 +104,7 @@
 			},
 			{
 				field : 'haulStatus',
-				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">状态</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">状态</font>',
 				width : 30,
 			
 				formatter: function(value,row,index){
@@ -124,7 +124,7 @@
 			},
 			{
 				field : 'action',
-				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">操作</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">操作</font>',
 				width : 100,
 				formatter : function(value, row, index) {
 					var str = '';
@@ -295,12 +295,12 @@
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">
 					<tr>
-						<th style="width: 500;">配货日期:
+						<td style="width: 500;">配货日期:
 						<input id="actionDate" class="span2" name="actionDate" placeholder="点击选择日期" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" readonly="readonly"/>
 						至
-						<input id="nextDate" class="span2" name="nextDate" placeholder="点击选择日期" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" readonly="readonly"/></th>
-						<th>配货点:
-						<input id="receiverName" class="span2" name="receiverName" />&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);"  onclick="searchFun();" class="easyui-linkbutton" iconCls="icon-search" ><font  style='font-style: normal;font-weight: bolder;font-size:18px;'>查询</font></a></th>
+						<input id="nextDate" class="span2" name="nextDate" placeholder="点击选择日期" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" readonly="readonly"/></td>
+						<td>配货点:
+						<input id="receiverName" class="span2" name="receiverName" />&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);"  onclick="searchFun();" class="easyui-linkbutton" iconCls="icon-search" ><font  style='font-style: normal;font-weight: bolder;font-size:18px;'>查询</font></a></td>
 					
 		</tr>
 				</table>
