@@ -58,7 +58,7 @@ public class FileManageController {
         ServletFileUpload upload = new ServletFileUpload(factory);
         
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-		String context = "upload" + File.separator + format.format(new Date());
+		String context = File.separator + format.format(new Date());
 //      String fileName = FileUtils.getUploadFileNameBybase64(baseImg)+"."+prefix;
         
         StringBuffer rootPath = new StringBuffer(PropertiesUtils.getProperty("upload.url"));
