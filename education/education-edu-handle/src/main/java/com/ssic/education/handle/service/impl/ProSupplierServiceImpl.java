@@ -99,5 +99,12 @@ public class ProSupplierServiceImpl implements ProSupplierService{
 		}
 		return null;
 	}
+
+	@Override
+	public List<ProSupplierDto> searchProSupplier(List<String> sourceIds) {
+		List<ProSupplier> results = proSupplierDao.searchProSupplier(sourceIds);
+		return BeanUtils.createBeanListByTarget(results, ProSupplierDto.class);
+//		return new PageResult<>(query, results);
+	}
 	
 }

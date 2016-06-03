@@ -225,4 +225,17 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 		return i;
 	}
 
+	public List<ProSupplier> searchProSupplier(List<String> sourceIds) {
+		ProSupplierExample example = new ProSupplierExample();
+		ProSupplierExample.Criteria criteria = example.createCriteria();
+
+		if(sourceIds!=null && sourceIds.size()>0){
+			criteria.andIdIn(sourceIds);
+		}
+
+		criteria.andStatEqualTo(DataStatus.ENABLED);
+
+		return mapper.selectByExample(example);
+	}
+
 }

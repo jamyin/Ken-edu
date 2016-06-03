@@ -41,4 +41,6 @@ public interface ProSupplierService {
 	
 	public PageResult<ProSupplierDto> findSupplierPageBySchoolId(ProSupplierDto dto, PageQuery query);
 
+	public List<ProSupplierDto> searchProSupplier(List<String> sourceIds);
+
 }
