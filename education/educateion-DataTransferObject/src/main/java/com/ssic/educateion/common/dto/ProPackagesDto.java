@@ -100,5 +100,5 @@ public class ProPackagesDto {
 	
 	@Getter
 	@Setter
-	private float Comment;
+	private float comment;
 }
