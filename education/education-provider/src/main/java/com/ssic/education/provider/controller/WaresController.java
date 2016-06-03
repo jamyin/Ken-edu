@@ -236,6 +236,13 @@ public class WaresController extends BaseController {
 	@RequestMapping("/editImage")
 	public String editImage(HttpServletRequest request, String id) {
 
+		
+		
+		
+		
+		
+		
+		
 		request.setAttribute("id", id);
 		return "wares/editImage";
 	}
@@ -273,21 +280,22 @@ public class WaresController extends BaseController {
 		pro.setStat(1);
 		ProWares proWares = new ProWares();
 		BeanUtils.copyProperties(pro, proWares);
-		ProWares specManu = waresService.findProWarsByNameSpecManu(
+	/*	ProWares specManu = waresService.findProWarsByNameSpecManu(
 				pro.getWaresName(), pro.getSpec(), pro.getManufacturer(),
-				pro.getSupplierId());
+				pro.getSupplierId());*/
 		proWares.setCreateTime(new Date());
 		proWares.setLastUpdateTime(new Date());
-		if (specManu == null || specManu.equals("")) {
+	
 			waresService.updateImsUsers(proWares);
 			json.setMsg("修改信息成功");
 			json.setSuccess(true);
 			return json;
-		}
+		/*	if (specManu == null || specManu.equals("")) {
+		}*/
 
-		json.setMsg("修改信息失败，数据重复");
-		json.setSuccess(true);
-		return json;
+	/*	json.setMsg("修改信息失败，数据重复");
+		json.setSuccess(false);
+		return json;*/
 	}
 
 	/**
