@@ -513,7 +513,7 @@ else
 							    <option value="20">其他类</option>   
 							</select>
 							&nbsp;&nbsp;&nbsp;
-							<a href="javascript:void(0);"  onclick="searchFun();" class="easyui-linkbutton" iconCls="icon-search" ><font  style='font-style: normal;font-weight: bolder;font-size:18px;'>查询</font></a>
+							<a href="javascript:void(0);"  onclick="searchFun();" class="easyui-linkbutton" iconCls="icon-search" ><font  style='font-style: normal;font-size:18px;'>查询</font></a>
 					    </td>
 					 </tr>
 				
