@@ -91,7 +91,7 @@
 			 			
 			 			{
 			 				field : 'corporation',
-			 				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">法人代表</font>',
+			 				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;"> 联系人</font>',
 			 				width : 80,
 			 				
 			 				formatter : function(value, row, index) {

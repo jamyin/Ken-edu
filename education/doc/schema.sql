@@ -913,7 +913,7 @@ CREATE TABLE `t_pro_supplier` (
   `food_circulation_code_date` date DEFAULT NULL COMMENT '食品流通证号失效日期',
   `food_produce_code` varchar(50) DEFAULT NULL COMMENT '食品生产证号',
   `food_produce_code_date` date DEFAULT NULL COMMENT '食品生产证号失效日期',
-  `corporation` varchar(20) DEFAULT NULL COMMENT '法人代表',
+  `corporation` varchar(20) DEFAULT NULL COMMENT '联系人',
   `id_card` varchar(20) DEFAULT NULL COMMENT '法人代表身份证号码',
   `id_type` varchar(20) DEFAULT NULL COMMENT '证件类型 0身份证、1护照、2港澳通行证、3台胞证',
   `contact_way` varchar(20) DEFAULT NULL COMMENT '联系方式',

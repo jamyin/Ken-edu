@@ -150,10 +150,10 @@
 		class="easyui-linkbutton"
 		data-options="plain:true,iconCls:'resultset_previous'">折叠</a>
 </div>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 $(function(){
 	$("td,th").css("vertical-align","middle");
 	$('td input').css("margin-top","8px");
 	$('table tr:first:child td').css("border-top","none");
 });
-</script>
+</script> -->

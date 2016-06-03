@@ -72,6 +72,9 @@ public class LedgerInfoDao {
 		if (StringUtils.isNotBlank(proLedgerMaster.getReceiverId())) {
 			criteria.andReceiverIdEqualTo(proLedgerMaster.getReceiverId());
 		}
+		if (StringUtils.isNotBlank(proLedgerMaster.getUserId())) {
+			criteria.andUserIdEqualTo(proLedgerMaster.getUserId());
+		}
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		if (null != page) {
 			example.setOrderByClause("stat desc,create_time desc limit " + page.getStartNum() + "," + page.getPageSize());
