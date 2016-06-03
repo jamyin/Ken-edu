@@ -82,7 +82,8 @@
 								result = $.parseJSON(result);
 
 								if (result.success) {
-									window.location.href = "";
+									window.parent.document.getElementById('indexContext').src="${pageContext.request.contextPath}/corporateController/manager";
+									parent.$.modalDialog.handler.dialog('close'); 
 								} else {
 									parent.$.messager.alert('错误', result.msg,
 											'error');
