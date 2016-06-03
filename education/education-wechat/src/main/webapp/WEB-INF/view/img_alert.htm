@@ -10,7 +10,9 @@
   </head>
 <body>
 	<header class="navgat"><a onclick="window.history.go(-1);" class="back" href="###"></a>${(name)!}</header>
-	<div class="img_alert" style="background-image:url(${(filePath)!})"></div>
+	<#if filePath ?? && filePath!=null && filePath !="null">
+		<div class="img_alert" style="background-image:url(${(filePath)!})"></div>
+	</#if>
 	<!-- <div class="img_alert" style="background-image:url(${(filePath)!})"></div> -->
 </body>
 <script>
