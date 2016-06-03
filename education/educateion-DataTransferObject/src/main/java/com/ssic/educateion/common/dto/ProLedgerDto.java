@@ -54,5 +54,7 @@ public class ProLedgerDto implements Serializable {
 	private Integer stat;
 	
 	private String driverName;
+	
+    private String productionName;
 
 }
