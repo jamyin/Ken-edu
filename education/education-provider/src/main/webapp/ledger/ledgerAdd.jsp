@@ -73,9 +73,9 @@
 	<div data-options="region:'center',border:false" title=""
 		style="overflow-x: hidden; overflow-y: auto;">
 		<form id="form" method="post">
-			<table id="ledgers" class="table table-hover table-condensed">
+			<table class="table table-hover table-condensed">
 				<tr >
-					<th style='width:70px;'>*配货日期：</th>
+					<th style='width:90px;'>*配货日期：</th>
 					<td style='width:95px;'><input name="ledger[0].actionDate" style='width:95px;' type="text"
 						class="span2" placeholder="点击选择日期" data-options="required:true"
 						onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})"
@@ -92,11 +92,13 @@
 							<option value ="${user.id}">${user.name}</option>
 						</c:forEach>
 						</select></td>
-					<th>*配送号：</th>
+					<th style='width:70px;'>*配送号：</th>
 					<td><input name="ledger[0].wareBatchNo" style='width:95px;' type="text"
 						placeholder="请输入回收人批次号" class="easyui-validatebox span2"
 						data-options="required:true"></td>
 				</tr>
+				</table>
+			<table id="ledgers" class="table table-hover table-condensed">
 				<tr id="ledger0">
 					<th style='width:70px;'>*采购品：</th>
 					<td style='width:95px;'><input name="ledger[0].name" style='width:95px;' type="text"

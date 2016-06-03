@@ -85,7 +85,7 @@
 	<div data-options="region:'center',border:false" title=""
 		style="overflow-x: hidden; overflow-y: auto;">
 		<form id="form" method="post" >
-			<table id="ledgers" class="table table-hover table-condensed">
+			<table class="table table-hover table-condensed">
 				<tr>
 					<th style='width:70px;'>配货日期：</th>
 					<td style='width:100px;'><input name="ledger[0].actionDate" type="text"
@@ -148,6 +148,8 @@
 						style='width:100px;' class="easyui-validatebox span2"
 						value="${LedgerList[0].masterId}"></td>
 				</tr>
+			</table>
+			<table id="ledgers" class="table table-hover table-condensed">
 				<c:forEach var="ledger" items="${LedgerList}" varStatus="status">
 					<tr id="ledger${status.index}">
 						<th style='width:70px;'>采购品：</th>
