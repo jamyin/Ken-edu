@@ -6,9 +6,10 @@ function loadImage(_this){
 	formObj.method = "post";
 	formObj.style.display = "none";
 	
-	var opt = document.createElement("input");        
-    opt.name = "absFilePath";
-    opt.value = absFilePath;
+	var opt_a = document.createElement("input");        
+    opt_a.name = "absFilePath";
+    opt_a.value = absFilePath;
+    formObj.appendChild(opt_a);
     
 	var opt = document.createElement("input");        
     opt.name = "name";
