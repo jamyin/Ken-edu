@@ -60,7 +60,7 @@ else
 			columns : [[  
 			            {
 				field : 'userAccount',
-				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">用户名</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">用户名</font>',
 				width : 120,
 				
 				formatter : function(value, row, index) {
@@ -74,7 +74,7 @@ else
 			}
 			,  {
 				field : 'name',
-				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">姓名</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">姓名</font>',
 				width : 120,
 				
 				formatter : function(value, row, index) {
@@ -87,7 +87,7 @@ else
 				}
 			},  {
 				field : 'userNo',
-				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">手机</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">手机</font>',
 				width : 120,
 				
 				formatter : function(value, row, index) {
@@ -100,7 +100,7 @@ else
 				}
 			},  {
 				field : 'email',
-				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">邮箱</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">邮箱</font>',
 				width : 120,
 				
 				formatter : function(value, row, index) {
@@ -114,16 +114,16 @@ else
 			},
 			{
 				field : 'action',
-				title : '<font  style="font-style: normal;font-weight: bolder;font-size:18px;">操作</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">操作</font>',
 				width : 140,
 				formatter : function(value, row, index) {
 					var str = '';
 					if ($.canEdit) {
-						str += $.formatString('<img onclick="editFun(\'{0}\');" src="{1}" title="编辑"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
+						str += $.formatString('<img onclick="editFun(\'{0}\');" src="{1}" title="编辑"/>', row.id, '${pageContext.request.contextPath}/icon/编辑.png');
 					}
 					
 					if ($.canEditPassword) {
-						str += $.formatString('<img onclick="editFunPassword(\'{0}\');" src="{1}" title="修改密码"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/key.png');
+						str += $.formatString('<img onclick="editFunPassword(\'{0}\');" src="{1}" title="修改密码"/>', row.id, '${pageContext.request.contextPath}/icon/.png');
 					}
 					return str;
 					
