@@ -96,7 +96,7 @@
         <li>
           <label for="">营养:</label>
           <div class="rt">
-            <ul class="rt_ul nutritionalss">
+            <ul class="rt_ul nutrition">
             <!-- <#if (data.proNutritionalDtos??) && (data.proNutritionalDtos?size > 0)>
             	<#list data.proNutritionalDtos as proNutritionalDto>
             		<#if proNutritionalDto_index == 0>
@@ -164,7 +164,6 @@
             	<#if proNutritionalDto_index == 0>
             		<li>
 		                <select class="s1" id="a${proNutritionalDto_index}">	
-		                	<option selected="selected" value="${(proNutritionalDto.name)!}">${(proNutritionalDto.name)!}</option>	                	
 		                </select>
 		                <input class="in1" type="text" id="weight${proNutritionalDto_index}" value="${(proNutritionalDto.weight)}">
 		                <select class="s2" id="b${proNutritionalDto_index}">
@@ -221,7 +220,7 @@
      });
      $(".rt_ul").on("click",".decrease",function(){
     	 var mm= $(this).parents('.rt_ul');
-    	 var key =  mm.hasClass("nutritional");
+    	 var key =  mm.hasClass("nutrition");
     	 $(this).parent().remove();
     	var lis = mm.find('li');
     	//debugger;
@@ -266,7 +265,7 @@
 			}			
 		}
 		jsonWares += ']';
-    	var nu_len = $(".nutritionalss li").length;
+    	var nu_len = $(".nutrition li").length;
     	var jsonNutritional;
     	jsonNutritional = '[';
 		for (i=0;i<=nu_len-1; i++) {
@@ -397,7 +396,13 @@
     initB(rel,data2,val1,selector2);
     $(selector2).val(val2);
   }
-  fillSelect(".nutrition li:nth-child(1) select:first",".nutrition li:nth-child(1) select:last",d1,d2,"v2","m2",rel);
+  var contactInfoListSize = '${data.proNutritionalDtos?size}';     
+  if (contactInfoListSize != 0) {
+	  <#list data.proNutritionalDtos as proNutritionalDto >  
+	  	fillSelect(".nutrition li:nth-child(1) select:first",".nutrition li:nth-child(1) select:last",d1,d2,"${(proNutritionalDto.name)!}","${(proNutritionalDto.unit)!}",rel);
+	  </#list>
+  }
+  
   </script>
 </body>
 </html>
