@@ -219,6 +219,10 @@ public class SchoolController {
 	@ResponseBody
 	public Response<ChooseSchoolDto>  chooseSchool(SchoolDto schoolDto, PageQuery query ,Integer type, Integer sourceType) {
 		Response<ChooseSchoolDto> result = new Response<ChooseSchoolDto>();
+		//处理CommitteeId全选传-1
+		if(StringUtils.isNotEmpty(schoolDto.getCommitteeId()) && schoolDto.getCommitteeId().equals("-1")){
+			schoolDto.setCommitteeId(null);
+		}
 		//处理level全选传-1
 		if(StringUtils.isNotEmpty(schoolDto.getLevel()) && schoolDto.getLevel().equals("-1")){
 			schoolDto.setLevel(null);
@@ -244,7 +248,6 @@ public class SchoolController {
 				chooseSchoolDto.setCommitteeList(committeeList);
 
 				//学校列表
-				schoolDto.setCommitteeId(null);   //全部学校
 				PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, query);
 				chooseSchoolDto.setSchoolDto(schoolList);
 				result.setData(chooseSchoolDto);
