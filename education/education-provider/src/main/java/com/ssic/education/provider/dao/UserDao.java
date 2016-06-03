@@ -92,7 +92,13 @@ public class UserDao {
 			if(list.get(i).getUserType().equals("1")){
 				list.get(i).setUserTypeName("驾驶员");
 			}
-		}}
+		}
+			if(list.get(i).getIsAdmin()==1){
+				list.get(i).setUserTypeName("超管");
+				
+			}
+		
+		}
 		
 		dataGrid.setRows(list);
 		

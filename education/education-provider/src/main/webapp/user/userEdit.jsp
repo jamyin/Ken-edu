@@ -103,7 +103,7 @@
 							<td><input name="password2" type="password" placeholder="请确认密码"  id="password2"  hidden="${user.password}" value="${user.password}"
 								class="easyui-validatebox span2"  ></td>
 						</tr>
-						<c:if test="${user.userType=='1'}">
+						<c:if test="${user.isAdmin==0}">
 							<tr>
 							<th>*账户权限</th>
 								
