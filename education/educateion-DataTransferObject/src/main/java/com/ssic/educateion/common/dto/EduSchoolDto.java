@@ -78,6 +78,7 @@ public class EduSchoolDto implements Serializable {
 	private String supplyPhase;    //供应阶段:早中晚餐
 	
 	private EduCanteenDto eduCanteenDto;
-	private EduSchoolSupplierDto eduSchoolSupplierDto;
+	//private EduSchoolSupplierDto eduSchoolSupplierDto;
+	List<SupplierDto> supplierList;
 	private Integer source;//来源0：市教委，1：区教委，2：学校
 }

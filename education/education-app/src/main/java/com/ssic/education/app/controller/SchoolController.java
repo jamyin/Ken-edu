@@ -20,6 +20,7 @@ import com.ssic.educateion.common.dto.EduSchoolSupplierDto;
 import com.ssic.educateion.common.dto.MapToListDto;
 import com.ssic.educateion.common.dto.ProPackagesDto;
 import com.ssic.educateion.common.dto.SchoolDto;
+import com.ssic.educateion.common.dto.SupplierDto;
 import com.ssic.education.app.constants.SchoolLevel;
 import com.ssic.education.app.service.ICommitteeService;
 import com.ssic.education.app.service.ISchoolService;
@@ -162,7 +163,8 @@ public class SchoolController {
 		//学校对应的供应商信息
 		EduSchoolSupplierDto eduSchoolSupplierDto = new EduSchoolSupplierDto();
 		eduSchoolSupplierDto.setSchoolId(schoolId);
-		eduSchoolSupplierDto = iEduSchoolSupplierService.searchEduSchoolSupplierDto(eduSchoolSupplierDto);
+		//eduSchoolSupplierDto = iEduSchoolSupplierService.searchEduSchoolSupplierDto(eduSchoolSupplierDto);
+		List<SupplierDto> supplierList = iEduSchoolSupplierService.searchEduSchoolSupplierListDto(schoolId);
 
 		List<MapToListDto> typeList = new ArrayList<MapToListDto>();
 		for(Entry<Integer, String> entry: PackagesTypeEnum.getAll().entrySet()) {
@@ -175,7 +177,8 @@ public class SchoolController {
 		PageResult<ProPackagesDto> proPackagesDtos = proPackagesService.searchPackages(dto, page);
 
 		eduSchoolDto.setEduCanteenDto(eduCanteenDto);
-		eduSchoolDto.setEduSchoolSupplierDto(eduSchoolSupplierDto);
+		//eduSchoolDto.setEduSchoolSupplierDto(eduSchoolSupplierDto);
+		eduSchoolDto.setSupplierList(supplierList);		
 		eduSchoolDto.setPackagesList(proPackagesDtos);
 
 		result.setData(eduSchoolDto);
