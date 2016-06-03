@@ -12,7 +12,7 @@
 	<header class="navgat"><a class="back" href="/wap/ledger/list/${(resultDto.receiverId)!}.htm"></a>配送信息</header>
 	<div class="dispatching_box">
 		<ul>
-			<li><a href="##"></a><p>配送号：${(resultDto.wareBatchNo)!}<br>配送日期：${(resultDto.startTime?string('yyyy-MM-dd'))!}</p>
+			<li><a href="##"></a><p>配送号：${(resultDto.wareBatchNo)!}<br>配送日期：${(resultDto.actionDate?string('yyyy-MM-dd'))!}</p>
 				<#if resultDto.haulStatus == 0>
 					<i class="notstart">未配送</i>
 				</#if>

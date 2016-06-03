@@ -35,20 +35,19 @@ public class LedgerMasterController extends BaseController{
 		ModelAndView mv = getModelAndView();
 		ProLedgerMasterDto dto = new ProLedgerMasterDto();
 		dto.setReceiverId(receiceId);
+		//主
 		List<ProLedgerMasterDto> resultList = iProLedgerMasterService.searchProLedgerMasterDto(dto);
 		List<String> ledgerMasterIds = new ArrayList<String>();
 		for(ProLedgerMasterDto master : resultList){
 			ledgerMasterIds.add(master.getId());
 		}
-
+		//从
 		List<ProLedgerDto> resultLeList = proLedgerService.searchProLedger(ledgerMasterIds);
 		HashMap<String,List<ProLedgerDto>> map = listToMap(resultLeList);
-
 		for(ProLedgerMasterDto master : resultList){
 			master.setResltList(map.get(master.getId()));
 		}
-		ProSupplierDto supplierDto = proSupplierService.findById(dto.getSourceId());
-		mv.addObject("supplierDto", supplierDto);
+
 		mv.addObject("resultList", resultList);
 		mv.setViewName("dispatching");
 		return mv;
