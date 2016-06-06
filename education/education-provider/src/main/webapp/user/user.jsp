@@ -5,6 +5,10 @@
 .panel-body {
 	font-size: 18px !important;
 }
+.act {
+	padding-top: 7px!important;;
+	padding-bottom: 7px!important;;
+}
 </style>
 <!DOCTYPE html>
 <html>
@@ -278,11 +282,10 @@ else
 		<div data-options="region:'north',border:false"  title="<font  style='font-style: normal;font-weight: bolder;font-size:18px;'>查询条件</font>"    style="height: 80px; overflow: hidden;">
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">
-					<tr>
+					<tr >
 						<td>姓名:
 						<input name="name" placeholder="可以搜索名称" class="easyui-validatebox"  style="width: 215px;"/>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);"  onclick="searchFun();" class="easyui-linkbutton" iconCls="icon-search" ><font  style='font-style: normal;font-size:18px;'>查询</font></a>
 							</td>
-	
 						 </tr>	
 								</table>
 			</form>
@@ -294,7 +297,7 @@ else
 				</style>
 		</div>
 	</div>
-	<div id="toolbar" style="display: none;">
+	<div id="toolbar" class="act" style="display: none;">
 			<a onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true"><img src="${pageContext.request.contextPath}/icon/添加.png" ></img></a>
 
 	</div>

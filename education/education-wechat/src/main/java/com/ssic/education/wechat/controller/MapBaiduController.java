@@ -98,6 +98,7 @@ public class MapBaiduController extends BaseController{
 		if(resultDto.getStartTime()!=null){
 			endTime = String.valueOf(resultDto.getEndTime().getTime());	
 		}		
+//		String reqURL = "ak=YN0mfG1VM2jrGV5jBB7RD6lKKmrDZA43&service_id=117192&entity_name=8438B07A-2B4C-49B7-8523-5A177081F602&start_time=1463695529&end_time=1463767529";
 		String reqURL = "ak="+PropertiesUtils.getProperty("baidu.ditu.ak")+"&service_id="+PropertiesUtils.getProperty("baidu.ditu.serviceId")+"&entity_name="+resultDto.getId()+"&start_time="+startTime+"&end_time="+endTime+"";
 		String json = HttpClientUtil.sendGetRequest(baidu_getHistory_url+reqURL, null);
 		BaiduHistoryDto history = new Gson().fromJson(json, BaiduHistoryDto.class);
