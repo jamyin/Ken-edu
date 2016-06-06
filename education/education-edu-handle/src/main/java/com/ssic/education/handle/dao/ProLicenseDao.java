@@ -68,6 +68,10 @@ public class ProLicenseDao extends MyBatisBaseDao<ProLicense>{
 			criteria.andCerSourceEqualTo(proLicenseDto.getCerSource());
 		}
 		
+		if(proLicenseDto.getWareIds()!=null && proLicenseDto.getWareIds().size()>0){
+			criteria.andRelationIdIn(proLicenseDto.getWareIds());
+		}
+		
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		return mapper.selectByExample(example);
 	}

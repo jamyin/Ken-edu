@@ -88,11 +88,13 @@
                                             <input type="text" id="searchV" name="search">
                                             <input id="searchName" type="button" name="name" value="搜索">
                                             <div class="checkwrap">
-                                                <ul id="dataList">
+ 												<ul id="c">
 													<li>
                                                         <label for="shisan">全选</label>
-                                                        <input type="checkbox" onclick="checkboxClick();"/>
-                                                    </li>                                                   
+                                                        <input type="checkbox" onclick="checkboxClick(this);"/>
+                                                    </li>                                                           
+                                                </ul>                                            
+                                                <ul id="dataList">                                                  
                                                 	<#if dataList ??>
                                                 		<#list dataList as data>
 		                                                    <li>
@@ -214,21 +216,23 @@
 
             });
             
-            function checkboxClick(){
-            	$(".checkwrap ul li input").on('click',function(){
-            		var lianxiList = "";
-            		var lianxiIds = "";
-            		$("input[name='lianxiIds']").each(function(){
-            		    if (true == $(this).prop("checked")) {
-            		    	lianxiList += $(this).parent().find("label").html() + ","
-            		    }
+            function checkboxClick(objThis){
+            	//console.log($(objThis).prop("checked"));
+            	//var lianxiList = "";
+            	if($(objThis).prop("checked")){
+            		$("input[name='lianxiIds']").prop("checked",true); 
+            		$("input[name='lianxiIds']").each(function(index,item){
+            		    lianxiList += $(item).parent().find("label").html() + ","
             		});
-            		$("#lianxiList").val(lianxiList);
-            	}); 
+            	}else{
+            		$("input[name='lianxiIds']").prop("checked",false);
+            		lianxiList = "";
+            	}
+            	$("#lianxiList").val(lianxiList);
             }
             
             function loadClickFunction(){
-            	$(".checkwrap ul li input").on('click',function(){
+            	$("input[name='lianxiIds']").on('click',function(){
             		var lianxiList = "";
             		var lianxiIds = "";
             		$("input[name='lianxiIds']").each(function(){

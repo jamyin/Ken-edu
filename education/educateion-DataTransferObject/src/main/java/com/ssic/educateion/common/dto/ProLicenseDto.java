@@ -1,6 +1,7 @@
 package com.ssic.educateion.common.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -40,5 +41,7 @@ public class ProLicenseDto {
     private Byte reviewed;//0:未审批，1：通过，2：不通过
     
     private Integer source;//
+    
+    private List<String> wareIds;//
 
 }
