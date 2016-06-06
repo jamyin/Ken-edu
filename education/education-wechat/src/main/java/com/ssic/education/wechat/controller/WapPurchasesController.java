@@ -72,7 +72,7 @@ public class WapPurchasesController extends BaseController{
 	private HashMap<String, ProLicenseDto> licenseListToMap(List<ProLicenseDto> licenseList) {
 		HashMap<String, ProLicenseDto> objMap = new HashMap<String, ProLicenseDto>();
 		for(ProLicenseDto licenseDto : licenseList){
-			String keyCode = licenseDto.getId();
+			String keyCode = licenseDto.getRelationId();
 			objMap.put(keyCode, licenseDto);
 		}
 		return objMap;

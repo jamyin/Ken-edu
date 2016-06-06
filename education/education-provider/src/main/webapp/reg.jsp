@@ -84,8 +84,13 @@
 	                       		<input id="file-1" name="licenseList" type="checkbox" style="display:none;"/>
 	      						<input multiple type="file" id="id-input-file-1"/>
 	                        </div>
-     						<div class="f-fl item-ifo" id="license1">
-     							<!-- <a href="">查看图片</a> -->
+     						<div class="f-fl item-ifo">
+     							<div class="f-fl item-ifo">
+     								<input />
+		     						<wf id="license1">
+		     							<!-- <a href="">查看图片</a> -->
+		     						</wf>
+     							</div>
      						</div>
 	                    </div>
 						<div class="item col-xs-12">
