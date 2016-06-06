@@ -148,6 +148,9 @@ public class UserController extends BaseController{
 		EduCanteenDto eduCanteenDto = new EduCanteenDto();
 		List<ProLicense> proLicenses = new ArrayList<>();
 		if (null != usersdto && StringUtils.isNotBlank(usersdto.getId())) {
+			if (usersdto.getSourceType() != DataStatus.ENABLED) {
+				response.sendRedirect(request.getContextPath() + "userInfo.htm");
+			}
 			eduSchoolDto = eduSchoolService.findById(usersdto.getSourceId());
 			if (null != eduSchoolDto && StringUtils.isNotBlank(eduSchoolDto.getCommitteeId())) {
 				eduCommitteeDto = iEduCommitteeService.findById(eduSchoolDto.getCommitteeId());
@@ -157,7 +160,7 @@ public class UserController extends BaseController{
 			eduCanteenDto = iEduCanteenService.searchEduCanteenDto(eduCanteendto);
 			ProLicense proLicense = new ProLicense();
 			proLicense.setCerSource((short)DataStatus.MANAGERTYPE);
-			proLicense.setRelationId(usersdto.getSourceId());
+			proLicense.setRelationId(eduCanteenDto.getId());
 			proLicenses = iProLicenseService.lookImage(proLicense);
 		} else {
 			response.sendRedirect(request.getContextPath() + "/login.htm");
