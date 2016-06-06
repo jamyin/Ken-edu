@@ -30,8 +30,17 @@ function loadscMenu(){
 				$.each(data.data, function(index, item) {
 					objHtml+="<div class='row breakfrist'>";
 					objHtml+="<h2><i>";
-					if(item['packageName']!=null && item['packageName']!=""){
-						objHtml+=item['packageName'];
+					//0：早餐，1：午餐，2：午后甜点，3：晚餐，4：夜宵  
+					if(item['supplyPhase']==0){
+						objHtml+="早餐";
+					}else if(item['supplyPhase']==1){
+						objHtml+="午餐";
+					}else if(item['supplyPhase']==2){
+						objHtml+="午后甜点";
+					}else if(item['supplyPhase']==3){
+						objHtml+="晚餐";
+					}else if(item['supplyPhase']==4){
+						objHtml+="夜宵  ";
 					}
 					objHtml+="</i><span></span><a href='/wap/comment/join/"+item['id']+".htm'>点评</a></h2>";
 					objHtml+="<ul>";
