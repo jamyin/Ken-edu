@@ -300,7 +300,8 @@
 						至
 						<input id="nextDate" class="span2" name="nextDate" placeholder="点击选择日期" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" readonly="readonly"/></td>
 						<td>配货点:
-						<input id="receiverName" class="span2" name="receiverName" />&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);"  onclick="searchFun();" class="easyui-linkbutton" iconCls="icon-search" ><font  style='font-style: normal;font-weight: bolder;font-size:18px;'>查询</font></a></td>
+						<input id="receiverName" class="span2" name="receiverName" />&nbsp;&nbsp;&nbsp;
+						<a href="javascript:void(0);"  onclick="searchFun();" ><img src="${pageContext.request.contextPath}/icon/查询.png" ></img></a></td>
 					
 		</tr>
 				</table>

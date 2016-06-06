@@ -123,7 +123,7 @@ else
 					}
 					
 					if ($.canEditPassword) {
-						str += $.formatString('<img onclick="editFunPassword(\'{0}\');" src="{1}" title="修改密码"/>', row.id, '${pageContext.request.contextPath}/icon/.png');
+						str += $.formatString('<img onclick="editFunPassword(\'{0}\');" src="{1}" title="修改密码"/>', row.id, '${pageContext.request.contextPath}/icon/编辑图片.png');
 					}
 					return str;
 					

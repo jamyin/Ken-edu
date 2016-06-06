@@ -97,7 +97,7 @@
 	<div data-options="region:'center',border:false" title=""
 		style="overflow-x: hidden; overflow-y: auto;">
 		<form id="updateImage" method="post" enctype="multipart/form-data">
-			<table class="table table-hover table-condensed">
+				<table class="table table-hover table-condensed">
 				<tr>
 					<th colspan="2">企业三证</th>
 					<th colspan="2">法定代表人/负责人/业主证件</th>
@@ -110,9 +110,9 @@
 					<td><input type="file" name="imgUrl8" id="imgUrl8"
 						accept="image/*" /></td>
 				</tr>
-				<tr hidden="hidden" id="img1_8">
-					<td colspan="2"><img id="img1"   width="150px" height="150px"></img></td>
-					<td colspan="2"><img id="img8"  width="150px" height="150px"></img></td>
+				<tr   id="img1_8">
+					<td colspan="2"><img id="img1"   width="150px" height="150px" src="${pageContext.request.contextPath}/icon/150x150.png"></img></td>
+					<td colspan="2"><img id="img8"  width="150px" height="150px" src="${pageContext.request.contextPath}/icon/150x150.png"></img></td>
 				</tr>
 				<tr>
 					<th>组织机构代码</th>
@@ -122,9 +122,9 @@
 					<td><input type="file" name="imgUrl9" id="imgUrl9"
 						accept="image/*" /></td>
 				</tr>
-				<tr hidden="hidden" id="img2_9">
-					<td colspan="2"><img id="img2"   width="150px" height="150px"></img></td>
-					<td colspan="2"><img id="img9"   width="150px" height="150px"></img></td>
+				<tr   id="img2_9">
+					<td colspan="2"><img id="img2"   width="150px" height="150px" src="${pageContext.request.contextPath}/icon/150x150.png"></img></td>
+					<td colspan="2"><img id="img9"   width="150px" height="150px" src="${pageContext.request.contextPath}/icon/150x150.png"></img></td>
 				</tr>
 				<tr>
 					<th>税务登记证</th>
@@ -134,9 +134,9 @@
 					<td><input type="file" name="imgUrl10" id="imgUrl10"
 						accept="image/*" /></td>
 				</tr>
-				<tr hidden="hidden" id="img3_10">
-					<td colspan="2"><img id="img3"  width="150px" height="150px"></img></td>
-					<td colspan="2"><img id="img10"  width="150px" height="150px"></img></td>
+				<tr   id="img3_10">
+					<td colspan="2"><img id="img3"  width="150px" height="150px" src="${pageContext.request.contextPath}/icon/150x150.png"></img ></td>
+					<td colspan="2"><img id="img10"  width="150px" height="150px" src="${pageContext.request.contextPath}/icon/150x150.png"></img></td>
 				</tr>
 				<tr>
 					<th>许可证</th>
@@ -152,33 +152,33 @@
 					<td><input type="file" name="imgUrl11" id="imgUrl11"
 						accept="image/*" /></td>
 				</tr>
-				<tr hidden="hidden" id="img4_11">
-					<td colspan="2"><img id="img4"  width="150px" height="150px"></img></td>
-					<td colspan="2"><img id="img11"   width="150px" height="150px"></img></td>
+				<tr   id="img4_11">
+					<td colspan="2"><img id="img4"  width="150px" height="150px" src="${pageContext.request.contextPath}/icon/150x150.png"></img></td>
+					<td colspan="2"><img id="img11"   width="150px" height="150px" src="${pageContext.request.contextPath}/icon/150x150.png"></img></td>
 				</tr>
 				<tr>
 					<th>食品生产许可证</th>
 					<td><input type="file" name="imgUrl5" id="imgUrl5"
 						accept="image/*" /></td>
 				</tr>
-				<tr hidden="hidden" id="img_5">
-					<td colspan="2"><img id="img5"  width="150px" height="150px"></img></td>
+				<tr   id="img_5">
+					<td colspan="2"><img id="img5"  width="150px" height="150px"  src="${pageContext.request.contextPath}/icon/150x150.png"></img></td>
 				</tr>
 				<tr>
 					<th>餐饮服务许可证</th>
 					<td><input type="file" name="imgUrl6" id="imgUrl6"
 						accept="image/*" /></td>
 				</tr>
-				<tr hidden="hidden" id="img_6">
-					<td colspan="2"><img id="img6" width="150px" height="150px"></img></td>
+				<tr   id="img_6">
+					<td colspan="2"><img id="img6" width="150px" height="150px" src="${pageContext.request.contextPath}/icon/150x150.png"></img></td>
 				</tr>
 				<tr>
 					<th>食品经营许可证</th>
 					<td><input type="file" name="imgUrl7" id="imgUrl7"
 						accept="image/*" /></td>
 				</tr>
-				<tr hidden="hidden" id="img_7">
-					<td colspan="2"><img id="img7"   width="150px" height="150px"></img></td>
+				<tr   id="img_7">
+					<td colspan="2"><img id="img7"   width="150px" height="150px" src="${pageContext.request.contextPath}/icon/150x150.png"></img></td>
 				</tr>
 			</table>
 

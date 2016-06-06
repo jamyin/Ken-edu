@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map.Entry;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,7 +42,8 @@ import com.ssic.education.utils.util.UUIDGenerator;
 @Controller
 @RequestMapping(value = "/task")
 public class TaskController {
-
+	protected static final Log logger = LogFactory.getLog(TaskController.class);
+	
 	@Autowired
 	private ITaskService taskService;
 
@@ -63,6 +66,7 @@ public class TaskController {
 	@RequestMapping("/findTaskListById/{id}")
 	@ResponseBody
 	public Response<PageResult<EduTaskDto>> findTaskListById(@PathVariable("id")String id,String readstat, PageQuery query) {
+		logger.info("id : " + id + ";readstat : " + readstat );
 		Response<PageResult<EduTaskDto>> result = new Response<PageResult<EduTaskDto>>();
 		if(StringUtils.isEmpty(id)){
 			result.setStatus(DataStatus.HTTP_FAILE);
@@ -112,6 +116,7 @@ public class TaskController {
 	@RequestMapping("/findTaskByPara")
 	@ResponseBody
 	public Response<EduTaskDto> findTaskByPara(EduTaskDto eduTaskDto) {
+		logger.info("EduTaskDto : " + eduTaskDto );
 		Response<EduTaskDto> result = new Response<EduTaskDto>();
 		if(eduTaskDto == null){
 			result.setStatus(DataStatus.HTTP_FAILE);
@@ -182,6 +187,7 @@ public class TaskController {
 	@RequestMapping("/delTask/{id}")
 	@ResponseBody
 	public Response<String> delTask(@PathVariable("id")String id){
+		logger.info("id : " + id );
 		Response<String> result = new Response<String>();
 		if(StringUtils.isEmpty(id)){
 			result.setStatus(DataStatus.HTTP_FAILE);
@@ -210,6 +216,7 @@ public class TaskController {
 	@RequestMapping("/upadteTask")
 	@ResponseBody
 	public Response<String> upadteTask(EduTaskReceiveDto receiveDto){
+		logger.info("EduTaskReceiveDto : " + receiveDto );
 		Response<String> result = new Response<String>();
 		if(receiveDto == null){
 			result.setStatus(DataStatus.HTTP_FAILE);
@@ -249,6 +256,7 @@ public class TaskController {
 	@RequestMapping("/findReceiveList/{id}")
 	@ResponseBody
 	public Response<EduTaskReadDto> findReadList(@PathVariable("id")String id, PageQuery query) {
+		logger.info("id : " + id );
 		Response<EduTaskReadDto> result = new Response<EduTaskReadDto>();
 		if(StringUtils.isEmpty(id)){
 			result.setStatus(DataStatus.HTTP_FAILE);
@@ -269,80 +277,11 @@ public class TaskController {
 		result.setData(dto);
 		return result;
 	}
-
-	/**
-	 * @Title: chooseReceive
-	 * @Description: 发送任务选择接收者接口
-	 * @author Ken Yin  
-	 * @date 2016年5月30日 下午1:27:53
-	 * @return Response<String>    返回类型
-	 */
-	/*@RequestMapping("/chooseReceive")
-	@ResponseBody
-	public Response<TaskReceiveDto> chooseReceive(String id, String level,PageQuery query) {
-		Response<TaskReceiveDto> result = new Response<TaskReceiveDto>();
-		TaskReceiveDto taskReceiveDto = new TaskReceiveDto();
-		if(StringUtils.isEmpty(id)){
-			result.setStatus(DataStatus.HTTP_FAILE);
-			result.setMessage("当前用户Id为空");
-			return result;
-		}
-		//判断当前用户类型
-		EduUsersDto user = new EduUsersDto();
-		user.setId(id);
-		EduUsersDto userInfo = eduUsersService.getUserInfo(user);
-		Byte userType = -1; 
-		if(userInfo != null){
-			userType = userInfo.getSourceType();    //获取用户类型  : 0市教委，1学校, 2区教委 
-		}
-		if(userType == -1 ){
-			result.setStatus(DataStatus.HTTP_FAILE);
-			result.setMessage("用户类型为空");
-			return result;
-		}
-		//当前用户是市教委
-		if(userType == 0){
-			EduCommitteeDto committeeDto = new EduCommitteeDto();
-			committeeDto.setType((short) 2);
-			List<EduCommitteeDto> committeeList = committeeService.findCommitteeListNoPage(committeeDto);
-			taskReceiveDto.setEduCommitteeList(committeeList);
-
-			result.setStatus(DataStatus.HTTP_SUCCESS);
-			result.setData(taskReceiveDto);
-			result.setMessage("成功获取区教委列表");
-			return result;
-		}
-		//当前用户是区教委,则获取学校列表
-		if(userType == 2){
-			//获取学校类型level列表   
-			List<MapToListDto> levelList = new ArrayList<MapToListDto>();
-			for(Entry<Integer, String> entry: SchoolLevel.getAll().entrySet()) {
-				MapToListDto mapToListDto = new MapToListDto();
-				mapToListDto.setKey(entry.getKey());
-				mapToListDto.setValue(entry.getValue());
-				levelList.add(mapToListDto);
-			}
-			taskReceiveDto.setLevelList(levelList);
-			//获取学校列表
-			SchoolDto schoolDto = new SchoolDto();
-			schoolDto.setLevel(level);
-			PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, query);
-			taskReceiveDto.setSchoolList(schoolList);
-
-			result.setStatus(DataStatus.HTTP_SUCCESS);
-			result.setData(taskReceiveDto);
-			result.setMessage("成功获取学校列表");
-			return result;
-
-		}
-		result.setStatus(DataStatus.HTTP_FAILE);
-		result.setMessage("用户类型不存在");
-		return result;
-	}*/
 	
 	@RequestMapping("/chooseReceive")
 	@ResponseBody
 	public Response<TaskReceiveDto> chooseReceive(Integer sourceType, String level,PageQuery query, String committeeId ,String schoolName) {
+		logger.info("sourceType : " + sourceType + ";committeeId : " + committeeId  + ";schoolName : " + schoolName );
 		Response<TaskReceiveDto> result = new Response<TaskReceiveDto>();
 		if(level != null && level.equals("-1")){
 			level = null;
@@ -408,6 +347,7 @@ public class TaskController {
 	@RequestMapping("/sendTask")
 	@ResponseBody
 	public Response<String> sendTask(EduTaskDto eduTaskDto) {
+		logger.info("EduTaskDto : " + eduTaskDto);
 		Response<String> result = new Response<String>();
 		if(eduTaskDto == null){
 			result.setStatus(DataStatus.HTTP_FAILE);

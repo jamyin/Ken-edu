@@ -5,12 +5,46 @@
 <style>
 .panel-body {
 	font-size: 18px !important;
+	
+}
+.table th, .table td {
+    border-top: none!important;
+}
+.panel-body.panel-body-noheader.panel-body-noborder.layout-body {
+	padding:20px!important;
+}
+</style>
+<style>
+.panel-body {
+	font-size: 18px !important;
 }
 </style>
 <script type="text/javascript">
 
-	$(function() {
-		parent.$.messager.progress('close');
+
+$(function() {
+	
+	var proLicenseList= '<%=request.getAttribute("ProLicenseList")%>';
+	var list = JSON.parse(proLicenseList);
+	for(var i in list){
+		var licName=list[i].licName;
+		if(licName=="商品图片"){
+			$("#img1_8").removeAttr("hidden");
+			$("#img1").attr("src",list[i].licPic);
+		}
+	
+		if(licName=="检测检验报告"){
+			$("#img2_9").removeAttr("hidden");
+			$("#img2").attr("src",list[i].licPic);
+		}
+		
+		if(licName=="生产许可证"){
+			$("#img3_10").removeAttr("hidden");
+			$("#img3").attr("src",list[i].licPic);
+		}
+	
+		
+	}
 
 
 		$('#updateImage').form(
@@ -50,9 +84,11 @@
 	
 	});
 
+	
+
 </script>
 		<div class="easyui-layout" data-options="fit:true,border:false">
-			<div data-options="region:'center',border:false" title=""
+		<%-- 	<div data-options="region:'center',border:false" title=""
 				style="overflow: hidden;">
 				<form id="updateImage" method="post"  enctype="multipart/form-data">
 				   <input id="id" name="id" type="hidden" value="${id}" />
@@ -84,7 +120,51 @@
 		
 			</table>
 			</c:forEach>
-				</form>
+				</form> --%>
+				
+				<div data-options="region:'center',border:false" title=""
+		style="overflow-x: hidden; overflow-y: auto;">
+		<form id="updateImage" method="post" enctype="multipart/form-data">
+		   <input id="id" name="id" type="hidden" value="${id}" />
+			<table class="table table-hover table-condensed">
+	
+				<tr>
+					<th>商品图片</th>
+					<td><input type="file" name="spImgUrl" id="spImgUrl"
+						accept="image/*" /></td>
+				
+				</tr>
+				<tr  id="img1_8">
+					<td colspan="2"><img id="img1"   width="150px" height="150px"  src="${pageContext.request.contextPath}/icon/图片未上传200x200.png"></img></td>
+				
+				</tr>
+				<tr>
+					<th>检测检验报告</th>
+					<td><input type="file" name="jcImgUrl" id="jcImgUrl"
+						accept="image/*" /></td>
+				
+				</tr>
+				<tr  id="img2_9">
+					<td colspan="2"><img id="img2"   width="150px" height="150px"  src="${pageContext.request.contextPath}/icon/图片未上传200x200.png"></img></td>
+				
+				</tr>
+				<tr>
+					<th>生产许可证</th>
+					<td><input type="file" name="scImgUrl" id="scImgUrl"
+						accept="image/*" /></td>
+				
+				</tr>
+				<tr  id="img3_10">
+					<td colspan="2"><img id="img3"  width="150px" height="150px" src="${pageContext.request.contextPath}/icon/图片未上传200x200.png"></img></td>
+				
+				</tr>
+			
+			</table>
+
+		</form>
+	</div>
+				
+				
 			</div>
 
 		</div>
