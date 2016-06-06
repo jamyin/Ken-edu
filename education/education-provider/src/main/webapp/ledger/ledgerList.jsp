@@ -286,6 +286,7 @@
 		$('#searchForm input').val('');
 		dataGrid.datagrid('load', {});
 	}
+	
 </script>
 </head>
 <body>
@@ -296,9 +297,9 @@
 				<table class="table table-hover table-condensed" style="display: none;">
 					<tr>
 						<td style="width: 500;">配货日期:
-						<input id="actionDate" class="span2" name="actionDate" placeholder="点击选择日期" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" readonly="readonly"/>
+						<input style='cursor:pointer;' id="actionDate" class="span2" name="actionDate" placeholder="点击选择日期" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" readonly="readonly"/>
 						至
-						<input id="nextDate" class="span2" name="nextDate" placeholder="点击选择日期" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" readonly="readonly"/></td>
+						<input style='cursor:pointer;' id="nextDate" class="span2" name="nextDate" placeholder="点击选择日期" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" readonly="readonly"/></td>
 						<td>配货点:
 						<input id="receiverName" class="span2" name="receiverName" />&nbsp;&nbsp;&nbsp;
 						<a href="javascript:void(0);"  onclick="searchFun();" ><img src="${pageContext.request.contextPath}/icon/查询.png" ></img></a></td>

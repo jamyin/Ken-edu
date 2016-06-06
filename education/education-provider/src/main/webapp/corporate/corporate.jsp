@@ -20,6 +20,11 @@ ul.my_info {
 	text-align:right;
 	margin-right:10px;
 }
+.fl {
+	text-align:center;
+	width:120px;
+	float:left;
+}
 </style>
 <jsp:include page="../inc.jsp"></jsp:include>
 <script type="text/javascript">
@@ -70,12 +75,14 @@ ul.my_info {
 <body>
 <div>
 	<h2>${Corporate.supplierName }</h2>
-	<div class="">
-	&nbsp;&nbsp;&nbsp;<a id="btn" onclick="edit()"><img title="编辑" src="${pageContext.request.contextPath}/icon/编辑.png"></img></a>&nbsp;&nbsp;&nbsp;
-	&nbsp;&nbsp;&nbsp;<a id="btn" onclick="showPic()"><img title="查看图片" src="${pageContext.request.contextPath}/icon/查看图片.png"></img></a>&nbsp;&nbsp;&nbsp;
-	&nbsp;&nbsp;&nbsp;<a id="btn" onclick="editPic()"><img title="编辑图片" src="${pageContext.request.contextPath}/icon/编辑图片.png"></img></a>  
+	<div class="fl" ><a id="btn" onclick="edit()"><img title="编辑" src="${pageContext.request.contextPath}/icon/编辑.png"></img></a></div>
+	<div class="fl" ><a id="btn" onclick="editPic()"><img title="编辑图片" src="${pageContext.request.contextPath}/icon/编辑图片.png"></img></a> </div>
+	<%-- <a id="btn" onclick="showPic()"><img title="查看图片" src="${pageContext.request.contextPath}/icon/查看图片.png"></img></a> --%>
 	</div>
-	
+	<div>
+		&nbsp;</p>
+	</div>
+	<div>	
 	<ul class="easyui-datalist my_info">
 		<li>
 			<span class="name">单位地址：</span><span class="value">${Corporate.address }</span>
