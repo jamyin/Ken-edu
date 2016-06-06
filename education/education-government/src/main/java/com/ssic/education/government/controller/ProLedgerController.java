@@ -56,7 +56,7 @@ public class ProLedgerController extends BaseController{
 		ModelAndView mv = this.getModelAndView();
 		List<LedgerDto> ledgerDtos = proLedgerService.findById(dto);
 		LedgerDto ledgerDto = new LedgerDto();
-		mv.setViewName("/ledger/distribution_detail");
+		
 		if (null !=ledgerDtos && ledgerDtos.size()>0) {
 			ledgerDto = ledgerDtos.get(0);
 		}
@@ -64,6 +64,7 @@ public class ProLedgerController extends BaseController{
 		if (StringUtils.isNotBlank(ledgerDto.getSupplierId())) {
 			proSupplierDto = proSupplierService.findById(ledgerDto.getSupplierId());
 		}		
+		mv.setViewName("/ledger/distribution_detail");
 		mv.addObject("ledgerDtos", ledgerDtos);
 		mv.addObject("ledgerDto", ledgerDto);
 		mv.addObject("dto", dto);

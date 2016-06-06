@@ -191,7 +191,7 @@ public class EduSchoolController extends BaseController{
 	@RequestMapping(value = "/details")
 	public ModelAndView details(HttpServletRequest request, HttpServletResponse response,
     		HttpSession session, ProPackagesDto dto,PageQuery query) throws ParseException{
-		query.setPageSize(5);
+		query.setPageSize(7);
 		ModelAndView mv = getModelAndView();
 		SimpleDateFormat sdf=new SimpleDateFormat(DateUtils.YMD_DASH);  
 		String str=sdf.format(new Date()); 
