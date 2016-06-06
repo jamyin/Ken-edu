@@ -1,5 +1,6 @@
 package com.ssic.education.app.controller;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -174,14 +175,20 @@ public class SchoolController {
 			typeList.add(mapToListDto);
 		}
 		eduSchoolDto.setTypeList(typeList);
-		PageResult<ProPackagesDto> proPackagesDtos = proPackagesService.searchPackages(dto, page);
+		//PageResult<ProPackagesDto> proPackagesDtos = proPackagesService.searchPackages(dto, page);
+		List<ProPackagesDto> proPackagesDtos = null;
+		try {
+			proPackagesDtos = proPackagesService.getProPackages(dto);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 
 		eduSchoolDto.setEduCanteenDto(eduCanteenDto);
 		//eduSchoolDto.setEduSchoolSupplierDto(eduSchoolSupplierDto);
 		if(supplierList != null && supplierList.size() > 0){
 			eduSchoolDto.setSupplierDto(supplierList.get(0));
 		}
-		eduSchoolDto.setPackagesList(proPackagesDtos);                  //委托供应商
+		eduSchoolDto.setPackagesDtoList(proPackagesDtos);                  //委托供应商
 
 		result.setData(eduSchoolDto);
 		return result;
