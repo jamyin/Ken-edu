@@ -40,7 +40,7 @@ function loadscMenu(){
 					}else if(item['supplyPhase']==3){
 						objHtml+="晚餐";
 					}else if(item['supplyPhase']==4){
-						objHtml+="夜宵  ";
+						objHtml+="夜宵 ";
 					}
 					objHtml+="</i><span></span><a href='/wap/comment/join/"+item['id']+".htm'>点评</a></h2>";
 					objHtml+="<ul>";
