@@ -52,11 +52,6 @@ public class LedgerService implements ILedgerService {
 	}
 
 	@Override
-	public int updataLedger(List<LedgerDto> ledger) {
-		return ledgerDao.updataLedger(ledger);
-	}
-
-	@Override
 	public int deleteLedger(String sourceId, String wareBatchNo) {
 		return ledgerDao.deleteLedger(sourceId, wareBatchNo);
 	}
@@ -114,16 +109,6 @@ public class LedgerService implements ILedgerService {
 	@Override
 	public Map<ProLedgerMaster,List<ProLedger>> findExportProSupplier(LedgerDto ld) {
 		return ledgerDao.findExportProSupplier(ld);
-	}
-
-	@Override
-	public int upDeleteLedger(String id) {
-		return ledgerDao.upDeleteLedger(id);
-	}
-
-	@Override
-	public int upSaveLedger(LedgerDto ledger) {
-		return ledgerDao.upSaveLedger(ledger);
 	}
 
 }
