@@ -62,7 +62,7 @@
 							var b="<tr id='ledger"+nextId+"'>"+a+"</tr>";
 							var c=b.replace(/title=""/g,"");
 							$(c).insertAfter($(lastTr));
-							$("<a onclick='subtractLedger(this);' data-id='ledger"+nextId+"' style='text-decoration:none;' ><font size='8' >-</font></a>").replaceAll("#ledger"+nextId+" a");
+							$("<a onclick='subtractLedger(this);' data-id='ledger"+nextId+"' style='text-decoration:none;cursor:pointer;' ><font size='8' >-</font></a>").replaceAll("#ledger"+nextId+" a");
 							$.parser.parse();
 						});
 	});
@@ -119,8 +119,34 @@
 					<th style='width:109px;'>生产日期：</th>
 					<th ></th>
 				</tr>
+				<tr id="ledger0">
+					<td style="width:95px;">
+						<input name="ledger[0].name" style="width:95px;" type="text" placeholder="请输入采购品" class="easyui-validatebox span2" data-options="required:true">
+					</td>
+					<td style="width:95px;">
+						<input name="ledger[0].quantity" style="width:95px;" type="text" placeholder="请输入数量" class="easyui-validatebox span2" data-options="required:true">
+					</td>
+					<td style="width:95px;">
+						<input name="ledger[0].spce" style="width:95px;" type="text" placeholder="请输入规格" class="easyui-validatebox span2" data-options="required:true">
+					</td>
+					<td style="width:95px;">
+						<input name="ledger[0].supplierName" style="width:95px;" type="text" placeholder="请输入供应商" class="easyui-validatebox span2">
+					</td>
+					<td style="width:95px;">
+						<input name="ledger[0].productionName" style="width:95px;" type="text" placeholder="请输入生产单位" class="easyui-validatebox span2">
+					</td>
+					<td style="width:95px;">
+						<input name="ledger[0].productionDate" style="width:95px;cursor:pointer;" type="text" placeholder="点击选择日期" class="easyui-validatebox span2" onclick="WdatePicker({readOnly:true,dateFmt:\'yyyy-MM-dd\'})" readonly="readonly">
+					</td>
+					<td>
+						<a onclick='subtractLedger(this);' data-id='ledger0' style='text-decoration:none;cursor:pointer;' ><font size='8' >-</font></a>
+					</td>
+					<td>
+						<input type="hidden" name="ledger[0].mark" value="1" >
+					</td>
+				</tr>
 				</table>
-				<div align="center"><a id="addLedger" style='text-decoration:none;' ><font size="8" >+</font></a></div>
+				<div align="center"><a id="addLedger" style='text-decoration:none;cursor:pointer;' ><font size="8" >+</font></a></div>
 				</form>
 				</div>
 				</div>
