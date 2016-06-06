@@ -32,10 +32,10 @@ function loadscMenu(){
 					objHtml+="<h2><i>"+item['packageName']+"</i><span></span><a href='/wap/comment/join/"+item['id']+".htm'>点评</a></h2>";
 					objHtml+="<ul>";
 					var proDishesDtos = item['proDishesDtos'];
-					
 					if(proDishesDtos!=null){
 						$.each(proDishesDtos, function(index_d, itemD) {
-							objHtml+="<li><img src='/static/img/food_simple.jpg' border='0'><p>"+itemD['waresName']+"</p><span>原料：银耳5g; 莲子5g; 红枣 5g</span></li>";
+							//<img src='/static/img/food_simple.jpg' border='0'>
+							objHtml+="<li><p>"+itemD['waresName']+"</p></li>";
 						});						
 					}
 					
