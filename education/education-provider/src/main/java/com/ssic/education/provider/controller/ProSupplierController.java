@@ -275,38 +275,7 @@ public class ProSupplierController extends BaseController{
 		return dataGrid;
 	}
 
-	/**
-	 * 跳转到上传图片页面
-	 * 
-	 * @param request
-	 * @param id
-	 * @return
-	 */
-	@RequestMapping("/inputImage")
-	public String inputImage(HttpServletRequest request, String id) {
-
-		request.setAttribute("id", id);
-		return "supplier/updateImage";
-	}
-
-	/**
-	 * 查看图片
-	 */
-	@RequestMapping("/lookImage")
-	public String lookImage(HttpServletRequest request, String id) {
-		ProLicense license = new ProLicense();
-		license.setRelationId(id);
-		license.setCerSource((short) 0);
-		List<ProLicense> ProLicenseList = proLicenseServiceImpl
-				.lookImage(license);
-		String realPath = PropertiesUtils.getProperty("upload.look.url");
-		for (ProLicense proLicense : ProLicenseList) {
-			proLicense.setLicPic(realPath + proLicense.getLicPic());
-		}
-		request.setAttribute("ProLicenseList", ProLicenseList);
-		return "supplier/lookImage";
-	}
-
+	
 	/**
 	 * 跳转到修改图片页面
 	 * 
@@ -334,290 +303,7 @@ public class ProSupplierController extends BaseController{
 		return "supplier/editImage";
 	}
 
-	/**
-	 * 上传图片
-	 */
-	@RequestMapping("/insterImage")
-	@ResponseBody
-	public Json updateImage(String id,
-			@RequestParam(value = "imgUrl1") MultipartFile imgUrl1,
-			@RequestParam(value = "imgUrl2") MultipartFile imgUrl2,
-			@RequestParam(value = "imgUrl3") MultipartFile imgUrl3,
-			@RequestParam(value = "imgUrl4") MultipartFile imgUrl4,
-			@RequestParam(value = "imgUrl5") MultipartFile imgUrl5,
-			@RequestParam(value = "imgUrl6") MultipartFile imgUrl6,
-			@RequestParam(value = "imgUrl7") MultipartFile imgUrl7,
-			@RequestParam(value = "imgUrl8") MultipartFile imgUrl8,
-			@RequestParam(value = "imgUrl9") MultipartFile imgUrl9,
-			@RequestParam(value = "imgUrl10") MultipartFile imgUrl10,
-			@RequestParam(value = "imgUrl11") MultipartFile imgUrl11,
-			ImageInfoDto image, HttpServletRequest request,
-			HttpServletResponse response) {
-		Json json = new Json();
-		ProLicense license = new ProLicense();
-		
-		
-		
-		
-		Map<String, Object> map1 = createImageServiceImpl.createImage(image,
-				imgUrl1, request, response);
-		Map<String, Object> map2 = createImageServiceImpl.createImage(image,
-				imgUrl2, request, response);
-		Map<String, Object> map3 = createImageServiceImpl.createImage(image,
-				imgUrl3, request, response);
-		Map<String, Object> map4 = createImageServiceImpl.createImage(image,
-				imgUrl4, request, response);
-		Map<String, Object> map5 = createImageServiceImpl.createImage(image,
-				imgUrl5, request, response);
-		Map<String, Object> map6 = createImageServiceImpl.createImage(image,
-				imgUrl6, request, response);
-		Map<String, Object> map7 = createImageServiceImpl.createImage(image,
-				imgUrl7, request, response);
-		Map<String, Object> map8 = createImageServiceImpl.createImage(image,
-				imgUrl8, request, response);
-		Map<String, Object> map9 = createImageServiceImpl.createImage(image,
-				imgUrl9, request, response);
-		Map<String, Object> map10 = createImageServiceImpl.createImage(image,
-				imgUrl10, request, response);
-		Map<String, Object> map11 = createImageServiceImpl.createImage(image,
-				imgUrl11, request, response);
-
-		// 如果已经有图片则更新image_url
-		String imageurl1 = (String) map1.get("image_url");
-		String imageurl2 = (String) map2.get("image_url");
-		String imageurl3 = (String) map3.get("image_url");
-		String imageurl4 = (String) map4.get("image_url");
-		String imageurl5 = (String) map5.get("image_url");
-		String imageurl6 = (String) map6.get("image_url");
-		String imageurl7 = (String) map7.get("image_url");
-		String imageurl8 = (String) map8.get("image_url");
-		String imageurl9 = (String) map9.get("image_url");
-		String imageurl10 = (String) map10.get("image_url");
-		String imageurl11 = (String) map11.get("image_url");
-
-		//判断图片是否重复上传
-				List<ProLicense> list2=	proLicenseServiceImpl.selectByRelationId(id);
-					
-				for (int i = 0; i < list2.size(); i++) {
-					if(imageurl1!=null){
-					if(list2.get(i).getLicName().equals("工商营业执照")){
-						json.setMsg("工商营业执照不可重复上传");
-						json.setSuccess(false);
-						return json;
-					}}
-				if(imageurl2!=null){
-					if(list2.get(i).getLicName().equals("组织机构代码")){
-						json.setMsg("组织机构代码不可重复上传");
-						json.setSuccess(false);
-						return json;
-					}}
-				if(imageurl3!=null){
-					if(list2.get(i).getLicName().equals("税务登记证")){
-						json.setMsg("税务登记证不可重复上传");
-						json.setSuccess(false);
-						return json;
-					}}
-				if(imageurl4!=null){
-					if(list2.get(i).getLicName().equals("食品流通许可证")){
-						json.setMsg("食品流通许可证不可重复上传");
-						json.setSuccess(false);
-						return json;
-					}}
-				if(imageurl5!=null){
-					if(list2.get(i).getLicName().equals("食品生产许可证")){
-						json.setMsg("食品生产许可证不可重复上传");
-						json.setSuccess(false);
-						return json;
-					}}
-				if(imageurl6!=null){
-					if(list2.get(i).getLicName().equals("餐饮服务许可证")){
-						json.setMsg("餐饮服务许可证不可重复上传");
-						json.setSuccess(false);
-						return json;
-					}}
-				if(imageurl7!=null){
-					if(list2.get(i).getLicName().equals("食品经营许可证")){
-						json.setMsg("食品经营许可证不可重复上传");
-						json.setSuccess(false);
-						return json;
-					}}
-				if(imageurl8!=null){
-					if(list2.get(i).getLicName().equals("身份证")){
-						json.setMsg("身份证不可重复上传");
-						json.setSuccess(false);
-						return json;
-					}}
-				if(imageurl9!=null){
-					if(list2.get(i).getLicName().equals("港澳居民来往内地通行证")){
-						json.setMsg("港澳居民来往内地通行证不可重复上传");
-						json.setSuccess(false);
-						return json;
-					}}
-				if(imageurl10!=null){
-					if(list2.get(i).getLicName().equals("台湾居民往来内地通行证")){
-						json.setMsg("台湾居民往来内地通行证不可重复上传");
-						json.setSuccess(false);
-						return json;
-					}}
-				if(imageurl11!=null){
-					if(list2.get(i).getLicName().equals("其他")){
-						json.setMsg("其他证件不可重复上传");
-						json.setSuccess(false);
-						return json;
-					}	}	
-				}
-				
-		
-		
-		if (imageurl1 != null && imageurl1 != "") {
-			license.setLicName("工商营业执照");
-			license.setLicPic(imageurl1);
-			license.setRelationId(id);
-			license.setStat(1);
-			license.setLicType(4);
-			license.setCreateTime(new Date());
-			license.setLastUpdateTime(new Date());
-			license.setCerSource((short) 0);
-			String uuid = UUID.randomUUID().toString();
-			license.setId(uuid);
-			proLicenseServiceImpl.updateImage(license);
-		}
-		if (imageurl2 != null && imageurl2 != "") {
-			license.setLicName("组织机构代码");
-			license.setLicPic(imageurl2);
-			license.setRelationId(id);
-			license.setStat(1);
-			license.setLicType(5);
-			license.setCreateTime(new Date());
-			license.setLastUpdateTime(new Date());
-			license.setCerSource((short) 0);
-			String uuid = UUID.randomUUID().toString();
-			license.setId(uuid);
-			proLicenseServiceImpl.updateImage(license);
-		}
-		if (imageurl3 != null && imageurl3 != "") {
-			license.setLicName("税务登记证");
-			license.setLicPic(imageurl3);
-			license.setRelationId(id);
-			license.setStat(1);
-			license.setLicType(6);
-			license.setCreateTime(new Date());
-			license.setLastUpdateTime(new Date());
-			license.setCerSource((short) 0);
-			String uuid = UUID.randomUUID().toString();
-			license.setId(uuid);
-			proLicenseServiceImpl.updateImage(license);
-			
-		}
-		if (imageurl4 != null && imageurl4 != "") {
-			license.setLicName("食品流通许可证");
-			license.setLicPic(imageurl4);
-			license.setRelationId(id);
-			license.setStat(1);
-			license.setLicType(2);
-			license.setCreateTime(new Date());
-			license.setLastUpdateTime(new Date());
-			license.setCerSource((short) 0);
-			String uuid = UUID.randomUUID().toString();
-			license.setId(uuid);
-			proLicenseServiceImpl.updateImage(license);
-		}
-		if (imageurl5 != null && imageurl5 != "") {
-			license.setLicName("食品生产许可证");
-			license.setLicPic(imageurl5);
-			license.setRelationId(id);
-			license.setStat(1);
-			license.setLicType(3);
-			license.setCreateTime(new Date());
-			license.setLastUpdateTime(new Date());
-			license.setCerSource((short) 0);
-			String uuid = UUID.randomUUID().toString();
-			license.setId(uuid);
-			proLicenseServiceImpl.updateImage(license);
-		}
-		if (imageurl6 != null && imageurl6 != "") {
-			license.setLicName("餐饮服务许可证");
-			license.setLicPic(imageurl6);
-			license.setRelationId(id);
-			license.setStat(1);
-			license.setLicType(0);
-			license.setCreateTime(new Date());
-			license.setLastUpdateTime(new Date());
-			license.setCerSource((short) 0);
-			String uuid = UUID.randomUUID().toString();
-			license.setId(uuid);
-			proLicenseServiceImpl.updateImage(license);
-		}
-		if (imageurl7 != null && imageurl7 != "") {
-			license.setLicName("食品经营许可证");
-			license.setLicPic(imageurl7);
-			license.setRelationId(id);
-			license.setStat(1);
-			license.setLicType(1);
-			license.setCreateTime(new Date());
-			license.setLastUpdateTime(new Date());
-			license.setCerSource((short) 0);
-			String uuid = UUID.randomUUID().toString();
-			license.setId(uuid);
-			proLicenseServiceImpl.updateImage(license);
-		}
-		if (imageurl8 != null && imageurl8 != "") {
-			license.setLicName("身份证");
-			license.setLicPic(imageurl8);
-			license.setRelationId(id);
-			license.setStat(1);
-			license.setLicType(9);
-			license.setCreateTime(new Date());
-			license.setLastUpdateTime(new Date());
-			license.setCerSource((short) 0);
-			String uuid = UUID.randomUUID().toString();
-			license.setId(uuid);
-			proLicenseServiceImpl.updateImage(license);
-		}
-		if (imageurl9 != null && imageurl9 != "") {
-			license.setLicName("港澳居民来往内地通行证");
-			license.setLicPic(imageurl9);
-			license.setRelationId(id);
-			license.setStat(1);
-			license.setLicType(10);
-			license.setCreateTime(new Date());
-			license.setLastUpdateTime(new Date());
-			license.setCerSource((short) 0);
-			String uuid = UUID.randomUUID().toString();
-			license.setId(uuid);
-			proLicenseServiceImpl.updateImage(license);
-		}
-		if (imageurl10 != null && imageurl10 != "") {
-			license.setLicName("台湾居民往来内地通行证");
-			license.setLicPic(imageurl10);
-			license.setRelationId(id);
-			license.setStat(1);
-			license.setLicType(11);
-			license.setCreateTime(new Date());
-			license.setLastUpdateTime(new Date());
-			license.setCerSource((short) 0);
-			String uuid = UUID.randomUUID().toString();
-			license.setId(uuid);
-			proLicenseServiceImpl.updateImage(license);
-		}
-		if (imageurl11 != null && imageurl11 != "") {
-			license.setLicName("其他");
-			license.setLicPic(imageurl11);
-			license.setRelationId(id);
-			license.setStat(1);
-			license.setLicType(12);
-			license.setCreateTime(new Date());
-			license.setLastUpdateTime(new Date());
-			license.setCerSource((short) 0);
-			String uuid = UUID.randomUUID().toString();
-			license.setId(uuid);
-			proLicenseServiceImpl.updateImage(license);
-		}
-		json.setMsg("上传图片成功");
-		json.setSuccess(true);
-		return json;
-	}
-
+	
 	/**
 	 * 修改图片
 	 */
@@ -638,6 +324,13 @@ public class ProSupplierController extends BaseController{
 			ImageInfoDto image, HttpServletRequest request,
 			HttpServletResponse response) {
 		Json json = new Json();
+		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
+				ConfigUtil.SESSIONINFONAME);
+		if(info==null){
+			json.setMsg("尚未登录");
+			json.setSuccess(false);
+			return json;
+		}
 		ProLicense license = new ProLicense();
 		Map<String, Object> map1 = createImageServiceImpl.createImage(image,
 				imgUrl1, request, response);
@@ -675,13 +368,22 @@ public class ProSupplierController extends BaseController{
 		String imageurl10 = (String) map10.get("image_url");
 		String imageurl11 = (String) map11.get("image_url");
 
+		
 		if (imageurl1 != null && imageurl1 != "") {
 			license.setLicName("工商营业执照");
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl1);
 			license.setLastUpdateTime(new Date());
-			proLicenseServiceImpl.alterImage(license);
+			int i = proLicenseServiceImpl.alterImage(license);
+			if (i == 0) {
+				license.setStat(1);
+				license.setLicType(4);
+				license.setCreateTime(new Date());
+				String uuid = UUID.randomUUID().toString();
+				license.setId(uuid);
+				proLicenseServiceImpl.updateImage(license);
+			}
 		}
 		if (imageurl2 != null && imageurl2 != "") {
 			license.setLicName("组织机构代码");
@@ -689,7 +391,15 @@ public class ProSupplierController extends BaseController{
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl2);
 			license.setLastUpdateTime(new Date());
-			proLicenseServiceImpl.alterImage(license);
+			int i = proLicenseServiceImpl.alterImage(license);
+			if (i == 0) {
+				license.setStat(1);
+				license.setLicType(5);
+				license.setCreateTime(new Date());
+				String uuid = UUID.randomUUID().toString();
+				license.setId(uuid);
+				proLicenseServiceImpl.updateImage(license);
+			}
 		}
 		if (imageurl3 != null && imageurl3 != "") {
 			license.setLicName("税务登记证");
@@ -697,7 +407,15 @@ public class ProSupplierController extends BaseController{
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl3);
 			license.setLastUpdateTime(new Date());
-			proLicenseServiceImpl.alterImage(license);
+			int i = proLicenseServiceImpl.alterImage(license);
+			if (i == 0) {
+				license.setStat(1);
+				license.setLicType(6);
+				license.setCreateTime(new Date());
+				String uuid = UUID.randomUUID().toString();
+				license.setId(uuid);
+				proLicenseServiceImpl.updateImage(license);
+			}
 		}
 		if (imageurl4 != null && imageurl4 != "") {
 			license.setLicName("食品流通许可证");
@@ -705,7 +423,15 @@ public class ProSupplierController extends BaseController{
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl4);
 			license.setLastUpdateTime(new Date());
-			proLicenseServiceImpl.alterImage(license);
+			int i = proLicenseServiceImpl.alterImage(license);
+			if (i == 0) {
+				license.setStat(1);
+				license.setLicType(2);
+				license.setCreateTime(new Date());
+				String uuid = UUID.randomUUID().toString();
+				license.setId(uuid);
+				proLicenseServiceImpl.updateImage(license);
+			}
 		}
 		if (imageurl5 != null && imageurl5 != "") {
 			license.setLicName("食品生产许可证");
@@ -713,7 +439,15 @@ public class ProSupplierController extends BaseController{
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl5);
 			license.setLastUpdateTime(new Date());
-			proLicenseServiceImpl.alterImage(license);
+			int i = proLicenseServiceImpl.alterImage(license);
+			if (i == 0) {
+				license.setStat(1);
+				license.setLicType(3);
+				license.setCreateTime(new Date());
+				String uuid = UUID.randomUUID().toString();
+				license.setId(uuid);
+				proLicenseServiceImpl.updateImage(license);
+			}
 		}
 		if (imageurl6 != null && imageurl6 != "") {
 			license.setLicName("餐饮服务许可证");
@@ -721,7 +455,15 @@ public class ProSupplierController extends BaseController{
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl6);
 			license.setLastUpdateTime(new Date());
-			proLicenseServiceImpl.alterImage(license);
+			int i = proLicenseServiceImpl.alterImage(license);
+			if (i == 0) {
+				license.setStat(1);
+				license.setLicType(0);
+				license.setCreateTime(new Date());
+				String uuid = UUID.randomUUID().toString();
+				license.setId(uuid);
+				proLicenseServiceImpl.updateImage(license);
+			}
 		}
 		if (imageurl7 != null && imageurl7 != "") {
 			license.setLicName("食品经营许可证");
@@ -729,7 +471,15 @@ public class ProSupplierController extends BaseController{
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl7);
 			license.setLastUpdateTime(new Date());
-			proLicenseServiceImpl.alterImage(license);
+			int i = proLicenseServiceImpl.alterImage(license);
+			if (i == 0) {
+				license.setStat(1);
+				license.setLicType(1);
+				license.setCreateTime(new Date());
+				String uuid = UUID.randomUUID().toString();
+				license.setId(uuid);
+				proLicenseServiceImpl.updateImage(license);
+			}
 		}
 		if (imageurl8 != null && imageurl8 != "") {
 			license.setLicName("身份证");
@@ -737,7 +487,15 @@ public class ProSupplierController extends BaseController{
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl8);
 			license.setLastUpdateTime(new Date());
-			proLicenseServiceImpl.alterImage(license);
+			int i = proLicenseServiceImpl.alterImage(license);
+			if (i == 0) {
+				license.setStat(1);
+				license.setLicType(9);
+				license.setCreateTime(new Date());
+				String uuid = UUID.randomUUID().toString();
+				license.setId(uuid);
+				proLicenseServiceImpl.updateImage(license);
+			}
 		}
 		if (imageurl9 != null && imageurl9 != "") {
 			license.setLicName("港澳居民来往内地通行证");
@@ -745,7 +503,15 @@ public class ProSupplierController extends BaseController{
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl9);
 			license.setLastUpdateTime(new Date());
-			proLicenseServiceImpl.alterImage(license);
+			int i = proLicenseServiceImpl.alterImage(license);
+			if (i == 0) {
+				license.setStat(1);
+				license.setLicType(10);
+				license.setCreateTime(new Date());
+				String uuid = UUID.randomUUID().toString();
+				license.setId(uuid);
+				proLicenseServiceImpl.updateImage(license);
+			}
 		}
 		if (imageurl10 != null && imageurl10 != "") {
 			license.setLicName("台湾居民往来内地通行证");
@@ -753,7 +519,15 @@ public class ProSupplierController extends BaseController{
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl10);
 			license.setLastUpdateTime(new Date());
-			proLicenseServiceImpl.alterImage(license);
+			int i = proLicenseServiceImpl.alterImage(license);
+			if (i == 0) {
+				license.setStat(1);
+				license.setLicType(11);
+				license.setCreateTime(new Date());
+				String uuid = UUID.randomUUID().toString();
+				license.setId(uuid);
+				proLicenseServiceImpl.updateImage(license);
+			}
 		}
 		if (imageurl11 != null && imageurl11 != "") {
 			license.setLicName("其他");
@@ -761,16 +535,19 @@ public class ProSupplierController extends BaseController{
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl11);
 			license.setLastUpdateTime(new Date());
-			proLicenseServiceImpl.alterImage(license);
+			int i = proLicenseServiceImpl.alterImage(license);
+			if (i == 0) {
+				license.setStat(1);
+				license.setLicType(12);
+				license.setCreateTime(new Date());
+				String uuid = UUID.randomUUID().toString();
+				license.setId(uuid);
+				proLicenseServiceImpl.updateImage(license);
+			}
 		}
 		json.setMsg("上传图片成功");
 		json.setSuccess(true);
 		return json;
-	}
-
-	@RequestMapping("/importPage")
-	public String importPage() {
-		return "supplier/supplierImport";
 	}
 
 	/**
@@ -1021,42 +798,5 @@ public class ProSupplierController extends BaseController{
 		}
 		return null;
 	}
-	
-//	@RequestMapping("download")
-//	public void download(HttpServletRequest request,
-//			HttpServletResponse response) {
-//		String fileName = "供货商.xlsx";
-//		BufferedInputStream bis = null;
-//		BufferedOutputStream bos = null;
-//		String p = request.getSession().getServletContext().getRealPath("/")
-//				+ "\\templates\\" + fileName;
-//		try {
-//			bis = new BufferedInputStream(new FileInputStream(new File(request
-//					.getSession().getServletContext().getRealPath("/")
-//					+ "\\templates\\" + fileName)));
-//			bos = new BufferedOutputStream(response.getOutputStream());
-//			String encodedfileName = null;
-//			String agent = request.getHeader("USER-AGENT");
-//			if (null != agent && -1 != agent.indexOf("MSIE")) {// IE
-//				encodedfileName = java.net.URLEncoder.encode(fileName, "UTF-8");
-//			} else if (null != agent && -1 != agent.indexOf("Mozilla")) {
-//				encodedfileName = new String(fileName.getBytes("UTF-8"),
-//						"iso-8859-1");
-//			} else {
-//				encodedfileName = java.net.URLEncoder.encode(fileName, "UTF-8");
-//			}
-//			response.setHeader("Content-Disposition", "attachment; filename=\""
-//					+ encodedfileName + "\"");
-//			int byteRead = 0;
-//			byte[] buffer = new byte[8192];
-//			while ((byteRead = bis.read(buffer, 0, 8192)) != -1) {
-//				bos.write(buffer, 0, byteRead);
-//			}
-//
-//			bos.flush();
-//			bis.close();
-//			bos.close();
-//		} catch (Exception e) {
-//		}
-//	}
+
 }
