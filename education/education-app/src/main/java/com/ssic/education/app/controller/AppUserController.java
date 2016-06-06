@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ssic.education.app.dto.AppEduUserDto;
 import com.ssic.education.app.dto.EduUsersInfoDto;
 import com.ssic.education.app.dto.AppProUserDto;
+import com.ssic.education.app.interceptor.AccessRequired;
 import com.ssic.education.app.service.IAppUsersService;
 import com.ssic.education.handle.pojo.ProUsers;
 import com.ssic.education.utils.constants.DataStatus;
@@ -43,8 +44,8 @@ public class AppUserController extends BaseController {
 	 * @return 用户信息
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	@ResponseBody
-	public Response<AppEduUserDto> login(@RequestParam(required = true) String account, @RequestParam(required = true) String password) {
+	//@AccessRequired
+	public @ResponseBody Response<AppEduUserDto> login(@RequestParam(required = true) String account, @RequestParam(required = true) String password) {
 		EduUsersInfoDto user = new EduUsersInfoDto();
 		Response<AppEduUserDto> result = new Response<AppEduUserDto>();
 		user.setUserAccount(account);
@@ -72,8 +73,7 @@ public class AppUserController extends BaseController {
 	 * @return 成功状态
 	 */
 	@RequestMapping(value = "/modifyPwd", method = RequestMethod.POST)
-	@ResponseBody
-	public Response<String> modifyPwd(String account, String oldPwd, String newPwd) {
+	public @ResponseBody Response<String> modifyPwd(String account, String oldPwd, String newPwd) {
 		Response<String> result = new Response<String>();
 		if (oldPwd.equals(newPwd)) {
 			result.setStatus(DataStatus.HTTP_FAILE);
@@ -95,8 +95,7 @@ public class AppUserController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/eduLogout/{token}", method = RequestMethod.GET)
-	@ResponseBody
-	public void eduLogout(@PathVariable("token") String token) {
+	public @ResponseBody void eduLogout(@PathVariable("token") String token) {
 		AppEduUserDto eduAppUser = eduRedisdao.get(token, AppEduUserDto.class);
 		if (eduAppUser != null) {
 			eduRedisdao.delete(eduAppUser, AppEduUserDto.class);
@@ -110,8 +109,7 @@ public class AppUserController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/proLogin", method = RequestMethod.POST)
-	@ResponseBody
-	public Response<AppProUserDto> proLogin(@RequestParam(required = true) String account, @RequestParam(required = true) String password) {
+	public @ResponseBody Response<AppProUserDto> proLogin(@RequestParam(required = true) String account, @RequestParam(required = true) String password) {
 		ProUsers user = new ProUsers();
 		Response<AppProUserDto> result = new Response<AppProUserDto>();
 		user.setUserAccount(account);
@@ -139,8 +137,7 @@ public class AppUserController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/proModifyPwd", method = RequestMethod.POST)
-	@ResponseBody
-	public Response<String> proModifyPwd(String account, String oldPwd, String newPwd) {
+	public @ResponseBody Response<String> proModifyPwd(String account, String oldPwd, String newPwd) {
 		Response<String> result = new Response<String>();
 		if (oldPwd.equals(newPwd)) {
 			result.setStatus(DataStatus.HTTP_FAILE);
@@ -162,8 +159,7 @@ public class AppUserController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/proLogout/{token}", method = RequestMethod.GET)
-	@ResponseBody
-	public void proLogout(@PathVariable("token") String token) {
+	public @ResponseBody void proLogout(@PathVariable("token") String token) {
 		AppProUserDto proAppUser = proRedisdao.get(token, AppProUserDto.class);
 		if (proAppUser != null) {
 			proRedisdao.delete(proAppUser, AppProUserDto.class);

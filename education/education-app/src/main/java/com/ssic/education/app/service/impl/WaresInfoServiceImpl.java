@@ -1,5 +1,6 @@
 package com.ssic.education.app.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import com.ssic.education.app.service.IWaresInfoService;
 import com.ssic.education.app.util.JsonUtil;
 import com.ssic.education.handle.pojo.ProLicense;
 import com.ssic.education.handle.pojo.ProWares;
+import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 import com.ssic.education.utils.util.BeanUtils;
@@ -102,9 +104,16 @@ public class WaresInfoServiceImpl implements IWaresInfoService {
 		List<String> schoolWares = this.schoolWaresDao.findSchoolWaresBySchoolId(schoolId);
 		if (schoolWares != null && !schoolWares.isEmpty()) {
 			List<ProWares> wares = waresInfoDao.findWarseInSchool(schoolWares, prowares, query);
+			List<ProWares> convert = new ArrayList<ProWares>();
+			for (ProWares pw : wares) {
+				if (pw.getImage() != null) {
+					pw.setImage(DataStatus.IMAGE_HOST + pw.getImage());
+				}
+				convert.add(pw);
+			}
 			int total = waresInfoDao.findWarseInSchoolCount(schoolWares, prowares);
 			query.setTotal(total);
-			List<WaresListDto> wareListDto = BeanUtils.createBeanListByTarget(wares, WaresListDto.class);
+			List<WaresListDto> wareListDto = BeanUtils.createBeanListByTarget(convert, WaresListDto.class);
 			return new PageResult<WaresListDto>(query, wareListDto);
 		} else {
 			return null;
@@ -120,13 +129,15 @@ public class WaresInfoServiceImpl implements IWaresInfoService {
 		if (wrd.getWaresType() != null) {
 			wrd.setTypeName(ProductClass.getName(wrd.getWaresType()));
 		}
+		if (wrd.getImage() != null) {
+			wrd.setImage(DataStatus.IMAGE_HOST + wrd.getImage());
+		}
 		List<ProLicense> list = supplierInfoDto.getWaresLic(wrd.getId(), (short) 2);
 		if (null != list && !list.isEmpty()) {
 			List<AppLicenseDto> licList = BeanUtils.createBeanListByTarget(list, AppLicenseDto.class);
 			for (AppLicenseDto appLicenseDto : licList) {
-				String host = "http://192.168.1.242";
 				if (StringUtils.isNotBlank(appLicenseDto.getLicPic())) {
-					String pic = host + appLicenseDto.getLicPic();
+					String pic = DataStatus.IMAGE_HOST + appLicenseDto.getLicPic();
 					appLicenseDto.setLicPic(pic);
 				}
 			}
