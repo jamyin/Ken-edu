@@ -14,9 +14,13 @@
 
 <div class="easyui-layout" data-options="fit:true,border:false">
 	<div data-options="region:'center',border:false" title=""
-		style="overflow: hidden;">
-			配送号：${LedgerList[0].wareBatchNo}  进货日期：<fmt:formatDate value="${LedgerList[0].actionDate}" pattern="yyyy-MM-dd"/> 配货点：${LedgerList[0].receiverName} 状态：
-						<c:if test="${LedgerList[0].haulStatus ==0}">
+		style="overflow-x: hidden; overflow-y: auto;">
+		<table id="ledgers" class="table table-hover table-condensed">
+			<tr>
+				<th>配送号：</th><td>${LedgerList[0].wareBatchNo}</td>
+				<th>进货日期：</th><td><fmt:formatDate value="${LedgerList[0].actionDate}" pattern="yyyy-MM-dd"/></td>
+				<th>配货点：</th><td>${LedgerList[0].receiverName}</td>
+				<th>状态：</th><td><c:if test="${LedgerList[0].haulStatus ==0}">
 							未配送
 						</c:if>
 						<c:if test="${LedgerList[0].haulStatus ==1}">
@@ -24,7 +28,9 @@
 						</c:if>
 						<c:if test="${LedgerList[0].haulStatus ==2}">
 							已配送
-						</c:if>
+						</c:if></td>
+			</tr>
+		</table>
 			<table id="ledgers" class="table table-hover table-condensed">
 					<tr>
 						<th>采购品</th>
