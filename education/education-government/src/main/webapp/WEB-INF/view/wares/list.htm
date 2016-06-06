@@ -28,7 +28,11 @@
           <#list pageList.results as data>
 	          <a href="/pro/wares/details.htm?id=${(data.id)!}&source=${(params.source)!}&schoolId=${(params.schoolId)!}&sourceId=${(params.sourceId)!}">
 	              <li>
-	                <img src="${(data.image)!}" alt="" />
+	              	<#if (data.image??) && (data.image != '')>
+	                	<img src="${(data.image)!}" alt="" />
+	                <#else>
+				   	 	<img class="con-img" src="/static/img/default.png" alt="" />
+				     </#if>
 	                <div class="name">${(data.waresName)!}</div>
 	                <div style="font-size: 12px; overflow: hidden;">产品编码:<span>${(data.customCode)!}</span></div>
 	                <div>规格:<span>${(data.spec)!}</span></div>

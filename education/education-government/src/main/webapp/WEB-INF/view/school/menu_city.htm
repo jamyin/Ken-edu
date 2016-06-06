@@ -57,15 +57,15 @@
 
     <div class="menu_box">
       <div class="subbar">
-        <p class="lef">经营单位：<a style="cursor: pointer;" href="canteen.htm?schoolId=${(eduSchoolDto.id)!}"><#if (eduCanteenDto.canteenName??) && (eduCanteenDto.canteenName != '')>${(eduCanteenDto.canteenName)!}<#else><span style="color: red;">暂无</span></#if></a></p><#if (dto.source == 1) && (eduSchoolSupplierDtos.supplierId??)><a style="cursor: pointer;" class="offer_delete">删除</a> </#if><p class="rig">委托经营单位：<#if (proSupplierDtos??) && (proSupplierDtos?size>0)>
+        <p class="lef">经营单位：<a style="cursor: pointer;" href="canteen.htm?schoolId=${(eduSchoolDto.id)!}"><#if (eduCanteenDto.canteenName??) && (eduCanteenDto.canteenName != '')><span style="color: blue;">${(eduCanteenDto.canteenName)!}</span><#else><span style="color: red;">暂无</span></#if></a></p><#if (dto.source == 1) && (eduSchoolSupplierDtos.supplierId??)><a style="cursor: pointer;" class="offer_delete">删除</a> </#if><p class="rig">委托经营单位：<#if (proSupplierDtos??) && (proSupplierDtos?size>0)>
 					<#list proSupplierDtos as supplier>
-						<a href="/pro/supplier/detail.htm?id=${(supplier.id)!}&source=1">${(supplier.supplierName)!}</a>
+						<a href="/pro/supplier/detail.htm?id=${(supplier.id)!}&source=1"><span style="color: blue;">${(supplier.supplierName)!}</span></a>
 					</#list>
 				<#else><span style="color: red;">暂无</span>
 				</#if></p>
       </div>
       <div class="menu_list">
-        <div class="control">
+        <div style="background-color: #60ac62;" class="control">
 			<!-- <a class="lbtn" href="###"><</a> -->
 			<span><input id="date" type="text" value="${dto.supplyDate?string("yyyy-MM-dd")}" onchange="changeDate()"></span>
 			<!-- <a class="rbtn" href="###">></a> -->
@@ -81,7 +81,7 @@
 			<#list proPackagesDtos as proPackages>
 				<div class="lunch row">
 				<#if proPackages.supplyPhase??>
-					<label class="ct1"><#if proPackages.supplyPhase == 0>早餐</#if><#if proPackages.supplyPhase == 1>午餐</#if><#if proPackages.supplyPhase == 2>午后甜点</#if><#if proPackages.supplyPhase == 3>晚餐</#if><#if proPackages.supplyPhase == 3>夜宵</#if></label>
+					<label class="ct1"><#if proPackages.supplyPhase == 0>早餐</#if><#if proPackages.supplyPhase == 1>午餐</#if><#if proPackages.supplyPhase == 2>午后甜点</#if><#if proPackages.supplyPhase == 3>晚餐</#if><#if proPackages.supplyPhase == 4>夜宵</#if></label>
 					<ul>
 						<#if proPackages.proPackagesDtos??>
 							<#list proPackages.proPackagesDtos as packages>
@@ -211,7 +211,11 @@
 		                <#list mWares.results as wares>
 			                <a href="/pro/wares/details.htm?id=${(wares.id)!}&source=${(dto.source)!}&schoolId=${(dto.customerId)!}&sourceId=${(eduSchoolSupplierDtos.sourceId)!}">
 			                    <li>
-			                        <img src="${(wares.image)!}" alt=""/>
+			                    	<#if (wares.image??) && (wares.image != '')>
+			                        	<img src="${(wares.image)!}" alt=""/>
+			                         <#else>
+								   	 	<img class="con-img" src="/static/img/default.png" alt="" />
+								     </#if>
 			                        <div class="name">${(wares.waresName)!}</div>
 			                        <div style="font-size: 12px; overflow: hidden;">产品编码:<span>${(wares.customCode)!}</span></div>
 			                        <div>规格:<span>${(wares.spec)!}</span></div>
