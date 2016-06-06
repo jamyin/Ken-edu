@@ -37,9 +37,12 @@ public class WapFollowController extends BaseController {
 	 * @version: 2016年5月21日 下午3:31:44
 	 */
 	@RequestMapping(value = "index")
-	public ModelAndView index(EduParentScChDto eduParentScChDto) {
+	public ModelAndView index(EduParentScChDto eduParentScChDto,String code) {
+		
+		setWeixinOpenId(code);
+		
 		ModelAndView mv = getModelAndView();
-
+		eduParentScChDto.setParentId(parentId);
 		List<EduParentScChDto> dataList = iEduParentScChService.searchParentScChDtoList(eduParentScChDto);
 		
 		mv.addObject("dataList",dataList);

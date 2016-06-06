@@ -186,6 +186,7 @@ public class LedgerController {
 		for (LedgerDto ledger : ledgers) {
 			if (ledger.getMark() != 1) {
 				str += i + ",";
+				i+=1;
 				continue;
 			}
 			// 采购品
@@ -197,6 +198,7 @@ public class LedgerController {
 			ledger.setWareBatchNo(ledgers.get(0).getWareBatchNo());
 			ledger.setActionDate(actionDate);
 			ledger.setReceiverId(receiverId);
+			ledger.setReceiverName(ledgers.get(0).getReceiverName());
 			ledger.setSourceId(sourceId);
 			// 查询采购品是否存在
 			if (ledger.getSpce() == null) {
@@ -250,15 +252,22 @@ public class LedgerController {
 			ledger.setCreateTime(new Date());
 			ledger.setLastUpdateTime(ledger.getCreateTime());
 			ledger.setStat(1);
+			ledger.setHaulStatus(0);
 			i += 1;
 		}
+		int x=0;
 		if (str != "") {
 			for (String b : str.split(",")) {
-				ledgers.remove(Integer.parseInt(b));
+				ledgers.remove(Integer.parseInt(b)-x);
+				x++;
 			}
 		}
+		if(ledgers.size()==0){
+			j.setMsg("不能没有采购品");
+			j.setSuccess(false);
+			return j;
+		}
 		ledgerService.saveLedger(ledgers);
-		j = new Json();
 		j.setMsg("添加供应商成功");
 		j.setSuccess(true);
 		return j;
@@ -346,11 +355,10 @@ public class LedgerController {
 		//标识
 		int n = 0;
 		String str = "";
-		String ui="";
-		String di="";
 		for (LedgerDto ledger : ledgers) {
 			if (ledger.getMark() != 1) {
 				str+=n+",";
+				n+=1;
 				continue;
 			}
 			// 采购品
@@ -363,6 +371,8 @@ public class LedgerController {
 			ledger.setWareBatchNo(ledgers.get(0).getWareBatchNo());
 			ledger.setActionDate(actionDate);
 			ledger.setReceiverId(receiverId);
+			ledger.setReceiverName(ledgers.get(0).getReceiverName());
+			ledger.setHaulStatus(ledgers.get(0).getHaulStatus());
 			ledger.setSourceId(sourceId);
 			if (ledger.getSpce() == null) {
 				j.setMsg(ledger.getName() + "采购品规格不能为空");
@@ -409,50 +419,22 @@ public class LedgerController {
 			ledger.setCreateTime(null);
 			ledger.setLastUpdateTime(new Date());
 			ledger.setStat(1);
-			int i=0;
-			//不存在的配送品添加
-			for (LedgerDto ledgerDto : list) {
-				if(!ledgerDto.getId().equals(ledger.getId())){
-					i+=1;
-				}else{
-					di+=i+",";
-					ui+=n+",";
-				}
-				if(i==list.size()){
-					ledger.setCreateTime(ledger.getLastUpdateTime());
-					ledger.setStat(1);
-					ledgerService.upSaveLedger(ledger);
-				}
-			}
 			n+=1;
 		}
+		int x=0;
 		if (str != "") {
 			for (String b : str.split(",")) {
-				LedgerDto remove = ledgers.remove(Integer.parseInt(b));
-			}
-		}
-		//配送品更新删除
-		if(di!=""){
-			List<LedgerDto> ls=new ArrayList();
-			int x=0;
-			for (String c : di.split(",")) {
-				list.remove(Integer.parseInt(c)-x);
+				LedgerDto remove = ledgers.remove(Integer.parseInt(b)-x);
 				x++;
 			}
-			int y=0;
-			for (String c : ui.split(",")) {
-				LedgerDto remove = ledgers.remove(Integer.parseInt(c)-y);
-				ls.add(remove);
-				y++;
-			}
-			ledgerService.updataLedger(ls);
-			for (LedgerDto ledgerDto : list) {
-				ledgerService.upDeleteLedger(ledgerDto.getId());
-			}
-		}else{
-			ledgerService.updataLedger(ledgers);
 		}
-		j = new Json();
+		if(ledgers.size()==0){
+			j.setMsg("不能没有采购品");
+			j.setSuccess(false);
+			return j;
+		}
+		ledgerService.deleteLedger(ledgers.get(0).getSourceId(), ledgers.get(0).getMasterId());
+		ledgerService.saveLedger(ledgers);
 		j.setMsg("修改供应商成功");
 		j.setSuccess(true);
 		return j;

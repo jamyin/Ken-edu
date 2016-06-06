@@ -17,18 +17,12 @@ public interface ILedgerService {
 
 	List<LedgerDto> findLedgerByMasterId(String sourceId, String masterId);
 
-	int updataLedger(List<LedgerDto> ledger);
-
-	int deleteLedger(String sourceId, String wareBatchNo);
+	int deleteLedger(String sourceId, String masterId);
 
 	int findWareBatchNo(String wareBatchNo,String sourceId);
 	
 	int importLedger(Map<ProLedgerMaster, List<ProLedger>> map);
 
 	Map<ProLedgerMaster,List<ProLedger>> findExportProSupplier(LedgerDto ld);
-
-	int upDeleteLedger(String id);
-
-	int upSaveLedger(LedgerDto ledger);
 
 }

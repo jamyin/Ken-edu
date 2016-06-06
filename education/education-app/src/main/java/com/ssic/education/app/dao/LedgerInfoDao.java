@@ -1,5 +1,6 @@
 package com.ssic.education.app.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import lombok.Getter;
@@ -118,5 +119,21 @@ public class LedgerInfoDao {
 	public LedgerMasterInfoDto findProLedgerMasterInfo(String id) {
 		ProLedgerMaster ledgerMaster = ledgerMasterMapper.selectByPrimaryKey(id);
 		return BeanUtils.createBeanByTarget(ledgerMaster, LedgerMasterInfoDto.class);
+	}
+
+	public int updateStatus(String id, String status) {
+		ProLedgerMasterExample example = new ProLedgerMasterExample();
+		ProLedgerMasterExample.Criteria criteria = example.createCriteria();
+		ProLedgerMaster ledgerMaster = new ProLedgerMaster();
+		ledgerMaster.setHaulStatus(Integer.valueOf(status));
+		if (status.equals("1")) {
+			ledgerMaster.setStartTime(new Date());
+		}
+		if (status.equals("2")) {
+			ledgerMaster.setEndTime(new Date());
+		}
+
+		criteria.andIdEqualTo(id);
+		return ledgerMasterMapper.updateByExampleSelective(ledgerMaster, example);
 	}
 }

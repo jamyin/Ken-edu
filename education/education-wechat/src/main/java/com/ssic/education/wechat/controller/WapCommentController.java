@@ -88,7 +88,9 @@ public class WapCommentController extends BaseController {
 		 * @version: 2016年5月24日 上午9:26:45
 	 */
 	@RequestMapping(value="index")
-	public ModelAndView searchComment(EduParentPackCommentDto eduParentPackCommentDto){
+	public ModelAndView searchComment(EduParentPackCommentDto eduParentPackCommentDto,String code){
+		
+		setWeixinOpenId(code);
 		
 		ModelAndView mv = getModelAndView();
 

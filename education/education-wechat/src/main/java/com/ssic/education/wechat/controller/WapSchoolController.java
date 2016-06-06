@@ -51,9 +51,12 @@ public class WapSchoolController extends BaseController{
 		 * @version: 2016年5月29日 上午10:34:54
 	 */
 	@RequestMapping(value="index")
-	public ModelAndView index(){
-		ModelAndView mv = getModelAndView();
+	public ModelAndView index(String code){
 		
+		setWeixinOpenId(code);
+		
+		ModelAndView mv = getModelAndView();
+
 		//查看家长关注的学校
 		EduParentScChDto eduParentScChDto = new EduParentScChDto();
 		eduParentScChDto.setParentId(parentId);

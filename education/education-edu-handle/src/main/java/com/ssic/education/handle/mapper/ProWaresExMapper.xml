@@ -73,7 +73,8 @@
 	<select id="searchProWares" resultMap="BaseResultMap">
 		SELECT * FROM `t_pro_wares` ware WHERE   EXISTS  (SELECT * FROM `t_pro_school_ware` sc_ware WHERE sc_ware.`school_id` = #{schoolId}  AND ware.`id` = sc_ware.`ware_id`)
 		<if test="waresName != null" >
-			and ware.wares_name LIKE '%${waresName}%'; 
+			and ware.wares_name LIKE '%${waresName}%' 
 		</if>
+		 ORDER BY ware.`create_time` DESC
 	</select>
 </mapper>
