@@ -113,6 +113,9 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 		if (StringUtils.isNotBlank(dto.getSupplierId())) {
 			criteria.andSupplierIdEqualTo(dto.getSupplierId());
 		}
+		if(dto.getType() != null){
+			criteria.andTypeEqualTo(dto.getType());          //类型
+		}
 		if (null != dto.getCustomerType()) {
 			criteria.andCustomerTypeEqualTo(dto.getCustomerType());
 		}
