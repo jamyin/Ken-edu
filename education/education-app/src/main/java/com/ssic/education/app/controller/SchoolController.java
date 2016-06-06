@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,6 +49,8 @@ import com.ssic.education.utils.util.StringUtils;
 @RequestMapping(value = "/school")
 public class SchoolController {
 
+	protected static final Log logger = LogFactory.getLog(SchoolController.class);
+
 	@Autowired
 	private ISchoolService schoolService;
 
@@ -78,6 +82,8 @@ public class SchoolController {
 	@RequestMapping("/findSchoolList")
 	@ResponseBody
 	public Response<PageResult<SchoolDto>>  findSchoolList(SchoolDto schoolDto, PageQuery query , Integer isPage) {
+		logger.info("SchoolDto : " + schoolDto +";isPage : " + isPage);
+
 		Response<PageResult<SchoolDto>> result = new Response<PageResult<SchoolDto>>();
 		PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, query , isPage);
 		if(schoolList.getResults() != null && schoolList.getResults().size() >0 ){
@@ -117,6 +123,7 @@ public class SchoolController {
 	@RequestMapping("/findSchoolDetialList/{id}")
 	@ResponseBody
 	public Response<PageResult<EduSchoolDto>> findSchoolDetialList(@PathVariable("id")String id,EduSchoolDto eduSchoolDto, PageQuery query) {
+		logger.info("EduSchoolDto : " + eduSchoolDto +";id : " + id);
 		Response<PageResult<EduSchoolDto>> result = new Response<PageResult<EduSchoolDto>>();
 		if(StringUtils.isEmpty(id)){
 			result.setStatus(DataStatus.HTTP_FAILE);
@@ -146,6 +153,7 @@ public class SchoolController {
 	@RequestMapping(value="school")
 	@ResponseBody
 	public Response<EduSchoolDto> school(ProPackagesDto dto, PageQuery page){
+		logger.info("ProPackagesDto : " + dto);
 		Response<EduSchoolDto> result = new Response<EduSchoolDto>();
 		if(StringUtils.isEmpty(dto.getCustomerId())){
 			result.setStatus(DataStatus.HTTP_FAILE);
@@ -202,6 +210,7 @@ public class SchoolController {
 	@RequestMapping(value="searchPackages")
 	@ResponseBody
 	public Response<PageResult<ProPackagesDto>> searchPackages(ProPackagesDto dto, PageQuery page){
+		logger.info("ProPackagesDto : " + dto);
 		Response<PageResult<ProPackagesDto>> result = new Response<PageResult<ProPackagesDto>>();
 		PageResult<ProPackagesDto> proPackagesDtos = proPackagesService.searchPackages(dto, page);
 		if(proPackagesDtos != null && proPackagesDtos.getResults() != null && proPackagesDtos.getResults().size() > 0){
@@ -225,6 +234,7 @@ public class SchoolController {
 	@RequestMapping("/chooseSchool")
 	@ResponseBody
 	public Response<ChooseSchoolDto>  chooseSchool(SchoolDto schoolDto, PageQuery query ,Integer type, Integer sourceType) {
+		logger.info("SchoolDto : " + schoolDto + ";type : " + type + ";sourceType : " + sourceType);
 		Response<ChooseSchoolDto> result = new Response<ChooseSchoolDto>();
 		//处理CommitteeId全选传-1
 		if(StringUtils.isNotEmpty(schoolDto.getCommitteeId()) && schoolDto.getCommitteeId().equals("-1")){
@@ -289,20 +299,6 @@ public class SchoolController {
 			}
 		}
 
-
-		/*if(type != null && type == 1 ){
-			List<MapToListDto> levelList = new ArrayList<MapToListDto>();
-			for(Entry<Integer, String> entry: SchoolLevel.getAll().entrySet()) {
-				MapToListDto mapToListDto = new MapToListDto();
-				mapToListDto.setKey(entry.getKey());
-				mapToListDto.setValue(entry.getValue());
-				levelList.add(mapToListDto);
-			}
-			chooseSchoolDto.setLevelList(levelList);
-			//chooseSchoolDto.setLevelList(SchoolLevel.getAll());
-			List<EduCommitteeDto> committeeList = committeeService.findCommitteeListNoPage(new EduCommitteeDto());
-			chooseSchoolDto.setCommitteeList(committeeList);
-		}*/
 		return result;
 	}
 

@@ -3,6 +3,8 @@ package com.ssic.education.app.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,6 +33,7 @@ import com.ssic.education.utils.util.StringUtils;
 @Controller
 @RequestMapping(value = "information")
 public class InformationController {
+	protected static final Log logger = LogFactory.getLog(InformationController.class);
 
 	@Autowired
 	private IInformationService informationService;
@@ -51,6 +54,7 @@ public class InformationController {
 	@RequestMapping("/findInformationList")
 	@ResponseBody
 	public Response<PageResult<EduInformationDto>>  findInformationList(EduInformationDto eduInformationDto, PageQuery query) {
+		logger.info("EduInformationDto : " + eduInformationDto + ";PageQuery : " + query );
 		Response<PageResult<EduInformationDto>> result = new Response<PageResult<EduInformationDto>>();
 		if(eduInformationDto.getSourceType() == null){
 			result.setStatus(DataStatus.HTTP_FAILE);
@@ -126,6 +130,7 @@ public class InformationController {
 	@RequestMapping("/findInformationDetial/{id}")
 	@ResponseBody
 	public Response<EduInformationDto> findInformationDetial(@PathVariable("id")String id) {
+		logger.info("id : " + id );
 		Response<EduInformationDto> result = new Response<EduInformationDto>();
 		if(StringUtils.isEmpty(id)){
 			result.setStatus(DataStatus.HTTP_FAILE);

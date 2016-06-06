@@ -7,6 +7,7 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -21,6 +22,7 @@ import com.ssic.education.utils.model.PageResult;
 *
  */
 @Data
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class EduSchoolDto implements Serializable {
