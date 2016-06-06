@@ -192,7 +192,7 @@
 						str += $.formatString('<img onclick="editFun(\'{0}\');" src="{1}" title="编辑"/>', row.id, '${pageContext.request.contextPath}/icon/编辑.png');
 					}
 					str += '&nbsp;';
-					if ($.inputImage) {
+			/* 		if ($.inputImage) {
 						str += $.formatString('<img onclick="inputImage(\'{0}\');" src="{1}" title="上传图片"/>',  row.id, '${pageContext.request.contextPath}/icon/上传图片.png');
 					}
 				
@@ -202,7 +202,7 @@
 						str += $.formatString('<img onclick="lookImage(\'{0}\');" src="{1}" title="查看图片"/>', row.id, '${pageContext.request.contextPath}/icon/查看图片.png');
 					}
 					
-					str += '&nbsp;';
+					str += '&nbsp;'; */
 
 					if ($.editImage) {
 						str += $.formatString('<img onclick="editImage(\'{0}\');" src="{1}" title="编辑图片"/>', row.id, '${pageContext.request.contextPath}/icon/编辑图片.png');

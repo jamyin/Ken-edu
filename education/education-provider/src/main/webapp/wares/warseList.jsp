@@ -196,7 +196,7 @@ else
 					if ($.canEdit) {
 						str += $.formatString('<img onclick="editFun(\'{0}\');" src="{1}" title="编辑"/>', row.id, '${pageContext.request.contextPath}/icon/编辑.png');
 					}
-					str += '&nbsp;';
+		/* 			str += '&nbsp;';
 					
 					
 					if ($.canImage) {
@@ -208,7 +208,7 @@ else
 					if ($.lookImage) {
 						str += $.formatString('<img onclick="lookImage(\'{0}\');" src="{1}" title="查看图片"/>', row.id, '${pageContext.request.contextPath}/icon/查看图片.png');
 					}
-					
+					 */
 					str += '&nbsp;';
 /* 
 					if ($.lookSupplier) {
