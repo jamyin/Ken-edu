@@ -83,7 +83,14 @@ public class AppUsersServiceImpl implements IAppUsersService {
 
 	@Override
 	public int proUpdatePwd(String account, String oldPwd, String newPwd) {
-		// TODO Auto-generated method stub
-		return 0;
+		ProUsers user = new ProUsers();
+		user.setPassword(oldPwd);
+		user.setUserAccount(account);
+		List<ProUsers> result = proUsersDao.proUserLogin(user);
+		if (null != result && !result.isEmpty() && result.size() == 1) {
+			return proUsersDao.proUpdatePwd(result.get(0).getId(), newPwd);
+		} else {
+			return 0;
+		}
 	}
 }

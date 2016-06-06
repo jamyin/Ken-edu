@@ -7,10 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ssic.education.app.dto.AppProUserDto;
 import com.ssic.education.app.dto.LedgerInfoDto;
 import com.ssic.education.app.dto.LedgerMasterInfoDto;
 import com.ssic.education.app.dto.LedgerMasterListDto;
 import com.ssic.education.app.service.ILedgerInfoService;
+import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 import com.ssic.education.utils.model.Response;
@@ -107,5 +109,21 @@ public class StockBatchController {
 		LedgerMasterInfoDto LedgerInfoDto = ledgerInfoService.findMasterById(id, query);
 		result.setData(LedgerInfoDto);
 		return result;
+	}
+
+	@RequestMapping(value = "/updateStatus/{id}/{status}", method = RequestMethod.GET)
+	@ResponseBody
+	public Response<String> updateStatus(@PathVariable("id") String id, @PathVariable("status") String status) {
+		Response<String> result = new Response<String>();
+		int i = ledgerInfoService.updateStatus(id, status);
+		if (i != 0) {
+			result.setStatus(DataStatus.HTTP_SUCCESS);
+			result.setMessage("提交成功！");
+			return result;
+		} else {
+			result.setStatus(DataStatus.HTTP_FAILE);
+			result.setMessage("请求失败！");
+			return result;
+		}
 	}
 }

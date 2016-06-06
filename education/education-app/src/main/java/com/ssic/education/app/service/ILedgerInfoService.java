@@ -26,4 +26,6 @@ public interface ILedgerInfoService {
 	PageResult<LedgerMasterListDto> findMasterDriverList(String userId, PageQuery page);
 
 	LedgerMasterInfoDto findMasterById(String id, PageQuery page);
+
+	int updateStatus(String id, String status);
 }
