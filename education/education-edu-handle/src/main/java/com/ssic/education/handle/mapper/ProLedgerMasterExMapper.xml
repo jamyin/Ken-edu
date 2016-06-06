@@ -26,7 +26,8 @@
 		a.production_name as productionName,a.batch_no as batchNo,a.trace_code as traceCode,a.create_time as createTime,a.last_update_time as lastUpdateTime,a.stat
 		FROM t_pro_ledger a
 		LEFT JOIN t_pro_ledger_master b on a.master_id = b.id
-		WHERE a.stat = 1 and b.stat=1
+		WHERE b.stat=1
+		<!-- a.stat = 1 and -->
 		<if test="ledgerDto.receiverId != null  and ledgerDto.receiverId !=''">
 			AND b.receiver_id = #{ledgerDto.receiverId}
 		</if>
@@ -47,7 +48,7 @@
 		a.production_name as productionName,a.batch_no as batchNo,a.trace_code as traceCode,a.create_time as createTime,a.last_update_time as lastUpdateTime,a.stat
 		FROM t_pro_ledger a
 		LEFT JOIN t_pro_ledger_master b on a.master_id = b.id
-		WHERE a.stat = 1 and b.stat=1
+		WHERE <!-- a.stat = 1 and --> b.stat=1
 		<if test="ledgerDto.receiverId != null  and ledgerDto.receiverId !=''">
 			AND b.receiver_id = #{ledgerDto.receiverId}
 		</if>
@@ -69,7 +70,7 @@
 	<select id="countLedgerListOrderby" resultType="java.lang.Long" parameterType="java.lang.String">
 		SELECT count(*) from  (SELECT b.id, COUNT(*) counts FROM t_pro_ledger a
 		LEFT JOIN t_pro_ledger_master b on a.master_id = b.id
-		WHERE a.stat = 1 and b.stat=1
+		WHERE <!-- a.stat = 1 and --> b.stat=1
 		<if test="ledgerDto.receiverId != null  and ledgerDto.receiverId !=''">
 			AND b.receiver_id = #{ledgerDto.receiverId}
 		</if>
