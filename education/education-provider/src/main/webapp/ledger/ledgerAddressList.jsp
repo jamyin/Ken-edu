@@ -125,7 +125,8 @@
 			
 					<tr>
 						<td>名称:
-						<input class="span2" name="schoolName" />&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);"  onclick="searchFun();" class="easyui-linkbutton" iconCls="icon-search" ><font  style='font-style: normal;font-weight: bolder;font-size:18px;'>查询</font></a></td>
+						<input class="span2" name="schoolName" />&nbsp;&nbsp;&nbsp;
+						<a href="javascript:void(0);"  onclick="searchFun();" ><img src="${pageContext.request.contextPath}/icon/查询.png" ></img></a></td>
 				
 					</tr>							
 				</table>

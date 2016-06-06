@@ -428,7 +428,8 @@
 						<td>
 						名称:&nbsp;<input id="supplierName" class="span3" name="supplierName" /></td>
 						<td>
-						地址:&nbsp;<input id="address" class="span2" name="address" />&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);"  onclick="searchFun();" class="easyui-linkbutton" iconCls="icon-search" ><font  style='font-style: normal;font-weight: bolder;font-size:18px;'>查询</font></a>
+						地址:&nbsp;<input id="address" class="span2" name="address" />&nbsp;&nbsp;&nbsp;
+						<a href="javascript:void(0);"  onclick="searchFun();" ><img src="${pageContext.request.contextPath}/icon/查询.png" ></img></a>
 						</td>
 						
 					</tr>		

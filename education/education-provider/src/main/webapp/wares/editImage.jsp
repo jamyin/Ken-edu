@@ -134,8 +134,8 @@ $(function() {
 						accept="image/*" /></td>
 				
 				</tr>
-				<tr hidden="hidden" id="img1_8">
-					<td colspan="2"><img id="img1"   width="150px" height="150px"></img></td>
+				<tr  id="img1_8">
+					<td colspan="2"><img id="img1"   width="150px" height="150px"  src="${pageContext.request.contextPath}/icon/图片未上传200x200.png"></img></td>
 				
 				</tr>
 				<tr>
@@ -144,8 +144,8 @@ $(function() {
 						accept="image/*" /></td>
 				
 				</tr>
-				<tr hidden="hidden" id="img2_9">
-					<td colspan="2"><img id="img2"   width="150px" height="150px"></img></td>
+				<tr  id="img2_9">
+					<td colspan="2"><img id="img2"   width="150px" height="150px"  src="${pageContext.request.contextPath}/icon/图片未上传200x200.png"></img></td>
 				
 				</tr>
 				<tr>
@@ -154,8 +154,8 @@ $(function() {
 						accept="image/*" /></td>
 				
 				</tr>
-				<tr hidden="hidden" id="img3_10">
-					<td colspan="2"><img id="img3"  width="150px" height="150px"></img></td>
+				<tr  id="img3_10">
+					<td colspan="2"><img id="img3"  width="150px" height="150px" src="${pageContext.request.contextPath}/icon/图片未上传200x200.png"></img></td>
 				
 				</tr>
 			
