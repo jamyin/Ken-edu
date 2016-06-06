@@ -30,6 +30,10 @@ public class EduParentPackCommentDao extends MyBatisBaseDao<EduParentPackComment
 		if(!StringUtils.isEmpty(eduParentPackCommentDto.getPackageId())){
 			criteria.andPackageIdEqualTo(eduParentPackCommentDto.getPackageId());
 		}
+		
+		if(!StringUtils.isEmpty(eduParentPackCommentDto.getParentId())){
+			criteria.andParentIdEqualTo(eduParentPackCommentDto.getParentId());
+		}
 
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		return mapper.selectByExample(example);
