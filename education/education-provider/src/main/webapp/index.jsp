@@ -175,9 +175,9 @@
 				<a onclick="loadUrl(this);" data-src="ledgerAddressController/manager" data-text="配货点管理" class="easyui-linkbutton" plain="true" iconCls="icon-print">
 				<font  style="font-style: normal;font-size:18px;">配货点管理</font>
 				</a>
-				<a onclick="loadUrl(this);" data-src="userController/manager" data-text="用户管理" class="easyui-linkbutton" plain="true"  iconCls="icon-user"><font  style="font-style: normal;font-size:18px;">用户管理</font></a>
+				<a onclick="loadUrl(this);" data-src="userController/manager" data-text="用户管理" class="easyui-linkbutton" plain="true"  iconCls="icon-pencil"><font  style="font-style: normal;font-size:18px;">用户管理</font></a>
 				<a onclick="loadUrl(this);" data-src="personalController/manager" data-text="个人中心" class="easyui-linkbutton" plain="true"  iconCls="icon-user"><font  style="font-style: normal;font-size:18px;">个人中心</font></a>
-				<a onclick="loadUrl(this);" data-src="corporateController/manager" data-text="我的信息" class="easyui-linkbutton" plain="true" iconCls="icon-user">
+				<a onclick="loadUrl(this);" data-src="corporateController/manager" data-text="我的信息" class="easyui-linkbutton" plain="true" iconCls="icon-ok">
 				<font  style="font-style: normal;font-size:18px;">
 				我的信息</font>
 				
