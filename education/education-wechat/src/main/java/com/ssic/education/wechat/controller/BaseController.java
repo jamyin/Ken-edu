@@ -55,7 +55,7 @@ public class BaseController {
 		}
 		System.out.println("parentId "+parentId);
 //		getopenId(getaccess_token());
-		
+		mv.addObject("wwwdomain", PropertiesUtils.getProperty("upload.look.url"));
 		return mv;
 	}
 	

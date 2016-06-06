@@ -60,10 +60,10 @@ header select#sel_school{position:absolute;top:0;width:80%;height:3rem;backgroun
 .menu_box .row h2 span{color:#999;font-size:1.3rem;display:block;clear:both}
 .menu_box .row h2 a{position:absolute;top:23px;right:5%;display:block;overflow:hidden;border:1px #60ac62 solid;border-radius:5px;padding:0 6px;color:#60ac62;font-size:1.2rem}
 .menu_box .row ul{width:100%;overflow:hidden;border-top:1px #ddd solid;background:#fff}
-.menu_box .row ul li{position:relative;width:100%;height:100px;border-bottom:1px #ddd solid}
+.menu_box .row ul li{position:relative;width:100%;height:100px;border-bottom:1px #ddd solid;}
 .menu_box .row ul li img{position:absolute;width:80px;height:80px;border-radius:5px;top:10px;left:10px;z-index:1}
-.menu_box .row ul li p{position:absolute;width:100%;padding-left:110px;padding-right:5%;top:23px;font-size:1.8rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.menu_box .row ul li span{position:absolute;width:100%;padding-left:110px;padding-right:5%;top:56px;color:#666;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.menu_box .row ul li p{position:absolute;width:100%;padding-left:5%;padding-right:5%;top:23px;font-size:1.8rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.menu_box .row ul li span{position:absolute;width:100%;padding-left:5%;padding-right:5%;top:56px;color:#666;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .menu_box .row ul.nutrition{border-top:0;}
 .menu_box .row ul.nutrition li{width:50%;float:left;height:auto;padding:10px 0;padding-right:5%}
 .menu_box .row ul.nutrition li:nth-child(odd){padding-left:5%;}
