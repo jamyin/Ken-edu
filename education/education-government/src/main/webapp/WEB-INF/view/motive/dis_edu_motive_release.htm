@@ -67,13 +67,13 @@
                             </section>
                             <section class="line">
                                 <label for="title">标题:    </label>
-                                <input type="text" name="title">
+                                <input id="title" type="text" name="title">
                             </section>
                             <section class="text">
                                 <label for="text">内容:    </label>
                                 <div class="text_wrap1">
                                 	<!-- <script id="editor" type="text/plain" style="width:550px;height:300px;"></script> -->
-                                    <textarea name="content" style="width:550px"></textarea>
+                                    <textarea id="content" name="content" style="width:550px"></textarea>
                                 </div>
                             </section>
                             <div class="subbt">
@@ -89,6 +89,10 @@
                                             <input id="searchName" type="button" name="name" value="搜索">
                                             <div class="checkwrap">
                                                 <ul id="dataList">
+													<li>
+                                                        <label for="shisan">全选</label>
+                                                        <input type="checkbox" onclick="checkboxClick();"/>
+                                                    </li>                                                   
                                                 	<#if dataList ??>
                                                 		<#list dataList as data>
 		                                                    <li>
@@ -160,9 +164,25 @@
             	
             	$("#savebutton").on('click',function(){
             		var ajaxParams = $("#submitForm").serialize();
-    				//var content = um.getContent();
-    				//$("#content").val(content);
-    				
+            		
+					var lianxiList = $("#lianxiList").val();
+					if(lianxiList=="" || lianxiList ==null){
+						alert("联系人不能为空");
+						return false;
+					};
+					
+					var title = $("#title").val();
+					if(title=="" || title ==null){
+						alert("标题不能为空");
+						return false;
+					};
+					
+					var content = $("#content").val();
+					if(content=="" || content ==null){
+						alert("内容不能为空");
+						return false;
+					};					
+					
     				$.ajax({
     					url : "/motive/save.htm",
     					type:"POST",
@@ -193,6 +213,19 @@
                 });
 
             });
+            
+            function checkboxClick(){
+            	$(".checkwrap ul li input").on('click',function(){
+            		var lianxiList = "";
+            		var lianxiIds = "";
+            		$("input[name='lianxiIds']").each(function(){
+            		    if (true == $(this).prop("checked")) {
+            		    	lianxiList += $(this).parent().find("label").html() + ","
+            		    }
+            		});
+            		$("#lianxiList").val(lianxiList);
+            	}); 
+            }
             
             function loadClickFunction(){
             	$(".checkwrap ul li input").on('click',function(){
