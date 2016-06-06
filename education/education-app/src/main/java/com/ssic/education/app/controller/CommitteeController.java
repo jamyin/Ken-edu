@@ -2,6 +2,8 @@ package com.ssic.education.app.controller;
 
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +26,7 @@ import com.ssic.education.utils.model.Response;
 @Controller
 @RequestMapping(value = "committee")
 public class CommitteeController {
+	protected static final Log logger = LogFactory.getLog(CommitteeController.class);
 	
 	@Autowired
 	private ICommitteeService committeeService;
@@ -38,6 +41,7 @@ public class CommitteeController {
     @RequestMapping("/findCommitteeList")
     @ResponseBody
     public Response<PageResult<EduCommitteeDto>>  findCommitteeList(EduCommitteeDto eduCommitteeDto, PageQuery query) {
+    	logger.info("EduCommitteeDto eduCommitteeDto : " + eduCommitteeDto);
     	Response<PageResult<EduCommitteeDto>> result = new Response<PageResult<EduCommitteeDto>>();
     	PageResult<EduCommitteeDto> committeeList = committeeService.findCommitteeList(eduCommitteeDto, query);
     	if(committeeList.getResults() != null && committeeList.getResults().size() >0 ){
