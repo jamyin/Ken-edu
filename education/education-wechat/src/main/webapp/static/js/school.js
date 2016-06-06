@@ -29,7 +29,11 @@ function loadscMenu(){
 				var objHtml = "";
 				$.each(data.data, function(index, item) {
 					objHtml+="<div class='row breakfrist'>";
-					objHtml+="<h2><i>"+item['packageName']+"</i><span></span><a href='/wap/comment/join/"+item['id']+".htm'>点评</a></h2>";
+					objHtml+="<h2><i>";
+					if(item['packageName']!=null && item['packageName']!=""){
+						objHtml+=item['packageName'];
+					}
+					objHtml+="</i><span></span><a href='/wap/comment/join/"+item['id']+".htm'>点评</a></h2>";
 					objHtml+="<ul>";
 					var proDishesDtos = item['proDishesDtos'];
 					if(proDishesDtos!=null){
