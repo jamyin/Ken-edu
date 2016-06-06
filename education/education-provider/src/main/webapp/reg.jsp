@@ -79,48 +79,55 @@
 								<div class="" id="committeeList" style="float: right; margin-left: 90px;"></div>
 							</div>
 						<div class="item col-xs-12" style="margin-top:80px;">
-	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>工商营业执照：</span>    
-	                       <div class="f-fl item-ifo">
+	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>工商营业执照：</span>
+     						<div class="f-fl item-ifo">
+		     						<input type="text" class="txt03 f-r3" id="licenseNo1"/>
+     						</div>	                        
+	                      <div class="f-fl item-ifo" style="margin-left:5px;">
 	                       		<input id="file-1" name="licenseList" type="checkbox" style="display:none;"/>
 	      						<input multiple type="file" id="id-input-file-1"/>
-	                        </div>
-     						<div class="f-fl item-ifo">
-     							<div class="f-fl item-ifo">
-     								<input />
-		     						<wf id="license1">
+		     					<wf id="license1">
 		     							<!-- <a href="">查看图片</a> -->
-		     						</wf>
-     							</div>
+		     					</wf>
      						</div>
 	                    </div>
 						<div class="item col-xs-12">
-	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>餐饮服务许可证：</span>    
-	                       <div class="f-fl item-ifo">
+	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>餐饮服务许可证：</span>
+     						<div class="f-fl item-ifo">
+		     						<input type="text" class="txt03 f-r3" id="licenseNo2"/>
+     						</div>
+	                       <div class="f-fl item-ifo" style="margin-left:5px;">
 	                       		<input id="file-2" name="licenseList" type="checkbox" style="display:none;"/>
 	      						<input multiple type="file" id="id-input-file-2"/>
-	                        </div>
-     						<div class="f-fl item-ifo" id="license2">
-     							<!-- <a href="">查看图片</a> -->
+		     					<wf id="license2">
+		     							<!-- <a href="">查看图片</a> -->
+		     					</wf>
      						</div>	                        
 	                    </div>
 						<div class="item col-xs-12">
-	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>食品流通许可证：</span>    
-	                       <div class="f-fl item-ifo">
+	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>食品流通许可证：</span>
+     						<div class="f-fl item-ifo">
+		     						<input type="text" class="txt03 f-r3" id="licenseNo3"/>
+     						</div>
+	                      <div class="f-fl item-ifo" style="margin-left:5px;">
 	                       		<input id="file-3" name="licenseList" type="checkbox" style="display:none;"/>
 	      						<input multiple type="file" id="id-input-file-3"/>
-	                        </div>
-     						<div class="f-fl item-ifo" id="license3">
-     							<!-- <a href="">查看图片</a> -->
+		     					<wf id="license3">
+		     							<!-- <a href="">查看图片</a> -->
+		     					</wf>
      						</div>	                        
 	                    </div>
 						<div class="item col-xs-12">
-	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>食品生产许可证：</span>    
-	                       <div class="f-fl item-ifo">
+	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>食品生产许可证：</span>
+     						<div class="f-fl item-ifo">
+		     						<input type="text" class="txt03 f-r3" id="licenseNo4"/>
+     						</div>
+	                       <div class="f-fl item-ifo" style="margin-left:5px;">
 	                       		<input id="file-4" name="licenseList" type="checkbox" style="display:none;"/>
 	      						<input multiple type="file" id="id-input-file-4"/>
-	                        </div>
-     						<div class="f-fl item-ifo" id="license4">
-     							<!-- <a href="">查看图片</a> -->
+		     					<wf id="license4">
+		     							<!-- <a href="">查看图片</a> -->
+		     					</wf>
      						</div>	                        
 	                    </div>	
 							<div class="item col-xs-12">
