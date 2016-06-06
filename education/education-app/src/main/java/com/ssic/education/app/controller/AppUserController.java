@@ -141,7 +141,20 @@ public class AppUserController extends BaseController {
 	@RequestMapping(value = "/proModifyPwd", method = RequestMethod.POST)
 	@ResponseBody
 	public Response<String> proModifyPwd(String account, String oldPwd, String newPwd) {
-		return null;
+		Response<String> result = new Response<String>();
+		if (oldPwd.equals(newPwd)) {
+			result.setStatus(DataStatus.HTTP_FAILE);
+			result.setMessage("两次密码一样");
+		} else {
+			if (appUserService.proUpdatePwd(account, oldPwd, newPwd) == 1) {
+				result.setStatus(DataStatus.HTTP_SUCCESS);
+				result.setMessage("修改成功！");
+			} else {
+				result.setStatus(DataStatus.HTTP_FAILE);
+				result.setMessage("修改失败，原密码有误");
+			}
+		}
+		return result;
 	}
 
 	/**

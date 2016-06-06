@@ -125,4 +125,9 @@ public class LedgerInfoServiceImpl implements ILedgerInfoService {
 
 		return result.toString();
 	}
+
+	public int updateStatus(String id, String status) {
+
+		return ledgerInfoDao.updateStatus(id, status);
+	}
 }

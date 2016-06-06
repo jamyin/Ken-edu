@@ -49,7 +49,6 @@ public class AppProUsersDao {
 		criteria.andIdEqualTo(id);
 		ProUsers proUser = new ProUsers();
 		proUser.setPassword(password);
-		proUserMapper.updateByExample(proUser, example);
-		return 0;
+		return proUserMapper.updateByExampleSelective(proUser, example);
 	}
 }
