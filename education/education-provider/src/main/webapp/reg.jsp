@@ -79,48 +79,47 @@
 								<div class="" id="committeeList" style="float: right; margin-left: 90px;"></div>
 							</div>
 						<div class="item col-xs-12" style="margin-top:80px;">
-	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>工商营业执照：</span>    
-	                       <div class="f-fl item-ifo">
+	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>工商营业执照：</span>
+     						<div class="f-fl item-ifo">
+		     						<input type="text" placeholder="工商营业执照" class="txt03 f-r3" id="licenseNo1"/>
+     						</div>	                        
+	                      <div class="f-fl item-ifo" style="margin-left:5px;">
 	                       		<input id="file-1" name="licenseList" type="checkbox" style="display:none;"/>
 	      						<input multiple type="file" id="id-input-file-1"/>
-	                        </div>
-     						<div class="f-fl item-ifo">
-     							<div class="f-fl item-ifo">
-     								<input />
-		     						<wf id="license1">
-		     							<!-- <a href="">查看图片</a> -->
-		     						</wf>
-     							</div>
+		     					<wf id="license1"></wf>
      						</div>
 	                    </div>
 						<div class="item col-xs-12">
-	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>餐饮服务许可证：</span>    
-	                       <div class="f-fl item-ifo">
+	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>餐饮服务许可证：</span>
+     						<div class="f-fl item-ifo">
+		     						<input type="text" placeholder="餐饮服务许可证" class="txt03 f-r3" id="licenseNo2"/>
+     						</div>
+	                       <div class="f-fl item-ifo" style="margin-left:5px;">
 	                       		<input id="file-2" name="licenseList" type="checkbox" style="display:none;"/>
 	      						<input multiple type="file" id="id-input-file-2"/>
-	                        </div>
-     						<div class="f-fl item-ifo" id="license2">
-     							<!-- <a href="">查看图片</a> -->
+		     					<wf id="license2"></wf>
      						</div>	                        
 	                    </div>
 						<div class="item col-xs-12">
-	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>食品流通许可证：</span>    
-	                       <div class="f-fl item-ifo">
+	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>食品流通许可证：</span>
+     						<div class="f-fl item-ifo">
+		     						<input type="text" placeholder="食品流通许可证" class="txt03 f-r3" id="licenseNo3"/>
+     						</div>
+	                      <div class="f-fl item-ifo" style="margin-left:5px;">
 	                       		<input id="file-3" name="licenseList" type="checkbox" style="display:none;"/>
 	      						<input multiple type="file" id="id-input-file-3"/>
-	                        </div>
-     						<div class="f-fl item-ifo" id="license3">
-     							<!-- <a href="">查看图片</a> -->
+		     					<wf id="license3"></wf>
      						</div>	                        
 	                    </div>
 						<div class="item col-xs-12">
-	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>食品生产许可证：</span>    
-	                       <div class="f-fl item-ifo">
+	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>食品生产许可证：</span>
+     						<div class="f-fl item-ifo">
+		     						<input type="text" placeholder="食品生产许可证" class="txt03 f-r3" id="licenseNo4"/>
+     						</div>
+	                       <div class="f-fl item-ifo" style="margin-left:5px;">
 	                       		<input id="file-4" name="licenseList" type="checkbox" style="display:none;"/>
 	      						<input multiple type="file" id="id-input-file-4"/>
-	                        </div>
-     						<div class="f-fl item-ifo" id="license4">
-     							<!-- <a href="">查看图片</a> -->
+		     					<wf id="license4"></wf>
      						</div>	                        
 	                    </div>	
 							<div class="item col-xs-12">
@@ -192,12 +191,25 @@
 			$("#btn_part1")
 					.click(
 							function() {
-								if (!verifyCheck._click())
+ 								if (!verifyCheck._click()){
 									return;
+								}
+								
+								//图片判断 必须上传一个图片
+								var isFiles = 0;
+								for(var i=1;i<5;i++){
+									var liceHtml = $("#license"+i).html();
+									if(liceHtml=="" || liceHtml ==null){
+										isFiles++;
+									}
+								}
+								if(isFiles==4){
+									alert("必须上传一份证件");
+									return false;
+								}
 								//加载
-								var dataParam = $("#submit_form").serialize();
-								$
-										.ajax({
+ 								var dataParam = $("#submit_form").serialize();
+								$.ajax({
 											url : '${pageContext.request.contextPath}/proUserRegController/pureg',
 											type : "POST",
 											data : dataParam,
