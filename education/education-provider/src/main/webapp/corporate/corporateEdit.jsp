@@ -51,13 +51,13 @@ text-align: right;
 				<tr>
 					<th>单位名称:</th>
 					<td><input name="supplierName" type="text"
-						class="span2" placeholder="点击选择日期" data-options="required:true"
+						class="span2" placeholder="请输入单位名称" data-options="required:true"
 						value="${Corporate.supplierName }" ></td>
 				</tr>
 				<tr>
 					<th>单位地址:</th>
 					<td><input name="address" type="text"
-						placeholder="请输入回收人配货点" class="easyui-validatebox span2"
+						placeholder="请输入单位地址" class="easyui-validatebox span2"
 						data-options="required:true" value="${Corporate.address }"></td>
 				</tr>
 				<tr>
@@ -76,28 +76,28 @@ text-align: right;
 					<th>证件类型:</th>
 					<th>食品经营许可证:</th>
 					<td><input name="foodBusinessCode" type="text"
-						placeholder="请输入采购品" class="easyui-validatebox span2"
+						placeholder="请输入食品经营许可证号" class="easyui-validatebox span2"
 						value="${Corporate.foodBusinessCode }"></td>
 				</tr>
 				<tr>
 					<th></th>
 					<th>食品流通证号:</th>
 					<td><input name="foodCirculationCode"
-						type="text" placeholder="请输入数量" class="easyui-validatebox span2"
+						type="text" placeholder="请输入食品流通证号" class="easyui-validatebox span2"
 						value="${Corporate.foodCirculationCode }"></td>
 				</tr>
 				<tr>
 					<th></th>
 					<th>食品生产证号:</th>
 					<td><input name="foodProduceCode" type="text"
-						placeholder="请输入规格" class="easyui-validatebox span2"
+						placeholder="请输入食品生产证号" class="easyui-validatebox span2"
 						value="${Corporate.foodProduceCode }"></td>
 				</tr>
 				<tr>	
 					<th></th>
 					<th>工商执照号:</th>
 					<td><input name="businessLicense"
-						type="text" placeholder="请输入供应商" class="easyui-validatebox span2"
+						type="text" placeholder="请输入工商执照号" class="easyui-validatebox span2"
 						value="${Corporate.businessLicense }"></td>
 				</tr>
 			</table>

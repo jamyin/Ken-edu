@@ -5,6 +5,10 @@
 .panel-body {
 	font-size: 18px !important;
 }
+.act {
+	padding-top: 7px!important;;
+	padding-bottom: 7px!important;;
+}
 </style>
 
 
@@ -521,7 +525,7 @@ else
 			</form>
 				
 		</div>
-		<div id="toolbar" style="display: none;" class="div-height" >
+		<div id="toolbar" style="display: none;" class="act" >
 		
 				<a onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true" ><img src="${pageContext.request.contextPath}/icon/添加.png" ></img></a>
 				&nbsp;
