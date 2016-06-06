@@ -43,16 +43,16 @@ function loadscMenu(){
 						objHtml+="夜宵 ";
 					}
 					objHtml+="</i><span></span><a href='/wap/comment/join/"+item['id']+".htm'>点评</a></h2>";
-					objHtml+="<ul>";
+					objHtml+="<ul><li><span>";
 					var proDishesDtos = item['proDishesDtos'];
 					if(proDishesDtos!=null){
 						$.each(proDishesDtos, function(index_d, itemD) {
 							//<img src='/static/img/food_simple.jpg' border='0'>
-							objHtml+="<li><p>"+itemD['waresName']+"</p></li>";
+							objHtml+=itemD['waresName'];
 						});						
 					}
 					
-					objHtml+="</ul>";
+					objHtml+="</span></li></ul>";
 					objHtml+="<ul class='nutrition'>";
 					var proNutritionalDtos = item['proNutritionalDtos'];
 					if(proNutritionalDtos!=null){
