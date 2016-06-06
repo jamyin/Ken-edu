@@ -58,11 +58,11 @@ public class FileManageController {
         ServletFileUpload upload = new ServletFileUpload(factory);
         
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-		String context = "upload" + File.separator + format.format(new Date());
+		String context = format.format(new Date());
 //      String fileName = FileUtils.getUploadFileNameBybase64(baseImg)+"."+prefix;
         
         StringBuffer rootPath = new StringBuffer(PropertiesUtils.getProperty("upload.url"));
-        rootPath.append(File.separator).append(context);
+        rootPath.append("/"+context);
         File file =new File(rootPath.toString());        
         //如果文件夹不存在则创建    
         if(!file.exists() && !file.isDirectory()) {
@@ -81,7 +81,7 @@ public class FileManageController {
                     }else{
                     	
                     	String newName = UUIDGenerator.getUUID32Bit() + "." + fileSuffix;
-                        String filePath = rootPath.append(File.separator).append(newName).toString();
+                        String filePath = rootPath.append("/").append(newName).toString();
                         OutputStream out = new FileOutputStream(filePath);
                         InputStream in = item.getInputStream() ;
                         int length = 0 ;
@@ -91,8 +91,7 @@ public class FileManageController {
                         }
                         in.close();
                         out.close();
-                        String fileStaticPath = File.separator+context + File.separator + newName;
-                        map.put("wwwdomain",PropertiesUtils.getProperty("upload.look.url"));
+                        String fileStaticPath = "/upload/"+context + "/" + newName;
                         map.put("filePath",fileStaticPath);
                         // 验证是否是指定格式的视频或图片
                         if(StringUtils.isFlvVideo(fileSuffix)){

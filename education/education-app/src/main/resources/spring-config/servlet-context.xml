@@ -58,14 +58,17 @@
 
 	<bean id="exceptionResolver" class="com.ssic.education.app.handler.ExceptionHandler" />
 
-	<!--配置拦截器, 多个拦截器,顺序执行
-	<mvc:interceptors>    
-	    <mvc:interceptor>    	      
-	        <mvc:mapping path="/**" />  
-	        <bean class="com.ssic.game.app.interceptor.I18nInterceptor"></bean>    
-	    </mvc:interceptor>  	   
-	</mvc:interceptors>  
- 	-->  
+ 	<!-- 对所有的请求拦截使用/** ,对某个模块下的请求拦截使用：/package/* -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<!-- <bean class="com.ssic.game.app.interceptor.I18nInterceptor"></bean> -->
+			<bean class="com.ssic.education.app.interceptor.UserAccessApiInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
 
+	<bean id="userAccessInterceptor"
+		class="com.ssic.education.app.interceptor.UserAccessApiInterceptor">
+	</bean>
 	<mvc:annotation-driven />
 </beans>

@@ -46,7 +46,7 @@ ul.my_info {
 		    height: 550,  
 		    href: '${pageContext.request.contextPath}/corporateController/editPage', 
 		    buttons : [ {
-				text : '编辑',
+				text : '保存',
 				handler : function() {
 					var f = parent.$.modalDialog.handler.find('#form');
 					f.submit();
@@ -58,11 +58,11 @@ ul.my_info {
 	function editPic(){
 		parent.$.modalDialog({
 			title : '编辑图片',
-			width : 700,
+			width : 800,
 			height : 600,
 			href : '${pageContext.request.contextPath}/corporateController/editPic',
 			buttons : [ {
-				text : '编辑',
+				text : '上传',
 				handler : function() {
 					var f = parent.$.modalDialog.handler.find('#updateImage');
 					f.submit();
@@ -88,25 +88,25 @@ ul.my_info {
 			<span class="name">单位地址：</span><span class="value">${Corporate.address }</span>
 		</li>
 		<li>
-			<span class="name">联系人姓名:	</span><span class="value">${Corporate.corporation }</span>
+			<span class="name">联系人姓名：</span><span class="value">${Corporate.corporation }</span>
 		</li>
 		<li>
-			<span class="name">电话:	</span><span class="value">${Corporate.contactWay }</span>
+			<span class="name">电话：	</span><span class="value">${Corporate.contactWay }</span>
 		</li>
 		<li>
-			<span class="name">证件类型:	</span><span class="value"></span>
+			<span class="name">证件类型：	</span><span class="value"></span>
 		</li>
 		<li>
-			<span class="cert">食品经营许可证:	</span><span class="value">${Corporate.foodBusinessCode }</span>
+			<span class="cert">食品经营许可证：	</span><span class="value">${Corporate.foodBusinessCode }</span>
 		</li>
 		<li>
-			<span class="cert">食品流通证号:	</span><span class="value">${Corporate.foodCirculationCode }</span>
+			<span class="cert">食品流通证号：	</span><span class="value">${Corporate.foodCirculationCode }</span>
 		</li>
 		<li>
-			<span class="cert">食品生产证号:	</span><span class="value">${Corporate.foodProduceCode }</span>
+			<span class="cert">食品生产证号：	</span><span class="value">${Corporate.foodProduceCode }</span>
 		</li>
 		<li>
-			<span class="cert">工商执照号:	</span><span class="value">${Corporate.businessLicense }</span>
+			<span class="cert">工商执照号：	</span><span class="value">${Corporate.businessLicense }</span>
 		</li>
 	</ul>
 		

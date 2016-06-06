@@ -63,7 +63,7 @@
 							var b="<tr id='ledger"+nextId+"'>"+a+"</tr>";
 							var c=b.replace(/title=""/g,"");
 							$(c).insertAfter($(lastTr));
-							$("<a onclick='subtractLedger(this);' data-id='ledger"+nextId+"' style='text-decoration:none;' ><font size='8' >-</font></a>").replaceAll("#ledger"+nextId+" a");
+							$("<a onclick='subtractLedger(this);' data-id='ledger"+nextId+"' style='text-decoration:none;cursor:pointer;' ><font size='8' >-</font></a>").replaceAll("#ledger"+nextId+" a");
 							$.parser.parse();
 						});
 	});
@@ -182,7 +182,7 @@
 							readonly="readonly"
 							value="<fmt:formatDate value="${ledger.productionDate }" pattern="yyyy-MM-dd"/>"></td>
 						<td>
-								<a id='subtract' onclick='subtractLedger(this);' data-id='ledger${status.index }' style='text-decoration:none;' ><font size='8' >-</font></a>
+								<a id='subtract' onclick='subtractLedger(this);' data-id='ledger${status.index }' style='text-decoration:none;cursor:pointer;' ><font size='8' >-</font></a>
 						</td>
 						<td ><input name="ledger[${status.index }].id" type="hidden"
 							class="easyui-validatebox span2" data-options="required:true" value="${ledger.id}"></td>
@@ -190,7 +190,7 @@
 					</tr>
 				</c:forEach>
 			</table>
-							<div align="center"><a id="addLedger" style='text-decoration:none;' ><font size="8" >+</font></a></div>
+							<div align="center"><a id="addLedger" style='text-decoration:none;cursor:pointer;' ><font size="8" >+</font></a></div>
 		</form>
 	</div>
 </div>
