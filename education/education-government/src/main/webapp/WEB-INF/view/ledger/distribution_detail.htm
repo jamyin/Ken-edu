@@ -33,7 +33,7 @@
 	          <span class="ct1"><a href="/pro/wares/details.htm?id=${(ledgerDtos.waresId)!}">${(ledgerDtos.name)!}</a></span>
 	          <span class="ct2">${(ledgerDtos.quantity)!}</span>
 	          <span class="ct3">${(ledgerDtos.spce)!}</span>
-	          <span class="ct4">${ledgerDto.productionDate?string("yyyy-MM-dd")}</span>
+	          <span class="ct4"><#if ledgerDto.productionDate??>${ledgerDto.productionDate?string("yyyy-MM-dd")}</#if></span>
 	          <span class="ct5">${(ledgerDtos.productionName)!}</span>
 	          <span class="ct6"><a href="/pro/supplier/detail.htm?id=${(ledgerDtos.supplierId)!}&source=1">${(ledgerDtos.supplierName)!}</a></span>
 	        </li>
