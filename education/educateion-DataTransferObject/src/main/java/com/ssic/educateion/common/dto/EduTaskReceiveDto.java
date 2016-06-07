@@ -35,5 +35,6 @@ public class EduTaskReceiveDto implements Serializable{
     private String receiveName;
     private String sendName;
     private String createId;
+    private Date readTime;
 }
 

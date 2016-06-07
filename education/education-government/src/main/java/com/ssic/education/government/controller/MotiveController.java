@@ -2,6 +2,7 @@ package com.ssic.education.government.controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -319,6 +320,7 @@ public class MotiveController extends BaseController {
 		if(dataList!=null && dataList.size()>0){
 			eduTaskReceiveDto = dataList.get(0);
 			eduTaskReceiveDto.setReadstat(DataStatus.ENABLED);
+			eduTaskReceiveDto.setReadTime(new Date());
 			iTaskReceiveService.updateEduTaskReceive(eduTaskReceiveDto);			
 		}
 
