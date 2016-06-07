@@ -71,9 +71,8 @@ public class WaresDao{
 	}
 
 
-	public void updateImsUsers(ProWares proWares) {
-		// TODO Auto-generated method stub
-		mapper.updateByPrimaryKey(proWares);
+	public int updateImsUsers(ProWares proWares) {
+		return mapper.updateByPrimaryKeySelective(proWares);
 	}
 
 	public ProWaresDto findWaresBySupplierId(LedgerDto ledger) {
