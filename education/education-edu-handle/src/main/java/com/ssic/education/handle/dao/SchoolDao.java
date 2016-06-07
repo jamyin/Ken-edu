@@ -69,9 +69,9 @@ public class SchoolDao extends MyBatisBaseDao<EduSchool> {
 			if (StringUtils.isNotBlank(schoolDto.getCommitteeId())) {
 				criteria.andCommitteeIdEqualTo(schoolDto.getCommitteeId().trim());
 			}
-			if (StringUtils.isNotBlank(schoolDto.getArea())){
+			/*if (StringUtils.isNotBlank(schoolDto.getArea())){
 				criteria.andAreaEqualTo(schoolDto.getArea());
-			}	
+			}	*/
 		}
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 	}

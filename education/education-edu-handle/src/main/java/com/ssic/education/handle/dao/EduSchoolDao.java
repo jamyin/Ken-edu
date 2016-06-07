@@ -70,13 +70,12 @@ public class EduSchoolDao extends MyBatisBaseDao<EduSchool> {
             if (StringUtils.isNotBlank(dto.getLevels())) {
                 criteria.andLevelLike("%" + dto.getLevels().trim()+ "%");
             }
-            if (StringUtils.isNotBlank(dto.getArea())) {
+            /*if (StringUtils.isNotBlank(dto.getArea())) {
                 criteria.andAreaEqualTo(dto.getArea().trim());
             }
             if (StringUtils.isNotBlank(dto.getProvince())) {
             	criteria.andProvinceEqualTo(dto.getProvince());
-            }
-           /* if (StringUtils.isNotBlank(dto.getCommitteeId())) {
+            }if (StringUtils.isNotBlank(dto.getCommitteeId())) {
                 criteria.andCommitteeIdEqualTo(dto.getCommitteeId().trim());
             }*/
             if (null != dto.getReviewed()) {
