@@ -13,7 +13,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ssic.education.provider.dao.TImsMenuDao;
 import com.ssic.education.provider.dto.AdminTabDto;
 import com.ssic.education.provider.dto.TImsMenuDto;
 import com.ssic.education.provider.pageModel.Json;
@@ -40,9 +39,6 @@ public class ResourceController extends BaseController {
 
 	@Autowired
 	private ResourceTypeServiceI resourceTypeService;
-
-	@Autowired
-	private TImsMenuDao menuDao;
 
 	@Autowired
 	private AdminTabServiceI adminTabService;
