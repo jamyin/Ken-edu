@@ -190,22 +190,6 @@ public class ResourceController extends BaseController {
 	}
 
 	/**
-	 * 跳转到资源编辑页面
-	 * 
-	 * @return
-	 */
-	@RequestMapping("/editPage")
-	public String editPage(HttpServletRequest request, String id) {
-		request.setAttribute("menuTypeList",
-				resourceTypeService.getMenuTypeList());
-		List<AdminTabDto> listTab = adminTabService.findAll();
-		request.setAttribute("tabList", listTab);
-		TImsMenuDto r = menuDao.findById(id);
-		request.setAttribute("menuDto", r);
-		return "admin/resourceEdit";
-	}
-
-	/**
 	 * 编辑资源
 	 * 
 	 * @param resource
