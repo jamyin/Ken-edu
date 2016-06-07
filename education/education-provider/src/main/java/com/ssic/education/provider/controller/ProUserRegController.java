@@ -5,6 +5,10 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssic.educateion.common.dto.EduSupplierReviewDto;
+import com.ssic.educateion.common.dto.EduUsersDto;
 import com.ssic.educateion.common.dto.ProLicenseDto;
 import com.ssic.educateion.common.dto.SupplierDto;
 import com.ssic.education.handle.service.IEduSupplierReviewService;
@@ -20,8 +25,11 @@ import com.ssic.education.handle.service.IProLicenseService;
 import com.ssic.education.handle.service.ISupplierService;
 import com.ssic.education.provider.dto.ProUsersDto;
 import com.ssic.education.provider.pageModel.Json;
+import com.ssic.education.provider.pageModel.SessionInfo;
 import com.ssic.education.provider.service.IProUsersService;
+import com.ssic.education.provider.util.ConfigUtil;
 import com.ssic.education.utils.constants.DataStatus;
+import com.ssic.education.utils.constants.SessionConstants;
 /**
  * 
 	 * 此类描述的是：供应商注册信息
@@ -54,10 +62,8 @@ public class ProUserRegController extends BaseController{
 		supplierDto.setReviewed(Byte.valueOf("0"));
 		supplierDto.setSupplierType(Integer.valueOf(1));//常量  0为不区分，1为成品菜供应商，2为原料供应商  
 		String supplierId = iSupplierService.saveOrUpdateSupplier(supplierDto);
-		
 		//供应商对应的区县信息
 		saveSupplierReview(supplierId);
-		
 		//保存证件信息
 		String[] licenses = getRequest().getParameterValues("licenseList");
 		saveLicenses(supplierId,licenses);
@@ -76,11 +82,29 @@ public class ProUserRegController extends BaseController{
 		if(licenses!=null){
 			for(String licesse : licenses){
 				if(!StringUtils.isEmpty(licesse)){
-					String licenseName = licesse.split("#")[0];
-					String licPic = licesse.split("#")[1];
-					String licNo = licesse.split("#")[2];
+					int i=0;
+					String str="#";
+					char [] stringArr = licesse.toCharArray();
+					for (int j=0;j<stringArr.length; j++) {
+						String strArr = String.valueOf(stringArr[j]);;
+						if (str.contains(strArr)) {
+							i++;
+						}
+					}
+					String licenseName =null;
+					String licPic = null;
+					String licNo = null;
+					if (i>=1) {
+						licenseName = licesse.split("#")[0];
+					}
+					if (i>=2) {
+						licPic = licesse.split("#")[1];
+					}
+					if (i>=3) {
+						licNo = licesse.split("#")[2];
+					}
 					ProLicenseDto proLicenseDto = new ProLicenseDto();
-					
+					proLicenseDto.setLicType(DataStatus.DISABLED);
 					proLicenseDto.setLicName(licenseName);
 					proLicenseDto.setLicPic(licPic);
 					proLicenseDto.setLicNo(licNo);

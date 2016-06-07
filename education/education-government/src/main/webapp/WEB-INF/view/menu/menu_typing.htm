@@ -57,7 +57,7 @@
 		          <span class="caterers"><#if data.supplyPhase == 0>早餐</#if><#if data.supplyPhase == 1>午餐</#if><#if data.supplyPhase == 2>午后甜点</#if><#if data.supplyPhase == 3>晚餐</#if><#if data.supplyPhase == 4>夜宵</#if></span>
 		          <span class="goods ellipsis"><#if data.proDishesDtos??>
 		          <#list data.proDishesDtos as proDishesDto>
-		          	${(proDishesDto.waresName)!} 
+		          	${(proDishesDto.name)!} 
 		          </#list>
 		          </#if></span>
 		          <span class="nutrition ellipsis"><#if data.proNutritionalDtos??>

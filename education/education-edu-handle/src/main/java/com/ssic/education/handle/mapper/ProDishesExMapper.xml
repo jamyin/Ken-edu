@@ -10,10 +10,10 @@
   </insert> 
   
    <insert id="addDishesBatch" parameterType="java.util.List">  
-      INSERT INTO t_pro_dishes (id, package_id,wares_id,wares_name, create_time, stat)
+      INSERT INTO t_pro_dishes (id, package_id, name,creator, create_time, stat)
       VALUES 
      <foreach collection="list" item="item" index="index" separator="," >  
-        (#{item.id},#{item.packageId},#{item.waresId},#{item.waresName},#{item.createTime},#{item.stat})  
+        (#{item.id},#{item.packageId},#{item.name},#{item.creator},#{item.createTime},#{item.stat})  
     </foreach> 
   </insert> 
   

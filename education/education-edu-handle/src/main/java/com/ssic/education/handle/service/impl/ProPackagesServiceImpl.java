@@ -95,7 +95,8 @@ public class ProPackagesServiceImpl implements ProPackagesService{
 			}
 		}
 		ProPackages proPackages = BeanUtils.createBeanByTarget(dto, ProPackages.class);
-		
+		proPackages.setCustomerType((short)DataStatus.DISABLED);
+		proPackages.setPackageName(proPackages.getType().toString());
 		proPackages.setId(UUIDGenerator.getUUID());
 		int packagesFlag = proPackagesDao.insertSelective(proPackages);
 		int waresFlag = 0;
@@ -106,28 +107,28 @@ public class ProPackagesServiceImpl implements ProPackagesService{
 			String waresNames_ = dto.getWaresNames().substring(0,dto.getWaresNames().length()-1);   //去逗号
 			String waresName[] = waresNames_.split(",");
 			
-			List<ProWares> waresList = new ArrayList<ProWares>();
+//			List<ProWares> waresList = new ArrayList<ProWares>();
 			List<ProDishes> dishesList = new ArrayList<ProDishes>();
 			for(int i = 0;i < waresName.length; i++){
-				ProWares wares = new ProWares();
-				wares.setId(UUIDGenerator.getUUID()); 
-				wares.setWaresName(waresName[i]);
-				wares.setDishes(true);
-				wares.setCreateTime(new Date());
-				wares.setStat(DataStatus.ENABLED);
-				waresList.add(wares);
+//				ProWares wares = new ProWares();
+//				wares.setId(UUIDGenerator.getUUID()); 
+//				wares.setWaresName(waresName[i]);
+//				wares.setDishes(true);
+//				wares.setCreateTime(new Date());
+//				wares.setStat(DataStatus.ENABLED);
+//				waresList.add(wares);
 				
-//				ProDishes proDishes = new ProDishes();
-//				proDishes.setId(UUIDGenerator.getUUID()); 
-//				proDishes.setPackageId(proPackages.getId());
-//				proDishes.setWaresId(wares.getId());
-//				proDishes.setWaresName(wares.getWaresName());
-//				proDishes.setCreateTime(new Date());
-//				proDishes.setStat(DataStatus.ENABLED);
-//				dishesList.add(proDishes);
+				ProDishes proDishes = new ProDishes();
+				proDishes.setId(UUIDGenerator.getUUID()); 
+				proDishes.setPackageId(proPackages.getId());
+				proDishes.setName(waresName[i]);
+				proDishes.setCreator(dto.getCreator());
+				proDishes.setCreateTime(new Date());
+				proDishes.setStat(DataStatus.ENABLED);
+				dishesList.add(proDishes);
 			}
-			waresFlag = waresDao.addWaresBatch(waresList);
-//			dishesFlag = proDishesDao.addDishesBatch(dishesList);
+//			waresFlag = waresDao.addWaresBatch(waresList);
+			dishesFlag = proDishesDao.addDishesBatch(dishesList);
 			
 			//营养
 			String nutritionalNames_ = dto.getNutritionalNames().substring(0,dto.getNutritionalNames().length()-1);   //去逗号

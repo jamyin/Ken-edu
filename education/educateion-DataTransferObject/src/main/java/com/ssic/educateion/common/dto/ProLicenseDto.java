@@ -43,5 +43,7 @@ public class ProLicenseDto {
     private Integer source;//
     
     private List<String> wareIds;//
+    
+    private String creator;
 
 }
