@@ -122,8 +122,12 @@ public class TImsUsersDto implements Serializable
     @Setter
     private String deptIds;
 
-    
-    
+    @Getter
+    @Setter
+    private String creator;
+    @Getter
+    @Setter
+    private String updater;
     
 
 }

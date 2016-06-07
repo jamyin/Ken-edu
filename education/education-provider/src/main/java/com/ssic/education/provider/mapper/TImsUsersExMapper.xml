@@ -59,11 +59,13 @@
 	email,
 	user_no,
 	user_type ,
-	source_id
+	source_id,
+	creator,updater
+	
 )
 VALUES
 	(
-		#{users.id},#{users.name},#{users.password},#{users.stat},#{users.isadmin},#{users.createTime},#{users.userAccount},#{users.email},#{users.userNo},#{users.userType},#{users.sourceId})
+		#{users.id},#{users.name},#{users.password},#{users.stat},#{users.isadmin},#{users.createTime},#{users.userAccount},#{users.email},#{users.userNo},#{users.userType},#{users.sourceId},#{users.creator},#{users.updater})
 	</insert>
 
 	<insert id="addImsUsers" parameterType="com.ssic.education.handle.pojo.ProUsers">

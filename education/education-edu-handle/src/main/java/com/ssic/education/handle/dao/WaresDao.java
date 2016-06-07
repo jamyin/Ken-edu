@@ -48,6 +48,7 @@ public class WaresDao{
 		 wares.setWay(0);
 		 wares.setCreateTime(new Date());
 		 wares.setLastUpdateTime(new Date());
+		 wares.setDishes(false);
 		mapper.insertSelective(wares);
 	}
 
