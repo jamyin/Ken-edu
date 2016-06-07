@@ -231,6 +231,7 @@ public class ProSupplierController extends BaseController{
 		proSupplierReceiver.setReceiverId(info.getSupplierId());
 		proSupplierReceiver.setSupplierCode(ps.getSupplierCode());
 		proSupplierReceiver.setId(UUIDGenerator.getUUID());
+		proSupplierReceiver.setCreateTime(new Date());
 		ProSupplier rps = supplierService.findProSupplierByName(ps.getSupplierName(),supplierId);
 		if(rps!=null){
 			j.setMsg("供应商已存在");
