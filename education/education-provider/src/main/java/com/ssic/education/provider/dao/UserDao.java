@@ -7,25 +7,19 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.ssic.education.provider.dto.ProUsersDto;
+import com.ssic.education.handle.pojo.ProUsers;
 import com.ssic.education.provider.dto.TImsUsersDto;
-import com.ssic.education.provider.mapper.TImsUserRoleExMapper;
 import com.ssic.education.provider.mapper.TImsUsersExMapper;
 import com.ssic.education.provider.pageModel.DataGrid;
 import com.ssic.education.provider.pageModel.PageHelper;
-import com.ssic.education.handle.pojo.ProUsers;
 import com.ssic.education.provider.util.MD5Util;
 import com.ssic.education.utils.util.BeanUtils;
 import com.ssic.education.utils.util.StringUtils;
-import com.ssic.education.utils.util.UUIDGenerator;
 
 @Repository
 public class UserDao {
 	@Autowired
 	private TImsUsersExMapper tImsUsersExMapper;
-
-	@Autowired
-	private TImsUserRoleExMapper userRoleMapper;
 	
 	public List<TImsUsersDto> findAllDriver(String sourceId) {
 		return tImsUsersExMapper.findAllDriver(sourceId);
@@ -115,29 +109,6 @@ public class UserDao {
 	}
 	public void updatePwd(TImsUsersDto userDto){
 		tImsUsersExMapper.updatePwd(userDto);
-	}
-
-	public void insertRole(List<String> roleList, String ids) {
-		// 先删除用户的权限 而后添加
-		for (String id : ids.split(",")) {
-			if (id != null && !id.equalsIgnoreCase("")) {
-				// Tuser t = userDao.get(Tuser.class, id);
-				// t.setTroles(new HashSet<Trole>(roles));
-				userRoleMapper.deleteRoleByUserId(id);
-				if (roleList != null && roleList.size() > 0) {
-					for (int i = 0; i < roleList.size(); i++) {
-						String pkId=UUIDGenerator.getUUID();
-						int counts = userRoleMapper.findCountRoleBy(id, roleList.get(i));
-						if(counts>0){
-							userRoleMapper.updateBy(id, roleList.get(i));
-						}else{
-							userRoleMapper.insertBy(pkId,id, roleList.get(i));
-						}
-					}
-				}
-
-			}
-		}
 	}
 	
 	public void addImsUsers(TImsUsersDto userDto){
