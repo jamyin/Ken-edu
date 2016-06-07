@@ -1,5 +1,6 @@
 package com.ssic.education.handle.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import lombok.Getter;
@@ -84,14 +85,15 @@ public class TaskDao extends MyBatisBaseDao<EduTask> {
 	}
 	public Integer updateTask(EduTaskReceive receive) {
 		receive.setReadstat(DataStatus.ENABLED);      //设置已读
+		receive.setReadTime(new Date());
 		EduTaskReceiveExample example = new EduTaskReceiveExample();
-		EduTaskReceiveExample.Criteria criteria = example.createCriteria();
+		/*EduTaskReceiveExample.Criteria criteria = example.createCriteria();
 		if (StringUtils.isNotEmpty(receive.getTaskId())){
     		criteria.andTaskIdEqualTo(receive.getTaskId());
     	}
 		if (StringUtils.isNotEmpty(receive.getReceiveId())){
     		criteria.andReceiveIdEqualTo(receive.getReceiveId());
-    	}
+    	}*/
 		return exMapper.updateByExampleSelective(receive, example);
 	}
 
