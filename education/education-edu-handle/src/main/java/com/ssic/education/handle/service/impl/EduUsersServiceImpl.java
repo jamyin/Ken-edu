@@ -63,8 +63,10 @@ public class EduUsersServiceImpl implements EduUsersService {
 		eduUsers.setIsadmin(1);
 		eduUsersDao.insertSelective(eduUsers);
 		EduCanteen eduCanteen = BeanUtils.createBeanByTarget(usersDto, EduCanteen.class);
-		eduCanteen.setSchoolId(eduSchool.getId());
-		eduCanteenDao.insertSelective(eduCanteen);
+		if (null != eduCanteen && StringUtils.isNotBlank(eduCanteen.getCanteenName())) {
+			eduCanteen.setSchoolId(eduSchool.getId());
+			eduCanteenDao.insertSelective(eduCanteen);
+		}		
 		List<ProLicenseDto> proLicenseDtos = new Gson().fromJson(usersDto.getJsonLic(), new TypeToken<List<ProLicenseDto>>(){}.getType());
 		for (ProLicenseDto proLicenseDto:proLicenseDtos) {
 			if (null != proLicenseDto && StringUtils.isNotBlank(proLicenseDto.getLicPic())) {

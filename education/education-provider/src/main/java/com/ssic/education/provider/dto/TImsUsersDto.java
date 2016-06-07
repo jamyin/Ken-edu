@@ -38,9 +38,7 @@ public class TImsUsersDto implements Serializable
     @Getter
     @Setter
     private Integer user_type;
-    @Getter
-    @Setter
-    private Integer isDelete;
+
     @Getter
     @Setter
     private Date modifydatetime;

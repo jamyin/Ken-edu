@@ -1,4 +1,4 @@
-package com.ssic.education.provider.controller;
+/*package com.ssic.education.provider.controller;
 
 import java.util.List;
 import java.util.UUID;
@@ -19,12 +19,12 @@ import com.ssic.education.provider.service.RoleServiceI;
 import com.ssic.education.provider.util.ConfigUtil;
 
 
-/**
+*//**
  * 角色控制器
  * 
  * @author 刘博
  * 
- */
+ *//*
 @Controller
 @RequestMapping("/roleController")
 public class RoleController extends BaseController {
@@ -32,21 +32,21 @@ public class RoleController extends BaseController {
 	@Autowired
 	private RoleServiceI roleService;
 
-	/**
+	*//**
 	 * 跳转到角色管理页面
 	 * 
 	 * @return
-	 */
+	 *//*
 	@RequestMapping("/manager")
 	public String manager() {
 		return "admin/role";
 	}
 
-	/**
+	*//**
 	 * 跳转到角色添加页面
 	 * 
 	 * @return
-	 */
+	 *//*
 	@RequestMapping("/addPage")
 	public String addPage(HttpServletRequest request) {
 		Role r = new Role();
@@ -55,11 +55,11 @@ public class RoleController extends BaseController {
 		return "admin/roleAdd";
 	}
 
-	/**
+	*//**
 	 * 添加角色
 	 * 
 	 * @return
-	 */
+	 *//*
 	@RequestMapping("/add")
 	@ResponseBody
 	public Json add(Role role, HttpSession session) {
@@ -71,11 +71,11 @@ public class RoleController extends BaseController {
 		return j;
 	}
 
-	/**
+	*//**
 	 * 跳转到角色修改页面
 	 * 
 	 * @return
-	 */
+	 *//*
 	@RequestMapping("/editPage")
 	public String editPage(HttpServletRequest request, String id) {
 		Role r = roleService.get(id);
@@ -83,12 +83,12 @@ public class RoleController extends BaseController {
 		return "admin/roleEdit";
 	}
 
-	/**
+	*//**
 	 * 修改角色
 	 * 
 	 * @param role
 	 * @return
-	 */
+	 *//*
 	@RequestMapping("/edit")
 	@ResponseBody
 	public Json edit(Role role) {
@@ -99,11 +99,11 @@ public class RoleController extends BaseController {
 		return j;
 	}
 
-	/**
+	*//**
 	 * 获得角色列表
 	 * 
 	 * @return
-	 */
+	 *//*
 	@RequestMapping("/treeGrid")
 	@ResponseBody
 	public List<Role> treeGrid(HttpSession session) {
@@ -111,11 +111,11 @@ public class RoleController extends BaseController {
 		return roleService.treeGrid(sessionInfo);
 	}
 
-	/**
+	*//**
 	 * 角色树(只能看到自己拥有的角色)
 	 * 
 	 * @return
-	 */
+	 *//*
 	@RequestMapping("/tree")
 	@ResponseBody
 	public List<Tree> tree(HttpSession session) {
@@ -123,11 +123,11 @@ public class RoleController extends BaseController {
 		return roleService.tree(sessionInfo);
 	}
 
-	/**
+	*//**
 	 * 角色树
 	 * 
 	 * @return
-	 */
+	 *//*
 	@RequestMapping("/allTree")
 	@ResponseBody
 	public List<Tree> allTree(HttpSession session) {
@@ -135,12 +135,12 @@ public class RoleController extends BaseController {
 		return roleService.allTree(sessionInfo);
 	}
 
-	/**
+	*//**
 	 * 删除角色
 	 * 
 	 * @param id
 	 * @return
-	 */
+	 *//*
 	@RequestMapping("/delete")
 	@ResponseBody
 	public Json delete(String id) {
@@ -151,11 +151,11 @@ public class RoleController extends BaseController {
 		return j;
 	}
 
-	/**
+	*//**
 	 * 跳转到角色授权页面
 	 * 
 	 * @return
-	 */
+	 *//*
 	@RequestMapping("/grantPage")
 	public String grantPage(HttpServletRequest request, String id) {
 		Role r = roleService.get(id);
@@ -163,12 +163,12 @@ public class RoleController extends BaseController {
 		return "admin/roleGrant";
 	}
 
-	/**
+	*//**
 	 * 授权
 	 * 
 	 * @param role
 	 * @return
-	 */
+	 *//*
 	@RequestMapping("/grant")
 	@ResponseBody
 	public Json grant(Role role) {
@@ -180,3 +180,4 @@ public class RoleController extends BaseController {
 	}
 
 }
+*/

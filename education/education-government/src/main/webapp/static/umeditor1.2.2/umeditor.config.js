@@ -138,7 +138,7 @@
         //图片上传配置区
 //        ,imageUrl:URL+"jsp/imageUp.jsp"             //图片上传提交地址
         ,imageUrl:"/load/configum.htm"             //图片上传提交地址        
-        ,imagePath:"http://www.jujusports.cn/"                     //图片修正地址，引用了fixedImagePath,如有特殊需求，可自行配置
+        ,imagePath:"192.168.1.246/"                     //图片修正地址，引用了fixedImagePath,如有特殊需求，可自行配置
         ,imageFieldName:"upfile"                   //图片数据的key,若此处修改，需要在后台对应文件修改对应参数
 
 

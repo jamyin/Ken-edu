@@ -92,9 +92,9 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 		for (ProDishes proDishes : proDishess) {
 			proDishes.setStat(DataStatus.DISABLED);
 			disMapper.updateByPrimaryKeySelective(proDishes);
-			ProWares proWares = pwMapper.selectByPrimaryKey(proDishes.getWaresId());
-			proWares.setStat(DataStatus.DISABLED);
-			pwMapper.updateByPrimaryKeySelective(proWares);
+//			ProWares proWares = pwMapper.selectByPrimaryKey(proDishes.getWaresId());
+//			proWares.setStat(DataStatus.DISABLED);
+//			pwMapper.updateByPrimaryKeySelective(proWares);
 		}
 		ProNutritionalExample exampleN = new ProNutritionalExample();
 		ProNutritionalExample.Criteria criteriaN = exampleN.createCriteria();
@@ -185,7 +185,7 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 	}
 	@Transactional
 	public void eidt(ProPackagesDto dto, String jsonWares, String jsonNutritional) {
-		List<ProWares> proWaress =  new Gson().fromJson(jsonWares, new TypeToken<List<ProWares>>(){}.getType());
+		List<ProDishes> proWaress =  new Gson().fromJson(jsonWares, new TypeToken<List<ProDishes>>(){}.getType());
 		List<ProNutritional> proNutritionals = new Gson().fromJson(jsonNutritional, new TypeToken<List<ProNutritional>>(){}.getType());
 		ProPackages proPackages = BeanUtils.createBeanByTarget(dto, ProPackages.class);
 		this.updateByPrimaryKeySelective(proPackages);
@@ -199,9 +199,9 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 		for (ProDishes proDishes: proDishess) {
 			proDishes.setStat(DataStatus.DISABLED);
 			disMapper.updateByPrimaryKeySelective(proDishes);
-			ProWares proWares = pwMapper.selectByPrimaryKey(proDishes.getWaresId());
-			proWares.setStat(DataStatus.DISABLED);
-			pwMapper.updateByPrimaryKeySelective(proWares);
+//			ProWares proWares = pwMapper.selectByPrimaryKey(proDishes.getWaresId());
+//			proWares.setStat(DataStatus.DISABLED);
+//			pwMapper.updateByPrimaryKeySelective(proWares);
 		}
 		ProNutritionalExample exampleNu = new ProNutritionalExample();
 		ProNutritionalExample.Criteria criteriaNu = exampleNu.createCriteria();
@@ -215,19 +215,16 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 			nuMapper.updateByPrimaryKeySelective(proNutritional);
 		}
 		List<ProDishes> proDishesss = new ArrayList<ProDishes>();
-		for (ProWares proWares : proWaress) {
-			if (null != proWares && StringUtils.isNotBlank(proWares.getWaresName())) {
-				proWares.setDishes(true);
-				proWares.setId(UUIDGenerator.getUUID());
-				proWares.setCreateTime(new Date());
-				proWares.setStat(DataStatus.ENABLED);
-			}			
-		}
-		disExMapper.addWaresBatch(proWaress);
-		for (ProWares proWares : proWaress) {
-			ProDishes proDishes = new ProDishes();
-			proDishes.setWaresId(proWares.getId());
-			proDishes.setWaresName(proWares.getWaresName());
+//		for (ProWares proWares : proWaress) {
+//			if (null != proWares && StringUtils.isNotBlank(proWares.getWaresName())) {
+//				proWares.setDishes(true);
+//				proWares.setId(UUIDGenerator.getUUID());
+//				proWares.setCreateTime(new Date());
+//				proWares.setStat(DataStatus.ENABLED);
+//			}			
+//		}
+//		disExMapper.addWaresBatch(proWaress);
+		for (ProDishes proDishes : proWaress) {
 			proDishes.setPackageId(proPackages.getId());
 			proDishes.setId(UUIDGenerator.getUUID());
 			proDishes.setCreateTime(new Date());

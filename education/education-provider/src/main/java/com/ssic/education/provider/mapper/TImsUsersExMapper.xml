@@ -31,8 +31,7 @@
 	
 	<select id="findBy" resultType="com.ssic.education.provider.dto.TImsUsersDto">
 		select users.id as id, age as age,create_time as
-		createdatetime,source_id as sourceId,gender as gender,isAdmin as isAdmin,isDelete as
-		isDelete,last_update_time as modifydatetime,name,
+		createdatetime,source_id as sourceId,gender as gender,isAdmin as isAdmin,last_update_time as modifydatetime,name,
 		users.pj_no as
 		pjNo,post_no as postNo,password as password,qjy_account as
 		qjyAccount,user_account as userAccount,user_image as userImage,user_no
@@ -93,8 +92,7 @@ VALUES
 
 	<select id="findPageBy" resultType="com.ssic.education.provider.dto.TImsUsersDto">
 		select users.id as id, age as age,create_time as
-		createdatetime,gender as gender,isAdmin as isAdmin,isDelete as
-		isDelete,last_update_time as modifydatetime,name,
+		createdatetime,gender as gender,isAdmin as isAdmin,last_update_time as modifydatetime,name,
 		users.pj_no as
 		pjNo,post_no as postNo,password as password,qjy_account as
 		qjyAccount,user_account as userAccount,user_image as userImage,user_no

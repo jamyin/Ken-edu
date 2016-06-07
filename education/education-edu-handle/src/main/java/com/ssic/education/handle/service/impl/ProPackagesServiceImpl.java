@@ -117,17 +117,17 @@ public class ProPackagesServiceImpl implements ProPackagesService{
 				wares.setStat(DataStatus.ENABLED);
 				waresList.add(wares);
 				
-				ProDishes proDishes = new ProDishes();
-				proDishes.setId(UUIDGenerator.getUUID()); 
-				proDishes.setPackageId(proPackages.getId());
-				proDishes.setWaresId(wares.getId());
-				proDishes.setWaresName(wares.getWaresName());
-				proDishes.setCreateTime(new Date());
-				proDishes.setStat(DataStatus.ENABLED);
-				dishesList.add(proDishes);
+//				ProDishes proDishes = new ProDishes();
+//				proDishes.setId(UUIDGenerator.getUUID()); 
+//				proDishes.setPackageId(proPackages.getId());
+//				proDishes.setWaresId(wares.getId());
+//				proDishes.setWaresName(wares.getWaresName());
+//				proDishes.setCreateTime(new Date());
+//				proDishes.setStat(DataStatus.ENABLED);
+//				dishesList.add(proDishes);
 			}
 			waresFlag = waresDao.addWaresBatch(waresList);
-			dishesFlag = proDishesDao.addDishesBatch(dishesList);
+//			dishesFlag = proDishesDao.addDishesBatch(dishesList);
 			
 			//营养
 			String nutritionalNames_ = dto.getNutritionalNames().substring(0,dto.getNutritionalNames().length()-1);   //去逗号
