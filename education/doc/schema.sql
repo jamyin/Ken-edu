@@ -28,10 +28,9 @@ CREATE TABLE `t_edu_canteen` (
   `creator` varchar(36) NOT NULL,
   `create_time` datetime NOT NULL,
   `stat` int(4) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `school_id` (`school_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='学校食堂表';
-
-/*Data for the table `t_edu_canteen` */
 
 /*Table structure for table `t_edu_committee` */
 
@@ -50,8 +49,6 @@ CREATE TABLE `t_edu_committee` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='教委信息表';
 
-/*Data for the table `t_edu_committee` */
-
 /*Table structure for table `t_edu_information` */
 
 DROP TABLE IF EXISTS `t_edu_information`;
@@ -66,12 +63,12 @@ CREATE TABLE `t_edu_information` (
   `create_admin_id` varchar(36) NOT NULL COMMENT '创建者id',
   `create_admin_name` varchar(20) NOT NULL COMMENT '创建者姓名',
   `create_time` datetime NOT NULL COMMENT '创建时间',
+  `create_source_id` varchar(36) NOT NULL COMMENT '创建者sourceId',
   `last_update_time` datetime DEFAULT NULL COMMENT '最后更新时间',
   `stat` int(1) NOT NULL DEFAULT '1' COMMENT '数据状态',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `create_source_id` (`create_source_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='教委发布的新闻资讯信息公示公告表';
-
-/*Data for the table `t_edu_information` */
 
 /*Table structure for table `t_edu_information_list` */
 
@@ -89,10 +86,10 @@ CREATE TABLE `t_edu_information_list` (
   `create_time` datetime NOT NULL,
   `last_update_time` datetime DEFAULT NULL,
   `stat` int(4) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `infomation_id` (`infomation_id`),
+  KEY `source_id` (`source_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='通知公告对应的人员或组织信息';
-
-/*Data for the table `t_edu_information_list` */
 
 /*Table structure for table `t_edu_parent` */
 
@@ -107,8 +104,6 @@ CREATE TABLE `t_edu_parent` (
   `stat` int(10) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='家长h5账号信息表';
-
-/*Data for the table `t_edu_parent` */
 
 /*Table structure for table `t_edu_parent_pack_comment` */
 
@@ -129,10 +124,11 @@ CREATE TABLE `t_edu_parent_pack_comment` (
   `create_time` datetime NOT NULL,
   `last_update_time` datetime DEFAULT NULL,
   `stat` int(4) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `parent_id` (`parent_id`),
+  KEY `package_id` (`package_id`),
+  KEY `school_Id` (`school_Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='家长针对菜谱的点评';
-
-/*Data for the table `t_edu_parent_pack_comment` */
 
 /*Table structure for table `t_edu_parent_sc_ch` */
 
@@ -152,10 +148,10 @@ CREATE TABLE `t_edu_parent_sc_ch` (
   `create_time` datetime NOT NULL,
   `last_update_time` datetime DEFAULT NULL,
   `stat` int(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `parent_id` (`parent_id`),
+  KEY `school_Id` (`school_Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='家长关注的学校以及学生信息';
-
-/*Data for the table `t_edu_parent_sc_ch` */
 
 /*Table structure for table `t_edu_school` */
 
@@ -178,10 +174,9 @@ CREATE TABLE `t_edu_school` (
   `updater` varchar(36) DEFAULT NULL COMMENT '更新者',
   `last_update_time` datetime DEFAULT NULL,
   `stat` int(11) NOT NULL COMMENT '是否失效',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `committee_id` (`committee_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='学校信息表';
-
-/*Data for the table `t_edu_school` */
 
 /*Table structure for table `t_edu_school_supplier` */
 
@@ -194,26 +189,27 @@ CREATE TABLE `t_edu_school_supplier` (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `last_update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `stat` int(11) NOT NULL COMMENT '是否有效',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `school_id` (`school_id`),
+  KEY `supplier_id` (`supplier_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='学校供应商关系表';
-
-/*Data for the table `t_edu_school_supplier` */
 
 /*Table structure for table `t_edu_supplier_review` */
 
 DROP TABLE IF EXISTS `t_edu_supplier_review`;
 
 CREATE TABLE `t_edu_supplier_review` (
+  `id` varchar(36) NOT NULL,
   `supplier_id` varchar(36) NOT NULL COMMENT '供应商id',
   `committee_id` varchar(36) NOT NULL COMMENT '审核的区',
   `review_result` smallint(6) NOT NULL COMMENT '0未审核，1未通过，2已通过',
   `create_time` datetime NOT NULL,
   `last_update_time` datetime DEFAULT NULL,
   `stat` int(4) NOT NULL,
-  PRIMARY KEY (`supplier_id`,`committee_id`)
+  PRIMARY KEY (`id`),
+  KEY `supplier_id` (`supplier_id`),
+  KEY `committee_id` (`committee_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*Data for the table `t_edu_supplier_review` */
 
 /*Table structure for table `t_edu_task` */
 
@@ -230,10 +226,9 @@ CREATE TABLE `t_edu_task` (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `last_update_time` datetime DEFAULT NULL COMMENT '最后更新时间',
   `stat` int(1) NOT NULL DEFAULT '1' COMMENT '数据状态',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `create_id` (`create_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='教委发布的任务信息';
-
-/*Data for the table `t_edu_task` */
 
 /*Table structure for table `t_edu_task_receive` */
 
@@ -248,14 +243,14 @@ CREATE TABLE `t_edu_task_receive` (
   `receive_id` varchar(36) NOT NULL COMMENT '接收者Id',
   `receive_name` varchar(100) NOT NULL COMMENT '接收者名称 学校或教委',
   `send_name` varchar(100) NOT NULL COMMENT '发送者名称 学校或教委',
-  `school_id` varchar(36) NOT NULL COMMENT '组织Id(学校Id) 暂时不用',
+  `create_id` varchar(36) NOT NULL COMMENT '创建者Id(登陆的sourceId)',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `last_update_time` datetime DEFAULT NULL COMMENT '最后更新时间',
   `stat` int(1) NOT NULL DEFAULT '1' COMMENT '数据状态',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `task_id` (`task_id`),
+  KEY `receive_id` (`receive_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='教委发布的任务信息对应的接收组织';
-
-/*Data for the table `t_edu_task_receive` */
 
 /*Table structure for table `t_edu_users` */
 
@@ -280,10 +275,9 @@ CREATE TABLE `t_edu_users` (
   `user_image` varchar(36) DEFAULT NULL,
   `user_no` varchar(36) DEFAULT NULL COMMENT '用户电话',
   `stat` int(11) NOT NULL DEFAULT '1' COMMENT '是否有效 1 有效 0 无效',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `source_id` (`source_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*Data for the table `t_edu_users` */
 
 /*Table structure for table `t_pro_dishes` */
 
@@ -298,10 +292,9 @@ CREATE TABLE `t_pro_dishes` (
   `updater` varchar(36) DEFAULT NULL COMMENT '更新者',
   `last_update_time` datetime DEFAULT NULL,
   `stat` int(6) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `package_id` (`package_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='菜品套餐子表';
-
-/*Data for the table `t_pro_dishes` */
 
 /*Table structure for table `t_pro_employee` */
 
@@ -328,8 +321,6 @@ CREATE TABLE `t_pro_employee` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Data for the table `t_pro_employee` */
-
 /*Table structure for table `t_pro_ledger` */
 
 DROP TABLE IF EXISTS `t_pro_ledger`;
@@ -353,10 +344,9 @@ CREATE TABLE `t_pro_ledger` (
   `updater` varchar(36) DEFAULT NULL,
   `last_update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `stat` int(11) NOT NULL COMMENT '是否有效',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `master_id` (`master_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='出入货台账信息';
-
-/*Data for the table `t_pro_ledger` */
 
 /*Table structure for table `t_pro_ledger_master` */
 
@@ -374,15 +364,15 @@ CREATE TABLE `t_pro_ledger_master` (
   `haul_status` int(11) NOT NULL COMMENT '配送状态 0 未配送 1配送中 2 已配送',
   `start_time` datetime DEFAULT NULL COMMENT '配送开始时间',
   `end_time` datetime DEFAULT NULL COMMENT '配送结束时间',
-  `creator` varchar(36) DEFAULT NULL,
+  `creator` varchar(36) NOT NULL,
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `updater` varchar(36) DEFAULT NULL,
   `last_update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `stat` int(11) NOT NULL COMMENT '是否有效',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `receiver_id` (`receiver_id`),
+  KEY `source_id` (`source_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='出入货台账信息';
-
-/*Data for the table `t_pro_ledger_master` */
 
 /*Table structure for table `t_pro_license` */
 
@@ -402,10 +392,9 @@ CREATE TABLE `t_pro_license` (
   `stat` int(1) NOT NULL COMMENT '是否有效',
   `relation_id` varchar(36) NOT NULL COMMENT '关联ID',
   `cer_source` smallint(20) NOT NULL COMMENT '证书来源，0：供应商，1：从业人员，2：商品，3：食堂',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `relation_id` (`relation_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='认证信息表';
-
-/*Data for the table `t_pro_license` */
 
 /*Table structure for table `t_pro_nutritional` */
 
@@ -420,10 +409,9 @@ CREATE TABLE `t_pro_nutritional` (
   `last_update_time` datetime DEFAULT NULL,
   `create_time` datetime NOT NULL,
   `stat` int(4) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `package_id` (`package_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='营养成分表';
-
-/*Data for the table `t_pro_nutritional` */
 
 /*Table structure for table `t_pro_packages` */
 
@@ -444,10 +432,9 @@ CREATE TABLE `t_pro_packages` (
   `updater` varchar(36) DEFAULT NULL,
   `last_update_time` datetime DEFAULT NULL COMMENT '最后修改日期',
   `stat` int(4) NOT NULL COMMENT '是否有效',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `customer_id` (`customer_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='菜品套餐主表';
-
-/*Data for the table `t_pro_packages` */
 
 /*Table structure for table `t_pro_recycle_oil` */
 
@@ -468,8 +455,6 @@ CREATE TABLE `t_pro_recycle_oil` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='废弃油脂回收台账';
 
-/*Data for the table `t_pro_recycle_oil` */
-
 /*Table structure for table `t_pro_recycle_waste` */
 
 DROP TABLE IF EXISTS `t_pro_recycle_waste`;
@@ -487,8 +472,6 @@ CREATE TABLE `t_pro_recycle_waste` (
   `stat` smallint(6) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='废弃餐厨回收台账';
-
-/*Data for the table `t_pro_recycle_waste` */
 
 /*Table structure for table `t_pro_sample` */
 
@@ -511,8 +494,6 @@ CREATE TABLE `t_pro_sample` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Data for the table `t_pro_sample` */
-
 /*Table structure for table `t_pro_school_ware` */
 
 DROP TABLE IF EXISTS `t_pro_school_ware`;
@@ -526,10 +507,9 @@ CREATE TABLE `t_pro_school_ware` (
   `create_time` datetime NOT NULL,
   `last_update_time` datetime DEFAULT NULL,
   `stat` int(1) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `school_id` (`school_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*Data for the table `t_pro_school_ware` */
 
 /*Table structure for table `t_pro_supplier` */
 
@@ -567,23 +547,22 @@ CREATE TABLE `t_pro_supplier` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='供应商信息表\r\n';
 
-/*Data for the table `t_pro_supplier` */
-
 /*Table structure for table `t_pro_supplier_receiver` */
 
 DROP TABLE IF EXISTS `t_pro_supplier_receiver`;
 
 CREATE TABLE `t_pro_supplier_receiver` (
+  `id` varchar(36) NOT NULL,
   `supplier_id` varchar(36) NOT NULL COMMENT '供应商主键',
   `receiver_id` varchar(36) NOT NULL COMMENT '收货商主键',
   `supplier_code` varchar(60) DEFAULT NULL COMMENT '供应商编码',
   `receiver_code` varchar(60) DEFAULT NULL COMMENT '收货商编码',
   `create_time` datetime NOT NULL,
   `last_update_time` datetime DEFAULT NULL,
-  PRIMARY KEY (`supplier_id`,`receiver_id`)
+  PRIMARY KEY (`id`),
+  KEY `supplier_id` (`supplier_id`),
+  KEY `receiver_id` (`receiver_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*Data for the table `t_pro_supplier_receiver` */
 
 /*Table structure for table `t_pro_users` */
 
@@ -610,10 +589,9 @@ CREATE TABLE `t_pro_users` (
   `updater` varchar(36) DEFAULT NULL,
   `last_update_time` datetime DEFAULT NULL,
   `stat` int(11) NOT NULL DEFAULT '1' COMMENT '是否有效 1 有效 0 无效',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `user_account` (`user_account`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户帐户表';
-
-/*Data for the table `t_pro_users` */
 
 /*Table structure for table `t_pro_wares` */
 
@@ -641,10 +619,9 @@ CREATE TABLE `t_pro_wares` (
   `updater` varchar(36) DEFAULT NULL,
   `last_update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `stat` int(4) NOT NULL COMMENT '是否有效',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `supplier_id` (`supplier_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品信息表';
-
-/*Data for the table `t_pro_wares` */
 
 /*Table structure for table `t_pro_waste_recycler` */
 
@@ -663,8 +640,6 @@ CREATE TABLE `t_pro_waste_recycler` (
   `stat` smallint(6) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*Data for the table `t_pro_waste_recycler` */
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
