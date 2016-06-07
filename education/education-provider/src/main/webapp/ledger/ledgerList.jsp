@@ -133,7 +133,7 @@
 				formatter : function(value, row, index) {
 					var str = '';
 					if ($.canShow) {
-						str += $.formatString('<img onclick="showFun(\''+row.masterId+'\');" src="{1}" title="查看"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
+						str += $.formatString('<img onclick="showFun(\''+row.masterId+'\');" src="{1}" title="查看"/>', row.id, '${pageContext.request.contextPath}/icon/查看信息.png');
 					}
 					str += '&nbsp;';
 					if ($.canEdit) {
@@ -315,7 +315,7 @@
 		<div data-options="region:'center',border:false" id="g">
 			<table id="dataGrid"  data-options="collapsible:true"  title="<font  style='font-style: normal;font-weight: bolder;font-size:16px;'>配货管理表单</font>" ></table>
 			<style>
-						#g .datagrid-btable tr{height: 57px;}
+						#g .datagrid-btable tr{height: 45px;}
 				</style>
 		</div>
 	</div>
