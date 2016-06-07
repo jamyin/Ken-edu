@@ -8,6 +8,7 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -46,6 +47,7 @@ public class ProUserRegController extends BaseController{
 	
 	@RequestMapping(value="/pureg")
 	@ResponseBody
+	@Transactional
 	public Json prreg(SupplierDto supplierDto,ProUsersDto proUsersDto) {
 		Json json = new Json();
 		//先保存供应商信息  -->  保存该供应商对应的用户信息(账号) //需要增加事务处理 或 增加判断

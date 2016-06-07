@@ -6,6 +6,7 @@
 
 <select id="lookImage" resultType="com.ssic.education.handle.pojo.ProLicense">
 				SELECT
+				a.id As id,
 				a.lic_name AS licName,
 				a.lic_pic AS licPic
 			FROM

@@ -69,7 +69,7 @@
 									<option value="">请选择区县</option>
 						          	<#if eduCommitteeDtos??>
 						          		<#list eduCommitteeDtos as area>
-						          			<option data-id="${(area.id)!}" <#if eduSchoolDto.area == area.areaCode>selected="selected" </#if> value="${(area.areaCode)!}">${(area.name)!}</option>
+						          			<option data-id="${(area.id)!}" <#if eduSchoolDto.committeeId == area.id>selected="selected" </#if> value="${(area.areaCode)!}">${(area.name)!}</option>
 						          		</#list>
 						          	</#if>
 								</select></li>
@@ -80,7 +80,7 @@
 									<label class="ckb"><input type="checkbox" name="CheckboxGroup1" value="1" <#if eduSchoolDto.levelStr?index_of("小学") != -1 >checked="checked"</#if> id="CheckboxGroup1_1">小学</label>
 									<label class="ckb"><input type="checkbox" name="CheckboxGroup1" value="2" <#if eduSchoolDto.levelStr?index_of("初中") != -1 >checked="checked"</#if> id="CheckboxGroup1_2">初中</label>
 									<label class="ckb"><input type="checkbox" name="CheckboxGroup1" value="3" <#if eduSchoolDto.levelStr?index_of("高中") != -1 >checked="checked"</#if> id="CheckboxGroup1_3">高中</label>
-									<label class="ckb"><input type="checkbox" name="CheckboxGroup1" value="4" <#if eduSchoolDto.levelStr?index_of("大学") != -1 >checked="checked"</#if> id="CheckboxGroup1_4">大学</label>
+									<!-- <label class="ckb"><input type="checkbox" name="CheckboxGroup1" value="4" <#if eduSchoolDto.levelStr?index_of("大学") != -1 >checked="checked"</#if> id="CheckboxGroup1_4">大学</label> -->
 								</li>
 							</ul>
 							<h4 class="">食堂信息</h4>
@@ -226,20 +226,20 @@
 			}
 			jsonLic += ']';
 			var canteenName = $.trim($("#canteenName").val());
-			if (canteenName.length <= 0) {
+			/* if (canteenName.length <= 0) {
 				alert("食堂名称不能为空~");
 				return;
-			} 
+			}  */
 			var canteenContacts = $.trim($("#canteenContacts").val());
-			if (canteenContacts.length <= 0) {
+			/* if (canteenContacts.length <= 0) {
 				alert("食堂联系人不能为空~");
 				return;
-			}
+			} */
 			var phoneNumber = $.trim($("#phoneNumber").val());
-			if (phoneNumber.length <= 0) {
+			/* if (phoneNumber.length <= 0) {
 				alert("食堂联系人手机不能为空~");
 				return;
-			}
+			} */
 			$.ajax({
 				url:"/user/edit.htm",
 				type:"post",
