@@ -13,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 
 import com.google.gson.Gson;
-import com.ssic.education.handle.service.AreaService;
 import com.ssic.education.handle.service.EduSchoolService;
 import com.ssic.education.utils.HttpRequest;
 import com.ssic.education.utils.constants.SessionConstants;
@@ -32,8 +31,8 @@ public class BaseController {
 	
 	public static String parentId = "1";//家长Id 为微信openId 目前默认1 测试使用
 
-	@Autowired
-	private AreaService areaService;
+//	@Autowired
+//	private AreaService areaService;
 	@Autowired
 	private EduSchoolService schoolService;
 	
