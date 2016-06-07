@@ -354,7 +354,7 @@
         last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where id = #{id,jdbcType=VARCHAR}
+    where  supplier_id = #{supplierId,jdbcType=VARCHAR} AND  receiver_id = #{receiverId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ssic.education.handle.pojo.ProSupplierReceiver" >
     <!--
