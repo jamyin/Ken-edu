@@ -14,7 +14,7 @@
 		<module>education-app</module>
 		<module>education-wechat</module>
 
-		<module>education-admin</module>
+		<!--  <module>education-admin</module>-->
 		<module>education-government</module>
 		<module>education-provider</module>
 		<module>education-government-user</module>
