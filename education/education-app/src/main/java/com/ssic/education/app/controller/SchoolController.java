@@ -163,7 +163,13 @@ public class SchoolController {
 		//学校详细信息
 		String schoolId = dto.getCustomerId();
 		EduSchoolDto eduSchoolDto = eduSchoolService.findById(schoolId);
-
+		
+		if(eduSchoolDto == null){
+			result.setStatus(DataStatus.HTTP_FAILE);
+			result.setMessage("未查到相关学校");
+			return result;
+		}
+		
 		//学校对应的食堂信息
 		EduCanteenDto eduCanteenDto = new EduCanteenDto();
 		eduCanteenDto.setSchoolId(schoolId);
