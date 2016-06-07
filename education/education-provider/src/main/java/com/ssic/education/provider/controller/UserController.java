@@ -27,12 +27,6 @@ import com.ssic.education.provider.pageModel.User;
 import com.ssic.education.provider.service.UserServiceI;
 import com.ssic.education.provider.util.ConfigUtil;
 
-/**
- * 用户控制器
- * 
- * @author 刘博
- * 
- */
 @Controller
 @RequestMapping("/userController")
 public class UserController extends BaseController {
