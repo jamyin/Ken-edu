@@ -111,36 +111,41 @@
 			<table class="table table-hover table-condensed">
 				<tr>
 					<th colspan="2">企业三证</th>
-					<th colspan="2">法定代表人/负责人/业主证件</th>
+				<!-- 	<th colspan="2">法定代表人/负责人/业主证件</th> -->
 				</tr>
 				<tr>
 					<th>工商营业执照</th>
 					<td><input type="file" name="imgUrl1" id="imgUrl1"
 						accept="image/*" /></td>
-					<th>身份证</th>
+				<!-- 	<th>身份证</th>
 					<td><input type="file" name="imgUrl8" id="imgUrl8"
+						accept="image/*" /></td> -->
+						<th>组织机构代码</th>
+					<td><input type="file" name="imgUrl2" id="imgUrl2"
 						accept="image/*" /></td>
+						<th>税务登记证</th>
+					<td><input type="file" name="imgUrl3" id="imgUrl3"
+						accept="image/*" /></td>
+						
 				</tr>
 				<tr   id="img1_8">
 					<td colspan="2"><img id="img1"   width="150px" height="150px" src="${pageContext.request.contextPath}/icon/150x150.png"></img></td>
-					<td colspan="2"><img id="img8"  width="150px" height="150px" src="${pageContext.request.contextPath}/icon/150x150.png"></img></td>
+					<%-- <td colspan="2"><img id="img8"  width="150px" height="150px" src="${pageContext.request.contextPath}/icon/150x150.png"></img></td> --%>
+			<td colspan="2"><img id="img2"   width="150px" height="150px" src="${pageContext.request.contextPath}/icon/150x150.png"></img></td>
+					<td colspan="2"><img id="img3"  width="150px" height="150px" src="${pageContext.request.contextPath}/icon/150x150.png"></img ></td>
 				</tr>
-				<tr>
-					<th>组织机构代码</th>
-					<td><input type="file" name="imgUrl2" id="imgUrl2"
-						accept="image/*" /></td>
+				<%-- <tr>
+					
 					<th>港澳居民来往内地通行证</th>
 					<td><input type="file" name="imgUrl9" id="imgUrl9"
 						accept="image/*" /></td>
 				</tr>
 				<tr   id="img2_9">
-					<td colspan="2"><img id="img2"   width="150px" height="150px" src="${pageContext.request.contextPath}/icon/150x150.png"></img></td>
+					
 					<td colspan="2"><img id="img9"   width="150px" height="150px" src="${pageContext.request.contextPath}/icon/150x150.png"></img></td>
 				</tr>
 				<tr>
-					<th>税务登记证</th>
-					<td><input type="file" name="imgUrl3" id="imgUrl3"
-						accept="image/*" /></td>
+					
 					<th>台湾居民往来内地通行证</th>
 					<td><input type="file" name="imgUrl10" id="imgUrl10"
 						accept="image/*" /></td>
@@ -190,7 +195,7 @@
 				</tr>
 				<tr   id="img_7">
 					<td colspan="2"><img id="img7"   width="150px" height="150px" src="${pageContext.request.contextPath}/icon/150x150.png"></img></td>
-				</tr>
+				</tr> --%>
 			</table>
 
 		</form>

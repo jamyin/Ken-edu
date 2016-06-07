@@ -312,8 +312,15 @@ public class WaresController extends BaseController {
 			license.setLicPic(imageurl1);
 			license.setLastUpdateTime(new Date());
 			int i = proLicenseServiceImpl.alterImage(license);
-			
+			if(i!=0){
+			ProWares  proWares =new ProWares();
+			proWares.setId(id);
+			proWares.setImage(imageurl1);
+			proWares.setCreateTime(new Date());
+			proWares.setStat(1);
+			int j=waresService.updateImsUsers(proWares);}
 			if (i == 0) {			
+				
 				license.setLicName("商品图片");
 				license.setLicPic(imageurl1);
 				license.setRelationId(id);
@@ -325,7 +332,15 @@ public class WaresController extends BaseController {
 				String uuid = UUID.randomUUID().toString();
 				license.setId(uuid);
 				proLicenseServiceImpl.updateImage(license);
-		}
+				ProWares  proWares =new ProWares();
+				proWares.setId(id);
+				proWares.setImage(imageurl1);
+				proWares.setCreateTime(new Date());
+				proWares.setStat(1);
+				waresService.updateImsUsers(proWares);
+		
+			
+			}
 			}
 		if (imageurl2 != null && imageurl2 != "") {
 			license.setLicName("检测检验报告");
