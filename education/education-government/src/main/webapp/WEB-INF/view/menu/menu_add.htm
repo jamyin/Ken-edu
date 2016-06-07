@@ -173,7 +173,7 @@
 		//营养校验
 		
     	//拼装菜品名称
-    	var waresNames = '';
+    	var name = '';
     	var flagWa=true;		
     	$("#rt_ul_1 li input").each(function(i){
     		// alert($(this).val());
@@ -181,7 +181,7 @@
     			alert("菜品不能为空！");
     			flagWa=false;
     		} else {
-    			waresNames += $(this).val()+",";
+    			name += $(this).val()+",";
     		}
     		if (flagWa == false) {
     			return;

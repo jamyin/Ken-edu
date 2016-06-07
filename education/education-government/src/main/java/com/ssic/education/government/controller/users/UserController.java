@@ -25,7 +25,6 @@ import com.ssic.educateion.common.dto.EduUsersDto;
 import com.ssic.educateion.common.dto.EduUsersRegDto;
 import com.ssic.education.government.controller.BaseController;
 import com.ssic.education.handle.pojo.ProLicense;
-import com.ssic.education.handle.service.AreaService;
 import com.ssic.education.handle.service.EduSchoolService;
 import com.ssic.education.handle.service.EduUsersService;
 import com.ssic.education.handle.service.IEduCanteenService;
@@ -49,8 +48,6 @@ public class UserController extends BaseController{
 	@Autowired
 	private EduUsersService eduUsersService;
 	
-	@Autowired
-	private AreaService areaService;
 	
 	@Autowired
 	private IEduCommitteeService iEduCommitteeService;

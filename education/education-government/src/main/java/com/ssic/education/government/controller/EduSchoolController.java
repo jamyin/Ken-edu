@@ -32,7 +32,6 @@ import com.ssic.educateion.common.dto.ProWaresDto;
 import com.ssic.educateion.common.dto.SupplierReviewedDto;
 import com.ssic.education.handle.dto.ProSchoolWareDto;
 import com.ssic.education.handle.pojo.ProLicense;
-import com.ssic.education.handle.service.AreaService;
 import com.ssic.education.handle.service.EduSchoolService;
 import com.ssic.education.handle.service.EduUsersService;
 import com.ssic.education.handle.service.IEduCanteenService;
@@ -92,9 +91,6 @@ public class EduSchoolController extends BaseController{
 	
 	@Autowired
 	private ProWaresService proWaresService;
-	
-	@Autowired
-	private AreaService areaService;
 	
 	@Autowired
 	private EduUsersService eduUsersService;
