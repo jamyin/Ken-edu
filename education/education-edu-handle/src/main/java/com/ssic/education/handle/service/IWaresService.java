@@ -21,7 +21,7 @@ public interface IWaresService {
 
 	void deleteWares(ProWaresDto waresDto);
 
-	void updateImsUsers(ProWares proWares);
+	int updateImsUsers(ProWares proWares);
 
 	List<SupplierDto> lookSupplier(ProWaresDto dto);
 

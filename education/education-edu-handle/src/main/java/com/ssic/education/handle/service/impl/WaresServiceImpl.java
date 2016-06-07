@@ -106,9 +106,10 @@ public class WaresServiceImpl implements IWaresService {
 
 
 	
-	public void updateImsUsers(ProWares proWares) {
+	public int updateImsUsers(ProWares proWares) {
 		// TODO Auto-generated method stub
-		dao.updateImsUsers(proWares);
+	
+		return 	dao.updateImsUsers(proWares);
 	}
 
 
