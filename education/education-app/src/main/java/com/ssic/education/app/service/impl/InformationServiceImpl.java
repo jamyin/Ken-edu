@@ -40,12 +40,13 @@ public class InformationServiceImpl implements IInformationService{
 		//String realPath = "127.0.0.1:8091";                    //拼接图片显示路径
 		for (EduInformationDto dto : informationDtoList) {
 			if(StringUtils.isNotEmpty(dto.getPic())){
-				String pics[] = dto.getPic().split(";");
+				dto.setPic(realPath +dto.getPic()) ;
+				String pics[] = dto.getPic().split(";");      //pics用于存放多张图片的路径
 				if(pics.length >0){
 					for(int i =0 ;i <pics.length ;i++){
 						pics[i] = realPath + pics[i];
 					}
-					dto.setPics(pics);                       //pics用于存放多张图片的路径
+					dto.setPics(pics);                       
 				}
 			}
 		}
