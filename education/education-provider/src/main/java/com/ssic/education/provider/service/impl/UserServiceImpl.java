@@ -1,7 +1,5 @@
 package com.ssic.education.provider.service.impl;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -9,17 +7,11 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-
 import com.ssic.education.provider.dao.UserDao;
-import com.ssic.education.provider.dto.ProUsersDto;
-import com.ssic.education.provider.dto.TImsMenuDto;
 import com.ssic.education.provider.dto.TImsUsersDto;
-import com.ssic.education.provider.model.Tuser;
 import com.ssic.education.provider.pageModel.DataGrid;
 import com.ssic.education.provider.pageModel.PageHelper;
 import com.ssic.education.provider.pageModel.SessionInfo;
-import com.ssic.education.provider.pageModel.Tree;
 import com.ssic.education.provider.pageModel.User;
 import com.ssic.education.provider.service.UserServiceI;
 import com.ssic.education.provider.util.MD5Util;
@@ -29,8 +21,6 @@ public class UserServiceImpl implements UserServiceI {
 
 	@Autowired
 	private UserDao userDao;
-
-
 
 	private static Logger log = Logger.getLogger(UserServiceImpl.class);
 	
@@ -45,7 +35,7 @@ public class UserServiceImpl implements UserServiceI {
 		return result;
 	}
 
-	synchronized public void reg(TImsUsersDto user) throws Exception {
+	 public synchronized void reg(TImsUsersDto user) throws Exception {
 	
 
 		userDao.insertBy(user);
@@ -111,8 +101,6 @@ public class UserServiceImpl implements UserServiceI {
 
 	}
 
-
-
 	public void editPwd(TImsUsersDto user) {
 		if (user != null && user.getPassword() != null
 				&& !user.getPassword().trim().equalsIgnoreCase("")) {
@@ -158,62 +146,17 @@ public class UserServiceImpl implements UserServiceI {
 	}
 
 
+
 	public void addImsUsers(TImsUsersDto user) {
 
 		userDao.addImsUsers(user);
 
 	}
 
-	public User get(String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<User> loginCombobox(String q) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public DataGrid loginCombogrid(String q, PageHelper ph) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<Long> userCreateDatetimeChart() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Tuser getCurrentUser() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<Tree> findUserTree(String userId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
+	
 	public int findByNameCount(TImsUsersDto user) {
-		// TODO Auto-generated method stub
 		return userDao.findByNameCount(user);
 	}
-
-	@Override
-	public List<String> resourceList(String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String findUserRole(String userId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
-	
 
 
 }

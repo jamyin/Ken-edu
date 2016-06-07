@@ -23,15 +23,15 @@ public class ChartController extends BaseController {
 	@Autowired
 	private UserServiceI userService;
 
-	/**
-	 * 用户创建时间图表
-	 * 
-	 * @return
-	 */
-	@RequestMapping("/userCreateDatetimeChart")
-	public String userCreateDatetimeChart(HttpServletRequest request) {
-		request.setAttribute("userCreateDatetimeChart", JSON.toJSONString(userService.userCreateDatetimeChart()));
-		return "charts/userCreateDatetimeChart";
-	}
+//	/**
+//	 * 用户创建时间图表
+//	 * 
+//	 * @return
+//	 */
+//	@RequestMapping("/userCreateDatetimeChart")
+//	public String userCreateDatetimeChart(HttpServletRequest request) {
+//		request.setAttribute("userCreateDatetimeChart", JSON.toJSONString(userService.userCreateDatetimeChart()));
+//		return "charts/userCreateDatetimeChart";
+//	}
 
 }

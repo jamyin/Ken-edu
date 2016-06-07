@@ -46,8 +46,11 @@ public class UserController extends BaseController {
 	@Autowired
 	private UserServiceI userService;
 
+	@Autowired
+	private RoleServiceI roleService;
 
-
+	@Autowired
+	private ResourceServiceI resourceService;
 	
 	@Autowired
 	private ISupplierService iSupplierService;
@@ -88,7 +91,6 @@ public class UserController extends BaseController {
 			BeanUtils.copyProperties(u, sessionInfo);
 //			sessionInfo.setIp(IpUtil.getIpAddr(request));
 			sessionInfo.setSupplierId(u.getSourceId());//sourceId 即供应商Id
-			sessionInfo.setResourceList(userService.resourceList(u.getId()));
 			session.setAttribute(ConfigUtil.SESSIONINFONAME, sessionInfo);
 			request.getSession(true).setAttribute("user", u); 
 			//用户信息也返回到客户端
@@ -412,22 +414,6 @@ public class UserController extends BaseController {
 		return j;
 	}
 
-	/**
-	 * 跳转到用户授权页面
-	 * 
-	 * @return
-	 */
-	@RequestMapping("/grantPage")
-	public String grantPage(String ids, HttpServletRequest request) {
-		request.setAttribute("ids", ids);
-		if (ids != null && !ids.equalsIgnoreCase("") && ids.indexOf(",") == -1) {
-			TImsUsersDto u = userService.getUser(ids);
-			String result = userService.findUserRole(ids);
-			
-			request.setAttribute("user", u);
-		}
-		return "admin/userGrant";
-	}
 
 
 	/**
@@ -510,41 +496,26 @@ public class UserController extends BaseController {
 	}
 
 	/**
-	 * 用户登录时的autocomplete
-	 * 
-	 * @param q
-	 *            参数
-	 * @return
-	 */
-	@RequestMapping("/loginCombobox")
-	@ResponseBody
-	public List<User> loginCombobox(String q) {
-		return userService.loginCombobox(q);
-	}
-
-	/**
-	 * 用户登录时的combogrid
-	 * 
-	 * @param q
-	 * @param ph
-	 * @return
-	 */
-	@RequestMapping("/loginCombogrid")
-	@ResponseBody
-	public DataGrid loginCombogrid(String q, PageHelper ph) {
-		return userService.loginCombogrid(q, ph);
-	}
-	
-	/**
-	 * 用户tree
+	 * 跳转到显示用户角色页面
 	 * 
 	 * @return
 	 */
-	@RequestMapping("/userTree")
-	@ResponseBody
-	public List<Tree> userTree(HttpSession session) {
+	@RequestMapping("/currentUserRolePage")
+	public String currentUserRolePage(HttpServletRequest request, HttpSession session) {
 		SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ConfigUtil.SESSIONINFONAME);
-		return userService.findUserTree(sessionInfo.getId());
+		request.setAttribute("userRoles", JSON.toJSONString(roleService.tree(sessionInfo)));
+		return "user/userRole";
 	}
 
+	/**
+	 * 跳转到显示用户权限页面
+	 * 
+	 * @return
+	 */
+	@RequestMapping("/currentUserResourcePage")
+	public String currentUserResourcePage(HttpServletRequest request, HttpSession session) {
+		SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ConfigUtil.SESSIONINFONAME);
+		request.setAttribute("userResources", JSON.toJSONString(resourceService.allTree(sessionInfo)));
+		return "user/userResource";
+	}
 }
