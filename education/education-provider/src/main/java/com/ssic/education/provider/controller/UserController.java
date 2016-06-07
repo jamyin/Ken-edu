@@ -219,6 +219,8 @@ public class UserController extends BaseController {
 			
 			SessionInfo info = (SessionInfo) request.getSession().getAttribute(ConfigUtil.SESSIONINFONAME);
 			user.setSourceId(info.getSupplierId());
+			user.setCreator(info.getName());
+			user.setUpdater(info.getName());
 				//添加t_admin_uses
 				userService.add(user);
 			

@@ -162,5 +162,7 @@ public class EduUsersDto implements Serializable{
     private Integer isdelete;
     
     private String oldpassword;
+    
+    private String updater;
 
 }

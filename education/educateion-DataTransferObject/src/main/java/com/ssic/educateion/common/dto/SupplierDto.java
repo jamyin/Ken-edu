@@ -71,6 +71,8 @@ public class SupplierDto implements Serializable {
 	private String longitude;
 
 	private String latitude;
+	private String creator;
+	private String Updater;
 
 	private Date createTime;
 

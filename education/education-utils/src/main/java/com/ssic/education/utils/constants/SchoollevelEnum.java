@@ -8,7 +8,7 @@ package com.ssic.education.utils.constants;
  * @time 16/5/12 上午9:59
  */
 public enum SchoollevelEnum {
-	NURSERY(0, "幼儿园"),PRIMARY(1, "小学"),MIDDLE(2, "初中"),HIGH(3, "高中"),UNIVERSITY(4, "大学");
+	NURSERY(0, "幼儿园"),PRIMARY(1, "小学"),MIDDLE(2, "初中"),HIGH(3, "高中");
     private int index;
     private String value;
     SchoollevelEnum(int index, String value){
