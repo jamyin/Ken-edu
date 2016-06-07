@@ -63,7 +63,7 @@
 	<select id="findProSupplier"
 		resultType="com.ssic.educateion.common.dto.SupplierDto">
 		SELECT
-		id,
+		a.id,
 		supplier_name supplierName,
 		address,
 		provinces,

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.ssic.education.handle.mapper.WaresExMapper">
+
+
+	<select id="findWares" resultType="com.ssic.educateion.common.dto.ProWaresDto">
+		SELECT
+		a.id AS id,
+		a.wares_name AS waresName,
+		a.spec AS spec,
+		a.shelf_life AS shelfLife,
+		a.unit AS unit,
+		a.way AS way,
+		a.wares_type AS waresType,
+		a.custom_code AS customCode,
+		a.bar_code AS barCode,
+		a.en_name AS enName,
+		a.place AS place,
+		a.dishes AS dishes,
+		a.image AS image,
+		a.remark AS remark,
+		a.supplier_id AS supplierId,
+		manufacturer AS manufacturer
+		FROM
+		t_pro_wares a
+		WHERE
+		a.supplier_id = #{warseDto.supplierId}
+		AND a.stat = 1
+
+		<include refid="where_findWares"></include>
+		order by a.create_time desc
+		<if test="page!=null">
+			limit #{page.beginRow},#{page.rows}
+		</if>
+		<!-- limit #{page.beginRow},#{page.rows} -->
+	</select>
+	<select id="findAllWaresCount" resultType="int">
+		SELECT
+		count(1)
+		FROM
+		t_pro_wares a
+		WHERE
+		a.supplier_id = #{dto.supplierId}
+		AND a.stat = 1
+
+
+
+	</select>
+
+	<select id="findWaresById" resultType="com.ssic.educateion.common.dto.ProWaresDto">
+		SELECT
+		a.id AS id,
+		a.wares_name AS waresName,
+		a.spec AS spec,
+		a.shelf_life AS shelfLife,
+		a.unit AS unit,
+		b.supplier_name AS supplierName,
+		a.way AS way,
+		a.wares_type AS waresType,
+		a.custom_code AS customCode,
+		a.bar_code AS barCode,
+		a.en_name AS enName,
+		a.place AS place,
+		a.dishes AS dishes,
+		a.image AS image,
+		a.remark AS remark,
+		a.supplier_id AS supplierId,
+		manufacturer AS manufacturer
+		FROM
+		t_pro_wares a,
+		t_pro_supplier b
+		WHERE
+		a.supplier_id = b.id
+		AND a.stat = 1
+		AND b.stat = 1
+		AND a.id=#{proWaresDto.id}
+
+		order by a.create_time desc
+	</select>
+
+
+
+	<sql id="where_findWares">
+		<if test="warseDto.waresName!=null and  warseDto.waresName!=''">
+			AND a.wares_name  like  #{warseDto.waresName}
+		</if>
+		<if test="warseDto.customCode!=null and warseDto.customCode!='' ">
+			AND a.custom_code  like #{warseDto.customCode}
+		</if>
+		<if test="warseDto.waresType!=null and warseDto.waresType!='' ">
+			and a.wares_type = #{warseDto.waresType}
+		</if>	
+	</sql>
+	<select id="findWaresBySupplierId" resultType="com.ssic.educateion.common.dto.ProWaresDto">
+		SELECT
+		id,
+		spec 
+		FROM
+		t_pro_wares a
+		WHERE
+		wares_name=#{ledger.name}
+		AND spec=#{ledger.spce}
+		AND manufacturer=#{ledger.productionName}
+		AND supplier_id=#{ledger.sourceId}
+		AND stat=1
+	</select>
+
+
+
+
+
+
+</mapper>
