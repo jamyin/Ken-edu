@@ -46,11 +46,8 @@ public class UserController extends BaseController {
 	@Autowired
 	private UserServiceI userService;
 
-	@Autowired
-	private RoleServiceI roleService;
 
-	@Autowired
-	private ResourceServiceI resourceService;
+
 	
 	@Autowired
 	private ISupplierService iSupplierService;
@@ -510,30 +507,6 @@ public class UserController extends BaseController {
 			j.setMsg("登录超时，请重新登录！");
 		}
 		return j;
-	}
-
-	/**
-	 * 跳转到显示用户角色页面
-	 * 
-	 * @return
-	 */
-	@RequestMapping("/currentUserRolePage")
-	public String currentUserRolePage(HttpServletRequest request, HttpSession session) {
-		SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ConfigUtil.SESSIONINFONAME);
-		request.setAttribute("userRoles", JSON.toJSONString(roleService.tree(sessionInfo)));
-		return "user/userRole";
-	}
-
-	/**
-	 * 跳转到显示用户权限页面
-	 * 
-	 * @return
-	 */
-	@RequestMapping("/currentUserResourcePage")
-	public String currentUserResourcePage(HttpServletRequest request, HttpSession session) {
-		SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ConfigUtil.SESSIONINFONAME);
-		request.setAttribute("userResources", JSON.toJSONString(resourceService.allTree(sessionInfo)));
-		return "user/userResource";
 	}
 
 	/**

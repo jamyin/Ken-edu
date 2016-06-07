@@ -9,10 +9,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ssic.education.provider.dao.ImsRoleDao;
-import com.ssic.education.provider.dao.ResourceDao;
-import com.ssic.education.provider.dao.TImsMenuDao;
-import com.ssic.education.provider.dao.TImsUsersRolesDao;
+
+
 import com.ssic.education.provider.dao.UserDao;
 import com.ssic.education.provider.dto.ProUsersDto;
 import com.ssic.education.provider.dto.TImsMenuDto;
@@ -32,17 +30,7 @@ public class UserServiceImpl implements UserServiceI {
 	@Autowired
 	private UserDao userDao;
 
-	@Autowired
-	private ImsRoleDao roleDao;
 
-	@Autowired
-	private ResourceDao resourceDao;
-
-	@Autowired
-	private TImsMenuDao tImsMenuDao;
-
-	@Autowired
-	private TImsUsersRolesDao userRoleDao;
 
 	private static Logger log = Logger.getLogger(UserServiceImpl.class);
 	
@@ -123,23 +111,7 @@ public class UserServiceImpl implements UserServiceI {
 
 	}
 
-	
-	public List<String> resourceList(String id) {
 
-
-		List<String> resourceList = new ArrayList<String>();
-		List<String> tempList = userRoleDao.findBy(id);
-		if (tempList != null && tempList.size() > 0) {
-			List<TImsMenuDto> list = tImsMenuDao.getTree(id);
-			if (list != null && list.size() > 0) {
-				for (TImsMenuDto tImsMenuDto : list) {
-					resourceList.add(tImsMenuDto.getUrl());
-				}
-			}
-		}
-
-		return resourceList;
-	}
 
 	public void editPwd(TImsUsersDto user) {
 		if (user != null && user.getPassword() != null
@@ -185,22 +157,6 @@ public class UserServiceImpl implements UserServiceI {
 		return userDao.login(temp);
 	}
 
-	public String findUserRole(String userId) {
-		List<String> list = userRoleDao.findBy(userId);
-		if (list != null && list.size() > 0) {
-			String result = "";
-			for (int i = 0; i < list.size(); i++) {
-				if (i == list.size() - 1) {
-					result += list.get(i);
-				} else {
-					result += list.get(i) + ",";
-				}
-			}
-			return result;
-		}
-		return null;
-	}
-
 
 	public void addImsUsers(TImsUsersDto user) {
 
@@ -242,6 +198,18 @@ public class UserServiceImpl implements UserServiceI {
 	public int findByNameCount(TImsUsersDto user) {
 		// TODO Auto-generated method stub
 		return userDao.findByNameCount(user);
+	}
+
+	@Override
+	public List<String> resourceList(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String findUserRole(String userId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

@@ -1,4 +1,4 @@
-package com.ssic.education.provider.controller;
+/*package com.ssic.education.provider.controller;
 
 import java.util.List;
 
@@ -42,3 +42,4 @@ public class AreaController extends BaseController{
 	}
 
 }
+*/

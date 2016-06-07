@@ -1,4 +1,4 @@
-package com.ssic.education.provider.controller;
+/*package com.ssic.education.provider.controller;
 
 import java.util.List;
 import java.util.UUID;
@@ -13,6 +13,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
 import com.ssic.education.provider.dto.AdminTabDto;
 import com.ssic.education.provider.dto.TImsMenuDto;
 import com.ssic.education.provider.pageModel.Json;
@@ -24,12 +25,12 @@ import com.ssic.education.provider.service.ResourceServiceI;
 import com.ssic.education.provider.service.ResourceTypeServiceI;
 import com.ssic.education.provider.util.ConfigUtil;
 
-/**
+*//**
  * 资源控制器
  * 
  * @author 刘博
  * 
- */
+ *//*
 @Controller
 @RequestMapping("/resourceController")
 public class ResourceController extends BaseController {
@@ -40,17 +41,19 @@ public class ResourceController extends BaseController {
 	@Autowired
 	private ResourceTypeServiceI resourceTypeService;
 
+
+
 	@Autowired
 	private AdminTabServiceI adminTabService;
 
-	/**
+	*//**
 	 * 获得资源树(资源类型为菜单类型)
 	 * 
 	 * 通过用户ID判断，他能看到的资源
 	 * 
 	 * @param session
 	 * @return
-	 */
+	 *//*
 	@RequestMapping("/tree")
 	@ResponseBody
 	public List<Tree> tree(HttpSession session, String tabType) {
@@ -89,14 +92,14 @@ public class ResourceController extends BaseController {
 		return resourceService.allsTree(sessionInfo);
 	}
 
-	/**
+	*//**
 	 * 获得资源树(包括所有资源类型)
 	 * 
 	 * 通过用户ID判断，他能看到的资源
 	 * 
 	 * @param session
 	 * @return
-	 */
+	 *//*
 	@RequestMapping("/allTree")
 	@ResponseBody
 	public List<Tree> allTree(HttpSession session) {
@@ -105,19 +108,19 @@ public class ResourceController extends BaseController {
 		return resourceService.allTree(sessionInfo);
 	}
 
-	/**
+	*//**
 	 * 获得左侧折叠tab
 	 * 
 	 * @param session
 	 * @return
-	 */
+	 *//*
 	@RequestMapping("/getAccordionList")
 	@ResponseBody
 	public List<AdminTabDto> getAccordionList(HttpSession session) {
-		/*
+		
 		 * List<AdminTabDto> tabList = (List<AdminTabDto>) session
 		 * .getAttribute("accordionList");
-		 */
+		 
 		List<AdminTabDto> listTab = adminTabService.findAll();
 		if (!CollectionUtils.isEmpty(listTab)) {
 			return listTab;
@@ -125,12 +128,12 @@ public class ResourceController extends BaseController {
 		return null;
 	}
 
-	/**
+	*//**
 	 * 获得左侧折叠tab
 	 * 
 	 * @param session
 	 * @return
-	 */
+	 *//*
 	@RequestMapping("/getTabModules")
 	@ResponseBody
 	public List<AdminTabDto> getTabModules(String tabName) {
@@ -141,21 +144,21 @@ public class ResourceController extends BaseController {
 		return null;
 	}
 
-	/**
+	*//**
 	 * 跳转到资源管理页面
 	 * 
 	 * @return
-	 */
+	 *//*
 	@RequestMapping("/manager")
 	public String manager() {
 		return "admin/resource";
 	}
 
-	/**
+	*//**
 	 * 跳转到资源添加页面
 	 * 
 	 * @return
-	 */
+	 *//*
 	@RequestMapping("/addPage")
 	public String addPage(HttpServletRequest request) {
 		request.setAttribute("menuTypeList",
@@ -168,11 +171,11 @@ public class ResourceController extends BaseController {
 		return "admin/resourceAdd";
 	}
 
-	/**
+	*//**
 	 * 添加资源
 	 * 
 	 * @return
-	 */
+	 *//*
 	@RequestMapping("/add")
 	@ResponseBody
 	public Json add(TImsMenuDto menuDto, HttpSession session) {
@@ -185,12 +188,14 @@ public class ResourceController extends BaseController {
 		return j;
 	}
 
-	/**
+	
+
+	*//**
 	 * 编辑资源
 	 * 
 	 * @param resource
 	 * @return
-	 */
+	 *//*
 	@RequestMapping("/edit")
 	@ResponseBody
 	public Json edit(TImsMenuDto menuDto) {
@@ -201,13 +206,13 @@ public class ResourceController extends BaseController {
 		return j;
 	}
 
-	/**
+	*//**
 	 * 获得资源列表
 	 * 
 	 * 通过用户ID判断，他能看到的资源
 	 * 
 	 * @return
-	 */
+	 *//*
 	@RequestMapping("/treeGrid")
 	@ResponseBody
 	public List<TImsMenuDto> treeGrid(HttpSession session) {
@@ -216,12 +221,12 @@ public class ResourceController extends BaseController {
 		return resourceService.treeGrid(sessionInfo);
 	}
 
-	/**
+	*//**
 	 * 删除资源
 	 * 
 	 * @param id
 	 * @return
-	 */
+	 *//*
 	@RequestMapping("/delete")
 	@ResponseBody
 	public Json delete(String id) {
@@ -233,3 +238,4 @@ public class ResourceController extends BaseController {
 	}
 
 }
+*/

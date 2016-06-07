@@ -1,6 +1,6 @@
 /**
  * 
- */
+ *//*
 package com.ssic.education.provider.controller;
 
 import java.util.List;
@@ -21,7 +21,7 @@ import com.ssic.education.provider.pageModel.Role;
 import com.ssic.education.provider.service.IRoleProjectService;
 import com.ssic.education.provider.service.RoleServiceI;
 
-/**		
+*//**		
  * <p>Title: RoleProjectController </p>
  * <p>Description: 角色项目关系控制器</p>
  * <p>Copyright (c) 2015 </p>
@@ -32,7 +32,7 @@ import com.ssic.education.provider.service.RoleServiceI;
  * <p>修改人：刘博</p>
  * <p>修改时间：2015年10月26日 下午1:58:27</p>
  * <p>修改备注：</p>
- */
+ *//*
 @Controller
 @RequestMapping("/roleProjectController")
 public class RoleProjectController
@@ -43,11 +43,11 @@ public class RoleProjectController
     @Autowired
     private RoleServiceI roleService;
 
-    /**
+    *//**
      * 跳转到角色授权页面
      * 
      * @return
-     */
+     *//*
     @RequestMapping("/grantProjectPage")
     public String grantPage(HttpServletRequest request, String id)
     {
@@ -79,12 +79,12 @@ public class RoleProjectController
         return "admin/projectGrant";
     }
 
-    /**
+    *//**
      * 授权
      * 
      * @param role 角色dto;
      * @return
-     */
+     *//*
     @RequestMapping("/grant")
     @ResponseBody
     public Json grant(RoleProjectDto roleProjectDto)
@@ -123,3 +123,4 @@ public class RoleProjectController
         return j;
     }
 }
+*/
