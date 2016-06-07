@@ -44,7 +44,7 @@ public class AppUserController extends BaseController {
 	 * @return 用户信息
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	@AccessRequired
+	//@AccessRequired
 	public @ResponseBody Response<AppEduUserDto> login(@RequestParam(required = true) String account, @RequestParam(required = true) String password) {
 		EduUsersInfoDto user = new EduUsersInfoDto();
 		Response<AppEduUserDto> result = new Response<AppEduUserDto>();
