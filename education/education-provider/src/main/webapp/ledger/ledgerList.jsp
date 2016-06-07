@@ -315,7 +315,7 @@
 		<div data-options="region:'center',border:false" id="g">
 			<table id="dataGrid"  data-options="collapsible:true"  title="<font  style='font-style: normal;font-weight: bolder;font-size:16px;'>配货管理表单</font>" ></table>
 			<style>
-						#g .datagrid-btable tr{height: 57px;}
+						#g .datagrid-btable tr{height: 45px;}
 				</style>
 		</div>
 	</div>
