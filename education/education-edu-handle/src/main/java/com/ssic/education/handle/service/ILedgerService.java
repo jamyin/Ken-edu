@@ -25,4 +25,6 @@ public interface ILedgerService {
 
 	Map<ProLedgerMaster,List<ProLedger>> findExportProSupplier(LedgerDto ld);
 
+	int updataLedger(List<LedgerDto> ledgers);
+
 }

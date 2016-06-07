@@ -126,8 +126,8 @@
 		user_id,
 		driver_name,
 		source_id,
-		ware_batch_no, haul_status, create_time,
-		last_update_time,
+		ware_batch_no, haul_status, creator, create_time,
+		updater, last_update_time,
 		stat)
 		values
 		(#{ledger.id}, #{ledger.actionDate},
@@ -138,7 +138,9 @@
 		#{ledger.sourceId},
 		#{ledger.wareBatchNo},
 		#{ledger.haulStatus},
+		#{ledger.creator},
 		#{ledger.createTime},
+		#{ledger.updater},
 		#{ledger.lastUpdateTime},
 		#{ledger.stat}
 		)

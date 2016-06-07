@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -180,6 +181,7 @@ public class LedgerController {
 			j.setSuccess(false);
 			return j;
 		}
+		String masterId=UUID.randomUUID().toString();
 		// 标识
 		int i = 0;
 		String str = "";
@@ -200,6 +202,9 @@ public class LedgerController {
 			ledger.setReceiverId(receiverId);
 			ledger.setReceiverName(ledgers.get(0).getReceiverName());
 			ledger.setSourceId(sourceId);
+			ledger.setCreator(user.getId());
+			ledger.setUpdater(user.getId());
+			ledger.setMasterId(masterId);
 			// 查询采购品是否存在
 			if (ledger.getSpce() == null) {
 				j.setMsg(ledger.getName() + "采购品规格不能为空");
@@ -416,7 +421,9 @@ public class LedgerController {
 			if (ledger.getSupplierId() == null) {
 				ledger.setSupplierName(null);
 			}
-			ledger.setCreateTime(null);
+			ledger.setCreator(user.getId());
+			ledger.setCreateTime(new Date());
+			ledger.setUpdater(user.getId());
 			ledger.setLastUpdateTime(new Date());
 			ledger.setStat(1);
 			n+=1;
@@ -433,8 +440,7 @@ public class LedgerController {
 			j.setSuccess(false);
 			return j;
 		}
-		ledgerService.deleteLedger(ledgers.get(0).getSourceId(), ledgers.get(0).getMasterId());
-		ledgerService.saveLedger(ledgers);
+		ledgerService.updataLedger(ledgers);
 		j.setMsg("修改供应商成功");
 		j.setSuccess(true);
 		return j;
@@ -541,7 +547,9 @@ public class LedgerController {
 							master.setSourceId(supplierId);
 							master.setHaulStatus(0);
 							master.setStat(1);
+							master.setCreator(info.getId());
 							master.setCreateTime(now);
+							master.setUpdater(info.getId());							
 							master.setLastUpdateTime(now);
 							noMaster.put(value, master);
 							masterLedger.put(master, new ArrayList());
@@ -639,7 +647,9 @@ public class LedgerController {
 					break;
 				}
 				dto.setSupplierId(supplierId);
+				dto.setCreator(info.getId());
 				dto.setCreateTime(now);
+				dto.setUpdater(info.getId());
 				dto.setLastUpdateTime(now);
 				dto.setStat(1);
 				masterLedger.get(master).add(dto);

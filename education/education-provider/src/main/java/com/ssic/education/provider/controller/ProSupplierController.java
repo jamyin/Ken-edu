@@ -77,6 +77,11 @@ public class ProSupplierController extends BaseController{
 	public String manager(HttpServletRequest request) {
 		return "supplier/supplier";
 	}
+	
+	@RequestMapping("/importPage")
+	public String importPage(HttpServletRequest request) {
+		return "supplier/supplierImport";
+	}
 
 	/**
 	 * 查询供应商

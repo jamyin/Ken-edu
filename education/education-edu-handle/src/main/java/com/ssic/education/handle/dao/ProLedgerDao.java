@@ -10,6 +10,7 @@ import java.util.UUID;
 import lombok.Getter;
 
 import org.apache.commons.lang.StringUtils;
+import org.elasticsearch.common.mvel2.ast.NewPrototypeNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -25,6 +26,7 @@ import com.ssic.education.handle.mapper.ProLedgerMasterMapper;
 import com.ssic.education.handle.mapper.ProSchoolWareMapper;
 import com.ssic.education.handle.pojo.ProLedger;
 import com.ssic.education.handle.pojo.ProLedgerExample;
+import com.ssic.education.handle.pojo.ProLedgerExample.Criteria;
 import com.ssic.education.handle.pojo.ProLedgerMaster;
 import com.ssic.education.handle.pojo.ProLedgerMasterExample;
 import com.ssic.education.handle.pojo.ProSchoolWare;
@@ -73,7 +75,7 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 			List<ProLedger> leadgers = mapper.selectByExample(example);
 			String name = "";
 			for (ProLedger proLedger : leadgers) {
-				name += proLedger.getName() + ",";
+				name += proLedger.getName() + "，";
 			}
 			if (name != "") {
 				ledgerDto.setName(name.substring(0, name.length() - 1));
@@ -117,7 +119,7 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 				}
 			}
 		}
-		ledger.get(0).setId(UUID.randomUUID().toString());
+		ledger.get(0).setId(ledger.get(0).getMasterId());
 		lmExMapper.insertLedgerMaster(ledger.get(0));
 		return exMapper.insertLedger(ledger);
 	}
@@ -225,6 +227,56 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 
 		return mapper.selectByExample(example);
+	}
+
+	public int updataLedger(List<LedgerDto> ledgers) {
+		// 采购品与学校
+		for (LedgerDto ledgerDto : ledgers) {
+			ProSchoolWare psw = new ProSchoolWare();
+			psw.setSchoolId(ledgerDto.getReceiverId());
+			psw.setWareId(ledgerDto.getWaresId());
+			psw.setSourceId(ledgerDto.getSourceId());
+			psw.setSupplierId(ledgerDto.getSupplierId());
+			ProSchoolWareExample example = new ProSchoolWareExample();
+			ProSchoolWareExample.Criteria criteria = example.createCriteria();
+			criteria.andSchoolIdEqualTo(psw.getSchoolId());
+			criteria.andWareIdEqualTo(psw.getWareId());
+			criteria.andSourceIdEqualTo(psw.getSourceId());
+			if (psw.getSupplierId() != null) {
+				criteria.andSupplierIdEqualTo(psw.getSupplierId());
+			} else {
+				criteria.andSupplierIdIsNull();
+			}
+			List<ProSchoolWare> list = swMapper.selectByExample(example);
+			if (list.size() == 0) {
+				psw.setId(UUID.randomUUID().toString());
+				psw.setCreateTime(new Date());
+				psw.setLastUpdateTime(psw.getCreateTime());
+				psw.setStat(1);
+				swMapper.insert(psw);
+			} else {
+				for (ProSchoolWare sw : list) {
+					ProSchoolWare psw1 = new ProSchoolWare();
+					psw1.setId(sw.getId());
+					psw1.setLastUpdateTime(new Date());
+					swMapper.updateByPrimaryKeySelective(psw1);
+				}
+			}
+		}
+		ProLedgerMaster plm = BeanUtils.createBeanByTarget(ledgers.get(0),
+				ProLedgerMaster.class);
+		plm.setId(ledgers.get(0).getMasterId());
+		plm.setCreator(null);
+		plm.setCreateTime(null);
+		plm.setWareBatchNo(null);
+		lmMapper.updateByPrimaryKeySelective(plm);
+		ProLedger pl = new ProLedger();
+		pl.setStat(0);
+		ProLedgerExample example = new ProLedgerExample();
+		ProLedgerExample.Criteria criteria = example.createCriteria();
+		criteria.andMasterIdEqualTo(ledgers.get(0).getMasterId());
+		mapper.updateByExampleSelective(pl, example);
+		return exMapper.insertLedger(ledgers);
 	}
 
 }

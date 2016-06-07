@@ -94,7 +94,7 @@ ul.my_info {
 			<span class="name">电话：	</span><span class="value">${Corporate.contactWay }</span>
 		</li>
 		<li>
-			<span class="name">证件类型：	</span><span class="value"></span>
+			<span class="name">证件类型</span><span class="value"></span>
 		</li>
 		<li>
 			<span class="cert">食品经营许可证：	</span><span class="value">${Corporate.foodBusinessCode }</span>

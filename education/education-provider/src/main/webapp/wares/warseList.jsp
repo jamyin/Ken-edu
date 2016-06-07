@@ -475,6 +475,13 @@ else
 		var waresType = $("#waresType").combo('getValue');
 		window.location.href='${pageContext.request.contextPath}/waresController/excel.do?waresName='+waresName+'&waresType='+waresType+'&customCode='+customCode+''
 	}
+
+/* 	window.onload=function(){
+		alert($("#datagrid-header-over"));
+		$("#datagrid-header-over").each(function(){
+			alert($(this).html());
+		});
+	} */
 	
 </script>
 </head>
