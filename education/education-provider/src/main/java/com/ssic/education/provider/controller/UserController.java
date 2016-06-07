@@ -1,6 +1,5 @@
 package com.ssic.education.provider.controller;
 
-import java.util.List;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -15,7 +14,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
 import com.google.common.base.Objects;
 import com.ssic.educateion.common.dto.ProSupplierDto;
 import com.ssic.education.handle.service.ISupplierService;
@@ -25,13 +23,9 @@ import com.ssic.education.provider.pageModel.DataGrid;
 import com.ssic.education.provider.pageModel.Json;
 import com.ssic.education.provider.pageModel.PageHelper;
 import com.ssic.education.provider.pageModel.SessionInfo;
-import com.ssic.education.provider.pageModel.Tree;
 import com.ssic.education.provider.pageModel.User;
-import com.ssic.education.provider.service.ResourceServiceI;
-import com.ssic.education.provider.service.RoleServiceI;
 import com.ssic.education.provider.service.UserServiceI;
 import com.ssic.education.provider.util.ConfigUtil;
-import com.ssic.education.utils.constants.DataStatus;
 
 /**
  * 用户控制器
@@ -45,12 +39,6 @@ public class UserController extends BaseController {
 
 	@Autowired
 	private UserServiceI userService;
-
-	@Autowired
-	private RoleServiceI roleService;
-
-	@Autowired
-	private ResourceServiceI resourceService;
 	
 	@Autowired
 	private ISupplierService iSupplierService;
@@ -493,29 +481,5 @@ public class UserController extends BaseController {
 			j.setMsg("登录超时，请重新登录！");
 		}
 		return j;
-	}
-
-	/**
-	 * 跳转到显示用户角色页面
-	 * 
-	 * @return
-	 */
-	@RequestMapping("/currentUserRolePage")
-	public String currentUserRolePage(HttpServletRequest request, HttpSession session) {
-		SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ConfigUtil.SESSIONINFONAME);
-		request.setAttribute("userRoles", JSON.toJSONString(roleService.tree(sessionInfo)));
-		return "user/userRole";
-	}
-
-	/**
-	 * 跳转到显示用户权限页面
-	 * 
-	 * @return
-	 */
-	@RequestMapping("/currentUserResourcePage")
-	public String currentUserResourcePage(HttpServletRequest request, HttpSession session) {
-		SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ConfigUtil.SESSIONINFONAME);
-		request.setAttribute("userResources", JSON.toJSONString(resourceService.allTree(sessionInfo)));
-		return "user/userResource";
 	}
 }
