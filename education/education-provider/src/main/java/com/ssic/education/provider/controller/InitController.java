@@ -1,4 +1,4 @@
-package com.ssic.education.provider.controller;
+/*package com.ssic.education.provider.controller;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.ssic.education.provider.service.InitServiceI;
 
 
-/**
+*//**
  * 初始化数据库控制器
  * 
  * @author 刘博
  * 
- */
+ *//*
 @Controller
 @RequestMapping("/initController")
 public class InitController {
@@ -22,11 +22,11 @@ public class InitController {
 	@Autowired
 	private InitServiceI initService;
 
-	/**
+	*//**
 	 * 初始化数据库后转向到首页
 	 * 
 	 * @return
-	 */
+	 *//*
 	@RequestMapping("/init")
 	public String init(HttpSession session) {
 		if (session != null) {
@@ -37,3 +37,4 @@ public class InitController {
 	}
 
 }
+*/
