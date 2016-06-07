@@ -728,11 +728,16 @@ public class ProSupplierController extends BaseController{
 				}
 				if (supplier != null && errorMsg == null) {
 					supplier.setId(UUID.randomUUID().toString());
+					supplier.setSupplierType(0);
+					supplier.setReviewed((byte)1);
 					if(psr==null){
 						psr=new ProSupplierReceiver();
 					}
+					psr.setId(UUID.randomUUID().toString());
 					psr.setSupplierId(supplier.getId());
 					psr.setReceiverId(supplierId);
+					psr.setCreateTime(new Date());
+					psr.setLastUpdateTime(psr.getCreateTime());
 					suppliers.put(psr, supplier);
 					map.put(supplier.getSupplierName(), suppliers);
 				}
