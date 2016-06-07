@@ -60,8 +60,12 @@ public class InformationServiceImpl implements IInformationService{
 		if(eduInformation ==null){
 			return null;
 		}
-		EduInformationDto dtoList = BeanUtils.createBeanByTarget(eduInformation, EduInformationDto.class);
-		return dtoList;
+		EduInformationDto dto = BeanUtils.createBeanByTarget(eduInformation, EduInformationDto.class);
+		String realPath = PropertiesUtils.getProperty("upload.look.url"); 
+		if(StringUtils.isNotEmpty(dto.getPic())){
+			dto.setPic(realPath +dto.getPic()) ;
+		}
+		return dto;
 	}
 
 
