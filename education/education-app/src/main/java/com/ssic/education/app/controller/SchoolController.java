@@ -292,19 +292,12 @@ public class SchoolController {
 				//显示学校级别列表
 				List<MapToListDto> levelList = showSchoolLevel();
 				chooseSchoolDto.setLevelList(levelList);
-
-				//学校列表
-				PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, query);
-				chooseSchoolDto.setSchoolDto(schoolList);
-				result.setData(chooseSchoolDto);
-			}else{
-				//学校列表
-				PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, query);
-				chooseSchoolDto.setSchoolDto(schoolList);
-				result.setData(chooseSchoolDto);
 			}
+				//学校列表
+				PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, query);
+				chooseSchoolDto.setSchoolDto(schoolList);
+				result.setData(chooseSchoolDto);
 		}
-
 		return result;
 	}
 
