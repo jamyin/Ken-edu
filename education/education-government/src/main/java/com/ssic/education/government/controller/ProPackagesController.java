@@ -130,8 +130,8 @@ public class ProPackagesController extends BaseController{
 	public Response<String> addPackage(HttpServletRequest request,HttpServletResponse response,HttpSession session,ProPackagesDto dto) {
 		Response<String> res = new Response<String>();
 		String id = (String) getRequest().getSession().getAttribute(SessionConstants.LOGIN_USER_INFO);
-//		EduUsersDto usersdto = (EduUsersDto) session.getAttribute(SessionConstants.LOGIN_USER_INFO);
 		EduUsersDto usersdto = getLoginUser(request, response, session, id);
+		dto.setCreator(usersdto.getId());
 		if (null != usersdto && StringUtils.isNotBlank(usersdto.getSourceId()) ) {
 			dto.setCustomerId(usersdto.getSourceId());
 		}

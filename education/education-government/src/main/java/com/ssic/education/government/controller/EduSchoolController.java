@@ -414,8 +414,12 @@ public class EduSchoolController extends BaseController{
 	
 	@RequestMapping(value = "/update")
 	@ResponseBody
-	public Response<String> update(SupplierReviewedDto dto) {
+	public Response<String> update(HttpServletRequest request, HttpServletResponse response,
+    		HttpSession session,SupplierReviewedDto dto) {
 		Response<String> res = new Response<String>();
+		String id = (String) getRequest().getSession().getAttribute(SessionConstants.LOGIN_USER_INFO);
+		EduUsersDto usersdto = getLoginUser(request, response, session, id);
+		dto.setUpdater(usersdto.getId());
 		Integer result = null;
 		if (StringUtils.isNotBlank(dto.getSchoolName())) {
 			EduSchoolDto eduSchoolDto = BeanUtils.createBeanByTarget(dto, EduSchoolDto.class);

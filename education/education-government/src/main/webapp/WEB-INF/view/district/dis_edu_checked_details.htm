@@ -75,7 +75,9 @@
                          <#if (proLicenses??) && (proLicenses?size>0)>
 	                        <h2>证件类型</h2>
 	                        <#list proLicenses as proLicense>
-	                        	<p> ${(proLicense.licName)!}： ${(proLicense.licNo)!} </p>
+		                        <#if (proLicense.licNo??) && (proLicense.licNo?length gt 0)>
+		                        	<p> ${(proLicense.licName)!}： ${(proLicense.licNo)!} </p>
+		                        </#if>
 	                        </#list>
                         </#if>
                     </#if>

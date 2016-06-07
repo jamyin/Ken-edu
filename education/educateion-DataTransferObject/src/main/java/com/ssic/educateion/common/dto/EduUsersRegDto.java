@@ -59,6 +59,8 @@ public class EduUsersRegDto implements Serializable{
 
     private String phoneNumber;
     
+    private String creator;//创建者
+    
     //学校信息
     private String schoolId;
     
