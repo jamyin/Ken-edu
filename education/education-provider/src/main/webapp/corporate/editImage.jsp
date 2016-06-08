@@ -14,6 +14,21 @@
 }
 </style>
 <script type="text/javascript">
+$(function(){
+    $("img").click(function(){
+        var width = $(this).width();
+        if(width==150)
+        {
+            $(this).width(300);
+            $(this).height(300);
+        }
+        else
+        {
+            $(this).width(150);
+            $(this).height(150);
+        }
+    });
+});
 	
 	$(function() {
 		parent.$.messager.progress('close');
