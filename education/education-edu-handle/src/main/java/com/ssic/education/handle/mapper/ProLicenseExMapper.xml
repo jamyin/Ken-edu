@@ -9,6 +9,7 @@
 				a.id As id,
 				a.lic_name AS licName,
 				a.lic_no AS licNo,
+				a.lic_type AS licType,
 				a.lic_pic AS licPic
 			FROM
 				t_pro_license a

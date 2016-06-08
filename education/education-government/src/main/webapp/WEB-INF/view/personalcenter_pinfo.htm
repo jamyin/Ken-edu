@@ -112,23 +112,40 @@
 								<li><label>手机</label><input type="text" id="phoneNumber" placeholder="" value="${(eduCanteenDto.phoneNumber)!}"></li>
 								<li>
 									<label>证件类型</label>
-									<ul class="c_type">
+									<ul class="c_type" id="edit_c_type">
 									<#if (proLicenses??) && (proLicenses?size>0)>
 										<#list proLicenses as proLicense>
-											<input style="display:none;" type="text" class="proLicenseId${proLicense_index+1}" placeholder="" value="${(proLicense.id)!}">
-											<li name="phoneFile${proLicense_index+1}">
-											<select class="licType1">
-												<option value="0" <#if proLicense.licType == 0>selected="selected"</#if> >餐饮服务证</option>
-												<option value="1" <#if proLicense.licType == 1>selected="selected"</#if> >食品经营许可证</option>
-												<option value="2" <#if proLicense.licType == 2>selected="selected"</#if> >食品流通证</option>
-												<option value="3" <#if proLicense.licType == 3>selected="selected"</#if> >食品生产证</option>
-												<option value="4" <#if proLicense.licType == 4>selected="selected"</#if> >工商执照</option>
-											</select>
-											<input id="licNum" type="text" class="licinputw${proLicense_index+1}" name="licNum" value="${(proLicense.licNo)!}" placeholder="证件编号">
-											<label class="file" for="phoneFile${proLicense_index+1}">文件<i>浏览</i></label>
-											<input id="phoneFile${proLicense_index+1}" value="${(proLicense.licPic)!}" type="file" name="file" onchange="selectfun(this)"><span class="add">+</span>
-											<a id="phoneQuery1"></a>
-											</li>
+											<#if proLicense_index==0>												
+												<li name="phoneFile${proLicense_index+1}">
+												<input style="display:none;" type="text" class="proLicenseId${proLicense_index+1}" placeholder="" value="${(proLicense.id)!}">
+												<select class="licType1">
+													<option value="0" <#if proLicense.licType == 0>selected="selected"</#if> >餐饮服务证</option>
+													<option value="1" <#if proLicense.licType == 1>selected="selected"</#if> >食品经营许可证</option>
+													<option value="2" <#if proLicense.licType == 2>selected="selected"</#if> >食品流通证</option>
+													<option value="3" <#if proLicense.licType == 3>selected="selected"</#if> >食品生产证</option>
+													<option value="4" <#if proLicense.licType == 4>selected="selected"</#if> >工商执照</option>
+												</select>
+												<input id="licNum" type="text" class="licinputw${proLicense_index+1}" name="licNum" value="${(proLicense.licNo)!}" placeholder="证件编号">
+												<label class="file" for="phoneFile${proLicense_index+1}">文件<i>浏览</i></label>
+												<input id="phoneFile${proLicense_index+1}" value="${(proLicense.licPic)!}" type="file" name="file" onchange="selectfun(this)"><span class="add">+</span>
+												<a id="phoneQuery1"></a>
+												</li>
+											<#else>												
+												<li name="phoneFile${proLicense_index+1}">
+												<input style="display:none;" type="text" class="proLicenseId${proLicense_index+1}" placeholder="" value="${(proLicense.id)!}">
+												<select class="licType1">
+													<option value="0" <#if proLicense.licType == 0>selected="selected"</#if> >餐饮服务证</option>
+													<option value="1" <#if proLicense.licType == 1>selected="selected"</#if> >食品经营许可证</option>
+													<option value="2" <#if proLicense.licType == 2>selected="selected"</#if> >食品流通证</option>
+													<option value="3" <#if proLicense.licType == 3>selected="selected"</#if> >食品生产证</option>
+													<option value="4" <#if proLicense.licType == 4>selected="selected"</#if> >工商执照</option>
+												</select>
+												<input id="licNum" type="text" class="licinputw${proLicense_index+1}" name="licNum" value="${(proLicense.licNo)!}" placeholder="证件编号">
+												<label class="file" for="phoneFile${proLicense_index+1}">文件<i>浏览</i></label>
+												<input id="phoneFile${proLicense_index+1}" value="${(proLicense.licPic)!}" type="file" name="file" onchange="selectfun(this)"><span class="remove">-</span>
+												<a id="phoneQuery1"></a>
+												</li>
+											</#if>
 										</#list>
 									<#else>
 										<input style="display:none;" type="text" class="proLicenseId1" placeholder="" value="">
@@ -242,12 +259,14 @@
             	alert("学校级别不能为空~");
 				return;
             } 
-			var _ind = $('.c_type').closest('ul').find('li').length;
+			var _ind = $('#edit_c_type').closest('ul').find('li').length;
+			alert(_ind);
 			var jsonLic;
 			jsonLic = '[';
 			for (i=1; i<=_ind; i++) {
-				if ($.trim($('#phoneFile1').attr("value")).length >0 && $('#phoneFile1').attr("value") != 'undefined') {
-					jsonLic += '{\"licPic\":\"' +$('#phoneFile'+i+'').attr("value")+'\",'+'\"licType\":\"' +$('.licType'+i+'').val()+'\",'+'\"licNo\":\"' +$('.licinputw'+i+'').val()+'\",'+'\"licName\":\"' +$('.licType'+i+'').find("option:selected").text()+'\"},';
+				if ($.trim($('#phoneFile1').attr("value")).length >0 && $('#phoneFile1').attr("value") != 'undefined' && $('#phoneFile'+i+'').attr("value") != 'undefined' && $.trim($('#phoneFile'+i+'').attr("value")).length >0 ) {
+					alert("pic"+i+":"+$('#phoneFile'+i+'').attr("value"));
+					jsonLic += '{\"id\":\"' +$('#proLicenseId'+i+'').val()+'\",'+'\"licPic\":\"' +$('#phoneFile'+i+'').attr("value")+'\",'+'\"licType\":\"' +$('.licType'+i+'').val()+'\",'+'\"licNo\":\"' +$('.licinputw'+i+'').val()+'\",'+'\"licName\":\"' +$('.licType'+i+'').find("option:selected").text()+'\"},';
 				}				
 			}
 			jsonLic += ']';
