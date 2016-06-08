@@ -57,7 +57,7 @@
 
     <div class="menu_box">
       <div class="subbar">
-        <p class="lef">经营单位：<a style="cursor: pointer;" href="canteen.htm?schoolId=${(eduSchoolDto.id)!}"><#if (eduCanteenDto.canteenName??) && (eduCanteenDto.canteenName != '')><span style="color: blue;">${(eduCanteenDto.canteenName)!}</span><#else><span style="color: red;">暂无</span></#if></a></p><#if (dto.source == 1) && (eduSchoolSupplierDtos.supplierId??)><a style="cursor: pointer;" class="offer_delete">删除</a> </#if><p class="rig">委托经营单位：<#if (proSupplierDtos??) && (proSupplierDtos?size>0)>
+        <p class="lef">经营单位：<#if (eduCanteenDto.canteenName??) && (eduCanteenDto.canteenName != '')><span style="color: blue;"><a style="cursor: pointer;" href="canteen.htm?schoolId=${(eduSchoolDto.id)!}">${(eduCanteenDto.canteenName)!}</a></span><#else><span style="color: red;">暂无</span></#if></p><#if (dto.source == 1) && (eduSchoolSupplierDtos.supplierId??)><a style="cursor: pointer;" class="offer_delete">删除</a> </#if><p class="rig">委托经营单位：<#if (proSupplierDtos??) && (proSupplierDtos?size>0)>
 					<#list proSupplierDtos as supplier>
 						<a href="/pro/supplier/detail.htm?id=${(supplier.id)!}&source=1"><span style="color: blue;">${(supplier.supplierName)!}</span></a>
 					</#list>
@@ -85,7 +85,7 @@
 					<ul>
 						<#if proPackages.proPackagesDtos??>
 							<#list proPackages.proPackagesDtos as packages>
-									<li data="餐次：<#if proPackages.supplyPhase == 0>早餐</#if><#if proPackages.supplyPhase == 1>午餐</#if><#if proPackages.supplyPhase == 2>午后甜点</#if><#if proPackages.supplyPhase == 3>晚餐</#if><#if proPackages.supplyPhase == 3>夜宵</#if><br><br> 类型：<#if packages.type == 0>国内班</#if><#if packages.type == 1>国际班</#if><br><br> 菜品：<#if packages.proDishesDtos??> <#list packages.proDishesDtos as proDishes> ${(proDishes.waresName)!} </#list></#if><br><br> 营养：<#if packages.proNutritionalDtos??>
+									<li data="餐次：<#if proPackages.supplyPhase == 0>早餐</#if><#if proPackages.supplyPhase == 1>午餐</#if><#if proPackages.supplyPhase == 2>午后甜点</#if><#if proPackages.supplyPhase == 3>晚餐</#if><#if proPackages.supplyPhase == 3>夜宵</#if><br><br> 类型：<#if packages.type == 0>国内班</#if><#if packages.type == 1>国际班</#if><br><br> 菜品：<#if packages.proDishesDtos??> <#list packages.proDishesDtos as proDishes> ${(proDishes.name)!} </#list></#if><br><br> 营养：<#if packages.proNutritionalDtos??>
 										<#list packages.proNutritionalDtos as proNutritionalDtos>
 											${(proNutritionalDtos.name)!}：${(proNutritionalDtos.weight)!}${(proNutritionalDtos.unit)!}    
 										</#list>
@@ -93,7 +93,7 @@
 									<span class="name"><#if packages.type == 0>国内班</#if><#if packages.type == 1>国际班</#if><#if packages.type == 2>教工</#if></span>
 									<span><#if packages.proDishesDtos??>
 										<#list packages.proDishesDtos as proDishes>
-											${(proDishes.waresName)!} 
+											${(proDishes.name)!} 
 										</#list>
 									</#if></span>
 									<span class="nutrition"><#if packages.proNutritionalDtos??>

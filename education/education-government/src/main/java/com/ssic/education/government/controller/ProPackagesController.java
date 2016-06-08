@@ -90,7 +90,10 @@ public class ProPackagesController extends BaseController{
 	
 	@RequestMapping(value = "/save")
 	@ResponseBody
-	public Response<String> save(ProPackagesDto dto, String jsonWares,String jsonNutritional) {
+	public Response<String> save(HttpServletRequest request,HttpServletResponse response,HttpSession session,ProPackagesDto dto, String jsonWares,String jsonNutritional) {
+		String id = (String) getRequest().getSession().getAttribute(SessionConstants.LOGIN_USER_INFO);
+		EduUsersDto usersdto = getLoginUser(request, response, session, id);
+		dto.setCreator(usersdto.getId());
 		proPackagesService.save(dto, jsonWares, jsonNutritional);
 		Response<String> res = new Response<String>();
 		res.setStatus(DataStatus.HTTP_SUCCESS);
