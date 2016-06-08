@@ -43,7 +43,8 @@
 .main_wrap .content_wrap > .text {
   margin-top: 30px;
   line-height: 32px;
-  text-indent: 48px; }
+  text-indent: 48px;
+  word-break: break-all; }
 
 .main_wrap .content_wrap #readed, .main_wrap .content_wrap #unread {
   cursor: pointer; }
@@ -75,8 +76,6 @@
       line-height: 42px;
       border-left: 5px solid #ebebeb;
       cursor: pointer; }
-	   .main_wrap .tab_wrap .side_menu li a, .main_wrap .tab_wrap .side_menu li a:visited{
-      color: #333;display:block;width:100%;height:100%;}
       .main_wrap .tab_wrap .side_menu li.active {
         background: #fff;
         color: #60ac62;
@@ -143,7 +142,7 @@
     box-sizing: border-box;
     padding: 0 28px;
     background: #fff;
-    min-height: 200px;}
+    min-height: 200px; }
     .main_wrap .tab_wrap .tab_content > h1 {
       text-align: center;
       font-size: 28px;
@@ -159,7 +158,7 @@
       font-weight: bold;
       border-left: 4px solid #60ac62; }
     .main_wrap .tab_wrap .tab_content > p {
-      line-height: 30px;
+      line-height: 38px;
       text-indent: 40px; }
     .main_wrap .tab_wrap .tab_content .status {
       text-align: center;
