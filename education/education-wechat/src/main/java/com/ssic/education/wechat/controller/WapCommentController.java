@@ -54,9 +54,18 @@ public class WapCommentController extends BaseController {
 		 * @version: 2016年5月23日 下午3:50:56
 	 */
 	@RequestMapping(value="/join/{packageId}")
-	public ModelAndView join(@PathVariable String packageId){	
+	public ModelAndView join(@PathVariable String packageId){
 		ModelAndView mv = getModelAndView();
 
+		//先判断该用户是否已经点评过 如果已经点评则直接跳转至我的点评页面
+		EduParentPackCommentDto eduParentPackCommentDto = new EduParentPackCommentDto();
+		eduParentPackCommentDto.setPackageId(packageId);
+		eduParentPackCommentDto.setParentId(packageId);
+		List<EduParentPackCommentDto> dataList = iEduParentPackCommentService.searchComment(eduParentPackCommentDto);
+		if(dataList!=null && dataList.size() > 0 ){
+			return new ModelAndView("redirect:/wap/comment/index.htm");
+		}
+		
 		ProPackagesDto proPackageSto = proPackagesService.findById(packageId);
 		
 		String schoolId = proPackageSto.getCustomerId();//学校Id
