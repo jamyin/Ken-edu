@@ -10,4 +10,6 @@ public interface IEduParentPackCommentService {
 
 	List<EduParentPackCommentDto> searchComment(EduParentPackCommentDto eduParentPackCommentDto);
 
+	Integer countPackageStar(String packageId);
+
 }

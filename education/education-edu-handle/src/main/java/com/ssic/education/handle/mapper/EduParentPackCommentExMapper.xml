@@ -28,4 +28,11 @@
 		</if>
 	</select>
 
+	<select id="countPackageStar" resultType="java.lang.Integer">
+		SELECT ROUND((AVG(flavor)+AVG(health)+AVG(weights))/3) FROM `t_edu_parent_pack_comment` where 
+		<if test="packageId!=null and packageId!='' ">
+			package_id =  #{packageId}
+		</if>
+	</select>
+
 </mapper>

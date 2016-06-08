@@ -3,108 +3,61 @@ package com.ssic.educateion.common.dto;
 import java.util.Date;
 import java.util.List;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+@Data
 public class ProPackagesDto {
-	
-	@Getter
-	@Setter
-    private String id;
 
-	@Getter
-	@Setter
-    private String packageName;
+	private String id;
 
-	@Getter
-	@Setter
-    private String supplierId;
-	
-	@Getter
-	@Setter
+	private String packageName;
+
+	private String supplierId;
+
 	private String sourceId;
 
-	@Getter
-	@Setter
 	private Integer type;
-	
-	@Getter
-	@Setter
-    private Short customerType;
 
-	@Getter
-	@Setter
-    private String customerId;
+	private Short customerType;
 
-	@Getter
-	@Setter
-    private Short grade;
+	private String customerId;
 
-	@Getter
-	@Setter
-    private Date supplyDate;
-	
-	@Getter
-	@Setter
-    private String supplyDateStr;
+	private Short grade;
 
-	@Getter
-	@Setter
-    private Short supplyPhase;
+	private Date supplyDate;
 
-	@Getter
-	@Setter
-    private Date createTime;
+	private String supplyDateStr;
 
-	@Getter
-	@Setter
-    private Date lastUpdateTime;
+	private Short supplyPhase;
 
-	@Getter
-	@Setter
-    private Short stat;
+	private Date createTime;
 
-	@Setter
-	@Getter
+	private Date lastUpdateTime;
+
+	private Short stat;
+
 	private List<ProDishesDto> proDishesDtos;
-	
-	@Getter
-	@Setter
-	private List<ProPackagesDto> proPackagesDtos;
-	
-	
-	@Getter
-	@Setter
-	private List<ProNutritionalDto> proNutritionalDtos;
-	
-	
-	@Getter
-	@Setter
-    private String waresNames;    //拼接菜品
-	
-	@Getter
-	@Setter
-    private String nutritionalNames;//拼接营养名称
-	
-	@Getter
-	@Setter
-    private String nutritionalWeights;//拼接营养含量
 
-	@Getter
-	@Setter
-    private String nutritionalUnits; //拼接营养单位
-	
-	@Getter
-	@Setter
-	private Integer source;//来源0：市教委，1：区教委，2：学校
-	
-	@Getter
-	@Setter
+	private List<ProPackagesDto> proPackagesDtos;
+
+	private List<ProNutritionalDto> proNutritionalDtos;
+
+	private String waresNames; // 拼接菜品
+
+	private String nutritionalNames;// 拼接营养名称
+
+	private String nutritionalWeights;// 拼接营养含量
+
+	private String nutritionalUnits; // 拼接营养单位
+
+	private Integer source;// 来源0：市教委，1：区教委，2：学校
+
 	private float comment;
-	
-	@Getter
-	@Setter
-    private String creator; //更新人
-	
-	
+
+	private String creator; // 更新人
+
+	private Integer packageStar;//package 的 评级 数量
+
 }

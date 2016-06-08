@@ -44,4 +44,6 @@ public interface ProPackagesService {
 	 */
 	public PageResult<ProPackagesDto> searchPackages(ProPackagesDto dto,
 			PageQuery page);
+
+	public void updatePackage(ProPackagesDto propackage);
 }

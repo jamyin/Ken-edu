@@ -9,6 +9,8 @@ public interface EduParentPackCommentExMapper {
 	
 	Object packagesComment(@Param("eduParentPackCommentDto")EduParentPackCommentDto eduParentPackCommentDto);
 
+	Integer countPackageStar(@Param("packageId") String packageId);
+
 
 
 }

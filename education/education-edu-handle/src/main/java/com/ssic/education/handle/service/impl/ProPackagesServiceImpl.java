@@ -169,4 +169,10 @@ public class ProPackagesServiceImpl implements ProPackagesService{
 		page.setTotal(proPackagesDao.fingPackagesCount(dto));
 		return new PageResult<>(page, results);
 	}
+
+	@Override
+	public void updatePackage(ProPackagesDto propackage) {
+		ProPackages propack = BeanUtils.createBeanByTarget(propackage, ProPackages.class);
+		proPackagesDao.updateByPrimaryKeySelective(propack);
+	}
 }

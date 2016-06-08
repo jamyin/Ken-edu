@@ -90,6 +90,12 @@ public class WapCommentController extends BaseController {
 		int data = iEduParentPackCommentService.saveComment(eduParentPackCommentDto);
 		if (data > 0) {
 			result.setMessage("点评成功");
+			//成功之后进行计算总体的星级
+			Integer count = iEduParentPackCommentService.countPackageStar(eduParentPackCommentDto.getPackageId());
+			
+			ProPackagesDto propackage = proPackagesService.findById(eduParentPackCommentDto.getPackageId());
+			propackage.setPackageStar(count);
+			proPackagesService.updatePackage(propackage);
 		} else {
 			result.setStatus(DataStatus.HTTP_FAILE);
 		}		

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ssic.education.handle.dto.EduParentPackCommentDto;
+import com.ssic.education.handle.mapper.EduParentPackCommentExMapper;
 import com.ssic.education.handle.mapper.EduParentPackCommentMapper;
 import com.ssic.education.handle.pojo.EduParentPackComment;
 import com.ssic.education.handle.pojo.EduParentPackCommentExample;
@@ -22,6 +23,10 @@ public class EduParentPackCommentDao extends MyBatisBaseDao<EduParentPackComment
 	@Autowired
 	@Getter
 	private EduParentPackCommentMapper mapper;
+	
+	@Autowired
+	@Getter
+	private EduParentPackCommentExMapper mapperEx;
 
 	public List<EduParentPackComment> searchComment(EduParentPackCommentDto eduParentPackCommentDto) {
 		EduParentPackCommentExample example = new EduParentPackCommentExample();
@@ -37,6 +42,11 @@ public class EduParentPackCommentDao extends MyBatisBaseDao<EduParentPackComment
 
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		return mapper.selectByExample(example);
+	}
+
+	public Integer countPackageStar(String packageId) {
+		// TODO Auto-generated method stub
+		return mapperEx.countPackageStar(packageId);
 	}
 
 }

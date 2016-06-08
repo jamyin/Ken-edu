@@ -29,4 +29,10 @@ public class EduParentPackCommentServiceImpl implements IEduParentPackCommentSer
 		return dataList;
 	}
 
+	@Override
+	public Integer countPackageStar(String packageId) {
+		// TODO Auto-generated method stub
+		return eduParentPackCommentDao.countPackageStar(packageId);
+	}
+
 }
