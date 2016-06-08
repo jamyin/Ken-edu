@@ -30,6 +30,7 @@ import com.ssic.education.provider.service.IProUsersService;
 import com.ssic.education.provider.util.ConfigUtil;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.constants.SessionConstants;
+import com.ssic.education.utils.util.UUIDGenerator;
 /**
  * 
 	 * 此类描述的是：供应商注册信息
@@ -66,9 +67,14 @@ public class ProUserRegController extends BaseController{
 		saveSupplierReview(supplierId);
 		//保存证件信息
 		String[] licenses = getRequest().getParameterValues("licenseList");
-		saveLicenses(supplierId,licenses);
+		
+		String creatorId = UUIDGenerator.getUUID();
+		
+		saveLicenses(supplierId,licenses,creatorId);
 		
 		//用户信息
+		proUsersDto.setId(creatorId);
+		proUsersDto.setCreator(creatorId);		
 		proUsersDto.setSourceId(supplierId);
 		proUsersDto.setName(supplierDto.getSupplierName());
 		proUsersDto.setIsadmin(DataStatus.ENABLED);
@@ -78,7 +84,7 @@ public class ProUserRegController extends BaseController{
 		
 	}
 
-	private void saveLicenses(String supplierId, String[] licenses) {
+	private void saveLicenses(String supplierId, String[] licenses,String creatorId) {
 		if(licenses!=null){
 			for(String licesse : licenses){
 				if(!StringUtils.isEmpty(licesse)){
@@ -94,7 +100,7 @@ public class ProUserRegController extends BaseController{
 					proLicenseDto.setLicNo(licNo);
 					proLicenseDto.setRelationId(supplierId);
 					proLicenseDto.setCerSource(Short.valueOf("0"));
-
+					proLicenseDto.setCreator(creatorId);
 					iProLicenseService.saveProLicense(proLicenseDto);
 				}
 			}
