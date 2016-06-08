@@ -1,5 +1,6 @@
 package com.ssic.education.app.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,7 @@ import com.ssic.education.handle.dao.CommitteeDao;
 import com.ssic.education.handle.dao.SchoolDao;
 import com.ssic.education.handle.pojo.EduCommittee;
 import com.ssic.education.handle.pojo.EduSchool;
+import com.ssic.education.handle.pojo.ProLedger;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 import com.ssic.education.utils.util.BeanUtils;
@@ -74,10 +76,46 @@ public class SchoolsServiceImpl implements ISchoolService {
 			}
 			if (schoolUser.getLevel() != null) {
 				Map<Integer, String> map = SchoolLevel.getAll();
-				//String[] str = schoolUser.getLevel().ToCharArray();
+				String[] strArray = schoolUser.getLevel().split(",");
+				List<String> list = new ArrayList<String>();
+				if (strArray.length != 1) {
+					for (String key : strArray) {
+						list.add(map.get(Integer.parseInt(key)));
+					}
+					schoolUser.setLevelName(listToString(list));
+				} else {
+					schoolUser.setLevelName(map.get(Integer.parseInt(schoolUser.getLevel())));
+				}
 			}
 			return schoolUser;
 		}
 		return null;
+	}
+
+	/**
+	 * List转String
+	 * listToString：一句话描述方法功能
+	 * @param list
+	 * @return
+	 * @exception	
+	 * @author SeanYoung
+	 * @date 2016年5月26日 下午3:31:15
+	 */
+	public String listToString(List<String> list) {
+		if (list == null) {
+			return null;
+		}
+		StringBuilder result = new StringBuilder();
+		boolean flag = false;
+		for (String str : list) {
+			if (flag) {
+				result.append("," == null ? "" : ",");
+			} else {
+				flag = true;
+			}
+			result.append(str);
+		}
+
+		return result.toString();
 	}
 }
