@@ -92,6 +92,7 @@ public class FileManageController {
                         in.close();
                         out.close();
                         String fileStaticPath = "/upload/"+context + "/" + newName;
+                        map.put("wwwdomain",PropertiesUtils.getProperty("upload.look.url"));
                         map.put("filePath",fileStaticPath);
                         // 验证是否是指定格式的视频或图片
                         if(StringUtils.isFlvVideo(fileSuffix)){
