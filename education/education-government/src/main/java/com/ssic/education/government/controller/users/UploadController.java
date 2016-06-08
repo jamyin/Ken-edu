@@ -133,7 +133,7 @@ public class UploadController {
             file.mkdir();    
         }
         
-		FileUtils.copyInputStreamToFile(myfile.getInputStream(), new File(realPath + "/" +context+"/"+fileDe , fileName));
+		FileUtils.copyInputStreamToFile(myfile.getInputStream(), new File(realPath + "/"+fileDe , fileName));
 		return (context + "/" + fileDe + "/" + fileName);
 	}
 

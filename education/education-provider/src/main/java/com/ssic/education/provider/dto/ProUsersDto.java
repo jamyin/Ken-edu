@@ -150,6 +150,9 @@ public class ProUsersDto implements Serializable{
      * @mbggenerated Mon May 16 11:08:17 CST 2016
      */
     private Integer isdelete;
+    
+    
+    private String creator;
 
     
 }

@@ -23,7 +23,6 @@ public class ProUsersServiceImpl implements IProUsersService {
 	@Override
 	public String saveProUsers(ProUsersDto proUsersDto) {
 		// TODO Auto-generated method stub
-		proUsersDto.setId(UUIDGenerator.getUUID());
 		proUsersDto.setPassword(MD5Util.md5(proUsersDto.getPassword()));
 		ProUsers proUsers = BeanUtils.createBeanByTarget(proUsersDto, ProUsers.class);
 		proUsers.setCreator(proUsers.getId());

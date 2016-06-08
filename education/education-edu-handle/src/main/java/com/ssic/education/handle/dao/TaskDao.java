@@ -87,13 +87,15 @@ public class TaskDao extends MyBatisBaseDao<EduTask> {
 		receive.setReadstat(DataStatus.ENABLED);      //设置已读
 		receive.setReadTime(new Date());
 		EduTaskReceiveExample example = new EduTaskReceiveExample();
-		/*EduTaskReceiveExample.Criteria criteria = example.createCriteria();
+		EduTaskReceiveExample.Criteria criteria = example.createCriteria();
+		
+		//更新条件
 		if (StringUtils.isNotEmpty(receive.getTaskId())){
     		criteria.andTaskIdEqualTo(receive.getTaskId());
     	}
 		if (StringUtils.isNotEmpty(receive.getReceiveId())){
     		criteria.andReceiveIdEqualTo(receive.getReceiveId());
-    	}*/
+    	}
 		return exMapper.updateByExampleSelective(receive, example);
 	}
 

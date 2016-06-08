@@ -2,6 +2,7 @@ package com.ssic.education.provider.service;
 
 import java.util.List;
 
+import com.ssic.education.handle.pojo.ProUsers;
 import com.ssic.education.provider.dto.TImsUsersDto;
 import com.ssic.education.provider.pageModel.DataGrid;
 import com.ssic.education.provider.pageModel.PageHelper;
@@ -42,4 +43,8 @@ public interface UserServiceI {
 	public void addImsUsers(TImsUsersDto user);
 	
 	public int findByNameCount(TImsUsersDto user);
+
+	public ProUsers findUserByName(TImsUsersDto user);
+
+	public ProUsers findUserByUserAccount(String userAccount);
 }

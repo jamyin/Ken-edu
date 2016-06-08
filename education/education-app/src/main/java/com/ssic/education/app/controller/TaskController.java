@@ -65,6 +65,7 @@ public class TaskController {
 	 */
 	@RequestMapping("/findTaskListById/{id}")
 	@ResponseBody
+	@Deprecated
 	public Response<PageResult<EduTaskDto>> findTaskListById(@PathVariable("id")String id,String readstat, PageQuery query) {
 		logger.info("id : " + id + ";readstat : " + readstat );
 		Response<PageResult<EduTaskDto>> result = new Response<PageResult<EduTaskDto>>();
@@ -112,7 +113,6 @@ public class TaskController {
 	 * @date 2016年5月29日 下午2:41:41
 	 * @return Response<EduTaskDto>    返回类型
 	 */
-	@Deprecated
 	@RequestMapping("/findTaskByPara")
 	@ResponseBody
 	public Response<EduTaskDto> findTaskByPara(EduTaskDto eduTaskDto) {

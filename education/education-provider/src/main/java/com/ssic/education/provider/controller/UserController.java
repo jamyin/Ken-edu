@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.common.base.Objects;
 import com.ssic.educateion.common.dto.ProSupplierDto;
+import com.ssic.education.handle.pojo.ProUsers;
 import com.ssic.education.handle.service.ISupplierService;
 //192.168.1.231/group-one/education.git
 import com.ssic.education.provider.dto.TImsUsersDto;
@@ -33,11 +34,9 @@ public class UserController extends BaseController {
 
 	@Autowired
 	private UserServiceI userService;
-	
+
 	@Autowired
 	private ISupplierService iSupplierService;
-	
-	
 
 	/**
 	 * 用户登录
@@ -50,32 +49,33 @@ public class UserController extends BaseController {
 	 */
 	@ResponseBody
 	@RequestMapping("/login")
-	public Json login(TImsUsersDto usersDto, HttpSession session, HttpServletRequest request) {
+	public Json login(TImsUsersDto usersDto, HttpSession session,
+			HttpServletRequest request) {
 		Json j = new Json();
 		TImsUsersDto u = userService.login(usersDto);
 		if (u != null) {
-			//系统管理员不需要判断
-//			if(!Objects.equal(u.getIsAdmin(),DataStatus.ENABLED)){
-//				u.getSourceId();//用户对应的供应商Id 查看该供应商是否审核通过
-				ProSupplierDto proSupplierDto = iSupplierService.searchProSupplierById(u.getSourceId());				
-				if(!Objects.equal(proSupplierDto.getReviewed(), Byte.valueOf("1"))){
-					j.setMsg("供应商信息审核未通过,请通过之后再进行登陆");
-					return j;
-				}			
-//			}
-			
+			// 系统管理员不需要判断
+			// if(!Objects.equal(u.getIsAdmin(),DataStatus.ENABLED)){
+			// u.getSourceId();//用户对应的供应商Id 查看该供应商是否审核通过
+			ProSupplierDto proSupplierDto = iSupplierService
+					.searchProSupplierById(u.getSourceId());
+			if (!Objects.equal(proSupplierDto.getReviewed(), Byte.valueOf("1"))) {
+				j.setMsg("供应商信息审核未通过,请通过之后再进行登陆");
+				return j;
+			}
+			// }
+
 			j.setSuccess(true);
 			j.setMsg("登陆成功！");
 
-			
-			//登录用户信息存入Session
+			// 登录用户信息存入Session
 			SessionInfo sessionInfo = new SessionInfo();
 			BeanUtils.copyProperties(u, sessionInfo);
-//			sessionInfo.setIp(IpUtil.getIpAddr(request));
-			sessionInfo.setSupplierId(u.getSourceId());//sourceId 即供应商Id
+			// sessionInfo.setIp(IpUtil.getIpAddr(request));
+			sessionInfo.setSupplierId(u.getSourceId());// sourceId 即供应商Id
 			session.setAttribute(ConfigUtil.SESSIONINFONAME, sessionInfo);
-			request.getSession(true).setAttribute("user", u); 
-			//用户信息也返回到客户端
+			request.getSession(true).setAttribute("user", u);
+			// 用户信息也返回到客户端
 			j.setObj(sessionInfo);
 		} else {
 			j.setMsg("用户名或密码错误！");
@@ -142,10 +142,12 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping("/dataGrid")
 	@ResponseBody
-	public DataGrid dataGrid(TImsUsersDto user, PageHelper ph ,HttpServletRequest request) {
-		SessionInfo info = (SessionInfo) request.getSession().getAttribute(ConfigUtil.SESSIONINFONAME);
+	public DataGrid dataGrid(TImsUsersDto user, PageHelper ph,
+			HttpServletRequest request) {
+		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
+				ConfigUtil.SESSIONINFONAME);
 		user.setSourceId(info.getSupplierId());
-		return userService.dataGrid(user, ph);   
+		return userService.dataGrid(user, ph);
 	}
 
 	/**
@@ -169,61 +171,67 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping("/add")
 	@ResponseBody
-	public Json add(TImsUsersDto user,HttpServletRequest request) {
+	public Json add(TImsUsersDto user, HttpServletRequest request) {
 		Json j = new Json();
-		if (user.getPassword().length()<6){
+		if (user.getPassword().length() < 6) {
 			j.setSuccess(false);
 			j.setMsg("密码长度不能小于六位");
 			return j;
 		}
-		if(user.getName().length()>10){
+		if (user.getName().length() > 10) {
 			j.setSuccess(false);
 			j.setMsg("用户名称不能大于10位");
 			return j;
 		}
-		if(!user.getPassword().equals(user.getPassword2())){
+		if (!user.getPassword().equals(user.getPassword2())) {
 			j.setSuccess(false);
 			j.setMsg("两次密码输入不同");
 			return j;
 		}
-		   Pattern p = Pattern.compile("^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\\.([a-zA-Z0-9_-])+)+$");		  
-		   Matcher isMail = p.matcher(user.getEmail());
-		   if(!StringUtils.isEmpty(user.getEmail())&&!isMail.matches()){
-			   j.setSuccess(false);
-			   j.setMsg("邮箱不合法");
-			   return j;
-		   }
-		   Pattern p2 = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
-		   Matcher isMail2 = p2.matcher(user.getUserNo());
-		   if(!StringUtils.isEmpty(user.getUserNo())&&!isMail2.matches()){
-			   j.setSuccess(false);
-			   j.setMsg("手机不合法");
-			   return j;
-		   }
-		
-	
+		Pattern p = Pattern
+				.compile("^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\\.([a-zA-Z0-9_-])+)+$");
+		Matcher isMail = p.matcher(user.getEmail());
+		if (!StringUtils.isEmpty(user.getEmail()) && !isMail.matches()) {
+			j.setSuccess(false);
+			j.setMsg("邮箱不合法");
+			return j;
+		}
+		Pattern p2 = Pattern
+				.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
+		Matcher isMail2 = p2.matcher(user.getUserNo());
+		if (!StringUtils.isEmpty(user.getUserNo()) && !isMail2.matches()) {
+			j.setSuccess(false);
+			j.setMsg("手机不合法");
+			return j;
+		}
+
 		try {
-			int number=userService.findByNameCount(user);
-			if(number>0){
+			int number = userService.findByNameCount(user);
+			if (number > 0) {
 				j.setSuccess(false);
 				j.setMsg("用户名不能重复");
 				j.setObj(user);
 				return j;
 			}
-			   if(StringUtils.isEmpty(user.getUserType())){
-				   j.setSuccess(false);
-				   j.setMsg("用户角色不能为空");
-				   return j;
-			   }
-			
-			
-			SessionInfo info = (SessionInfo) request.getSession().getAttribute(ConfigUtil.SESSIONINFONAME);
+			if (StringUtils.isEmpty(user.getUserType())) {
+				j.setSuccess(false);
+				j.setMsg("用户角色不能为空");
+				return j;
+			}
+			ProUsers ur = userService.findUserByName(user);
+			if (ur != null) {
+				j.setSuccess(false);
+				j.setMsg("用户姓名不能为相同");
+				return j;
+			}
+			SessionInfo info = (SessionInfo) request.getSession().getAttribute(
+					ConfigUtil.SESSIONINFONAME);
 			user.setSourceId(info.getSupplierId());
 			user.setCreator(info.getName());
 			user.setUpdater(info.getName());
-				//添加t_admin_uses
-				userService.add(user);
-			
+			// 添加t_admin_uses
+			userService.add(user);
+
 			j.setSuccess(true);
 			j.setMsg("添加成功！");
 			j.setObj(user);
@@ -242,12 +250,12 @@ public class UserController extends BaseController {
 	@RequestMapping("/editPage")
 	public String editPage(HttpServletRequest request, String id) {
 		TImsUsersDto u = userService.getUser(id);
-		if(u.getIsAdmin()==1  && u.getIsAdmin()==null){
+		if (u.getIsAdmin() == 1 && u.getIsAdmin() == null) {
 			u.setUserType(null);
 		}
-	    request.setAttribute("user", u);
-	    
-        return "user/userEdit";
+		request.setAttribute("user", u);
+
+		return "user/userEdit";
 	}
 
 	/**
@@ -258,41 +266,58 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping("/edit")
 	@ResponseBody
-	public Json edit(TImsUsersDto user) {
-			Json j = new Json();
-		
-		if (user.getPassword().length()<6){
+	public Json edit(TImsUsersDto user, HttpServletRequest request) {
+		Json j = new Json();
+		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
+				ConfigUtil.SESSIONINFONAME);
+		user.setSourceId(info.getSupplierId());
+		if (user.getPassword().length() < 6) {
 			j.setSuccess(false);
 			j.setMsg("密码长度不能小于六位");
 			return j;
 		}
-		if(user.getName().length()>10){
+		if (user.getName().length() > 10) {
 			j.setSuccess(false);
 			j.setMsg("用户名称不能大于10位");
 			return j;
 		}
-		if(!user.getPassword().equals(user.getPassword2())){
+		if (!user.getPassword().equals(user.getPassword2())) {
 			j.setSuccess(false);
 			j.setMsg("两次密码输入不同");
 			return j;
 		}
 
-		   Pattern p = Pattern.compile("^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\\.([a-zA-Z0-9_-])+)+$");		  
-		   Matcher isMail = p.matcher(user.getEmail());
-		   if(!StringUtils.isEmpty(user.getEmail())&&!isMail.matches()){
-			   j.setSuccess(false);
-			   j.setMsg("邮箱不合法");
-			   return j;
-		   }
-		   Pattern p2 = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
-		   Matcher isMail2 = p2.matcher(user.getUserNo());
-		   if(!StringUtils.isEmpty(user.getUserNo())&&!isMail2.matches()){
-			   j.setSuccess(false);
-			   j.setMsg("手机不合法");
-			   return j;
-		   }
+		Pattern p = Pattern
+				.compile("^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\\.([a-zA-Z0-9_-])+)+$");
+		Matcher isMail = p.matcher(user.getEmail());
+		if (!StringUtils.isEmpty(user.getEmail()) && !isMail.matches()) {
+			j.setSuccess(false);
+			j.setMsg("邮箱不合法");
+			return j;
+		}
+		Pattern p2 = Pattern
+				.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
+		Matcher isMail2 = p2.matcher(user.getUserNo());
+		if (!StringUtils.isEmpty(user.getUserNo()) && !isMail2.matches()) {
+			j.setSuccess(false);
+			j.setMsg("手机不合法");
+			return j;
+		}
+		ProUsers u = userService.findUserByUserAccount(user.getUserAccount());
+		if (u !=null&&!u.getId().equals(user.getId())) {
+			j.setSuccess(false);
+			j.setMsg("用户名不能重复");
+			j.setObj(user);
+			return j;
+		}
+		ProUsers ur = userService.findUserByName(user);
+		if (ur != null && !ur.getId().equals(user.getId())) {
+			j.setSuccess(false);
+			j.setMsg("用户姓名不能为相同");
+			return j;
+		}
 		try {
-			
+			user.setUpdater(info.getName());
 			userService.edit(user);
 			j.setSuccess(true);
 			j.setMsg("编辑成功！");
@@ -303,10 +328,7 @@ public class UserController extends BaseController {
 		}
 		return j;
 	}
-	
-	
-	
-	
+
 	/**
 	 * 修改自己的信息
 	 * 
@@ -316,32 +338,32 @@ public class UserController extends BaseController {
 	@RequestMapping("/editMy")
 	@ResponseBody
 	public Json editMy(TImsUsersDto user) {
-			Json j = new Json();
-		
-		
-		if(user.getName().length()>10){
+		Json j = new Json();
+
+		if (user.getName().length() > 10) {
 			j.setSuccess(false);
 			j.setMsg("用户名称不能大于10位");
 			return j;
 		}
-		
 
-		   Pattern p = Pattern.compile("^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\\.([a-zA-Z0-9_-])+)+$");		  
-		   Matcher isMail = p.matcher(user.getEmail());
-		   if(!StringUtils.isEmpty(user.getEmail())&&!isMail.matches()){
-			   j.setSuccess(false);
-			   j.setMsg("邮箱不合法");
-			   return j;
-		   }
-		   Pattern p2 = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
-		   Matcher isMail2 = p2.matcher(user.getUserNo());
-		   if(!StringUtils.isEmpty(user.getUserNo())&&!isMail2.matches()){
-			   j.setSuccess(false);
-			   j.setMsg("手机不合法");
-			   return j;
-		   }
+		Pattern p = Pattern
+				.compile("^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\\.([a-zA-Z0-9_-])+)+$");
+		Matcher isMail = p.matcher(user.getEmail());
+		if (!StringUtils.isEmpty(user.getEmail()) && !isMail.matches()) {
+			j.setSuccess(false);
+			j.setMsg("邮箱不合法");
+			return j;
+		}
+		Pattern p2 = Pattern
+				.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
+		Matcher isMail2 = p2.matcher(user.getUserNo());
+		if (!StringUtils.isEmpty(user.getUserNo()) && !isMail2.matches()) {
+			j.setSuccess(false);
+			j.setMsg("手机不合法");
+			return j;
+		}
 		try {
-			
+
 			userService.edit(user);
 			j.setSuccess(true);
 			j.setMsg("编辑成功！");
@@ -362,9 +384,10 @@ public class UserController extends BaseController {
 	@RequestMapping("/delete")
 	@ResponseBody
 	public Json delete(String id, HttpSession session) {
-		SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ConfigUtil.SESSIONINFONAME);
+		SessionInfo sessionInfo = (SessionInfo) session
+				.getAttribute(ConfigUtil.SESSIONINFONAME);
 		Json j = new Json();
-		if (id != null && id.equalsIgnoreCase(sessionInfo.getId())) {// 不能删除自己			
+		if (id != null && id.equalsIgnoreCase(sessionInfo.getId())) {// 不能删除自己
 			j.setMsg("不能删除自己！");
 			j.setSuccess(false);
 			return j;
@@ -398,8 +421,6 @@ public class UserController extends BaseController {
 		return j;
 	}
 
-
-
 	/**
 	 * 跳转到编辑用户密码页面
 	 * 
@@ -424,7 +445,7 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public Json editPwd(TImsUsersDto user) {
 		Json j = new Json();
-		if(user.getPassword().length()<6){
+		if (user.getPassword().length() < 6) {
 			j.setSuccess(false);
 			j.setMsg("密码不能小于6位");
 			return j;
@@ -454,15 +475,17 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping("/editCurrentUserPwd")
 	@ResponseBody
-	public Json editCurrentUserPwd(HttpSession session, String oldPwd, String pwd) {
+	public Json editCurrentUserPwd(HttpSession session, String oldPwd,
+			String pwd) {
 		Json j = new Json();
-		if(pwd.length()<6){
+		if (pwd.length() < 6) {
 			j.setSuccess(false);
 			j.setMsg("密码长度不能小于6位");
 			return j;
 		}
 		if (session != null) {
-			SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ConfigUtil.SESSIONINFONAME);
+			SessionInfo sessionInfo = (SessionInfo) session
+					.getAttribute(ConfigUtil.SESSIONINFONAME);
 			if (sessionInfo != null) {
 				if (userService.editCurrentUserPwd(sessionInfo, oldPwd, pwd)) {
 					j.setSuccess(true);

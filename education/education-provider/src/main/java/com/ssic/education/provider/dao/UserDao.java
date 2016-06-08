@@ -7,7 +7,9 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ssic.education.handle.mapper.ProUsersMapper;
 import com.ssic.education.handle.pojo.ProUsers;
+import com.ssic.education.handle.pojo.ProUsersExample;
 import com.ssic.education.provider.dto.TImsUsersDto;
 import com.ssic.education.provider.mapper.TImsUsersExMapper;
 import com.ssic.education.provider.pageModel.DataGrid;
@@ -18,6 +20,10 @@ import com.ssic.education.utils.util.StringUtils;
 
 @Repository
 public class UserDao {
+	
+	@Autowired
+	private ProUsersMapper mapper;
+	
 	@Autowired
 	private TImsUsersExMapper tImsUsersExMapper;
 	
@@ -128,6 +134,25 @@ public class UserDao {
 	public int findByNameCount(TImsUsersDto user) {
 		// TODO Auto-generated method stub
 		return tImsUsersExMapper.findByNameCount(user);
+	}
+
+	public ProUsers findUserByName(TImsUsersDto user) {
+		ProUsersExample example=new ProUsersExample();
+		ProUsersExample.Criteria criteria=example.createCriteria();
+		criteria.andNameEqualTo(user.getName());
+		criteria.andSourceIdEqualTo(user.getSourceId());
+		criteria.andStatEqualTo(1);
+		List<ProUsers> list = mapper.selectByExample(example);
+		return list.size()==0?null:list.get(0);
+	}
+
+	public ProUsers findUserByUserAccount(String userAccount) {
+		ProUsersExample example=new ProUsersExample();
+		ProUsersExample.Criteria criteria=example.createCriteria();
+		criteria.andUserAccountEqualTo(userAccount);
+		criteria.andStatEqualTo(1);
+		List<ProUsers> list = mapper.selectByExample(example);
+		return list.size()==0?null:list.get(0);
 	}
 
 	

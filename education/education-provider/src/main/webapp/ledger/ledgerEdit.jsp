@@ -106,12 +106,12 @@
 					<td style='width:104px;'><select name="ledger[0].userId" type="text"
 						style='width:118px;' placeholder="请选择驾驶员" class="easyui-validatebox span2">
 						<c:if test="${LedgerList[0].userName} == null">
-							<option selected="selected" value =null>请选择驾驶员</option>
+							<option selected="selected" value ="">请选择驾驶员</option>
 						</c:if>
 						<c:if test="${LedgerList[0].userName} != null">
-							<option value =null>请选择驾驶员</option>
+							<option value ="">请选择驾驶员</option>
 						</c:if>
-						<option selected="selected" value =null>请选择驾驶员</option>
+						<option selected="selected" value ="">请选择驾驶员</option>
 						<c:forEach items="${Driver}" var="user">
 							<c:if test="${LedgerList[0].userName eq user.name}">
 								<option selected="selected" value ="${user.id}">${user.name}</option>
