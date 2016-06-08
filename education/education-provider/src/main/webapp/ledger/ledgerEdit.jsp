@@ -94,7 +94,7 @@
 						value="<fmt:formatDate value="${LedgerList[0].actionDate}" pattern="yyyy-MM-dd"/>"></td>
 					<th style='width:65px;'>配货点：</th>
 					<td style='width:104px;'><input name="ledger[0].receiverName" type="text"
-						style='width:104px;' placeholder="请输入回收人配货点" class="easyui-validatebox span2"
+						style='width:104px;' placeholder="请输入配货点" class="easyui-validatebox span2"
 						data-options="required:true" value="${LedgerList[0].receiverName}"></td>
 					<th style='width:65px;'>配送号：</th>
 					<td style='width:104px;'><input name="ledger[0].wareBatchNo" type="text"

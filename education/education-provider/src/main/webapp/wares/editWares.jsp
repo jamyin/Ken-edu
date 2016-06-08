@@ -12,6 +12,9 @@
 .panel-body.panel-body-noheader.panel-body-noborder.layout-body {
 	padding:20px!important;
 }
+.textbox .textbox-text {
+	 cursor:pointer;
+}
 </style>
 
 <script type="text/javascript">
