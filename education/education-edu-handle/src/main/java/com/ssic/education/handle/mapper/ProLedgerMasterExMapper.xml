@@ -114,7 +114,7 @@
 		<if test="ledgerDto.receiverName!=null and  ledgerDto.receiverName!=''">
 			AND m.receiver_name like "%"#{ledgerDto.receiverName}"%"
 		</if>
-		ORDER BY m.action_date DESC
+		ORDER BY m.action_date DESC , m.create_time DESC
 		<if test="ph.rows!=0 and ph!=null">
 			limit #{ph.beginRow},#{ph.rows}
 		</if>

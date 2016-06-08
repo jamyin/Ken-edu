@@ -72,8 +72,8 @@
                             <section class="text">
                                 <label for="text">内容:    </label>
                                 <div class="text_wrap1">
-                                	<!-- <script id="editor" type="text/plain" style="width:550px;height:300px;"></script> -->
-                                    <textarea id="content" name="content" style="width:550px"></textarea>
+                                	<script id="editor" type="text/plain" style="width:550px;height:300px;"></script>
+                                    <!-- <textarea id="content" name="content" style="width:550px"></textarea> -->
                                 </div>
                             </section>
                             <div class="subbt">
@@ -133,10 +133,20 @@
         <script src="/static/js/kindeditor-all-min.js"></script>
         <script src="/static/js/lang/zh-CN.js"></script>
         <script src="/static/js/plugins/code/prettify.js"></script> -->
+	<script>
+		<!--自定义toobar-->
+        window.UMEDITOR_CONFIG.toolbar = [
+            // 加入一个 test
+            'source | undo redo | bold italic underline strikethrough  forecolor backcolor | removeformat |',
+            '| justifyleft justifycenter justifyright justifyjustify |',
+            //'link unlink | emotion video | map',
+            '| fullscreen'
+        ];
+    </script>        
         <script>
             $(function(){
-            	//var um = UM.getEditor('editor');          	
-            	// debugger;
+  				var um = UM.getEditor('editor');
+  				
 		      $(".nav").find("a").removeClass("cur");
 		      $(".nav").find("a:eq(6)").addClass("cur");
             	loadClickFunction();
@@ -179,7 +189,7 @@
 						return false;
 					};
 					
-					var content = $("#content").val();
+					var content = um.getContent();
 					if(content=="" || content ==null){
 						alert("内容不能为空");
 						return false;
