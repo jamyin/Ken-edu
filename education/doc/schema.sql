@@ -427,6 +427,7 @@ CREATE TABLE `t_pro_packages` (
   `grade` smallint(6) DEFAULT NULL COMMENT '年级',
   `supply_date` date NOT NULL COMMENT '供应日期',
   `supply_phase` smallint(6) NOT NULL COMMENT '供应阶段，0：早餐，1：午餐，2：午后甜点，3：晚餐，4：夜宵',
+  `package_star` int(11) NOT NULL DEFAULT '3' COMMENT '套餐评级，默认3分',
   `creator` varchar(36) DEFAULT NULL,
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `updater` varchar(36) DEFAULT NULL,
