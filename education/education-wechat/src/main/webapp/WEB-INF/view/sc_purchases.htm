@@ -8,6 +8,7 @@
     <script src="/static/js/jquery-2.1.3.min.js"></script>
   </head>
 <body>
+<input id="wwwdomain" type="hidden" value="{(wwwdomain)!}"/>
 <header class="searchbar"><input id="waresName" type="text" placeholder="请输入关键字"></header>
 <div class="purchasing_box">
 		<ul id="purchasesList">
@@ -37,12 +38,13 @@ $(function(){
 			dataType:'json',
 			success:function(data){
 				var schoolList = $("#purchasesList");
+				var wwwdomain = $("#wwwdomain").val();
 				schoolList.empty();				
 				$.each(data.data, function(index, item) {
 					//<li><img src="static/img/food_simple.jpg" border="0"><p>红枣</p><span>产品编号：86910108</span><span class="weight">5g</span></li>
 					//$("#purchasesList").append("<li><label>"+item['waresName']+"</label></li>");
 					//<img src='/static/img/food_simple.jpg' border='0'>
-					$("#purchasesList").append("<li><a href='/wap/purchases/details/"+item['id']+".htm'><p>"+item['waresName']+"</p><span>产品编号："+item['barCode']+"</span><span class='weight'>规格："+item['spec']+"</span></a></li>");
+					$("#purchasesList").append("<li><a href='/wap/purchases/details/"+item['id']+".htm'><img src="+wwwdomain+""+item['image']+"' border='0'><p>"+item['waresName']+"</p><span>产品编号："+item['barCode']+"</span><span class='weight'>规格："+item['spec']+"</span></a></li>");
 				});
 			}
 		});
