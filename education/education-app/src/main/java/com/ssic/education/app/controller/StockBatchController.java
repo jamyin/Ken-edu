@@ -112,16 +112,18 @@ public class StockBatchController {
 
 	@RequestMapping(value = "/updateStatus/{id}/{status}", method = RequestMethod.GET)
 	@ResponseBody
-	public Response<String> updateStatus(@PathVariable("id") String id, @PathVariable("status") String status) {
-		Response<String> result = new Response<String>();
-		int i = ledgerInfoService.updateStatus(id, status);
-		if (i != 0) {
+	public Response<Integer> updateStatus(@PathVariable("id") String id, @PathVariable("status") String status) {
+		Response<Integer> result = new Response<Integer>();
+		int num = ledgerInfoService.updateStatus(id, status);
+		if (num != -1) {
 			result.setStatus(DataStatus.HTTP_SUCCESS);
 			result.setMessage("提交成功！");
+			result.setData(num);
 			return result;
 		} else {
 			result.setStatus(DataStatus.HTTP_FAILE);
 			result.setMessage("请求失败！");
+			result.setData(num);
 			return result;
 		}
 	}

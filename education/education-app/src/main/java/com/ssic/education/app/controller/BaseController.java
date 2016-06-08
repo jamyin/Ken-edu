@@ -19,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ssic.education.app.util.StringEscapeEditor;
 import com.ssic.education.utils.util.PageData;
 
-
 /**
  * 基础控制器
  * 
@@ -58,32 +57,34 @@ public class BaseController {
 	 */
 	@RequestMapping("/{folder}/{jspName}")
 	public String redirectJsp(@PathVariable String folder, @PathVariable String jspName) {
-		return  folder + "/" + jspName;
+		return folder + "/" + jspName;
 	}
+
 	/**
-     * 得到PageData
-     */
-    public PageData getPageData(){
-        return new PageData(this.getRequest());
-    }
-    
-    /**
-     * 得到ModelAndView
-     */
-    public ModelAndView getModelAndView(){
-        return new ModelAndView();
-    }
-    /**
-     * 得到request对象
-     */
-    public HttpServletRequest getRequest() {
-        HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
-        
-        return request;
-    }
-    
-    public static void logAfter(Logger logger){
-        logger.info("end");
-        logger.info("");
-    }
+	 * 得到PageData
+	 */
+	public PageData getPageData() {
+		return new PageData(this.getRequest());
+	}
+
+	/**
+	 * 得到ModelAndView
+	 */
+	public ModelAndView getModelAndView() {
+		return new ModelAndView();
+	}
+
+	/**
+	 * 得到request对象
+	 */
+	public HttpServletRequest getRequest() {
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+
+		return request;
+	}
+
+	public static void logAfter(Logger logger) {
+		logger.info("end");
+		logger.info("");
+	}
 }
