@@ -19,6 +19,7 @@ import com.ssic.education.handle.service.IEduParentPackCommentService;
 import com.ssic.education.handle.service.ProDishesService;
 import com.ssic.education.handle.service.ProPackagesService;
 import com.ssic.education.utils.constants.DataStatus;
+import com.ssic.education.utils.constants.SupplyPhaseEnum;
 import com.ssic.education.utils.model.Response;
 
 /**
@@ -69,6 +70,7 @@ public class WapCommentController extends BaseController {
 		
 		mv.addObject("schoolDto", schoolDto);
 		mv.addObject("proPackageSto", proPackageSto);
+		mv.addObject("packageName", SupplyPhaseEnum.getValueByIndex(proPackageSto.getSupplyPhase()));
 		mv.addObject("resultDishList", resultDishList);
 		mv.setViewName("join");
 		return mv;
