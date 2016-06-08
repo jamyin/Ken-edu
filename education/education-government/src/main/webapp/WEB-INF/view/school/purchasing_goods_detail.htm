@@ -13,10 +13,8 @@
     <h1 class="con-tt"><span class="title">采购品详情</span></h1>
     <div class="con-bd">
       <div class="imgs">
-        <#if (proLicenses??) && (proLicenses?size>0)>
-        	<#list proLicenses as proLicense>
-        		 <img class="con-img" src="${(proLicense.licPic)!}" alt="" />
-        	</#list>
+        <#if proWaresDto.image??>
+        	<img class="con-img" src="${(proWaresDto.image)!}" alt="" />
         <#else>
    	 		<img class="con-img" src="/static/img/default.png" alt="" />
         </#if>

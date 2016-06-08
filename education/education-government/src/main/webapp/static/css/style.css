@@ -14,10 +14,11 @@ a{text-decoration:none}
 body{background:#f3f3f3}
 
 .wrapper{width:1000px;margin:40px auto;}
-.index_newsbox{position:relative;width:688px;height:216px;border:1px #d3d3d3 solid;padding:10px 10px 10px 300px;overflow:hidden;background:#fff}
+.index_newsbox{position:relative;width:978px;height:216px;border:1px #d3d3d3 solid;padding:10px;overflow:hidden;background:#fff}
 .index_newsbox img{position:absolute;left:10px;top:10px;width:280px;height:216px;}
-.index_newsbox h2{display:block;width:638px;padding:10px 20px 0;font-size:16px;font-weight:bold;text-align:center;margin-bottom:20px}
-.index_newsbox p{margin-bottom:10px;width:638px;padding:0 20px;line-height:22px}
+.index_newsbox h2{display:block;width:100%;padding:10px 0 0;font-size:16px;font-weight:bold;text-align:center;margin-bottom:20px;}
+.index_newsbox p{margin-bottom:10px;width:100%;padding:0 0;line-height:22px;}
+.index_newsbox.lr_c{width:678px;padding-left:310px;}
 
 .index_row{width:1000px;overflow:hidden;margin-top:30px;}
 .inewbox{width:480px;overflow:hidden;float:left;margin-bottom:20px}

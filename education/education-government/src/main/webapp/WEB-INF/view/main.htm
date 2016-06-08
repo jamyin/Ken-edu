@@ -14,13 +14,22 @@
 	<!--<script src="static/js/header.js"></script>-->
 	<#include "/common/nav.htm" />
 	<div class="wrapper">
-		<div class="index_newsbox">
+		
 		<#if pageList??>
 			<#list pageList.results as eduInformationDto>
 			<#if eduInformationDto_index==0>
-				<a href="/info/details/${(eduInformationDto.id)!}.htm"><#if (eduInformationDto.pic??) && (eduInformationDto.pic != '')><img src="${(eduInformationDto.pic)!}" border="0"></#if></a>
-				<a href="/info/details/${(eduInformationDto.id)!}.htm"><h2>${(eduInformationDto.title)!}</h2></a>
-				<a href="/info/details/${(eduInformationDto.id)!}.htm"><p>${(eduInformationDto.content)!}</p></a>
+				<#if (eduInformationDto.pic??) && (eduInformationDto.pic != '')>
+					<div class="index_newsbox lr_c">
+						<a href="/info/details/${(eduInformationDto.id)!}.htm"><#if (eduInformationDto.pic??) && (eduInformationDto.pic != '')><img src="${(eduInformationDto.pic)!}" border="0"></#if></a>
+						<a href="/info/details/${(eduInformationDto.id)!}.htm"><h2>${(eduInformationDto.title)!}</h2></a>
+						<a href="/info/details/${(eduInformationDto.id)!}.htm"><p>${(eduInformationDto.content)!}</p></a>
+					</div>
+				<#else>
+					<div class="index_newsbox">
+						<a href="/info/details/${(eduInformationDto.id)!}.htm"><h2>${(eduInformationDto.title)!}</h2></a>
+						<a href="/info/details/${(eduInformationDto.id)!}.htm"><p>${(eduInformationDto.content)!}</p></a>
+					</div>
+				</#if>
 			</#if>
 			</#list>
 		</#if>
@@ -28,7 +37,7 @@
 			<h2>上海与国家食药监总局战略合作 加强食品药品安全监管</h2>
 			<p>上海市人民政府与国家食品药品监督管理总局2016年3月3日在京签署《关于加强食品药品安全监管战略合作协议》。国家食药监总局局长毕井泉、上海市市长杨雄代表双方签署协议并进行工作会谈。国家食药监总局副局长滕佳材出席上述活动。</p>
 			<p>根据合作协议，国家食药监总局将积极支持上海开展全国食品安全示范城市创建工作，落实市、区两级食品药品监管“四有两责”制度，落实区县地方政府食品安全属地国家食药监总局将积极支持上海开展全国食品安全示范城市创建工作国家食药监总局将积极支持上海开展全国食品安全示范城市创建工作国家食药监总局将积极支持上海开展全国食品安全示范城市创建工作</p> -->
-		</div>
+		
 		<div class="index_row">
 			<div class="inewbox">
 				<h3>公示栏<a class="more" href="/info/index/1.htm">更多...</a></h3>
@@ -92,8 +101,6 @@
 	$(function(){		
 		$(".nav").find("a").removeClass("cur");
         $(".nav").find("a:eq(0)").addClass("cur");
-
-
 	});
 </script>
 </html>
