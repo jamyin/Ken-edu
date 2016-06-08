@@ -1,5 +1,6 @@
 package com.ssic.education.provider.controller;
 
+import java.util.Date;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -318,6 +319,7 @@ public class UserController extends BaseController {
 		}
 		try {
 			user.setUpdater(info.getId());
+			user.setModifydatetime(new Date());
 			userService.edit(user);
 			j.setSuccess(true);
 			j.setMsg("编辑成功！");
