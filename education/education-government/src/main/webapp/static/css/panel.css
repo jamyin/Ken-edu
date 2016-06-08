@@ -58,7 +58,8 @@
         color: 919090; }
       .main_wrap .content_wrap .content .text {
         margin-top: 30px;
-        line-height: 2em; }
+        line-height: 2em;
+        word-break: break-all; }
         .main_wrap .content_wrap .content .text img {
           display: inline-block;
           max-width: 100%; }
