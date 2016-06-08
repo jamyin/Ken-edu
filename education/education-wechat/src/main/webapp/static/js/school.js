@@ -42,7 +42,7 @@ function loadscMenu(){
 					}else if(item['supplyPhase']==4){
 						objHtml+="夜宵 ";
 					}
-					objHtml+="</i><span></span><a href='/wap/comment/join/"+item['id']+".htm'>点评</a></h2>";
+					objHtml+="</i><span></span><img src='/static/img/star"+item['packageStar']+".png' border='0'><a href='/wap/comment/join/"+item['id']+".htm'>点评</a></h2>";
 					objHtml+="<ul><li><span>";
 					var proDishesDtos = item['proDishesDtos'];
 					if(proDishesDtos!=null){
