@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssic.education.handle.pojo.ProUsers;
 import com.ssic.education.provider.dao.UserDao;
 import com.ssic.education.provider.dto.TImsUsersDto;
 import com.ssic.education.provider.pageModel.DataGrid;
@@ -156,6 +157,16 @@ public class UserServiceImpl implements UserServiceI {
 	
 	public int findByNameCount(TImsUsersDto user) {
 		return userDao.findByNameCount(user);
+	}
+
+	@Override
+	public ProUsers findUserByName(TImsUsersDto user) {
+		return userDao.findUserByName(user);
+	}
+
+	@Override
+	public ProUsers findUserByUserAccount(String userAccount) {
+		return userDao.findUserByUserAccount(userAccount);
 	}
 
 

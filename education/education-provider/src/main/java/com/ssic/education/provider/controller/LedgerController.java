@@ -181,6 +181,10 @@ public class LedgerController {
 			j.setSuccess(false);
 			return j;
 		}
+		//驾驶员
+		if(ledgers.get(0).getUserId().equals("")){
+			ledgers.get(0).setUserId(null);
+		}
 		String masterId=UUID.randomUUID().toString();
 		// 标识
 		int i = 0;
@@ -354,6 +358,10 @@ public class LedgerController {
 			j.setMsg("不存在的配送点");
 			j.setSuccess(false);
 			return j;
+		}
+		//驾驶员
+		if(ledgers.get(0).getUserId().equals("")){
+			ledgers.get(0).setUserId(null);
 		}
 		List<LedgerDto> list = ledgerService.findLedgerByMasterId(
 				user.getSourceId(), ledgers.get(0).getMasterId());
@@ -637,6 +645,8 @@ public class LedgerController {
 							break;
 						} else {
 							dto.setWaresId(pw.getId());
+							dto.setSpce(pw.getSpec());
+							dto.setProductionName(pw.getManufacturer());
 						}
 					} else if (i == 9 && StringUtils.isNotBlank(value)) {
 						// 生产日期
