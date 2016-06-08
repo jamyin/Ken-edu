@@ -12,7 +12,8 @@
       <span class="cp">当前位置:</span><a href="/edu/school/list.htm?source=${(params.source)!}&reviewed=1">安全追溯</a><span class="gt">&gt;</span><a href="/edu/school/details.htm?source=${(dto.source)!}&customerId=${(params.schoolId)!}">学校详情</a><span class="gt">&gt;</span><a href="#">采购品列表</a>
     </div>
     <form action="/pro/wares/waresPages.htm?schoolId=${(params.schoolId)!}&sourceId=${(params.sourceId)!}&source=${(params.source)!}" method="post" id="myform">
-      <h1 class="con-tt"><span class="title"><#if params.dishes>成品<#else>原料</#if>列表</span>
+       <input type="hidden" name="currPage" id="currPage" value="1"/>
+      <h1 class="con-tt"><span class="title">采购品列表</span>
         <span>
           <input type="hidden" name="dishes" value="${(params.dishes)!}"/>
           <input type="hidden" name="supplierId" value="${(params.supplierId)!}"/>
@@ -80,7 +81,7 @@
     })
 
     function gotoPage(page) {
-      $("currPage").val(page);
+      $("#currPage").val(page);
       $("#myform").submit();
     }
   </script>

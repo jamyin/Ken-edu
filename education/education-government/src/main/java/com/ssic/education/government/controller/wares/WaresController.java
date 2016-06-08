@@ -56,6 +56,7 @@ public class WaresController extends BaseController {
 	@RequestMapping(value = "waresPages")
 	public ModelAndView waresPage(ProSchoolWareDto proSchoolWareDto, PageQuery query){
 		ModelAndView mv = getModelAndView();
+		query.setPageSize(14);
 		PageResult<ProWaresDto> datas = proWaresService.findWarsePageByParam(proSchoolWareDto, query);
 		mv.addObject("pageList", datas);
 		mv.addObject("params", proSchoolWareDto);
