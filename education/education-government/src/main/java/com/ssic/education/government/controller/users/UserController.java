@@ -155,10 +155,12 @@ public class UserController extends BaseController{
 			EduCanteenDto eduCanteendto = new EduCanteenDto();
 			eduCanteendto.setSchoolId(usersdto.getSourceId());
 			eduCanteenDto = iEduCanteenService.searchEduCanteenDto(eduCanteendto);
-			ProLicense proLicense = new ProLicense();
-			proLicense.setCerSource((short)DataStatus.MANAGERTYPE);
-			proLicense.setRelationId(eduCanteenDto.getId());
-			proLicenses = iProLicenseService.lookImage(proLicense);
+			if (null != eduCanteenDto && StringUtils.isNotBlank(eduCanteenDto.getId())) {
+				ProLicense proLicense = new ProLicense();
+				proLicense.setCerSource((short)DataStatus.MANAGERTYPE);
+				proLicense.setRelationId(eduCanteenDto.getId());
+				proLicenses = iProLicenseService.lookImage(proLicense);
+			}			
 		} else {
 			response.sendRedirect(request.getContextPath() + "/login.htm");
 		}

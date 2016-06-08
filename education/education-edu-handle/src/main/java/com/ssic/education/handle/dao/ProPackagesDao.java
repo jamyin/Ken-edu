@@ -227,6 +227,7 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 		for (ProDishes proDishes : proWaress) {
 			proDishes.setPackageId(proPackages.getId());
 			proDishes.setId(UUIDGenerator.getUUID());
+			proDishes.setCreator(dto.getCreator());
 			proDishes.setCreateTime(new Date());
 			proDishes.setStat(DataStatus.ENABLED);
 			proDishesss.add(proDishes);

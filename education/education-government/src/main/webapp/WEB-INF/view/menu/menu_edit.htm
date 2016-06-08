@@ -259,9 +259,9 @@
     	jsonWares = '[';
 		for (i=0; i<=nu_dis-1; i++) {
 			if (i == nu_dis-1) {
-				jsonWares += '{\"name\":\"' +$('#name'+i+'').val()+'\"}';
+				jsonWares += '{\"name\":\"' +$('#waresName'+i+'').val()+'\"}';
 			} else {
-				jsonWares += '{\"name\":\"' +$('#name'+i+'').val()+'\"},';
+				jsonWares += '{\"name\":\"' +$('#waresName'+i+'').val()+'\"},';
 			}			
 		}
 		jsonWares += ']';
