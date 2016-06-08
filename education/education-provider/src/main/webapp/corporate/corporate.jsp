@@ -43,7 +43,7 @@ ul.my_info {
 		parent.$.modalDialog({
 			title: '编辑',    
 		    width: 500,    
-		    height: 550,  
+		    height: 600,  
 		    href: '${pageContext.request.contextPath}/corporateController/editPage', 
 		    buttons : [ {
 				text : '保存',
@@ -95,6 +95,9 @@ ul.my_info {
 		</li>
 		<li>
 			<span class="name">证件类型</span><span class="value"></span>
+		</li>
+		<li>
+			<span class="cert">餐饮服务证号：	</span><span class="value">${Corporate.foodServiceCode }</span>
 		</li>
 		<li>
 			<span class="cert">食品经营许可证：	</span><span class="value">${Corporate.foodBusinessCode }</span>

@@ -13,6 +13,7 @@ import com.ssic.education.app.dto.LedgerMasterInfoDto;
 import com.ssic.education.app.dto.LedgerMasterListDto;
 import com.ssic.education.app.dto.ledgerDetailDto;
 import com.ssic.education.app.service.ILedgerInfoService;
+import com.ssic.education.handle.dao.ProLedgerMasterDao;
 import com.ssic.education.handle.pojo.ProLedger;
 import com.ssic.education.handle.pojo.ProLedgerMaster;
 import com.ssic.education.utils.model.PageQuery;
@@ -38,6 +39,8 @@ public class LedgerInfoServiceImpl implements ILedgerInfoService {
 	private LedgerInfoDao ledgerInfoDao;
 	@Autowired
 	private SupplierInfoDao supplierInfoDao;
+	@Autowired
+	private ProLedgerMasterDao proLedgerMasterDao;
 
 	/** 
 	* (non-Javadoc)   
@@ -127,7 +130,10 @@ public class LedgerInfoServiceImpl implements ILedgerInfoService {
 	}
 
 	public int updateStatus(String id, String status) {
-
-		return ledgerInfoDao.updateStatus(id, status);
+		int count = ledgerInfoDao.updateStatus(id, status);
+		if (count == 1) {
+			return proLedgerMasterDao.selectByPrimaryKey(id).getHaulStatus();
+		}
+		return -1;
 	}
 }

@@ -25,6 +25,7 @@ import com.ssic.educateion.common.dto.ProPackagesDto;
 import com.ssic.educateion.common.dto.SchoolDto;
 import com.ssic.educateion.common.dto.SupplierDto;
 import com.ssic.education.app.constants.SchoolLevel;
+import com.ssic.education.app.dto.SchoolUserDto;
 import com.ssic.education.app.service.ICommitteeService;
 import com.ssic.education.app.service.ISchoolService;
 import com.ssic.education.handle.service.EduSchoolService;
@@ -81,17 +82,17 @@ public class SchoolController {
 	 */
 	@RequestMapping("/findSchoolList")
 	@ResponseBody
-	public Response<PageResult<SchoolDto>>  findSchoolList(SchoolDto schoolDto, PageQuery query , Integer isPage) {
-		logger.info("SchoolDto : " + schoolDto +";isPage : " + isPage);
+	public Response<PageResult<SchoolDto>> findSchoolList(SchoolDto schoolDto, PageQuery query, Integer isPage) {
+		logger.info("SchoolDto : " + schoolDto + ";isPage : " + isPage);
 
 		Response<PageResult<SchoolDto>> result = new Response<PageResult<SchoolDto>>();
-		PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, query , isPage);
-		if(schoolList.getResults() != null && schoolList.getResults().size() >0 ){
+		PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, query, isPage);
+		if (schoolList.getResults() != null && schoolList.getResults().size() > 0) {
 			result.setStatus(DataStatus.HTTP_SUCCESS);
 			result.setMessage("查询成功！");
 			result.setData(schoolList);
 			return result;
-		}else{
+		} else {
 			result.setStatus(DataStatus.HTTP_SUCCESS);
 			result.setMessage("未查到相关记录！");
 			return result;
@@ -122,21 +123,21 @@ public class SchoolController {
 	 */
 	@RequestMapping("/findSchoolDetialList/{id}")
 	@ResponseBody
-	public Response<PageResult<EduSchoolDto>> findSchoolDetialList(@PathVariable("id")String id,EduSchoolDto eduSchoolDto, PageQuery query) {
-		logger.info("EduSchoolDto : " + eduSchoolDto +";id : " + id);
+	public Response<PageResult<EduSchoolDto>> findSchoolDetialList(@PathVariable("id") String id, EduSchoolDto eduSchoolDto, PageQuery query) {
+		logger.info("EduSchoolDto : " + eduSchoolDto + ";id : " + id);
 		Response<PageResult<EduSchoolDto>> result = new Response<PageResult<EduSchoolDto>>();
-		if(StringUtils.isEmpty(id)){
+		if (StringUtils.isEmpty(id)) {
 			result.setStatus(DataStatus.HTTP_FAILE);
 			result.setMessage("查询Id为空");
 			return result;
 		}
-		PageResult<EduSchoolDto> schoolDetialList = schoolService.findSchoolDetialList(id,eduSchoolDto, query);
-		if(schoolDetialList.getResults() != null && schoolDetialList.getResults().size() >0 ){
+		PageResult<EduSchoolDto> schoolDetialList = schoolService.findSchoolDetialList(id, eduSchoolDto, query);
+		if (schoolDetialList.getResults() != null && schoolDetialList.getResults().size() > 0) {
 			result.setStatus(DataStatus.HTTP_SUCCESS);
 			result.setMessage("查询成功！");
 			result.setData(schoolDetialList);
 			return result;
-		}else{
+		} else {
 			result.setStatus(DataStatus.HTTP_SUCCESS);
 			result.setMessage("未查到相关记录！");
 			return result;
@@ -150,12 +151,12 @@ public class SchoolController {
 	 * @date 2016年5月26日 下午3:01:31
 	 * @return Response<SchoolDto>    返回类型
 	 */
-	@RequestMapping(value="school")
+	@RequestMapping(value = "school")
 	@ResponseBody
-	public Response<EduSchoolDto> school(ProPackagesDto dto, PageQuery page){
+	public Response<EduSchoolDto> school(ProPackagesDto dto, PageQuery page) {
 		logger.info("ProPackagesDto : " + dto);
 		Response<EduSchoolDto> result = new Response<EduSchoolDto>();
-		if(StringUtils.isEmpty(dto.getCustomerId())){
+		if (StringUtils.isEmpty(dto.getCustomerId())) {
 			result.setStatus(DataStatus.HTTP_FAILE);
 			result.setMessage("学校Id为空！");
 			return result;
@@ -163,13 +164,13 @@ public class SchoolController {
 		//学校详细信息
 		String schoolId = dto.getCustomerId();
 		EduSchoolDto eduSchoolDto = eduSchoolService.findById(schoolId);
-		
-		if(eduSchoolDto == null){
+
+		if (eduSchoolDto == null) {
 			result.setStatus(DataStatus.HTTP_FAILE);
 			result.setMessage("未查到相关学校");
 			return result;
 		}
-		
+
 		//学校对应的食堂信息
 		EduCanteenDto eduCanteenDto = new EduCanteenDto();
 		eduCanteenDto.setSchoolId(schoolId);
@@ -182,7 +183,7 @@ public class SchoolController {
 		List<SupplierDto> supplierList = iEduSchoolSupplierService.searchEduSchoolSupplierListDto(schoolId);
 
 		List<MapToListDto> typeList = new ArrayList<MapToListDto>();
-		for(Entry<Integer, String> entry: PackagesTypeEnum.getAll().entrySet()) {
+		for (Entry<Integer, String> entry : PackagesTypeEnum.getAll().entrySet()) {
 			MapToListDto mapToListDto = new MapToListDto();
 			mapToListDto.setKey(entry.getKey());
 			mapToListDto.setValue(entry.getValue());
@@ -199,10 +200,10 @@ public class SchoolController {
 
 		eduSchoolDto.setEduCanteenDto(eduCanteenDto);
 		//eduSchoolDto.setEduSchoolSupplierDto(eduSchoolSupplierDto);
-		if(supplierList != null && supplierList.size() > 0){
+		if (supplierList != null && supplierList.size() > 0) {
 			eduSchoolDto.setSupplierDto(supplierList.get(0));
 		}
-		eduSchoolDto.setPackagesDtoList(proPackagesDtos);                  //委托供应商
+		eduSchoolDto.setPackagesDtoList(proPackagesDtos); //委托供应商
 
 		result.setData(eduSchoolDto);
 		return result;
@@ -213,13 +214,13 @@ public class SchoolController {
 	 * @param 传入customerId 为当前学校Id
 	 * @param supplyDateStr 套餐日期 默认为当前日期
 	 */
-	@RequestMapping(value="searchPackages")
+	@RequestMapping(value = "searchPackages")
 	@ResponseBody
-	public Response<PageResult<ProPackagesDto>> searchPackages(ProPackagesDto dto, PageQuery page){
+	public Response<PageResult<ProPackagesDto>> searchPackages(ProPackagesDto dto, PageQuery page) {
 		logger.info("ProPackagesDto : " + dto);
 		Response<PageResult<ProPackagesDto>> result = new Response<PageResult<ProPackagesDto>>();
 		PageResult<ProPackagesDto> proPackagesDtos = proPackagesService.searchPackages(dto, page);
-		if(proPackagesDtos != null && proPackagesDtos.getResults() != null && proPackagesDtos.getResults().size() > 0){
+		if (proPackagesDtos != null && proPackagesDtos.getResults() != null && proPackagesDtos.getResults().size() > 0) {
 			result.setData(proPackagesDtos);
 			result.setStatus(DataStatus.HTTP_SUCCESS);
 			result.setMessage("查询成功");
@@ -239,27 +240,27 @@ public class SchoolController {
 	 */
 	@RequestMapping("/chooseSchool")
 	@ResponseBody
-	public Response<ChooseSchoolDto>  chooseSchool(SchoolDto schoolDto, PageQuery query ,Integer type, Integer sourceType) {
+	public Response<ChooseSchoolDto> chooseSchool(SchoolDto schoolDto, PageQuery query, Integer type, Integer sourceType) {
 		logger.info("SchoolDto : " + schoolDto + ";type : " + type + ";sourceType : " + sourceType);
 		Response<ChooseSchoolDto> result = new Response<ChooseSchoolDto>();
 		//处理CommitteeId全选传-1
-		if(StringUtils.isNotEmpty(schoolDto.getCommitteeId()) && schoolDto.getCommitteeId().equals("-1")){
+		if (StringUtils.isNotEmpty(schoolDto.getCommitteeId()) && schoolDto.getCommitteeId().equals("-1")) {
 			schoolDto.setCommitteeId(null);
 		}
 		//处理level全选传-1
-		if(StringUtils.isNotEmpty(schoolDto.getLevel()) && schoolDto.getLevel().equals("-1")){
+		if (StringUtils.isNotEmpty(schoolDto.getLevel()) && schoolDto.getLevel().equals("-1")) {
 			schoolDto.setLevel(null);
 		}
 		ChooseSchoolDto chooseSchoolDto = new ChooseSchoolDto();
-		if(sourceType == null){
+		if (sourceType == null) {
 			result.setStatus(DataStatus.HTTP_FAILE);
 			result.setMessage("教委类型为空");
 			return result;
 		}
 		//市教委选择学校
-		if(sourceType == 0){
+		if (sourceType == 0) {
 			//Type:为1则学校信息,区域信息和学校级别都会查出来; 不传则只查学校信息
-			if(type != null && type == 1){
+			if (type != null && type == 1) {
 				//显示学校级别列表
 				List<MapToListDto> levelList = showSchoolLevel();
 				chooseSchoolDto.setLevelList(levelList);
@@ -274,7 +275,7 @@ public class SchoolController {
 				PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, query);
 				chooseSchoolDto.setSchoolDto(schoolList);
 				result.setData(chooseSchoolDto);
-			}else{
+			} else {
 				//学校列表  -查所有
 				schoolDto.setCommitteeId(null);
 				schoolDto.setLevel(null);
@@ -286,19 +287,29 @@ public class SchoolController {
 		}
 
 		//区教委选择学校  注sourceType为用户的类型
-		if(sourceType == 2){
+		if (sourceType == 2) {
 			//Type:为1则学校信息,区域信息和学校级别都会查出来; 不传则只查学校信息
-			if(type != null && type == 1){
+			if (type != null && type == 1) {
 				//显示学校级别列表
 				List<MapToListDto> levelList = showSchoolLevel();
 				chooseSchoolDto.setLevelList(levelList);
 			}
-				//学校列表
-				PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, query);
-				chooseSchoolDto.setSchoolDto(schoolList);
-				result.setData(chooseSchoolDto);
+			//学校列表
+			PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, query);
+			chooseSchoolDto.setSchoolDto(schoolList);
+			result.setData(chooseSchoolDto);
 		}
 		return result;
+	}
+
+	/**
+	 * 学校用户信息
+	 * @param schoolId
+	 * @return
+	 */
+	@RequestMapping("/user/{schoolId}")
+	public @ResponseBody Response<SchoolUserDto> schoolUser(@PathVariable("schoolId") String schoolId) {
+		return new Response<SchoolUserDto>(200, "查询成功", schoolService.findSchoolById(schoolId));
 	}
 
 	/**
@@ -307,10 +318,10 @@ public class SchoolController {
 	 * @author Ken Yin  
 	 * @date 2016年6月1日 下午4:15:08
 	 * @return List<MapToListDto>    返回类型
-	 */ 
+	 */
 	private List<MapToListDto> showSchoolLevel() {
 		List<MapToListDto> levelList = new ArrayList<MapToListDto>();
-		for(Entry<Integer, String> entry: SchoolLevel.getAll().entrySet()) {
+		for (Entry<Integer, String> entry : SchoolLevel.getAll().entrySet()) {
 			MapToListDto mapToListDto = new MapToListDto();
 			mapToListDto.setKey(entry.getKey());
 			mapToListDto.setValue(entry.getValue());
@@ -319,4 +330,3 @@ public class SchoolController {
 		return levelList;
 	}
 }
-

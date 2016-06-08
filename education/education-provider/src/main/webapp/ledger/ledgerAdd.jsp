@@ -91,7 +91,7 @@
 						readonly="readonly"></td>
 					<th style='width:70px;'>*配货点：</th>
 					<td style='width:104px;'><input name="ledger[0].receiverName" style='width:104px;' type="text"
-						placeholder="请输入回收人配货点" class="easyui-validatebox span2"
+						placeholder="请输入配货点" class="easyui-validatebox span2"
 						data-options="required:true"></td>
 				</tr>
 				<tr>
@@ -105,7 +105,7 @@
 						</select></td>
 					<th style='width:70px;'>*配送号：</th>
 					<td><input name="ledger[0].wareBatchNo" style='width:104px;' type="text"
-						placeholder="请输入回收人批次号" class="easyui-validatebox span2"
+						placeholder="请输入批次号" class="easyui-validatebox span2"
 						data-options="required:true"></td>
 				</tr>
 				</table>

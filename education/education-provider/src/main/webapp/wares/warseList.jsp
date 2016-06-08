@@ -9,6 +9,9 @@
 	padding-top: 7px!important;;
 	padding-bottom: 7px!important;;
 }
+.textbox .textbox-text {
+	 cursor:pointer;
+}
 </style>
 
 

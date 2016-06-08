@@ -8,6 +8,9 @@
 .table th, .table td {
     border-top: none!important;
 } 
+.textbox .textbox-text {
+	 cursor:pointer;
+}
 </style>
 
 <script type="text/javascript">

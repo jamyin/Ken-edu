@@ -15,6 +15,22 @@
 }
 </style>
 <script type="text/javascript">
+
+$(function(){
+    $("img").click(function(){
+        var width = $(this).width();
+        if(width==150)
+        {
+            $(this).width(300);
+            $(this).height(300);
+        }
+        else
+        {
+            $(this).width(150);
+            $(this).height(150);
+        }
+    });
+});
 	
 	$(function() {
 		
@@ -23,47 +39,36 @@
 		for(var i in list){
 			var licName=list[i].licName;
 			if(licName=="工商营业执照"){
-				$("#img1_8").removeAttr("hidden");
 				$("#img1").attr("src",list[i].licPic);
 			}
 			if(licName=="身份证"){
-				$("#img1_8").removeAttr("hidden");
 				$("#img8").attr("src",list[i].licPic);
 			}
 			if(licName=="组织机构代码"){
-				$("#img2_9").removeAttr("hidden");
 				$("#img2").attr("src",list[i].licPic);
 			}
 			if(licName=="港澳居民来往内地通行证"){
-				$("#img2_9").removeAttr("hidden");
 				$("#img9").attr("src",list[i].licPic);
 			}
 			if(licName=="税务登记证"){
-				$("#img3_10").removeAttr("hidden");
 				$("#img3").attr("src",list[i].licPic);
 			}
 			if(licName=="台湾居民往来内地通行证"){
-				$("#img3_10").removeAttr("hidden");
 				$("#img10").attr("src",list[i].licPic);
 			}
 			if(licName=="食品流通许可证"){
-				$("#img4_11").removeAttr("hidden");
 				$("#img4").attr("src",list[i].licPic);
 			}
 			if(licName=="其他"){
-				$("#img4_11").removeAttr("hidden");
 				$("#img11").attr("src",list[i].licPic);
 			}
 			if(licName=="食品生产许可证"){
-				$("#img_5").removeAttr("hidden");
 				$("#img5").attr("src",list[i].licPic);
 			}
 			if(licName=="餐饮服务许可证"){
-				$("#img_6").removeAttr("hidden");
 				$("#img6").attr("src",list[i].licPic);
 			}
 			if(licName=="食品经营许可证"){
-				$("#img_7").removeAttr("hidden");
 				$("#img7").attr("src",list[i].licPic);
 			}
 		}

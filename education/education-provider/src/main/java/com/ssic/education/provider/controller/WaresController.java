@@ -177,7 +177,7 @@ public class WaresController extends BaseController {
 				ConfigUtil.SESSIONINFONAME);
 		pro.setSupplierId(info.getSupplierId());
 		pro.setCreator(info.getId());
-		pro.setUpdater(info.getId());
+
 		ProWares specManu = waresService.findProWarsByNameSpecManu(
 				pro.getWaresName(), pro.getSpec(), pro.getManufacturer(),
 				pro.getSupplierId());
@@ -268,7 +268,7 @@ public class WaresController extends BaseController {
 				ConfigUtil.SESSIONINFONAME);
 		pro.setSupplierId(info.getSupplierId());
 		pro.setStat(1);
-		pro.setCreator(info.getId());
+		
 		pro.setUpdater(info.getId());
 		ProWares proWares = new ProWares();
 		BeanUtils.copyProperties(pro, proWares);
@@ -327,7 +327,8 @@ public class WaresController extends BaseController {
 			proWares.setImage(imageurl1);
 			proWares.setCreateTime(new Date());
 			proWares.setStat(1);
-			int j=waresService.updateImsUsers(proWares);}
+			
+			waresService.updateImsUsers(proWares);}
 			if (i == 0) {			
 				
 				license.setLicName("商品图片");
