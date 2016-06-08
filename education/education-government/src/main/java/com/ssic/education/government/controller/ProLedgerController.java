@@ -1,6 +1,7 @@
 package com.ssic.education.government.controller;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -11,14 +12,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.ssic.educateion.common.dto.BaiduHistoryDto;
+import com.ssic.educateion.common.dto.BaiduPointsDto;
 import com.ssic.educateion.common.dto.LedgerDto;
+import com.ssic.educateion.common.dto.ProLedgerMasterDto;
 import com.ssic.educateion.common.dto.ProPackagesDto;
 import com.ssic.educateion.common.dto.ProSupplierDto;
 import com.ssic.education.government.controller.supplier.ProSupplierController;
+import com.ssic.education.handle.service.IProLedgerMasterService;
 import com.ssic.education.handle.service.ProLedgerService;
 import com.ssic.education.handle.service.ProSupplierService;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
+import com.ssic.education.utils.util.HttpClientUtil;
+import com.ssic.education.utils.util.PropertiesUtils;
 
 /**
  * 
@@ -36,6 +44,9 @@ public class ProLedgerController extends BaseController{
 	
 	@Autowired
 	private ProSupplierService proSupplierService;
+	
+	@Autowired
+	private IProLedgerMasterService iProLedgerMasterService;
 	
 	@RequestMapping("/findPage")
 	public ModelAndView findPage(ProPackagesDto dto,PageQuery query) throws ParseException{
@@ -69,6 +80,38 @@ public class ProLedgerController extends BaseController{
 		mv.addObject("ledgerDto", ledgerDto);
 		mv.addObject("dto", dto);
 		mv.addObject("proSupplierDto", proSupplierDto);
+		
+		ProLedgerMasterDto resultDto = iProLedgerMasterService.searchProLedgerMasterDto(ledgerDto.getMasterId());
+		//地图展示方法
+		List<BaiduPointsDto> points = new ArrayList<BaiduPointsDto>();
+		points = getHistory(resultDto).getPoints();
+		if(points!=null && points.size()>0){
+			for(BaiduPointsDto bp : points){
+				bp.setX(bp.getLocation()[0]);
+				bp.setY(bp.getLocation()[1]);
+			}							
+		}
+		mv.addObject("historyList", points);
+		
+		
 		return mv;
+	}
+	
+	
+	public BaiduHistoryDto getHistory(ProLedgerMasterDto resultDto){
+		String baidu_getHistory_url = "http://api.map.baidu.com/trace/v2/track/gethistory?";
+		String startTime = "";
+		String endTime = "";
+		if(resultDto.getStartTime()!=null){
+			startTime = String.valueOf(resultDto.getStartTime().getTime());	
+		}
+		if(resultDto.getStartTime()!=null){
+			endTime = String.valueOf(resultDto.getEndTime().getTime());	
+		}		
+//		String reqURL = "ak=YN0mfG1VM2jrGV5jBB7RD6lKKmrDZA43&service_id=117192&entity_name=8438B07A-2B4C-49B7-8523-5A177081F602&start_time=1463695529&end_time=1463767529";
+		String reqURL = "ak="+PropertiesUtils.getProperty("baidu.ditu.ak")+"&service_id="+PropertiesUtils.getProperty("baidu.ditu.serviceId")+"&entity_name="+resultDto.getId()+"&start_time="+startTime+"&end_time="+endTime+"";
+		String json = HttpClientUtil.sendGetRequest(baidu_getHistory_url+reqURL, null);
+		BaiduHistoryDto history = new Gson().fromJson(json, BaiduHistoryDto.class);
+		return history;
 	}
 }

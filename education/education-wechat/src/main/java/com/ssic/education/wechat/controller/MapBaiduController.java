@@ -89,7 +89,7 @@ public class MapBaiduController extends BaseController{
 	
 	
 	public BaiduHistoryDto getHistory(ProLedgerMasterDto resultDto){
-		String baidu_getHistory_url = "http://api.map.baidu.com/trace/v2/track/gethistory?";
+		String baidu_getHistory_url = PropertiesUtils.getProperty("baidu.ditu.url");
 		String startTime = "";
 		String endTime = "";
 		if(resultDto.getStartTime()!=null){
