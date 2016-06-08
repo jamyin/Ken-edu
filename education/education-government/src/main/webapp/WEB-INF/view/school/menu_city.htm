@@ -104,11 +104,11 @@
 									</span>
 									<span class="evaluate">
 						             <span class="starts">
-						               <i class="star <#if (proPackages.comment >0)  >on</#if>"></i>
-						               <i class="star <#if (proPackages.comment >1) >on</#if>"></i>
-						               <i class="star <#if (proPackages.comment >2) >on</#if>""></i>
-						               <i class="star <#if (proPackages.comment >3) >on</#if>""></i>
-						               <i class="star <#if (proPackages.comment >4) >on</#if>""></i>
+						               <i class="star <#if (proPackages.packageStar >0)  >on</#if>"></i>
+						               <i class="star <#if (proPackages.packageStar >1) >on</#if>"></i>
+						               <i class="star <#if (proPackages.packageStar >2) >on</#if>""></i>
+						               <i class="star <#if (proPackages.packageStar >3) >on</#if>""></i>
+						               <i class="star <#if (proPackages.packageStar >4) >on</#if>""></i>
 						             </span>
 						             <i class="points">${(proPackages.comment)!}</i>
 						           </span>
@@ -245,6 +245,11 @@
                 </h1>
                 <div class="wrapperB">
                   <ul class="sulplier_ul">
+                   <li class="head">
+                      <span class="name">原料供应商名称</span>
+                      <span class="place">单位地址</span>
+                      <span class="detail">详情</span>
+                    </li>
                   	<#if mSuppliers??>
 		                <#list mSuppliers.results as sup>
 		                    <li>

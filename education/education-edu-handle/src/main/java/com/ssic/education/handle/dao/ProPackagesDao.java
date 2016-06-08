@@ -164,15 +164,15 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 			ArrayList<ProPackagesDto> proArrayList = new ArrayList<ProPackagesDto>();
 			EduParentPackCommentDto eduParentPackCommentDto = new EduParentPackCommentDto();
 			eduParentPackCommentDto.setPackageId(propackagesDto.getId());
-			Object sum = eppcExMapper.packagesComment(eduParentPackCommentDto);
-			if (sum != null) {
-				Integer sumInt = Integer.valueOf(sum.toString());
-				long listSize = findListByPackages(propackagesDto.getId());
-				float b = (float)Math.round((double)(sumInt/3)/listSize);
-				propackagesDto.setComment(b);
-			} else {
-				propackagesDto.setComment(DataStatus.DISABLED);
-			}
+//			Object sum = eppcExMapper.packagesComment(eduParentPackCommentDto);
+//			if (sum != null) {
+//				Integer sumInt = Integer.valueOf(sum.toString());
+//				long listSize = findListByPackages(propackagesDto.getId());
+//				float b = (float)Math.round((double)(sumInt/3)/listSize);
+//				propackagesDto.setComment(b);
+//			} else {
+//				propackagesDto.setComment(DataStatus.DISABLED);
+//			}
 			
 			for (ProPackagesDto proPackagesDto : proPackagesDtos) {
 				if (propackagesDto.getSupplyPhase() == proPackagesDto.getSupplyPhase()) {
