@@ -38,7 +38,7 @@ public interface ProWaresExMapper {
 		 * @author: cwftalus@163.com
 		 * @version: 2016年5月29日 上午11:20:10
 	 */
-	List<ProWaresDto> searchProWares(@Param("schoolId") String schoolId,@Param("waresName") String waresName);
+	List<ProWaresDto> searchProWares(@Param("schoolId") String schoolId,@Param("waresName") String waresName,@Param("waresType") Integer waresType);
 	
 	List<ProWaresDto> findWarseListByParam(@Param("proSchoolWareDto") ProSchoolWareDto proSchoolWareDto,@Param("query") PageQuery query);
 	

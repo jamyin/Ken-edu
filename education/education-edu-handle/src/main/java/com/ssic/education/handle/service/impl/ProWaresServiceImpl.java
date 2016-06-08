@@ -62,9 +62,9 @@ public class ProWaresServiceImpl implements ProWaresService {
     }
 
 	@Override
-	public List<ProWaresDto> searchProWares(String schoolId,String waresName) {
+	public List<ProWaresDto> searchProWares(String schoolId,String waresName,Integer waresType) {
 		// TODO Auto-generated method stub
-		return proWaresDao.searchProWares(schoolId,waresName);
+		return proWaresDao.searchProWares(schoolId,waresName,waresType);
 	}
 
 
