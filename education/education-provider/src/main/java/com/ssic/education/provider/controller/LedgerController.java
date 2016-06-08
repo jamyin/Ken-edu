@@ -343,6 +343,18 @@ public class LedgerController {
 		}
 		String sourceId = user.getSourceId();
 		List<LedgerDto> ledgers = lm.getLedger();
+		List<LedgerDto> listls = ledgerService.findLedgerByMasterId(
+				user.getSourceId(), ledgers.get(0).getMasterId());
+		if(listls.size()==0){
+			j.setMsg("不存在的配送");
+			j.setSuccess(false);
+			return j;
+		}
+		if(listls.get(0).hashCode()==2){
+			j.setMsg("不能修改此配送");
+			j.setSuccess(false);
+			return j;
+		}
 		ledgers.get(0).setSourceId(sourceId);
 		// 配货日期
 		Date actionDate = ledgers.get(0).getActionDate();
@@ -469,6 +481,18 @@ public class LedgerController {
 		TImsUsersDto user = (TImsUsersDto) session.getAttribute("user");
 		if (user == null) {
 			j.setMsg("尚未登录");
+			j.setSuccess(false);
+			return j;
+		}
+		List<LedgerDto> list = ledgerService.findLedgerByMasterId(
+				user.getSourceId(), masterId);
+		if(list.size()==0){
+			j.setMsg("不存在的配送");
+			j.setSuccess(false);
+			return j;
+		}
+		if(list.get(0).hashCode()!=0){
+			j.setMsg("不能删除此配送");
 			j.setSuccess(false);
 			return j;
 		}

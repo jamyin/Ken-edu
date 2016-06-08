@@ -186,6 +186,8 @@
 						if (result.success) {
 							parent.$.messager.alert('提示', result.msg, 'info');
 							dataGrid.datagrid('reload');
+						} else {
+							parent.$.messager.alert('错误', result.msg,'error');
 						}
 						parent.$.messager.progress('close');
 					}, 'JSON');
