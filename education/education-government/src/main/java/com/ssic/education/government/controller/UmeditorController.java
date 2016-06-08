@@ -20,7 +20,7 @@ public class UmeditorController {
 		response.setCharacterEncoding("utf-8");
 		response.setHeader("content-type", "text/html;charset=UTF-8");//通过设置响应头控制浏览器以UTF-8的编码显示数据，如果不加这句话，那么浏览器显示的将是乱码
 	    Uploader up = new Uploader(request);
-	    up.setSavePath("upload");
+	    up.setSavePath("");
 	    String[] fileType = {".gif" , ".png" , ".jpg" , ".jpeg" , ".bmp"};
 	    up.setAllowFiles(fileType);
 	    up.setMaxSize(10000); //单位KB
@@ -28,7 +28,7 @@ public class UmeditorController {
 
 	    String callback = request.getParameter("callback");
 
-	    String result = "{\"name\":\""+ up.getFileName() +"\", \"originalName\": \""+ up.getOriginalName() +"\", \"size\": "+ up.getSize() +", \"state\": \""+ up.getState() +"\", \"type\": \""+ up.getType() +"\", \"url\": \""+ up.getUrl() +"\"}";
+	    String result = "{\"name\":\""+ up.getFileName() +"\", \"originalName\": \""+ up.getOriginalName() +"\", \"size\": "+ up.getSize() +", \"state\": \""+ up.getState() +"\", \"type\": \""+ up.getType() +"\", \"url\": \""+ "upload/"+up.getUrl() +"\"}";
 
 	    result = result.replaceAll( "\\\\", "\\\\" );
 
