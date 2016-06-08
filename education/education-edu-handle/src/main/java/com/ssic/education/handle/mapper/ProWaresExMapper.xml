@@ -26,7 +26,8 @@
 		select * 
 		from t_pro_wares a
 		LEFT JOIN t_pro_school_ware b on a.id = b.ware_id
-		where a.stat = 1 and b.stat=1
+		where b.stat=1
+		<!--where a.stat = 1 and b.stat=1-->
 		<if test="proSchoolWareDto.schoolId != null  and proSchoolWareDto.schoolId !=''">
 			AND b.school_id = #{proSchoolWareDto.schoolId}
 		</if>
@@ -50,7 +51,8 @@
 		select count(*) from (SELECT a.id, COUNT(*) counts 
 		from t_pro_wares a
 		LEFT JOIN t_pro_school_ware b on a.id = b.ware_id
-		where a.stat = 1 and b.stat=1
+		where b.stat=1
+		<!--where a.stat = 1 and b.stat=1-->
 		<if test="proSchoolWareDto.schoolId != null  and proSchoolWareDto.schoolId !=''">
 			AND b.school_id = #{proSchoolWareDto.schoolId}
 		</if>
