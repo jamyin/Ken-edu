@@ -173,6 +173,9 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public Json add(TImsUsersDto user, HttpServletRequest request) {
 		Json j = new Json();
+		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
+				ConfigUtil.SESSIONINFONAME);
+		user.setSourceId(info.getSupplierId());
 		if (user.getPassword().length() < 6) {
 			j.setSuccess(false);
 			j.setMsg("密码长度不能小于六位");
@@ -224,9 +227,6 @@ public class UserController extends BaseController {
 				j.setMsg("用户姓名不能为相同");
 				return j;
 			}
-			SessionInfo info = (SessionInfo) request.getSession().getAttribute(
-					ConfigUtil.SESSIONINFONAME);
-			user.setSourceId(info.getSupplierId());
 			user.setCreator(info.getName());
 			user.setUpdater(info.getName());
 			// 添加t_admin_uses

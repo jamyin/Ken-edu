@@ -49,6 +49,7 @@ import com.ssic.education.handle.pojo.ProSupplier;
 import com.ssic.education.handle.pojo.ProSupplierReceiver;
 import com.ssic.education.handle.service.ICreateImageService;
 import com.ssic.education.handle.service.IProLicenseService;
+import com.ssic.education.handle.service.IProSupplierReceiverService;
 import com.ssic.education.handle.service.ISupplierService;
 import com.ssic.education.handle.service.IWaresService;
 import com.ssic.education.provider.pageModel.Json;
@@ -62,11 +63,15 @@ import com.ssic.education.utils.util.UUIDGenerator;
 
 @Controller
 @RequestMapping("/proSupplierController")
-public class ProSupplierController extends BaseController{
+public class ProSupplierController extends BaseController {
 	@Autowired
 	private IWaresService waresService;
 	@Autowired
 	private ISupplierService supplierService;
+
+	@Autowired
+	private IProSupplierReceiverService srService;
+
 	@Autowired
 	private ICreateImageService createImageServiceImpl;
 
@@ -77,7 +82,7 @@ public class ProSupplierController extends BaseController{
 	public String manager(HttpServletRequest request) {
 		return "supplier/supplier";
 	}
-	
+
 	@RequestMapping("/importPage")
 	public String importPage(HttpServletRequest request) {
 		return "supplier/supplierImport";
@@ -129,7 +134,7 @@ public class ProSupplierController extends BaseController{
 				ConfigUtil.SESSIONINFONAME);
 		// 当前登录用户所属供应商的id
 		String supplierId = info.getSupplierId();
-		if(supplierId==null){
+		if (supplierId == null) {
 			j.setMsg("请登录");
 			j.setSuccess(false);
 			return j;
@@ -162,7 +167,7 @@ public class ProSupplierController extends BaseController{
 		 */
 		ps.setCreator(info.getName());
 		ps.setUpdater(info.getName());
-		ProSupplierReceiver proSupplierReceiver = new ProSupplierReceiver();		
+		ProSupplierReceiver proSupplierReceiver = new ProSupplierReceiver();
 		proSupplierReceiver.setSupplierCode(ps.getSupplierCode());
 		proSupplierReceiver.setSupplierId(ps.getId());
 		proSupplierReceiver.setReceiverId(supplierId);
@@ -211,7 +216,7 @@ public class ProSupplierController extends BaseController{
 		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
 				ConfigUtil.SESSIONINFONAME);
 		String supplierId = info.getSupplierId();
-		if(supplierId==null){
+		if (supplierId == null) {
 			j.setMsg("请登录");
 			j.setSuccess(false);
 			return j;
@@ -230,15 +235,16 @@ public class ProSupplierController extends BaseController{
 		ps.setUpdater(info.getName());
 		ps.setId(UUIDGenerator.getUUID());
 		ps.setSupplierType(2);
-		ps.setReviewed((byte)0);
+		ps.setReviewed((byte) 0);
 		ProSupplierReceiver proSupplierReceiver = new ProSupplierReceiver();
 		proSupplierReceiver.setSupplierId(ps.getId());
 		proSupplierReceiver.setReceiverId(info.getSupplierId());
 		proSupplierReceiver.setSupplierCode(ps.getSupplierCode());
 		proSupplierReceiver.setId(UUIDGenerator.getUUID());
 		proSupplierReceiver.setCreateTime(new Date());
-		ProSupplier rps = supplierService.findProSupplierByName(ps.getSupplierName(),supplierId);
-		if(rps!=null){
+		ProSupplier rps = supplierService.findProSupplierByName(
+				ps.getSupplierName(), supplierId);
+		if (rps != null) {
 			j.setMsg("供应商已存在");
 			j.setSuccess(false);
 			return j;
@@ -287,7 +293,6 @@ public class ProSupplierController extends BaseController{
 		return dataGrid;
 	}
 
-	
 	/**
 	 * 跳转到修改图片页面
 	 * 
@@ -307,15 +312,14 @@ public class ProSupplierController extends BaseController{
 		for (ProLicense proLicense : ProLicenseList) {
 			proLicense.setLicPic(realPath + proLicense.getLicPic());
 		}
-		
-		JSONArray jsonarray = JSONArray.fromObject(ProLicenseList);  
+
+		JSONArray jsonarray = JSONArray.fromObject(ProLicenseList);
 		request.setAttribute("id", id);
 		request.setAttribute("ProLicenseList", jsonarray.toString());
 
 		return "supplier/editImage";
 	}
 
-	
 	/**
 	 * 修改图片
 	 */
@@ -338,7 +342,7 @@ public class ProSupplierController extends BaseController{
 		Json json = new Json();
 		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
 				ConfigUtil.SESSIONINFONAME);
-		if(info==null){
+		if (info == null) {
 			json.setMsg("尚未登录");
 			json.setSuccess(false);
 			return json;
@@ -380,7 +384,6 @@ public class ProSupplierController extends BaseController{
 		String imageurl10 = (String) map10.get("image_url");
 		String imageurl11 = (String) map11.get("image_url");
 
-		
 		if (imageurl1 != null && imageurl1 != "") {
 			license.setLicName("工商营业执照");
 			license.setRelationId(id);
@@ -608,6 +611,7 @@ public class ProSupplierController extends BaseController{
 
 	/**
 	 * 导入供应商
+	 * 
 	 * @param file
 	 * @param request
 	 * @param response
@@ -625,7 +629,7 @@ public class ProSupplierController extends BaseController{
 		// 当前登录用户所属供应商的id
 		String supplierId = info.getSupplierId();
 		String errorMsg = null;
-		Map<String,Map<ProSupplierReceiver,ProSupplier>> map = new HashMap();
+		Map<String, Map<ProSupplierReceiver, ProSupplier>> map = new HashMap();
 		try (Workbook wb = WorkbookFactory.create(file.getInputStream());) {
 			Sheet sheet = wb.getSheetAt(0);
 			Date now = new Date();
@@ -637,9 +641,9 @@ public class ProSupplierController extends BaseController{
 				if (errorMsg != null) {
 					break;
 				}
-				Map< ProSupplierReceiver,ProSupplier> suppliers=new HashMap();
+				Map<ProSupplierReceiver, ProSupplier> suppliers = new HashMap();
 				ProSupplier supplier = null;
-				ProSupplierReceiver psr=null;
+				ProSupplierReceiver psr = null;
 				Row row = sheet.getRow(rowNum);
 				int n = 0;
 				for (int i = 0; i < row.getLastCellNum(); i++) {
@@ -652,7 +656,7 @@ public class ProSupplierController extends BaseController{
 						value = value.trim();
 					}
 					if (i == 0) {
-						//供应商
+						// 供应商
 						if (StringUtils.isBlank(value)) {
 							errorMsg = "第" + (rowNum + 1) + "行数据不正确，供应商名称不能为空。";
 							break;
@@ -663,7 +667,7 @@ public class ProSupplierController extends BaseController{
 							errorMsg = "第" + (rowNum + 1) + "行数据不正确，供应商名称已存在。";
 							break;
 						}
-						if (map.get(value)!= null) {
+						if (map.get(value) != null) {
 							errorMsg = "第" + (rowNum + 1) + "行数据不正确，供应商名称重复。";
 							break;
 						}
@@ -674,14 +678,14 @@ public class ProSupplierController extends BaseController{
 						supplier.setLastUpdateTime(now);
 						supplier.setStat(1);
 					} else if (i == 1) {
-						//供应商地址
+						// 供应商地址
 						if (StringUtils.isBlank(value)) {
 							errorMsg = "第" + (rowNum + 1) + "行数据不正确，供应商地址不能为空。";
 							break;
 						}
 						supplier.setAddress(value);
 					} else if (i == 2) {
-						//证书
+						// 证书
 						if (StringUtils.isBlank(value)) {
 							n += 1;
 							break;
@@ -715,23 +719,29 @@ public class ProSupplierController extends BaseController{
 						}
 						supplier.setBusinessLicense(value);
 					} else if (i == 7 && !StringUtils.isBlank(value)) {
-						//供应商编码
-						psr=new ProSupplierReceiver();
+						// 供应商编码
+						int x = srService.findBySupplierCode(value, supplierId);
+						if (x != 0) {
+							errorMsg = "第" + (rowNum + 1)
+									+ "行数据不正确，供应商编码已存在。";
+							break;
+						}
+						psr = new ProSupplierReceiver();
 						psr.setSupplierCode(value);
 					} else if (i == 8 && !StringUtils.isBlank(value)) {
-						//联系人
+						// 联系人
 						supplier.setCorporation(value);
 					} else if (i == 9 && !StringUtils.isBlank(value)) {
-						//联系方式
+						// 联系方式
 						supplier.setContactWay(value);
 					}
 				}
 				if (supplier != null && errorMsg == null) {
 					supplier.setId(UUID.randomUUID().toString());
 					supplier.setSupplierType(0);
-					supplier.setReviewed((byte)1);
-					if(psr==null){
-						psr=new ProSupplierReceiver();
+					supplier.setReviewed((byte) 1);
+					if (psr == null) {
+						psr = new ProSupplierReceiver();
 					}
 					psr.setId(UUID.randomUUID().toString());
 					psr.setSupplierId(supplier.getId());
@@ -745,21 +755,21 @@ public class ProSupplierController extends BaseController{
 		} catch (EncryptedDocumentException | InvalidFormatException e) {
 			errorMsg = "Excel文件格式不正确";
 		}
-		if(errorMsg != null) {
+		if (errorMsg != null) {
 			j.setMsg(errorMsg);
 			j.setSuccess(false);
 		} else {
-			int r=supplierService.importSupplier(map);
-			j.setMsg("成功添加"+r+"条数据");
+			int r = supplierService.importSupplier(map);
+			j.setMsg("成功添加" + r + "条数据");
 			j.setSuccess(true);
 		}
 		return j;
 	}
-	
+
 	@RequestMapping(value = "/excel")
 	@ResponseBody
 	public ModelAndView exportExcel(SupplierDto supplierDto,
-			HttpServletRequest request,HttpServletResponse response) {
+			HttpServletRequest request, HttpServletResponse response) {
 		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
 				ConfigUtil.SESSIONINFONAME);
 		if (info == null) {
@@ -811,8 +821,7 @@ public class ProSupplierController extends BaseController{
 			HSSFCellStyle contentStyle = (HSSFCellStyle) workbook
 					.createCellStyle(); // 内容样式
 			contentStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
-			DataGrid dg = supplierService.findProSupplier(supplierDto,
-					null);
+			DataGrid dg = supplierService.findProSupplier(supplierDto, null);
 			List<SupplierDto> expList = dg.getRows();
 			List<PageData> varList = new ArrayList<PageData>();
 			if (!CollectionUtils.isEmpty(expList)) {
@@ -823,8 +832,7 @@ public class ProSupplierController extends BaseController{
 					vpd.put("var3", expList.get(i).getFoodServiceCode());
 					vpd.put("var4", expList.get(i).getFoodBusinessCode());
 					vpd.put("var5", expList.get(i).getFoodCirculationCode());
-					vpd.put("var6",
-							expList.get(i).getFoodProduceCode());
+					vpd.put("var6", expList.get(i).getFoodProduceCode());
 					vpd.put("var7", expList.get(i).getBusinessLicense());
 					vpd.put("var8", expList.get(i).getSupplierCode());
 					vpd.put("var9", expList.get(i).getCorporation());
