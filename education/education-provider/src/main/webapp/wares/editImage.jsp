@@ -85,9 +85,9 @@ $(function() {
 	});
 
 				$(function(){
-				    $("#img1").click(function(){
+				    $("img").click(function(){
 				        var width = $(this).width();
-				        if(width==100)
+				        if(width==150)
 				        {
 				            $(this).width(300);
 				            $(this).height(300);
