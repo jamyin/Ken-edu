@@ -3,6 +3,7 @@ package com.ssic.education.government.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,6 +44,14 @@ public class MainController extends BaseController{
 		List<String> sourceIds = packageSourceId();
 		eduInformationDto.setSourceIds(sourceIds);
 		PageResult<EduInformationDto> pageList =  iEduInformationService.searchInfomation(eduInformationDto,pageQuery);
+		EduInformationDto eduinformationDto = new EduInformationDto();
+		if (null != pageList.getResults() && pageList.getResults().size()>0){
+			eduinformationDto = pageList.getResults().get(0); 
+			String content = eduinformationDto.getContent();
+			if (StringUtils.isNotBlank(content)) {
+				eduinformationDto.setContent(content.replace("img","yy"));
+			}
+		}
 		eduInformationDto.setType(Integer.valueOf(DataStatus.ENABLED));
 		PageResult<EduInformationDto> pageList1 =  iEduInformationService.searchInfomation(eduInformationDto,pageQuery);
 		eduInformationDto.setType(Integer.valueOf(DataStatus.MANAGERTYPE));
