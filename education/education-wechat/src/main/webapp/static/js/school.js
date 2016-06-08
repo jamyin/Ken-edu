@@ -48,7 +48,7 @@ function loadscMenu(){
 					if(proDishesDtos!=null){
 						$.each(proDishesDtos, function(index_d, itemD) {
 							//<img src='/static/img/food_simple.jpg' border='0'>
-							objHtml+=itemD['name']+"&nbps;";
+							objHtml+=itemD['name']+" ";
 						});						
 					}
 					
