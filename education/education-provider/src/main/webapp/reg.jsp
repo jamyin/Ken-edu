@@ -188,13 +188,24 @@
 	<script>
 		$(function() {
 			//第一页的确定按钮
-			$("#btn_part1")
-					.click(
-							function() {
+			$("#btn_part1").click(function() {
  								if (!verifyCheck._click()){
 									return;
 								}
 								
+ 								//必须选中一个区域
+ 								//var committees = document.getElementsByName("committees");
+ 								var checkLength = 0;
+ 			            		$("input[name='committees']").each(function(index,item){
+ 			            		    if (true == $(item).prop("checked")) {
+ 			            		    	checkLength ++;
+ 			            		    }
+ 			            		});
+ 			            		if(checkLength<1){
+ 			            			alert("必须选择一个区教委");
+ 			            			return false;
+ 			            		}
+ 								
 								//图片判断 必须上传一个图片
 								var isFiles = 0;
 								for(var i=1;i<5;i++){
