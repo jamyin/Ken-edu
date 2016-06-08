@@ -51,7 +51,7 @@
 		LEFT JOIN t_pro_supplier c on b.source_id = c.id
 		WHERE <!-- a.stat = 1 and b.stat=1--> 
 		<if test="ledgerDto.receiverId != null  and ledgerDto.receiverId !=''">
-			AND b.receiver_id = #{ledgerDto.receiverId}
+			b.receiver_id = #{ledgerDto.receiverId}
 		</if>
 		<if test="ledgerDto.masterId != null  and ledgerDto.masterId !=''">
 			AND b.id = #{ledgerDto.masterId}
@@ -74,7 +74,7 @@
 		LEFT JOIN t_pro_supplier c on b.source_id = c.id
 		WHERE <!-- a.stat = 1 and b.stat=1--> 
 		<if test="ledgerDto.receiverId != null  and ledgerDto.receiverId !=''">
-			AND b.receiver_id = #{ledgerDto.receiverId}
+			b.receiver_id = #{ledgerDto.receiverId}
 		</if>
 		<if test="ledgerDto.masterId != null  and ledgerDto.masterId !=''">
 			AND b.id = #{ledgerDto.masterId}
