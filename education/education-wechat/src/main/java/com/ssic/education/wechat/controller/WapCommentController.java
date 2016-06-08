@@ -1,5 +1,6 @@
 package com.ssic.education.wechat.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +11,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ssic.educateion.common.dto.EduSchoolDto;
+import com.ssic.educateion.common.dto.ProDishesDto;
 import com.ssic.educateion.common.dto.ProPackagesDto;
 import com.ssic.education.handle.dto.EduParentPackCommentDto;
 import com.ssic.education.handle.service.EduSchoolService;
 import com.ssic.education.handle.service.IEduParentPackCommentService;
+import com.ssic.education.handle.service.ProDishesService;
 import com.ssic.education.handle.service.ProPackagesService;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.Response;
@@ -40,6 +43,9 @@ public class WapCommentController extends BaseController {
 	@Autowired
 	private EduSchoolService eduSchoolService;
 	
+	@Autowired
+	private ProDishesService proDishesService;
+	
 	/**
 	 * 
 		 * 此方法描述的是：进入某一个菜的点评功能页面
@@ -55,9 +61,15 @@ public class WapCommentController extends BaseController {
 		String schoolId = proPackageSto.getCustomerId();//学校Id
 		EduSchoolDto schoolDto = eduSchoolService.findById(schoolId);
 		
+		List<String> packageIdList = new ArrayList<String>();
+		packageIdList.add(packageId);
+		
+		//查询dishes 信息
+		List<ProDishesDto> resultDishList = proDishesService.searchDishes(packageIdList);
 		
 		mv.addObject("schoolDto", schoolDto);
 		mv.addObject("proPackageSto", proPackageSto);
+		mv.addObject("resultDishList", resultDishList);
 		mv.setViewName("join");
 		return mv;
 	}
