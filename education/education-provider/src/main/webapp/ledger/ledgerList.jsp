@@ -133,7 +133,7 @@
 				formatter : function(value, row, index) {
 					var str = '';
 					if ($.canShow) {
-						str += $.formatString('<img onclick="showFun(\''+row.masterId+'\');" src="{1}" title="查看"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
+						str += $.formatString('<img onclick="showFun(\''+row.masterId+'\');" src="{1}" title="查看"/>', row.id, '${pageContext.request.contextPath}/icon/查看信息.png');
 					}
 					str += '&nbsp;';
 					if ($.canEdit) {

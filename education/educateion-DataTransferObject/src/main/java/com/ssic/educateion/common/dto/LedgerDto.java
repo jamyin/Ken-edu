@@ -111,8 +111,16 @@ public class LedgerDto {
 	
 	@Setter
 	@Getter
+	private String creator;
+	
+	@Setter
+	@Getter
 	private Date createTime;
 
+	@Setter
+	@Getter
+	private String updater;
+	
 	@Setter
 	@Getter
 	private Date lastUpdateTime;

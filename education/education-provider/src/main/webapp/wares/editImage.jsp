@@ -84,7 +84,21 @@ $(function() {
 	
 	});
 
-	
+				$(function(){
+				    $("#img1").click(function(){
+				        var width = $(this).width();
+				        if(width==100)
+				        {
+				            $(this).width(300);
+				            $(this).height(300);
+				        }
+				        else
+				        {
+				            $(this).width(150);
+				            $(this).height(150);
+				        }
+				    });
+				});
 
 </script>
 		<div class="easyui-layout" data-options="fit:true,border:false">
@@ -136,7 +150,7 @@ $(function() {
 				</tr>
 				<tr  id="img1_8">
 					<td colspan="2"><img id="img1"   width="150px" height="150px"  src="${pageContext.request.contextPath}/icon/图片未上传200x200.png"></img></td>
-				
+					
 				</tr>
 				<tr>
 					<th>检测检验报告</th>

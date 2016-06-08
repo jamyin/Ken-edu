@@ -207,11 +207,13 @@ public class CorporateController {
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl1);
+			license.setUpdater(info.getId());
 			license.setLastUpdateTime(new Date());
 			int i = proLicenseServiceImpl.alterImage(license);
 			if (i == 0) {
 				license.setStat(1);
 				license.setLicType(4);
+				license.setCreator(info.getId());
 				license.setCreateTime(new Date());
 				String uuid = UUID.randomUUID().toString();
 				license.setId(uuid);
@@ -223,11 +225,13 @@ public class CorporateController {
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl2);
+			license.setUpdater(info.getId());
 			license.setLastUpdateTime(new Date());
 			int i = proLicenseServiceImpl.alterImage(license);
 			if (i == 0) {
 				license.setStat(1);
 				license.setLicType(5);
+				license.setCreator(info.getId());
 				license.setCreateTime(new Date());
 				String uuid = UUID.randomUUID().toString();
 				license.setId(uuid);
@@ -239,11 +243,13 @@ public class CorporateController {
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl3);
+			license.setUpdater(info.getId());
 			license.setLastUpdateTime(new Date());
 			int i = proLicenseServiceImpl.alterImage(license);
 			if (i == 0) {
 				license.setStat(1);
 				license.setLicType(6);
+				license.setCreator(info.getId());
 				license.setCreateTime(new Date());
 				String uuid = UUID.randomUUID().toString();
 				license.setId(uuid);
@@ -255,11 +261,13 @@ public class CorporateController {
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl4);
+			license.setUpdater(info.getId());
 			license.setLastUpdateTime(new Date());
 			int i = proLicenseServiceImpl.alterImage(license);
 			if (i == 0) {
 				license.setStat(1);
 				license.setLicType(2);
+				license.setCreator(info.getId());
 				license.setCreateTime(new Date());
 				String uuid = UUID.randomUUID().toString();
 				license.setId(uuid);
@@ -271,11 +279,13 @@ public class CorporateController {
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl5);
+			license.setUpdater(info.getId());
 			license.setLastUpdateTime(new Date());
 			int i = proLicenseServiceImpl.alterImage(license);
 			if (i == 0) {
 				license.setStat(1);
 				license.setLicType(3);
+				license.setCreator(info.getId());
 				license.setCreateTime(new Date());
 				String uuid = UUID.randomUUID().toString();
 				license.setId(uuid);
@@ -287,11 +297,13 @@ public class CorporateController {
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl6);
+			license.setUpdater(info.getId());
 			license.setLastUpdateTime(new Date());
 			int i = proLicenseServiceImpl.alterImage(license);
 			if (i == 0) {
 				license.setStat(1);
 				license.setLicType(0);
+				license.setCreator(info.getId());
 				license.setCreateTime(new Date());
 				String uuid = UUID.randomUUID().toString();
 				license.setId(uuid);
@@ -303,11 +315,13 @@ public class CorporateController {
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl7);
+			license.setUpdater(info.getId());
 			license.setLastUpdateTime(new Date());
 			int i = proLicenseServiceImpl.alterImage(license);
 			if (i == 0) {
 				license.setStat(1);
 				license.setLicType(1);
+				license.setCreator(info.getId());
 				license.setCreateTime(new Date());
 				String uuid = UUID.randomUUID().toString();
 				license.setId(uuid);
@@ -319,11 +333,13 @@ public class CorporateController {
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl8);
+			license.setUpdater(info.getId());
 			license.setLastUpdateTime(new Date());
 			int i = proLicenseServiceImpl.alterImage(license);
 			if (i == 0) {
 				license.setStat(1);
 				license.setLicType(9);
+				license.setCreator(info.getId());
 				license.setCreateTime(new Date());
 				String uuid = UUID.randomUUID().toString();
 				license.setId(uuid);
@@ -335,11 +351,13 @@ public class CorporateController {
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl9);
+			license.setUpdater(info.getId());
 			license.setLastUpdateTime(new Date());
 			int i = proLicenseServiceImpl.alterImage(license);
 			if (i == 0) {
 				license.setStat(1);
 				license.setLicType(10);
+				license.setCreator(info.getId());
 				license.setCreateTime(new Date());
 				String uuid = UUID.randomUUID().toString();
 				license.setId(uuid);
@@ -351,11 +369,13 @@ public class CorporateController {
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl10);
+			license.setUpdater(info.getId());
 			license.setLastUpdateTime(new Date());
 			int i = proLicenseServiceImpl.alterImage(license);
 			if (i == 0) {
 				license.setStat(1);
 				license.setLicType(11);
+				license.setCreator(info.getId());
 				license.setCreateTime(new Date());
 				String uuid = UUID.randomUUID().toString();
 				license.setId(uuid);
@@ -367,11 +387,13 @@ public class CorporateController {
 			license.setRelationId(id);
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl11);
+			license.setUpdater(info.getId());
 			license.setLastUpdateTime(new Date());
 			int i = proLicenseServiceImpl.alterImage(license);
 			if (i == 0) {
 				license.setStat(1);
 				license.setLicType(12);
+				license.setCreator(info.getId());
 				license.setCreateTime(new Date());
 				String uuid = UUID.randomUUID().toString();
 				license.setId(uuid);

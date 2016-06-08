@@ -136,7 +136,7 @@
 						<input name="ledger[0].productionName" style="width:95px;" type="text" placeholder="请输入生产单位" class="easyui-validatebox span2">
 					</td>
 					<td style="width:95px;">
-						<input name="ledger[0].productionDate" style="width:95px;cursor:pointer;" type="text" placeholder="点击选择日期" class="easyui-validatebox span2" onclick="WdatePicker({readOnly:true,dateFmt:\'yyyy-MM-dd\'})" readonly="readonly">
+						<input name="ledger[0].productionDate" style="width:95px;cursor:pointer;" type="text" placeholder="点击选择日期" class="easyui-validatebox span2" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" readonly="readonly">
 					</td>
 					<td>
 						<a onclick='subtractLedger(this);' data-id='ledger0' style='text-decoration:none;cursor:pointer;' ><font size='8' >-</font></a>

@@ -70,12 +70,12 @@
             	<#list data.proDishesDtos as proDishesDto>
             		<#if proDishesDto_index == 0>
             			 <li>
-			                <input type="text" id="waresName${proDishesDto_index}" value="${(proDishesDto.waresName)!}">
+			                <input type="text" id="waresName${proDishesDto_index}" value="${(proDishesDto.name)!}">
 			                <span class="add">+</span>
 			              </li>
 			        <#else>
 			        	<li>
-			                <input type="text" id="waresName${proDishesDto_index}" value="${(proDishesDto.waresName)!}">
+			                <input type="text" id="waresName${proDishesDto_index}" value="${(proDishesDto.name)!}">
 				        	<span class='decrease'>-</span>
 				        </li>
             		</#if>
@@ -259,9 +259,9 @@
     	jsonWares = '[';
 		for (i=0; i<=nu_dis-1; i++) {
 			if (i == nu_dis-1) {
-				jsonWares += '{\"waresName\":\"' +$('#waresName'+i+'').val()+'\"}';
+				jsonWares += '{\"name\":\"' +$('#name'+i+'').val()+'\"}';
 			} else {
-				jsonWares += '{\"waresName\":\"' +$('#waresName'+i+'').val()+'\"},';
+				jsonWares += '{\"name\":\"' +$('#name'+i+'').val()+'\"},';
 			}			
 		}
 		jsonWares += ']';

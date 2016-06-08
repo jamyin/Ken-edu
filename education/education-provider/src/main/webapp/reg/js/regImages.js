@@ -19,7 +19,7 @@ $(function(){
             if(dataObj.status == 200){
             	var showUrl = dataObj.wwwdomain+dataObj.filePath;
             	var licenseNo1 = $("#licenseNo1").val();
-            	$("#file-1").attr("value","工商营业执照#"+dataObj.filePath+"#"+licenseNo1);
+            	$("#file-1").attr("value","工商营业执照#"+dataObj.filePath+"#"+licenseNo1+"#4");
             	$("#license1").html("<a target='_' href='"+showUrl+"'>查看工商营业执照</a>");
             	$("#file-1").attr("checked","checked");
             }
@@ -54,7 +54,7 @@ $(function(){
             if(dataObj.status == 200){
             	var showUrl = dataObj.wwwdomain+dataObj.filePath;
             	var licenseNo2 = $("#licenseNo2").val();
-                $("#file-2").val("餐饮服务许可证#"+dataObj.filePath+"#"+licenseNo2);
+                $("#file-2").val("餐饮服务许可证#"+dataObj.filePath+"#"+licenseNo2+"#0");
                 $("#license2").html("<a target='_' href='"+showUrl+"'>查看餐饮服务许可证</a>");
                 $("#file-2").attr("checked","checked");
             }
@@ -90,7 +90,7 @@ $(function(){
             if(dataObj.status == 200){
             	var showUrl = dataObj.wwwdomain+dataObj.filePath;
             	var licenseNo1 = $("#licenseNo1").val();
-                $("#file-3").val("食品流通许可证#"+dataObj.filePath+"#"+licenseNo3);
+                $("#file-3").val("食品流通许可证#"+dataObj.filePath+"#"+licenseNo3+"#2");
                 $("#license3").html("<a target='_' href='"+showUrl+"'>查看食品流通许可证</a>");
                 $("#file-3").attr("checked","checked");
             }
@@ -125,7 +125,7 @@ $(function(){
             if(dataObj.status == 200){
             	var showUrl = dataObj.wwwdomain+dataObj.filePath;
             	var licenseNo4 = $("#licenseNo4").val();
-                $("#file-4").val("食品生产许可证#"+dataObj.filePath+"#"+licenseNo4);
+                $("#file-4").val("食品生产许可证#"+dataObj.filePath+"#"+licenseNo4+"#3");
                 $("#license4").html("<a target='_' href='"+showUrl+"'>查看食品生产许可证</a>");
                 $("#file-4").attr("checked","checked");         	            	
             }

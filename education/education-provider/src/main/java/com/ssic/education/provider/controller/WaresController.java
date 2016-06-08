@@ -650,7 +650,10 @@ public class WaresController extends BaseController {
 				}
 				dto.setSupplierId(supplierId);
 				dto.setWay(0);
+				dto.setDishes(false);
+				dto.setCreator(info.getId());
 				dto.setCreateTime(now);
+				dto.setUpdater(info.getId());
 				dto.setLastUpdateTime(now);
 				dto.setStat(1);
 				list.add(dto);

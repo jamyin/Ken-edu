@@ -111,4 +111,9 @@ public class LedgerService implements ILedgerService {
 		return ledgerDao.findExportProSupplier(ld);
 	}
 
+	@Override
+	public int updataLedger(List<LedgerDto> ledgers) {
+		return ledgerDao.updataLedger(ledgers);
+	}
+
 }

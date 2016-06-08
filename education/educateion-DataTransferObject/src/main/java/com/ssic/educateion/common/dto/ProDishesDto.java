@@ -21,7 +21,7 @@ public class ProDishesDto {
 
 	@Setter
 	@Getter
-    private String waresName;
+    private String name;
 
 	@Setter
 	@Getter

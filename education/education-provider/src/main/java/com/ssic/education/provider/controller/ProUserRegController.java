@@ -82,31 +82,15 @@ public class ProUserRegController extends BaseController{
 		if(licenses!=null){
 			for(String licesse : licenses){
 				if(!StringUtils.isEmpty(licesse)){
-					int i=0;
-					String str="#";
-					char [] stringArr = licesse.toCharArray();
-					for (int j=0;j<stringArr.length; j++) {
-						String strArr = String.valueOf(stringArr[j]);;
-						if (str.contains(strArr)) {
-							i++;
-						}
-					}
-					String licenseName =null;
-					String licPic = null;
-					String licNo = null;
-					if (i>=1) {
-						licenseName = licesse.split("#")[0];
-					}
-					if (i>=2) {
-						licPic = licesse.split("#")[1];
-					}
-					if (i>=3) {
-						licNo = licesse.split("#")[2];
-					}
+					String licenseName = licesse.split("#")[0];
+					String licPic = licesse.split("#")[1];
+					String licNo = licesse.split("#")[2];
+					String licType = licesse.split("#")[3];
 					ProLicenseDto proLicenseDto = new ProLicenseDto();
 					proLicenseDto.setLicType(DataStatus.DISABLED);
 					proLicenseDto.setLicName(licenseName);
 					proLicenseDto.setLicPic(licPic);
+					proLicenseDto.setLicType(Integer.valueOf(licType));;
 					proLicenseDto.setLicNo(licNo);
 					proLicenseDto.setRelationId(supplierId);
 					proLicenseDto.setCerSource(Short.valueOf("0"));

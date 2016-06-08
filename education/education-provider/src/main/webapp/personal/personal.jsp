@@ -121,9 +121,9 @@ else
 					if ($.canEdit) {
 						str += $.formatString('<img onclick="editFun(\'{0}\');" src="{1}" title="编辑"/>', row.id, '${pageContext.request.contextPath}/icon/编辑.png');
 					}
-					
+					str+= "&nbsp";
 					if ($.canEditPassword) {
-						str += $.formatString('<img onclick="editFunPassword(\'{0}\');" src="{1}" title="修改密码"/>', row.id, '${pageContext.request.contextPath}/icon/编辑图片.png');
+						str += $.formatString('<img onclick="editFunPassword(\'{0}\');" src="{1}" title="修改密码"/>', row.id, '${pageContext.request.contextPath}/icon/修改密码.png');
 					}
 					return str;
 					
@@ -201,10 +201,6 @@ else
 			} ]
 		});
 	}
-
-	
-	
-	
 	
 </script>
 </head>
