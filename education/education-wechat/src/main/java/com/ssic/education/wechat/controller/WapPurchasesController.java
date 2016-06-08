@@ -43,24 +43,24 @@ public class WapPurchasesController extends BaseController{
 		//根据学校查询 对应的采购品信息
 		List<ProWaresDto> resultList = proWaresService.searchProWares(schoolId,null);
 
-		List<String> wareIds = new ArrayList<String>();
-		for(ProWaresDto wareDto : resultList){
-			wareIds.add(wareDto.getId());
-		}
+//		List<String> wareIds = new ArrayList<String>();
+//		for(ProWaresDto wareDto : resultList){
+//			wareIds.add(wareDto.getId());
+//		}
 		//资质 图片信息
-		ProLicenseDto proLicenseDto = new ProLicenseDto();
-		proLicenseDto.setWareIds(wareIds);
-		proLicenseDto.setLicType(8);
-		proLicenseDto.setCerSource(Short.valueOf("2"));
-		List<ProLicenseDto> licenseList = iProLicenseService.searchProLicenseList(proLicenseDto);
-		HashMap<String,ProLicenseDto> licenseMap = licenseListToMap(licenseList);
+//		ProLicenseDto proLicenseDto = new ProLicenseDto();
+//		proLicenseDto.setWareIds(wareIds);
+//		proLicenseDto.setLicType(8);
+//		proLicenseDto.setCerSource(Short.valueOf("2"));
+////		List<ProLicenseDto> licenseList = iProLicenseService.searchProLicenseList(proLicenseDto);
+//		HashMap<String,ProLicenseDto> licenseMap = licenseListToMap(licenseList);
 
-		for(ProWaresDto wareDto : resultList){
-			ProLicenseDto licenseDto = licenseMap.get(wareDto.getId());
-			if(licenseDto!=null){
-				wareDto.setImage(licenseDto.getLicPic());	
-			}
-		}
+//		for(ProWaresDto wareDto : resultList){
+//			ProLicenseDto licenseDto = licenseMap.get(wareDto.getId());
+//			if(licenseDto!=null){
+//				wareDto.setImage(licenseDto.getLicPic());	
+//			}
+//		}
 
 		mv.addObject("resultList",resultList);
 		mv.addObject("schoolId",schoolId);

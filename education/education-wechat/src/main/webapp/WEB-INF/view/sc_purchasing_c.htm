@@ -11,14 +11,7 @@
 <body>
 	<header class="navgat"><a class="back" href="javascript:window.history.go(-1)"></a>${(proWaresDto.waresName)!}</header>
 	<div class="purchasing_c_box">
-		<#if resultList ??>
-			<#list resultList as result>
-				<#if result.licType == 8>
-					<!-- <li><a href="#" data-path="${(result.licPic)!}" data-name="${(result.licName)!}" onclick="loadImage(this);"></a><label>${(result.licName)!}</label><span>${(result.licNo)!}</span></li> -->
-					<img src="${(wwwdomain)!}${(result.licPic)!}" border="0">
-				</#if>
-			</#list>
-		</#if>		
+		<img src="${(wwwdomain)!}${(proWaresDto.image)!}" border="0">
 		<p>
 			名称：${(proWaresDto.waresName)!}<br>
 			产品编码：${(proWaresDto.barCode)!}<br>
