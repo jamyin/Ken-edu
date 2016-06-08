@@ -39,7 +39,7 @@ public interface ProWaresService {
 		 * @version: 2016年5月29日 上午11:17:12
 		 * @param SELECT * FROM `t_pro_wares` ware WHERE   EXISTS  (SELECT * FROM `t_pro_school_ware` sc_ware WHERE sc_ware.`school_id` = '000d804f-ffdc-432a-b9b7-85307a611423'  AND ware.`id` = sc_ware.`ware_id`)
 	 */
-	List<ProWaresDto> searchProWares(String schoolId,String waresName);
+	List<ProWaresDto> searchProWares(String schoolId,String waresName,Integer waresType);
 	
 	public PageResult<ProWaresDto> findWarsePageByParam(ProSchoolWareDto proSchoolWareDto,PageQuery query);
 

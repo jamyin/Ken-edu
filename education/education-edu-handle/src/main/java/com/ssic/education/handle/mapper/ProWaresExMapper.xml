@@ -75,6 +75,9 @@
 		<if test="waresName != null" >
 			and ware.wares_name LIKE '%${waresName}%' 
 		</if>
+		<if test="waresType != null" >
+			and ware.wares_type = #{waresType}
+		</if>
 		 ORDER BY ware.`create_time` DESC
 	</select>
 </mapper>

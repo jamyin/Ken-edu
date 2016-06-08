@@ -89,9 +89,9 @@ public class ProWaresDao extends MyBatisBaseDao<ProWares>{
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 	}
 
-	public List<ProWaresDto> searchProWares(String schoolId,String waresName) {
+	public List<ProWaresDto> searchProWares(String schoolId,String waresName,Integer waresType) {
 		// TODO Auto-generated method stub
-		return mapperEx.searchProWares(schoolId,waresName);
+		return mapperEx.searchProWares(schoolId,waresName,waresType);
 	}
 
 	public List<ProWares> searchWarseList(List<String> wareIds) {

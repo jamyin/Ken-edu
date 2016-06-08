@@ -1,8 +1,12 @@
 package com.ssic.education.wechat.controller;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import lombok.Data;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,7 +45,7 @@ public class WapPurchasesController extends BaseController{
 		ModelAndView mv = getModelAndView();
 		
 		//根据学校查询 对应的采购品信息
-		List<ProWaresDto> resultList = proWaresService.searchProWares(schoolId,null);
+		List<ProWaresDto> resultList = proWaresService.searchProWares(schoolId,null,null);
 
 //		List<String> wareIds = new ArrayList<String>();
 //		for(ProWaresDto wareDto : resultList){
@@ -61,7 +65,8 @@ public class WapPurchasesController extends BaseController{
 //				wareDto.setImage(licenseDto.getLicPic());	
 //			}
 //		}
-
+		Map<Integer,String> productClass = ProductClass.getAll();
+		mv.addObject("productClass",mapToList(productClass));
 		mv.addObject("resultList",resultList);
 		mv.addObject("schoolId",schoolId);
 		mv.setViewName("sc_purchases");
@@ -81,10 +86,10 @@ public class WapPurchasesController extends BaseController{
 
 	@RequestMapping(value="/search/{schoolId}")
 	@ResponseBody
-	private Response<List<ProWaresDto>> search(@PathVariable String schoolId,String waresName){
+	private Response<List<ProWaresDto>> search(@PathVariable String schoolId,Integer waresType,String waresName){
 		Response<List<ProWaresDto>> result = new Response<List<ProWaresDto>>();
 		//根据学校查询 对应的采购品信息
-		List<ProWaresDto> resultList = proWaresService.searchProWares(schoolId,waresName);
+		List<ProWaresDto> resultList = proWaresService.searchProWares(schoolId,waresName,waresType);
 		result.setData(resultList);
 		return result;
 	}
@@ -109,6 +114,26 @@ public class WapPurchasesController extends BaseController{
 		mv.addObject("proWaresDto",proWaresDto);
 		mv.setViewName("sc_purchasing_c");
 		return mv;
+	}
+	
+	public List<purChasesWaresType> mapToList(Map<Integer,String> productClass){
+		List<purChasesWaresType> dataList = new ArrayList<WapPurchasesController.purChasesWaresType>();
+		purChasesWaresType purType = null;
+		for (Map.Entry<Integer, String> entry : productClass.entrySet()) {
+			purType = new purChasesWaresType();
+			purType.setWaresType(entry.getKey());
+			purType.setWaresName(entry.getValue());
+			dataList.add(purType);
+//		    System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
+		}
+		
+		return dataList;
+	}
+	
+	@Data
+	public class purChasesWaresType implements Serializable{
+		private Integer waresType;
+		private String waresName;
 	}
 	
 }
