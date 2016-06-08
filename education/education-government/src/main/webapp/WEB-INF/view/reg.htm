@@ -5,6 +5,22 @@
        	<link rel="stylesheet" href="/static/css/style.css">
        	<script src="/static/js/reg.js"></script>
        	<script src="/static/js/phoneReg.upload.js"></script>
+       	<style type="text/css">
+       		.cafeteria > li > ul > li input[type=text]{width: 120px; margin-left:10px;}
+       		.reg_box > ul > li label.file {width: 150px;}
+       		.reg_box > ul > li > ul > li span.remove{
+       			width: 28px;
+			    height: 28px;
+			    text-align: center;
+			    line-height: 31px;
+			    background: #ededed;
+			    display: block;
+			    cursor: pointer;
+			    float: left;
+			    border: 1px #c6c6c6 solid;
+			    font-size: 24px;
+			 }
+       	</style>
     </head>
 <body>
 	<!--<script src="static/js/header.js"></script>-->
@@ -56,7 +72,7 @@
 				</li>
 			</ul>
 			
-			<a class="add_cafeteria" href="###">点击填写食堂信息</a>
+			<a class="add_cafeteria" href="###"><span>+</span> 填写食堂信息</a>
 			<h4 class="cafeteria">食堂信息</h4>
 			<ul class="cafeteria">
 				<li><label><i></i>食堂名称</label><input id="canteenName" type="text" placeholder=""></li>
@@ -73,6 +89,7 @@
 							<option value="3">食品生产证</option>
 							<option value="4">工商执照</option>
 						</select>
+						<input id="licNum" type="text" class="licinputw1" name="licNum" placeholder="证件编号">
 						<label class="file" for="phoneFile1">未选择文件<i>浏览</i></label>
 						<input id="phoneFile1" type="file" name="file" onchange="selectfun(this)"><span class="add">+</span>
 						<a id="phoneQuery1"></a>
@@ -105,13 +122,16 @@
 			if(_tag == 'add'){
 				var _ind = $(this).closest('ul').find('li').length + 1
 				//alert(_ind)
-				$('.c_type').append('<li name="phoneFile'+ _ind +'"><select class="licType'+  _ind +'" id=""><option value=\"0\">餐饮服务证</option><option value=\"1\">食品经营许可证</option><option value=\"2\">食品流通证</option><option value=\"3\">食品生产证</option><option value=\"4\">工商执照</option>></select><label class="file" for="phoneFile'+ _ind +'">未选择文件<i>浏览</i></label><input id="phoneFile'+ _ind +'"  type="file" name="file" onchange="selectfun(this)"><span class="remove">-</span><a id="phoneQuery'+ _ind +'"></a></li>')
+				$('.c_type').append('<li name="phoneFile'+ _ind +'"><select class="licType'+  _ind +'" id=""><option value=\"0\">餐饮服务证</option><option value=\"1\">食品经营许可证</option><option value=\"2\">食品流通证</option><option value=\"3\">食品生产证</option><option value=\"4\">工商执照</option>></select><input id="licNum" type="text" class="licinputw'+ _ind +'" name="licNum" placeholder="证件编号"><label class="file" for="phoneFile'+ _ind +'">未选择文件<i>浏览</i></label><input id="phoneFile'+ _ind +'"  type="file" name="file" onchange="selectfun(this)"><span class="remove">-</span><a id="phoneQuery'+ _ind +'"></a></li>')
 			}else if(_tag == 'remove'){
 				$(this).closest('li').remove()
 				for(var i=0; i<$('.c_type').find('li').length;i++){
-					$('.c_type li').eq(i).find('input').attr('id','phoneFile'+(i+1))
+					$('.c_type li').eq(i).find('#licNum').attr('class','licinputw'+(i+1))
+					$('.c_type li').eq(i).find('input[name=file]').attr('id','phoneFile'+(i+1))
 					$('.c_type li').eq(i).find('label.file').attr('for','phoneFile'+(i+1))
 					$('.c_type li').eq(i).find('select').attr('class','licType'+(i+1))
+					$('.c_type li').eq(i).find('a').attr('id','phoneQuery'+(i+1))
+					$('.c_type li').eq(i).attr('name','phoneFile'+(i+1))
 				}
 			}
 		})
@@ -165,7 +185,7 @@
 			jsonLic = '[';
 			for (i=1; i<=_ind; i++) {
 				if ($.trim($('#phoneFile1').attr("value")).length >0 && $('#phoneFile1').attr("value") != 'undefined') {
-					jsonLic += '{\"licPic\":\"' +$('#phoneFile'+i+'').attr("value")+'\",'+'\"licType\":\"' +$('.licType'+i+'').val()+'\",'+'\"licName\":\"' +$('.licType'+i+'').find("option:selected").text()+'\"},';
+					jsonLic += '{\"licPic\":\"' +$('#phoneFile'+i+'').attr("value")+'\",'+'\"licType\":\"' +$('.licType'+i+'').val()+'\",'+'\"licNo\":\"' +$('.licinputw'+i+'').val()+'\",'+'\"licName\":\"' +$('.licType'+i+'').find("option:selected").text()+'\"},';
 				}				
 			}
 			jsonLic += ']';

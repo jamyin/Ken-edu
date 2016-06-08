@@ -90,11 +90,14 @@ public class UserController extends BaseController{
 	
 	@RequestMapping(value="edit")	
 	@ResponseBody
-	public Response<String> edit(EduUsersRegDto usersDto) throws Exception{
+	public Response<String> edit(HttpServletRequest request,HttpServletResponse response,HttpSession session,EduUsersRegDto usersDto) throws Exception{
+		String id = (String) getRequest().getSession().getAttribute(SessionConstants.LOGIN_USER_INFO);
+		EduUsersDto usersdto = getLoginUser(request, response, session, id);
+		usersDto.setCreator(usersdto.getId());
 		Response<String> res = new Response<String>();
 		eduUsersService.edit(usersDto);
 		res.setStatus(DataStatus.HTTP_SUCCESS);
-		res.setMessage("用户名已被使用，注册失败！");
+		res.setMessage("编辑成功，注册失败！");
 		return res;
 	}
 	

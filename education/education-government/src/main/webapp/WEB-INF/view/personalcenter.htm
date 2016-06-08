@@ -4,6 +4,12 @@
         <#include "/common/head.htm" />
         <link rel="stylesheet" href="/static/css/style.css">
          <link rel="stylesheet" href="/static/css/dis_edu.css">
+         <style type="text/css">
+       		a{
+				text-decoration:none;
+				color:#333;
+				}
+       	</style>
     </head>
 <body>
 <#include "/common/nav.htm" />
@@ -14,7 +20,7 @@
                 <div class="tab_wrap">
                     <ul class="side_menu">
                     	<li class="active"><a href="###">修改密码</a></li>
-                        <#if userInfo.sourceType == 1><li><a href="oEditUserInfo.htm">基本信息</a></li></#if>
+                        <#if userInfo.sourceType == 1><a href="oEditUserInfo.htm"><li>基本信息</li></a></#if>
                     </ul>
                     <div class="tab_content">
                         <div class="pcenter_box">
