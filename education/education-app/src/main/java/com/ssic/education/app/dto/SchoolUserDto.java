@@ -13,7 +13,6 @@ public class SchoolUserDto {
 	private String committeeId; //教委ID 
 	private String committeeName; //教委ID 
 	private String schoolName;//学校名称
-	private String schoolThum;//学校缩略图
 	private String mobileNo;//联系电话
 	private String contacts; //联系人
 	private String address; //地址
