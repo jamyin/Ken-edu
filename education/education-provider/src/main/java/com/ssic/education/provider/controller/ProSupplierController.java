@@ -165,8 +165,8 @@ public class ProSupplierController extends BaseController {
 		 * 
 		 * }
 		 */
-		ps.setCreator(info.getName());
-		ps.setUpdater(info.getName());
+		
+		ps.setUpdater(info.getId());
 		ProSupplierReceiver proSupplierReceiver = new ProSupplierReceiver();
 		proSupplierReceiver.setSupplierCode(ps.getSupplierCode());
 		proSupplierReceiver.setSupplierId(ps.getId());
@@ -231,8 +231,8 @@ public class ProSupplierController extends BaseController {
 			j.setSuccess(false);
 			return j;
 		}
-		ps.setCreator(info.getName());
-		ps.setUpdater(info.getName());
+		ps.setCreator(info.getId());
+	
 		ps.setId(UUIDGenerator.getUUID());
 		ps.setSupplierType(2);
 		ps.setReviewed((byte) 0);
@@ -390,8 +390,8 @@ public class ProSupplierController extends BaseController {
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl1);
 			license.setLastUpdateTime(new Date());
-			license.setCreator(info.getName());
-			license.setUpdater(info.getName());
+		
+			license.setUpdater(info.getId());
 			int i = proLicenseServiceImpl.alterImage(license);
 			if (i == 0) {
 				license.setStat(1);
@@ -399,8 +399,8 @@ public class ProSupplierController extends BaseController {
 				license.setCreateTime(new Date());
 				String uuid = UUID.randomUUID().toString();
 				license.setId(uuid);
-				license.setCreator(info.getName());
-				license.setUpdater(info.getName());
+				license.setCreator(info.getId());
+			
 				proLicenseServiceImpl.updateImage(license);
 			}
 		}
@@ -410,8 +410,8 @@ public class ProSupplierController extends BaseController {
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl2);
 			license.setLastUpdateTime(new Date());
-			license.setCreator(info.getName());
-			license.setUpdater(info.getName());
+		
+			license.setUpdater(info.getId());
 			int i = proLicenseServiceImpl.alterImage(license);
 			if (i == 0) {
 				license.setStat(1);
@@ -419,8 +419,8 @@ public class ProSupplierController extends BaseController {
 				license.setCreateTime(new Date());
 				String uuid = UUID.randomUUID().toString();
 				license.setId(uuid);
-				license.setCreator(info.getName());
-				license.setUpdater(info.getName());
+				license.setCreator(info.getId());
+			
 				proLicenseServiceImpl.updateImage(license);
 			}
 		}
@@ -430,8 +430,8 @@ public class ProSupplierController extends BaseController {
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl3);
 			license.setLastUpdateTime(new Date());
-			license.setCreator(info.getName());
-			license.setUpdater(info.getName());
+
+			license.setUpdater(info.getId());
 			int i = proLicenseServiceImpl.alterImage(license);
 			if (i == 0) {
 				license.setStat(1);
@@ -439,8 +439,8 @@ public class ProSupplierController extends BaseController {
 				license.setCreateTime(new Date());
 				String uuid = UUID.randomUUID().toString();
 				license.setId(uuid);
-				license.setCreator(info.getName());
-				license.setUpdater(info.getName());
+				license.setCreator(info.getId());
+		
 				proLicenseServiceImpl.updateImage(license);
 			}
 		}
@@ -450,8 +450,8 @@ public class ProSupplierController extends BaseController {
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl4);
 			license.setLastUpdateTime(new Date());
-			license.setCreator(info.getName());
-			license.setUpdater(info.getName());
+		
+			license.setUpdater(info.getId());
 			int i = proLicenseServiceImpl.alterImage(license);
 			if (i == 0) {
 				license.setStat(1);
@@ -459,8 +459,8 @@ public class ProSupplierController extends BaseController {
 				license.setCreateTime(new Date());
 				String uuid = UUID.randomUUID().toString();
 				license.setId(uuid);
-				license.setCreator(info.getName());
-				license.setUpdater(info.getName());
+				license.setCreator(info.getId());
+			
 				proLicenseServiceImpl.updateImage(license);
 			}
 		}
@@ -470,8 +470,8 @@ public class ProSupplierController extends BaseController {
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl5);
 			license.setLastUpdateTime(new Date());
-			license.setCreator(info.getName());
-			license.setUpdater(info.getName());
+		
+			license.setUpdater(info.getId());
 			int i = proLicenseServiceImpl.alterImage(license);
 			if (i == 0) {
 				license.setStat(1);
@@ -479,8 +479,8 @@ public class ProSupplierController extends BaseController {
 				license.setCreateTime(new Date());
 				String uuid = UUID.randomUUID().toString();
 				license.setId(uuid);
-				license.setCreator(info.getName());
-				license.setUpdater(info.getName());
+				license.setCreator(info.getId());
+			
 				proLicenseServiceImpl.updateImage(license);
 			}
 		}
@@ -490,8 +490,8 @@ public class ProSupplierController extends BaseController {
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl6);
 			license.setLastUpdateTime(new Date());
-			license.setCreator(info.getName());
-			license.setUpdater(info.getName());
+		
+			license.setUpdater(info.getId());
 			int i = proLicenseServiceImpl.alterImage(license);
 			if (i == 0) {
 				license.setStat(1);
@@ -499,8 +499,8 @@ public class ProSupplierController extends BaseController {
 				license.setCreateTime(new Date());
 				String uuid = UUID.randomUUID().toString();
 				license.setId(uuid);
-				license.setCreator(info.getName());
-				license.setUpdater(info.getName());
+				license.setCreator(info.getId());
+		
 				proLicenseServiceImpl.updateImage(license);
 			}
 		}
@@ -510,8 +510,8 @@ public class ProSupplierController extends BaseController {
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl7);
 			license.setLastUpdateTime(new Date());
-			license.setCreator(info.getName());
-			license.setUpdater(info.getName());
+	
+			license.setUpdater(info.getId());
 			int i = proLicenseServiceImpl.alterImage(license);
 			if (i == 0) {
 				license.setStat(1);
@@ -519,8 +519,8 @@ public class ProSupplierController extends BaseController {
 				license.setCreateTime(new Date());
 				String uuid = UUID.randomUUID().toString();
 				license.setId(uuid);
-				license.setCreator(info.getName());
-				license.setUpdater(info.getName());
+				license.setCreator(info.getId());
+			
 				proLicenseServiceImpl.updateImage(license);
 			}
 		}
@@ -530,8 +530,8 @@ public class ProSupplierController extends BaseController {
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl8);
 			license.setLastUpdateTime(new Date());
-			license.setCreator(info.getName());
-			license.setUpdater(info.getName());
+		
+			license.setUpdater(info.getId());
 			int i = proLicenseServiceImpl.alterImage(license);
 			if (i == 0) {
 				license.setStat(1);
@@ -539,8 +539,8 @@ public class ProSupplierController extends BaseController {
 				license.setCreateTime(new Date());
 				String uuid = UUID.randomUUID().toString();
 				license.setId(uuid);
-				license.setCreator(info.getName());
-				license.setUpdater(info.getName());
+				license.setCreator(info.getId());
+		
 				proLicenseServiceImpl.updateImage(license);
 			}
 		}
@@ -550,8 +550,8 @@ public class ProSupplierController extends BaseController {
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl9);
 			license.setLastUpdateTime(new Date());
-			license.setCreator(info.getName());
-			license.setUpdater(info.getName());
+		
+			license.setUpdater(info.getId());
 			int i = proLicenseServiceImpl.alterImage(license);
 			if (i == 0) {
 				license.setStat(1);
@@ -559,8 +559,8 @@ public class ProSupplierController extends BaseController {
 				license.setCreateTime(new Date());
 				String uuid = UUID.randomUUID().toString();
 				license.setId(uuid);
-				license.setCreator(info.getName());
-				license.setUpdater(info.getName());
+				license.setCreator(info.getId());
+		
 				proLicenseServiceImpl.updateImage(license);
 			}
 		}
@@ -570,8 +570,8 @@ public class ProSupplierController extends BaseController {
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl10);
 			license.setLastUpdateTime(new Date());
-			license.setCreator(info.getName());
-			license.setUpdater(info.getName());
+	
+			license.setUpdater(info.getId());
 			int i = proLicenseServiceImpl.alterImage(license);
 			if (i == 0) {
 				license.setStat(1);
@@ -579,8 +579,8 @@ public class ProSupplierController extends BaseController {
 				license.setCreateTime(new Date());
 				String uuid = UUID.randomUUID().toString();
 				license.setId(uuid);
-				license.setCreator(info.getName());
-				license.setUpdater(info.getName());
+				license.setCreator(info.getId());
+				
 				proLicenseServiceImpl.updateImage(license);
 			}
 		}
@@ -590,8 +590,8 @@ public class ProSupplierController extends BaseController {
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl11);
 			license.setLastUpdateTime(new Date());
-			license.setCreator(info.getName());
-			license.setUpdater(info.getName());
+			
+			license.setUpdater(info.getId());
 			int i = proLicenseServiceImpl.alterImage(license);
 			if (i == 0) {
 				license.setStat(1);
@@ -599,8 +599,8 @@ public class ProSupplierController extends BaseController {
 				license.setCreateTime(new Date());
 				String uuid = UUID.randomUUID().toString();
 				license.setId(uuid);
-				license.setCreator(info.getName());
-				license.setUpdater(info.getName());
+				license.setCreator(info.getId());
+				
 				proLicenseServiceImpl.updateImage(license);
 			}
 		}

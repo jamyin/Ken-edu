@@ -227,8 +227,8 @@ public class UserController extends BaseController {
 				j.setMsg("用户姓名不能为相同");
 				return j;
 			}
-			user.setCreator(info.getName());
-			user.setUpdater(info.getName());
+			user.setCreator(info.getId());
+			
 			// 添加t_admin_uses
 			userService.add(user);
 
@@ -317,7 +317,7 @@ public class UserController extends BaseController {
 			return j;
 		}
 		try {
-			user.setUpdater(info.getName());
+			user.setUpdater(info.getId());
 			userService.edit(user);
 			j.setSuccess(true);
 			j.setMsg("编辑成功！");

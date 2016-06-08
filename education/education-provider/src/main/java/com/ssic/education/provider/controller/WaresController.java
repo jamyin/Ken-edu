@@ -176,8 +176,8 @@ public class WaresController extends BaseController {
 		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
 				ConfigUtil.SESSIONINFONAME);
 		pro.setSupplierId(info.getSupplierId());
-		pro.setCreator(info.getName());
-		pro.setUpdater(info.getName());
+		pro.setCreator(info.getId());
+		pro.setUpdater(info.getId());
 		ProWares specManu = waresService.findProWarsByNameSpecManu(
 				pro.getWaresName(), pro.getSpec(), pro.getManufacturer(),
 				pro.getSupplierId());
@@ -268,8 +268,8 @@ public class WaresController extends BaseController {
 				ConfigUtil.SESSIONINFONAME);
 		pro.setSupplierId(info.getSupplierId());
 		pro.setStat(1);
-		pro.setCreator(info.getName());
-		pro.setUpdater(info.getName());
+		pro.setCreator(info.getId());
+		pro.setUpdater(info.getId());
 		ProWares proWares = new ProWares();
 		BeanUtils.copyProperties(pro, proWares);
 	
@@ -317,13 +317,12 @@ public class WaresController extends BaseController {
 			license.setCerSource((short) 2);
 			license.setLicPic(imageurl1);
 			license.setLastUpdateTime(new Date());
-			license.setCreator(info.getName());
-			license.setUpdater(info.getName());
+		
+			license.setUpdater(info.getId());
 			int i = proLicenseServiceImpl.alterImage(license);
 			if(i!=0){
-			ProWares  proWares =new ProWares();
-			proWares.setCreator(info.getName());
-			proWares.setUpdater(info.getName());
+			ProWares  proWares =new ProWares();		
+			proWares.setUpdater(info.getId());
 			proWares.setId(id);
 			proWares.setImage(imageurl1);
 			proWares.setCreateTime(new Date());
@@ -341,14 +340,15 @@ public class WaresController extends BaseController {
 				license.setCerSource((short) 2);
 				String uuid = UUID.randomUUID().toString();
 				license.setId(uuid);
-				license.setCreator(info.getName());
-				license.setUpdater(info.getName());
+				license.setCreator(info.getId());
+			
 				proLicenseServiceImpl.updateImage(license);
 				ProWares  proWares =new ProWares();
 				proWares.setId(id);
 				proWares.setImage(imageurl1);
 				proWares.setCreateTime(new Date());
 				proWares.setStat(1);
+				proWares.setUpdater(info.getId());
 				waresService.updateImsUsers(proWares);
 		
 			
@@ -360,8 +360,8 @@ public class WaresController extends BaseController {
 			license.setCerSource((short) 2);
 			license.setLicPic(imageurl2);
 			license.setLastUpdateTime(new Date());
-			license.setCreator(info.getName());
-			license.setUpdater(info.getName());
+		
+			license.setUpdater(info.getId());
 			int i = proLicenseServiceImpl.alterImage(license);
 			
 			if (i == 0) {			
@@ -375,14 +375,14 @@ public class WaresController extends BaseController {
 				license.setCerSource((short) 2);
 				String uuid = UUID.randomUUID().toString();
 				license.setId(uuid);
-				license.setCreator(info.getName());
-				license.setUpdater(info.getName());
+				license.setCreator(info.getId());
+				
 				proLicenseServiceImpl.updateImage(license);
 			}
 		}
 		if (imageurl3 != null && imageurl3 != "") {
-			license.setCreator(info.getName());
-			license.setUpdater(info.getName());
+		
+			license.setUpdater(info.getId());
 			license.setLicName("生产许可证");
 			license.setRelationId(id);
 			license.setCerSource((short) 2);
@@ -391,8 +391,8 @@ public class WaresController extends BaseController {
 			int i = proLicenseServiceImpl.alterImage(license);
 			
 			if (i == 0) {	
-				license.setCreator(info.getName());
-				license.setUpdater(info.getName());
+				license.setCreator(info.getId());
+		
 				license.setLicPic(imageurl3);
 				license.setRelationId(id);
 				license.setStat(1);
