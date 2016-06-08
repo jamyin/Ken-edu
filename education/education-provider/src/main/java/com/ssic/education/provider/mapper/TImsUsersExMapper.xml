@@ -77,8 +77,11 @@ VALUES
 
 	<update id="updateBy">
 		update t_pro_users set
-		name=#{user.name},email=#{user.email},user_no=#{user.userNo},user_type=#{user.userType},user_account=#{user.userAccount},password=#{user.password}
+		name=#{user.name},email=#{user.email},user_no=#{user.userNo},user_type=#{user.userType},user_account=#{user.userAccount},password=#{user.password},updater=#{user.updater},last_update_time=#{user.modifydatetime}
 		where id=#{user.id}
+	
+	
+	
 	</update>
 	<update id="updatePwd">
 		update t_pro_users set
