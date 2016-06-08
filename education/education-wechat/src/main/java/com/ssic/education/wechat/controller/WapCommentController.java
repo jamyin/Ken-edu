@@ -60,7 +60,7 @@ public class WapCommentController extends BaseController {
 		//先判断该用户是否已经点评过 如果已经点评则直接跳转至我的点评页面
 		EduParentPackCommentDto eduParentPackCommentDto = new EduParentPackCommentDto();
 		eduParentPackCommentDto.setPackageId(packageId);
-		eduParentPackCommentDto.setParentId(packageId);
+		eduParentPackCommentDto.setParentId(parentId);
 		List<EduParentPackCommentDto> dataList = iEduParentPackCommentService.searchComment(eduParentPackCommentDto);
 		if(dataList!=null && dataList.size() > 0 ){
 			return new ModelAndView("redirect:/wap/comment/index.htm");

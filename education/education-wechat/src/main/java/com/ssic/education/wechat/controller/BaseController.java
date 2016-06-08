@@ -48,7 +48,7 @@ public class BaseController {
 		}else{
 			return new ModelAndView("redirect:index.htm");
 		}
-		System.out.println("parentId "+parentId);
+//		System.out.println("parentId "+parentId);
 //		getopenId(getaccess_token());
 		mv.addObject("wwwdomain", PropertiesUtils.getProperty("upload.look.url"));
 		return mv;
