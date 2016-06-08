@@ -85,6 +85,7 @@ public class EduUsersServiceImpl implements EduUsersService {
 	public EduUsersRegDto edit(EduUsersRegDto usersDto) {
 		EduSchool eduSchool = BeanUtils.createBeanByTarget(usersDto, EduSchool.class);
 		eduSchool.setId(usersDto.getSchoolId());
+		eduSchool.setUpdater(usersDto.getCreator());
 		eduSchoolDao.updateByPrimaryKeySelective(eduSchool);
 		EduCanteen eduCanteen = BeanUtils.createBeanByTarget(usersDto, EduCanteen.class);
 		if (StringUtils.isNotBlank(usersDto.getCanteenId())) {

@@ -419,7 +419,7 @@ public class EduSchoolController extends BaseController{
 		Response<String> res = new Response<String>();
 		String id = (String) getRequest().getSession().getAttribute(SessionConstants.LOGIN_USER_INFO);
 		EduUsersDto usersdto = getLoginUser(request, response, session, id);
-		dto.setUpdater(usersdto.getId());
+//		dto.setUpdater(usersdto.getId());
 		Integer result = null;
 		if (StringUtils.isNotBlank(dto.getSchoolName())) {
 			EduSchoolDto eduSchoolDto = BeanUtils.createBeanByTarget(dto, EduSchoolDto.class);

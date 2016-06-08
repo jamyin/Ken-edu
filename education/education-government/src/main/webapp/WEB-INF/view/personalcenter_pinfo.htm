@@ -124,7 +124,7 @@
 												<option value="3" <#if proLicense.licType == 3>selected="selected"</#if> >食品生产证</option>
 												<option value="4" <#if proLicense.licType == 4>selected="selected"</#if> >工商执照</option>
 											</select>
-											<input id="licNum" type="text" class="licinputw${proLicense_index+1}" name="licNum" placeholder="证件编号">
+											<input id="licNum" type="text" class="licinputw${proLicense_index+1}" name="licNum" value="${(proLicense.licNo)!}" placeholder="证件编号">
 											<label class="file" for="phoneFile${proLicense_index+1}">文件<i>浏览</i></label>
 											<input id="phoneFile${proLicense_index+1}" value="${(proLicense.licPic)!}" type="file" name="file" onchange="selectfun(this)"><span class="add">+</span>
 											<a id="phoneQuery1"></a>
@@ -173,7 +173,6 @@
 	$(function(){			
 		
 		$('.c_type').on('click', 'span', function(){
-			debugger;
 			var _tag = $(this).attr('class')
 			if(_tag == 'add'){
 				var _ind = $(this).closest('ul').find('li').length + 1
