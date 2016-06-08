@@ -13,12 +13,16 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.common.base.Objects;
+import com.ssic.educateion.common.dto.EduTaskReceiveDto;
 import com.ssic.educateion.common.dto.EduUsersDto;
 import com.ssic.education.government.controller.dto.MenuListDto;
 import com.ssic.education.government.controller.dto.ParentMenuDto;
 import com.ssic.education.handle.service.EduUsersService;
 import com.ssic.education.handle.service.IEduCommitteeService;
+import com.ssic.education.handle.service.ITaskReceiveService;
+import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.constants.SessionConstants;
+import com.ssic.education.utils.model.PageResult;
 import com.ssic.education.utils.util.FileUtils;
 import com.ssic.education.utils.util.JsonUtil;
 import com.ssic.education.utils.util.PropertiesUtils;
@@ -36,15 +40,34 @@ public class BaseController {
 	@Autowired
 	private IEduCommitteeService iEduCommitteeService;
 	
+	@Autowired
+	private ITaskReceiveService iTaskReceiveService;
+	
 	/**
 	 * 得到ModelAndView
 	 */
 	public ModelAndView getModelAndView(){
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("eduUsersDto", getEduUsersDto());
+		mv.addObject("unreaded", getEduTaskReceiveSize());
 		mv.addObject("navList", getNavList());
 		mv.addObject("wwwdomain",PropertiesUtils.getProperty("upload.look.url"));
 		return mv;
+	}
+	
+	public long getEduTaskReceiveSize() {
+		EduTaskReceiveDto eduTaskReceiveDto = new EduTaskReceiveDto();
+		if (null != getEduUsersDto()) {
+			String sourceId = getEduUsersDto().getSourceId();//用户所属教委 或学校
+			eduTaskReceiveDto.setReceiveId(sourceId);
+			eduTaskReceiveDto.setReadstat(DataStatus.DISABLED);
+			List<EduTaskReceiveDto> results = iTaskReceiveService.searchEduTaskReceive(eduTaskReceiveDto);
+			if (null != results) {
+				return results.size();
+			}
+		}
+		
+		return 0;
 	}
 
 	public EduUsersDto getEduUsersDto(){

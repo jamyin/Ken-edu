@@ -101,9 +101,9 @@ $(function(){
 //	})
 
 	//取消错误提示
-	$('input[type=text], input[type=phone_password]').keyup(function(){
+	/*$('input[type=text], input[type=phone_password]').keyup(function(){
 		$(this).siblings('span').html('').removeClass('warning')
-	})
+	})*/
 	
 	//注册发送验证码到手机
 	$("#getCaptcha").click(function(){
