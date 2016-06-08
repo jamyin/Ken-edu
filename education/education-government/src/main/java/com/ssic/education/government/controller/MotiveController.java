@@ -164,7 +164,7 @@ public class MotiveController extends BaseController {
 	@ResponseBody
 	public Response<String> save(EduTaskDto eduTaskDto) {
 		Response<String> response = new Response<String>();
-//		eduTaskDto.setContent(eduTaskDto.getEditorValue());
+		eduTaskDto.setContent(eduTaskDto.getEditorValue());
 		
 		String infoId = UUIDGenerator.getUUID32Bit();
 		eduTaskDto.setId(infoId);
