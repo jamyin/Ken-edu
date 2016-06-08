@@ -67,7 +67,7 @@
                         <#if proLicenseDtos??>
                         	<#list proLicenseDtos as proLicenseDtos>
                         		<div class="pic_wrap">
-		                            <img src="${(proLicenseDtos.licPic)!}" />
+		                            <img src="${(wwwdomain)!}${(proLicenseDtos.licPic)!}" />
 		                            <span>${(proLicenseDtos.licName)!}</span>
 		                        </div>
                         	</#list>
