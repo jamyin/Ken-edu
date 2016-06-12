@@ -232,7 +232,9 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 			proDishes.setStat(DataStatus.ENABLED);
 			proDishesss.add(proDishes);
 		}
-		disExMapper.addDishesBatch(proDishesss);
+		if (proDishesss != null && proDishesss.size()>0) {
+			disExMapper.addDishesBatch(proDishesss);
+		}		
 		for (ProNutritional proNutritional :proNutritionals) {
 			if (null != proNutritional && StringUtils.isNotBlank(proNutritional.getName())) {
 				proNutritional.setPackageId(proPackages.getId());
@@ -242,7 +244,9 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 			}
 			
 		}
-		nuExMapper.addNutritionalBatch(proNutritionals);
+		if (null != proNutritionals && proNutritionals.size()>0) {
+			nuExMapper.addNutritionalBatch(proNutritionals);
+		}		
 	}
 	
 	public ProPackagesDto findById (String id) {

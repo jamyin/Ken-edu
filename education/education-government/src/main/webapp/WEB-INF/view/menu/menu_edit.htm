@@ -181,6 +181,15 @@
 		            </li>
 		          </#if>
             	</#list>
+            <#else>
+            	<li>
+	                <select class="s1" name="" id="a0" >
+	                </select>
+	                <input class="in1" type="text" name="name" value="" id="weight0">
+	                <select class="s2" name="" id="b0">
+	                </select>
+	                <span class="add">+</span>
+	              </li>
             </#if>
             </ul>
           </div>
@@ -226,11 +235,11 @@
     	//debugger;
 		for(var i=0; i<lis.length;i++){
 			if (key) {
-				lis.eq(i).find('input').attr('id','weight'+(i+1))
-				lis.eq(i).find('select:first').attr('id','a'+(i+1))
-				lis.eq(i).find('select:last').attr('id','b'+(i+1))
+				lis.eq(i).find('input').attr('id','weight'+(i))
+				lis.eq(i).find('select:first').attr('id','a'+(i))
+				lis.eq(i).find('select:last').attr('id','b'+(i))
 			} else {
-				lis.eq(i).find('input').attr('id','waresName'+(i+1))
+				lis.eq(i).find('input').attr('id','waresName'+(i))
 			}
 			
 			
@@ -258,6 +267,11 @@
     	var jsonWares;
     	jsonWares = '[';
 		for (i=0; i<=nu_dis-1; i++) {
+			var name= $('#waresName'+i+'').val();
+			if (jsonWares.indexOf(name) > -1) {
+				alert("菜品'"+name+"'"+"已存在不能重复添加！");
+				return;
+			}
 			if (i == nu_dis-1) {
 				jsonWares += '{\"name\":\"' +$('#waresName'+i+'').val()+'\"}';
 			} else {
@@ -269,6 +283,16 @@
     	var jsonNutritional;
     	jsonNutritional = '[';
 		for (i=0;i<=nu_len-1; i++) {
+			var name=$('#a'+i+'').val();
+			if (jsonNutritional.indexOf(name) > -1) {
+				alert("营养'"+name+"'"+"已存在不能重复添加！");
+				return;
+			}
+			var weight = $.trim($('#weight'+i+'').val());
+			if (weight.length <= 0 || weight == 'undefined') {
+				alert("营养'"+$('#a'+i+'').val()+"'"+"的重量不能为空！");
+				return;
+			}
 			if (i == nu_len-1) {
 				jsonNutritional += '{\"name\":\"' +$('#a'+i+'').val()+'\",'+'\"unit\":\"' +$('#b'+i+'').val()+'\",'+'\"weight\":\"' +$('#weight'+i+'').val()+'\"}';
 			} else {
