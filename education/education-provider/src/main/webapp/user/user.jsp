@@ -283,8 +283,8 @@ else
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">
 					<tr >
-						<td>姓名:
-						<input name="name" placeholder="可以搜索名称" class="easyui-validatebox"  style="width: 215px;"/>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);"  onclick="searchFun();" class="easyui-linkbutton" iconCls="icon-search" ><font  style='font-style: normal;font-size:18px;'>查询</font></a>
+						<td style='padding-top: 10px;'>姓名:
+						<input name="name" placeholder="可以搜索姓名" class="easyui-validatebox"  style="width: 215px;"/>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);"  onclick="searchFun();" class="easyui-linkbutton" iconCls="icon-search" ><font  style='font-style: normal;font-size:18px;'>查询</font></a>
 							</td>
 						 </tr>	
 								</table>

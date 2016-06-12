@@ -209,8 +209,6 @@ public class WaresController extends BaseController {
 		return "wares/editWares";
 	}
 
-	
-
 	/**
 	 * 跳转到修改图片页面
 	 * 
@@ -231,7 +229,7 @@ public class WaresController extends BaseController {
 
 			proLicense.setLicPic(realPath + proLicense.getLicPic());
 		}
-		JSONArray jsonarray = JSONArray.fromObject(ProLicenseList);  
+		JSONArray jsonarray = JSONArray.fromObject(ProLicenseList);
 		request.setAttribute("id", id);
 		request.setAttribute("ProLicenseList", jsonarray.toString());
 		return "wares/editImage";
@@ -268,21 +266,20 @@ public class WaresController extends BaseController {
 				ConfigUtil.SESSIONINFONAME);
 		pro.setSupplierId(info.getSupplierId());
 		pro.setStat(1);
-		
+
 		pro.setUpdater(info.getId());
 		ProWares proWares = new ProWares();
 		BeanUtils.copyProperties(pro, proWares);
-	
+
 		proWares.setCreateTime(new Date());
 		proWares.setLastUpdateTime(new Date());
-	
-			waresService.updateImsUsers(proWares);
-			json.setMsg("修改信息成功");
-			json.setSuccess(true);
-			return json;
-	
-	}
 
+		waresService.updateImsUsers(proWares);
+		json.setMsg("修改信息成功");
+		json.setSuccess(true);
+		return json;
+
+	}
 
 	/**
 	 * 修改图片
@@ -308,64 +305,35 @@ public class WaresController extends BaseController {
 		String imageurl2 = (String) map2.get("image_url");
 		String imageurl3 = (String) map3.get("image_url");
 		List<String> list = new ArrayList<String>();
-		
+
 		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
 				ConfigUtil.SESSIONINFONAME);
 		if (imageurl1 != null && imageurl1 != "") {
-			license.setLicName("商品图片");
-			license.setRelationId(id);
-			license.setCerSource((short) 2);
-			license.setLicPic(imageurl1);
-			license.setLastUpdateTime(new Date());
-		
-			license.setUpdater(info.getId());
-			int i = proLicenseServiceImpl.alterImage(license);
-			if(i!=0){
-			ProWares  proWares =new ProWares();		
+			ProWares proWares = new ProWares();
 			proWares.setUpdater(info.getId());
 			proWares.setId(id);
 			proWares.setImage(imageurl1);
 			proWares.setCreateTime(new Date());
 			proWares.setStat(1);
-			
-			waresService.updateImsUsers(proWares);}
-			if (i == 0) {			
-				
-				license.setLicName("商品图片");
-				license.setLicPic(imageurl1);
-				license.setRelationId(id);
-				license.setStat(1);
-				license.setLicType(8);
-				license.setCreateTime(new Date());
-				license.setLastUpdateTime(new Date());
-				license.setCerSource((short) 2);
-				String uuid = UUID.randomUUID().toString();
-				license.setId(uuid);
-				license.setCreator(info.getId());
-			
-				proLicenseServiceImpl.updateImage(license);
-				ProWares  proWares =new ProWares();
-				proWares.setId(id);
-				proWares.setImage(imageurl1);
+			int i = waresService.updateImsUsers(proWares);
+			if (i == 0) {
 				proWares.setCreateTime(new Date());
 				proWares.setStat(1);
 				proWares.setUpdater(info.getId());
 				waresService.updateImsUsers(proWares);
-		
-			
 			}
-			}
+		}
 		if (imageurl2 != null && imageurl2 != "") {
 			license.setLicName("检测检验报告");
 			license.setRelationId(id);
 			license.setCerSource((short) 2);
 			license.setLicPic(imageurl2);
 			license.setLastUpdateTime(new Date());
-		
+
 			license.setUpdater(info.getId());
 			int i = proLicenseServiceImpl.alterImage(license);
-			
-			if (i == 0) {			
+
+			if (i == 0) {
 				license.setLicName("检测检验报告");
 				license.setLicPic(imageurl2);
 				license.setRelationId(id);
@@ -377,12 +345,12 @@ public class WaresController extends BaseController {
 				String uuid = UUID.randomUUID().toString();
 				license.setId(uuid);
 				license.setCreator(info.getId());
-				
+
 				proLicenseServiceImpl.updateImage(license);
 			}
 		}
 		if (imageurl3 != null && imageurl3 != "") {
-		
+
 			license.setUpdater(info.getId());
 			license.setLicName("生产许可证");
 			license.setRelationId(id);
@@ -390,10 +358,10 @@ public class WaresController extends BaseController {
 			license.setLicPic(imageurl3);
 			license.setLastUpdateTime(new Date());
 			int i = proLicenseServiceImpl.alterImage(license);
-			
-			if (i == 0) {	
+
+			if (i == 0) {
 				license.setCreator(info.getId());
-		
+
 				license.setLicPic(imageurl3);
 				license.setRelationId(id);
 				license.setStat(1);
@@ -411,8 +379,6 @@ public class WaresController extends BaseController {
 		json.setSuccess(true);
 		return json;
 	}
-
-
 
 	/**
 	 * 查看该商品供应商
@@ -677,6 +643,5 @@ public class WaresController extends BaseController {
 		}
 
 	}
-
 
 }
