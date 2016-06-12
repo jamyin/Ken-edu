@@ -90,7 +90,7 @@ $(function(){
             if(dataObj.status == 200){
             	var showUrl = dataObj.wwwdomain+dataObj.filePath;
             	var licenseNo1 = $("#licenseNo1").val();
-                $("#file-3").val("食品流通许可证#"+dataObj.filePath+"#"+licenseNo3+"#2");
+                $("#file-3").val("食品流通许可证#"+dataObj.filePath+"#"+licenseNo1+"#2");
                 $("#license3").html("<a target='_' href='"+showUrl+"'>查看食品流通许可证</a>");
                 $("#file-3").attr("checked","checked");
             }
