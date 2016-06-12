@@ -31,9 +31,9 @@ public enum SchoolLevel {
         
         JuniorMiddleSchool(2, "初中"),
         
-        SeniorMiddleSchool(3, "高中"),
+        SeniorMiddleSchool(3, "高中");
         
-        University(4, "大学");
+        //University(4, "大学");
         
         private static final Map<Integer, String> schoolLevelMap = new LinkedHashMap<Integer, String>();
     
