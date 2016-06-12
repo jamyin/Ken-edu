@@ -34,9 +34,36 @@
 	<section class="dp_c">
 		<h2>综合评价</h2>
 		<div class="con">
-			<div class="row"><label>口味</label><ul id="flavor" score="0"><li></li><li></li><li></li><li></li><li></li></ul></div>
-			<div class="row"><label>卫生</label><ul id="health" score="0"><li></li><li></li><li></li><li></li><li></li></ul></div>
-			<div class="row"><label>份量</label><ul id="weights" score="0"><li></li><li></li><li></li><li></li><li></li></ul></div>
+			<div class="row"><label>口味</label><ul id="flavor" score="${(eduParentPackCommentDto.flavor)!}">
+			<#assign flavor = 1..5>
+			<#list flavor as data>
+				<#if data gt eduParentPackCommentDto.flavor>
+					<li></li>
+				<#else>
+					<li class="cur"></li>		
+				</#if>
+			</#list>
+			</ul></div>
+			<div class="row"><label>卫生</label><ul id="health" score="${(eduParentPackCommentDto.health)!}">
+				<#assign health = 1..5>
+				<#list health as data>
+					<#if data gt eduParentPackCommentDto.health>
+						<li></li>
+					<#else>
+						<li class="cur"></li>		
+					</#if>
+				</#list>
+			</ul></div>
+			<div class="row"><label>份量</label><ul id="weights" score="${(eduParentPackCommentDto.weights)!}">
+				<#assign weights = 1..5>
+				<#list weights as data>
+					<#if data gt eduParentPackCommentDto.weights>
+						<li></li>
+					<#else>
+						<li class="cur"></li>		
+					</#if>
+				</#list>
+			</ul></div>
 		</div>
 	</section>
 </body>

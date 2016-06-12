@@ -66,7 +66,8 @@ public class WapCommentController extends BaseController {
 		eduParentPackCommentDto.setParentId(parentId);
 		List<EduParentPackCommentDto> dataList = iEduParentPackCommentService.searchComment(eduParentPackCommentDto);
 		if(dataList!=null && dataList.size() > 0 ){
-			return new ModelAndView("redirect:/wap/comment/index.htm");
+			mv.addObject("eduParentPackCommentDto", dataList.get(0));
+//			return new ModelAndView("redirect:/wap/comment/index.htm");
 		}
 		
 		ProPackagesDto proPackageSto = proPackagesService.findById(packageId);
@@ -98,8 +99,20 @@ public class WapCommentController extends BaseController {
 	@ResponseBody
 	public Response<String> comment(EduParentPackCommentDto eduParentPackCommentDto){
 		Response<String> result = new Response<String>();
+		
+		//先判断该用户是否已经点评过 如果已经点评则直接跳转至我的点评页面
 		eduParentPackCommentDto.setParentId(parentId);
-		int data = iEduParentPackCommentService.saveComment(eduParentPackCommentDto);
+		List<EduParentPackCommentDto> dataList = iEduParentPackCommentService.searchComment(eduParentPackCommentDto);
+		int data = 0;
+		if(dataList!=null && dataList.size() > 0 ){
+			EduParentPackCommentDto tempDto = dataList.get(0);
+			eduParentPackCommentDto.setId(tempDto.getId());
+			data = iEduParentPackCommentService.updateComment(eduParentPackCommentDto);
+		}else{
+			data = iEduParentPackCommentService.saveComment(eduParentPackCommentDto);	
+		}
+//		eduParentPackCommentDto.setParentId(parentId);
+		
 		if (data > 0) {
 			result.setMessage("点评成功");
 			//成功之后进行计算总体的星级

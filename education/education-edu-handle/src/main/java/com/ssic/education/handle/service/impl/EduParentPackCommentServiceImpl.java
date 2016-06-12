@@ -35,4 +35,10 @@ public class EduParentPackCommentServiceImpl implements IEduParentPackCommentSer
 		return eduParentPackCommentDao.countPackageStar(packageId);
 	}
 
+	@Override
+	public int updateComment(EduParentPackCommentDto eduParentPackCommentDto) {
+		EduParentPackComment eduParentPackComment = BeanUtils.createBeanByTarget(eduParentPackCommentDto, EduParentPackComment.class);
+		return eduParentPackCommentDao.updateByPrimaryKeySelective(eduParentPackComment);
+	}
+
 }

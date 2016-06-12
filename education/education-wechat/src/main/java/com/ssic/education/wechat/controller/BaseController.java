@@ -61,7 +61,9 @@ public class BaseController {
 	//{"access_token":"ACCESS_TOKEN","expires_in":7200}
 	public static String getaccess_token(){
 		String url = PropertiesUtils.getProperty("weixin.access_token.url");
-		String s = HttpRequest.sendGet(url, "grant_type=client_credential&appid=wx0e8ce00a08e68b04&secret=42c8dc75f48b03adb9d1031d051ab21a");
+		String appId = PropertiesUtils.getProperty("weixin.appId");
+		String secret = PropertiesUtils.getProperty("weixin.secret");
+		String s = HttpRequest.sendGet(url, "grant_type=client_credential&appid="+appId+"&secret="+secret);
 		Gson gson = new Gson();
 		AccessToken at = gson.fromJson(s, AccessToken.class);
 		return at.getAccess_token();
@@ -69,7 +71,7 @@ public class BaseController {
 	
 	public void getaccess_token(String code){
 //		https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&code=CODE&grant_type=authorization_code 
-		String url = PropertiesUtils.getProperty("weixin.access_token.url");
+		String url = PropertiesUtils.getProperty("weixin.access_token.url");;		
 		String reqURL = url + "appid="+PropertiesUtils.getProperty("weixin.appId")+"&secret="+PropertiesUtils.getProperty("weixin.secret")+"&code="+code+"&grant_type=authorization_code";
 		String s = HttpClientUtil.sendGetRequest(reqURL, null);
 //		String s = HttpRequest.sendGet(url, "appid="+PropertiesUtils.getProperty("weixin.appId")+"&secret="+PropertiesUtils.getProperty("weixin.secret")+"&code="+code+"&grant_type=authorization_code");
