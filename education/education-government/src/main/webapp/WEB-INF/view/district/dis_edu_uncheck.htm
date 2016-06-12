@@ -48,8 +48,8 @@
                     	<h1>${(eduSchoolDto.schoolName)!}</h1>
                         <h2>基本信息</h2>
                         <p> 地址：${(eduSchoolDto.address)!} </p>
-                        <p> 联系人姓名：${(eduCanteenDto.canteenContacts)!} </p>
-                        <p> 电话：${(eduCanteenDto.phoneNumber)!} </p>
+                        <p> 联系人姓名：${(eduSchoolDto.contacts)!} </p>
+                        <p> 电话：${(eduSchoolDto.mobileNo)!} </p>
 						<#if (proLicenses??) && (proLicenses?size>0)>
 	                        <h2>证件类型</h2>
 	                        <#list proLicenses as proLicense>
