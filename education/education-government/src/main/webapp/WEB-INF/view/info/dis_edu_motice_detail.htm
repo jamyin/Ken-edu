@@ -28,7 +28,7 @@
                     <h1>${(data.title)!}</h1>
                     <p class="date"> ${(data.createTime?string('yyyy-MM-dd'))!} </p>
                     <div class="text">
-                    	<#if data.pic ??>
+                    	<#if data.pic?if_exists>
                     		<img alt="" src="${(wwwdomain)!}${(data.pic)!}" style="width: 400px;height:300px;text-align: center;"/>
                     	</#if>
                     	
