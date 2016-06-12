@@ -120,9 +120,7 @@ public class WaresController extends BaseController {
 		int count = waresService.findAllWaresCount(waresDto);
 		List<ProWaresDto> pdtoList = waresService.findAllWares(waresDto, phdto);
 		for (ProWaresDto proWaresDto : pdtoList) {
-
-			String name = ProductClass.getName(proWaresDto.getWaresType());
-			proWaresDto.setWaresTypeName(name);
+			proWaresDto.setWaresTypeName(proWaresDto.getWaresTypeStr());
 		}
 		// 查询数量
 		dataGrid.setRows(pdtoList);
