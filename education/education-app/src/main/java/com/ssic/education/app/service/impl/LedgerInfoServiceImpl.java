@@ -1,6 +1,7 @@
 package com.ssic.education.app.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +56,7 @@ public class LedgerInfoServiceImpl implements ILedgerInfoService {
 	public PageResult<LedgerMasterListDto> findMasterList(String receiverId, PageQuery page) {
 		ProLedgerMaster ledgerMaster = new ProLedgerMaster();
 		ledgerMaster.setReceiverId(receiverId);
-		List<LedgerMasterListDto> LedgerMasterList = ledgerInfoDao.findAllMaster(ledgerMaster, page);
+		List<LedgerMasterListDto> LedgerMasterList = ledgerInfoDao.findAllMaster(ledgerMaster, page, null);
 		List<LedgerMasterListDto> result = new ArrayList<LedgerMasterListDto>();
 		for (LedgerMasterListDto lmld : LedgerMasterList) {
 			ProLedger Ledger = new ProLedger();
@@ -69,10 +70,10 @@ public class LedgerInfoServiceImpl implements ILedgerInfoService {
 	}
 
 	//查询驾驶员配送信息列表
-	public PageResult<LedgerMasterListDto> findMasterDriverList(String userId, PageQuery page) {
+	public PageResult<LedgerMasterListDto> findMasterDriverList(String userId, PageQuery page, Date actionDate) {
 		ProLedgerMaster ledgerMaster = new ProLedgerMaster();
 		ledgerMaster.setUserId(userId);
-		List<LedgerMasterListDto> LedgerMasterList = ledgerInfoDao.findAllMaster(ledgerMaster, page);
+		List<LedgerMasterListDto> LedgerMasterList = ledgerInfoDao.findAllMaster(ledgerMaster, page, actionDate);
 		List<LedgerMasterListDto> result = new ArrayList<LedgerMasterListDto>();
 		for (LedgerMasterListDto lmld : LedgerMasterList) {
 			ProLedger Ledger = new ProLedger();

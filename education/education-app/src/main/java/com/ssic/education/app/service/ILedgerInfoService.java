@@ -1,5 +1,7 @@
 package com.ssic.education.app.service;
 
+import java.util.Date;
+
 import com.ssic.education.app.dto.LedgerInfoDto;
 import com.ssic.education.app.dto.LedgerMasterInfoDto;
 import com.ssic.education.app.dto.LedgerMasterListDto;
@@ -24,7 +26,7 @@ public interface ILedgerInfoService {
 
 	PageResult<LedgerMasterListDto> findMasterList(String receiverId, PageQuery page);
 
-	PageResult<LedgerMasterListDto> findMasterDriverList(String userId, PageQuery page);
+	PageResult<LedgerMasterListDto> findMasterDriverList(String userId, PageQuery page, Date actionDate);
 
 	LedgerMasterInfoDto findMasterById(String id, PageQuery page);
 
