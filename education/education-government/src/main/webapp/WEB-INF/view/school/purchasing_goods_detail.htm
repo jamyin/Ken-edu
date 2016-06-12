@@ -3,6 +3,7 @@
 <head>
    <#include "/common/head.htm" />
   <link rel="stylesheet" href="/static/css/purchasing_goods_detail.css" media="screen" charset="utf-8">
+  <link rel="stylesheet" href="/static/css/supplier_qualification.css" media="screen" charset="utf-8">
 </head>
 <body>
   <#include "/common/nav.htm" />
@@ -30,6 +31,11 @@
         <li><label for="">生产企业:</label><span>${(proWaresDto.manufacturer)!}</span></li>
         <li><label for="">产地:</label><span>${(proWaresDto.place)!}</span></li>
         <li><label for="">产品包装条码:</label><span>${(proWaresDto.barCode)!}</span></li>
+        <#if proLicenses??>
+        	<#list proLicenses as proLicense>
+        		<li><label for="">${(proLicense.licName)!}:</label><span>${(proLicense.licNo)!}</span><a class="img_nn" data-value="${(wwwdomain)!}${(proLicense.licPic)!}" href="###" style="color: blue;">查看图片&gt;&gt;</a></li>
+        	</#list>
+        </#if>
         <!-- <li><label for="">单位名称:</label><span>上海程联餐饮有限公司</span></li>
         <li><label for="">单位地址:</label><span>上海市奉贤区海湾镇燎原农场燎星公路901号</span></li>
         <li><label for="">工商执照:</label><span>370282400002207-A</span></li>
@@ -42,7 +48,12 @@
       </ul>
     </div>
 
-
+  <div class="cover">
+    <div class="c_content">
+      <h1><span class="closeCover">×</span></h1>
+      <img class="col_1" src="/static/img/qualification_20X200.png" alt="" />
+    </div>
+  </div>
   </div>
    <#include "/common/footer.htm" />
        
@@ -51,6 +62,24 @@
       // debugger;
       $(".nav").find("a").removeClass("cur");
       $(".nav").find("a:eq(1)").addClass("cur");
+      
+    //图片弹层
+      $(".img_nn").on("click",function(){
+      	$(".col_1").attr("src",$(this).attr('data-value'));
+        var w = $(".c_content").css("width");
+        var h = $(".c_content").css("height");
+        w = "-"+parseInt(w,10)/2+"px";
+        h = "-"+parseInt(h,10)/2+"px";
+        $(".c_content").css({"margin-left":w,"margin-top":h});
+        $(".cover").css({
+          "display": "block"
+        });
+      });
+      $(".closeCover").on("click", function() {
+        $(".cover").css({
+          "display": "none"
+        });
+      });
     })
   </script>
 </body>

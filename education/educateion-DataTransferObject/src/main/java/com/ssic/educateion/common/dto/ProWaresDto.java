@@ -3,6 +3,7 @@ package com.ssic.educateion.common.dto;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.ssic.educateion.common.utils.ProductClass;
 import com.ssic.education.utils.constants.WaresMaterialEnum;
 
 import lombok.Data;
@@ -33,10 +34,10 @@ public class ProWaresDto implements Serializable {
 	private Integer way;
 
 	private Integer waresType;
-	/*public void setWaresType(int waresType) {
-		waresTypeStr = WaresMaterialEnum.getValueByIndex(waresType);
+	public void setWaresType(int waresType) {
+		waresTypeStr = ProductClass.getName(waresType);
 		this.setWaresTypeStr(waresTypeStr);
-	}*/
+	}
 	
 	private String waresTypeStr;
 	

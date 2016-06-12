@@ -72,7 +72,7 @@
 				</li>
 			</ul>
 			
-			<a class="add_cafeteria" href="###"><span>+</span> 填写食堂信息</a>
+			<a tag="close" class="add_cafeteria" href="###"><span>+</span> 填写食堂信息</a>
 			<h4 class="cafeteria">食堂信息</h4>
 			<ul class="cafeteria">
 				<li><label><i></i>食堂名称</label><input id="canteenName" type="text" placeholder=""></li>
@@ -114,7 +114,19 @@
 <script>
 	$(function(){	
 		$('.add_cafeteria').on('click', function(){
-			$('.cafeteria').toggleClass('show')
+			var _tag = $(this).attr('tag');
+			if(_tag == 'close'){
+				$('.cafeteria').addClass('show')
+				$(this).html('<span>-</span> 取消食堂信息')
+				$(this).attr('tag','open');
+			}
+			
+			if (_tag == 'open') {
+				$('.cafeteria').removeClass('show')
+				$(this).html('<span>+</span> 填写食堂信息')
+				$(this).attr('tag','close');
+			}
+			
 		})
 		
 		$('.c_type').on('click', 'span', function(){
@@ -180,26 +192,33 @@
             	alert("学校级别不能为空~");
 				return;
             } 
-			var _ind = $('.c_type').closest('ul').find('li').length;
+			var actag= $('.add_cafeteria').attr('tag');
 			var jsonLic;
-			jsonLic = '[';
-			for (i=1; i<=_ind; i++) {
-				if ($.trim($('#phoneFile1').attr("value")).length >0 && $('#phoneFile1').attr("value") != 'undefined') {
-					jsonLic += '{\"licPic\":\"' +$('#phoneFile'+i+'').attr("value")+'\",'+'\"licType\":\"' +$('.licType'+i+'').val()+'\",'+'\"licNo\":\"' +$('.licinputw'+i+'').val()+'\",'+'\"licName\":\"' +$('.licType'+i+'').find("option:selected").text()+'\"},';
-				}				
+			var canteenName;
+			var canteenContacts;
+			var phoneNumber;
+			if (actag == 'open') {
+				var _ind = $('.c_type').closest('ul').find('li').length;
+				jsonLic = '[';
+				for (i=1; i<=_ind; i++) {
+					if ($.trim($('#phoneFile1').attr("value")).length >0 && $('#phoneFile1').attr("value") != 'undefined') {
+						jsonLic += '{\"licPic\":\"' +$('#phoneFile'+i+'').attr("value")+'\",'+'\"licType\":\"' +$('.licType'+i+'').val()+'\",'+'\"licNo\":\"' +$('.licinputw'+i+'').val()+'\",'+'\"licName\":\"' +$('.licType'+i+'').find("option:selected").text()+'\"},';
+					}				
+				}
+				jsonLic += ']';
+				canteenName = $.trim($("#canteenName").val());
+				/* if (canteenName.length <= 0) {
+					alert("食堂名称不能为空~");
+					return;
+				}  */
+				canteenContacts = $.trim($("#canteenContacts").val());
+				/* if (canteenContacts.length <= 0) {
+					alert("食堂联系人不能为空~");
+					return;
+				} */
+				phoneNumber = $.trim($("#phoneNumber").val());
 			}
-			jsonLic += ']';
-			var canteenName = $.trim($("#canteenName").val());
-			/* if (canteenName.length <= 0) {
-				alert("食堂名称不能为空~");
-				return;
-			}  */
-			var canteenContacts = $.trim($("#canteenContacts").val());
-			/* if (canteenContacts.length <= 0) {
-				alert("食堂联系人不能为空~");
-				return;
-			} */
-			var phoneNumber = $.trim($("#phoneNumber").val());
+			
 			var userAccount = $.trim($("#userAccount").val());
 			if (userAccount.length <= 0) {
 				alert("用户名不能为空~");
