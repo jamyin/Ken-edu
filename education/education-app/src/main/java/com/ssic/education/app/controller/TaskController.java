@@ -354,6 +354,16 @@ public class TaskController {
 			result.setMessage("参数为空");
 			return result;
 		}
+		if(StringUtils.isEmpty(eduTaskDto.getTitle()) ){
+			result.setStatus(DataStatus.HTTP_FAILE);
+			result.setMessage("标题为空");
+			return result;
+		}
+		if(StringUtils.isEmpty(eduTaskDto.getContent()) ){
+			result.setStatus(DataStatus.HTTP_FAILE);
+			result.setMessage("任务内容为空");
+			return result;
+		}
 		if(StringUtils.isEmpty(eduTaskDto.getReceiveIdsNames()) ){
 			result.setStatus(DataStatus.HTTP_FAILE);
 			result.setMessage("任务接收者为空");
