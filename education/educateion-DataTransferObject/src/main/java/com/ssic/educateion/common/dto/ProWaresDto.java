@@ -36,6 +36,7 @@ public class ProWaresDto implements Serializable {
 	private Integer waresType;
 	public void setWaresType(int waresType) {
 		waresTypeStr = ProductClass.getName(waresType);
+		this.waresType=waresType;
 		this.setWaresTypeStr(waresTypeStr);
 	}
 	
