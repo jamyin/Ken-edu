@@ -118,6 +118,8 @@ public class EduParentPackCommentDto implements Serializable {
      * @mbggenerated Sun May 29 16:27:13 CST 2016
      */
     private Integer stat;
+    
+    private String weekName;
 
    
 }

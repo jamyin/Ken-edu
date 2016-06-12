@@ -21,6 +21,7 @@ import com.ssic.education.handle.service.ProPackagesService;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.constants.SupplyPhaseEnum;
 import com.ssic.education.utils.model.Response;
+import com.ssic.education.utils.util.DateUtils;
 
 /**
  * 
@@ -125,6 +126,14 @@ public class WapCommentController extends BaseController {
 
 		eduParentPackCommentDto.setParentId(parentId);
 		List<EduParentPackCommentDto> dataList = iEduParentPackCommentService.searchComment(eduParentPackCommentDto);
+		for(EduParentPackCommentDto dto : dataList){
+			try {
+				dto.setWeekName(DateUtils.dayForWeek(dto.getSupplyDate(),DateUtils.YMD_DASH));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		mv.addObject("dataList",dataList);
 		mv.setViewName("comment");

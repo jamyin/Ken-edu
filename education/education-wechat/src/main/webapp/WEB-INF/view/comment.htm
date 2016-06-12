@@ -15,7 +15,7 @@
 				<#list dataList as data>
 					<li>
 						<div class="bar_t">
-							<span>${(data.supplyDate)!} </span><span>${(data.supplydate)!}</span><span class="school">${(data.schoolName)!}</span>
+							<span>${(data.supplyDate)!} </span><span>周${(data.weekName)!}</span><span class="school">${(data.schoolName)!}</span>
 						</div>
 						<div class="tag_m">
 							<#assign dishes = data.dishes>
