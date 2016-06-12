@@ -67,7 +67,7 @@ public class LedgerInfoDao {
 	 * @author SeanYoung
 	 * @date 2016年5月26日 下午2:31:27
 	 */
-	public List<LedgerMasterListDto> findAllMaster(ProLedgerMaster proLedgerMaster, PageQuery page) {
+	public List<LedgerMasterListDto> findAllMaster(ProLedgerMaster proLedgerMaster, PageQuery page, Date actionDate) {
 		ProLedgerMasterExample example = new ProLedgerMasterExample();
 		ProLedgerMasterExample.Criteria criteria = example.createCriteria();
 		if (StringUtils.isNotBlank(proLedgerMaster.getReceiverId())) {
@@ -75,6 +75,9 @@ public class LedgerInfoDao {
 		}
 		if (StringUtils.isNotBlank(proLedgerMaster.getUserId())) {
 			criteria.andUserIdEqualTo(proLedgerMaster.getUserId());
+		}
+		if (actionDate != null) {
+			criteria.andActionDateEqualTo(actionDate);
 		}
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		if (null != page) {

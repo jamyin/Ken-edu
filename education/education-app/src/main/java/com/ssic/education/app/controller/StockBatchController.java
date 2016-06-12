@@ -1,5 +1,7 @@
 package com.ssic.education.app.controller;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -84,9 +86,9 @@ public class StockBatchController {
 	 */
 	@RequestMapping(value = "/driverlist/{userId}", method = RequestMethod.POST)
 	@ResponseBody
-	public Response<PageResult<LedgerMasterListDto>> getMaterialByUser(@PathVariable("userId") String userId, PageQuery query) {
+	public Response<PageResult<LedgerMasterListDto>> getMaterialByUser(@PathVariable("userId") String userId, PageQuery query,Date actionDate) {
 		Response<PageResult<LedgerMasterListDto>> result = new Response<PageResult<LedgerMasterListDto>>();
-		PageResult<LedgerMasterListDto> ledgerInfoDto = ledgerInfoService.findMasterDriverList(userId, query);
+		PageResult<LedgerMasterListDto> ledgerInfoDto = ledgerInfoService.findMasterDriverList(userId, query,actionDate);
 		result.setData(ledgerInfoDto);
 		return result;
 	}
