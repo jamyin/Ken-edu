@@ -57,7 +57,8 @@
                                 <th> 状态 </th>
                                 <th> 时间 </th>
                             </thead>
-                            <form class="" action="" method="post">
+                            <form class="" action="/edu/school/checkList.htm?source=1&reviewed=2" method="post" id="myform">
+                            <input type="hidden" name="currPage" id="currPage" value="1"/>
                              <#if pageList??>
                             	<#if (pageList.results??) && (pageList.results?size>0)>
 	                            	<#list pageList.results as data>
