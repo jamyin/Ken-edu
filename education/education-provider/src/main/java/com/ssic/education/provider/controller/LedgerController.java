@@ -350,7 +350,7 @@ public class LedgerController {
 			j.setSuccess(false);
 			return j;
 		}
-		if(listls.get(0).hashCode()==2){
+		if(listls.get(0).getHaulStatus()==2){
 			j.setMsg("不能修改此配送");
 			j.setSuccess(false);
 			return j;
@@ -491,7 +491,7 @@ public class LedgerController {
 			j.setSuccess(false);
 			return j;
 		}
-		if(list.get(0).hashCode()!=0){
+		if(list.get(0).getHaulStatus()==2){
 			j.setMsg("不能删除此配送");
 			j.setSuccess(false);
 			return j;

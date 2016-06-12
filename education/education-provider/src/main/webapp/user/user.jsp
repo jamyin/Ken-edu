@@ -284,7 +284,7 @@ else
 				<table class="table table-hover table-condensed" style="display: none;">
 					<tr >
 						<td style='padding-top: 10px;'>姓名:
-						<input name="name" placeholder="可以搜索姓名" class="easyui-validatebox"  style="width: 215px;"/>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);"  onclick="searchFun();" class="easyui-linkbutton" iconCls="icon-search" ><font  style='font-style: normal;font-size:18px;'>查询</font></a>
+						<input name="name" placeholder="查询姓名" class="easyui-validatebox"  style="width: 215px;"/>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);"  onclick="searchFun();" ><img src="${pageContext.request.contextPath}/icon/查询.png" ></img></a>
 							</td>
 						 </tr>	
 								</table>
