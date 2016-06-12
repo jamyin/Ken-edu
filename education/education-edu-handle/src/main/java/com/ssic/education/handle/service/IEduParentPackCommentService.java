@@ -12,4 +12,6 @@ public interface IEduParentPackCommentService {
 
 	Integer countPackageStar(String packageId);
 
+	int updateComment(EduParentPackCommentDto eduParentPackCommentDto);
+
 }
