@@ -504,7 +504,7 @@ else
 					    
 					       <select id="waresType" class="easyui-combobox"  name="waresType" data-options="width:210,height:24,editable:false,panelHeight:'auto'"
 								data-options="required:true"  >	
-								<option value="">请选择商品类别</option>							
+								<option value="0">请选择商品类别</option>							
 							    <option value="1">畜产品及其制品</option>   
 							    <option value="2">禽及其产品、制品</option>   
 							    <option value="3">蔬菜</option>   
