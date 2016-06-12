@@ -85,31 +85,28 @@ ul.my_info {
 	<div>	
 	<ul class="easyui-datalist my_info">
 		<li>
-			<span class="name">单位地址：</span><span class="value">${Corporate.address }</span>
+			<span class="name" style="text-align:left;">单位地址：</span><span class="value">${Corporate.address }</span>
 		</li>
 		<li>
-			<span class="name">联系人姓名：</span><span class="value">${Corporate.corporation }</span>
+			<span class="name" style="text-align:left;">联系人姓名：</span><span class="value">${Corporate.corporation }</span>
 		</li>
 		<li>
-			<span class="name">电话：	</span><span class="value">${Corporate.contactWay }</span>
+			<span class="name" style="text-align:left;">电话：	</span><span class="value">${Corporate.contactWay }</span>
 		</li>
 		<li>
-			<span class="name">证件类型</span><span class="value"></span>
+			<span class="cert" style="text-align:left;">餐饮服务证号：	</span><span class="value">${Corporate.foodServiceCode }</span>
 		</li>
 		<li>
-			<span class="cert">餐饮服务证号：	</span><span class="value">${Corporate.foodServiceCode }</span>
+			<span class="cert" style="text-align:left;">食品经营许可证：	</span><span class="value">${Corporate.foodBusinessCode }</span>
 		</li>
 		<li>
-			<span class="cert">食品经营许可证：	</span><span class="value">${Corporate.foodBusinessCode }</span>
+			<span class="cert" style="text-align:left;">食品流通证号：	</span><span class="value">${Corporate.foodCirculationCode }</span>
 		</li>
 		<li>
-			<span class="cert">食品流通证号：	</span><span class="value">${Corporate.foodCirculationCode }</span>
+			<span class="cert" style="text-align:left;">食品生产证号：	</span><span class="value">${Corporate.foodProduceCode }</span>
 		</li>
 		<li>
-			<span class="cert">食品生产证号：	</span><span class="value">${Corporate.foodProduceCode }</span>
-		</li>
-		<li>
-			<span class="cert">工商执照号：	</span><span class="value">${Corporate.businessLicense }</span>
+			<span class="cert" style="text-align:left;">工商执照号：	</span><span class="value">${Corporate.businessLicense }</span>
 		</li>
 	</ul>
 		
