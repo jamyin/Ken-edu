@@ -118,7 +118,7 @@
 											<#if proLicense_index==0>												
 												<li name="phoneFile${proLicense_index+1}">
 												<input style="display:none;" type="text" class="proLicenseId${proLicense_index+1}" placeholder="" value="${(proLicense.id)!}">
-												<select class="licType1">
+												<select class="licType${proLicense_index+1}">
 													<option value="0" <#if proLicense.licType == 0>selected="selected"</#if> >餐饮服务证</option>
 													<option value="1" <#if proLicense.licType == 1>selected="selected"</#if> >食品经营许可证</option>
 													<option value="2" <#if proLicense.licType == 2>selected="selected"</#if> >食品流通证</option>
@@ -133,7 +133,7 @@
 											<#else>												
 												<li name="phoneFile${proLicense_index+1}">
 												<input style="display:none;" type="text" class="proLicenseId${proLicense_index+1}" placeholder="" value="${(proLicense.id)!}">
-												<select class="licType1">
+												<select class="licType${proLicense_index+1}">
 													<option value="0" <#if proLicense.licType == 0>selected="selected"</#if> >餐饮服务证</option>
 													<option value="1" <#if proLicense.licType == 1>selected="selected"</#if> >食品经营许可证</option>
 													<option value="2" <#if proLicense.licType == 2>selected="selected"</#if> >食品流通证</option>
@@ -260,13 +260,11 @@
 				return;
             } 
 			var _ind = $('#edit_c_type').closest('ul').find('li').length;
-			alert(_ind);
 			var jsonLic;
 			jsonLic = '[';
 			for (i=1; i<=_ind; i++) {
 				if ($.trim($('#phoneFile1').attr("value")).length >0 && $('#phoneFile1').attr("value") != 'undefined' && $('#phoneFile'+i+'').attr("value") != 'undefined' && $.trim($('#phoneFile'+i+'').attr("value")).length >0 ) {
-					alert("pic"+i+":"+$('#phoneFile'+i+'').attr("value"));
-					jsonLic += '{\"id\":\"' +$('#proLicenseId'+i+'').val()+'\",'+'\"licPic\":\"' +$('#phoneFile'+i+'').attr("value")+'\",'+'\"licType\":\"' +$('.licType'+i+'').val()+'\",'+'\"licNo\":\"' +$('.licinputw'+i+'').val()+'\",'+'\"licName\":\"' +$('.licType'+i+'').find("option:selected").text()+'\"},';
+					jsonLic += '{\"id\":\"' +$('.proLicenseId'+i+'').val()+'\",'+'\"licPic\":\"' +$('#phoneFile'+i+'').attr("value")+'\",'+'\"licType\":\"' +$('.licType'+i+'').val()+'\",'+'\"licNo\":\"' +$('.licinputw'+i+'').val()+'\",'+'\"licName\":\"' +$('.licType'+i+'').find("option:selected").text()+'\"},';
 				}				
 			}
 			jsonLic += ']';
