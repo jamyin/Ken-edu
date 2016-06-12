@@ -120,6 +120,8 @@ public class EduParentPackCommentDto implements Serializable {
     private Integer stat;
     
     private String weekName;
+    
+    private String supplyPhase;
 
    
 }

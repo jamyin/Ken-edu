@@ -175,4 +175,15 @@ public class ProPackagesServiceImpl implements ProPackagesService{
 		ProPackages propack = BeanUtils.createBeanByTarget(propackage, ProPackages.class);
 		proPackagesDao.updateByPrimaryKeySelective(propack);
 	}
+
+	@Override
+	public List<ProPackagesDto> searchProPackages(List<String> packageIds) {
+		List<ProPackages>  dataList = proPackagesDao.searchProPackages(packageIds);
+		if(dataList!=null){
+			return BeanUtils.createBeanListByTarget(dataList, ProPackagesDto.class);	
+		}else{
+			return null;
+		}
+		
+	}
 }

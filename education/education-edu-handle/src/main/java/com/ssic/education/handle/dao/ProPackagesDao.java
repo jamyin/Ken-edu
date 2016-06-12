@@ -453,4 +453,16 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		return eppcMapper.countByExample(example);
 	}
+
+	public List<ProPackages> searchProPackages(List<String> packageIds) {
+		ProPackagesExample example = new ProPackagesExample();
+		ProPackagesExample.Criteria criteria = example.createCriteria();
+		if (packageIds!=null && packageIds.size()>0) {
+			criteria.andIdIn(packageIds);
+		}else{
+			return null;
+		}
+		criteria.andStatEqualTo(DataStatus.ENABLED);
+		return mapper.selectByExample(example);
+	}
 }

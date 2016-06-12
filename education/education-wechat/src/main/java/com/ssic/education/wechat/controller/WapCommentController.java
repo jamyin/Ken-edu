@@ -1,6 +1,7 @@
 package com.ssic.education.wechat.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ssic.educateion.common.dto.EduSchoolDto;
 import com.ssic.educateion.common.dto.ProDishesDto;
+import com.ssic.educateion.common.dto.ProLicenseDto;
 import com.ssic.educateion.common.dto.ProPackagesDto;
 import com.ssic.education.handle.dto.EduParentPackCommentDto;
 import com.ssic.education.handle.service.EduSchoolService;
@@ -126,7 +128,9 @@ public class WapCommentController extends BaseController {
 
 		eduParentPackCommentDto.setParentId(parentId);
 		List<EduParentPackCommentDto> dataList = iEduParentPackCommentService.searchComment(eduParentPackCommentDto);
+		List<String> packageIds = new ArrayList<String>();
 		for(EduParentPackCommentDto dto : dataList){
+			packageIds.add(dto.getPackageId());
 			try {
 				dto.setWeekName(DateUtils.dayForWeek(dto.getSupplyDate(),DateUtils.YMD_DASH));
 			} catch (Exception e) {
@@ -134,10 +138,26 @@ public class WapCommentController extends BaseController {
 				e.printStackTrace();
 			}
 		}
+		List<ProPackagesDto> resultList = proPackagesService.searchProPackages(packageIds);
+		if(resultList!=null){
+			HashMap<String,String> packageMap = copyListToMap(resultList);
+			for(EduParentPackCommentDto dto : dataList){
+				dto.setSupplyPhase(packageMap.get(dto.getPackageId()));
+			}			
+		}
 		
 		mv.addObject("dataList",dataList);
 		mv.setViewName("comment");
 		return mv;
+	}
+
+	private HashMap<String, String> copyListToMap(List<ProPackagesDto> resultList) {
+		HashMap<String, String> objMap = new HashMap<String, String>();
+		for(ProPackagesDto packDto : resultList){
+			String keyCode = packDto.getId();
+			objMap.put(keyCode,SupplyPhaseEnum.getValueByIndex(Integer.valueOf(packDto.getSupplyPhase())));
+		}
+		return objMap;
 	}	
 	
 	
