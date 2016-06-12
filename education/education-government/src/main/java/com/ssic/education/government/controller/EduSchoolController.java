@@ -259,6 +259,7 @@ public class EduSchoolController extends BaseController{
 	public ModelAndView checkList(HttpServletRequest request, HttpServletResponse response,
     		HttpSession session,SupplierReviewedDto dto, PageQuery page) {
 		ModelAndView mv = getModelAndView();
+		page.setPageSize(2);
 		String id = (String) getRequest().getSession().getAttribute(SessionConstants.LOGIN_USER_INFO);
 		EduUsersDto usersdto = getLoginUser(request, response, session, id);
 		if (StringUtils.isNotBlank(usersdto.getSourceId()) && null != usersdto.getSourceType() && usersdto.getSourceType() == DataStatus.EVA_TWO) {
