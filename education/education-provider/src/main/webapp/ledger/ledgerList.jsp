@@ -9,6 +9,10 @@
 	padding-top: 7px!important;;
 	padding-bottom: 7px!important;;
 }
+.stable{
+	width:414px!important;;
+  	table-layout:fixed;
+}
 </style>
 <!DOCTYPE html>
 <html>
@@ -297,17 +301,17 @@
 </head>
 <body>
 	<div class="easyui-layout" data-options="fit : true,border : false">
-		<div data-options="region:'north',border:false"  title="<font  style='font-style: normal;font-weight: bolder;font-size:18px;'>查询条件</font>"    style="height: 80px; overflow: hidden;">
+		<div data-options="region:'north',border:false"  title="<font  style='font-style: normal;font-weight: bolder;font-size:18px;'>查询条件</font>"    style="height: 80px; overflow: hidden;text-align:center;">
 			
 			<form id="searchForm">
-				<table class="table table-hover table-condensed" style="display: none;">
-					<tr>
-						<td style="width: 500;">配货日期:
-						<input style='cursor:pointer;' id="actionDate" class="span2" name="actionDate" placeholder="点击选择日期" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" readonly="readonly"/>
+				<table class="table table-hover table-condensed stable" style="display: none;">
+					<tr >
+						<td style='width: 650px;padding-top: 10px;'>配货日期:
+						<input style='cursor:pointer;width: 215px;' id="actionDate" class="span2" name="actionDate" placeholder="点击选择日期" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" readonly="readonly"/>
 						至
-						<input style='cursor:pointer;' id="nextDate" class="span2" name="nextDate" placeholder="点击选择日期" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" readonly="readonly"/></td>
-						<td>配货点:
-						<input id="receiverName" class="span2" name="receiverName" />&nbsp;&nbsp;&nbsp;
+						<input style='cursor:pointer;width: 215px;' id="nextDate" class="span2" name="nextDate" placeholder="点击选择日期" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" readonly="readonly"/></td>
+						<td style='width: 414px;padding-top: 10px;'>配货点:
+						<input style='width: 215px;' id="receiverName" class="span2" name="receiverName" placeholder="查询配货点" />&nbsp;&nbsp;&nbsp;
 						<a href="javascript:void(0);"  onclick="searchFun();" ><img src="${pageContext.request.contextPath}/icon/查询.png" ></img></a></td>
 					
 		</tr>

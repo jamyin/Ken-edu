@@ -124,8 +124,8 @@
 				<table class="table table-hover table-condensed" style="display: none;">
 			
 					<tr>
-						<td>名称:
-						<input class="span2" name="schoolName" />&nbsp;&nbsp;&nbsp;
+						<td style='padding-top: 10px;'>名称:
+						<input style='width: 215px;' placeholder="查询名称" class="span2" name="schoolName" />&nbsp;&nbsp;&nbsp;
 						<a href="javascript:void(0);"  onclick="searchFun();" ><img src="${pageContext.request.contextPath}/icon/查询.png" ></img></a></td>
 				
 					</tr>							

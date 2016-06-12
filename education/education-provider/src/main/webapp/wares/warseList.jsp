@@ -494,15 +494,15 @@ else
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">
 					<tr>
-						<td>商品名称:
+						<td style='padding-top: 10px;'>商品名称:
 						<input id="waresName" name="waresName" placeholder="查询商品名称" class="easyui-validatebox"  style="width: 215px;"/></td>
-						 <td>产品编码:
+						 <td style='padding-top: 10px;'>产品编码:
 					     <input id="customCode" name="customCode" placeholder="查询产品编码" class="easyui-validatebox"  style="width: 215px;"/></td>
 						 
 						 
-						  <td>商品类别:
+						  <td style='padding-top: 10px;'>商品类别:
 					    
-					       <select id="waresType" class="easyui-combobox"  name="waresType"  data-options="width:210,height:24,editable:false,panelHeight:'auto'"
+					       <select id="waresType" class="easyui-combobox"  name="waresType" data-options="width:210,height:24,editable:false,panelHeight:'auto'"
 								data-options="required:true"  >	
 								<option value="">请选择商品类别</option>							
 							    <option value="1">畜产品及其制品</option>   

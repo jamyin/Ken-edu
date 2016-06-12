@@ -18,7 +18,7 @@
 		<table id="ledgers" class="table table-hover table-condensed">
 			<tr>
 				<th>配送号：</th><td>${LedgerList[0].wareBatchNo}</td>
-				<th>进货日期：</th><td><fmt:formatDate value="${LedgerList[0].actionDate}" pattern="yyyy-MM-dd"/></td>
+				<th>配送日期：</th><td><fmt:formatDate value="${LedgerList[0].actionDate}" pattern="yyyy-MM-dd"/></td>
 				<th>配货点：</th><td>${LedgerList[0].receiverName}</td>
 				<th>状态：</th><td><c:if test="${LedgerList[0].haulStatus ==0}">
 							未配送
