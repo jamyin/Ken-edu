@@ -111,12 +111,19 @@ public class EduUsersServiceImpl implements EduUsersService {
 			}
 		}
 		for (ProLicenseDto proLicenseDto:proLicenseDtos) {
-			if (null != proLicenseDto && StringUtils.isNotBlank(proLicenseDto.getLicPic())) {
+			if (null != proLicenseDto && StringUtils.isNotBlank(proLicenseDto.getLicNo())) {
 				if (StringUtils.isNotBlank(proLicenseDto.getId())) {
 					ProLicense proLicense = BeanUtils.createBeanByTarget(proLicenseDto, ProLicense.class);
+					if (proLicense.getLicPic().equals("undefined")) {
+						proLicense.setLicPic(null);
+					}
+					proLicense.setStat(DataStatus.ENABLED);
 					proLicenseDao.updateByPrimaryKeySelective(proLicense);
 				}else {
 					ProLicense proLicense = BeanUtils.createBeanByTarget(proLicenseDto, ProLicense.class);
+					if (proLicense.getLicPic().equals("undefined")) {
+						proLicense.setLicPic(null);
+					}
 					proLicense.setRelationId(eduCanteen.getId());
 					proLicense.setCerSource(usersDto.getCerSource().shortValue());
 					proLicense.setCreator(usersDto.getCreator());
