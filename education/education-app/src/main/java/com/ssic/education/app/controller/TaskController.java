@@ -359,6 +359,11 @@ public class TaskController {
 			result.setMessage("标题为空");
 			return result;
 		}
+		if(eduTaskDto.getTitle().length() > 30){
+			result.setStatus(DataStatus.HTTP_FAILE);
+			result.setMessage("标题长度超过30个字符");
+			return result;
+		}
 		if(StringUtils.isEmpty(eduTaskDto.getContent()) ){
 			result.setStatus(DataStatus.HTTP_FAILE);
 			result.setMessage("任务内容为空");
