@@ -81,7 +81,11 @@
 	                                    <td>
 	                                    	<#if result.getTaskReceiceList() ??>
 	                                    		<#list result.getTaskReceiceList() as data>
-	                                    			<#assign receiveName = receiveName + data.receiveName+"、">
+		                                    		<#if !data_has_next>
+		                                    			<#assign receiveName = receiveName + data.receiveName>
+		                                    		<#else>
+		                                    			<#assign receiveName = receiveName + data.receiveName+"、">
+		                                    		</#if>
 	                                    		</#list>
 	                                    		<#if receiveName ??>
 	                                    			<#if receiveName?length gt 15>
