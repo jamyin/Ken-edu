@@ -1,8 +1,7 @@
 /*
-SQLyog Enterprise - MySQL GUI v6.06 Beta 1
-Host - 5.5.42-log : Database - edu_test
+SQLyog Ultimate v11.27 (32 bit)
+MySQL - 5.5.42-log : Database - edu_test
 *********************************************************************
-Server version : 5.5.42-log
 */
 
 
@@ -10,8 +9,11 @@ Server version : 5.5.42-log
 
 /*!40101 SET SQL_MODE=''*/;
 
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`edu_test` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
 /*Table structure for table `t_edu_canteen` */
 
@@ -217,7 +219,7 @@ DROP TABLE IF EXISTS `t_edu_task`;
 
 CREATE TABLE `t_edu_task` (
   `id` varchar(36) NOT NULL COMMENT '主键id',
-  `title` varchar(20) NOT NULL COMMENT '标题',
+  `title` varchar(50) NOT NULL COMMENT '标题',
   `pic` varchar(200) DEFAULT NULL COMMENT '缩略图',
   `summary` varchar(200) DEFAULT NULL COMMENT '简介',
   `content` text COMMENT '内容',
@@ -644,3 +646,5 @@ CREATE TABLE `t_pro_waste_recycler` (
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
