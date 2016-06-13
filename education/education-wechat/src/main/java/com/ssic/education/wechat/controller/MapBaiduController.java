@@ -1,6 +1,8 @@
 package com.ssic.education.wechat.controller;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ import com.ssic.education.handle.service.IProLedgerMasterService;
 import com.ssic.education.handle.service.ProLedgerService;
 import com.ssic.education.handle.service.ProSupplierService;
 import com.ssic.education.handle.service.ProWaresService;
+import com.ssic.education.utils.util.DateUtils;
 import com.ssic.education.utils.util.HttpClientUtil;
 import com.ssic.education.utils.util.PropertiesUtils;
 
@@ -69,7 +72,12 @@ public class MapBaiduController extends BaseController{
 				resultDto.setWareList(wareList);
 			}		
 			
-			points = getHistory(resultDto).getPoints();
+			try {
+				points = getHistory(resultDto).getPoints();
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			if(points!=null && points.size()>0){
 				for(BaiduPointsDto bp : points){
 					bp.setX(bp.getLocation()[0]);
@@ -90,15 +98,15 @@ public class MapBaiduController extends BaseController{
 	}
 	
 	
-	public BaiduHistoryDto getHistory(ProLedgerMasterDto resultDto){
+	public BaiduHistoryDto getHistory(ProLedgerMasterDto resultDto) throws ParseException{
 		String baidu_getHistory_url = PropertiesUtils.getProperty("baidu.ditu.url");
 		String startTime = "";
 		String endTime = "";
 		if(resultDto.getStartTime()!=null){
-			startTime = String.valueOf(resultDto.getStartTime().getTime());	
+			startTime = DateUtils.dateToTimestamp(resultDto.getStartTime());	
 		}
 		if(resultDto.getStartTime()!=null){
-			endTime = String.valueOf(resultDto.getEndTime().getTime());	
+			endTime = DateUtils.dateToTimestamp(resultDto.getEndTime());//String.valueOf(resultDto.getEndTime().getTime());	
 		}		
 //		String reqURL = "ak=YN0mfG1VM2jrGV5jBB7RD6lKKmrDZA43&service_id=117192&entity_name=8438B07A-2B4C-49B7-8523-5A177081F602&start_time=1463695529&end_time=1463767529";
 		String reqURL = "ak="+PropertiesUtils.getProperty("baidu.ditu.ak")+"&service_id="+PropertiesUtils.getProperty("baidu.ditu.serviceId")+"&entity_name="+resultDto.getId()+"&start_time="+startTime+"&end_time="+endTime+"";
@@ -106,6 +114,5 @@ public class MapBaiduController extends BaseController{
 		BaiduHistoryDto history = new Gson().fromJson(json, BaiduHistoryDto.class);
 		return history;
 	}
-	
 	
 }

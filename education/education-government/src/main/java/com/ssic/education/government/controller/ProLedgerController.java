@@ -25,6 +25,7 @@ import com.ssic.education.handle.service.ProLedgerService;
 import com.ssic.education.handle.service.ProSupplierService;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
+import com.ssic.education.utils.util.DateUtils;
 import com.ssic.education.utils.util.HttpClientUtil;
 import com.ssic.education.utils.util.PropertiesUtils;
 
@@ -84,7 +85,12 @@ public class ProLedgerController extends BaseController{
 		ProLedgerMasterDto resultDto = iProLedgerMasterService.searchProLedgerMasterDto(ledgerDto.getMasterId());
 		//地图展示方法
 		List<BaiduPointsDto> points = new ArrayList<BaiduPointsDto>();
-		points = getHistory(resultDto).getPoints();
+		try {
+			points = getHistory(resultDto).getPoints();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(points!=null && points.size()>0){
 			for(BaiduPointsDto bp : points){
 				bp.setX(bp.getLocation()[0]);
@@ -99,16 +105,16 @@ public class ProLedgerController extends BaseController{
 	}
 	
 	
-	public BaiduHistoryDto getHistory(ProLedgerMasterDto resultDto){
+	public BaiduHistoryDto getHistory(ProLedgerMasterDto resultDto) throws ParseException{
 		String baidu_getHistory_url = PropertiesUtils.getProperty("baidu.ditu.url");
 		String startTime = "";
 		String endTime = "";
 		if(resultDto.getStartTime()!=null){
-			startTime = String.valueOf(resultDto.getStartTime().getTime());	
+			startTime = DateUtils.dateToTimestamp(resultDto.getStartTime());	
 		}
 		if(resultDto.getStartTime()!=null){
-			endTime = String.valueOf(resultDto.getEndTime().getTime());	
-		}		
+			endTime = DateUtils.dateToTimestamp(resultDto.getEndTime());//String.valueOf(resultDto.getEndTime().getTime());	
+		}			
 //		String reqURL = "ak=YN0mfG1VM2jrGV5jBB7RD6lKKmrDZA43&service_id=117192&entity_name=8438B07A-2B4C-49B7-8523-5A177081F602&start_time=1463695529&end_time=1463767529";
 		String reqURL = "ak="+PropertiesUtils.getProperty("baidu.ditu.ak")+"&service_id="+PropertiesUtils.getProperty("baidu.ditu.serviceId")+"&entity_name="+resultDto.getId()+"&start_time="+startTime+"&end_time="+endTime+"";
 		String json = HttpClientUtil.sendGetRequest(baidu_getHistory_url+reqURL, null);
