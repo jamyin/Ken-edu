@@ -83,6 +83,8 @@ public class MapBaiduController extends BaseController{
 		mv.addObject("supplierDto", supplierDto);
 		
 		mv.addObject("resultDto", resultDto);
+		
+		mv.addObject("baiduAk",PropertiesUtils.getProperty("baidu.ditu.ak"));
 		mv.setViewName("dispatching_c");
 		return mv;
 	}
