@@ -13,11 +13,13 @@ import org.springframework.stereotype.Repository;
 import com.ssic.education.app.dto.MaterialSupplierDto;
 import com.ssic.education.app.dto.SupplierLicDto;
 import com.ssic.education.app.mapper.SupplierInfoExMapper;
+import com.ssic.education.handle.mapper.EduCanteenMapper;
 import com.ssic.education.handle.mapper.ProLedgerMapper;
 import com.ssic.education.handle.mapper.ProLedgerMasterMapper;
 import com.ssic.education.handle.mapper.ProLicenseMapper;
 import com.ssic.education.handle.mapper.ProSupplierMapper;
 import com.ssic.education.handle.mapper.ProSupplierReceiverMapper;
+import com.ssic.education.handle.pojo.EduCanteen;
 import com.ssic.education.handle.pojo.ProLicense;
 import com.ssic.education.handle.pojo.ProLicenseExample;
 import com.ssic.education.handle.pojo.ProSupplier;
@@ -66,6 +68,10 @@ public class SupplierInfoDao {
 	@Getter
 	@Autowired
 	private ProSupplierReceiverMapper supplierReceiverMapper;
+
+	@Getter
+	@Autowired
+	private EduCanteenMapper canteenMapper;
 
 	/**
 	 * getSupplierInfoById：供应商资质查询
@@ -183,5 +189,9 @@ public class SupplierInfoDao {
 		} else {
 			return null;
 		}
+	}
+
+	public EduCanteen findCanteenById(String id) {
+		return canteenMapper.selectByPrimaryKey(id);
 	}
 }

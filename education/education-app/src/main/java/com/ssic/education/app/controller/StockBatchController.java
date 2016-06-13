@@ -62,7 +62,7 @@ public class StockBatchController {
 	 * @param query
 	 * @return
 	 * @exception	
-	 * @author Administrator
+	 * @author SeanYoung
 	 * @date 2016年5月27日 下午2:24:06
 	 */
 	@RequestMapping(value = "/list/{receiverId}", method = RequestMethod.POST)
@@ -81,7 +81,7 @@ public class StockBatchController {
 	 * @param query
 	 * @return
 	 * @exception	
-	 * @author Administrator
+	 * @author SeanYoung
 	 * @date 2016年5月27日 下午2:24:06
 	 */
 	@RequestMapping(value = "/driverlist/{userId}", method = RequestMethod.POST)
@@ -111,7 +111,7 @@ public class StockBatchController {
 		result.setData(LedgerInfoDto);
 		return result;
 	}
-
+	
 	@RequestMapping(value = "/updateStatus/{id}/{status}", method = RequestMethod.GET)
 	@ResponseBody
 	public Response<Integer> updateStatus(@PathVariable("id") String id, @PathVariable("status") String status) {

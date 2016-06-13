@@ -31,5 +31,5 @@ public @Data class LedgerMasterInfoDto {
 	private Integer haulStatus;//运送状态	
 	private Date startTime; //开始时间
 	private Date endTime;//结束时间
-	private PageResult<ledgerDetailDto> resultLedger;
+	private PageResult<LedgerDetailDto> resultLedger;
 }
