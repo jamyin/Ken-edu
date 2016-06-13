@@ -34,7 +34,7 @@
 			AND b.id = #{ledgerDto.masterId}
 		</if>
 		<if test="ledgerDto.receiverName != null  and ledgerDto.receiverName !=''">
-			AND b.receiver_name like "%"#{ledgerDto.receiverName}"%"
+			AND a.name like "%"#{ledgerDto.receiverName}"%"
 		</if>
 		<if test="ledgerDto.wareBatchNo != null  and ledgerDto.wareBatchNo !=''">
 			AND b.ware_batch_no = #{ledgerDto.wareBatchNo}
@@ -59,7 +59,7 @@
 			AND b.source_id = #{ledgerDto.sourceId}
 		</if>
 		<if test="ledgerDto.receiverName != null  and ledgerDto.receiverName !=''">
-			AND b.receiver_name like "%"#{ledgerDto.receiverName}"%"
+			AND a.name like "%"#{ledgerDto.receiverName}"%"
 		</if>
 		GROUP BY b.ware_batch_no
 		ORDER BY a.create_time desc
@@ -82,7 +82,7 @@
 			AND b.source_id = #{ledgerDto.sourceId}
 		</if>
 		<if test="ledgerDto.receiverName != null  and ledgerDto.receiverName !=''">
-			AND b.receiver_name like "%"#{ledgerDto.receiverName}"%"
+			AND a.name like "%"#{ledgerDto.receiverName}"%"
 		</if>
 		GROUP BY b.ware_batch_no) t
 	</select>
