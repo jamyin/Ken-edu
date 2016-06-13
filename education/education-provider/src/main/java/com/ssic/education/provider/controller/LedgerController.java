@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -181,18 +182,18 @@ public class LedgerController {
 			j.setSuccess(false);
 			return j;
 		}
-		//驾驶员
-		if(ledgers.get(0).getUserId().equals("")){
+		// 驾驶员
+		if (ledgers.get(0).getUserId().equals("")) {
 			ledgers.get(0).setUserId(null);
 		}
-		String masterId=UUID.randomUUID().toString();
+		String masterId = UUID.randomUUID().toString();
 		// 标识
 		int i = 0;
 		String str = "";
 		for (LedgerDto ledger : ledgers) {
 			if (ledger.getMark() != 1) {
 				str += i + ",";
-				i+=1;
+				i += 1;
 				continue;
 			}
 			// 采购品
@@ -264,14 +265,14 @@ public class LedgerController {
 			ledger.setHaulStatus(0);
 			i += 1;
 		}
-		int x=0;
+		int x = 0;
 		if (str != "") {
 			for (String b : str.split(",")) {
-				ledgers.remove(Integer.parseInt(b)-x);
+				ledgers.remove(Integer.parseInt(b) - x);
 				x++;
 			}
 		}
-		if(ledgers.size()==0){
+		if (ledgers.size() == 0) {
 			j.setMsg("不能没有采购品");
 			j.setSuccess(false);
 			return j;
@@ -345,12 +346,12 @@ public class LedgerController {
 		List<LedgerDto> ledgers = lm.getLedger();
 		List<LedgerDto> listls = ledgerService.findLedgerByMasterId(
 				user.getSourceId(), ledgers.get(0).getMasterId());
-		if(listls.size()==0){
+		if (listls.size() == 0) {
 			j.setMsg("不存在的配送");
 			j.setSuccess(false);
 			return j;
 		}
-		if(listls.get(0).getHaulStatus()==2){
+		if (listls.get(0).getHaulStatus() == 2) {
 			j.setMsg("不能修改此配送");
 			j.setSuccess(false);
 			return j;
@@ -371,19 +372,19 @@ public class LedgerController {
 			j.setSuccess(false);
 			return j;
 		}
-		//驾驶员
-		if(ledgers.get(0).getUserId().equals("")){
+		// 驾驶员
+		if (ledgers.get(0).getUserId().equals("")) {
 			ledgers.get(0).setUserId(null);
 		}
 		List<LedgerDto> list = ledgerService.findLedgerByMasterId(
 				user.getSourceId(), ledgers.get(0).getMasterId());
-		//标识
+		// 标识
 		int n = 0;
 		String str = "";
 		for (LedgerDto ledger : ledgers) {
 			if (ledger.getMark() != 1) {
-				str+=n+",";
-				n+=1;
+				str += n + ",";
+				n += 1;
 				continue;
 			}
 			// 采购品
@@ -428,7 +429,7 @@ public class LedgerController {
 					}
 				}
 			}
-			//采购数量
+			// 采购数量
 			String num = ledger.getQuantity();
 			if (!num.matches("^[1-9][0-9]*(\\.)?[0-9]{0,2}$")) {
 				j.setMsg(ledger.getName() + "错误的采购数量");
@@ -446,16 +447,16 @@ public class LedgerController {
 			ledger.setUpdater(user.getId());
 			ledger.setLastUpdateTime(new Date());
 			ledger.setStat(1);
-			n+=1;
+			n += 1;
 		}
-		int x=0;
+		int x = 0;
 		if (str != "") {
 			for (String b : str.split(",")) {
-				LedgerDto remove = ledgers.remove(Integer.parseInt(b)-x);
+				LedgerDto remove = ledgers.remove(Integer.parseInt(b) - x);
 				x++;
 			}
 		}
-		if(ledgers.size()==0){
+		if (ledgers.size() == 0) {
 			j.setMsg("不能没有采购品");
 			j.setSuccess(false);
 			return j;
@@ -486,12 +487,12 @@ public class LedgerController {
 		}
 		List<LedgerDto> list = ledgerService.findLedgerByMasterId(
 				user.getSourceId(), masterId);
-		if(list.size()==0){
+		if (list.size() == 0) {
 			j.setMsg("不存在的配送");
 			j.setSuccess(false);
 			return j;
 		}
-		if(list.get(0).getHaulStatus()==2){
+		if (list.get(0).getHaulStatus() == 2) {
 			j.setMsg("不能删除此配送");
 			j.setSuccess(false);
 			return j;
@@ -581,23 +582,35 @@ public class LedgerController {
 							master.setStat(1);
 							master.setCreator(info.getId());
 							master.setCreateTime(now);
-							master.setUpdater(info.getId());							
+							master.setUpdater(info.getId());
 							master.setLastUpdateTime(now);
 							noMaster.put(value, master);
 							masterLedger.put(master, new ArrayList());
 						}
 					}
-					if (i == 1 && master.getActionDate() == null) {
-						if (StringUtils.isBlank(value)) {
-							errorMsg = "第" + (rowNum + 1) + "行数据不正确，配送日期不能为空。";
-							break;
-						}
-						// 进货日期
-						try {
-							master.setActionDate(sdf.parse(value));
-						} catch (ParseException e) {
-							errorMsg = "第" + (rowNum + 1) + "行数据不正确，配送日期格式不正确。";
-							break;
+					if (i == 1) {
+						if (master.getActionDate() == null) {
+							if (StringUtils.isBlank(value)) {
+								errorMsg = "第" + (rowNum + 1)
+										+ "行数据不正确，配送日期不能为空。";
+								break;
+							}
+							// 进货日期
+							try {
+								master.setActionDate(sdf.parse(value));
+							} catch (ParseException e) {
+								errorMsg = "第" + (rowNum + 1)
+										+ "行数据不正确，配送日期格式不正确。";
+								break;
+							}
+						} else {
+							if (!master.getActionDate()
+									.equals(sdf.parse(value))) {
+								errorMsg = "第" + (rowNum + 1)
+										+ "行数据不正确，配送日期不正确。";
+								break;
+							}
+
 						}
 					} else if (i == 2) {
 						if (StringUtils.isBlank(value)) {
@@ -627,27 +640,48 @@ public class LedgerController {
 						}
 						// 规格
 						spec = value;
-					} else if (i == 5 && master.getReceiverId() == null) {
-						if (StringUtils.isBlank(value)) {
-							errorMsg = "第" + (rowNum + 1) + "行数据不正确，配货点不能为空。";
-							break;
-						}
+					} else if (i == 5) {
 						// 配货点
 						String receiverId = eduSchoolSupplierService
 								.findSchoolIdByReceiverId(value, supplierId);
-						if (receiverId == null) {
-							errorMsg = "第" + (rowNum + 1) + "行数据不正确，配货点不存在。";
-							break;
-						}
-						master.setReceiverId(receiverId);
-						master.setReceiverName(value);
-					} else if (i == 6 && StringUtils.isNotBlank(value)
-							&& master.getUserId() == null) {
-						// 根据name取司机
-						for (TImsUsersDto o : drivers) {
-							if (value.equals(o.getName())) {
-								master.setUserId(o.getId());
+						if (master.getReceiverId() == null) {
+							if (StringUtils.isBlank(value)) {
+								errorMsg = "第" + (rowNum + 1)
+										+ "行数据不正确，配货点不能为空。";
 								break;
+							}
+							if (receiverId == null) {
+								errorMsg = "第" + (rowNum + 1)
+										+ "行数据不正确，配货点不存在。";
+								break;
+							}
+							master.setReceiverId(receiverId);
+							master.setReceiverName(value);
+						} else {
+							if (!master.getReceiverId().equals(receiverId)) {
+								errorMsg = "第" + (rowNum + 1)
+										+ "行数据不正确，配货点不正确。";
+								break;
+							}
+						}
+					} else if (i == 6 && StringUtils.isNotBlank(value)) {
+						// 根据name取司机
+						if (master.getUserId() == null) {
+							for (TImsUsersDto o : drivers) {
+								if (value.equals(o.getName())) {
+									master.setUserId(o.getId());
+									break;
+								}
+							}
+						} else {
+							for (TImsUsersDto o : drivers) {
+								if (value.equals(o.getName())) {
+									if(!o.getId().equals(master.getUserId())){
+										errorMsg = "第" + (rowNum + 1)
+												+ "行数据不正确，驾驶员不正确。";
+										break;
+									}
+								}
 							}
 						}
 					} else if (i == 7 && StringUtils.isNotBlank(value)) {

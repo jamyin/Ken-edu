@@ -93,6 +93,7 @@ public class ProLedgerController extends BaseController{
 		}
 		mv.addObject("historyList", points);
 		
+		mv.addObject("baiduAk",PropertiesUtils.getProperty("baidu.ditu.ak"));
 		
 		return mv;
 	}

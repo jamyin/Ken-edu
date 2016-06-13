@@ -63,7 +63,7 @@
 					#allmap{height:500px;width:100%;}
 					#r-result{width:100%;}
 				</style>
-				<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=YN0mfG1VM2jrGV5jBB7RD6lKKmrDZA43"></script>
+				<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=${(baiduAk)!}"></script>
 				<title>添加/删除覆盖物</title>
 			</head>
 			<body>
@@ -77,7 +77,8 @@
 			<script type="text/javascript">
 				// 百度地图API功能
 				var map = new BMap.Map("allmap");
-				var point = new BMap.Point(121.462, 31.222);
+				var point = map.centerAndZoom("上海",15);      // 初始化地图,用城市名设置地
+				//var point = new BMap.Point(121.462, 31.222);
 				map.centerAndZoom(point, 15);
 				map.enableScrollWheelZoom(true);
 				
