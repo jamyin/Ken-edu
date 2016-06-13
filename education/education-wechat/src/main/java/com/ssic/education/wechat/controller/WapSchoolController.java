@@ -53,7 +53,9 @@ public class WapSchoolController extends BaseController{
 	@RequestMapping(value="index")
 	public ModelAndView index(String code){
 		
-		setWeixinOpenId(code);
+		if(StringUtils.isNotEmpty(code)){
+			setWeixinOpenId(code);	
+		}
 		
 		ModelAndView mv = getModelAndView();
 
