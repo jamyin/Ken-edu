@@ -3,6 +3,7 @@ package com.ssic.education.app.service;
 import com.ssic.educateion.common.dto.ProSupplierDto;
 import com.ssic.education.app.dto.MaterialSupplierDto;
 import com.ssic.education.app.dto.SupplierLicDto;
+import com.ssic.education.handle.pojo.EduCanteen;
 import com.ssic.education.handle.pojo.ProSupplier;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
@@ -30,6 +31,8 @@ public interface ISupplierService {
 	 * @date 2016年5月23日 下午4:21:39	 
 	 */
 	SupplierLicDto findSupplierInfo(String supplier_id);
+
+	EduCanteen findCanteenByid(String id);
 
 	/**     
 	 * findListByIds：查询所有供应商-带分页

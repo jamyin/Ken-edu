@@ -17,7 +17,7 @@ import lombok.Data;
  * <p>修改备注：</p>
  */
 
-public @Data class ledgerDetailDto {
+public @Data class LedgerDetailDto {
 	private String id;
 	private String masterId;
 	private String name;

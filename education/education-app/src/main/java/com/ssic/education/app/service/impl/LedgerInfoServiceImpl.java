@@ -12,7 +12,7 @@ import com.ssic.education.app.dao.SupplierInfoDao;
 import com.ssic.education.app.dto.LedgerInfoDto;
 import com.ssic.education.app.dto.LedgerMasterInfoDto;
 import com.ssic.education.app.dto.LedgerMasterListDto;
-import com.ssic.education.app.dto.ledgerDetailDto;
+import com.ssic.education.app.dto.LedgerDetailDto;
 import com.ssic.education.app.service.ILedgerInfoService;
 import com.ssic.education.handle.dao.ProLedgerMasterDao;
 import com.ssic.education.handle.pojo.ProLedger;
@@ -95,8 +95,8 @@ public class LedgerInfoServiceImpl implements ILedgerInfoService {
 		List<ProLedger> ProLedgerList = ledgerInfoDao.findProLedgerList(Ledger, page);
 		if (ProLedgerString != null) {
 			ledgerMaster.setStock(listToString(ProLedgerString));
-			List<ledgerDetailDto> ldd = BeanUtils.createBeanListByTarget(ProLedgerList, ledgerDetailDto.class);
-			ledgerMaster.setResultLedger((new PageResult<ledgerDetailDto>(page, ldd)));
+			List<LedgerDetailDto> ldd = BeanUtils.createBeanListByTarget(ProLedgerList, LedgerDetailDto.class);
+			ledgerMaster.setResultLedger((new PageResult<LedgerDetailDto>(page, ldd)));
 			ledgerMaster.setOutset(supplierInfoDao.getSupplierName(ledgerMaster.getSourceId()));
 		}
 		//TODO 还缺少采购品列表

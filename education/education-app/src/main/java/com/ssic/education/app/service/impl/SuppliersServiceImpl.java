@@ -12,18 +12,18 @@ import com.ssic.education.app.dto.MaterialSupplierDto;
 import com.ssic.education.app.dto.SupplierLicDto;
 import com.ssic.education.app.service.ISupplierService;
 import com.ssic.education.handle.dao.SupplierDao;
+import com.ssic.education.handle.pojo.EduCanteen;
 import com.ssic.education.handle.pojo.ProLicense;
 import com.ssic.education.handle.pojo.ProSupplier;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 import com.ssic.education.utils.util.BeanUtils;
 
-/**	
-* @ClassName: SupplierServiceImpl
-* @Description: TODO(这里用一句话描述这个类的作用)
-* @author Ken Yin
-* @date 2016年5月12日 下午2:20:58
-*
+/**
+ * 
+ * 供应商信息类
+ * @author SeanYoung
+ *
  */
 @Service
 public class SuppliersServiceImpl implements ISupplierService {
@@ -93,5 +93,12 @@ public class SuppliersServiceImpl implements ISupplierService {
 			return null;
 		}
 
+	}
+
+	@Override
+	public EduCanteen findCanteenByid(String id) {
+		EduCanteen canteen = new EduCanteen();
+		canteen = this.supplierInfoDao.findCanteenById(id);
+		return null;
 	}
 }
