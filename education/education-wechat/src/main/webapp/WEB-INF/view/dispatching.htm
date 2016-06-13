@@ -14,7 +14,7 @@
 			<#if resultList ??>
 				<#list resultList as result>
 					<li>
-						<a href="/wap/map/show/${(result.id)!}.htm"></a>
+						<a class="link" href="/wap/map/show/${(result.id)!}.htm"></a>
 						<p>配送号：${(result.wareBatchNo)!}<br>配送日期：${(result.actionDate?string('yyyy-MM-dd'))!}</p>
 						<p class="oth">
 							出发地：
