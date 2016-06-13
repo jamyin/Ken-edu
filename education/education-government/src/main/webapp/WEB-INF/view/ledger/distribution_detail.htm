@@ -44,12 +44,12 @@
       <div class="info">
         <p class="driver"><span>${(ledgerDto.driverName)!}</span></p>
         <p>出发点：<span><#if proSupplierDto??>${(dto.supplierName)!}</#if></span></p>
-        <p>出发时间：<span>${(ledgerDto.startTime)!}</span></p>
+        <p>出发时间：<span>${ledgerDto.startTime?string("yyyy-MM-dd")}</span></p>
         <p>货物：<span> <#if ledgerDtos??>
         <#list ledgerDtos as ledgerDtos>${(ledgerDtos.name)!}&nbsp;</#list>
         </#if></span></p>
         <p>目的地：<span>${(ledgerDto.receiverName)!}</span></p>
-        <p>到达时间：<span>${(ledgerDto.endTime)!}</span></p>
+        <p>到达时间：<span>${ledgerDto.endTime?string("yyyy-MM-dd")}</span></p>
       </div>
       <div class="map">
       	<#if historyList ??>
