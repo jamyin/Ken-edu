@@ -188,6 +188,13 @@ public class ProPackagesDao extends MyBatisBaseDao<ProPackages>{
 		List<ProDishes> proWaress =  new Gson().fromJson(jsonWares, new TypeToken<List<ProDishes>>(){}.getType());
 		List<ProNutritional> proNutritionals = new Gson().fromJson(jsonNutritional, new TypeToken<List<ProNutritional>>(){}.getType());
 		ProPackages proPackages = BeanUtils.createBeanByTarget(dto, ProPackages.class);
+		SimpleDateFormat sdf=new SimpleDateFormat(DateUtils.YMD_DASH);
+		try {
+			proPackages.setSupplyDate(sdf.parse(dto.getSupplyDateStr()));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.updateByPrimaryKeySelective(proPackages);
 		ProDishesExample exampleDis = new ProDishesExample();
 		ProDishesExample.Criteria criteriaDis = exampleDis.createCriteria();

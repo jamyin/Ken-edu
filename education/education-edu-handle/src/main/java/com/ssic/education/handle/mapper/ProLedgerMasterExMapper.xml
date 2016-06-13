@@ -66,7 +66,7 @@
 		</if>
 		AND b.stat=1
 		GROUP BY b.ware_batch_no
-		ORDER BY a.create_time desc
+		ORDER BY b.action_date DESC,a.create_time desc
 		limit #{page.startNum},
 		#{page.pageSize}
 	</select>
