@@ -171,6 +171,17 @@ public class SupplierInfoDao {
 		return licenseMapper.selectByExample(example);
 	}
 
+	public List<ProLicense> getCenteenLic(String relationId) {
+		ProLicenseExample example = new ProLicenseExample();
+		ProLicenseExample.Criteria criteria = example.createCriteria();
+		if (StringUtils.isNotBlank(relationId)) {
+			criteria.andRelationIdEqualTo(relationId);
+			criteria.andCerSourceEqualTo((short) 3);
+		}
+		criteria.andStatEqualTo(DataStatus.ENABLED);
+		return licenseMapper.selectByExample(example);
+	}
+
 	public List<ProLicense> getWaresLic(String relationId, short cerSource) {
 		ProLicenseExample example = new ProLicenseExample();
 		ProLicenseExample.Criteria criteria = example.createCriteria();

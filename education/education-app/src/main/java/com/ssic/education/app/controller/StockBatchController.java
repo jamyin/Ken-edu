@@ -86,9 +86,9 @@ public class StockBatchController {
 	 */
 	@RequestMapping(value = "/driverlist/{userId}", method = RequestMethod.POST)
 	@ResponseBody
-	public Response<PageResult<LedgerMasterListDto>> getMaterialByUser(@PathVariable("userId") String userId, PageQuery query,Date actionDate) {
+	public Response<PageResult<LedgerMasterListDto>> getMaterialByUser(@PathVariable("userId") String userId, PageQuery query, Date actionDate) {
 		Response<PageResult<LedgerMasterListDto>> result = new Response<PageResult<LedgerMasterListDto>>();
-		PageResult<LedgerMasterListDto> ledgerInfoDto = ledgerInfoService.findMasterDriverList(userId, query,actionDate);
+		PageResult<LedgerMasterListDto> ledgerInfoDto = ledgerInfoService.findMasterDriverList(userId, query, actionDate);
 		result.setData(ledgerInfoDto);
 		return result;
 	}
@@ -111,7 +111,7 @@ public class StockBatchController {
 		result.setData(LedgerInfoDto);
 		return result;
 	}
-	
+
 	@RequestMapping(value = "/updateStatus/{id}/{status}", method = RequestMethod.GET)
 	@ResponseBody
 	public Response<Integer> updateStatus(@PathVariable("id") String id, @PathVariable("status") String status) {

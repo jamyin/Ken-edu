@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssic.educateion.common.dto.ProSupplierDto;
 import com.ssic.educateion.common.dto.ProWaresDto;
+import com.ssic.education.app.dto.AppCanTeenDto;
 import com.ssic.education.app.dto.MaterialSupplierDto;
 import com.ssic.education.app.dto.SupplierLicDto;
 import com.ssic.education.app.service.ISupplierService;
@@ -157,8 +158,7 @@ public class SupplierController {
 	 * @date 2016年5月23日 下午4:24:30
 	 */
 	@RequestMapping("/findSupplierList/{id}")
-	@ResponseBody
-	public Response<PageResult<MaterialSupplierDto>> findSupplierList(@PathVariable("id") String id, ProSupplier supplier, PageQuery query) {
+	public @ResponseBody Response<PageResult<MaterialSupplierDto>> findSupplierList(@PathVariable("id") String id, ProSupplier supplier, PageQuery query) {
 		Response<PageResult<MaterialSupplierDto>> result = new Response<PageResult<MaterialSupplierDto>>();
 		if (StringUtils.isEmpty(id)) {
 			result.setStatus(DataStatus.HTTP_FAILE);
@@ -174,6 +174,18 @@ public class SupplierController {
 		}
 		result.setStatus(DataStatus.HTTP_SUCCESS);
 		result.setMessage("未查到相关记录！");
+		return result;
+	}
+
+	/**
+	 * 根据ID查询食堂信息
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/findCantenn/{id}")
+	public @ResponseBody Response<AppCanTeenDto> findCantennById(@PathVariable("id") String id) {
+		Response<AppCanTeenDto> result = new Response<AppCanTeenDto>();
+		result.setData(this.supplierService.findCanteenByid(id));
 		return result;
 	}
 }

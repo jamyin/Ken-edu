@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ssic.educateion.common.dto.ProSupplierDto;
 import com.ssic.education.app.dao.SupplierInfoDao;
+import com.ssic.education.app.dto.AppCanTeenDto;
 import com.ssic.education.app.dto.AppLicenseDto;
 import com.ssic.education.app.dto.MaterialSupplierDto;
 import com.ssic.education.app.dto.SupplierLicDto;
@@ -96,9 +97,23 @@ public class SuppliersServiceImpl implements ISupplierService {
 	}
 
 	@Override
-	public EduCanteen findCanteenByid(String id) {
-		EduCanteen canteen = new EduCanteen();
-		canteen = this.supplierInfoDao.findCanteenById(id);
-		return null;
+	public AppCanTeenDto findCanteenByid(String id) {
+		EduCanteen canteen = this.supplierInfoDao.findCanteenById(id);
+		AppCanTeenDto canteenDto = BeanUtils.createBeanByTarget(canteen, AppCanTeenDto.class);
+		if (canteen != null) {
+			List<ProLicense> list = supplierInfoDao.getCenteenLic(canteen.getId());
+			if (null != list && !list.isEmpty()) {
+				for (ProLicense proLicense : list) {
+					if (null != proLicense.getLicPic()) {
+						String host = "http://192.168.1.242";
+						String pic = host + proLicense.getLicPic();
+						proLicense.setLicPic(pic);
+					}
+				}
+				List<AppLicenseDto> applic = BeanUtils.createBeanListByTarget(list, AppLicenseDto.class);
+				canteenDto.setAppLicense(applic);
+			}
+		}
+		return canteenDto;
 	}
 }
