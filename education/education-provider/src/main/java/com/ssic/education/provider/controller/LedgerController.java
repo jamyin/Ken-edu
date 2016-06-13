@@ -522,6 +522,11 @@ public class LedgerController {
 		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
 				ConfigUtil.SESSIONINFONAME);
 		// 当前登录用户所属供应商的id
+		if(info==null){
+			j.setMsg("尚未登录");
+			j.setSuccess(false);
+			return j;
+		}
 		String supplierId = info.getSupplierId();
 		String errorMsg = null;
 		Map<ProLedgerMaster, List<ProLedger>> masterLedger = new LinkedHashMap();
@@ -708,6 +713,10 @@ public class LedgerController {
 						}
 					} else if (i == 9 && StringUtils.isNotBlank(value)) {
 						// 生产日期
+						if(sdf.parse(value).after(master.getActionDate())){
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，生产日期不正确。";
+							break;
+						}
 						dto.setProductionDate(sdf.parse(value));
 					}
 				}

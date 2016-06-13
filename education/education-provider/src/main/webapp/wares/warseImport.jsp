@@ -47,7 +47,7 @@
 <table class="table table-hover table-condensed"  >
 		<tr>
 			<th>
-				导入供应商：
+				导入采购品：
 			</th>
 			<td>
 				<input type="file" name="filename">
