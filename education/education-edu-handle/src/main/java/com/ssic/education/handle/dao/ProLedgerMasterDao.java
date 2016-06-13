@@ -31,7 +31,7 @@ public class ProLedgerMasterDao extends MyBatisBaseDao<ProLedgerMaster>{
 		}
 		
 		criteria.andStatEqualTo(DataStatus.ENABLED);
-		
+		example.setOrderByClause(" haul_status asc,create_time desc ");
 		return mapper.selectByExample(example);
 	}
 	
