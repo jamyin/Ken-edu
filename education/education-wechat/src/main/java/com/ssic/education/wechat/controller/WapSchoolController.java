@@ -62,7 +62,7 @@ public class WapSchoolController extends BaseController{
 		eduParentScChDto.setParentId(parentId);
 		List<EduParentScChDto> dataList = iEduParentScChService.searchParentScChDtoList(eduParentScChDto);
 		if(dataList.isEmpty()){
-			return new ModelAndView("redirect:/index.htm");
+			return new ModelAndView("redirect:/index.htm?code="+code);
 		}
 		String schoolId = dataList.get(0).getSchoolId();
 
