@@ -77,6 +77,8 @@
 		if (sessionInfo_userId) {/*目的是，如果已经登陆过了，那么刷新页面后也不需要弹出登录窗体*/
 			loginDialog.dialog('close');
 			defaultUserInfoDialog.dialog('close');
+		}else{
+			window.location.href = "login.jsp";
 		}
 
 		$('#loginDialog input').keyup(function(event) {
