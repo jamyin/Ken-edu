@@ -26,6 +26,20 @@ public class ProLicenseDao extends MyBatisBaseDao<ProLicense>{
 	@Autowired
 	private ProLicenseExMapper exmapper;
 	
+	public ProLicense findById(String id) {
+		ProLicenseExample example = new ProLicenseExample();
+		ProLicenseExample.Criteria criteria = example.createCriteria();	
+		if (StringUtils.isNotBlank(id)) {
+			criteria.andIdEqualTo(id);	
+		}
+		List<ProLicense> proLicenses = mapper.selectByExample(example);
+		if (null != proLicenses && proLicenses.size()>0) {
+			return proLicenses.get(0);
+		}
+		return null;
+	}
+	
+	
 	public List<ProLicense> findById (String id, Integer cerSource) {
 		ProLicenseExample example = new ProLicenseExample();
 		ProLicenseExample.Criteria criteria = example.createCriteria();	
