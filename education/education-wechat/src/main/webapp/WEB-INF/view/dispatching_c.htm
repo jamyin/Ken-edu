@@ -86,7 +86,8 @@
 			<script type="text/javascript">
 				// 百度地图API功能
 				var map = new BMap.Map("allmap");
-				var point = new BMap.Point(121.462, 31.222);
+				var point = map.centerAndZoom("上海",15);      // 初始化地图,用城市名设置地
+				//var point = new BMap.Point(121.462, 31.222);
 				map.centerAndZoom(point, 15);
 				map.enableScrollWheelZoom(true);
 				
