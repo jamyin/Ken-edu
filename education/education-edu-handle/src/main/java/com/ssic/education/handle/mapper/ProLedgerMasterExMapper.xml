@@ -26,9 +26,9 @@
 		a.production_name as productionName,a.batch_no as batchNo,a.trace_code as traceCode,a.create_time as createTime,a.last_update_time as lastUpdateTime,a.stat
 		FROM t_pro_ledger a
 		LEFT JOIN t_pro_ledger_master b on a.master_id = b.id
-		WHERE a.stat=1 and b.stat = 1 
+		WHERE 
 		<if test="ledgerDto.receiverId != null  and ledgerDto.receiverId !=''">
-			AND b.receiver_id = #{ledgerDto.receiverId}
+			 b.receiver_id = #{ledgerDto.receiverId}
 		</if>
 		<if test="ledgerDto.masterId != null  and ledgerDto.masterId !=''">
 			AND b.id = #{ledgerDto.masterId}
@@ -40,6 +40,7 @@
 		<if test="ledgerDto.wareBatchNo != null  and ledgerDto.wareBatchNo !=''">
 			AND b.ware_batch_no = #{ledgerDto.wareBatchNo}
 		</if>
+		AND a.stat=1 and b.stat = 1 
 	</select>
 	
 	<select id="selectLedgerListOrderby" resultType="com.ssic.educateion.common.dto.LedgerDto" parameterType="com.ssic.educateion.common.dto.LedgerDto">
@@ -49,9 +50,9 @@
 		FROM t_pro_ledger a
 		LEFT JOIN t_pro_ledger_master b on a.master_id = b.id
 		LEFT JOIN t_pro_supplier c on b.source_id = c.id
-		WHERE a.stat = 1 and b.stat=1
+		WHERE 
 		<if test="ledgerDto.receiverId != null  and ledgerDto.receiverId !=''">
-			AND b.receiver_id = #{ledgerDto.receiverId}
+			b.receiver_id = #{ledgerDto.receiverId}
 		</if>
 		<if test="ledgerDto.masterId != null  and ledgerDto.masterId !=''">
 			AND b.id = #{ledgerDto.masterId}
@@ -63,6 +64,7 @@
 			AND a.name like "%"#{ledgerDto.receiverName}"%"
 			OR b.ware_batch_no like "%"#{ledgerDto.receiverName}"%"
 		</if>
+		AND a.stat=1 and b.stat = 1 
 		GROUP BY b.ware_batch_no
 		ORDER BY a.create_time desc
 		limit #{page.startNum},
@@ -73,9 +75,9 @@
 		SELECT count(*) from  (SELECT b.id, COUNT(*) counts FROM t_pro_ledger a
 		LEFT JOIN t_pro_ledger_master b on a.master_id = b.id
 		LEFT JOIN t_pro_supplier c on b.source_id = c.id
-		WHERE a.stat = 1 and b.stat=1
+		WHERE
 		<if test="ledgerDto.receiverId != null  and ledgerDto.receiverId !=''">
-			AND b.receiver_id = #{ledgerDto.receiverId}
+			b.receiver_id = #{ledgerDto.receiverId}
 		</if>
 		<if test="ledgerDto.masterId != null  and ledgerDto.masterId !=''">
 			AND b.id = #{ledgerDto.masterId}
@@ -87,6 +89,7 @@
 			AND a.name like "%"#{ledgerDto.receiverName}"%"
 			OR b.ware_batch_no like "%"#{ledgerDto.receiverName}"%"
 		</if>
+		AND a.stat=1 and b.stat = 1 
 		GROUP BY b.ware_batch_no) t
 	</select>
 	<select id="findAllLedger" resultType="com.ssic.educateion.common.dto.LedgerDto">
