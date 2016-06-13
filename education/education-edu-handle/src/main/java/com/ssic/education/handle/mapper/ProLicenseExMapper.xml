@@ -14,7 +14,7 @@
 			FROM
 				t_pro_license a
 			WHERE
-				a.relation_id =#{license.relationId}
+				a.relation_id =#{license.relationId} and a.stat=1
 			AND a.cer_source = #{license.cerSource}		
 	</select>
 	

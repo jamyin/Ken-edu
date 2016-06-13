@@ -148,8 +148,8 @@
 											</#if>
 										</#list>
 									<#else>
-										<input style="display:none;" type="text" class="proLicenseId1" placeholder="" value="">
 										<li name="phoneFile1">
+										<input style="display:none;" type="text" class="proLicenseId1" name="proLicenseId" placeholder="" value="">
 											<select class="licType1">
 												<option value="" >请选择</option>
 												<option value="0" >餐饮服务证</option>
@@ -189,21 +189,22 @@
 <script>
 	$(function(){			
 		
-		$('.c_type').on('click', 'span', function(){
+		$('#edit_c_type').on('click', 'span', function(){
 			var _tag = $(this).attr('class')
 			if(_tag == 'add'){
 				var _ind = $(this).closest('ul').find('li').length + 1
 				//alert(_ind)
-				$('.c_type').append('<li name="phoneFile'+ _ind +'"><select class="licType'+  _ind +'" id=""><option value=\"0\">餐饮服务证</option><option value=\"1\">食品经营许可证</option><option value=\"2\">食品流通证</option><option value=\"3\">食品生产证</option><option value=\"4\">工商执照</option>></select><input id="licNum" type="text" class="licinputw'+ _ind +'" name="licNum" placeholder="证件编号"><label class="file" for="phoneFile'+ _ind +'">未选择文件<i>浏览</i></label><input id="phoneFile'+ _ind +'"  type="file" name="file" onchange="selectfun(this)"><span class="remove">-</span><a id="phoneQuery'+ _ind +'"></a></li>')
+				$('#edit_c_type').append('<li name="phoneFile'+ _ind +'"><input style="display:none;" type="text" class="proLicenseId'+ _ind +'" name="proLicenseId" placeholder="" value=""><select class="licType'+  _ind +'" id=""><option value=\"0\">餐饮服务证</option><option value=\"1\">食品经营许可证</option><option value=\"2\">食品流通证</option><option value=\"3\">食品生产证</option><option value=\"4\">工商执照</option>></select><input id="licNum" type="text" class="licinputw'+ _ind +'" name="licNum" placeholder="证件编号"><label class="file" for="phoneFile'+ _ind +'">未选择文件<i>浏览</i></label><input id="phoneFile'+ _ind +'"  type="file" name="file" onchange="selectfun(this)"><span class="remove">-</span><a id="phoneQuery'+ _ind +'"></a></li>')
 			}else if(_tag == 'remove'){
 				$(this).closest('li').remove()
-				for(var i=0; i<$('.c_type').find('li').length;i++){
-					$('.c_type li').eq(i).find('#licNum').attr('class','licinputw'+(i+1))
-					$('.c_type li').eq(i).find('input[name=file]').attr('id','phoneFile'+(i+1))
-					$('.c_type li').eq(i).find('label.file').attr('for','phoneFile'+(i+1))
-					$('.c_type li').eq(i).find('select').attr('class','licType'+(i+1))
-					$('.c_type li').eq(i).find('a').attr('id','phoneQuery'+(i+1))
-					$('.c_type li').eq(i).attr('name','phoneFile'+(i+1))
+				for(var i=0; i<$('#edit_c_type').find('li').length;i++){
+					$('#edit_c_type li').eq(i).find('#licNum').attr('class','licinputw'+(i+1))
+					$('#edit_c_type li').eq(i).find('input[name=file]').attr('id','phoneFile'+(i+1))
+					$('#edit_c_type li').eq(i).find('label.file').attr('for','phoneFile'+(i+1))
+					$('#edit_c_type li').eq(i).find('select').attr('class','licType'+(i+1))
+					$('#edit_c_type li').eq(i).find('a').attr('id','phoneQuery'+(i+1))
+					$('#edit_c_type li').eq(i).attr('name','phoneFile'+(i+1))
+					$('#edit_c_type li').eq(i).find('input[name=proLicenseId]').attr('class','proLicenseId'+(i+1))
 				}
 			}
 		})
@@ -263,9 +264,27 @@
 			var jsonLic;
 			jsonLic = '[';
 			for (i=1; i<=_ind; i++) {
-				if ($.trim($('#phoneFile1').attr("value")).length >0 && $('#phoneFile1').attr("value") != 'undefined' && $('#phoneFile'+i+'').attr("value") != 'undefined' && $.trim($('#phoneFile'+i+'').attr("value")).length >0 ) {
+				var licTypeText= $('.licType'+i+'').find("option:selected").text();
+				if (jsonLic.indexOf(licTypeText) > -1) {
+					alert("证件类型'"+licTypeText+"'"+"已存在不能重复添加！");
+					return;
+				}
+				var picValue = $.trim($('.licinputw'+i+'').val());
+				if (picValue.length <= 0 || picValue == 'undefined') {
+					alert(licTypeText+"的证件号不能为空！");
+					return;
+				}
+				var picV1 = $('#phoneFile1').attr("value") ;
+				var picV = $('#phoneFile'+i+'').attr("value");
+				if (picV1 == 'undefined') {
+					picV1="";
+				}
+				if (picV == 'undefined') {
+					picV="";
+				}
+				//if ($.trim($('#phoneFile1').attr("value")).length >0 && $('#phoneFile1').attr("value") != 'undefined' && $('#phoneFile'+i+'').attr("value") != 'undefined' && $.trim($('#phoneFile'+i+'').attr("value")).length >0 ) {
 					jsonLic += '{\"id\":\"' +$('.proLicenseId'+i+'').val()+'\",'+'\"licPic\":\"' +$('#phoneFile'+i+'').attr("value")+'\",'+'\"licType\":\"' +$('.licType'+i+'').val()+'\",'+'\"licNo\":\"' +$('.licinputw'+i+'').val()+'\",'+'\"licName\":\"' +$('.licType'+i+'').find("option:selected").text()+'\"},';
-				}				
+				//}				
 			}
 			jsonLic += ']';
 			var canteenName = $.trim($("#canteenName").val());

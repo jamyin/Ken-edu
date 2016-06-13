@@ -114,6 +114,7 @@ public class EduUsersServiceImpl implements EduUsersService {
 			if (null != proLicenseDto && StringUtils.isNotBlank(proLicenseDto.getLicPic())) {
 				if (StringUtils.isNotBlank(proLicenseDto.getId())) {
 					ProLicense proLicense = BeanUtils.createBeanByTarget(proLicenseDto, ProLicense.class);
+					proLicense.setStat(DataStatus.ENABLED);
 					proLicenseDao.updateByPrimaryKeySelective(proLicense);
 				}else {
 					ProLicense proLicense = BeanUtils.createBeanByTarget(proLicenseDto, ProLicense.class);
