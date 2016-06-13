@@ -14,7 +14,7 @@
     <div class="track_box">
       <div class="dis_info">
         <span class="d_1"><label for="">配送号：</label><span class="d_2">${(ledgerDto.wareBatchNo)!}</span></span>
-        <span class="d_1"><label for="">配货日期：</label><span class="d_2">${ledgerDto.actionDate?string("yyyy-MM-dd")}</span></span>
+        <span class="d_1"><label for="">配货日期：</label><span class="d_2"><#if ledgerDto.actionDate??>${ledgerDto.actionDate?string("yyyy-MM-dd")}</#if></span></span>
         <span class="d_1"><label for="">出发点：</label><span class="d_2">${(dto.supplierName)!}</span></span>
         <span class="d_1"><label for="">状态：</label><span class="d_2"><#if ledgerDto.haulStatus == 0>未配送 </#if><#if ledgerDto.haulStatus == 1>配送中</#if><#if ledgerDto.haulStatus == 2>已配送</#if></span></span>
       </div>
@@ -44,12 +44,12 @@
       <div class="info">
         <p class="driver"><span>${(ledgerDto.driverName)!}</span></p>
         <p>出发点：<span><#if proSupplierDto??>${(dto.supplierName)!}</#if></span></p>
-        <p>出发时间：<span>${ledgerDto.startTime?string("yyyy-MM-dd")}</span></p>
+        <p>出发时间：<span><#if ledgerDto.startTime??>${ledgerDto.startTime?string("yyyy-MM-dd")}</#if></span></p>
         <p>货物：<span> <#if ledgerDtos??>
         <#list ledgerDtos as ledgerDtos>${(ledgerDtos.name)!}&nbsp;</#list>
         </#if></span></p>
         <p>目的地：<span>${(ledgerDto.receiverName)!}</span></p>
-        <p>到达时间：<span>${ledgerDto.endTime?string("yyyy-MM-dd")}</span></p>
+        <p>到达时间：<span><#if ledgerDto.endTime??>${ledgerDto.endTime?string("yyyy-MM-dd")}</#if></span></p>
       </div>
       <div class="map">
       	<#if historyList ??>
