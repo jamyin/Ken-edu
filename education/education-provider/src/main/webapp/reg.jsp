@@ -230,8 +230,8 @@
 								}
 								//加载
  								var dataParam = $("#submit_form").serialize();
-								console.log("dataParam"+dataParam);
-/* 								$.ajax({
+								//console.log("dataParam"+dataParam);
+ 								$.ajax({
 									url : '${pageContext.request.contextPath}/proUserRegController/pureg',
 									type : "POST",
 									data : dataParam,
@@ -243,7 +243,7 @@
 										//console.log(obj);
 										settime(obj);
 									}
-								}); */
+								});
 								
 							});
 
