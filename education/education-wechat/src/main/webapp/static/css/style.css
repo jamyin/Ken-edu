@@ -162,7 +162,8 @@ section.aptitude_c h2{width:100%;border-left:2px #60ac62 solid;margin-bottom:10p
 .dispatching_box ul li{position:relative;width:100%;overflow:hidden;border-top:1px #ddd solid;border-bottom:1px #ddd solid;margin-bottom:10px;background:#fff}
 .dispatching_box ul li p{width:100%;display:block;overflow:hidden;padding:10px 5%;line-height:2rem}
 .dispatching_box ul li p.oth{border-top:1px #e5e5e5 solid}
-.dispatching_box ul li a{position:absolute;width:100%;height:100%;left:0;top:0;display:block;color:#333;z-index:2}
+.dispatching_box ul li a{color:#333}
+.dispatching_box ul li a.link{position:absolute;width:100%;height:100%;left:0;top:0;display:block;color:#333;z-index:2}
 .dispatching_box ul li i{position:absolute;top:24px;right:5%;}
 .dispatching_box ul li i.notstart{color:red}
 .dispatching_box ul li i.end{color:#999}
