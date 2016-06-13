@@ -17,9 +17,22 @@ public class IndexController extends BaseController{
 	private EduSchoolService eduSchoolService;
 	
 	@RequestMapping(value="index")
-	public ModelAndView IndexController(EduSchoolDto eduSchoolDto,String code) {
+	public ModelAndView indexController(EduSchoolDto eduSchoolDto,String code) {
 		
 		setWeixinOpenId(code);
+		
+		ModelAndView mv = getModelAndView();
+		
+		List<EduSchoolDto> dataList = eduSchoolService.searchEduScholDtoList(eduSchoolDto);
+		
+		
+		mv.addObject("dataList",dataList);
+		mv.setViewName("index");
+		return mv;
+	}
+	
+	@RequestMapping(value="main")
+	public ModelAndView mainController(EduSchoolDto eduSchoolDto) {
 		
 		ModelAndView mv = getModelAndView();
 		
