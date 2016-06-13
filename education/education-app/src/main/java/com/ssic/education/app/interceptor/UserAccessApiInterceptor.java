@@ -1,15 +1,18 @@
 package com.ssic.education.app.interceptor;
 
-import java.io.PrintWriter;
 import java.lang.reflect.Method;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.ssic.education.utils.model.Response;
+import com.ssic.education.app.dto.AppEduUserDto;
+import com.ssic.education.app.dto.AppProUserDto;
+import com.ssic.education.utils.redis.WdRedisDao;
+import com.ssic.education.utils.util.StringUtils;
 
 /**
  * 拦截url中的token
@@ -17,45 +20,46 @@ import com.ssic.education.utils.model.Response;
  *
  */
 public class UserAccessApiInterceptor extends HandlerInterceptorAdapter {
+
+	@Autowired
+	private WdRedisDao<AppEduUserDto> eduRedisdao;
+	@Autowired
+	private WdRedisDao<AppProUserDto> proRedisdao;
+
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		Response<String> resoult = new Response<String>();
 		HandlerMethod handlerMethod = (HandlerMethod) handler;
 		Method method = handlerMethod.getMethod();
 		AccessRequired annotation = method.getAnnotation(AccessRequired.class);
 		if (annotation != null) {
-			System.out.println("扫描到注解：@AccessRequired");
-			String accessToken = request.getParameter("token");
-			/**
-			 * Do something
-			 */
-			response.setContentType("text/html;charset=utf-8"); //设置响应编码与浏览器查看编码
-			PrintWriter out = response.getWriter();
-			out.print(resoult);
-			response.getWriter().write("没有通过拦截，accessToken的值为：" + accessToken);
-			response.sendError(403, "Exception Request");
-			return false;
+			String eduToken = request.getParameter("edu");
+			String proToken = request.getParameter("pro");
+			if (StringUtils.isNotBlank(eduToken)) {
+				AppEduUserDto eduAppUser = eduRedisdao.get(eduToken, AppEduUserDto.class);
+				if (eduAppUser != null) {
+					return true;
+				} else {
+					response.setContentType("text/html;charset=utf-8"); //设置响应编码与浏览器查看编码
+					//PrintWriter out = response.getWriter();
+					//response.getWriter().write("没有通过拦截，accessToken的值为：" + eduToken + proToken);
+					response.sendError(403, "Access Denied！");
+					return false;
+				}
+			} else if (StringUtils.isNotBlank(proToken)) {
+				AppProUserDto proAppUser = proRedisdao.get(proToken, AppProUserDto.class);
+				if (proAppUser != null) {
+					return true;
+				} else {
+					response.setContentType("text/html;charset=utf-8"); //设置响应编码与浏览器查看编码
+					response.sendError(403, "Access Denied！");
+					return false;
+				}
+			} else {
+				response.setContentType("text/html;charset=utf-8"); //设置响应编码与浏览器查看编码
+				response.sendError(403, "Access Denied！");
+				return false;
+			}
+		} else {
+			return true;
 		}
-		// 没有注解通过拦截
-		return true;
 	}
 }
-
-//if (annotation != null) {
-//	System.out.println("扫描到注解：@AccessRequired");
-//	String accessToken = request.getParameter("token");
-//	/**
-//	 * Do something
-//	 */
-//
-//	//response.getOutputStream().print("没有通过拦截，token的值为：" + accessToken);
-//	//需要通知浏览器查看编码
-//	response.setContentType("text/html;charset=utf-8"); //设置响应编码与浏览器查看编码
-//	PrintWriter out = response.getWriter();
-//	//out.println("没有通过拦截，token的值为：" + accessToken);
-//	//response.sendError(500, "没有通过拦截，token的值为：" + accessToken);
-//	response.getWriter().write("没有通过拦截，token的值为：" + accessToken);
-//	return false;
-//} else {
-//	// 没有注解通过拦截
-//	return true;
-//}
