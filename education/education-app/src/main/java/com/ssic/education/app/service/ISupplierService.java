@@ -1,9 +1,9 @@
 package com.ssic.education.app.service;
 
 import com.ssic.educateion.common.dto.ProSupplierDto;
+import com.ssic.education.app.dto.AppCanTeenDto;
 import com.ssic.education.app.dto.MaterialSupplierDto;
 import com.ssic.education.app.dto.SupplierLicDto;
-import com.ssic.education.handle.pojo.EduCanteen;
 import com.ssic.education.handle.pojo.ProSupplier;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
@@ -32,7 +32,7 @@ public interface ISupplierService {
 	 */
 	SupplierLicDto findSupplierInfo(String supplier_id);
 
-	EduCanteen findCanteenByid(String id);
+	AppCanTeenDto findCanteenByid(String id);
 
 	/**     
 	 * findListByIds：查询所有供应商-带分页
