@@ -107,6 +107,45 @@ public class TaskController {
 	}
 
 	/**
+	 * 显示当前用户未读消息条数
+	* @Title: findReadAccount
+	* @Description: TODO(这里用一句话描述这个方法的作用)
+	* @author Ken Yin  
+	* @date 2016年6月14日 上午10:18:09
+	* @return Response<List<EduTaskDto>>    返回类型
+	 */
+	@RequestMapping("/findReadAccount/{id}")
+	@ResponseBody
+	public Response<Integer> findReadAccount(@PathVariable("id")String id) {
+		logger.info("id : " + id);
+		Response<Integer> result = new Response<Integer>();
+		if(StringUtils.isEmpty(id)){
+			result.setStatus(DataStatus.HTTP_FAILE);
+			result.setMessage("查询Id为空");
+			return result;
+		}
+
+		//查询当前用户接收任务列表-未读 
+		PageResult<EduTaskDto> dataList = taskService.findTaskListById(id, 0, new PageQuery());
+
+		//    	dto.setReceiveReadList(dataList);
+		//    	dto.setReceiveNotReadList(receiveNotReadList);
+		if(dataList != null){
+			result.setStatus(DataStatus.HTTP_SUCCESS);
+				if(dataList.getTotal() != 0){
+					result.setMessage("查询成功");
+				}else{
+					result.setMessage("未查到未读通知");
+				}
+			result.setData((int) dataList.getTotal());
+			return result;
+		}
+		result.setStatus(DataStatus.HTTP_SUCCESS);
+		result.setMessage("未查到未读通知");
+		return result;
+	}
+	
+	/**
 	 * @Title: findTask
 	 * @Description: 根据任务Id查询任务详情
 	 * @author Ken Yin  
