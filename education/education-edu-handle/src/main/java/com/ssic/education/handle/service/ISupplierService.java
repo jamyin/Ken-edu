@@ -78,6 +78,8 @@ public interface ISupplierService {
 		 * @parem limit 可以为空
 	 */
 	List<ProSupplierDto> searchSupplierListBySupplierId(String supplierId,String suppliName,Integer supplierType, Integer limit);
+	
+	List<ProSupplierDto> searchSchWareSuppListBySuppSchoolId(String supplierId,String schoolId,String suppliName,Integer supplierType, Integer limit);
 
 	ProSupplier findProSupplierByName(String value,String supplierId);
 

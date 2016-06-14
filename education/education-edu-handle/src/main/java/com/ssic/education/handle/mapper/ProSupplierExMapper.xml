@@ -50,6 +50,21 @@
 		</if>
 		
 	</select>
+	
+	<select id="searchSchWareSuppListBySuppSchoolId" resultMap="BaseResultMap">
+		SELECT * FROM t_pro_supplier ps WHERE EXISTS 
+		(
+			SELECT * FROM `t_pro_school_ware` psr WHERE  psr.`source_id`=#{supplierId} and psr.school_id = #{schoolId} AND ps.`id` = psr.`supplier_id`
+		) 
+		AND ps.`supplier_type` = #{supplierType} 
+		<if test="suppliName!=null">
+			and ps.supplier_name like '%${suppliName}%'
+		</if>
+		<if test="limit!=null">
+			limit #{limit}
+		</if>
+		
+	</select>	
 
 	<select id="findSupplierIdByName" resultType="String">
 		SELECT
