@@ -3,6 +3,7 @@ package com.ssic.education.handle.dao;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import lombok.Getter;
 
@@ -15,9 +16,12 @@ import com.ssic.educateion.common.dto.ProSupplierDto;
 import com.ssic.educateion.common.dto.SupplierDto;
 import com.ssic.educateion.common.utils.DataGrid;
 import com.ssic.educateion.common.utils.PageHelper;
+import com.ssic.education.handle.mapper.ProLicenseMapper;
 import com.ssic.education.handle.mapper.ProSupplierExMapper;
 import com.ssic.education.handle.mapper.ProSupplierMapper;
 import com.ssic.education.handle.mapper.ProSupplierReceiverMapper;
+import com.ssic.education.handle.pojo.ProLicense;
+import com.ssic.education.handle.pojo.ProLicenseExample;
 import com.ssic.education.handle.pojo.ProSupplier;
 import com.ssic.education.handle.pojo.ProSupplierExample;
 import com.ssic.education.handle.pojo.ProSupplierExample.Criteria;
@@ -42,19 +46,24 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 
 	@Autowired
 	private ProSupplierExMapper exMapper;
+
+	@Autowired
+	private ProSupplierReceiverMapper srMapper;
 	
 	@Autowired
-	private ProSupplierReceiverMapper  srMapper;
-	
-	public List<ProSupplierDto> findSupplierListBySchoolId(ProSupplierDto dto, PageQuery page){
+	private ProLicenseMapper plMapper;
+
+	public List<ProSupplierDto> findSupplierListBySchoolId(ProSupplierDto dto,
+			PageQuery page) {
 		return exMapper.findSupplierListBySchoolId(dto, page);
 	}
-	
+
 	public long countSupplierListBySchoolId(ProSupplierDto dto) {
 		return exMapper.countSupplierListBySchoolId(dto);
 	}
-	
-	public List<ProSupplierDto> findSupplierListByCommittee(ProSupplierDto dto, PageQuery page) {
+
+	public List<ProSupplierDto> findSupplierListByCommittee(ProSupplierDto dto,
+			PageQuery page) {
 		return exMapper.findSupplierListByCommittee(dto, page);
 	}
 
@@ -135,6 +144,127 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 		ps.setCreateTime(null);
 		ps.setLastUpdateTime(new Date());
 		exMapper.updateByPrimaryKeySelective(ps);
+		ProLicense pl=null;
+		if(ps.getFoodBusinessCode()!=null){
+			pl=new ProLicense();
+			pl.setLicNo(ps.getFoodBusinessCode());
+			pl.setUpdater(ps.getUpdater());
+			pl.setLastUpdateTime(ps.getLastUpdateTime());
+			ProLicenseExample example=new ProLicenseExample();
+			ProLicenseExample.Criteria criteria= example.createCriteria();
+			criteria.andLicNameEqualTo("食品经营许可证");
+			criteria.andLicTypeEqualTo(1);
+			criteria.andRelationIdEqualTo(ps.getId());
+			criteria.andStatEqualTo(1);
+			int i = plMapper.updateByExampleSelective(pl, example);
+			if(i==0){
+				pl.setId(UUID.randomUUID().toString());
+				pl.setLicName("食品经营许可证");
+				pl.setLicType(1);
+				pl.setRelationId(ps.getId());
+				pl.setStat(1);
+				pl.setCreator(pl.getUpdater());
+				pl.setCreateTime(pl.getLastUpdateTime());
+				pl.setCerSource((short)0);
+				plMapper.insertSelective(pl);
+			}
+		}
+		if(ps.getFoodCirculationCode()!=null){
+			pl=new ProLicense();
+			pl.setLicNo(ps.getFoodCirculationCode());
+			pl.setUpdater(ps.getUpdater());
+			pl.setLastUpdateTime(ps.getLastUpdateTime());
+			ProLicenseExample example=new ProLicenseExample();
+			ProLicenseExample.Criteria criteria= example.createCriteria();
+			criteria.andLicNameEqualTo("食品流通许可证");
+			criteria.andLicTypeEqualTo(2);
+			criteria.andRelationIdEqualTo(ps.getId());
+			criteria.andStatEqualTo(1);
+			int i = plMapper.updateByExampleSelective(pl, example);
+			if(i==0){
+				pl.setId(UUID.randomUUID().toString());
+				pl.setLicName("食品流通许可证");
+				pl.setLicType(2);
+				pl.setRelationId(ps.getId());
+				pl.setStat(1);
+				pl.setCreator(pl.getUpdater());
+				pl.setCreateTime(pl.getLastUpdateTime());
+				pl.setCerSource((short)0);
+				plMapper.insertSelective(pl);
+			}
+		}
+		if(ps.getFoodProduceCode()!=null){
+			pl=new ProLicense();
+			pl.setLicNo(ps.getFoodProduceCode());
+			pl.setUpdater(ps.getUpdater());
+			pl.setLastUpdateTime(ps.getLastUpdateTime());
+			ProLicenseExample example=new ProLicenseExample();
+			ProLicenseExample.Criteria criteria= example.createCriteria();
+			criteria.andLicNameEqualTo("食品生产许可证");
+			criteria.andLicTypeEqualTo(3);
+			criteria.andRelationIdEqualTo(ps.getId());
+			criteria.andStatEqualTo(1);
+			int i = plMapper.updateByExampleSelective(pl, example);
+			if(i==0){
+				pl.setId(UUID.randomUUID().toString());
+				pl.setLicName("食品生产许可证");
+				pl.setLicType(3);
+				pl.setRelationId(ps.getId());
+				pl.setStat(1);
+				pl.setCreator(pl.getUpdater());
+				pl.setCreateTime(pl.getLastUpdateTime());
+				pl.setCerSource((short)0);
+				plMapper.insertSelective(pl);
+			}
+		}
+		if(ps.getFoodServiceCode()!=null){
+			pl=new ProLicense();
+			pl.setLicNo(ps.getFoodServiceCode());
+			pl.setUpdater(ps.getUpdater());
+			pl.setLastUpdateTime(ps.getLastUpdateTime());
+			ProLicenseExample example=new ProLicenseExample();
+			ProLicenseExample.Criteria criteria= example.createCriteria();
+			criteria.andLicNameEqualTo("餐饮服务许可证");
+			criteria.andLicTypeEqualTo(0);
+			criteria.andRelationIdEqualTo(ps.getId());
+			criteria.andStatEqualTo(1);
+			int i = plMapper.updateByExampleSelective(pl, example);
+			if(i==0){
+				pl.setId(UUID.randomUUID().toString());
+				pl.setLicName("餐饮服务许可证");
+				pl.setLicType(0);
+				pl.setRelationId(ps.getId());
+				pl.setStat(1);
+				pl.setCreator(pl.getUpdater());
+				pl.setCreateTime(pl.getLastUpdateTime());
+				pl.setCerSource((short)0);
+				plMapper.insertSelective(pl);
+			}
+		}
+		if(ps.getBusinessLicense()!=null){
+			pl=new ProLicense();
+			pl.setLicNo(ps.getBusinessLicense());
+			pl.setUpdater(ps.getUpdater());
+			pl.setLastUpdateTime(ps.getLastUpdateTime());
+			ProLicenseExample example=new ProLicenseExample();
+			ProLicenseExample.Criteria criteria= example.createCriteria();
+			criteria.andLicNameEqualTo("工商营业执照");
+			criteria.andLicTypeEqualTo(4);
+			criteria.andRelationIdEqualTo(ps.getId());
+			criteria.andStatEqualTo(1);
+			int i = plMapper.updateByExampleSelective(pl, example);
+			if(i==0){
+				pl.setId(UUID.randomUUID().toString());
+				pl.setLicName("工商营业执照");
+				pl.setLicType(4);
+				pl.setRelationId(ps.getId());
+				pl.setStat(1);
+				pl.setCreator(pl.getUpdater());
+				pl.setCreateTime(pl.getLastUpdateTime());
+				pl.setCerSource((short)0);
+				plMapper.insertSelective(pl);
+			}
+		}
 	}
 
 	public int deleteSupplierById(String id) {
@@ -229,7 +359,7 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 		ProSupplierExample example = new ProSupplierExample();
 		ProSupplierExample.Criteria criteria = example.createCriteria();
 
-		if(sourceIds!=null && sourceIds.size()>0){
+		if (sourceIds != null && sourceIds.size() > 0) {
 			criteria.andIdIn(sourceIds);
 		}
 
