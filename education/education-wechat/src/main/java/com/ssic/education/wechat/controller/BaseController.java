@@ -45,9 +45,10 @@ public class BaseController {
 		Object objParent = getRequest().getSession().getAttribute("parentId");
 		if(objParent!=null){
 			parentId = String.valueOf(objParent);
-		}else{
-			return new ModelAndView("redirect:index.htm");
 		}
+//		else{
+//			return new ModelAndView("redirect:index.htm");
+//		}
 //		System.out.println("parentId "+parentId);
 //		getopenId(getaccess_token());
 		mv.addObject("wwwdomain", PropertiesUtils.getProperty("upload.look.url"));
