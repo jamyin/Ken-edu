@@ -2,7 +2,6 @@ package com.ssic.education.wechat.controller;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.Gson;
-import com.ssic.educateion.common.dto.BaiduHistoryDto;
 import com.ssic.educateion.common.dto.BaiduPointsDto;
 import com.ssic.educateion.common.dto.ProLedgerDto;
 import com.ssic.educateion.common.dto.ProLedgerMasterDto;
@@ -22,32 +19,27 @@ import com.ssic.education.handle.service.IProLedgerMasterService;
 import com.ssic.education.handle.service.ProLedgerService;
 import com.ssic.education.handle.service.ProSupplierService;
 import com.ssic.education.handle.service.ProWaresService;
-import com.ssic.education.utils.util.DateUtils;
-import com.ssic.education.utils.util.HttpClientUtil;
 import com.ssic.education.utils.util.PropertiesUtils;
 
 @Controller
-@RequestMapping(value="/wap/map")
-public class MapBaiduController extends BaseController{
-	
+@RequestMapping(value="app")
+public class AppMapViewController {
+
 	@Autowired
 	private ProLedgerService proLedgerService;
-	
+
 	@Autowired
 	private IProLedgerMasterService iProLedgerMasterService;
-	
-	
+
 	@Autowired
 	private ProWaresService proWaresService;
-	
-	
+
 	@Autowired
 	private ProSupplierService proSupplierService;
 	
-	
-	@RequestMapping(value="show/{masterId}")
-	public ModelAndView show(@PathVariable String masterId){
-		ModelAndView mv = getModelAndView();
+	@RequestMapping(value="/showMap/{masterId}")
+	public ModelAndView showMap(@PathVariable String masterId) {
+		ModelAndView mv = new ModelAndView();
 
 		ProLedgerMasterDto resultDto = iProLedgerMasterService.searchProLedgerMasterDto(masterId);
 		
@@ -93,8 +85,10 @@ public class MapBaiduController extends BaseController{
 		mv.addObject("resultDto", resultDto);
 		
 		mv.addObject("baiduAk",PropertiesUtils.getProperty("baidu.ditu.ak"));
-		mv.setViewName("dispatching_c");
+		mv.setViewName("appMapView");
 		return mv;
 	}
 	
+	
+
 }

@@ -62,7 +62,7 @@ public class SchoolDao extends MyBatisBaseDao<EduSchool> {
 			}
 			if (StringUtils.isNotBlank(schoolDto.getSchoolName())){
 				criteria.andSchoolNameLike("%"+schoolDto.getSchoolName().trim()+"%");
-			}	
+			}
 			if (StringUtils.isNotBlank(schoolDto.getLevel())) {
 				criteria.andLevelLike("%" + schoolDto.getLevel().trim()+ "%");
 			}
@@ -71,8 +71,9 @@ public class SchoolDao extends MyBatisBaseDao<EduSchool> {
 			}
 			/*if (StringUtils.isNotBlank(schoolDto.getArea())){
 				criteria.andAreaEqualTo(schoolDto.getArea());
-			}	*/
+			}*/
 		}
+		criteria.andReviewedEqualTo((byte) DataStatus.ENABLED);            //过滤审核通过的学校
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 	}
 

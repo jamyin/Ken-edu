@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssic.education.app.constants.ProductClass;
 import com.ssic.education.app.constants.ProductList;
+import com.ssic.education.app.interceptor.AccessRequired;
 import com.ssic.education.utils.model.Response;
 
 /**		
@@ -35,6 +36,7 @@ public class SystematicsController {
 	 * @date 2016年5月16日 上午9:44:23
 	 */
 	@RequestMapping(value = "/typelist", method = RequestMethod.GET)
+	@AccessRequired
 	@ResponseBody
 	public Response<Map<Integer, String>> getDishesType() {
 		Response<Map<Integer, String>> result = new Response<Map<Integer, String>>();
@@ -50,6 +52,7 @@ public class SystematicsController {
 	 * @date 2016年5月16日 上午9:44:23
 	 */
 	@RequestMapping(value = "/DingTypelist", method = RequestMethod.GET)
+	@AccessRequired
 	@ResponseBody
 	public Response<List<ProductList>> Dinglist() {
 		Response<List<ProductList>> result = new Response<List<ProductList>>();

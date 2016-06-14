@@ -2,6 +2,7 @@ package com.ssic.educateion.common.dto;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 import lombok.Getter;
@@ -81,4 +82,40 @@ public class SupplierDto implements Serializable {
 	private Integer stat;
 
 	private Byte reviewed;
+
+	private String committeeId;
+	
+	private String areaName;
+
+	private List<ProLicenseDto> proLicenseDtoList;
+
+	private List<EduSchoolDto> schools; // 供应学校
+
+	private String schoolIds; // 供应学校id(用,分割)
+
+	private String schoolNames; // 供应学校名称(用,分割)
+
+	/* 以下为供应商资质信息 */
+
+	private String licName;
+
+	private String licNo;
+
+	private Integer licType;
+
+	private Date licEndDate;
+
+	private String licPic;
+
+	private Integer source;
+
+
+	private String idCard;
+
+	private String idType;
+
+	private String schoolId;
+	
+	private String updater;
+
 }

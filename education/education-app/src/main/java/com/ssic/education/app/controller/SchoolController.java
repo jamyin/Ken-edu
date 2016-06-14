@@ -154,6 +154,7 @@ public class SchoolController {
 	 * @return Response<SchoolDto>    返回类型
 	 */
 	@RequestMapping(value = "school")
+	@AccessRequired
 	@ResponseBody
 	public Response<EduSchoolDto> school(ProPackagesDto dto, PageQuery page) {
 		logger.info("ProPackagesDto : " + dto);
@@ -217,6 +218,7 @@ public class SchoolController {
 	 * @param supplyDateStr 套餐日期 默认为当前日期
 	 */
 	@RequestMapping(value = "searchPackages")
+	@AccessRequired
 	@ResponseBody
 	public Response<PageResult<ProPackagesDto>> searchPackages(ProPackagesDto dto, PageQuery page) {
 		logger.info("ProPackagesDto : " + dto);
@@ -241,6 +243,7 @@ public class SchoolController {
 	 * @return Response<PageResult<EduSchoolDto>>    返回类型
 	 */
 	@RequestMapping("/chooseSchool")
+	@AccessRequired
 	@ResponseBody
 	public Response<ChooseSchoolDto> chooseSchool(SchoolDto schoolDto, PageQuery query, Integer type, Integer sourceType) {
 		logger.info("SchoolDto : " + schoolDto + ";type : " + type + ";sourceType : " + sourceType);
@@ -310,6 +313,7 @@ public class SchoolController {
 	 * @return
 	 */
 	@RequestMapping("/user/{schoolId}")
+	@AccessRequired
 	public @ResponseBody Response<SchoolUserDto> schoolUser(@PathVariable("schoolId") String schoolId) {
 		return new Response<SchoolUserDto>(200, "查询成功", schoolService.findSchoolById(schoolId));
 	}

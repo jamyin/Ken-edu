@@ -1,10 +1,10 @@
-function enterLicenNO(objThis,fileNum,LicenType){
+function enterLicenNO(objThis,fileNum,LicenType,liceName){
 	var filePath = $(objThis).attr("data-path");
 	if (filePath==null || filePath==""){
 		filePath = "";
 	}
 	var licenseNo = $(objThis).val();
-	$("#file-"+fileNum).attr("value","工商营业执照#"+filePath+"#"+licenseNo+"#"+LicenType);
+	$("#file-"+fileNum).attr("value",liceName+"#"+filePath+"#"+licenseNo+"#"+LicenType);
 }
 
 $(function(){

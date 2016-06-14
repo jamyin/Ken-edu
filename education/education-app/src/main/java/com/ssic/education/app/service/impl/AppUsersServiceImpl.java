@@ -16,6 +16,7 @@ import com.ssic.education.app.token.TokenUtil;
 import com.ssic.education.handle.dao.CommitteeDao;
 import com.ssic.education.handle.pojo.EduCommittee;
 import com.ssic.education.handle.pojo.ProUsers;
+import com.ssic.education.utils.redis.WdRedisDao;
 import com.ssic.education.utils.util.BeanUtils;
 import com.ssic.education.utils.util.StringUtils;
 
@@ -30,6 +31,10 @@ public class AppUsersServiceImpl implements IAppUsersService {
 	private CommitteeDao committeeDao;
 	@Autowired
 	private SupplierInfoDao supplierDao;
+	@Autowired
+	private WdRedisDao<AppEduUserDto> eduRedisdao;
+	@Autowired
+	private WdRedisDao<AppProUserDto> proRedisdao;
 
 	@Override
 	public synchronized AppEduUserDto eduLogin(EduUsersInfoDto user) {
@@ -44,9 +49,28 @@ public class AppUsersServiceImpl implements IAppUsersService {
 				}
 			}
 			result.setToken(TokenUtil.getToken(user.getUserAccount()).getSignature());
-			//TODO 第一次登陆创建Token 第二次登录刷新Token 待实现
+			eduRedisdao.set(result, 5040);
 		}
 		return result;
+	}
+
+	@Override
+	public synchronized AppProUserDto proLogin(ProUsers user) {
+		List<ProUsers> list = proUsersDao.proUserLogin(user);
+		if (null != list && !list.isEmpty()) {
+			AppProUserDto apud = BeanUtils.createBeanByTarget(list.get(0), AppProUserDto.class);
+			apud.setToken(TokenUtil.getToken(apud.getUserAccount()).getSignature());
+			if (apud.getSourceId() != null) {
+				String supplierName = supplierDao.getSupplierName(apud.getSourceId());
+				if (supplierName != null)
+					apud.setSupplierName(supplierName);
+			}
+			apud.setJob("驾驶员");
+			proRedisdao.set(apud, 5040);
+			return apud;
+		} else {
+			return null;
+		}
 	}
 
 	@Override
@@ -64,24 +88,6 @@ public class AppUsersServiceImpl implements IAppUsersService {
 	}
 
 	@Override
-	public AppProUserDto proLogin(ProUsers user) {
-		List<ProUsers> list = proUsersDao.proUserLogin(user);
-		if (null != list && !list.isEmpty()) {
-			AppProUserDto apud = BeanUtils.createBeanByTarget(list.get(0), AppProUserDto.class);
-			apud.setToken(TokenUtil.getToken(apud.getUserAccount()).getSignature());
-			if (apud.getSourceId() != null) {
-				String supplierName = supplierDao.getSupplierName(apud.getSourceId());
-				if (supplierName != null)
-					apud.setSupplierName(supplierName);
-			}
-			apud.setJob("驾驶员");
-			return apud;
-		} else {
-			return null;
-		}
-	}
-
-	@Override
 	public int proUpdatePwd(String account, String oldPwd, String newPwd) {
 		ProUsers user = new ProUsers();
 		user.setPassword(oldPwd);
@@ -92,5 +98,23 @@ public class AppUsersServiceImpl implements IAppUsersService {
 		} else {
 			return 0;
 		}
+	}
+
+	@Override
+	public void eduLogout(String token) {
+		AppEduUserDto eduAppUser = eduRedisdao.get(token, AppEduUserDto.class);
+		if (eduAppUser != null) {
+			eduRedisdao.delete(eduAppUser, AppEduUserDto.class);
+		}
+
+	}
+
+	@Override
+	public void proLogout(String token) {
+		AppProUserDto proAppUser = proRedisdao.get(token, AppProUserDto.class);
+		if (proAppUser != null) {
+			proRedisdao.delete(proAppUser, AppProUserDto.class);
+		}
+
 	}
 }

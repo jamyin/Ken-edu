@@ -28,7 +28,7 @@
 		<ul>
 			<#if resultList ??>
 				<#list resultList as result>
-					<#if result.licType != 8>
+					<#if result.licType != 8 && result.licPic?exists>
 						<li><a href="#" data-path="${(result.licPic)!}" data-name="${(result.licName)!}" onclick="loadImage(this);"></a><label>${(result.licName)!}</label><span>${(result.licNo)!}</span></li>
 					</#if>
 				</#list>

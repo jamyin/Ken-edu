@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ssic.education.app.dto.LedgerInfoDto;
 import com.ssic.education.app.dto.LedgerMasterInfoDto;
 import com.ssic.education.app.dto.LedgerMasterListDto;
+import com.ssic.education.app.interceptor.AccessRequired;
 import com.ssic.education.app.service.ILedgerInfoService;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
@@ -47,8 +48,8 @@ public class StockBatchController {
 	 * @date 2016年5月16日 上午10:10:50
 	 */
 	@RequestMapping(value = "/info/{batchNo}", method = RequestMethod.GET)
-	@ResponseBody
-	public Response<LedgerInfoDto> getMaterialInfo(@PathVariable("batchNo") String batchNo) {
+	@AccessRequired
+	public @ResponseBody Response<LedgerInfoDto> getMaterialInfo(@PathVariable("batchNo") String batchNo) {
 		Response<LedgerInfoDto> result = new Response<LedgerInfoDto>();
 		LedgerInfoDto waresInfoList = ledgerInfoService.findLedgerByBatchNo(batchNo);
 		result.setData(waresInfoList);
@@ -66,8 +67,8 @@ public class StockBatchController {
 	 * @date 2016年5月27日 下午2:24:06
 	 */
 	@RequestMapping(value = "/list/{receiverId}", method = RequestMethod.POST)
-	@ResponseBody
-	public Response<PageResult<LedgerMasterListDto>> getMaterialInfo(@PathVariable("receiverId") String receiverId, PageQuery query) {
+	@AccessRequired
+	public @ResponseBody Response<PageResult<LedgerMasterListDto>> getMaterialInfo(@PathVariable("receiverId") String receiverId, PageQuery query) {
 		Response<PageResult<LedgerMasterListDto>> result = new Response<PageResult<LedgerMasterListDto>>();
 		PageResult<LedgerMasterListDto> ledgerInfoDto = ledgerInfoService.findMasterList(receiverId, query);
 		result.setData(ledgerInfoDto);
@@ -85,8 +86,8 @@ public class StockBatchController {
 	 * @date 2016年5月27日 下午2:24:06
 	 */
 	@RequestMapping(value = "/driverlist/{userId}", method = RequestMethod.POST)
-	@ResponseBody
-	public Response<PageResult<LedgerMasterListDto>> getMaterialByUser(@PathVariable("userId") String userId, PageQuery query, Date actionDate) {
+	@AccessRequired
+	public @ResponseBody Response<PageResult<LedgerMasterListDto>> getMaterialByUser(@PathVariable("userId") String userId, PageQuery query, Date actionDate) {
 		Response<PageResult<LedgerMasterListDto>> result = new Response<PageResult<LedgerMasterListDto>>();
 		PageResult<LedgerMasterListDto> ledgerInfoDto = ledgerInfoService.findMasterDriverList(userId, query, actionDate);
 		result.setData(ledgerInfoDto);
@@ -104,8 +105,8 @@ public class StockBatchController {
 	 * @date 2016年5月27日 下午2:39:55
 	 */
 	@RequestMapping(value = "/master/{id}", method = RequestMethod.GET)
-	@ResponseBody
-	public Response<LedgerMasterInfoDto> getMasterInfoById(@PathVariable("id") String id, PageQuery query) {
+	@AccessRequired
+	public @ResponseBody Response<LedgerMasterInfoDto> getMasterInfoById(@PathVariable("id") String id, PageQuery query) {
 		Response<LedgerMasterInfoDto> result = new Response<LedgerMasterInfoDto>();
 		LedgerMasterInfoDto LedgerInfoDto = ledgerInfoService.findMasterById(id, query);
 		result.setData(LedgerInfoDto);
@@ -113,8 +114,8 @@ public class StockBatchController {
 	}
 
 	@RequestMapping(value = "/updateStatus/{id}/{status}", method = RequestMethod.GET)
-	@ResponseBody
-	public Response<Integer> updateStatus(@PathVariable("id") String id, @PathVariable("status") String status) {
+	@AccessRequired
+	public @ResponseBody Response<Integer> updateStatus(@PathVariable("id") String id, @PathVariable("status") String status) {
 		Response<Integer> result = new Response<Integer>();
 		int num = ledgerInfoService.updateStatus(id, status);
 		if (num != -1) {

@@ -89,7 +89,7 @@
 							<div class="item col-xs-12">
 								<span class="intelligent-label f-fl"><b class="ftx04">*</b>短信验证码：</span>
 								<div class="f-fl item-ifo">
-									<input name="messageValid" type="text" class="txt03 f-r3 required" keycodes="tel" tabindex="3" data-valid="isNonEmpty" maxlength="11" id="messageValid" /> <span
+									<input name="messageValid" type="text" class="txt03 f-r3 required" keycodes="tel" data-valid="isNonEmpty" maxlength="11" id="messageValid" /> <span
 										class="ie8 icon-close close hide"></span> <label class="icon-sucessfill blank hide"></label>
 								</div>
 								<div class="f-fl item-ifo">
@@ -103,7 +103,7 @@
 						<div class="item col-xs-12" style="margin-top:80px;">
 	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>工商营业执照：</span>
      						<div class="f-fl item-ifo">
-		     						<input type="text" placeholder="输入工商营业执照号" data-valid="between:6-20" class="txt03 f-r3" id="licenseNo1" onkeyup="enterLicenNO(this,1,4);"/>
+		     						<input type="text" placeholder="输入工商营业执照号" data-valid="between:6-20" class="txt03 f-r3" id="licenseNo1" onkeyup="enterLicenNO(this,1,4,'工商营业执照');"/>
      						</div>	                        
 	                      <div class="f-fl item-ifo" style="margin-left:5px;">
 	                       		<input id="file-1" name="licenseList" type="checkbox" style="display:none;"/>
@@ -114,7 +114,7 @@
 						<div class="item col-xs-12">
 	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>餐饮服务许可证：</span>
      						<div class="f-fl item-ifo">
-		     						<input type="text" placeholder="输入餐饮服务许可证号" data-valid="between:6-20" class="txt03 f-r3" id="licenseNo2" onkeyup="enterLicenNO(this,2,0);"/>
+		     						<input type="text" placeholder="输入餐饮服务许可证号" data-valid="between:6-20" class="txt03 f-r3" id="licenseNo2" onkeyup="enterLicenNO(this,2,0,'餐饮服务许可证');"/>
      						</div>
 	                       <div class="f-fl item-ifo" style="margin-left:5px;">
 	                       		<input id="file-2" name="licenseList" type="checkbox" style="display:none;"/>
@@ -125,7 +125,7 @@
 						<div class="item col-xs-12">
 	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>食品流通许可证：</span>
      						<div class="f-fl item-ifo">
-		     						<input type="text" placeholder="输入食品流通许可证号" data-valid="between:6-20" class="txt03 f-r3" id="licenseNo3" onkeyup="enterLicenNO(this,3,2);"/>
+		     						<input type="text" placeholder="输入食品流通许可证号" data-valid="between:6-20" class="txt03 f-r3" id="licenseNo3" onkeyup="enterLicenNO(this,3,2,'食品流通许可证');"/>
      						</div>
 	                      <div class="f-fl item-ifo" style="margin-left:5px;">
 	                       		<input id="file-3" name="licenseList" type="checkbox" style="display:none;"/>
@@ -136,7 +136,7 @@
 						<div class="item col-xs-12">
 	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>食品生产许可证：</span>
      						<div class="f-fl item-ifo">
-		     						<input type="text" placeholder="输入食品生产许可证号" data-valid="between:6-20" class="txt03 f-r3" id="licenseNo4" onkeyup="enterLicenNO(this,4,3);"/>
+		     						<input type="text" placeholder="输入食品生产许可证号" data-valid="between:6-20" class="txt03 f-r3" id="licenseNo4" onkeyup="enterLicenNO(this,4,3,'食品生产许可证');"/>
      						</div>
 	                       <div class="f-fl item-ifo" style="margin-left:5px;">
 	                       		<input id="file-4" name="licenseList" type="checkbox" style="display:none;"/>
@@ -208,68 +208,6 @@
 	</div>
 	<script>
 		$(function() {
-			
-			//失去焦点事件
-			$("#picCaptcha").on("blur",function(){
-				var picCaptcha = $("#picCaptcha").val();
-				var dataParam = {picCaptcha:picCaptcha};
-				$.ajax({
-					url : '${pageContext.request.contextPath}/checkRandom',
-					type : "POST",
-					data : dataParam,
-					dataType : 'json',
-					success : function(data) {
-						if(data.status == 500){
-							$("#sendMessage").attr("disabled","disabled");
-							layer.alert(data.message, {icon: 2});
-						}else{
-							$("#sendMessage").removeAttr("disabled");
-						}
-					}
-				});
-			});
-			$("#sendMessage").click(function(){
-				var picCaptcha = $("#picCaptcha").val();
-				var mobilePhone = $("#phone").val();
-				var dataParam = {picCaptcha:picCaptcha,mobilePhone:mobilePhone};
-				$.ajax({
-					url : '${pageContext.request.contextPath}/SMS/send',
-					type : "POST",
-					data : dataParam,
-					dataType : 'json',
-					success : function(data) {
-						if(data.status == 500){
-							layer.alert(data.message, {icon: 2});
-						}else{
-							
-						}
-					}
-				});
-			});
-			$("#messageValid").on("blur",function(){
-				var validateCode = $("#messageValid").val();
-				var mobilePhone = $("#phone").val();
-				var dataParam = {validateCode:validateCode,mobilePhone:mobilePhone};
-				$.ajax({
-					url : '${pageContext.request.contextPath}/checkMobile',
-					type : "POST",
-					data : dataParam,
-					dataType : 'json',
-					success : function(data) {
-						if(data.status == 500){
-							$("#btn_part1").attr("disabled","disabled");
-							layer.alert(data.message, {icon: 2});
-						}else{
-							$("#btn_part1").removeAttr("disabled");
-						}
-					}
-				});
-			});
-			
-			$("#refreshValid").click(function(){
-				$(this).attr("src","${pageContext.request.contextPath}/drawRandom?"+Math.random());
-			});
-			
 			//第一页的确定按钮
 			$("#btn_part1").click(function() {
  								if (!verifyCheck._click()){
@@ -365,5 +303,6 @@
 	</script>
 	<script src="reg/js/reg.js"></script>
 	<script src="reg/js/regImages.js"></script>
+	<script src="reg/js/check.js"></script>
 </body>
 </html>
