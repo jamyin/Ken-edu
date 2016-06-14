@@ -33,7 +33,10 @@ $(function() {
 				if(data.status == 500){
 					layer.alert(data.message, {icon: 2});
 				}else{
-					
+					var obj =  $("#sendMessage");
+					$("#sendMessage").attr("disabled","disabled");
+					$("#sendMessage").css("background","#c6c6c6");
+					setMessagetime(obj);
 				}
 			}
 		});
@@ -64,3 +67,17 @@ $(function() {
 		$(this).attr("src","/ajax/drawRandom.htm?"+Math.random());
 	});
 });
+
+var countM = 90;
+function setMessagetime(obj) {
+	if (countM == 0) {
+		$(obj).removeAttr("disabled");
+		return false;
+	} else {
+		$(obj).val("获取短信验证码" + countM + "");
+		countM--;
+	}
+	setTimeout(function() {
+		setMessagetime(obj)
+	}, 1000)
+}
