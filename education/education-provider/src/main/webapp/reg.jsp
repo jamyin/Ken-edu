@@ -103,7 +103,7 @@
 						<div class="item col-xs-12" style="margin-top:80px;">
 	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>工商营业执照：</span>
      						<div class="f-fl item-ifo">
-		     						<input type="text" placeholder="输入工商营业执照号" data-valid="between:6-20" class="txt03 f-r3" id="licenseNo1" onkeyup="enterLicenNO(this,1,4);"/>
+		     						<input type="text" placeholder="输入工商营业执照号" data-valid="between:6-20" class="txt03 f-r3" id="licenseNo1" onkeyup="enterLicenNO(this,1,4,'工商营业执照');"/>
      						</div>	                        
 	                      <div class="f-fl item-ifo" style="margin-left:5px;">
 	                       		<input id="file-1" name="licenseList" type="checkbox" style="display:none;"/>
@@ -114,7 +114,7 @@
 						<div class="item col-xs-12">
 	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>餐饮服务许可证：</span>
      						<div class="f-fl item-ifo">
-		     						<input type="text" placeholder="输入餐饮服务许可证号" data-valid="between:6-20" class="txt03 f-r3" id="licenseNo2" onkeyup="enterLicenNO(this,2,0);"/>
+		     						<input type="text" placeholder="输入餐饮服务许可证号" data-valid="between:6-20" class="txt03 f-r3" id="licenseNo2" onkeyup="enterLicenNO(this,2,0,'餐饮服务许可证');"/>
      						</div>
 	                       <div class="f-fl item-ifo" style="margin-left:5px;">
 	                       		<input id="file-2" name="licenseList" type="checkbox" style="display:none;"/>
@@ -125,7 +125,7 @@
 						<div class="item col-xs-12">
 	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>食品流通许可证：</span>
      						<div class="f-fl item-ifo">
-		     						<input type="text" placeholder="输入食品流通许可证号" data-valid="between:6-20" class="txt03 f-r3" id="licenseNo3" onkeyup="enterLicenNO(this,3,2);"/>
+		     						<input type="text" placeholder="输入食品流通许可证号" data-valid="between:6-20" class="txt03 f-r3" id="licenseNo3" onkeyup="enterLicenNO(this,3,2,'食品流通许可证');"/>
      						</div>
 	                      <div class="f-fl item-ifo" style="margin-left:5px;">
 	                       		<input id="file-3" name="licenseList" type="checkbox" style="display:none;"/>
@@ -136,7 +136,7 @@
 						<div class="item col-xs-12">
 	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>食品生产许可证：</span>
      						<div class="f-fl item-ifo">
-		     						<input type="text" placeholder="输入食品生产许可证号" data-valid="between:6-20" class="txt03 f-r3" id="licenseNo4" onkeyup="enterLicenNO(this,4,3);"/>
+		     						<input type="text" placeholder="输入食品生产许可证号" data-valid="between:6-20" class="txt03 f-r3" id="licenseNo4" onkeyup="enterLicenNO(this,4,3,'食品生产许可证');"/>
      						</div>
 	                       <div class="f-fl item-ifo" style="margin-left:5px;">
 	                       		<input id="file-4" name="licenseList" type="checkbox" style="display:none;"/>
