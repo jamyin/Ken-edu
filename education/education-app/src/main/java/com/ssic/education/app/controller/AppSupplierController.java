@@ -46,8 +46,8 @@ public class AppSupplierController {
 	 * @return Response<EduTaskDto>    返回类型
 	 */
 	@RequestMapping("/findSupplierList")
-	@ResponseBody
-	public Response<PageResult<ProSupplierDto>> findSupplierList(ProSupplierDto proSupplierDto, PageQuery query) {
+	@AccessRequired
+	public @ResponseBody Response<PageResult<ProSupplierDto>> findSupplierList(ProSupplierDto proSupplierDto, PageQuery query) {
 		Response<PageResult<ProSupplierDto>> result = new Response<PageResult<ProSupplierDto>>();
 		PageResult<ProSupplierDto> supplierList = supplierService.findSupplierList(proSupplierDto, query);
 		if (supplierList.getResults() != null && supplierList.getResults().size() > 0) {
@@ -70,8 +70,8 @@ public class AppSupplierController {
 	* @return Response<ProSupplierDto>    返回类型
 	 */
 	@RequestMapping("/findSupplierDetail/{id}")
-	@ResponseBody
-	public Response<ProSupplierDto> findSupplierDetail(@PathVariable("id") String id) {
+	@AccessRequired
+	public @ResponseBody Response<ProSupplierDto> findSupplierDetail(@PathVariable("id") String id) {
 		Response<ProSupplierDto> result = new Response<ProSupplierDto>();
 		if (StringUtils.isEmpty(id)) {
 			result.setStatus(DataStatus.HTTP_FAILE);
@@ -98,8 +98,8 @@ public class AppSupplierController {
 	 * @return Response<ProSupplierDto>    返回类型
 	  */
 	@RequestMapping("/findSupplierWares")
-	@ResponseBody
-	public Response<PageResult<ProWaresDto>> findSupplierWares(ProWaresDto dto, PageQuery query) {
+	@AccessRequired
+	public @ResponseBody Response<PageResult<ProWaresDto>> findSupplierWares(ProWaresDto dto, PageQuery query) {
 		Response<PageResult<ProWaresDto>> result = new Response<PageResult<ProWaresDto>>();
 		if (dto.getId() == null) {
 			result.setStatus(DataStatus.HTTP_FAILE);
@@ -129,8 +129,8 @@ public class AppSupplierController {
 	 * @date 2016年5月23日 下午4:24:30
 	 */
 	@RequestMapping("/findSupplierInfo/{id}")
-	@ResponseBody
-	public Response<SupplierLicDto> findSupplierInfo(@PathVariable("id") String id) {
+	@AccessRequired
+	public @ResponseBody Response<SupplierLicDto> findSupplierInfo(@PathVariable("id") String id) {
 		Response<SupplierLicDto> result = new Response<SupplierLicDto>();
 		if (StringUtils.isEmpty(id)) {
 			result.setStatus(DataStatus.HTTP_FAILE);
@@ -159,6 +159,7 @@ public class AppSupplierController {
 	 * @date 2016年5月23日 下午4:24:30
 	 */
 	@RequestMapping("/findSupplierList/{id}")
+	@AccessRequired
 	public @ResponseBody Response<PageResult<MaterialSupplierDto>> findSupplierList(@PathVariable("id") String id, ProSupplier supplier, PageQuery query) {
 		Response<PageResult<MaterialSupplierDto>> result = new Response<PageResult<MaterialSupplierDto>>();
 		if (StringUtils.isEmpty(id)) {
@@ -184,6 +185,7 @@ public class AppSupplierController {
 	 * @return
 	 */
 	@RequestMapping("/findCantenn/{id}")
+	@AccessRequired
 	public @ResponseBody Response<AppCanTeenDto> findCantennById(@PathVariable("id") String id) {
 		Response<AppCanTeenDto> result = new Response<AppCanTeenDto>();
 		result.setData(this.supplierService.findCanteenByid(id));
