@@ -175,7 +175,8 @@
 							<div class="item col-xs-12">
 								<span class="intelligent-label f-fl">&nbsp;</span>
 								<div class="f-fl item-ifo">
-									<a href="javascript:;" class="btn btn-blue f-r3" disabled="disabled" id="btn_part1">完成</a>
+									<input id="btn_part1" type="button" href="javascript:;" disabled="disabled" class="btn btn-blue f-r3" style="width:150px;" value="完成"></input>
+									<!-- <a href="javascript:;" class="btn btn-blue f-r3" disabled="disabled" id="btn_part1">完成</a> -->
 								</div>
 							</div>
 
