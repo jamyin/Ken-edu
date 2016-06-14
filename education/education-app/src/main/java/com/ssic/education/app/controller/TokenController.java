@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ssic.education.app.interceptor.AccessRequired;
 import com.ssic.education.app.token.Token;
 import com.ssic.education.app.token.TokenUtil;
 import com.ssic.education.utils.model.Response;
@@ -37,8 +38,9 @@ public class TokenController {
 	private WdRedisDao<String> redisdao;
 
 	@RequestMapping(value = "get/{id}", method = RequestMethod.GET)
-	@ResponseBody
-	public Response<Token> get(@PathVariable("id") String id) {
+	@Deprecated
+	@AccessRequired
+	public @ResponseBody Response<Token> get(@PathVariable("id") String id) {
 		Response<Token> result = new Response<Token>();
 		result.setData(TokenUtil.getToken(id));
 		redisdao.set("dasdfdgdfgdf", 123456);
@@ -46,8 +48,9 @@ public class TokenController {
 	}
 
 	@RequestMapping(value = "check/{id}/{signature}", method = RequestMethod.GET)
-	@ResponseBody
-	public Response<Object> get(@PathVariable("id") int id, @PathVariable("signature") String signature) {
+	@Deprecated
+	@AccessRequired
+	public @ResponseBody Response<Object> get(@PathVariable("id") int id, @PathVariable("signature") String signature) {
 		Response<Object> result = new Response<Object>();
 		TokenUtil.volidateToken(signature, id);
 		result.setData(TokenUtil.volidateToken(signature, id));

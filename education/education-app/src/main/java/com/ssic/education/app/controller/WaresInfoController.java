@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ssic.education.app.dto.WaresInfoDto;
 import com.ssic.education.app.dto.WaresListDto;
 import com.ssic.education.app.dto.WaresRelatedDto;
+import com.ssic.education.app.interceptor.AccessRequired;
 import com.ssic.education.app.service.IWaresInfoService;
 import com.ssic.education.handle.pojo.ProWares;
 import com.ssic.education.utils.constants.DataStatus;
@@ -47,6 +48,7 @@ public class WaresInfoController {
 	 * @date 2016年5月13日 下午3:32:09
 	 */
 	@RequestMapping(value = "/list/{supplierId}", method = RequestMethod.GET)
+	@AccessRequired
 	@ResponseBody
 	public Response<List<WaresInfoDto>> getWaresList(@PathVariable("supplierId") String supplierId) {
 		Response<List<WaresInfoDto>> result = new Response<List<WaresInfoDto>>();
@@ -63,6 +65,7 @@ public class WaresInfoController {
 	 * @date 2016年5月13日 上午11:55:28	
 	 */
 	@RequestMapping(value = "/dishesInfo/{id}", method = RequestMethod.GET)
+	@AccessRequired
 	@ResponseBody
 	public Response<WaresRelatedDto> getDishesInfoById(@PathVariable("id") String id) {
 		Response<WaresRelatedDto> result = new Response<WaresRelatedDto>();
@@ -79,6 +82,7 @@ public class WaresInfoController {
 	 * @date 2016年5月13日 下午12:00:30
 	 */
 	@RequestMapping(value = "/materialInfo/{id}", method = RequestMethod.GET)
+	@AccessRequired
 	@ResponseBody
 	public Response<WaresRelatedDto> getMaterialInfoById(@PathVariable("id") String id) {
 		Response<WaresRelatedDto> result = new Response<WaresRelatedDto>();
@@ -94,6 +98,7 @@ public class WaresInfoController {
 	 * @date 2016年5月13日 下午12:00:30
 	 */
 	@RequestMapping(value = "/purchaseList/{schoolId}", method = { RequestMethod.POST, RequestMethod.GET })
+	@AccessRequired
 	@ResponseBody
 	public Response<PageResult<WaresListDto>> purchaseList(@PathVariable("schoolId") String schoolId, ProWares prowares, PageQuery query) throws Exception {
 		Response<PageResult<WaresListDto>> result = new Response<PageResult<WaresListDto>>();
@@ -128,6 +133,7 @@ public class WaresInfoController {
 	 * @date 2016年5月13日 下午12:00:30
 	 */
 	@RequestMapping(value = "/purchaseListDemo/{schoolId}", method = { RequestMethod.POST, RequestMethod.GET })
+	@AccessRequired
 	@ResponseBody
 	public Response<PageResult<WaresListDto>> purchaseListDemo(@PathVariable("schoolId") String schoolId, @RequestBody String json) throws Exception {
 		Response<PageResult<WaresListDto>> result = new Response<PageResult<WaresListDto>>();

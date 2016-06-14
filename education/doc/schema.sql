@@ -386,7 +386,7 @@ CREATE TABLE `t_pro_license` (
   `lic_no` varchar(60) DEFAULT NULL COMMENT '证书号码',
   `lic_type` int(2) NOT NULL COMMENT '证书类型 0:餐饮服务证、1:食品经营许可证、2:食品流通证、3:食品生产证、4:工商执照5：组织机构代码6：税务登记证7:检测检验报告8：商品图片9：身份证10：港澳居民来往内地通行证11：台湾居民往来内地通行证12：其他',
   `lic_end_date` date DEFAULT NULL COMMENT '证书有效期截止日',
-  `lic_pic` varchar(400) NOT NULL COMMENT '证书图片',
+  `lic_pic` varchar(400) DEFAULT NULL COMMENT '证书图片',
   `creator` varchar(36) NOT NULL,
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `updater` varchar(36) DEFAULT NULL,

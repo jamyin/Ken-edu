@@ -67,10 +67,12 @@
                         <h2>企业证书</h2>
                         <#if proLicenseDtos??>
                         	<#list proLicenseDtos as proLicenseDtos>
+                        	<#if proLicenseDtos.licPic??>
                         		<div class="pic_wrap">
 		                            <img src="${(wwwdomain)!}${(proLicenseDtos.licPic)!}" />
 		                            <span>${(proLicenseDtos.licName)!}</span>
 		                        </div>
+		                    </#if>
                         	</#list>
                         </#if>
                          <!-- <div class="pic_wrap">

@@ -1,5 +1,7 @@
 package com.ssic.education.app.controller;
 
+import java.io.UnsupportedEncodingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,11 +50,15 @@ public class AppUserController extends BaseController {
 		EduUsersInfoDto user = new EduUsersInfoDto();
 		Response<AppEduUserDto> result = new Response<AppEduUserDto>();
 		user.setUserAccount(account);
+		try {
+			int num=account.getBytes("utf-8").length;
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}  
 		user.setPassword(password);
 		AppEduUserDto userdto = appUserService.eduLogin(user);
 		result.setData(userdto);
 		if (userdto != null) {
-			eduRedisdao.set(userdto, 5040);
 			result.setStatus(DataStatus.HTTP_SUCCESS);
 			result.setMessage("登录成功！");
 			result.setData(userdto);
@@ -72,6 +78,7 @@ public class AppUserController extends BaseController {
 	 * @return 成功状态
 	 */
 	@RequestMapping(value = "/modifyPwd", method = RequestMethod.POST)
+	@AccessRequired
 	public @ResponseBody Response<String> modifyPwd(String account, String oldPwd, String newPwd) {
 		Response<String> result = new Response<String>();
 		if (oldPwd.equals(newPwd)) {
@@ -95,10 +102,7 @@ public class AppUserController extends BaseController {
 	 */
 	@RequestMapping(value = "/eduLogout/{token}", method = RequestMethod.GET)
 	public @ResponseBody void eduLogout(@PathVariable("token") String token) {
-		AppEduUserDto eduAppUser = eduRedisdao.get(token, AppEduUserDto.class);
-		if (eduAppUser != null) {
-			eduRedisdao.delete(eduAppUser, AppEduUserDto.class);
-		}
+		this.appUserService.eduLogout(token);
 	}
 
 	/**
@@ -116,7 +120,6 @@ public class AppUserController extends BaseController {
 		AppProUserDto userdto = appUserService.proLogin(user);
 		result.setData(userdto);
 		if (userdto != null) {
-			proRedisdao.set(userdto, 5040);
 			result.setStatus(DataStatus.HTTP_SUCCESS);
 			result.setMessage("登录成功！");
 			result.setData(userdto);
@@ -136,6 +139,7 @@ public class AppUserController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/proModifyPwd", method = RequestMethod.POST)
+	@AccessRequired
 	public @ResponseBody Response<String> proModifyPwd(String account, String oldPwd, String newPwd) {
 		Response<String> result = new Response<String>();
 		if (oldPwd.equals(newPwd)) {
@@ -159,9 +163,6 @@ public class AppUserController extends BaseController {
 	 */
 	@RequestMapping(value = "/proLogout/{token}", method = RequestMethod.GET)
 	public @ResponseBody void proLogout(@PathVariable("token") String token) {
-		AppProUserDto proAppUser = proRedisdao.get(token, AppProUserDto.class);
-		if (proAppUser != null) {
-			proRedisdao.delete(proAppUser, AppProUserDto.class);
-		}
+		this.appUserService.proLogout(token);
 	}
 }

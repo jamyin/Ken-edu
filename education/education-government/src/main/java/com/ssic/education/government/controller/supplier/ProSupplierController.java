@@ -96,7 +96,7 @@ public class ProSupplierController extends BaseController {
 		mv.addObject("proLicenses", proLicenses);
 //		mv.addObject("pWares", pWares);
 		mv.addObject("mSuppliers", mSuppliers);
-		for (ProLicense prolicense:proLicenses) {
+		/*for (ProLicense prolicense:proLicenses) {
 			if (null != prolicense.getLicType() && prolicense.getLicType()==4 && StringUtils.isNotBlank(supplier.getBusinessLicense())) {
 				prolicense.setLicNo(supplier.getBusinessLicense());
 			}
@@ -115,7 +115,7 @@ public class ProSupplierController extends BaseController {
 			if (null != prolicense.getLicType() && prolicense.getLicType()==3 && StringUtils.isNotBlank(supplier.getFoodProduceCode())) {
 				prolicense.setLicNo(supplier.getFoodProduceCode());
 			}
-		}
+		}*/
 		if (null != dto.getSource() && dto.getSource() == 1) {
 			mv.setViewName("supplier/supplier_detail");
 		}else {
