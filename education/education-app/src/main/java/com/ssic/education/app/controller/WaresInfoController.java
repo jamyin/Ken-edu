@@ -123,7 +123,6 @@ public class WaresInfoController {
 				return result;
 			}
 		}
-		//Map<String, Object> map = StringUtil.isEmpty(json) ? new HashMap<String, Object>() : JsonUtil.json2Obj(json, Map.class);
 	}
 
 	/**
