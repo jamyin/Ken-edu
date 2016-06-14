@@ -59,13 +59,13 @@
 					<th>出发点：</th><td>${LedgerList[0].sourceName}</td>
 				</tr>
 				<tr>
-					<th>开始时间：</th><td></td>
+					<th>开始时间：</th><td><fmt:formatDate value="${LedgerList[0].startTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
 				</tr>
 				<tr>
 					<th>目的地：</th><td>${LedgerList[0].receiverName}</td>
 				</tr>
 				<tr>
-					<th>到达时间：</th><td></td>
+					<th>到达时间：</th><td><fmt:formatDate value="${LedgerList[0].endTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
 				</tr>
 			</table>
 	</div>
