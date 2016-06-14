@@ -85,7 +85,7 @@ public class AppMapViewController {
 		mv.addObject("resultDto", resultDto);
 		
 		mv.addObject("baiduAk",PropertiesUtils.getProperty("baidu.ditu.ak"));
-		mv.setViewName("dispatching_c");
+		mv.setViewName("appMapView");
 		return mv;
 	}
 	
