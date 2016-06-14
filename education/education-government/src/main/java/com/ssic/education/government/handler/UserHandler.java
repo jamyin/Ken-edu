@@ -21,7 +21,7 @@ public class UserHandler implements HandlerInterceptor  {
 		Object obj = request.getSession().getAttribute(SessionConstants.LOGIN_USER_INFO);
 		String requestUrl = request.getRequestURI();
 		if(obj==null ){
-			if(requestUrl.contains("reg") || requestUrl.contains("upload")){
+			if(requestUrl.contains("reg") || requestUrl.contains("upload") || requestUrl.contains("ajax")){
 				return true;
 			}
 			if(!requestUrl.contains("login")){
