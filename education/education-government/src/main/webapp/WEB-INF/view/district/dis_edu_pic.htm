@@ -30,19 +30,15 @@
             <span> &gt; </span>
             <#if data.reviewed == 0>
 				<a href="/edu/school/checkList.htm?source=1&reviewed=${(data.reviewed)!}">未审批单位</a>
-	            <span> &gt; </span>
-	            <a href="#">未审批单位</a>
             </#if>
            <#if data.reviewed == 1>
 				<a href="/edu/school/checkList.htm?source=1&reviewed=${(data.reviewed)!}">审批通过单位</a>
-	            <span> &gt; </span>
-	            <a href="#">审批通过单位</a>
             </#if>
             <#if data.reviewed == 2>
               	<a href="/edu/school/checkList.htm?source=1&reviewed=${(data.reviewed)!}">审批不通过单位</a>
-	            <span> &gt; </span>
-	            <a href="#">审批不通过单位</a>
             </#if>
+            <span> &gt; </span>
+	        <a href="#">单位详情</a>
         </div> 
         <div class="main_wrap">
        		<#if data.reviewed == 0>
@@ -57,7 +53,12 @@
             <div class="content_wrap">
                 <div class="tab_wrap">
                     <ul class="side_menu">
-                        <a href="/edu/school/detail.htm?id=${(data.relationId)!}&schoolName=${(data.schoolName)!}&supplierName=${(data.supplierName)!}"><li>信息</li></a>
+                    <#if data.reviewed == 0>
+                    	<a href="/edu/school/detail.htm?id=${(data.relationId)!}&schoolName=${(data.schoolName)!}&supplierName=${(data.supplierName)!}&reviewed=${(data.reviewed)!}"><li>信息</li></a>
+                    <#else>
+                     	<a href="/edu/school/detailed.htm?id=${(data.relationId)!}&schoolName=${(data.schoolName)!}&supplierName=${(data.supplierName)!}&reviewed=${(data.reviewed)!}"><li>信息</li></a>
+                    </#if>
+                       
                         <li class="active">图片</li>
                     </ul>
                     <div class="tab_content">

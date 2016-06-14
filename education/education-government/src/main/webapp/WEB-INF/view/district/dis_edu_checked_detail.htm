@@ -31,15 +31,12 @@
             <span> &gt; </span>
             <#if dto.reviewed == 1>
 				<a href="/edu/school/checkList.htm?source=${(dto.source)!}&reviewed=${(dto.reviewed)!}">审批通过单位</a>
-	            <span> &gt; </span>
-	            <a href="#">审批通过单位</a>
             </#if>
             <#if dto.reviewed == 2>
               	<a href="/edu/school/checkList.htm?source=${(dto.source)!}&reviewed=${(dto.reviewed)!}">审批不通过单位</a>
-	            <span> &gt; </span>
-	            <a href="#">审批不通过单位</a>
             </#if>
-            
+            <span> &gt; </span>
+	        <a href="#">单位详情</a>
         </div>
         <div class="main_wrap">
 			
