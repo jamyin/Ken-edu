@@ -48,7 +48,7 @@
 			<label><span>选择日期</span></label>
 			<span class="day">${.now?string('yyyy年MM月dd日')}</span>
 			<input class="seldate" type="date" value="${.now?string('yyyy年MM月dd日')}">
-			<input id="sel_date" type="text" value="${.now?string('yyyy-MM-dd')}">
+			<input id="sel_date" type="hidden" value="${.now?string('yyyy-MM-dd')}">
 		</p>
 <!-- 		<p>
 			<label><span>选择日期</span></label>
@@ -110,6 +110,7 @@
 		//$('.seldate').on('click', function(){
 //			$(this).attr('type','date').focus()
 //		})
+		var _curDay = $('span.day').text()
 		$('.seldate').on('change', function(){
 			var _val = $(this).val()
 			if(_val==''){
@@ -117,6 +118,7 @@
 			}else(
 				$(this).parent().find('span.day').text(_val)
 			)
+			$("#sel_date").val(_val);
 			loadscMenu();
 		})
 		$('.load_more').on('click', function(){
