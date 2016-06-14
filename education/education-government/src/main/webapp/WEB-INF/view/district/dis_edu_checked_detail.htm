@@ -69,7 +69,7 @@
                             <span style="background-color: red;">审核状态：未通过</span>
                         </div>
                         </#if>
-                        <h2>学校信息</h2>
+                        <h2>基本信息</h2>
                         <p> 地址：${(eduSchoolDto.address)!} </p>
                         <p> 联系人姓名：${(eduCanteenDto.canteenContacts)!} </p>
                         <p> 电话：${(eduCanteenDto.phoneNumber)!} </p>
@@ -85,6 +85,7 @@
 		                        	<p> ${(proLicense.licName)!}： ${(proLicense.licNo)!} </p>
 	                        	 </#if>
 	                        </#list>
+                        </#if>
                         </#if>
                         
                       </#if>

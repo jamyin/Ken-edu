@@ -147,8 +147,8 @@ public class WapSupplierController extends BaseController{
 		InfoObj infoObj = new InfoObj();
 		infoObj.setName(proSupplierDto.getSupplierName());
 		infoObj.setAddress(proSupplierDto.getAddress());
-		infoObj.setMobile(proSupplierDto.getCorporation());
-		infoObj.setRelationer(proSupplierDto.getContactWay());
+		infoObj.setMobile(proSupplierDto.getContactWay());
+		infoObj.setRelationer(proSupplierDto.getCorporation());
 		return infoObj;
 	}
 

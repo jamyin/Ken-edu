@@ -38,7 +38,7 @@ public class EduUsersServiceImpl implements EduUsersService {
 	
 	@Autowired
 	private EduCanteenDao eduCanteenDao;
-
+	
 	
 	public EduUsersDto checkUser(EduUsersDto usersDto) {
 		// TODO Auto-generated method stub
@@ -99,13 +99,31 @@ public class EduUsersServiceImpl implements EduUsersService {
 		}
 		
 		List<ProLicenseDto> proLicenseDtos = new Gson().fromJson(usersDto.getJsonLic(), new TypeToken<List<ProLicenseDto>>(){}.getType());
+		
+		ProLicense prolicense = new ProLicense();
+		prolicense.setCerSource((short)DataStatus.MANAGERTYPE);
+		prolicense.setRelationId(eduCanteen.getId());
+		List<ProLicense> proLicenses = proLicenseDao.lookImage(prolicense);
+		if (null != proLicenses && proLicenses.size()>0) {
+			for (ProLicense proLicense :proLicenses) {
+				proLicense.setStat(DataStatus.DISABLED);
+				proLicenseDao.updateByPrimaryKeySelective(proLicense);
+			}
+		}
 		for (ProLicenseDto proLicenseDto:proLicenseDtos) {
-			if (null != proLicenseDto && StringUtils.isNotBlank(proLicenseDto.getLicPic())) {
+			if (null != proLicenseDto && StringUtils.isNotBlank(proLicenseDto.getLicNo())) {
 				if (StringUtils.isNotBlank(proLicenseDto.getId())) {
 					ProLicense proLicense = BeanUtils.createBeanByTarget(proLicenseDto, ProLicense.class);
+					if (proLicense.getLicPic().equals("undefined")) {
+						proLicense.setLicPic(null);
+					}
+					proLicense.setStat(DataStatus.ENABLED);
 					proLicenseDao.updateByPrimaryKeySelective(proLicense);
 				}else {
 					ProLicense proLicense = BeanUtils.createBeanByTarget(proLicenseDto, ProLicense.class);
+					if (proLicense.getLicPic().equals("undefined")) {
+						proLicense.setLicPic(null);
+					}
 					proLicense.setRelationId(eduCanteen.getId());
 					proLicense.setCerSource(usersDto.getCerSource().shortValue());
 					proLicense.setCreator(usersDto.getCreator());

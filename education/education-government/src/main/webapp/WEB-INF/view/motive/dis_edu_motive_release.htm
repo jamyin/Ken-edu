@@ -238,6 +238,10 @@
             		$("input[name='lianxiIds']").prop("checked",false);
             		lianxiList = "";
             	}
+            	var lianxiLists;
+            	if(lianxiList.length > 0) {
+            		lianxiLists=lianxiList.substring(0,lianxiList.length-1);
+            	}
             	$("#lianxiList").val(lianxiList);
             }
             
@@ -251,6 +255,10 @@
             		    	//lianxiIds  += $(this).val()+ ",";
             		    }
             		});
+            		var lianxiLists;
+            		if(lianxiList.length > 0) {
+                		lianxiLists=lianxiList.substring(0,lianxiList.length-1);
+                	}
             		$("#lianxiList").val(lianxiList);
             		//$("#lianxiIds").val(lianxiIds);
             	});            	

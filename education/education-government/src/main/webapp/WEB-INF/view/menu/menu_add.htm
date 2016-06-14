@@ -174,8 +174,19 @@
 		
     	//拼装菜品名称
     	var name = '';
-    	var flagWa=true;		
+    	var flagWa=true;	
     	$("#rt_ul_1 li input").each(function(i){
+    		var nameV= $(this).val();    		
+    		if (nameV.length <= 0 || nameV == 'undefined') {
+    			flagWa=false;
+				alert("菜品不能为空！");	
+				return;
+			}     		
+			if (null != nameV && nameV.length >= 0 && nameV != 'undefined' && name.indexOf(nameV) > -1) {
+				alert("菜品'"+nameV+"'"+"已存在不能重复添加！");
+				flagWa=false;
+				return;
+			}
     		// alert($(this).val());
     		if ($(this).val() <= 0) {
     			alert("菜品不能为空！");
@@ -192,14 +203,33 @@
    		}
     	//拼装营养名称
     	var nutritionalNames= '';
+    	var flagNa=true;
     	$("#rt_ul_2 li .s1").each(function(i){
+    		var weight = $.trim($(this).val());
+			if (nutritionalNames.indexOf(weight) > -1) {
+				alert("营养'"+weight+"'"+"已存在不能重复添加！");
+				flagNa=false;
+				return;
+			}
     		nutritionalNames += $(this).val()+",";
     	})
+    	if (flagNa==false) {
+    		return;
+    	}
     	//拼装营养含量
     	var nutritionalWeights= '';
     	var flagNu=true;
     	$("#rt_ul_2 li .in1").each(function(i){
-    		if ($(this).val().length<=0) {
+    		if (flagNu == false) {
+    			return;
+    		}
+    		var name=$.trim($(this).val());
+    		if (name.length<=0 || name == 'undefined') {
+    			alert("含量不能为空！");
+    			flagNu=false;
+    			return;
+    		}			
+    		if ($(this).val().length<=0 ) {
     			alert("含量不能为空！");
     			flagNu=false;
     		} else {
@@ -215,30 +245,34 @@
     	//拼装营养单位
     	var nutritionalUnits= '';
     	$("#rt_ul_2 li .s2").each(function(i){
+    		/* var weight = $.trim($(this).val());
+			if (nutritionalUnits.indexOf(weight) > -1) {
+				alert("营养'"+weight+"'"+"已存在不能重复添加！");
+				return;
+			} */
     		nutritionalUnits += $(this).val()+",";
     	})
     	
     	var supplyDate = $.trim($("#supplyDate").val());
     	var type = $.trim($("#type").val());
     	var supplyPhase = $.trim($("#supplyPhase").val());
-    	$.ajax({
-			url:"/pro/packages/addPackage.htm",
-			type:"post",
-			dataType:"json",
-			data:{supplyDateStr:supplyDate,type:type,supplyPhase:supplyPhase,waresNames:name,
-				nutritionalNames:nutritionalNames,nutritionalWeights:nutritionalWeights,nutritionalUnits:nutritionalUnits},
-			async: false,
-			success:function(data){
-				if(data.status == 200){
-					alert("添加菜谱成功");
-					window.location.href="findPage.htm";
-					return;
-				}else {
-					alert(data.message);
-				}							
-			}
-		});
-    	
+   		$.ajax({
+   			url:"/pro/packages/addPackage.htm",
+   			type:"post",
+   			dataType:"json",
+   			data:{supplyDateStr:supplyDate,type:type,supplyPhase:supplyPhase,waresNames:name,
+   				nutritionalNames:nutritionalNames,nutritionalWeights:nutritionalWeights,nutritionalUnits:nutritionalUnits},
+   			async: false,
+   			success:function(data){
+   				if(data.status == 200){
+   					alert("添加菜谱成功");
+   					window.location.href="findPage.htm";
+   					return;
+   				}else {
+   					alert(data.message);
+   				}							
+   			}
+   		});
     })
   })
   var d1={"热量":"热量","蛋白质":"蛋白质","脂肪":"脂肪","钙":"钙","铁":"铁","锌":"锌","维生素":"维生素"};

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -135,7 +136,9 @@ public class WapCommentController extends BaseController {
 	@RequestMapping(value="index")
 	public ModelAndView searchComment(EduParentPackCommentDto eduParentPackCommentDto,String code){
 		
-		setWeixinOpenId(code);
+		if(StringUtils.isNotEmpty(code)){
+			setWeixinOpenId(code);	
+		}
 		
 		ModelAndView mv = getModelAndView();
 

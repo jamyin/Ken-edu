@@ -581,6 +581,10 @@ public class WaresController extends BaseController {
 						// 采购品分类
 						try {
 							dto.setWaresType(ProductClass.fromName(value));
+							if(dto.getWaresType()==null){
+								errorMsg = "第" + (rowNum + 1) + "行数据不正确，分类不正确。";
+								break;
+							}
 						} catch (Exception e) {
 							errorMsg = "第" + (rowNum + 1) + "行数据不正确，分类不正确。";
 							break;

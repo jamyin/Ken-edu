@@ -132,7 +132,7 @@
 	</servlet-mapping>
 
 	<welcome-file-list>
-		<welcome-file>/index.htm</welcome-file>
+		<welcome-file>/login.jsp</welcome-file>
 	</welcome-file-list>
 
 	<error-page>

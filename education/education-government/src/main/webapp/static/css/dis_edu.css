@@ -191,9 +191,13 @@
       .main_wrap .tab_wrap .tab_content > table tr > td {
         line-height: 42px;
         border-bottom: 1px solid #c8c8c8;
-        text-align: center; }
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden; }
         .main_wrap .tab_wrap .tab_content > table tr > td > a {
           color: #333333; }
+        .main_wrap .tab_wrap .tab_content > table tr > td.date {
+          width: 90px; }
     .main_wrap .tab_wrap .tab_content > form > section {
       position: relative;
       box-sizing: border-box; }

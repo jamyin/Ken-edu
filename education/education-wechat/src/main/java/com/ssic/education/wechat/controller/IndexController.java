@@ -2,6 +2,7 @@ package com.ssic.education.wechat.controller;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,9 +18,23 @@ public class IndexController extends BaseController{
 	private EduSchoolService eduSchoolService;
 	
 	@RequestMapping(value="index")
-	public ModelAndView IndexController(EduSchoolDto eduSchoolDto,String code) {
+	public ModelAndView indexController(EduSchoolDto eduSchoolDto,String code) {
+		if(StringUtils.isNotEmpty(code)){
+			setWeixinOpenId(code);	
+		}
 		
-		setWeixinOpenId(code);
+		ModelAndView mv = getModelAndView();
+		
+		List<EduSchoolDto> dataList = eduSchoolService.searchEduScholDtoList(eduSchoolDto);
+		
+		
+		mv.addObject("dataList",dataList);
+		mv.setViewName("index");
+		return mv;
+	}
+	
+	@RequestMapping(value="main")
+	public ModelAndView mainController(EduSchoolDto eduSchoolDto) {
 		
 		ModelAndView mv = getModelAndView();
 		
