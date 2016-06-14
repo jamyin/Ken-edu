@@ -40,7 +40,7 @@
 		<if test="ledgerDto.wareBatchNo != null  and ledgerDto.wareBatchNo !=''">
 			AND b.ware_batch_no = #{ledgerDto.wareBatchNo}
 		</if>
-		AND b.stat=1 
+		AND b.stat=1 AND a.stat=1 
 	</select>
 	
 	<select id="selectLedgerListOrderby" resultType="com.ssic.educateion.common.dto.LedgerDto" parameterType="com.ssic.educateion.common.dto.LedgerDto">
@@ -64,7 +64,7 @@
 			AND a.name like "%"#{ledgerDto.receiverName}"%"
 			OR b.ware_batch_no like "%"#{ledgerDto.receiverName}"%"
 		</if>
-		AND b.stat=1
+		AND b.stat=1 AND a.stat=1 
 		GROUP BY b.ware_batch_no
 		ORDER BY b.action_date DESC,a.create_time desc
 		limit #{page.startNum},
@@ -89,7 +89,7 @@
 			AND a.name like "%"#{ledgerDto.receiverName}"%"
 			OR b.ware_batch_no like "%"#{ledgerDto.receiverName}"%"
 		</if>
-		AND b.stat=1
+		AND b.stat=1 AND a.stat=1 
 		GROUP BY b.ware_batch_no) t
 	</select>
 	<select id="findAllLedger" resultType="com.ssic.educateion.common.dto.LedgerDto">

@@ -3,6 +3,7 @@ package com.ssic.education.government.controller.supplier;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,6 +96,26 @@ public class ProSupplierController extends BaseController {
 		mv.addObject("proLicenses", proLicenses);
 //		mv.addObject("pWares", pWares);
 		mv.addObject("mSuppliers", mSuppliers);
+		for (ProLicense prolicense:proLicenses) {
+			if (null != prolicense.getLicType() && prolicense.getLicType()==4 && StringUtils.isNotBlank(supplier.getBusinessLicense())) {
+				prolicense.setLicNo(supplier.getBusinessLicense());
+			}
+			if (null != prolicense.getLicType() && prolicense.getLicType()==5 && StringUtils.isNotBlank(supplier.getOrganizationCode())) {
+				prolicense.setLicNo(supplier.getOrganizationCode());
+			}
+			if (null != prolicense.getLicType() && prolicense.getLicType()==0 && StringUtils.isNotBlank(supplier.getFoodServiceCode())) {
+				prolicense.setLicNo(supplier.getFoodServiceCode());
+			}
+			if (null != prolicense.getLicType() && prolicense.getLicType()==1 && StringUtils.isNotBlank(supplier.getFoodBusinessCode())) {
+				prolicense.setLicNo(supplier.getFoodBusinessCode());
+			}
+			if (null != prolicense.getLicType() && prolicense.getLicType()==2 && StringUtils.isNotBlank(supplier.getFoodCirculationCode())) {
+				prolicense.setLicNo(supplier.getFoodCirculationCode());
+			}
+			if (null != prolicense.getLicType() && prolicense.getLicType()==3 && StringUtils.isNotBlank(supplier.getFoodProduceCode())) {
+				prolicense.setLicNo(supplier.getFoodProduceCode());
+			}
+		}
 		if (null != dto.getSource() && dto.getSource() == 1) {
 			mv.setViewName("supplier/supplier_detail");
 		}else {
