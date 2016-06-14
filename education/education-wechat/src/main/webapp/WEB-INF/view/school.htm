@@ -46,17 +46,20 @@
 	<div class="calendar_box">
 		<p>
 			<label><span>选择日期</span></label>
-			<i>
-				<span>${.now?string('yyyy年MM月dd日')}</span>
-				<input class="seldate" type="date" value="${.now?string('yyyy年MM月dd日')}">
-				<input id="sel_date" type="text" value="${.now?string('yyyy-MM-dd')}">
-			</i>
+			<span class="day">${.now?string('yyyy年MM月dd日')}</span>
+			<input class="seldate" type="date" value="${.now?string('yyyy年MM月dd日')}">
+			<input id="sel_date" type="text" value="${.now?string('yyyy-MM-dd')}">
 		</p>
-		<p>
+<!-- 		<p>
+			<label><span>选择日期</span></label>
+			<span>${.now?string('yyyy年MM月dd日')}</span>
+			<input class="seldate" type="date" value="${.now?string('yyyy年MM月dd日')}">
+			<input id="sel_date" type="text" value="${.now?string('yyyy-MM-dd')}">
+		</p>
+ -->		<p>
 			<label><span>选择类型</span></label>
 			<input type="hidden" id="gradeId" value="0"/>
-			<i>
-				<span>国内班</span>
+				<span class="class">国内班</span>
 				<select id="sel_class" onchange="selectGradeList(this);">
 					<#assign keys=gradeList?keys>
 					<#list keys as key>
@@ -64,7 +67,6 @@
 						<!-- ${key}=${gradeList[key]} -->
 					</#list>
 				</select>
-			</i>
 		</p>
 	</div>
 	
@@ -109,9 +111,12 @@
 //			$(this).attr('type','date').focus()
 //		})
 		$('.seldate').on('change', function(){
-			var _val = $(this).val();
-			$(this).parent().find('span').text(_val);
-			$("#sel_date").val(_val);
+			var _val = $(this).val()
+			if(_val==''){
+				$(this).parent().find('span.day').text(_curDay)
+			}else(
+				$(this).parent().find('span.day').text(_val)
+			)
 			loadscMenu();
 		})
 		$('.load_more').on('click', function(){
@@ -120,7 +125,8 @@
 		$('select').on('change', function(){
 			//var _val = $(this).text();
 			var _val = $(this).find("option:selected").text();
-			$(this).parent().find('span').text(_val);
+			//$(this).parent().find('span').text(_val);
+			$(this).parent().find('span.class').text(_val)
 			//loadscMenu();
 		})
 	})
