@@ -14,7 +14,7 @@ $(function() {
 			success : function(data) {
 				if(data.status == 500){
 					$("#sendMessage").attr("disabled","disabled");
-					layer.alert(data.message, {icon: 2});
+					layer.msg(data.message, {icon: 2});
 				}else{
 					$("#sendMessage").removeAttr("disabled");
 				}
