@@ -89,7 +89,7 @@
 							<div class="item col-xs-12">
 								<span class="intelligent-label f-fl"><b class="ftx04">*</b>短信验证码：</span>
 								<div class="f-fl item-ifo">
-									<input name="messageValid" type="text" class="txt03 f-r3 required" keycodes="tel" tabindex="3" data-valid="isNonEmpty" maxlength="11" id="messageValid" /> <span
+									<input name="messageValid" type="text" class="txt03 f-r3 required" keycodes="tel" data-valid="isNonEmpty" maxlength="11" id="messageValid" /> <span
 										class="ie8 icon-close close hide"></span> <label class="icon-sucessfill blank hide"></label>
 								</div>
 								<div class="f-fl item-ifo">
@@ -208,68 +208,6 @@
 	</div>
 	<script>
 		$(function() {
-			
-			//失去焦点事件
-			$("#picCaptcha").on("blur",function(){
-				var picCaptcha = $("#picCaptcha").val();
-				var dataParam = {picCaptcha:picCaptcha};
-				$.ajax({
-					url : '${pageContext.request.contextPath}/checkRandom',
-					type : "POST",
-					data : dataParam,
-					dataType : 'json',
-					success : function(data) {
-						if(data.status == 500){
-							$("#sendMessage").attr("disabled","disabled");
-							layer.alert(data.message, {icon: 2});
-						}else{
-							$("#sendMessage").removeAttr("disabled");
-						}
-					}
-				});
-			});
-			$("#sendMessage").click(function(){
-				var picCaptcha = $("#picCaptcha").val();
-				var mobilePhone = $("#phone").val();
-				var dataParam = {picCaptcha:picCaptcha,mobilePhone:mobilePhone};
-				$.ajax({
-					url : '${pageContext.request.contextPath}/SMS/send',
-					type : "POST",
-					data : dataParam,
-					dataType : 'json',
-					success : function(data) {
-						if(data.status == 500){
-							layer.alert(data.message, {icon: 2});
-						}else{
-							
-						}
-					}
-				});
-			});
-			$("#messageValid").on("blur",function(){
-				var validateCode = $("#messageValid").val();
-				var mobilePhone = $("#phone").val();
-				var dataParam = {validateCode:validateCode,mobilePhone:mobilePhone};
-				$.ajax({
-					url : '${pageContext.request.contextPath}/checkMobile',
-					type : "POST",
-					data : dataParam,
-					dataType : 'json',
-					success : function(data) {
-						if(data.status == 500){
-							$("#btn_part1").attr("disabled","disabled");
-							layer.alert(data.message, {icon: 2});
-						}else{
-							$("#btn_part1").removeAttr("disabled");
-						}
-					}
-				});
-			});
-			
-			$("#refreshValid").click(function(){
-				$(this).attr("src","${pageContext.request.contextPath}/drawRandom?"+Math.random());
-			});
-			
 			//第一页的确定按钮
 			$("#btn_part1").click(function() {
  								if (!verifyCheck._click()){
@@ -365,5 +303,6 @@
 	</script>
 	<script src="reg/js/reg.js"></script>
 	<script src="reg/js/regImages.js"></script>
+	<script src="reg/js/check.js"></script>
 </body>
 </html>
