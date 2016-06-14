@@ -86,10 +86,7 @@
 			<script type="text/javascript">
 				// 百度地图API功能
 				var map = new BMap.Map("allmap");
-				var point = map.centerAndZoom("上海",15);      // 初始化地图,用城市名设置地
-				//var point = new BMap.Point(121.462, 31.222);
-				map.centerAndZoom(point, 15);
-				map.enableScrollWheelZoom(true);
+				
 				
 				//var marker = new BMap.Marker(new BMap.Point(121.462, 31.222)); // 创建点
 				
@@ -103,12 +100,43 @@
 							</#if>
 						</#list>
 					</#if>
-				], {strokeColor:"blue", strokeWeight:2, strokeOpacity:0.5});   //创建折线
+				], {strokeColor:"blue", strokeWeight:3, strokeOpacity:1});   //创建折线
 					
+				var points = [                          //创建7个点
+                      <#if historyList ??>
+						<#list historyList as history>
+							<#if (history_index+1) < historyList?size>
+								new BMap.Point(${(history.x)!},${(history.y)!}),
+							<#else>
+								new BMap.Point(${(history.x)!},${(history.y)!})
+							</#if>
+						</#list>
+					</#if>
+                  ];	
+				
+				var pointsFirst = [                          //创建7个点
+                      <#if historyList ??>
+						<#list historyList as history>
+							<#if history_index==0>
+								new BMap.Point(${(history.x)!},${(history.y)!})
+							</#if>
+						</#list>
+					</#if>
+                  ];				
+				
+				
+				var point = map.centerAndZoom(pointsFirst,16);      // 初始化地图,用城市名设置地
+				//var point = new BMap.Point(121.462, 31.222);
+				map.centerAndZoom(point, 16);
+				map.enableScrollWheelZoom(true);
+				map.addControl(new BMap.NavigationControl());      //为地图添加鱼骨
+				
 				//添加覆盖物
 				//function add_overlay(){
 					//map.addOverlay(marker);            //增加点
 					map.addOverlay(polyline);          //增加折线
+					
+					map.setViewport(points);　　　　　
 				//}
 			</script>      		
       	<#else>
