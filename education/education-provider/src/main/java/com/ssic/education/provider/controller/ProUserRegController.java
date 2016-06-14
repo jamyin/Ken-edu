@@ -5,10 +5,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,20 +12,19 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.common.base.Objects;
 import com.ssic.educateion.common.dto.EduSupplierReviewDto;
-import com.ssic.educateion.common.dto.EduUsersDto;
 import com.ssic.educateion.common.dto.ProLicenseDto;
+import com.ssic.educateion.common.dto.ProSupplierDto;
 import com.ssic.educateion.common.dto.SupplierDto;
 import com.ssic.education.handle.service.IEduSupplierReviewService;
 import com.ssic.education.handle.service.IProLicenseService;
 import com.ssic.education.handle.service.ISupplierService;
 import com.ssic.education.provider.dto.ProUsersDto;
 import com.ssic.education.provider.pageModel.Json;
-import com.ssic.education.provider.pageModel.SessionInfo;
 import com.ssic.education.provider.service.IProUsersService;
-import com.ssic.education.provider.util.ConfigUtil;
 import com.ssic.education.utils.constants.DataStatus;
-import com.ssic.education.utils.constants.SessionConstants;
+import com.ssic.education.utils.util.BeanUtils;
 import com.ssic.education.utils.util.UUIDGenerator;
 /**
  * 
@@ -71,6 +66,7 @@ public class ProUserRegController extends BaseController{
 		String creatorId = UUIDGenerator.getUUID();
 		
 		saveLicenses(supplierId,licenses,creatorId);
+		//licenses 信息保存时同时存入主表信息
 		
 		//用户信息
 		proUsersDto.setId(creatorId);
@@ -86,6 +82,7 @@ public class ProUserRegController extends BaseController{
 
 	private void saveLicenses(String supplierId, String[] licenses,String creatorId) {
 		if(licenses!=null){
+			ProSupplierDto proDto = iSupplierService.searchProSupplierById(supplierId);
 			for(String licesse : licenses){
 				if(!StringUtils.isEmpty(licesse)){
 					String licenseName = licesse.split("#")[0];
@@ -102,9 +99,33 @@ public class ProUserRegController extends BaseController{
 					proLicenseDto.setCerSource(Short.valueOf("0"));
 					proLicenseDto.setCreator(creatorId);
 					iProLicenseService.saveProLicense(proLicenseDto);
+					
+					if(Objects.equal(licType, "4")){
+						proDto.setBusinessLicense(licNo);
+					}else if(Objects.equal(licType, "0")){
+						proDto.setFoodServiceCode(licNo);
+					}else if(Objects.equal(licType, "2")){
+						proDto.setFoodCirculationCode(licNo);
+					}else if(Objects.equal(licType, "3")){
+						proDto.setFoodProduceCode(licNo);
+					}
 				}
 			}
+			SupplierDto suppliDto = BeanUtils.createBeanByTarget(proDto, SupplierDto.class);
+			iSupplierService.saveOrUpdateSupplier(suppliDto);
 		}
+		
+//		business_license            工商执照号  4                                                              
+//		organization_code           组织机构代码                                                            
+//		food_service_code           餐饮服务证号   0                                                         
+//		food_service_code_date      餐饮服务证号失效日期                                                
+//		food_business_code          食品经营许可证号                                                      
+//		food_business_code_date     食品经营许可证号失效日期                                          
+//		food_circulation_code       食品流通证号            2                                                
+//		food_circulation_code_date  食品流通证号失效日期                                                
+//		food_produce_code           食品生产证号          3                                                  
+//		food_produce_code_date      食品生产证号失效日期   
+		
 	}
 
 	private void saveSupplierReview(String supplierId) {
