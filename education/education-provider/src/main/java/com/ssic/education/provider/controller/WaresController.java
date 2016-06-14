@@ -216,20 +216,33 @@ public class WaresController extends BaseController {
 	 */
 	@RequestMapping("/editImage")
 	public String editImage(HttpServletRequest request, String id) {
-
+		ProWaresDto proWaresDto=new ProWaresDto();
+		proWaresDto.setId(id);
 		ProLicense license = new ProLicense();
 		license.setRelationId(id);
 		license.setCerSource((short) 2);
 		List<ProLicense> ProLicenseList = proLicenseServiceImpl
 				.lookImage(license);
+		List<ProWaresDto> wares = waresService.findWares(proWaresDto);
 		String realPath = PropertiesUtils.getProperty("upload.look.url");
+		for (ProWaresDto proWaresDto2 : wares) {
+			if(proWaresDto2.getImage()!=null && proWaresDto2.getImage()!=""){
+			proWaresDto2.setImage(realPath+proWaresDto2.getImage());}
+		}
+		if(wares.get(0).getImage()!=null && wares.get(0).getImage()!=""){
+			license.setLicPic(wares.get(0).getImage());
+			license.setLicName("商品图片");
+			ProLicenseList.add(license);
+		}
 		for (ProLicense proLicense : ProLicenseList) {
 
 			proLicense.setLicPic(realPath + proLicense.getLicPic());
 		}
 		JSONArray jsonarray = JSONArray.fromObject(ProLicenseList);
+	
 		request.setAttribute("id", id);
 		request.setAttribute("ProLicenseList", jsonarray.toString());
+		
 		return "wares/editImage";
 	}
 

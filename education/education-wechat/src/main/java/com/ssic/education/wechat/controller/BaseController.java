@@ -54,6 +54,16 @@ public class BaseController {
 		return mv;
 	}
 	
+	public String getParentId(){
+		Object objParent = getRequest().getSession().getAttribute("parentId");
+		if(objParent!=null){
+			parentId = String.valueOf(objParent);
+			return parentId;
+		}
+		return null;
+	}
+	
+	
 	public void setWeixinOpenId(String code){
 		getaccess_token(code);
 	}

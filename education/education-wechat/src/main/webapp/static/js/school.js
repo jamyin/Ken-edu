@@ -45,7 +45,13 @@ function loadscMenu(){
 					
 					//</i><span>Breakfrist</span><div class="scorce_box"><img src="static/img/star3.png" border="0"><span>124.2</span></div><a href="###">点评</a></h2>
 					//objHtml+="</i><span></span><img src='/static/img/star"+item['packageStar']+".png' border='0'><a href='/wap/comment/join/"+item['id']+".htm'>点评</a></h2>";
-					objHtml+="</i><span></span><div class='scorce_box'><img src='/static/img/star"+item['packageStar']+".png' border='0'><span>"+item['packageStar']+"</span></div><a href='/wap/comment/join/"+item['id']+".htm'>点评</a></h2>";
+					objHtml+="</i><span></span><div class='scorce_box'><img src='/static/img/star"+item['packageStar']+".png' border='0'><span>"+item['packageStar']+"</span></div><a href='/wap/comment/join/"+item['id']+".htm'>";
+					if(item['evaluated']){
+						objHtml+="重新点评";	
+					}else{
+						objHtml+="点评";
+					}
+					objHtml+="</a></h2>";
 					objHtml+="<ul><li><span>";
 					var proDishesDtos = item['proDishesDtos'];
 					if(proDishesDtos!=null){
