@@ -1,4 +1,4 @@
-package com.ssic.education.provider.controller;
+package com.ssic.education.government.controller;
 
 import java.awt.Font;
 import java.awt.Graphics;
@@ -27,6 +27,7 @@ import com.ssic.education.utils.util.DateUtils;
 import com.ssic.education.utils.util.PropertiesUtils;
 
 @Controller
+@RequestMapping(value = "/ajax")
 public class DrawRandomController {
 	
     @Autowired
@@ -156,7 +157,7 @@ public class DrawRandomController {
 		
 		if(validateCode == null || validateCode.equals("")){
 			result.setStatus(DataStatus.HTTP_FAILE);
-			result.setMessage("验证码为空！");
+			result.setMessage("短信验证码为空！");
 			return result;
 		}
 		if (StringUtils.isEmpty(mobilePhone)) {

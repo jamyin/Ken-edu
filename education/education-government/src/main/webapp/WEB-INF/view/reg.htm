@@ -4,7 +4,9 @@
         <#include "/common/head.htm" />
        	<link rel="stylesheet" href="/static/css/style.css">
        	<script src="/static/js/reg.js"></script>
+       	<script src="/static/js/regUtils.js"></script>
        	<script src="/static/js/phoneReg.upload.js"></script>
+       	<script type="text/javascript" src="/static/layer-v2.0/layer/layer.js"></script>
        	<style type="text/css">
        		.cafeteria > li > ul > li input[type=text]{width: 120px; margin-left:10px;}
        		.reg_box > ul > li label.file {width: 150px;}
@@ -53,6 +55,10 @@
 				<li><label><i>*</i>地址</label><input id="address" type="text" placeholder=""></li>
 				<li><label><i>*</i>联系人姓名</label><input id="contacts" type="text" placeholder=""></li>
 				<li><label><i>*</i>手机</label><input id="mobileNo" type="text" placeholder=""></li>
+				<li><label><i>*</i>图片验证码</label><input id="picCaptcha" type="text" placeholder=""><img id="refreshValid" title="点击图片刷新验证码" src="/ajax/drawRandom.htm"/></li>
+				<li><label><i>*</i>短信验证码</label><input id="messageValid" type="text" placeholder="">
+					<input id="sendMessage" type="button" href="javascript:;" disabled="disabled" style="width:150px;line-height:30px;background:#c6c6c6;color:black;" value="获取短信验证码"></input>
+				</li>
 				<li><label><i>*</i>区教委</label>
 				<select name="area"  id="area" panelheight="auto">
 					<option value="">请选择区县</option>
@@ -104,7 +110,7 @@
 				<li><label><i>*</i>密码</label><input id="password" type="password" style="padding:10px;border:thin double #CCCCCC; height: 8px;width: 190px;" placeholder=""></li>
 				<li><label><i>*</i>确认密码</label><input id="confirmPassword" type="password" style="padding:10px;border:thin double #CCCCCC; height: 8px;width: 190px;" placeholder=""></li>
 			</ul>
-			<input class="submit" type="button" value="确认提交">
+			<input id="sursSubmit" disabled="disabled" class="submit" type="button" style="background:#c6c6c6;" value="确认提交">
 		</div>
 	</div>	
 	<div class="footer">
