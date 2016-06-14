@@ -16,7 +16,6 @@ import com.ssic.education.handle.dao.CommitteeDao;
 import com.ssic.education.handle.dao.SchoolDao;
 import com.ssic.education.handle.pojo.EduCommittee;
 import com.ssic.education.handle.pojo.EduSchool;
-import com.ssic.education.handle.pojo.ProLedger;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 import com.ssic.education.utils.util.BeanUtils;
