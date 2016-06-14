@@ -24,7 +24,7 @@ public class IndexController extends BaseController{
 		}
 		
 		ModelAndView mv = getModelAndView();
-		
+		eduSchoolDto.setReviewed(Byte.valueOf("1"));
 		List<EduSchoolDto> dataList = eduSchoolService.searchEduScholDtoList(eduSchoolDto);
 		
 		
