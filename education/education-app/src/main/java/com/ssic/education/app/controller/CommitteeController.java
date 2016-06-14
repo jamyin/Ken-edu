@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssic.educateion.common.dto.EduCommitteeDto;
+import com.ssic.education.app.interceptor.AccessRequired;
 import com.ssic.education.app.service.ICommitteeService;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
@@ -38,6 +39,7 @@ public class CommitteeController {
 	 * @date 2016年5月23日 下午4:55:23
 	 * @return Response<PageResult<EduCommitteeDto>>    返回类型
 	 */
+	@AccessRequired
 	@RequestMapping("/findCommitteeList")
 	@ResponseBody
 	public Response<PageResult<EduCommitteeDto>>  findCommitteeList(EduCommitteeDto eduCommitteeDto, PageQuery query) {
@@ -63,6 +65,7 @@ public class CommitteeController {
 	 * @date 2016年5月23日 下午4:55:23
 	 * @return Response<PageResult<EduCommitteeDto>>    返回类型
 	 */
+	@AccessRequired
 	@RequestMapping("/findCommitteeListNoPage")
 	@ResponseBody
 	public Response<List<EduCommitteeDto>>  findCommitteeListNoPage(EduCommitteeDto eduCommitteeDto) {

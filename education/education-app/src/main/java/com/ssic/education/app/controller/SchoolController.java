@@ -26,6 +26,7 @@ import com.ssic.educateion.common.dto.SchoolDto;
 import com.ssic.educateion.common.dto.SupplierDto;
 import com.ssic.education.app.constants.SchoolLevel;
 import com.ssic.education.app.dto.SchoolUserDto;
+import com.ssic.education.app.interceptor.AccessRequired;
 import com.ssic.education.app.service.ICommitteeService;
 import com.ssic.education.app.service.ISchoolService;
 import com.ssic.education.handle.service.EduSchoolService;
@@ -80,6 +81,7 @@ public class SchoolController {
 	 * @date 2016年5月13日 上午9:14:56
 	 * @return Response<PageResult<EduSchoolDto>>    返回类型
 	 */
+	@AccessRequired
 	@RequestMapping("/findSchoolList")
 	@ResponseBody
 	public Response<PageResult<SchoolDto>> findSchoolList(SchoolDto schoolDto, PageQuery query, Integer isPage) {

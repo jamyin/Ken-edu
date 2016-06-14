@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ssic.educateion.common.dto.EduCommitteeDto;
 import com.ssic.educateion.common.dto.EduInformationDto;
 import com.ssic.educateion.common.dto.EduSchoolDto;
+import com.ssic.education.app.interceptor.AccessRequired;
 import com.ssic.education.app.service.ICommitteeService;
 import com.ssic.education.app.service.IInformationService;
 import com.ssic.education.handle.service.EduSchoolService;
@@ -51,6 +52,7 @@ public class InformationController {
 	 * @date 2016年5月20日 上午10:26:05
 	 * @return Response<PageResult<EduInformationDto>>    返回类型
 	 */
+	@AccessRequired
 	@RequestMapping("/findInformationList")
 	@ResponseBody
 	public Response<PageResult<EduInformationDto>>  findInformationList(EduInformationDto eduInformationDto, PageQuery query) {
@@ -127,6 +129,7 @@ public class InformationController {
 	 * @date 2016年5月20日 上午10:29:45
 	 * @return Response<PageResult<EduInformationDto>>    返回类型
 	 */
+	@AccessRequired
 	@RequestMapping("/findInformationDetial/{id}")
 	@ResponseBody
 	public Response<EduInformationDto> findInformationDetial(@PathVariable("id")String id) {
