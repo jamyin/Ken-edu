@@ -17,6 +17,8 @@
 <script type="text/javascript" src="reg/uploadify/swfobject.js"></script>
 <script type="text/javascript" src="reg/uploadify/jquery.uploadify.v2.1.4.min.js"></script>
 
+<script type="text/javascript" src="reg/layer-v2.0/layer/layer.js"></script>
+
 </head>
 <body class="bgf4">
 	<div class="login-box f-mt10 f-pb50">
@@ -68,10 +70,30 @@
 								</div>
 							</div>
 							<div class="item col-xs-12">
-								<span class="intelligent-label f-fl"><b class="ftx04"></b>手机：</span>
+								<span class="intelligent-label f-fl"><b class="ftx04">*</b>手机：</span>
 								<div class="f-fl item-ifo">
-									<input name="contactWay" type="text" class="txt03 f-r3" keycodes="tel" tabindex="3" data-valid="isPhone" data-error="手机号码不能为空||手机号码格式不正确" maxlength="11" id="phone" /> <span
+									<input name="contactWay" type="text" class="txt03 f-r3 required" keycodes="tel" tabindex="3" data-valid="isNonEmpty||isPhone" data-error="手机号码不能为空||手机号码格式不正确" maxlength="11" id="phone" /> <span
 										class="ie8 icon-close close hide"></span> <label class="icon-sucessfill blank hide"></label> <label class="focus">请填写11位有效的手机号码</label> <label class="focus valid"></label>
+								</div>
+							</div>
+							<div class="item col-xs-12">
+								<span class="intelligent-label f-fl"><b class="ftx04">*</b>图片验证码：</span>
+								<div class="f-fl item-ifo">
+									<input name="picCaptcha" type="text" class="txt03 f-r3 required" keycodes="tel" tabindex="3" data-valid="isNonEmpty" data-error="手机号码不能为空||手机号码格式不正确" maxlength="11" id="picCaptcha" /> <span
+										class="ie8 icon-close close hide"></span> <label class="icon-sucessfill blank hide"></label> 
+								</div>
+								<div class="f-fl item-ifo">
+									<label class=""><img id="refreshValid" title="点击图片刷新验证码" src="${pageContext.request.contextPath}/drawRandom"/></label>
+								</div>
+							</div>
+							<div class="item col-xs-12">
+								<span class="intelligent-label f-fl"><b class="ftx04">*</b>短信验证码：</span>
+								<div class="f-fl item-ifo">
+									<input name="messageValid" type="text" class="txt03 f-r3 required" keycodes="tel" tabindex="3" data-valid="isNonEmpty" maxlength="11" id="messageValid" /> <span
+										class="ie8 icon-close close hide"></span> <label class="icon-sucessfill blank hide"></label>
+								</div>
+								<div class="f-fl item-ifo">
+									<input id="sendMessage" type="button" href="javascript:;" disabled="disabled" class="btn btn-blue" style="width:150px;" value="获取短信验证码"></input>
 								</div>
 							</div>
 							<div class="item col-xs-12">
@@ -153,8 +175,7 @@
 							<div class="item col-xs-12">
 								<span class="intelligent-label f-fl">&nbsp;</span>
 								<div class="f-fl item-ifo">
-									<a href="javascript:;" class="btn btn-blue f-r3" id="btn_part1">完成</a>
-
+									<a href="javascript:;" class="btn btn-blue f-r3" disabled="disabled" id="btn_part1">完成</a>
 								</div>
 							</div>
 
@@ -187,6 +208,68 @@
 	</div>
 	<script>
 		$(function() {
+			
+			//失去焦点事件
+			$("#picCaptcha").on("blur",function(){
+				var picCaptcha = $("#picCaptcha").val();
+				var dataParam = {picCaptcha:picCaptcha};
+				$.ajax({
+					url : '${pageContext.request.contextPath}/checkRandom',
+					type : "POST",
+					data : dataParam,
+					dataType : 'json',
+					success : function(data) {
+						if(data.status == 500){
+							$("#sendMessage").attr("disabled","disabled");
+							layer.alert(data.message, {icon: 2});
+						}else{
+							$("#sendMessage").removeAttr("disabled");
+						}
+					}
+				});
+			});
+			$("#sendMessage").click(function(){
+				var picCaptcha = $("#picCaptcha").val();
+				var mobilePhone = $("#phone").val();
+				var dataParam = {picCaptcha:picCaptcha,mobilePhone:mobilePhone};
+				$.ajax({
+					url : '${pageContext.request.contextPath}/SMS/send',
+					type : "POST",
+					data : dataParam,
+					dataType : 'json',
+					success : function(data) {
+						if(data.status == 500){
+							layer.alert(data.message, {icon: 2});
+						}else{
+							
+						}
+					}
+				});
+			});
+			$("#messageValid").on("blur",function(){
+				var validateCode = $("#messageValid").val();
+				var mobilePhone = $("#phone").val();
+				var dataParam = {validateCode:validateCode,mobilePhone:mobilePhone};
+				$.ajax({
+					url : '${pageContext.request.contextPath}/checkMobile',
+					type : "POST",
+					data : dataParam,
+					dataType : 'json',
+					success : function(data) {
+						if(data.status == 500){
+							$("#btn_part1").attr("disabled","disabled");
+							layer.alert(data.message, {icon: 2});
+						}else{
+							$("#btn_part1").removeAttr("disabled");
+						}
+					}
+				});
+			});
+			
+			$("#refreshValid").click(function(){
+				$(this).attr("src","${pageContext.request.contextPath}/drawRandom?"+Math.random());
+			});
+			
 			//第一页的确定按钮
 			$("#btn_part1").click(function() {
  								if (!verifyCheck._click()){
