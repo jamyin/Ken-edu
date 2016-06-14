@@ -21,6 +21,7 @@ import com.ssic.educateion.common.dto.SchoolDto;
 import com.ssic.education.app.constants.SchoolLevel;
 import com.ssic.education.app.dto.MapToListDto;
 import com.ssic.education.app.dto.TaskReceiveDto;
+import com.ssic.education.app.interceptor.AccessRequired;
 import com.ssic.education.app.service.ICommitteeService;
 import com.ssic.education.app.service.ISchoolService;
 import com.ssic.education.handle.service.EduUsersService;
@@ -64,6 +65,7 @@ public class TaskController {
 	 * @return Response<EduTaskDto>    返回类型
 	 */
 	@RequestMapping("/findTaskListById/{id}")
+	@AccessRequired
 	@ResponseBody
 	@Deprecated
 	public Response<PageResult<EduTaskDto>> findTaskListById(@PathVariable("id")String id,String readstat, PageQuery query) {
@@ -114,6 +116,7 @@ public class TaskController {
 	* @date 2016年6月14日 上午10:18:09
 	* @return Response<List<EduTaskDto>>    返回类型
 	 */
+	@AccessRequired
 	@RequestMapping("/findReadAccount/{id}")
 	@ResponseBody
 	public Response<Integer> findReadAccount(@PathVariable("id")String id) {
@@ -152,6 +155,7 @@ public class TaskController {
 	 * @date 2016年5月29日 下午2:41:41
 	 * @return Response<EduTaskDto>    返回类型
 	 */
+	@AccessRequired
 	@RequestMapping("/findTaskByPara")
 	@ResponseBody
 	public Response<EduTaskDto> findTaskByPara(EduTaskDto eduTaskDto) {
@@ -223,6 +227,7 @@ public class TaskController {
 	 * @date 2016年5月20日 下午5:39:27
 	 * @return Response<String>    返回类型
 	 */
+	@AccessRequired
 	@RequestMapping("/delTask/{id}")
 	@ResponseBody
 	public Response<String> delTask(@PathVariable("id")String id){
@@ -252,6 +257,7 @@ public class TaskController {
 	 * @date 2016年5月20日 下午5:53:55
 	 * @return Response<String>    返回类型
 	 */
+	@AccessRequired
 	@RequestMapping("/upadteTask")
 	@ResponseBody
 	public Response<String> upadteTask(EduTaskReceiveDto receiveDto){
@@ -292,6 +298,7 @@ public class TaskController {
 	 * @return Response<EduTaskReadDto>    返回类型
 	 */
 	@Deprecated   
+	@AccessRequired
 	@RequestMapping("/findReceiveList/{id}")
 	@ResponseBody
 	public Response<EduTaskReadDto> findReadList(@PathVariable("id")String id, PageQuery query) {
@@ -317,6 +324,7 @@ public class TaskController {
 		return result;
 	}
 	
+	@AccessRequired
 	@RequestMapping("/chooseReceive")
 	@ResponseBody
 	public Response<TaskReceiveDto> chooseReceive(Integer sourceType, String level,PageQuery query, String committeeId ,String schoolName) {
@@ -383,6 +391,7 @@ public class TaskController {
 	 * @date 2016年5月26日 上午10:50:28
 	 * @return Response<EduTaskReadDto>    返回类型
 	 */
+	@AccessRequired
 	@RequestMapping("/sendTask")
 	@ResponseBody
 	public Response<String> sendTask(EduTaskDto eduTaskDto) {
