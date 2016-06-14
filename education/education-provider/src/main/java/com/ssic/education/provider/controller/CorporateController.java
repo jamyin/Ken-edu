@@ -79,6 +79,8 @@ public class CorporateController {
 		if (user == null) {
 			return null;
 		}
+		psd.setLastUpdateTime(new Date());
+		psd.setUpdater(user.getId());
 		psd.setId(user.getSourceId());
 		supplierService.updataProSupplier(psd);
 		j.setMsg("修改信息成功");
@@ -129,7 +131,9 @@ public class CorporateController {
 				.lookImage(license);
 		String realPath = PropertiesUtils.getProperty("upload.look.url");
 		for (ProLicense proLicense : ProLicenseList) {
+			if(proLicense.getLicPic()!=null){
 			proLicense.setLicPic(realPath + proLicense.getLicPic());
+			}
 		}
 		
 		JSONArray jsonarray = JSONArray.fromObject(ProLicenseList);  
