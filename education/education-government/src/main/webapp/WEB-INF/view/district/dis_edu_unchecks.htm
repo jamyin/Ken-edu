@@ -50,11 +50,19 @@
                         <p> 联系人姓名：${(proSupplierDto.corporation)!} </p>
                         <p> 电话：${(proSupplierDto.contactWay)!} </p>
 
-                        <h2>证件类型</h2>
-                        <p> 食品经营许可证：${(proSupplierDto.foodBusinessCode)!}  </p>
-                        <p> 食品流通证号：${(proSupplierDto.foodCirculationCode)!}  </p>
-                        <p> 食品生产证号：${(proSupplierDto.foodProduceCode)!}  </p>
-                        <p> 工商执照号：${(proSupplierDto.businessLicense)!}  </p>
+						<#if (proLicenses??) && (proLicenses?size>0)>
+						<h2>证件类型</h2>
+	                        <#list proLicenses as proLicense>
+		                        <#if (proLicense.licNo??) && (proLicense.licNo?length gt 0)>
+		                        	<p> ${(proLicense.licName)!}： ${(proLicense.licNo)!} </p>
+	                        	 </#if>
+	                        </#list>
+                         </#if>
+                          
+                        <!-- <#if proSupplierDto.foodBusinessCode??><p> 食品经营许可证：${(proSupplierDto.foodBusinessCode)!}  </p></#if>
+                        <#if proSupplierDto.foodCirculationCode??><p> 食品流通证号：${(proSupplierDto.foodCirculationCode)!}  </p></#if>
+                        <#if proSupplierDto.foodProduceCode??><p> 食品生产证号：${(proSupplierDto.foodProduceCode)!}  </p></#if>
+                        <#if proSupplierDto.businessLicense??><p> 工商执照号：${(proSupplierDto.businessLicense)!}  </p></#if> -->
                     </#if>
                         <div class="subbt">
                             <a id="disPass" style="cursor:pointer;">通过</a>

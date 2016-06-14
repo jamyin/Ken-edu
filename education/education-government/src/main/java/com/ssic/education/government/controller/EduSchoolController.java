@@ -313,6 +313,11 @@ public class EduSchoolController extends BaseController{
 		}
 		if (StringUtils.isNotBlank(dto.getSupplierName())) {
 			ProSupplierDto proSupplierDto = proSupplierService.findById(dto.getId());
+			ProLicense proLicense = new ProLicense();
+			proLicense.setCerSource((short)DataStatus.DISABLED);
+			proLicense.setRelationId(proSupplierDto.getId());
+			List<ProLicense> proLicenses = iProLicenseService.lookImage(proLicense);
+			mv.addObject("proLicenses", proLicenses);
 			mv.addObject("proSupplierDto", proSupplierDto);
 			mv.addObject("dto", dto);
 			mv.setViewName("/district/dis_edu_unchecks");

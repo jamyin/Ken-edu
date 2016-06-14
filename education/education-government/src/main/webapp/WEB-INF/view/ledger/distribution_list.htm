@@ -65,7 +65,8 @@
     })
     $('#searchBut').on('click', function() {
   	  var schoolName = $('.search_text').val();
-  	  window.location.href ="findPage.htm?waresNames="+schoolName+"&customerId=${(dto.customerId)!}&sourceId=${(dto.sourceId)!}";
+  	  var page = $('#currPage').val();
+  	  window.location.href ="findPage.htm?waresNames="+schoolName+"&currPage="+page+"&customerId=${(dto.customerId)!}&sourceId=${(dto.sourceId)!}";
     })
  	  // 跳转指定页
     $('#jump_btn').on('click', function () {
@@ -91,8 +92,13 @@
   })
   
   function gotoPage(page) {
-      $("#currPage").val(page);
-      $("#myform").submit();
+	  var waresName = '${(dto.waresNames)!}';
+	  if (waresName.length>0 && waresName != 'undefined') {
+		  window.location.href ="findPage.htm?waresNames="+waresName+"&currPage="+page+"&customerId=${(dto.customerId)!}&sourceId=${(dto.sourceId)!}";
+      } else {
+    	  $("#currPage").val(page);
+          $("#myform").submit();
+      }      
   }
 
   </script>
