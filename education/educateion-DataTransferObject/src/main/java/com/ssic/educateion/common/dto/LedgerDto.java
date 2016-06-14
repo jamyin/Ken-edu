@@ -160,7 +160,7 @@ public class LedgerDto {
 	@Setter
 	@Getter
 	private int mark;
-
+	
 	@Override
 	public String toString() {
 		return "LedgerDto [id=" + id + ", masterId=" + masterId + ", waresId="
