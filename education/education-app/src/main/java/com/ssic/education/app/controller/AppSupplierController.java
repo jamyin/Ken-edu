@@ -11,6 +11,7 @@ import com.ssic.educateion.common.dto.ProWaresDto;
 import com.ssic.education.app.dto.AppCanTeenDto;
 import com.ssic.education.app.dto.MaterialSupplierDto;
 import com.ssic.education.app.dto.SupplierLicDto;
+import com.ssic.education.app.interceptor.AccessRequired;
 import com.ssic.education.app.service.ISupplierService;
 import com.ssic.education.handle.pojo.ProSupplier;
 import com.ssic.education.handle.service.ProWaresService;
@@ -29,7 +30,7 @@ import com.ssic.education.utils.util.StringUtils;
 */
 @Controller
 @RequestMapping(value = "/supplier")
-public class SupplierController {
+public class AppSupplierController {
 
 	@Autowired
 	private ISupplierService supplierService;

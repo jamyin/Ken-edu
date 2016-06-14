@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ssic.educateion.common.dto.ProDishesDto;
 import com.ssic.educateion.common.dto.ProNutritionalDto;
 import com.ssic.educateion.common.dto.ProPackagesDto;
+import com.ssic.education.handle.dto.EduParentPackCommentDto;
+import com.ssic.education.handle.service.IEduParentPackCommentService;
 import com.ssic.education.handle.service.INutritionalService;
 import com.ssic.education.handle.service.ProDishesService;
 import com.ssic.education.handle.service.ProPackagesService;
@@ -35,6 +37,9 @@ public class WapSchoolMenuController extends BaseController{
 	
 	@Autowired
 	private ProDishesService proDishesService;
+	
+	@Autowired
+	private IEduParentPackCommentService iEduParentPackCommentService;
 	
 	/**
 	 * 
@@ -66,9 +71,20 @@ public class WapSchoolMenuController extends BaseController{
 		List<ProDishesDto> resultDishList = proDishesService.searchDishes(packageIdList);
 		HashMap<String,List<ProDishesDto>> packDishMap = listToDishMap(resultDishList);
 		
+		//查找该用户是否已经评价
+		EduParentPackCommentDto eduParentPackCommentDto = new EduParentPackCommentDto();
+		eduParentPackCommentDto.setPackageIds(packageIdList);
+		eduParentPackCommentDto.setParentId(getParentId());
+		List<EduParentPackCommentDto> comList = iEduParentPackCommentService.searchComment(eduParentPackCommentDto);
+		HashMap<String,EduParentPackCommentDto> comListToMap = comListToMap(comList);
+		
+		
 		for(ProPackagesDto packageDto : dataList){
 			packageDto.setProNutritionalDtos(packAgeMap.get(packageDto.getId()));
 			packageDto.setProDishesDtos(packDishMap.get(packageDto.getId()));
+			if(comListToMap.containsKey(packageDto.getId())){
+				packageDto.setEvaluated(true);
+			}
 		}
 
 		response.setData(dataList);
@@ -76,6 +92,15 @@ public class WapSchoolMenuController extends BaseController{
 		return response;
 	}
 	
+	private HashMap<String, EduParentPackCommentDto> comListToMap(List<EduParentPackCommentDto> comList) {
+		HashMap<String, EduParentPackCommentDto> objMap = new HashMap<String,EduParentPackCommentDto>();
+		for(EduParentPackCommentDto dto : comList){
+			String keyCode = dto.getPackageId();
+			objMap.put(keyCode, dto);
+		}
+		return objMap;
+	}
+
 	private HashMap<String, List<ProDishesDto>> listToDishMap(List<ProDishesDto> resultList) {
 		HashMap<String, List<ProDishesDto>> objMap = new HashMap<String, List<ProDishesDto>>();
 		List<ProDishesDto> objList = null;

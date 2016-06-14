@@ -67,6 +67,14 @@ public class LedgerDto {
 	
 	@Setter
 	@Getter
+	private Date startTime;
+	
+	@Setter
+	@Getter
+	private Date endTime;
+	
+	@Setter
+	@Getter
 	private String productionName;
 
 	@Setter
@@ -152,7 +160,7 @@ public class LedgerDto {
 	@Setter
 	@Getter
 	private int mark;
-
+	
 	@Override
 	public String toString() {
 		return "LedgerDto [id=" + id + ", masterId=" + masterId + ", waresId="
@@ -161,7 +169,7 @@ public class LedgerDto {
 				+ ", nextDate=" + nextDate + ", supplierId=" + supplierId
 				+ ", supplierCode=" + supplierCode + ", supplierName="
 				+ supplierName + ", quantity=" + quantity + ", productionDate="
-				+ productionDate + ", productionName=" + productionName
+				+ productionDate + ", productionName=" + productionName +", endTime=" + endTime +", startTime=" + startTime
 				+ ", batchNo=" + batchNo + ", receiverId=" + receiverId
 				+ ", receiverCode=" + receiverCode + ", receiverName="
 				+ receiverName + ", traceCode=" + traceCode + ", userId="

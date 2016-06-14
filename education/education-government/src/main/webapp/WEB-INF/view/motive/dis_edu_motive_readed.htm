@@ -100,6 +100,8 @@
     <script src="/static/js/jquery-2.1.3.min.js"></script>   
     <script type="text/javascript">
 	$(function(){
+		$(".nav").find("a").removeClass("cur");
+		$(".nav").find("a:eq(2)").addClass("cur");
 	 	  // 跳转指定页
 	    $('#jump_btn').on('click', function () {
 	        var jump_num = $('#jump_num').val();

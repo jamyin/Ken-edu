@@ -28,7 +28,7 @@
        	<li><label>联系人:</label><span>${(supplier.corporation)!}</span></li>
        	<#if proLicenses??>
         	<#list proLicenses as proLicense>
-        		<li><label for="">${(proLicense.licName)!}:</label><span>${(proLicense.licNo)!}</span><a class="img_nn" data-value="${(wwwdomain)!}${(proLicense.licPic)!}" href="###" style="color: blue;">查看图片&gt;&gt;</a></li>
+        		<li><label for="">${(proLicense.licName)!}:</label><span>${(proLicense.licNo)!}  </span><a class="img_nn" data-value="${(wwwdomain)!}${(proLicense.licPic)!}" href="###" style="color: blue;">查看图片&gt;&gt;</a></li>
         	</#list>
         </#if>
         <!-- <li><label>工商执照:</label><span>${(supplier.businessLicense)!}</span><a class="img_nn" href="${(supplier.businessLicense)!}">图片</a></li>

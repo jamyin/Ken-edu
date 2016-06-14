@@ -2,6 +2,7 @@ package com.ssic.education.handle.dto;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -122,6 +123,8 @@ public class EduParentPackCommentDto implements Serializable {
     private String weekName;
     
     private String supplyPhase;
+    
+    private List<String> packageIds;
 
    
 }

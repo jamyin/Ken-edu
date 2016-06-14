@@ -245,11 +245,11 @@
     	//拼装营养单位
     	var nutritionalUnits= '';
     	$("#rt_ul_2 li .s2").each(function(i){
-    		var weight = $.trim($(this).val());
+    		/* var weight = $.trim($(this).val());
 			if (nutritionalUnits.indexOf(weight) > -1) {
 				alert("营养'"+weight+"'"+"已存在不能重复添加！");
 				return;
-			}
+			} */
     		nutritionalUnits += $(this).val()+",";
     	})
     	

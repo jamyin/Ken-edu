@@ -59,5 +59,7 @@ public class ProPackagesDto {
 	private String creator; // 更新人
 
 	private Integer packageStar;//package 的 评级 数量
+	
+	private Boolean evaluated = false; //true 点评 false 未点评
 
 }
