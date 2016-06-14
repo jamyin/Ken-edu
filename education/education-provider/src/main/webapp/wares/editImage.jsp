@@ -148,10 +148,12 @@ $(function() {
 						accept="image/*" /></td>
 				
 				</tr>
+				
+				 
 				<tr  id="img1_8">
 					<td colspan="2"><img id="img1"   width="150px" height="150px"  src="${pageContext.request.contextPath}/icon/图片未上传200x200.png"></img></td>
-					
 				</tr>
+			
 				<tr>
 					<th>检测检验报告</th>
 					<td><input type="file" name="jcImgUrl" id="jcImgUrl"
