@@ -160,7 +160,7 @@
 	                      <span class="dis_date">${ledgerDto.actionDate?string("yyyy-MM-dd")}</span>
 	                      <span class="dis_goods ellipsis"><#if ledgerDto.ledgerDtos??>
 	                      	<#list ledgerDto.ledgerDtos as data>
-	                      		${(data.name)!}&nbsp;
+	                      		${(data.name)!} 
 	                      	</#list>
 	                      </#if></span>
 	                      <span class="dis_start ellipsis">${(ledgerDto.supplierName)!}</span>
