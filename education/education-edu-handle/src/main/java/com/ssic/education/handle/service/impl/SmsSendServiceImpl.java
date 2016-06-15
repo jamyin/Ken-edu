@@ -24,8 +24,8 @@ public class SmsSendServiceImpl implements ISmsSendService {
 
 		String returnString = "";
 		try {
-			returnString = HttpSender.batchSend(uri, account, pswd, mobilePhone,
-					content, needstatus, product, extno);
+			returnString = HttpSender.batchSend(uri, account, pswd,
+					mobilePhone, content, needstatus, product, extno);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
