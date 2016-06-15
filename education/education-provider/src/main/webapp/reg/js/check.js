@@ -2,6 +2,9 @@ $(function() {
 	//失去焦点事件
 	$("#picCaptcha").on("blur",function(){
 		var picCaptcha = $("#picCaptcha").val();
+		if(picCaptcha=="" || picCaptcha==null){
+			return false;
+		}
 		var dataParam = {picCaptcha:picCaptcha};
 		$.ajax({
 			url : 'checkRandom',
@@ -11,7 +14,7 @@ $(function() {
 			success : function(data) {
 				if(data.status == 500){
 					$("#sendMessage").attr("disabled","disabled");
-					layer.alert(data.message, {icon: 2});
+					layer.msg(data.message, {icon: 2});
 				}else{
 					$("#sendMessage").removeAttr("disabled");
 				}
@@ -41,6 +44,11 @@ $(function() {
 	$("#messageValid").on("blur",function(){
 		var validateCode = $("#messageValid").val();
 		var mobilePhone = $("#phone").val();
+
+		if(validateCode=="" || validateCode==null){
+			return false;
+		}
+		
 		var dataParam = {validateCode:validateCode,mobilePhone:mobilePhone};
 		$.ajax({
 			url : 'checkMobile',
@@ -68,6 +76,7 @@ var countM = 90;
 function setMessagetime(obj) {
 	if (countM == 0) {
 		$(obj).removeAttr("disabled");
+		$(obj).val("获取短信验证码");
 		return false;
 	} else {
 		$(obj).val("获取短信验证码" + countM + "");

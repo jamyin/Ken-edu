@@ -92,8 +92,8 @@
 									<input name="messageValid" type="text" class="txt03 f-r3 required" keycodes="tel" data-valid="isNonEmpty" maxlength="11" id="messageValid" /> <span
 										class="ie8 icon-close close hide"></span> <label class="icon-sucessfill blank hide"></label>
 								</div>
-								<div class="f-fl item-ifo">
-									<input id="sendMessage" type="button" href="javascript:;" disabled="disabled" class="btn btn-blue" style="width:150px;" value="获取短信验证码"></input>
+								<div class="f-fl item-ifo" style="padding-left:10px;">
+									<input title="请先输入图片验证码" id="sendMessage" type="button" href="javascript:;" disabled="disabled" class="btn btn-blue" style="width:150px;height:35px;line-height:30px;" value="获取短信验证码"></input>
 								</div>
 							</div>
 							<div class="item col-xs-12">
@@ -175,7 +175,8 @@
 							<div class="item col-xs-12">
 								<span class="intelligent-label f-fl">&nbsp;</span>
 								<div class="f-fl item-ifo">
-									<a href="javascript:;" class="btn btn-blue f-r3" disabled="disabled" id="btn_part1">完成</a>
+									<input id="btn_part1" type="button" href="javascript:;" disabled="disabled" class="btn btn-blue f-r3" style="width:150px;" value="完成"></input>
+									<!-- <a href="javascript:;" class="btn btn-blue f-r3" disabled="disabled" id="btn_part1">完成</a> -->
 								</div>
 							</div>
 

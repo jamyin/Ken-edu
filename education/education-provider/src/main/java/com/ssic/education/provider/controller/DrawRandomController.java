@@ -80,7 +80,7 @@ public class DrawRandomController {
 		Response<String> result = new Response<String>();
 		if(StringUtils.isEmpty(picCaptcha)){
 			result.setStatus(DataStatus.HTTP_FAILE);
-			result.setMessage("验证码不存在！");
+			result.setMessage("图片验证码不存在！");
 			return result;
 		}
 		if (session.getAttribute("RandomCode") != null) {
@@ -88,16 +88,16 @@ public class DrawRandomController {
 					.toString().toLowerCase();
 			if (!picCaptcha.toLowerCase().equals(randomPicSession)) {
 				result.setStatus(DataStatus.HTTP_FAILE);
-				result.setMessage("验证码输入错误！");
+				result.setMessage("图片验证码输入错误！");
 				return result;
 			}else{
 				result.setStatus(DataStatus.HTTP_SUCCESS);
-				result.setMessage("验证码输入正确！");
+				result.setMessage("图片验证码输入正确！");
 				return result;
 			}
 		 }else {
 			result.setStatus(DataStatus.HTTP_FAILE);
-			result.setMessage("验证码不存在！");
+			result.setMessage("图片验证码不存在！");
 			return result;
 		}
 	}
@@ -115,13 +115,13 @@ public class DrawRandomController {
 		
 		if(StringUtils.isEmpty(picCaptcha)){
 			result.setStatus(DataStatus.HTTP_FAILE);
-			result.setMessage("验证码为空！");
+			result.setMessage("图片验证码为空！");
 			return result;
 		}
 		String randomPicSession = session.getAttribute("RandomCode").toString().toLowerCase();
 		if (!picCaptcha.toLowerCase().equals(randomPicSession)) {
 			result.setStatus(DataStatus.HTTP_FAILE);
-			result.setMessage("验证码输入错误！");
+			result.setMessage("图片验证码输入错误！");
 			return result;
 		}		
 		
@@ -156,7 +156,7 @@ public class DrawRandomController {
 		
 		if(validateCode == null || validateCode.equals("")){
 			result.setStatus(DataStatus.HTTP_FAILE);
-			result.setMessage("验证码为空！");
+			result.setMessage("短信验证码为空！");
 			return result;
 		}
 		if (StringUtils.isEmpty(mobilePhone)) {
@@ -168,7 +168,7 @@ public class DrawRandomController {
 		String keyCode = mobilePhone + "provider";
 		if(redisTemplate.opsForValue().get(keyCode)==null || redisTemplate.opsForValue().get(keyCode).equals("")){
 			result.setStatus(DataStatus.HTTP_FAILE);
-			result.setMessage("验证码失效！");
+			result.setMessage("短信验证码失效！");
 			return result;
 		}
 		
@@ -179,7 +179,7 @@ public class DrawRandomController {
 			return result;
 		} else {
 			result.setStatus(DataStatus.HTTP_FAILE);
-			result.setMessage("验证码错误！");
+			result.setMessage("短信验证码错误！");
 			return result;
 		}
 

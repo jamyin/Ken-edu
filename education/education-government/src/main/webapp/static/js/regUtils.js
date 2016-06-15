@@ -2,6 +2,9 @@ $(function() {
 	//失去焦点事件
 	$("#picCaptcha").on("blur",function(){
 		var picCaptcha = $("#picCaptcha").val();
+		if(picCaptcha=="" || picCaptcha==null){
+			return false;
+		}		
 		var dataParam = {picCaptcha:picCaptcha};
 		$.ajax({
 			url : '/ajax/checkRandom.htm',
@@ -43,6 +46,9 @@ $(function() {
 	});
 	$("#messageValid").on("blur",function(){
 		var validateCode = $("#messageValid").val();
+		if(validateCode=="" || validateCode==null){
+			return false;
+		}		
 		var mobilePhone = $("#mobileNo").val();
 		var dataParam = {validateCode:validateCode,mobilePhone:mobilePhone};
 		$.ajax({

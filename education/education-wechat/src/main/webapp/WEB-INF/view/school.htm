@@ -38,7 +38,7 @@
 			</#if>	
 			<#if supplierList ??>
 				<#list supplierList as supplier>
-					<p><span class="lb">委托经营单位</span id="gu">${(supplier.supplierName)!}<a href="/wap/supplier/index.htm?companyType=2&relationId=${(supplier.id)!}">查看</a></p>		
+					<p><span class="lb">委托经营单位</span id="gu">${(supplier.supplierName)!}<a href="/wap/supplier/index.htm?companyType=2&relationId=${(supplier.id)!}&schoolId=${(eduSchoolDto.id)!}">查看</a></p>		
 				</#list>
 			</#if>
 		</div>	

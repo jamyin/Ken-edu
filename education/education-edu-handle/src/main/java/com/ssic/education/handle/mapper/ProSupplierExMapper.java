@@ -32,6 +32,8 @@ public interface ProSupplierExMapper {
 
 	List<ProSupplierDto> searchSupplierListBySupplierId(@Param("supplierId") String supplierId,@Param("suppliName") String suppliName,@Param("supplierType") Integer supplierType,@Param("limit") Integer limit);
 	
+	List<ProSupplierDto> searchSchWareSuppListBySuppSchoolId(@Param("supplierId") String supplierId,@Param("schoolId")String schoolId,@Param("suppliName") String suppliName,@Param("supplierType") Integer supplierType,@Param("limit") Integer limit);
+	
 	List<ProSupplierDto> findSupplierListByCommittee(@Param("proSupplierDto") ProSupplierDto proSupplierDto,@Param("query") PageQuery page);
 	
 	long countSupplierListByCommittee(@Param("proSupplierDto") ProSupplierDto proSupplierDto);

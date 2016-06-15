@@ -64,7 +64,7 @@ function loadFunction(){
 				//<li><img src="static/img/food_simple.jpg" border="0"><p>红枣</p><span>产品编号：86910108</span><span class="weight">5g</span></li>
 				//$("#purchasesList").append("<li><label>"+item['waresName']+"</label></li>");
 				//<img src='/static/img/food_simple.jpg' border='0'>
-				$("#purchasesList").append("<li><a href='/wap/purchases/details/"+item['id']+".htm'><img src="+wwwdomain+""+item['image']+"' border='0'><p>"+item['waresName']+"</p><span>产品编号："+item['barCode']+"</span><span class='weight'>规格："+item['spec']+"</span></a></li>");
+				$("#purchasesList").append("<li><a href='/wap/purchases/details/"+item['id']+".htm'><img src="+wwwdomain+""+item['image']+" border='0'><p>"+item['waresName']+"</p><span>产品编号："+item['barCode']+"</span><span class='weight'>规格："+item['spec']+"</span></a></li>");
 			});
 		}
 	});

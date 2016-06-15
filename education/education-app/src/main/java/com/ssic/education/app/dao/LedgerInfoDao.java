@@ -81,7 +81,12 @@ public class LedgerInfoDao {
 		}
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		if (null != page) {
-			example.setOrderByClause("stat desc,create_time desc limit " + page.getStartNum() + "," + page.getPageSize());
+			if (StringUtils.isNotBlank(proLedgerMaster.getUserId())) {
+				example.setOrderByClause("FIELD(haul_status,1,2,0),action_date desc limit " + page.getStartNum() + "," + page.getPageSize());
+			}else
+			{
+				example.setOrderByClause("stat desc,action_date desc limit " + page.getStartNum() + "," + page.getPageSize());
+			}
 		}
 		List<ProLedgerMaster> proLedgersMaster = ledgerMasterMapper.selectByExample(example);
 		return BeanUtils.createBeanListByTarget(proLedgersMaster, LedgerMasterListDto.class);
@@ -104,7 +109,7 @@ public class LedgerInfoDao {
 		}
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		if (null != page) {
-			example.setOrderByClause("stat desc,create_time desc limit " + page.getStartNum() + "," + page.getPageSize());
+			example.setOrderByClause("stat desc limit " + page.getStartNum() + "," + page.getPageSize());
 		}
 		List<ProLedger> proLedgers = ledgerMapper.selectByExample(example);
 		return proLedgers;

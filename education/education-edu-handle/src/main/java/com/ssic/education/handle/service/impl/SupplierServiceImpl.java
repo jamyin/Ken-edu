@@ -167,10 +167,19 @@ public class SupplierServiceImpl implements ISupplierService {
 	 */
 	@Override
 	public List<ProSupplierDto> searchSupplierListBySupplierId(
-			String supplierId, String suppliName, Integer supplierType,
+			String supplierId ,String suppliName, Integer supplierType,
 			Integer limit) {
 		// TODO Auto-generated method stub
 		return proSupplierDao.searchSupplierListBySupplierId(supplierId,
+				suppliName, supplierType, limit);
+	}
+	
+	@Override
+	public List<ProSupplierDto> searchSchWareSuppListBySuppSchoolId(
+			String supplierId,String schoolId ,String suppliName, Integer supplierType,
+			Integer limit) {
+		// TODO Auto-generated method stub
+		return proSupplierDao.searchSchWareSuppListBySuppSchoolId(supplierId,schoolId,
 				suppliName, supplierType, limit);
 	}
 

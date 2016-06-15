@@ -317,6 +317,14 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 		return exMapper.searchSupplierListBySupplierId(supplierId, suppliName,
 				supplierType, limit);
 	}
+	
+	public List<ProSupplierDto> searchSchWareSuppListBySuppSchoolId(
+			String supplierId,String schoolId, String suppliName, Integer supplierType,
+			Integer limit) {
+		// TODO Auto-generated method stub
+		return exMapper.searchSchWareSuppListBySuppSchoolId(supplierId,schoolId, suppliName,
+				supplierType, limit);
+	}
 
 	public ProSupplier findProSupplierByName(String name, String supplierId) {
 		ProSupplierReceiverExample psrExample = new ProSupplierReceiverExample();

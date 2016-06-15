@@ -53,7 +53,7 @@ public class WapSupplierController extends BaseController{
 		 * @param companyType 自定义类型 1 食堂 2 委托单位
 	 */
 	@RequestMapping(value="index")
-	public ModelAndView index(Integer companyType,String relationId){
+	public ModelAndView index(Integer companyType,String relationId,String schoolId){
 		ModelAndView mv = getModelAndView();
 
 		List<ProLicenseDto> resultList = null;
@@ -94,7 +94,7 @@ public class WapSupplierController extends BaseController{
 
 		
 		//根据当前供应商信息 查询该供应商对应的原料供应商信息
-		List<ProSupplierDto> suppliList = iSupplierService.searchSupplierListBySupplierId(supplierId,null,2,10);
+		List<ProSupplierDto> suppliList = iSupplierService.searchSchWareSuppListBySuppSchoolId(supplierId,schoolId,null,2,10);
 
 		mv.addObject("companyType",companyType);
 		mv.addObject("infoObj",infoObj);
