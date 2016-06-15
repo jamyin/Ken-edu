@@ -78,7 +78,11 @@
 	                                    <td>
 	                                    	<!-- onmouseover="this.style.color='#60ac62'"  onmouseout="this.style.color='#000000'" -->
 	                                        <a style="color: blue;" href="/motive/details/${(result.taskId)!}.htm">
-	                                            ${(result.taskTitle)!}
+	                                            <#if result.taskTitle?length lt 10>   
+		                                            ${(result.taskTitle)!}
+		                                        <#else> 
+												     ${result.taskTitle[0..11]}... 
+												</#if>
 	                                        </a>
 	                                    </td>
 	                                    <td>${(result.createTime?string('yyyy-MM-dd'))!}</td>

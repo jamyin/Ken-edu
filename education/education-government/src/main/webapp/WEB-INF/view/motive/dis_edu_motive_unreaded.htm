@@ -81,7 +81,11 @@
 	                                    <td>${(result.sendName)!} </td>
 	                                    <td>
 	                                        <a style="color: blue;" href="/motive/details/${(result.taskId)!}.htm">
+	                                        <#if result.taskTitle?length lt 10>   
 	                                            ${(result.taskTitle)!}
+	                                        <#else> 
+											     ${result.taskTitle[0..11]}... 
+											</#if>
 	                                        </a>
 	                                    </td>
 	                                    <td>${(result.createTime?string('yyyy-MM-dd'))!}</td>
