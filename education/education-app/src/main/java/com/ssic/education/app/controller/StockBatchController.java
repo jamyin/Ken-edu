@@ -105,6 +105,7 @@ public class StockBatchController {
 	 * @date 2016年5月27日 下午2:39:55
 	 */
 	@RequestMapping(value = "/master/{id}", method = RequestMethod.GET)
+	@AccessRequired
 	public @ResponseBody Response<LedgerMasterInfoDto> getMasterInfoById(@PathVariable("id") String id, PageQuery query) {
 		Response<LedgerMasterInfoDto> result = new Response<LedgerMasterInfoDto>();
 		LedgerMasterInfoDto LedgerInfoDto = ledgerInfoService.findMasterById(id, query);
@@ -114,7 +115,7 @@ public class StockBatchController {
 
 	@RequestMapping(value = "/updateStatus/{id}/{status}", method = RequestMethod.GET)
 	@AccessRequired
-	public Response<Integer> updateStatus(@PathVariable("id") String id, @PathVariable("status") String status) {
+	public @ResponseBody Response<Integer> updateStatus(@PathVariable("id") String id, @PathVariable("status") String status) {
 		Response<Integer> result = new Response<Integer>();
 		int num = ledgerInfoService.updateStatus(id, status);
 		if (num != -1) {
