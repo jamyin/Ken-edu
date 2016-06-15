@@ -96,6 +96,7 @@ public class ProSupplierController extends BaseController {
 		mv.addObject("proLicenses", proLicenses);
 //		mv.addObject("pWares", pWares);
 		mv.addObject("mSuppliers", mSuppliers);
+		mv.addObject("dto", dto);
 		/*for (ProLicense prolicense:proLicenses) {
 			if (null != prolicense.getLicType() && prolicense.getLicType()==4 && StringUtils.isNotBlank(supplier.getBusinessLicense())) {
 				prolicense.setLicNo(supplier.getBusinessLicense());

@@ -8,7 +8,9 @@
 <#include "/common/nav.htm" />
 
   <div class="wrapperA">
-
+	 <div class="cur_postion">
+	     <span class="cp">当前位置:</span><span class="gt">&gt;</span><a href="/edu/school/details.htm?source=${(dto.source)!}&customerId=${(dto.schoolId)!}">学校详情</a><span class="gt">&gt;</span><a href="#">供应商列表</a>
+    </div>
     <h1 class="con-tt">
       <span class="title">供应商列表</span>
       <span>
@@ -19,7 +21,7 @@
     </h1>
 
     <div class="wrapperB">
-    <form action="list.htm?id=${(data.id)!}&sourceId=${(dto.supplierId)!}&schoolId=${(dto.customerId)!}&source=${(dto.source)!}&supplierName=${(dto.supplierName)!}" method="post" id="myform">
+    <form action="list.htm?id=${(data.id)!}&sourceId=${(dto.sourceId)!}&schoolId=${(dto.schoolId)!}&source=${(dto.source)!}&supplierName=${(dto.supplierName)!}" method="post" id="myform">
      <input type="hidden" name="currPage" id="currPage" value="1"/>
       <ul class="sulplier_ul">
         <li class="head">
@@ -32,7 +34,7 @@
             <li>
               <span class="name">${(data.supplierName)!}</span>
               <span class="place">${(data.address)!}</span>
-              <span class="detail"><a href="/pro/supplier/detail.htm?id=${(data.id)!}&source=1">详情 &gt;</a></span>
+              <span class="detail"><a href="/pro/supplier/detail.htm?id=${(data.id)!}&sourceId=${(dto.sourceId)!}&schoolId=${(dto.schoolId)!}&supplierName=${(dto.supplierName)!}&source=1">详情 &gt;</a></span>
             </li>
           </#list>
         </#if>
