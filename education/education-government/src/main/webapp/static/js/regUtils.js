@@ -25,6 +25,10 @@ $(function() {
 	});
 	$("#sendMessage").click(function(){
 		var picCaptcha = $("#picCaptcha").val();
+		if (picCaptcha.length<=0 || picCaptcha == 'undefined') {
+			layer.alert("请输入图片验证码~", {icon: 2});
+			return;
+		}
 		var mobilePhone = $("#mobileNo").val();
 		var dataParam = {picCaptcha:picCaptcha,mobilePhone:mobilePhone};
 		$.ajax({
