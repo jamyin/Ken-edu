@@ -15,7 +15,6 @@ import com.ssic.education.app.dto.EduUsersInfoDto;
 import com.ssic.education.app.dto.AppProUserDto;
 import com.ssic.education.app.interceptor.AccessRequired;
 import com.ssic.education.app.service.IAppUsersService;
-import com.ssic.education.handle.pojo.ProUsers;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.Response;
 import com.ssic.education.utils.redis.WdRedisDao;
@@ -44,28 +43,25 @@ public class AppUserController extends BaseController {
 	 * @param account 账户
 	 * @param password 密码
 	 * @return 用户信息
+	 * @throws UnsupportedEncodingException 
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public @ResponseBody Response<AppEduUserDto> login(@RequestParam(required = true) String account, @RequestParam(required = true) String password) {
+	public @ResponseBody Response<AppEduUserDto> login(@RequestParam(required = true) String account, @RequestParam(required = true) String password) throws UnsupportedEncodingException {
 		EduUsersInfoDto user = new EduUsersInfoDto();
 		Response<AppEduUserDto> result = new Response<AppEduUserDto>();
 		user.setUserAccount(account);
-		try {
-			int num=account.getBytes("utf-8").length;
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}  
-		user.setPassword(password);
-		AppEduUserDto userdto = appUserService.eduLogin(user);
-		result.setData(userdto);
-		if (userdto != null) {
-			result.setStatus(DataStatus.HTTP_SUCCESS);
-			result.setMessage("登录成功！");
+		int num = account.getBytes("utf-8").length;
+		if (num >= 4 && num <= 30) {
+			user.setPassword(password);
+			AppEduUserDto userdto = appUserService.eduLogin(user);
 			result.setData(userdto);
-			return result;
+			if (userdto != null) {
+				result = new Response<AppEduUserDto>(DataStatus.HTTP_SUCCESS, "登录成功！", userdto);
+			} else {
+				result = new Response<AppEduUserDto>(DataStatus.HTTP_FAILE, "登录失败，请检查用户名密码！");
+			}
 		} else {
-			result.setStatus(DataStatus.HTTP_FAILE);
-			result.setMessage("登录失败，请检查用户名密码！");
+			result = new Response<AppEduUserDto>(DataStatus.HTTP_FAILE, "登录失败，请检查用户名长度！");
 		}
 		return result;
 	}
@@ -114,18 +110,13 @@ public class AppUserController extends BaseController {
 	@RequestMapping(value = "/proLogin", method = RequestMethod.POST)
 	public @ResponseBody Response<AppProUserDto> proLogin(@RequestParam(required = true) String account, @RequestParam(required = true) String password) {
 		Response<AppProUserDto> result = new Response<AppProUserDto>();
-		AppProUserDto userdto = appUserService.proLogin(account,password);
+		AppProUserDto userdto = appUserService.proLogin(account, password);
 		result.setData(userdto);
 		if (userdto != null) {
-			result.setStatus(DataStatus.HTTP_SUCCESS);
-			result.setMessage("登录成功！");
-			result.setData(userdto);
-			return result;
+			return new Response<AppProUserDto>(DataStatus.HTTP_SUCCESS, "登录成功！", userdto);
 		} else {
-			result.setStatus(DataStatus.HTTP_FAILE);
-			result.setMessage("登录失败，请检查用户名密码！");
+			return new Response<AppProUserDto>(DataStatus.HTTP_FAILE, "登录失败，请检查用户名密码！");
 		}
-		return result;
 	}
 
 	/**

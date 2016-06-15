@@ -22,6 +22,10 @@ public class Response<T> implements Serializable {
 		this.message = message;
 		this.data = data;
 	}
+	public Response(int status, String message){
+		this.status = status;
+		this.message = message;
+	}
 	
 	@Getter
 	@Setter
