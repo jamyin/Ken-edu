@@ -368,15 +368,14 @@ AND  a.stat=1 AND  a.id=#{id}
 	</select>
 	<select id="findSupplierCodeByReceiverId"
 		resultType="com.ssic.educateion.common.dto.SupplierDto">
-	
-	
 	SELECT
-	a.supplier_code AS supplierCode
+	supplier_id id,
+	supplier_code AS supplierCode
 FROM
-	t_pro_supplier_receiver a
+	t_pro_supplier_receiver
 WHERE
-	a.receiver_id = #{supplierId}
-	
+	receiver_id = #{supplierId}
+
 	</select>
 	
 	<select id="findSupplierIdBySourceId" resultType="java.lang.String">

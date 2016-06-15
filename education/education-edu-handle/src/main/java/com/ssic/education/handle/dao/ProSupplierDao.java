@@ -273,7 +273,6 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 		ps.setStat(0);
 		ps.setCreateTime(null);
 		ps.setLastUpdateTime(new Date());
-		mapper.updateByPrimaryKeySelective(ps);
 		return mapper.updateByPrimaryKeySelective(ps);
 	}
 
