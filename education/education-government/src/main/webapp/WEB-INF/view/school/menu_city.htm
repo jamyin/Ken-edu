@@ -87,7 +87,7 @@
 										</#list>
 									</#if>">
 									<span class="name"><#if packages.type == 0>国内班</#if><#if packages.type == 1>国际班</#if><#if packages.type == 2>教工</#if></span>
-									<span style="text-overflow: ellipsis;"><#if packages.proDishesDtos??>
+									<span class="ellipsis"><#if packages.proDishesDtos??>
 										<#list packages.proDishesDtos as proDishes>
 											${(proDishes.name)!} 
 										</#list>
@@ -100,13 +100,13 @@
 									</span>
 									<span class="evaluate">
 						             <span class="starts">
-						               <i class="star <#if (proPackages.packageStar >0)  >on</#if>"></i>
-						               <i class="star <#if (proPackages.packageStar >1) >on</#if>"></i>
-						               <i class="star <#if (proPackages.packageStar >2) >on</#if>""></i>
-						               <i class="star <#if (proPackages.packageStar >3) >on</#if>""></i>
-						               <i class="star <#if (proPackages.packageStar >4) >on</#if>""></i>
+						               <i class="star <#if (packages.packageStar >0)  >on</#if>"></i>
+						               <i class="star <#if (packages.packageStar >1) >on</#if>"></i>
+						               <i class="star <#if (packages.packageStar >2) >on</#if>""></i>
+						               <i class="star <#if (packages.packageStar >3) >on</#if>""></i>
+						               <i class="star <#if (packages.packageStar >4) >on</#if>""></i>
 						             </span>
-						             <i class="points">${(proPackages.packageStar)!}</i>
+						             <i class="points">${(packages.packageStar)!}</i>
 						           </span>
 								</li>
 							</#list>										

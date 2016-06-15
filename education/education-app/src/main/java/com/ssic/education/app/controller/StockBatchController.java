@@ -115,7 +115,7 @@ public class StockBatchController {
 
 	@RequestMapping(value = "/updateStatus/{id}/{status}", method = RequestMethod.GET)
 	@AccessRequired
-	public Response<Integer> updateStatus(@PathVariable("id") String id, @PathVariable("status") String status) {
+	public @ResponseBody Response<Integer> updateStatus(@PathVariable("id") String id, @PathVariable("status") String status) {
 		Response<Integer> result = new Response<Integer>();
 		int num = ledgerInfoService.updateStatus(id, status);
 		if (num != -1) {
