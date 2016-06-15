@@ -25,6 +25,9 @@ ul.my_info {
 	width:120px;
 	float:left;
 }
+.fl-a {
+	padding-top:25px!important;
+}
 </style>
 <jsp:include page="../inc.jsp"></jsp:include>
 <script type="text/javascript">
@@ -74,12 +77,13 @@ ul.my_info {
 </head>
 <body>
 <div>
-	<h2>${Corporate.supplierName }</h2>
-	<div class="fl" ><a id="btn" onclick="edit()"><img title="编辑" src="${pageContext.request.contextPath}/icon/编辑.png"></img></a></div>
-	<div class="fl" ><a id="btn" onclick="editPic()"><img title="编辑图片" src="${pageContext.request.contextPath}/icon/编辑图片.png"></img></a> </div>
+	<div class="fl" style="width:300px;"><h2>${Corporate.supplierName }</h2></div>
+	<div class="fl fl-a" ><a id="btn" onclick="edit()"><img title="编辑" src="${pageContext.request.contextPath}/icon/编辑.png"></img></a></div>
+	<div class="fl fl-a" ><a id="btn" onclick="editPic()"><img title="编辑图片" src="${pageContext.request.contextPath}/icon/编辑图片.png"></img></a> </div>
 	<%-- <a id="btn" onclick="showPic()"><img title="查看图片" src="${pageContext.request.contextPath}/icon/查看图片.png"></img></a> --%>
 	</div>
 	<div>
+		&nbsp;</p>
 		&nbsp;</p>
 	</div>
 	<div>	
