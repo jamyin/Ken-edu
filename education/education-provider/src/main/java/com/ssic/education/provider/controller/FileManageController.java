@@ -110,7 +110,7 @@ public class FileManageController {
         }catch (Exception e) {
         	log.error("文件上传出错", e);
             map.put("status", DataStatus.HTTP_FAILE);
-            map.put("data", "不是指定格式的视频或图片");
+            map.put("data", "文件上传出错");
         }
         Gson gson = new Gson();
         String msg = gson.toJson(map);
