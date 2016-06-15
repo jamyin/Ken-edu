@@ -130,6 +130,7 @@ public class AppSupplierController {
 	 * @date 2016年5月23日 下午4:24:30
 	 */
 	@RequestMapping("/findSupplierInfo/{id}")
+	@AccessRequired
 	public @ResponseBody Response<SupplierLicDto> findSupplierInfo(@PathVariable("id") String id, @RequestParam(required = false) String schoolId) {
 		Response<SupplierLicDto> result = new Response<SupplierLicDto>();
 		if (StringUtils.isEmpty(id)) {
@@ -164,6 +165,7 @@ public class AppSupplierController {
 	 * @date 2016年5月23日 下午4:24:30
 	 */
 	@RequestMapping("/findSupplierList/{id}")
+	@AccessRequired
 	public @ResponseBody Response<PageResult<MaterialSupplierDto>> findSupplierList(@PathVariable("id") String id, ProSupplier supplier, PageQuery query, @RequestParam(required = false) String schoolId) {
 		Response<PageResult<MaterialSupplierDto>> result = new Response<PageResult<MaterialSupplierDto>>();
 		if (StringUtils.isEmpty(id)) {
