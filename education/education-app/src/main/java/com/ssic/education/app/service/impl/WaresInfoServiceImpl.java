@@ -126,22 +126,24 @@ public class WaresInfoServiceImpl implements IWaresInfoService {
 	@Override
 	public WaresRelatedDto findWarseById(String id) {
 		WaresRelatedDto wrd = waresInfoDao.findWarseById(id);
-		if (wrd.getWaresType() != null) {
-			wrd.setTypeName(ProductClass.getName(wrd.getWaresType()));
-		}
-		if (wrd.getImage() != null) {
-			wrd.setImage(DataStatus.IMAGE_HOST + wrd.getImage());
-		}
-		List<ProLicense> list = supplierInfoDto.getWaresLic(wrd.getId(), (short) 2);
-		if (null != list && !list.isEmpty()) {
-			List<AppLicenseDto> licList = BeanUtils.createBeanListByTarget(list, AppLicenseDto.class);
-			for (AppLicenseDto appLicenseDto : licList) {
-				if (StringUtils.isNotBlank(appLicenseDto.getLicPic())) {
-					String pic = DataStatus.IMAGE_HOST + appLicenseDto.getLicPic();
-					appLicenseDto.setLicPic(pic);
-				}
+		if (wrd != null) {
+			if (wrd.getWaresType() != null) {
+				wrd.setTypeName(ProductClass.getName(wrd.getWaresType()));
 			}
-			wrd.setLicense(licList);
+			if (wrd.getImage() != null) {
+				wrd.setImage(DataStatus.IMAGE_HOST + wrd.getImage());
+			}
+			List<ProLicense> list = supplierInfoDto.getWaresLic(wrd.getId(), (short) 2);
+			if (null != list && !list.isEmpty()) {
+				List<AppLicenseDto> licList = BeanUtils.createBeanListByTarget(list, AppLicenseDto.class);
+				for (AppLicenseDto appLicenseDto : licList) {
+					if (StringUtils.isNotBlank(appLicenseDto.getLicPic())) {
+						String pic = DataStatus.IMAGE_HOST + appLicenseDto.getLicPic();
+						appLicenseDto.setLicPic(pic);
+					}
+				}
+				wrd.setLicense(licList);
+			}
 		}
 		return wrd;
 	}

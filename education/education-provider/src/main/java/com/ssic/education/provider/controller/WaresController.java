@@ -225,11 +225,8 @@ public class WaresController extends BaseController {
 				.lookImage(license);
 		List<ProWaresDto> wares = waresService.findWares(proWaresDto);
 		String realPath = PropertiesUtils.getProperty("upload.look.url");
-		for (ProWaresDto proWaresDto2 : wares) {
-			if(proWaresDto2.getImage()!=null && proWaresDto2.getImage()!=""){
-			proWaresDto2.setImage(realPath+proWaresDto2.getImage());}
-		}
-		if(wares.get(0).getImage()!=null && wares.get(0).getImage()!=""){
+		String image = wares.get(0).getImage();
+		if(StringUtils.isNotEmpty(image)){
 			license.setLicPic(wares.get(0).getImage());
 			license.setLicName("商品图片");
 			ProLicenseList.add(license);

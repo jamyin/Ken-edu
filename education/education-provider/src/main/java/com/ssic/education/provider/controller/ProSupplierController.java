@@ -6,8 +6,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -156,16 +158,24 @@ public class ProSupplierController extends BaseController {
 			return j;
 		}
 		// 查找已定义的供应商编码，供应商编码唯一
-		/*
-		 * List<SupplierDto> list=
-		 * supplierService.findSupplierCodeByReceiverId(info.getSupplierId());
-		 * for (SupplierDto supplierDto : list) {
-		 * if(supplierDto.getSupplierCode().equals(ps.getSupplierCode())){
-		 * j.setMsg("供应商编码重复"); j.setSuccess(false); return j; }
-		 * 
-		 * }
-		 */
-		
+
+		if (ps.getSupplierCode() != null && !ps.getSupplierCode().equals("")) {
+			List<SupplierDto> list = supplierService
+					.findSupplierCodeByReceiverId(info.getSupplierId());
+			for (int i = 0; i < list.size(); i++) {
+				if (list.get(i).getSupplierCode() != null&&!list.get(i).getId().equals(ps.getId())) {
+					boolean falge = list.get(i).getSupplierCode()
+							.equalsIgnoreCase(ps.getSupplierCode());
+					if (falge) {
+						j = new Json();
+						j.setMsg("供应商编码重复");
+						j.setSuccess(false);
+						return j;
+					}
+				}
+			}
+		}
+
 		ps.setUpdater(info.getId());
 		ProSupplierReceiver proSupplierReceiver = new ProSupplierReceiver();
 		proSupplierReceiver.setSupplierCode(ps.getSupplierCode());
@@ -232,7 +242,7 @@ public class ProSupplierController extends BaseController {
 			return j;
 		}
 		ps.setCreator(info.getId());
-	
+
 		ps.setId(UUIDGenerator.getUUID());
 		ps.setSupplierType(2);
 		ps.setReviewed((byte) 0);
@@ -249,18 +259,21 @@ public class ProSupplierController extends BaseController {
 			j.setSuccess(false);
 			return j;
 		}
-		List<SupplierDto> list = supplierService
-				.findSupplierCodeByReceiverId(info.getSupplierId());
-		for (int i = 0; i < list.size(); i++) {
-			boolean falge = list.get(i).getSupplierCode()
-					.equalsIgnoreCase(ps.getSupplierCode());
-			if (falge) {
-				j = new Json();
-				j.setMsg("供应商编码重复");
-				j.setSuccess(false);
-				return j;
+		if (ps.getSupplierCode() != null && !ps.getSupplierCode().equals("")) {
+			List<SupplierDto> list = supplierService
+					.findSupplierCodeByReceiverId(info.getSupplierId());
+			for (int i = 0; i < list.size(); i++) {
+				if (list.get(i).getSupplierCode() != null) {
+					boolean falge = list.get(i).getSupplierCode()
+							.equalsIgnoreCase(ps.getSupplierCode());
+					if (falge) {
+						j = new Json();
+						j.setMsg("供应商编码重复");
+						j.setSuccess(false);
+						return j;
+					}
+				}
 			}
-
 		}
 		supplierService.saveSupplier(ps);
 		supplierService.saveSupplierReceiver(proSupplierReceiver);
@@ -289,7 +302,6 @@ public class ProSupplierController extends BaseController {
 		List<SupplierDto> SupplierDtoList = supplierService
 				.lookRelatingWares(dto);
 		dataGrid.setRows(SupplierDtoList);
-		;
 		return dataGrid;
 	}
 
@@ -390,7 +402,7 @@ public class ProSupplierController extends BaseController {
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl1);
 			license.setLastUpdateTime(new Date());
-		
+
 			license.setUpdater(info.getId());
 			int i = proLicenseServiceImpl.alterImage(license);
 			if (i == 0) {
@@ -402,7 +414,7 @@ public class ProSupplierController extends BaseController {
 				String uuid = UUID.randomUUID().toString();
 				license.setId(uuid);
 				license.setCreator(info.getId());
-			
+
 				proLicenseServiceImpl.updateImage(license);
 			}
 		}
@@ -412,7 +424,7 @@ public class ProSupplierController extends BaseController {
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl2);
 			license.setLastUpdateTime(new Date());
-		
+
 			license.setUpdater(info.getId());
 			int i = proLicenseServiceImpl.alterImage(license);
 			if (i == 0) {
@@ -424,7 +436,7 @@ public class ProSupplierController extends BaseController {
 				String uuid = UUID.randomUUID().toString();
 				license.setId(uuid);
 				license.setCreator(info.getId());
-			
+
 				proLicenseServiceImpl.updateImage(license);
 			}
 		}
@@ -445,7 +457,7 @@ public class ProSupplierController extends BaseController {
 				String uuid = UUID.randomUUID().toString();
 				license.setId(uuid);
 				license.setCreator(info.getId());
-		
+
 				proLicenseServiceImpl.updateImage(license);
 			}
 		}
@@ -455,7 +467,7 @@ public class ProSupplierController extends BaseController {
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl4);
 			license.setLastUpdateTime(new Date());
-		
+
 			license.setUpdater(info.getId());
 			int i = proLicenseServiceImpl.alterImage(license);
 			if (i == 0) {
@@ -467,7 +479,7 @@ public class ProSupplierController extends BaseController {
 				String uuid = UUID.randomUUID().toString();
 				license.setId(uuid);
 				license.setCreator(info.getId());
-			
+
 				proLicenseServiceImpl.updateImage(license);
 			}
 		}
@@ -477,7 +489,7 @@ public class ProSupplierController extends BaseController {
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl5);
 			license.setLastUpdateTime(new Date());
-		
+
 			license.setUpdater(info.getId());
 			int i = proLicenseServiceImpl.alterImage(license);
 			if (i == 0) {
@@ -489,7 +501,7 @@ public class ProSupplierController extends BaseController {
 				String uuid = UUID.randomUUID().toString();
 				license.setId(uuid);
 				license.setCreator(info.getId());
-			
+
 				proLicenseServiceImpl.updateImage(license);
 			}
 		}
@@ -499,7 +511,7 @@ public class ProSupplierController extends BaseController {
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl6);
 			license.setLastUpdateTime(new Date());
-		
+
 			license.setUpdater(info.getId());
 			int i = proLicenseServiceImpl.alterImage(license);
 			if (i == 0) {
@@ -511,7 +523,7 @@ public class ProSupplierController extends BaseController {
 				String uuid = UUID.randomUUID().toString();
 				license.setId(uuid);
 				license.setCreator(info.getId());
-		
+
 				proLicenseServiceImpl.updateImage(license);
 			}
 		}
@@ -521,7 +533,7 @@ public class ProSupplierController extends BaseController {
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl7);
 			license.setLastUpdateTime(new Date());
-	
+
 			license.setUpdater(info.getId());
 			int i = proLicenseServiceImpl.alterImage(license);
 			if (i == 0) {
@@ -533,7 +545,7 @@ public class ProSupplierController extends BaseController {
 				String uuid = UUID.randomUUID().toString();
 				license.setId(uuid);
 				license.setCreator(info.getId());
-			
+
 				proLicenseServiceImpl.updateImage(license);
 			}
 		}
@@ -543,7 +555,7 @@ public class ProSupplierController extends BaseController {
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl8);
 			license.setLastUpdateTime(new Date());
-		
+
 			license.setUpdater(info.getId());
 			int i = proLicenseServiceImpl.alterImage(license);
 			if (i == 0) {
@@ -553,7 +565,7 @@ public class ProSupplierController extends BaseController {
 				String uuid = UUID.randomUUID().toString();
 				license.setId(uuid);
 				license.setCreator(info.getId());
-		
+
 				proLicenseServiceImpl.updateImage(license);
 			}
 		}
@@ -563,7 +575,7 @@ public class ProSupplierController extends BaseController {
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl9);
 			license.setLastUpdateTime(new Date());
-		
+
 			license.setUpdater(info.getId());
 			int i = proLicenseServiceImpl.alterImage(license);
 			if (i == 0) {
@@ -573,7 +585,7 @@ public class ProSupplierController extends BaseController {
 				String uuid = UUID.randomUUID().toString();
 				license.setId(uuid);
 				license.setCreator(info.getId());
-		
+
 				proLicenseServiceImpl.updateImage(license);
 			}
 		}
@@ -583,7 +595,7 @@ public class ProSupplierController extends BaseController {
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl10);
 			license.setLastUpdateTime(new Date());
-	
+
 			license.setUpdater(info.getId());
 			int i = proLicenseServiceImpl.alterImage(license);
 			if (i == 0) {
@@ -593,7 +605,7 @@ public class ProSupplierController extends BaseController {
 				String uuid = UUID.randomUUID().toString();
 				license.setId(uuid);
 				license.setCreator(info.getId());
-				
+
 				proLicenseServiceImpl.updateImage(license);
 			}
 		}
@@ -603,7 +615,7 @@ public class ProSupplierController extends BaseController {
 			license.setCerSource((short) 0);
 			license.setLicPic(imageurl11);
 			license.setLastUpdateTime(new Date());
-			
+
 			license.setUpdater(info.getId());
 			int i = proLicenseServiceImpl.alterImage(license);
 			if (i == 0) {
@@ -613,7 +625,7 @@ public class ProSupplierController extends BaseController {
 				String uuid = UUID.randomUUID().toString();
 				license.setId(uuid);
 				license.setCreator(info.getId());
-				
+
 				proLicenseServiceImpl.updateImage(license);
 			}
 		}
@@ -643,6 +655,7 @@ public class ProSupplierController extends BaseController {
 		String supplierId = info.getSupplierId();
 		String errorMsg = null;
 		Map<String, Map<ProSupplierReceiver, ProSupplier>> map = new HashMap();
+		Set<String> set=new HashSet();
 		try (Workbook wb = WorkbookFactory.create(file.getInputStream());) {
 			Sheet sheet = wb.getSheetAt(0);
 			Date now = new Date();
@@ -735,9 +748,16 @@ public class ProSupplierController extends BaseController {
 						// 供应商编码
 						int x = srService.findBySupplierCode(value, supplierId);
 						if (x != 0) {
-							errorMsg = "第" + (rowNum + 1)
-									+ "行数据不正确，供应商编码已存在。";
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，供应商编码已存在。";
 							break;
+						}
+						if(value!=null&& !StringUtils.isBlank(value)){
+							int s=set.size();
+							set.add(value);
+							if(s==set.size()){
+								errorMsg = "第" + (rowNum + 1) + "行数据不正确，供应商编码重复。";
+								break;
+							}
 						}
 						psr = new ProSupplierReceiver();
 						psr.setSupplierCode(value);
