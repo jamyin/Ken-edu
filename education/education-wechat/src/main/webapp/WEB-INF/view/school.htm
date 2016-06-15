@@ -58,12 +58,16 @@
 		</p>
  -->		<p>
 			<label><span>选择类型</span></label>
-			<input type="hidden" id="gradeId" value="0"/>
-				<span class="class">国内班</span>
+			<input type="hidden" id="gradeId" value="${(eduParentScChDto.childClass)!0}"/>
+				<span class="class">${gradeScValueList[eduParentScChDto.childClass]}</span>
 				<select id="sel_class" onchange="selectGradeList(this);">
-					<#assign keys=gradeList?keys>
+					<#assign keys=gradeScList?keys>
 					<#list keys as key>
-						<option value="${gradeList[key]}">${key}</option>
+						<#if eduParentScChDto.childClass == gradeScList[key]>
+							<option value="${gradeScList[key]}" selected="selected">${key}</option>
+						<#else>
+							<option value="${gradeScList[key]}">${key}</option>
+						</#if>	
 						<!-- ${key}=${gradeList[key]} -->
 					</#list>
 				</select>

@@ -40,10 +40,10 @@ public class WapSchoolController extends BaseController{
 	
 	@Autowired
 	private IEduSchoolSupplierService iEduSchoolSupplierService;
-	
-	
+
 	@Autowired
 	private IEduParentScChService iEduParentScChService;
+	
 	/**
 	 * 
 		 * 此方法描述的是：菜谱查询 如果一个家长存在多个学校的时候默认查询出第一个
@@ -81,6 +81,12 @@ public class WapSchoolController extends BaseController{
 		eduParentScChDto.setParentId(parentId);
 		List<EduParentScChDto> dataList = iEduParentScChService.searchParentScChDtoList(eduParentScChDto);
 		
+		eduParentScChDto.setParentId(parentId);
+		eduParentScChDto.setSchoolId(schoolId);
+		List<EduParentScChDto> resultList = iEduParentScChService.searchParentScChDtoList(eduParentScChDto);
+		if(resultList!=null && resultList.size()>0){
+			mv.addObject("eduParentScChDto",resultList.get(0));
+		}
 		
 		//学校详细信息
 		EduSchoolDto eduSchoolDto = eduSchoolService.findById(schoolId);
