@@ -78,15 +78,12 @@ public class AppUserController extends BaseController {
 	public @ResponseBody Response<String> modifyPwd(String account, String oldPwd, String newPwd) {
 		Response<String> result = new Response<String>();
 		if (oldPwd.equals(newPwd)) {
-			result.setStatus(DataStatus.HTTP_FAILE);
-			result.setMessage("两次密码一样");
+			result = new Response<String>(DataStatus.HTTP_FAILE, "两次密码一样!");
 		} else {
 			if (appUserService.eduUpdatePwd(account, oldPwd, newPwd) == 1) {
-				result.setStatus(DataStatus.HTTP_SUCCESS);
-				result.setMessage("修改成功！");
+				result = new Response<String>(DataStatus.HTTP_SUCCESS, "修改成功！");
 			} else {
-				result.setStatus(DataStatus.HTTP_FAILE);
-				result.setMessage("修改失败，原密码有误");
+				result = new Response<String>(DataStatus.HTTP_FAILE, "修改失败，原密码有误！");
 			}
 		}
 		return result;
@@ -131,15 +128,12 @@ public class AppUserController extends BaseController {
 	public @ResponseBody Response<String> proModifyPwd(String account, String oldPwd, String newPwd) {
 		Response<String> result = new Response<String>();
 		if (oldPwd.equals(newPwd)) {
-			result.setStatus(DataStatus.HTTP_FAILE);
-			result.setMessage("两次密码一样");
+			result = new Response<String>(DataStatus.HTTP_FAILE, "两次密码一样！");
 		} else {
 			if (appUserService.proUpdatePwd(account, oldPwd, newPwd) == 1) {
-				result.setStatus(DataStatus.HTTP_SUCCESS);
-				result.setMessage("修改成功！");
+				result = new Response<String>(DataStatus.HTTP_SUCCESS, "修改成功！");
 			} else {
-				result.setStatus(DataStatus.HTTP_FAILE);
-				result.setMessage("修改失败，原密码有误");
+				result = new Response<String>(DataStatus.HTTP_FAILE, "修改失败，原密码有误！");
 			}
 		}
 		return result;

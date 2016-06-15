@@ -36,8 +36,9 @@
 	</section>
 	<!-- 当委托经营单位和经营单位都有数据的时候，采购品供应商只显示在委托经营单位下 -->
 	<#if companyType==1 && supplierId ??>
+	
 	<#else>
-	<#if suppliList ??>
+		<#if suppliList?? && (suppliList?size>0)>
 			<section class="aptitude_c">
 				<h2>采购品供应商</h2>
 				<section class="tablecell">
