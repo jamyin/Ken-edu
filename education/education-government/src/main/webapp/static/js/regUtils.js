@@ -24,9 +24,9 @@ $(function() {
 //		});
 //	});
 	$("#sendMessage").click(function(){
-		var tel = $.trim($("#mobileNo").val());
+		var mobilePhone = $("#mobileNo").val();
 		var phone_reg  = /(^13\d{9}$)|(^14)[5,7]\d{8}$|(^15[0,1,2,3,5,6,7,8,9]\d{8}$)|(^17)[6,7,8]\d{8}$|(^18\d{9}$)/g ;  
-		if (!phone_reg.test(tel)) {
+		if (!phone_reg.test(mobilePhone)) {
 			layer.msg("手机格式不正确", {icon: 2,time: 800});//alert_redtext('mobile','手机格式不正确')
 			return;
 		}			
@@ -36,7 +36,7 @@ $(function() {
 			layer.msg("请输入图片验证码", {icon: 2,time: 800});//alert_redtext('mobile','手机格式不正确')
 			return;
 		}
-		var mobilePhone = $("#mobileNo").val();
+		
 		var dataParam = {picCaptcha:picCaptcha,mobilePhone:mobilePhone};
 		$.ajax({
 			url : '/ajax/SMS/send.htm',
@@ -45,7 +45,7 @@ $(function() {
 			dataType : 'json',
 			success : function(data) {
 				if(data.status == 500){
-					layer.alert(data.message, {icon: 2});
+					layer.alert(data.message, {icon: 2,time: 800});
 				}else{
 					var obj =  $("#sendMessage");
 					$("#sendMessage").attr("disabled","disabled");
