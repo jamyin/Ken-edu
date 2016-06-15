@@ -1,5 +1,7 @@
 package com.ssic.education.app.service;
 
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.ssic.education.app.dto.AppEduUserDto;
 import com.ssic.education.app.dto.AppProUserDto;
 import com.ssic.education.app.dto.EduUsersInfoDto;
@@ -25,6 +27,14 @@ public interface IAppUsersService {
 	 * @return
 	 */
 	public AppProUserDto proLogin(ProUsers user);
+
+	/**
+	 * 团餐用户登录
+	 * @param account
+	 * @param password
+	 * @return
+	 */
+	public AppProUserDto proLogin(String account, String password);
 
 	/**
 	 * 教委用户修改密码

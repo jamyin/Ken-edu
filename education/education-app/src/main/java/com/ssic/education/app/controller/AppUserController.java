@@ -113,11 +113,8 @@ public class AppUserController extends BaseController {
 	 */
 	@RequestMapping(value = "/proLogin", method = RequestMethod.POST)
 	public @ResponseBody Response<AppProUserDto> proLogin(@RequestParam(required = true) String account, @RequestParam(required = true) String password) {
-		ProUsers user = new ProUsers();
 		Response<AppProUserDto> result = new Response<AppProUserDto>();
-		user.setUserAccount(account);
-		user.setPassword(password);
-		AppProUserDto userdto = appUserService.proLogin(user);
+		AppProUserDto userdto = appUserService.proLogin(account,password);
 		result.setData(userdto);
 		if (userdto != null) {
 			result.setStatus(DataStatus.HTTP_SUCCESS);

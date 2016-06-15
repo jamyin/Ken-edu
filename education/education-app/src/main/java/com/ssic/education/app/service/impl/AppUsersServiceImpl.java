@@ -16,6 +16,7 @@ import com.ssic.education.app.token.TokenUtil;
 import com.ssic.education.handle.dao.CommitteeDao;
 import com.ssic.education.handle.pojo.EduCommittee;
 import com.ssic.education.handle.pojo.ProUsers;
+import com.ssic.education.utils.model.Response;
 import com.ssic.education.utils.redis.WdRedisDao;
 import com.ssic.education.utils.util.BeanUtils;
 import com.ssic.education.utils.util.StringUtils;
@@ -56,7 +57,35 @@ public class AppUsersServiceImpl implements IAppUsersService {
 
 	@Override
 	public synchronized AppProUserDto proLogin(ProUsers user) {
+
 		List<ProUsers> list = proUsersDao.proUserLogin(user);
+		if (null != list && !list.isEmpty()) {
+			AppProUserDto apud = BeanUtils.createBeanByTarget(list.get(0), AppProUserDto.class);
+			apud.setToken(TokenUtil.getToken(apud.getUserAccount()).getSignature());
+			if (apud.getSourceId() != null) {
+				String supplierName = supplierDao.getSupplierName(apud.getSourceId());
+				if (supplierName != null)
+					apud.setSupplierName(supplierName);
+			}
+			apud.setJob("驾驶员");
+			proRedisdao.set(apud, 5040);
+			return apud;
+		} else {
+			return null;
+		}
+	}
+
+	@Override
+	public synchronized AppProUserDto proLogin(String account, String password) {
+		ProUsers user = new ProUsers();
+		List<ProUsers> list = null;
+		if (StringUtils.isNotBlank(account)) {
+			if (StringUtils.isNotBlank(password)) {
+				user.setUserAccount(account);
+				user.setPassword(password);
+				list = proUsersDao.proUserLogin(user);
+			}
+		}
 		if (null != list && !list.isEmpty()) {
 			AppProUserDto apud = BeanUtils.createBeanByTarget(list.get(0), AppProUserDto.class);
 			apud.setToken(TokenUtil.getToken(apud.getUserAccount()).getSignature());
