@@ -45,7 +45,7 @@ public class AppMapViewController {
 		
 		ProSupplierDto supplierDto = new ProSupplierDto();
 		
-		List<BaiduPointsDto> points = new ArrayList<BaiduPointsDto>();
+		List<BaiduPointsDto> points = null;//new ArrayList<BaiduPointsDto>();
 		
 		if(resultDto!=null){
 			supplierDto = proSupplierService.findById(resultDto.getSourceId());//获取企业信息
