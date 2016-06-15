@@ -20,6 +20,7 @@ import lombok.Data;
 public @Data class LedgerDetailDto {
 	private String id;
 	private String masterId;
+	private String waresId;
 	private String name;
 	private String supplierId;
 	private String supplierName;
