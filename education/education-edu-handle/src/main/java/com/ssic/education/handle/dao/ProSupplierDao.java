@@ -53,13 +53,13 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 	@Autowired
 	private ProLicenseMapper plMapper;
 
-	public List<ProSupplierDto> findSupplierListBySchoolId(ProSupplierDto dto,
+	public List<ProSupplierDto> findSupplierListByIds(ProSupplierDto dto,
 			PageQuery page) {
-		return exMapper.findSupplierListBySchoolId(dto, page);
+		return exMapper.findSupplierListByIds(dto, page);
 	}
 
-	public long countSupplierListBySchoolId(ProSupplierDto dto) {
-		return exMapper.countSupplierListBySchoolId(dto);
+	public long countSupplierListByIds(ProSupplierDto dto) {
+		return exMapper.countSupplierListByIds(dto);
 	}
 
 	public List<ProSupplierDto> findSupplierListByCommittee(ProSupplierDto dto,
@@ -273,7 +273,6 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 		ps.setStat(0);
 		ps.setCreateTime(null);
 		ps.setLastUpdateTime(new Date());
-		mapper.updateByPrimaryKeySelective(ps);
 		return mapper.updateByPrimaryKeySelective(ps);
 	}
 

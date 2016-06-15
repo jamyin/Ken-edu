@@ -36,6 +36,44 @@
 	    <result column="last_update_time" property="lastUpdateTime" jdbcType="TIMESTAMP" />
 	    <result column="stat" property="stat" jdbcType="INTEGER" />
 	  </resultMap>
+	 
+	<select id="findSupplierListByIds" resultMap="BaseResultMap" parameterType="com.ssic.educateion.common.dto.ProSupplierDto" > 
+		SELECT * FROM t_pro_supplier a
+		LEFT JOIN t_pro_school_ware b on a.id = b.supplier_id 
+		WHERE b.stat=1
+		<if test="proSupplierDto.supplierName!=null and proSupplierDto.supplierName!='' ">
+			AND a.supplier_name like "%"#{proSupplierDto.supplierName}"%"
+		</if>
+		<if test="proSupplierDto.schoolId!=null and proSupplierDto.schoolId!='' ">
+			AND b.school_id = #{proSupplierDto.schoolId}
+		</if>
+		<if test="proSupplierDto.sourceId!=null and proSupplierDto.sourceId!='' ">
+			AND b.source_id = #{proSupplierDto.sourceId}
+		</if>
+		GROUP BY a.id
+		ORDER BY b.create_time desc
+		<if test="query != null">
+       		LIMIT  #{query.startNum}, #{query.pageSize}
+        </if>
+	</select>
+	
+	<select id="countSupplierListByIds" resultType="java.lang.Long" parameterType="com.ssic.educateion.common.dto.ProSupplierDto" > 
+		select count(*) from (SELECT a.id, COUNT(*) counts 
+		FROM t_pro_supplier a
+		LEFT JOIN t_pro_school_ware b on a.id = b.supplier_id
+		WHERE b.stat=1
+		<if test="proSupplierDto.supplierName!=null and proSupplierDto.supplierName!='' ">
+			AND a.supplier_name like "%"#{proSupplierDto.supplierName}"%"
+		</if>
+		<if test="proSupplierDto.id!=null and proSupplierDto.id!='' ">
+			AND b.school_id = #{proSupplierDto.schoolId}
+		</if>
+		<if test="proSupplierDto.sourceId!=null and proSupplierDto.sourceId!='' ">
+			AND b.source_id = #{proSupplierDto.sourceId}
+		</if>
+		GROUP BY a.id ) t
+	</select>
+	 
 	<select id="searchSupplierListBySupplierId" resultMap="BaseResultMap">
 		SELECT * FROM t_pro_supplier ps WHERE EXISTS 
 		(
@@ -330,15 +368,14 @@ AND  a.stat=1 AND  a.id=#{id}
 	</select>
 	<select id="findSupplierCodeByReceiverId"
 		resultType="com.ssic.educateion.common.dto.SupplierDto">
-	
-	
 	SELECT
-	a.supplier_code AS supplierCode
+	supplier_id id,
+	supplier_code AS supplierCode
 FROM
-	t_pro_supplier_receiver a
+	t_pro_supplier_receiver
 WHERE
-	a.receiver_id = #{supplierId}
-	
+	receiver_id = #{supplierId}
+
 	</select>
 	
 	<select id="findSupplierIdBySourceId" resultType="java.lang.String">
