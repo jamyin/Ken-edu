@@ -115,40 +115,6 @@
 
 </head>
 <body>
-	<div id="portalLayout">
-								<h1 align="center"  ><font color="read ">一哥们是个二货，骑电瓶车逆行，被警察逮住，要罚款50，他立马就火了，大声呵斥警察，不就是逆行吗，又不是汽车，还要罚我50，我要是请出我大爷来，你得倒找我50，警察也怒了，你把你大爷叫来，我看他有多牛，我就不信还让我给你50，这货立马从兜里掏出一百元，指着毛爷爷头像说，这就是我大爷，找我50！警察当场就惊呆了!</font></h1>
-									<h1 align="center"  ><font color="RoyalBlue  ">这片弹幕由我承包</font></h1>
-								<h1 align="center"  ><font color="red ">这片弹幕由我承包</font></h1>
-								<h1 align="center"  ><font color="Yellow  ">这片弹幕由我承包</font></h1>								
-								<h1 align="center"  ><font color="VioletRed">这片弹幕由我承包</font></h1>
-								<h1 align="center"  ><font color="red ">王老菊</font></h1>
-								<h1 align="center"  ><font color="PaleGreen  ">此人智商高达50</font></h1>
-		<h1 align="left"  ><font color="AntiqueWhite ">还有谁</font></h1>			<h1 align="right"  ><font color="red">还有谁</font></h1>  	<h1 align="center"  ><font color="red">还有谁</font></h1>
-		<h1 align="left"  ><font color="AntiqueWhite ">还有谁</font></h1>			<h1 align="right"  ><font color="AntiqueWhite ">还有谁</font></h1> <h1 align="center"  ><font color="AntiqueWhite ">还有谁</font></h1>
-					<h1 align="left"  ><font color="Aqua">还有谁</font></h1> 
-		<h1 align="left"  ><font color="AntiqueWhite ">还有谁</font></h1>			<h1 align="right"  ><font color="Aquamarine ">还有谁</font></h1> 
-	<h1 align="left"  ><font color="AntiqueWhite ">还有谁</font></h1>				<h1 align="center"  ><font color="Azure ">还有谁</font></h1> <h1 align="center"  ><font color="AntiqueWhite ">还有谁</font></h1>
-	<h1 align="left"  ><font color="AntiqueWhite ">还有谁</font></h1>				<h1 align="center"  ><font color="Beige ">还有谁</font></h1> 
-					<h1 align="left"  ><font color="Bisque ">还有谁</font></h1> <h1 align="center"  ><font color="AntiqueWhite ">还有谁</font></h1>
-		<h1 align="center"  ><font color="AntiqueWhite ">还有谁</font></h1>			<h1 align="right"  ><font color="Black">还有谁</font></h1> 
-					<h1 align="left"  ><font color="BlanchedAlmond ">还有谁</font></h1> 
-					<h1 align="left"  ><font color="Blue">还有谁</font></h1> <h1 align="center"  ><font color="AntiqueWhite ">还有谁</font></h1>
-	<h1 align="left"  ><font color="AntiqueWhite ">还有谁</font></h1>				<h1 align="center"  ><font color="BlueViolet ">还有谁</font></h1> 
-					<h1 align="center"  ><font color="Brown">还有谁</font></h1> <h1 align="center"  ><font color="AntiqueWhite ">还有谁</font></h1>
-	<h1 align="left"  ><font color="AntiqueWhite ">还有谁</font></h1>				<h1 align="center"  ><font color="BurlyWood">还有谁</font></h1> 
-					<h1 align="left"  ><font color="BurlyWood">还有谁</font></h1><h1 align="center"  ><font color="AntiqueWhite ">还有谁</font></h1>
-	<h1 align="center"  ><font color="AntiqueWhite ">还有谁</font></h1>				<h1 align="left"  ><font color="AntiqueWhite ">还有谁</font></h1> 
-					<h1 align="left"  ><font color="Aqua">还有谁</font></h1> <h1 align="center"  ><font color="AntiqueWhite ">还有谁</font></h1>
-		<h1 align="center"  ><font color="AntiqueWhite ">还有谁</font></h1>			<h1 align="left"  ><font color="Aquamarine ">还有谁</font></h1> <h1 align="center"  ><font color="AntiqueWhite ">还有谁</font></h1>
-					<h1 align="left"  ><font color="Azure ">还有谁</font></h1> 
-					<h1 align="left"  ><font color="Beige ">还有谁</font></h1> <h1 align="center"  ><font color="AntiqueWhite ">还有谁</font></h1>
-					<h1 align="left"  ><font color="Bisque ">还有谁</font></h1> 
-	<h1 align="center"  ><font color="AntiqueWhite ">还有谁</font></h1>				<h1 align="left"  ><font color="Black">还有谁</font></h1> 
-					<h1 align="left"  ><font color="BlanchedAlmond ">还有谁</font></h1> 
-					<h1 align="right"  ><font color="Blue">还有谁</font></h1> 
-					<h1 align="right"  ><font color="BlueViolet ">还有谁</font></h1> 
-					<h1 align="left"  ><font color="Brown">还有谁</font></h1> 
-					<h1 align="left"  ><font color="BurlyWood">还有谁</font></h1> 
-	</div>
+	<img style="width:100%; height:100%;"  src="${pageContext.request.contextPath}/icon/团餐供应商首页-发.jpg">
 </body>
 </html>
