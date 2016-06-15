@@ -82,9 +82,56 @@ public class SuppliersServiceImpl implements ISupplierService {
 		return null;
 	}
 
+	/**
+	 * 查询供应商资质 带出学校供货供应商
+	 * (non-Javadoc)   
+	 * @see com.ssic.education.app.service.ISupplierService#findSupplierInfo(java.lang.String)
+	 */
+	@Override
+	public SupplierLicDto findSupplierInfo(String supplier_id, String schoolId) {
+		SupplierLicDto supplierLicDto = new SupplierLicDto();
+		supplierLicDto = supplierInfoDao.getSupplierById(supplier_id);
+		PageQuery query = new PageQuery();
+		query.setPageSize(3);
+		if (supplierLicDto != null) {
+			PageResult<MaterialSupplierDto> findSupplierList = this.findListByIds(supplierLicDto.getId(), schoolId, null, query);
+			List<ProLicense> list = supplierInfoDao.getLic(supplierLicDto.getId());
+			if (null != list && !list.isEmpty()) {
+				for (ProLicense proLicense : list) {
+					if (null != proLicense.getLicPic()) {
+						String host = "http://192.168.1.242";
+						String pic = host + proLicense.getLicPic();
+						proLicense.setLicPic(pic);
+					}
+				}
+				List<AppLicenseDto> applic = BeanUtils.createBeanListByTarget(list, AppLicenseDto.class);
+				supplierLicDto.setAppLicense(applic);
+			}
+			if (findSupplierList != null) {
+				supplierLicDto.setMaterialSupplierList(findSupplierList);
+			}
+			return supplierLicDto;
+		}
+		return null;
+	}
+
 	@Override
 	public PageResult<MaterialSupplierDto> findListByIds(String id, ProSupplier proSupplier, PageQuery query) {
 		List<String> list = this.supplierInfoDao.getSupplierReceiver(id);
+		if (null != list && !list.isEmpty()) {
+			List<MaterialSupplierDto> materialSupplierDto = this.supplierInfoDao.getSupplierByIds(list, proSupplier, query);
+			int total = supplierInfoDao.getSupplierByIdsCount(list, proSupplier);
+			query.setTotal(total);
+			return new PageResult<MaterialSupplierDto>(query, materialSupplierDto);
+		} else {
+			return null;
+		}
+
+	}
+
+	@Override
+	public PageResult<MaterialSupplierDto> findListByIds(String id, String schoolId, ProSupplier proSupplier, PageQuery query) {
+		List<String> list = this.supplierInfoDao.getSchoolWares(id, schoolId);
 		if (null != list && !list.isEmpty()) {
 			List<MaterialSupplierDto> materialSupplierDto = this.supplierInfoDao.getSupplierByIds(list, proSupplier, query);
 			int total = supplierInfoDao.getSupplierByIdsCount(list, proSupplier);
