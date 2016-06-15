@@ -160,7 +160,7 @@
 	                      <span class="dis_date">${ledgerDto.actionDate?string("yyyy-MM-dd")}</span>
 	                      <span class="dis_goods ellipsis"><#if ledgerDto.ledgerDtos??>
 	                      	<#list ledgerDto.ledgerDtos as data>
-	                      		${(data.name)!}&nbsp;
+	                      		${(data.name)!} 
 	                      	</#list>
 	                      </#if></span>
 	                      <span class="dis_start ellipsis">${(ledgerDto.supplierName)!}</span>
@@ -239,7 +239,7 @@
 
                 <h1 class="con-tt">
                   <span class="title">供应商列表</span>
-                  <a class="more" href="/pro/supplier/list.htm?id=${(eduSchoolSupplierDtos.supplierId)!}&source=${(dto.source)!}">更多 &gt;&gt; </a>
+                  <a class="more" href="/pro/supplier/list.htm?sourceId=${(eduSchoolSupplierDtos.supplierId)!}&schoolId=${(dto.customerId)!}&source=${(dto.source)!}">更多 &gt;&gt; </a>
                 </h1>
                 <div class="wrapperB">
                   <ul class="sulplier_ul">

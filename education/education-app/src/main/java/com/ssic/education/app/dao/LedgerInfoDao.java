@@ -109,7 +109,7 @@ public class LedgerInfoDao {
 		}
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		if (null != page) {
-			example.setOrderByClause("stat desc,action_date desc limit " + page.getStartNum() + "," + page.getPageSize());
+			example.setOrderByClause("stat desc limit " + page.getStartNum() + "," + page.getPageSize());
 		}
 		List<ProLedger> proLedgers = ledgerMapper.selectByExample(example);
 		return proLedgers;
