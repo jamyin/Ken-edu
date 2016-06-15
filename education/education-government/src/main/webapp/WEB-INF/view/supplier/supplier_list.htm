@@ -19,7 +19,7 @@
     </h1>
 
     <div class="wrapperB">
-    <form action="list.htm?id=${(dto.id)!}&supplierName=${(dto.supplierName)!}" method="post" id="myform">
+    <form action="list.htm?id=${(data.id)!}&sourceId=${(dto.supplierId)!}&schoolId=${(dto.customerId)!}&source=${(dto.source)!}&supplierName=${(dto.supplierName)!}" method="post" id="myform">
      <input type="hidden" name="currPage" id="currPage" value="1"/>
       <ul class="sulplier_ul">
         <li class="head">
@@ -56,7 +56,8 @@
 
       $('#searchBut').on('click', function() {
     	  var supplierName = $('.search_text').val();
-    	  window.location.href ="list.htm?id="+ $('input[name=supplierId]').val()+"&supplierName="+supplierName;   	  
+    	  var page = $('#currPage').val();
+    	  window.location.href ="/pro/supplier/list.htm?id=${(dto.sourceId)!}&sourceId=${(dto.sourceId)!}&schoolId=${(dto.schoolId)!}&source=${(dto.source)!}&supplierName="+supplierName+"&currPage="+page;   	  
       })
       
       // 跳转指定页
@@ -83,8 +84,14 @@
     })
 
     function gotoPage(page) {
-      $("#currPage").val(page);
-      $("#myform").submit();
+    	var supplierName = $('.search_text').val();
+    	if (supplierName.length>0 && supplierName != 'undefined') {
+    		window.location.href ="/pro/supplier/list.htm?id=${(dto.sourceId)!}&sourceId=${(dto.sourceId)!}&schoolId=${(dto.schoolId)!}&source=${(dto.source)!}&supplierName="+supplierName+"&currPage="+page;   
+    	}else {
+    		$("#currPage").val(page);
+          	$("#myform").submit();
+    	}
+      	
     }
   </script>
 </body>

@@ -39,4 +39,8 @@ public interface ProSupplierExMapper {
 	List<ProSupplierDto> findSupplierListBySchoolId(@Param("proSupplierDto") ProSupplierDto proSupplierDto,@Param("query") PageQuery page);
 	
 	long countSupplierListBySchoolId(@Param("proSupplierDto") ProSupplierDto proSupplierDto);
+	
+	List<ProSupplierDto> findSupplierListByIds(@Param("proSupplierDto") ProSupplierDto proSupplierDto,@Param("query") PageQuery page);
+	
+	long countSupplierListByIds(@Param("proSupplierDto") ProSupplierDto proSupplierDto);
 }

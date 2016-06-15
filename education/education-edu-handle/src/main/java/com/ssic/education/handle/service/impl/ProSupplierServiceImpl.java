@@ -45,8 +45,8 @@ public class ProSupplierServiceImpl implements ProSupplierService{
 //	}
 
 	public PageResult<ProSupplierDto> findSupplierPageBySchoolId(ProSupplierDto dto, PageQuery query) {
-		List<ProSupplierDto> results = proSupplierDao.findSupplierListBySchoolId(dto, query);
-		query.setTotal(proSupplierDao.countSupplierListBySchoolId(dto));
+		List<ProSupplierDto> results = proSupplierDao.findSupplierListByIds(dto, query);
+		query.setTotal(proSupplierDao.countSupplierListByIds(dto));
 		return new PageResult<>(query, results);
 	}
 	
