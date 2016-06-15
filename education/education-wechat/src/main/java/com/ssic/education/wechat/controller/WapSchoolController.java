@@ -136,7 +136,7 @@ public class WapSchoolController extends BaseController{
 			result.setMessage("未找到相对应的学校信息");
 			return result;
 		}
-		
+		eduSchoolDto.setReviewed(Byte.valueOf("1"));
 		eduSchoolDto.setSchoolName(StringUtils.trim(eduSchoolDto.getSchoolName()));
 		dataList = eduSchoolService.searchEduScholDtoList(eduSchoolDto);
 		

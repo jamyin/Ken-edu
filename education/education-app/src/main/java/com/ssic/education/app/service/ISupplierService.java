@@ -32,6 +32,8 @@ public interface ISupplierService {
 	 */
 	SupplierLicDto findSupplierInfo(String supplier_id);
 
+	SupplierLicDto findSupplierInfo(String supplierId, String schoolId);
+
 	AppCanTeenDto findCanteenByid(String id);
 
 	/**     
@@ -43,5 +45,7 @@ public interface ISupplierService {
 	 * @date 2016年5月30日 下午3:04:51	 
 	 */
 	PageResult<MaterialSupplierDto> findListByIds(String id, ProSupplier proSupplier, PageQuery query);
+
+	PageResult<MaterialSupplierDto> findListByIds(String id, String schoolId, ProSupplier proSupplier, PageQuery query);
 
 }

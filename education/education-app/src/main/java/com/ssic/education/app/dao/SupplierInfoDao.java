@@ -17,11 +17,14 @@ import com.ssic.education.handle.mapper.EduCanteenMapper;
 import com.ssic.education.handle.mapper.ProLedgerMapper;
 import com.ssic.education.handle.mapper.ProLedgerMasterMapper;
 import com.ssic.education.handle.mapper.ProLicenseMapper;
+import com.ssic.education.handle.mapper.ProSchoolWareMapper;
 import com.ssic.education.handle.mapper.ProSupplierMapper;
 import com.ssic.education.handle.mapper.ProSupplierReceiverMapper;
 import com.ssic.education.handle.pojo.EduCanteen;
 import com.ssic.education.handle.pojo.ProLicense;
 import com.ssic.education.handle.pojo.ProLicenseExample;
+import com.ssic.education.handle.pojo.ProSchoolWare;
+import com.ssic.education.handle.pojo.ProSchoolWareExample;
 import com.ssic.education.handle.pojo.ProSupplier;
 import com.ssic.education.handle.pojo.ProSupplierExample;
 import com.ssic.education.handle.pojo.ProSupplierReceiver;
@@ -72,6 +75,10 @@ public class SupplierInfoDao {
 	@Getter
 	@Autowired
 	private EduCanteenMapper canteenMapper;
+
+	@Getter
+	@Autowired
+	private ProSchoolWareMapper schoolWareMapper;
 
 	/**
 	 * getSupplierInfoById：供应商资质查询
@@ -152,6 +159,24 @@ public class SupplierInfoDao {
 			}
 			Set<String> set = new HashSet<String>(list);
 			return new ArrayList<String>(set);
+		}
+		return null;
+	}
+
+	public List<String> getSchoolWares(String sourceId , String schoolId) {
+		ProSchoolWareExample example = new ProSchoolWareExample();
+		ProSchoolWareExample.Criteria criteria = example.createCriteria();
+		criteria.andSourceIdEqualTo(sourceId);
+		criteria.andSchoolIdEqualTo(schoolId);
+		List<String> list = new ArrayList<String>();
+		List<ProSchoolWare> schoolWareList = this.schoolWareMapper.selectByExample(example);
+		if (null != schoolWareList && !schoolWareList.isEmpty()) {
+			for (ProSchoolWare proSchoolWare : schoolWareList) {
+				list.add(proSchoolWare.getSupplierId());
+			}
+			Set<String> set = new HashSet<String>(list);
+			return new ArrayList<String>(set);
+
 		}
 		return null;
 	}

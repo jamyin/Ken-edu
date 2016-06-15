@@ -1,5 +1,6 @@
 package com.ssic.education.app.dto;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import lombok.Data;
@@ -24,7 +25,7 @@ public @Data class LedgerDetailDto {
 	private String name;
 	private String supplierId;
 	private String supplierName;
-	private String quantity;
+	private BigDecimal quantity;
 	private Date productionDate;
 	private String productionName;
 }

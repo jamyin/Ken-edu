@@ -26,6 +26,7 @@
         <li><label>单位名称:</label><span>${(supplier.supplierName)!}</span></li>
        	<li><label>单位地址:</label><span>${(supplier.address)!}</span></li>
        	<li><label>联系人:</label><span>${(supplier.corporation)!}</span></li>
+       	<li><label>联系方式:</label><span>${(supplier.contactWay)!}</span></li>
        	<#if proLicenses??>
         	<#list proLicenses as proLicense>
         		<li><label for="">${(proLicense.licName)!}:</label><span>${(proLicense.licNo)!}  </span><#if proLicense.licPic??><a class="img_nn" data-value="${(wwwdomain)!}${(proLicense.licPic)!}" href="###" style="color: blue;">查看图片&gt;&gt;</a></#if></li>
@@ -36,8 +37,7 @@
         <li><label>食品流通证号:</label><span>${(supplier.foodCirculationCode)!}</span><a class="img_nn" href="###">图片</a></li>
         <li><label>食品经营许可证号码:</label><span>${(supplier.businessCode)!}</span><a class="img_nn" href="###">图片</a></li>
         <li><label>餐饮服务证号:</label><span>${(supplier.foodServiceCode)!}</span><a class="img_nn" href="###">图片</a></li>
-        <li><label>法定代表人:</label><span>${(supplier.corporation)!}</span></li> -->
-        <li><label>联系方式:</label><span>${(supplier.contactWay)!}</span></li>
+        <li><label>法定代表人:</label><span>${(supplier.corporation)!}</span></li> -->       
       </ul>
     </div>
 

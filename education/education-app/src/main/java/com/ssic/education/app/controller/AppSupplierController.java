@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssic.educateion.common.dto.ProSupplierDto;
@@ -130,14 +131,19 @@ public class AppSupplierController {
 	 */
 	@RequestMapping("/findSupplierInfo/{id}")
 	@AccessRequired
-	public @ResponseBody Response<SupplierLicDto> findSupplierInfo(@PathVariable("id") String id) {
+	public @ResponseBody Response<SupplierLicDto> findSupplierInfo(@PathVariable("id") String id, @RequestParam(required = false) String schoolId) {
 		Response<SupplierLicDto> result = new Response<SupplierLicDto>();
 		if (StringUtils.isEmpty(id)) {
 			result.setStatus(DataStatus.HTTP_FAILE);
 			result.setMessage("查询Id为空");
 			return result;
 		}
-		SupplierLicDto supplier = supplierService.findSupplierInfo(id);
+		SupplierLicDto supplier = new SupplierLicDto();
+		if (StringUtils.isNotBlank(schoolId)) {
+			supplier = supplierService.findSupplierInfo(id, schoolId);
+		} else {
+			supplier = supplierService.findSupplierInfo(id);
+		}
 		if (supplier != null) {
 			result.setStatus(DataStatus.HTTP_SUCCESS);
 			result.setMessage("查询成功！");
@@ -160,14 +166,19 @@ public class AppSupplierController {
 	 */
 	@RequestMapping("/findSupplierList/{id}")
 	@AccessRequired
-	public @ResponseBody Response<PageResult<MaterialSupplierDto>> findSupplierList(@PathVariable("id") String id, ProSupplier supplier, PageQuery query) {
+	public @ResponseBody Response<PageResult<MaterialSupplierDto>> findSupplierList(@PathVariable("id") String id, ProSupplier supplier, PageQuery query, @RequestParam(required = false) String schoolId) {
 		Response<PageResult<MaterialSupplierDto>> result = new Response<PageResult<MaterialSupplierDto>>();
 		if (StringUtils.isEmpty(id)) {
 			result.setStatus(DataStatus.HTTP_FAILE);
 			result.setMessage("查询Id为空");
 			return result;
 		}
-		PageResult<MaterialSupplierDto> PageResult = this.supplierService.findListByIds(id, supplier, query);
+		PageResult<MaterialSupplierDto> PageResult = new PageResult<MaterialSupplierDto>();
+		if (StringUtils.isNotBlank(schoolId)) {
+			PageResult = this.supplierService.findListByIds(id,schoolId, supplier, query);
+		} else {
+			PageResult = this.supplierService.findListByIds(id, supplier, query);
+		}
 		if (PageResult != null) {
 			result.setStatus(DataStatus.HTTP_SUCCESS);
 			result.setMessage("查询成功！");
