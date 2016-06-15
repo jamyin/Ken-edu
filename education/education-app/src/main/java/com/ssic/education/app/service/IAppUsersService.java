@@ -1,6 +1,5 @@
 package com.ssic.education.app.service;
 
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ssic.education.app.dto.AppEduUserDto;
 import com.ssic.education.app.dto.AppProUserDto;

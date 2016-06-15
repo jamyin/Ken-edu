@@ -16,7 +16,6 @@ import com.ssic.education.app.token.TokenUtil;
 import com.ssic.education.handle.dao.CommitteeDao;
 import com.ssic.education.handle.pojo.EduCommittee;
 import com.ssic.education.handle.pojo.ProUsers;
-import com.ssic.education.utils.model.Response;
 import com.ssic.education.utils.redis.WdRedisDao;
 import com.ssic.education.utils.util.BeanUtils;
 import com.ssic.education.utils.util.StringUtils;
