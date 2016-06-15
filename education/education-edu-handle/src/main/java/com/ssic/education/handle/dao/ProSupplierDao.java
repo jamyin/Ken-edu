@@ -267,12 +267,17 @@ public class ProSupplierDao extends MyBatisBaseDao<ProSupplier> {
 		}
 	}
 
-	public int deleteSupplierById(String id) {
+	public int deleteSupplierById(String id,String supplierId) {
 		ProSupplier ps = new ProSupplier();
 		ps.setId(id);
 		ps.setStat(0);
 		ps.setCreateTime(null);
 		ps.setLastUpdateTime(new Date());
+		ProSupplierReceiverExample example=new ProSupplierReceiverExample();
+		ProSupplierReceiverExample.Criteria criteria = example.createCriteria();
+		criteria.andSupplierIdEqualTo(id);
+		criteria.andReceiverIdEqualTo(supplierId);
+		srMapper.deleteByExample(example);
 		return mapper.updateByPrimaryKeySelective(ps);
 	}
 
