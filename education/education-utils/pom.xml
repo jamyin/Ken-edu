@@ -237,7 +237,7 @@
 		<repositories>
 		<repository>
 			<id>nexus</id>
-			<url>http://192.168.1.180:8081//nexus/content/repositories/thirdparty/</url>
+			<url>http://192.168.1.180:8081/nexus/content/repositories/thirdparty/</url>
 			<layout>default</layout>
 		</repository>
 		<repository>
