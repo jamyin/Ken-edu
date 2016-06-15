@@ -114,8 +114,9 @@ public class EduSchoolController extends BaseController{
 		EduUsersDto usersdto = getLoginUser(request, response, session, id);
 		if (null != dto.getSource() && dto.getSource() == DataStatus.EVA_TWO 
 				&& null != usersdto.getSourceType() && usersdto.getSourceType() == DataStatus.EVA_TWO) {
-			EduCommitteeDto EduCommitteeDto = iEduCommitteeService.findById(usersdto.getSourceId());
-			dto.setArea(EduCommitteeDto.getAreaCode());
+			EduCommitteeDto eduCommitteeDto = iEduCommitteeService.findById(usersdto.getSourceId());
+			dto.setArea(eduCommitteeDto.getAreaCode());
+			dto.setCommitteeId(eduCommitteeDto.getId());
 		}		
 		PageResult<EduSchoolDto> result = eduSchoolService.list(dto, page);
 		List<EduCommitteeDto> eduCommitteeDtos = iEduCommitteeService.findAll();
