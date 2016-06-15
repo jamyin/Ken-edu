@@ -119,8 +119,8 @@ public class SupplierServiceImpl implements ISupplierService {
 		proSupplierDao.updataProSupplier(ps);
 	}
 
-	public int deleteSupplier(String id) {
-		return proSupplierDao.deleteSupplierById(id);
+	public int deleteSupplier(String id,String supplierId) {
+		return proSupplierDao.deleteSupplierById(id,supplierId);
 	}
 
 	public int saveSupplier(SupplierDto ps) {

@@ -20,7 +20,7 @@ public interface ISupplierService {
 
 	void updataProSupplier(SupplierDto ps);
 
-	int deleteSupplier(String id);
+	int deleteSupplier(String id, String supplierId);
 
 	int saveSupplier(SupplierDto ps);
 
@@ -86,5 +86,6 @@ public interface ISupplierService {
 	int importSupplier(Map<String, Map<ProSupplierReceiver, ProSupplier>> map);
 
 	void updataProSupplierCode(ProSupplierReceiver proSupplierReceiver);
+
 
 }

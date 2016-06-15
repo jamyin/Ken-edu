@@ -191,9 +191,17 @@ public class ProSupplierController extends BaseController {
 
 	@RequestMapping("/deleteSupplier")
 	@ResponseBody
-	public Json deleteSupplier(ProSupplierDto psd) {
+	public Json deleteSupplier(ProSupplierDto psd,HttpServletRequest request) {
 		Json j = new Json();
-		int r = supplierService.deleteSupplier(psd.getId());
+		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
+				ConfigUtil.SESSIONINFONAME);
+		if (info == null) {
+			j.setMsg("请登录");
+			j.setSuccess(false);
+			return j;
+		}
+		String supplierId = info.getSupplierId();
+		int r = supplierService.deleteSupplier(psd.getId(),supplierId);
 		if (r == 0) {
 			j.setMsg("删除供应商失败");
 			j.setSuccess(false);
@@ -225,12 +233,12 @@ public class ProSupplierController extends BaseController {
 		Json j = new Json();
 		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
 				ConfigUtil.SESSIONINFONAME);
-		String supplierId = info.getSupplierId();
-		if (supplierId == null) {
+		if (info == null) {
 			j.setMsg("请登录");
 			j.setSuccess(false);
 			return j;
 		}
+		String supplierId = info.getSupplierId();
 		if (ps.getSupplierName() == null || ps.getSupplierName().equals("")) {
 			j.setMsg("供应商名称不能为空");
 			j.setSuccess(false);
