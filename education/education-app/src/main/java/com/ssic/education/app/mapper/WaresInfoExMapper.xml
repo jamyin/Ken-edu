@@ -31,6 +31,7 @@
 		<result column="way" property="way" jdbcType="INTEGER" />
 		<result column="wares_type" property="waresType" jdbcType="INTEGER" />
 		<result column="custom_code" property="customCode" jdbcType="VARCHAR" />
+		<result column="bar_code" property="barCode" jdbcType="VARCHAR" />
 		<result column="place" property="place" jdbcType="VARCHAR" />
 		<result column="manufacturer" property="manufacturer" jdbcType="VARCHAR" />
 		<result column="en_name" property="enName" jdbcType="VARCHAR" />
