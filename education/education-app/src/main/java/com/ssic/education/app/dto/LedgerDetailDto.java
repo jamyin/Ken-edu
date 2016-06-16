@@ -26,6 +26,7 @@ public @Data class LedgerDetailDto {
 	private String supplierId;
 	private String supplierName;
 	private BigDecimal quantity;
+	private String spce;
 	private Date productionDate;
 	private String productionName;
 }

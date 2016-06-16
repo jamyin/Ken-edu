@@ -55,7 +55,7 @@ public class ProLedgerController extends BaseController{
 		LedgerDto ledgerDto = new LedgerDto();
 		ledgerDto.setReceiverId(dto.getCustomerId());
 		ledgerDto.setReceiverName(dto.getWaresNames());
-		ledgerDto.setSourceId(dto.getSourceId());
+//		ledgerDto.setSourceId(dto.getSourceId());
 		PageResult<LedgerDto> ledgerDtos = proLedgerService.selectLedgerPage(ledgerDto,query);
 		mv.setViewName("/ledger/distribution_list");
 		mv.addObject("pageList", ledgerDtos);
