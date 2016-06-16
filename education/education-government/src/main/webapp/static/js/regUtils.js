@@ -68,7 +68,9 @@ $(function() {
 				if(data.status == 500){
 					layer.alert(data.message, {icon: 2,time: 800});
 				}else{
-					
+					var obj =  $("#sendMessage");
+					$(obj).attr("disabled","disabled");
+					setMessagetime(obj);
 				}
 			}
 		});
