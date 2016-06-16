@@ -88,7 +88,9 @@ $(function() {
 					$("#sursSubmit").attr("disabled","disabled");
 					$("#sursSubmit").css("background","#c6c6c6");
 //					layer.alert(data.message, {icon: 2});
-					layer.msg(data.message, {icon: 2,time: 800});
+					//layer.msg(data.message, {icon: 2,time: 800});
+					$("#messageValid").attr("placeholder",data.message);
+//					alert_redtext('messageValid',data.message)
 				}else{
 					$("#sursSubmit").css("background","#60ac62");
 					$("#sursSubmit").removeAttr("disabled");
