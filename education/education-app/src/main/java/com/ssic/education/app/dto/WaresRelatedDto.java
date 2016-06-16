@@ -40,17 +40,15 @@ public @Data class WaresRelatedDto {
 	private String typeName;
 	/**企业自定义编码*/
 	private String customCode;
+	/**包装条形码*/
+	private String barCode;
 	/**产地*/
 	private String place;
 	/**商品英文名*/
 	private String enName;
 	/**商品图片*/
 	private String image;
-	/**检测检验报告*/
-	//private String insReport;
-	/**生产许可证*/
-	//private String proLic;
-
+	/**证书列表*/
 	private List<AppLicenseDto> license;
 
 }

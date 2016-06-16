@@ -138,12 +138,12 @@ public class DrawRandomController {
 		}
 		
 		int randomNumber = (int) (Math.random() * 9000 + 1000);
-		String content = "温馨提示，为了保护您的隐私，请您在90秒内输入" + randomNumber + "验证码。";// 短信内容
+		String content = "温馨提示，为了保护您的隐私，请您在10分钟内输入" + randomNumber + "验证码。";// 短信内容
 		System.out.println("iSmsSendService"+iSmsSendService);
 		String returnString = iSmsSendService.sendSms(randomNumber, mobilePhone, content);
 //		String keyCode = SessionConstants.PHONE_NUMBER+loginUserDto.getId();
 		String keyCode = mobilePhone + "provider";
-		redisTemplate.opsForValue().set(keyCode, randomNumber, 90, TimeUnit.SECONDS);
+		redisTemplate.opsForValue().set(keyCode, randomNumber, 10, TimeUnit.MINUTES);
 		
 		result.setStatus(DataStatus.HTTP_SUCCESS);
 		return result;

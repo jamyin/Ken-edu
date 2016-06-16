@@ -61,7 +61,7 @@
 			</div>
 		</div>
       <div class="map">
-      	<#if historyList ??>
+      	<#if historyList ?? && (historyList?size > 0)>
 			<!DOCTYPE html>
 			<html>
 			<head>

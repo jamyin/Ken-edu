@@ -57,7 +57,7 @@
 				<li><label><i>*</i>手机</label><input id="mobileNo" type="text" placeholder=""></li>
 				<li><label><i>*</i>图片验证码</label><input id="picCaptcha" type="text" placeholder=""><img id="refreshValid" title="点击图片刷新验证码" src="/ajax/drawRandom.htm"/></li>
 				<li><label><i>*</i>短信验证码</label><input id="messageValid" type="text" placeholder="">
-					<input title="请先输入图片验证码" id="sendMessage" type="button" href="javascript:;" style="width:150px;line-height:30px;background:#c6c6c6;color:black;" value="获取短信验证码"></input>
+					<input title="请先输入图片验证码" id="sendMessage" type="button" href="javascript:;" style="width:150px;line-height:30px;background:#60ac62;color:black;" value="获取短信验证码"></input>
 				</li>
 				<li><label><i>*</i>区教委</label>
 				<select name="area"  id="area" panelheight="auto">
@@ -89,11 +89,11 @@
 					<ul class="c_type">
 						<li name="phoneFile1">
 						<select class="licType1">
-							<option value="0">餐饮服务证</option>
+							<option value="0">餐饮服务许可证</option>
 							<option value="1">食品经营许可证</option>
-							<option value="2">食品流通证</option>
-							<option value="3">食品生产证</option>
-							<option value="4">工商执照</option>
+							<option value="2">食品流通许可证</option>
+							<option value="3">食品生产许可证</option>
+							<option value="4">工商营业执照</option>
 						</select>
 						<input id="licNum" type="text" class="licinputw1" name="licNum" placeholder="证件编号">
 						<label class="file" for="phoneFile1">未选择文件<i>浏览</i></label>
@@ -140,7 +140,7 @@
 			if(_tag == 'add'){
 				var _ind = $(this).closest('ul').find('li').length + 1
 				//alert(_ind)
-				$('.c_type').append('<li name="phoneFile'+ _ind +'"><select class="licType'+  _ind +'" id=""><option value=\"0\">餐饮服务证</option><option value=\"1\">食品经营许可证</option><option value=\"2\">食品流通证</option><option value=\"3\">食品生产证</option><option value=\"4\">工商执照</option>></select><input id="licNum" type="text" class="licinputw'+ _ind +'" name="licNum" placeholder="证件编号"><label class="file" for="phoneFile'+ _ind +'">未选择文件<i>浏览</i></label><input id="phoneFile'+ _ind +'"  type="file" name="file" onchange="selectfun(this)"><span class="remove">-</span><a id="phoneQuery'+ _ind +'"></a></li>')
+				$('.c_type').append('<li name="phoneFile'+ _ind +'"><select class="licType'+  _ind +'" id=""><option value=\"0\">餐饮服务许可证</option><option value=\"1\">食品经营许可证</option><option value=\"2\">食品流通许可证</option><option value=\"3\">食品生产许可证</option><option value=\"4\">工商营业执照</option>></select><input id="licNum" type="text" class="licinputw'+ _ind +'" name="licNum" placeholder="证件编号"><label class="file" for="phoneFile'+ _ind +'">未选择文件<i>浏览</i></label><input id="phoneFile'+ _ind +'"  type="file" name="file" onchange="selectfun(this)"><span class="remove">-</span><a id="phoneQuery'+ _ind +'"></a></li>')
 			}else if(_tag == 'remove'){
 				$(this).closest('li').remove()
 				for(var i=0; i<$('.c_type').find('li').length;i++){

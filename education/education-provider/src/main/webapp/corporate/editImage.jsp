@@ -13,7 +13,8 @@
 	padding:20px!important;
 }
 .text-license {
-	font-size: 15px !important;
+	font-size: 18px !important;
+	font-weight:normal!important;
 }
 </style>
 <script type="text/javascript">

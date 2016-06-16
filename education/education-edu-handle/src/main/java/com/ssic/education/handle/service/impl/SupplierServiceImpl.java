@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -134,10 +135,13 @@ public class SupplierServiceImpl implements ISupplierService {
 
 	public String saveOrUpdateSupplier(SupplierDto ps) {
 		// TODO Auto-generated method stub
-		ps.setId(UUIDGenerator.getUUID());
-		ProSupplier proSupplier = BeanUtils.createBeanByTarget(ps,
-				ProSupplier.class);
-		proSupplierDao.insertSelective(proSupplier);
+		ProSupplier proSupplier = BeanUtils.createBeanByTarget(ps,ProSupplier.class);
+		if(StringUtils.isEmpty(ps.getId())){
+			ps.setId(UUIDGenerator.getUUID());
+			proSupplierDao.insertSelective(proSupplier);
+		}else{
+			proSupplierDao.updateByPrimaryKeySelective(proSupplier);
+		}		
 		return ps.getId();
 	}
 

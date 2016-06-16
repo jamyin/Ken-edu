@@ -51,7 +51,7 @@
         <p>到达时间：<span><#if ledgerDto.endTime??>${ledgerDto.endTime?string("yyyy-MM-dd HH:mm:ss")}</#if></span></p>
       </div>
       <div class="map">
-      	<#if historyList ??>
+      	<#if historyList ?? && (historyList?size > 0)>
 			<!DOCTYPE html>
 			<html>
 			<head>

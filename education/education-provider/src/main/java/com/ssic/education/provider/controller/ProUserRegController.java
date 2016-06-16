@@ -54,10 +54,9 @@ public class ProUserRegController extends BaseController{
 	@Transactional
 	public Json prreg(SupplierDto supplierDto,ProUsersDto proUsersDto) {
 		Json json = new Json();
-		//先保存供应商信息  -->  保存该供应商对应的用户信息(账号) //需要增加事务处理 或 增加判断
-		supplierDto.setReviewed(Byte.valueOf("0"));
-		supplierDto.setSupplierType(Integer.valueOf(1));//常量  0为不区分，1为成品菜供应商，2为原料供应商  
-		String supplierId = iSupplierService.saveOrUpdateSupplier(supplierDto);
+		//先保存供应商信息  -->  保存该供应商对应的用户信息(账号) //需要增加事务处理 或 增加判断		String supplierId = UUIDGenerator.getUUID();
+		String supplierId = UUIDGenerator.getUUID();
+//		iSupplierService.saveOrUpdateSupplier(supplierDto);
 		//供应商对应的区县信息
 		saveSupplierReview(supplierId);
 		//保存证件信息
@@ -65,7 +64,7 @@ public class ProUserRegController extends BaseController{
 		
 		String creatorId = UUIDGenerator.getUUID();
 		
-		saveLicenses(supplierId,licenses,creatorId);
+		saveLicenses(supplierId,licenses,creatorId,supplierDto);
 		//licenses 信息保存时同时存入主表信息
 		
 		//用户信息
@@ -80,9 +79,8 @@ public class ProUserRegController extends BaseController{
 		
 	}
 
-	private void saveLicenses(String supplierId, String[] licenses,String creatorId) {
+	private void saveLicenses(String supplierId, String[] licenses,String creatorId,SupplierDto supplierDto) {
 		if(licenses!=null){
-			ProSupplierDto proDto = iSupplierService.searchProSupplierById(supplierId);
 			for(String licesse : licenses){
 				if(!StringUtils.isEmpty(licesse)){
 					String licenseName = licesse.split("#")[0];
@@ -101,18 +99,19 @@ public class ProUserRegController extends BaseController{
 					iProLicenseService.saveProLicense(proLicenseDto);
 					
 					if(Objects.equal(licType, "4")){
-						proDto.setBusinessLicense(licNo);
+						supplierDto.setBusinessLicense(licNo);
 					}else if(Objects.equal(licType, "0")){
-						proDto.setFoodServiceCode(licNo);
+						supplierDto.setFoodServiceCode(licNo);
 					}else if(Objects.equal(licType, "2")){
-						proDto.setFoodCirculationCode(licNo);
+						supplierDto.setFoodCirculationCode(licNo);
 					}else if(Objects.equal(licType, "3")){
-						proDto.setFoodProduceCode(licNo);
+						supplierDto.setFoodProduceCode(licNo);
 					}
 				}
 			}
-			SupplierDto suppliDto = BeanUtils.createBeanByTarget(proDto, SupplierDto.class);
-			iSupplierService.saveOrUpdateSupplier(suppliDto);
+			supplierDto.setReviewed(Byte.valueOf("0"));
+			supplierDto.setSupplierType(Integer.valueOf(1));//常量  0为不区分，1为成品菜供应商，2为原料供应商  
+			iSupplierService.saveOrUpdateSupplier(supplierDto);
 		}
 		
 //		business_license            工商执照号  4                                                              

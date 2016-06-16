@@ -32,6 +32,12 @@ $(function(){
             	$("#file-1").attr("value","工商营业执照#"+dataObj.filePath+"#"+licenseNo1+"#4");
             	$("#license1").html("<a target='_' href='"+showUrl+"'>查看工商营业执照</a>");
             	$("#file-1").attr("checked","checked");
+            }else{
+            	layer.alert("对不起,上传失败!", {
+    				shade: [0.9, '#000'],
+    			    icon: 3,
+    			    time: 3000 //2秒关闭（如果不配置，默认是3秒）
+    			}); 
             }
         },
         onSelect:function(){
@@ -68,6 +74,12 @@ $(function(){
                 $("#file-2").val("餐饮服务许可证#"+dataObj.filePath+"#"+licenseNo2+"#0");
                 $("#license2").html("<a target='_' href='"+showUrl+"'>查看餐饮服务许可证</a>");
                 $("#file-2").attr("checked","checked");
+            }else{
+            	layer.alert("对不起,上传失败!", {
+    				shade: [0.9, '#000'],
+    			    icon: 3,
+    			    time: 3000 //2秒关闭（如果不配置，默认是3秒）
+            	});
             }
         },
         onSelect:function(){
@@ -105,6 +117,12 @@ $(function(){
                 $("#file-3").val("食品流通许可证#"+dataObj.filePath+"#"+licenseNo3+"#2");
                 $("#license3").html("<a target='_' href='"+showUrl+"'>查看食品流通许可证</a>");
                 $("#file-3").attr("checked","checked");
+            }else{
+            	layer.alert("对不起,上传失败!", {
+    				shade: [0.9, '#000'],
+    			    icon: 3,
+    			    time: 3000 //2秒关闭（如果不配置，默认是3秒）
+            	});
             }
         },
         onSelect:function(){
@@ -141,6 +159,12 @@ $(function(){
                 $("#file-4").val("食品生产许可证#"+dataObj.filePath+"#"+licenseNo4+"#3");
                 $("#license4").html("<a target='_' href='"+showUrl+"'>查看食品生产许可证</a>");
                 $("#file-4").attr("checked","checked");         	            	
+            }else{
+            	layer.alert("对不起,上传失败!", {
+    				shade: [0.9, '#000'],
+    			    icon: 3,
+    			    time: 3000 //2秒关闭（如果不配置，默认是3秒）
+            	});
             }
         },
         onSelect:function(){
