@@ -62,6 +62,12 @@
 		});
 	}
 
+	function logoutFun2() {
+		
+				location.replace('${pageContext.request.contextPath}/index.jsp');
+			
+	}
+
 	function editCurrentUserPwd() {
 		parent.$.modalDialog({
 			title : '修改密码',
@@ -94,13 +100,17 @@
 		});
 	}
 </script>
+
+	<a href="${pageContext.request.contextPath}/index.jsp" class="logo">
+		<img src="${pageContext.request.contextPath}/style/images/logo.png"   style="height: 50px"/>
+	</a>
 <div id="sessionInfoDiv" style="position: absolute; right: 0px; top: 0px;" class="alert alert-info">
 	<c:if test="${sessionInfo.id != null}">[<strong>${sessionInfo.userAccount}</strong>]，欢迎你登录:[团餐管理系统]</c:if>
 </div>
 <div style="position: absolute; right: 0px; bottom: 0px;">
 <!-- 	<a href="javascript:void(0);" class="easyui-menubutton" data-options="menu:'#layout_north_pfMenu',iconCls:'cog'">更换皮肤</a> 
-	<a href="javascript:void(0);" class="easyui-menubutton" data-options="menu:'#layout_north_kzmbMenu',iconCls:'cog'">控制面板</a>  -->
-	<a href="javascript:void(0);" class="easyui-menubutton" data-options="menu:'#layout_north_zxMenu',iconCls:'cog'">注销</a>
+	<a href="javascript:void(0);" class="easyui-menubutton" data-options="menu:'#layout_north_kzmbMenu',iconCls:'cog'"></a>  -->
+	<a href="javascript:void(0);" class="easyui-menubutton" data-options="menu:'#layout_north_zxMenu',iconCls:'cog'">控制面板</a>
 </div>
 <div id="layout_north_pfMenu" style="width: 120px; display: none;">
 	<div onclick="changeThemeFun('default');" title="default">default</div>
@@ -129,7 +139,8 @@
 </div>
 <div id="layout_north_zxMenu" style="width: 100px; display: none;">
 
+	
 	<div class="menu-sep"></div>
-<!-- 	<div onclick="logoutFun();">重新登录</div> -->
+	<div onclick="logoutFun2();">返回首页</div>
 	<div onclick="logoutFun(true);">退出系统</div>
 </div>

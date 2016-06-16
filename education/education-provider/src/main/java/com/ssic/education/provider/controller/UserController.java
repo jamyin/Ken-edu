@@ -62,10 +62,20 @@ public class UserController extends BaseController {
 					.searchProSupplierById(u.getSourceId());
 			if (!Objects.equal(proSupplierDto.getReviewed(), Byte.valueOf("1"))) {
 				j.setMsg("供应商信息审核未通过,请通过之后再进行登陆");
-				return j;
+				return j;								
 			}
 			// }
-
+			
+			if(u.getUserType()==null){
+			u.setUserType("3");
+			}
+			if(u.getUserType().equals("1")){
+				j.setMsg("你是驾驶员用户，无法登陆，请联系管理员");
+				return j;			
+				
+			}
+			
+			
 			j.setSuccess(true);
 			j.setMsg("登陆成功！");
 
