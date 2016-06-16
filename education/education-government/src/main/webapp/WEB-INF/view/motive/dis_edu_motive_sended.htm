@@ -80,6 +80,7 @@
 	                                    <!-- <td class="center"> <input type="checkbox"> </td> -->
 	                                    <td>
 	                                    	<#if result.getTaskReceiceList() ??>
+	                                    		<#assign receiveName = "">
 	                                    		<#list result.getTaskReceiceList() as data>
 		                                    		<#if !data_has_next>
 		                                    			<#assign receiveName = receiveName + data.receiveName>
@@ -89,7 +90,7 @@
 	                                    		</#list>
 	                                    		<#if receiveName ??>
 	                                    			<#if receiveName?length gt 15>
-	                                    				<a title="${(receiveName)!}">${receiveName?substring(0,15)}...</a>
+	                                    				<a title="${(receiveName)!}">${receiveName?substring(0,13)}...</a>
 	                                    			<#else>
 	                                    				${(receiveName)!}
 	                                    			</#if>
@@ -99,7 +100,7 @@
 	                                    <td>
 	                                        <a style="color: blue;" href="/motive/details/${(result.id)!}.htm">
 	                                            <#if result.title?length gt 15>
-                                    				${result.title?substring(0,15)}...
+                                    				${result.title?substring(0,13)}...
                                     			<#else>
                                     				${(result.title)!}
                                     			</#if>
