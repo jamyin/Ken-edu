@@ -35,8 +35,8 @@ public class UserAccessApiInterceptor extends HandlerInterceptorAdapter {
 			String eduParam = request.getParameter("edutk");
 			String eduToken = StringUtils.isNotBlank(eduHeader) ? eduHeader : eduParam;
 
-			String proHeader = request.getHeader("edutk");
-			String proParam = request.getParameter("edutk");
+			String proHeader = request.getHeader("protk");
+			String proParam = request.getParameter("protk");
 			String proToken = StringUtils.isNotBlank(proHeader) ? proHeader : proParam;
 
 			if (StringUtils.isNotBlank(eduToken)) {
