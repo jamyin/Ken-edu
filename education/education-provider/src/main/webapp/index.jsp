@@ -117,16 +117,16 @@
 						}
 					}
 				});
-	}); 
-	
+	});
+
 	function loadUrl(_this){
 		var params = new Object();
-		
+
 		params.url = $(_this).attr("data-src");
 		params.title = $(_this).attr("data-text");
 		params.iconCls = $(_this).attr("iconCls");
-		
-		
+
+
 		$(".tabs-title").html(params.title);
 		//$("#index_tabs").find("span .tabs-title").html(params.title);
 		//console.log($("#index_tabs").find("span .tabs-title"));
@@ -154,11 +154,17 @@
 </head>
 <body>
 
+
 	<jsp:include page="user/login.jsp"></jsp:include>
 	<jsp:include page="user/reg.jsp"></jsp:include>
 
 	<div id="index_layout">
-		<div data-options="region:'north',href:'${pageContext.request.contextPath}/layout/north.jsp'" style="height: 70px; overflow: hidden;" class="logo"></div>
+<div data-options="region:'north',href:'${pageContext.request.contextPath}/layout/north.jsp'" style="height: 70px; overflow: hidden;">
+
+</div>
+
+
+
 		<%-- <div data-options="region:'west',href:'${pageContext.request.contextPath}/layout/west.jsp',split:true" title="模块导航" style="width: 200px; overflow: hidden;"></div> --%>
 		<div data-options="region:'center'" title="<font  style='font-style: normal;font-weight: bolder;font-size:18px;'>欢迎使用团餐供应商系统</font>" style="overflow: hidden;">
 			<div style="padding:5px;background:#fafafa;width:100%;border:1px solid #ccc">
@@ -171,7 +177,7 @@
 				<a onclick="loadUrl(this);" data-src="ledgerController/manager" data-text="配货管理" class="easyui-linkbutton" plain="true" iconCls="icon-search">
 				<font  style="font-style: normal;font-size:18px;">配货管理</font>
 				</a>
-				
+
 				<a onclick="loadUrl(this);" data-src="ledgerAddressController/manager" data-text="配货点管理" class="easyui-linkbutton" plain="true" iconCls="icon-print">
 				<font  style="font-style: normal;font-size:18px;">配货点管理</font>
 				</a>
@@ -180,7 +186,7 @@
 				<a onclick="loadUrl(this);" data-src="corporateController/manager" data-text="我的信息" class="easyui-linkbutton" plain="true" iconCls="icon-ok">
 				<font  style="font-style: normal;font-size:18px;">
 				我的信息</font>
-				
+
 				</a>
 			</div>
 			<div id="index_tabs" style="overflow: hidden;">
