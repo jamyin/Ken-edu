@@ -40,6 +40,8 @@ public @Data class WaresRelatedDto {
 	private String typeName;
 	/**企业自定义编码*/
 	private String customCode;
+	/**包装条形码*/
+	private String barCode;
 	/**产地*/
 	private String place;
 	/**商品英文名*/
