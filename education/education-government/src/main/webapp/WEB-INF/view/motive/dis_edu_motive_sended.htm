@@ -80,6 +80,7 @@
 	                                    <!-- <td class="center"> <input type="checkbox"> </td> -->
 	                                    <td>
 	                                    	<#if result.getTaskReceiceList() ??>
+	                                    		<#assign receiveName = "">
 	                                    		<#list result.getTaskReceiceList() as data>
 		                                    		<#if !data_has_next>
 		                                    			<#assign receiveName = receiveName + data.receiveName>
