@@ -221,8 +221,8 @@ public class EduSchoolController extends BaseController{
 		if (null != eduSchoolSupplierDtos && StringUtils.isNotBlank(eduSchoolSupplierDtos.getSupplierId())) {
 //			 mWares = queryWares(eduSchoolSupplierDtos.getSupplierId(), query, false);
 			 proSupplierDto.setSourceId(eduSchoolSupplierDtos.getSupplierId());
-			 proSchoolWareDto.setSourceId(eduSchoolSupplierDtos.getSupplierId());			
-			 ledgerDto.setSourceId(eduSchoolSupplierDtos.getSupplierId());
+//			 proSchoolWareDto.setSourceId(eduSchoolSupplierDtos.getSupplierId());			
+//			 ledgerDto.setSourceId(eduSchoolSupplierDtos.getSupplierId());
 		} else {
 			 proSupplierDto.setSourceId(dto.getCustomerId());
 		}
