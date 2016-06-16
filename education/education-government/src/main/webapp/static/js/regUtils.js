@@ -1,30 +1,7 @@
 $(function() {	
-	//失去焦点事件
-	$("#picCaptcha").on("blur",function(){
-		var picCaptcha = $("#picCaptcha").val();
-		var dataParam = {picCaptcha:picCaptcha};
-		$.ajax({
-			url : '/ajax/checkRandom.htm',
-			type : "POST",
-			data : dataParam,
-			dataType : 'json',
-			success : function(data) {
-				if(data.status == 500){
-					$("#sendMessage").attr("disabled","disabled");
-					$("#sendMessage").css("background","#c6c6c6");
-					layer.alert(data.message, {icon: 2});
-				}else{
-					$("#sendMessage").css("background","#60ac62");
-					$("#sendMessage").removeAttr("disabled");
-				}
-			}
-		});
-	});
+//	//失去焦点事件
 //	$("#picCaptcha").on("blur",function(){
 //		var picCaptcha = $("#picCaptcha").val();
-//		if(picCaptcha=="" || picCaptcha==null){
-//			return false;
-//		}		
 //		var dataParam = {picCaptcha:picCaptcha};
 //		$.ajax({
 //			url : '/ajax/checkRandom.htm',
@@ -33,16 +10,39 @@ $(function() {
 //			dataType : 'json',
 //			success : function(data) {
 //				if(data.status == 500){
-//					//$("#sendMessage").attr("disabled","disabled");
-//					//$("#sendMessage").css("background","#c6c6c6");
+//					$("#sendMessage").attr("disabled","disabled");
+//					$("#sendMessage").css("background","#c6c6c6");
 //					layer.alert(data.message, {icon: 2});
 //				}else{
-//					//$("#sendMessage").css("background","#60ac62");
-//					//$("#sendMessage").removeAttr("disabled");
+//					$("#sendMessage").css("background","#60ac62");
+//					$("#sendMessage").removeAttr("disabled");
 //				}
 //			}
 //		});
 //	});
+////	$("#picCaptcha").on("blur",function(){
+////		var picCaptcha = $("#picCaptcha").val();
+////		if(picCaptcha=="" || picCaptcha==null){
+////			return false;
+////		}		
+////		var dataParam = {picCaptcha:picCaptcha};
+////		$.ajax({
+////			url : '/ajax/checkRandom.htm',
+////			type : "POST",
+////			data : dataParam,
+////			dataType : 'json',
+////			success : function(data) {
+////				if(data.status == 500){
+////					//$("#sendMessage").attr("disabled","disabled");
+////					//$("#sendMessage").css("background","#c6c6c6");
+////					layer.alert(data.message, {icon: 2});
+////				}else{
+////					//$("#sendMessage").css("background","#60ac62");
+////					//$("#sendMessage").removeAttr("disabled");
+////				}
+////			}
+////		});
+////	});
 	$("#sendMessage").click(function(){
 		var mobilePhone = $("#mobileNo").val();
 		var phone_reg  = /(^13\d{9}$)|(^14)[5,7]\d{8}$|(^15[0,1,2,3,5,6,7,8,9]\d{8}$)|(^17)[6,7,8]\d{8}$|(^18\d{9}$)/g ;  
