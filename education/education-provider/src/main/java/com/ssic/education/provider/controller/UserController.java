@@ -65,7 +65,11 @@ public class UserController extends BaseController {
 				return j;								
 			}
 			// }
-			if(u.getUserType().contains("1")){
+			
+			if(u.getUserType()==null){
+			u.setUserType("3");
+			}
+			if(u.getUserType().equals("1")){
 				j.setMsg("你是驾驶员用户，无法登陆，请联系管理员");
 				return j;			
 				
