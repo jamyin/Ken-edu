@@ -119,11 +119,11 @@
 												<li name="phoneFile${proLicense_index+1}">
 												<input style="display:none;" type="text" class="proLicenseId${proLicense_index+1}" placeholder="" value="${(proLicense.id)!}">
 												<select class="licType${proLicense_index+1}">
-													<option value="0" <#if proLicense.licType == 0>selected="selected"</#if> >餐饮服务证</option>
+													<option value="0" <#if proLicense.licType == 0>selected="selected"</#if> >餐饮服务许可证</option>
 													<option value="1" <#if proLicense.licType == 1>selected="selected"</#if> >食品经营许可证</option>
-													<option value="2" <#if proLicense.licType == 2>selected="selected"</#if> >食品流通证</option>
-													<option value="3" <#if proLicense.licType == 3>selected="selected"</#if> >食品生产证</option>
-													<option value="4" <#if proLicense.licType == 4>selected="selected"</#if> >工商执照</option>
+													<option value="2" <#if proLicense.licType == 2>selected="selected"</#if> >食品流通许可证</option>
+													<option value="3" <#if proLicense.licType == 3>selected="selected"</#if> >食品生产许可证</option>
+													<option value="4" <#if proLicense.licType == 4>selected="selected"</#if> >工商营业执照</option>
 												</select>
 												<input id="licNum" type="text" class="licinputw${proLicense_index+1}" name="licNum" value="${(proLicense.licNo)!}" placeholder="证件编号">
 												<label class="file" for="phoneFile${proLicense_index+1}">文件<i>浏览</i></label>

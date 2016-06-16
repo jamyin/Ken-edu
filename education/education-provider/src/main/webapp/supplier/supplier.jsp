@@ -403,8 +403,8 @@
 	function importSupplier() {
 		parent.$.modalDialog({
 			title : '导入供应商',
-			width :300,
-			height : 150,
+			width :340,
+			height : 130,
 			href : '${pageContext.request.contextPath}/proSupplierController/importPage',
 			onOpen: function(){},
 			buttons : [ {

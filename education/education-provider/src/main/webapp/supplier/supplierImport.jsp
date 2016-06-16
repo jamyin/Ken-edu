@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<style>
+.panel-body {
+	font-size: 18px !important;
+}
+</style>
 <script type="text/javascript">
 	$(function() {
 		parent.$.messager.progress('close');
@@ -41,8 +46,8 @@
 		<form id="importSupplier" method="post" enctype="multipart/form-data">
 <table class="table table-hover table-condensed"  >
 		<tr>
-			<th>
-				导入供应商：
+			<th style="width: 120px">
+				<div style="width: 120px">导入供应商：</div>
 			</th>
 			<td>
 				<input type="file" name="file">

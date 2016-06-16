@@ -455,8 +455,8 @@ else
 	function importSupplier() {
 		parent.$.modalDialog({
 			title : '导入采购品',
-			width :300,
-			height : 150,
+			width :340,
+			height : 130,
 			href : '${pageContext.request.contextPath}/waresController/importPage',
 			onOpen: function(){},
 			buttons : [ {

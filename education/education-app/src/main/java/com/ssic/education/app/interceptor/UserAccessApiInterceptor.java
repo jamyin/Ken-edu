@@ -31,8 +31,14 @@ public class UserAccessApiInterceptor extends HandlerInterceptorAdapter {
 		Method method = handlerMethod.getMethod();
 		AccessRequired annotation = method.getAnnotation(AccessRequired.class);
 		if (annotation != null) {
-			String eduToken = request.getParameter("edu");
-			String proToken = request.getParameter("pro");
+			String eduHeader = request.getHeader("edutk");
+			String eduParam = request.getParameter("edutk");
+			String eduToken = StringUtils.isNotBlank(eduHeader) ? eduHeader : eduParam;
+
+			String proHeader = request.getHeader("edutk");
+			String proParam = request.getParameter("edutk");
+			String proToken = StringUtils.isNotBlank(proHeader) ? proHeader : proParam;
+
 			if (StringUtils.isNotBlank(eduToken)) {
 				AppEduUserDto eduAppUser = eduRedisdao.get(eduToken, AppEduUserDto.class);
 				if (eduAppUser != null) {
