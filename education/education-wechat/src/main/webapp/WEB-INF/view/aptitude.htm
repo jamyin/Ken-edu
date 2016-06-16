@@ -43,17 +43,22 @@
 				<h2>采购品供应商</h2>
 				<section class="tablecell">
 					<ul>
-						<#if suppliList ??>
+						<#if suppliList ?? && suppliList?size gt 0>
 							<#list suppliList as suppli>
+								<#if suppli_index lt 3>
 								<li class="break-line">
 									<a href="/wap/supplier/index.htm?companyType=2&relationId=${(suppli.id)!}"></a>
 									<label>${(suppli.supplierName)!}</label>
 									<span>单位地址：${(suppli.address)!}</span>
-								</li>		
+								</li>
+								</#if>
 							</#list>
 						</#if>
 		 			</ul>
-					<!-- <div class="load_more gr"><a href="/wap/supplier/more/${(supplierId)!}.htm">查看其它供应商</a></div> -->
+		 			<#if suppliList ?? && suppliList?size gt 3>
+		 				<div class="load_more gr"><a href="/wap/supplier/more/${(supplierId)!}.htm">查看其它供应商</a></div>
+		 			</#if>
+					
 				</section>
 			</section>
 		</#if>		
