@@ -267,8 +267,8 @@
 	function importSupplier() {
 		parent.$.modalDialog({
 			title : '导入配货',
-			width :300,
-			height : 150,
+			width :320,
+			height : 130,
 			href : '${pageContext.request.contextPath}/ledgerController/importPage',
 			onOpen: function(){},
 			buttons : [ {

@@ -46,8 +46,8 @@
 		<form id="importWare" method="post" enctype="multipart/form-data">
 <table class="table table-hover table-condensed"  >
 		<tr>
-			<th>
-				导入采购品：
+			<th style="width: 120px">
+				<div style="width: 120px">导入采购品：</div>
 			</th>
 			<td>
 				<input type="file" name="filename">
