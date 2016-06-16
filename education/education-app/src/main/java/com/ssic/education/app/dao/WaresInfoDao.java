@@ -63,7 +63,7 @@ public class WaresInfoDao extends MyBatisBaseDao<WaresInfoDto> {
 	 * @param page
 	 * @return
 	 * @exception	
-	 * @author Administrator
+	 * @author SeanYoung
 	 * @date 2016年5月29日 下午3:45:55
 	 */
 	public List<ProWares> findWarseInSchool(List<String> schoolWares, ProWares proWares, PageQuery page) {
