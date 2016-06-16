@@ -1,4 +1,4 @@
-$(function() {		
+$(function() {	
 	//失去焦点事件
 	$("#picCaptcha").on("blur",function(){
 		var picCaptcha = $("#picCaptcha").val();
@@ -100,7 +100,6 @@ $(function() {
 	$("#refreshValid").click(function(){
 		$(this).attr("src","/ajax/drawRandom.htm?"+Math.random());
 	});
-});
 });
 
 var countM = 90;
