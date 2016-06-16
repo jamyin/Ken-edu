@@ -49,11 +49,11 @@
                         <p> <span class="key">电话</span>：<span class="value">${(proSupplierdto.contactWay)!} </span></p>
 
                         <h2>证件编号</h2>
-                        <p> <span class="key">餐饮服务证号</span>：<span class="value"> ${(proSupplierdto.foodServiceCode)!}</span></p>
-                        <p> <span class="key">食品经营许可证</span>：<span class="value"> ${(proSupplierdto.foodBusinessCode)!}</span></p>
-                        <p> <span class="key">食品流通证号</span>：<span class="value"> ${(proSupplierdto.foodCirculationCode)!} </span></p>
-                        <p> <span class="key">食品生产证号</span>：<span class="value"> ${(proSupplierdto.foodProduceCode)!} </span></p>
-                        <p> <span class="key">工商执照号</span>：<span class="value"> ${(proSupplierdto.businessLicense)!} </span></p>
+                        <p> <span class="key">餐饮服务许可证号</span>：<span class="value"> ${(proSupplierdto.foodServiceCode)!}</span></p>
+                        <p> <span class="key">食品经营许可证号</span>：<span class="value"> ${(proSupplierdto.foodBusinessCode)!}</span></p>
+                        <p> <span class="key">食品流通许可证号</span>：<span class="value"> ${(proSupplierdto.foodCirculationCode)!} </span></p>
+                        <p> <span class="key">食品生产许可证号</span>：<span class="value"> ${(proSupplierdto.foodProduceCode)!} </span></p>
+                        <p> <span class="key">工商营业执照号</span>：<span class="value"> ${(proSupplierdto.businessLicense)!} </span></p>
 
                         <div class="subbt">
                             <a style="cursor: pointer;" >关联</a>
@@ -127,19 +127,19 @@
     							textAll += "<p> <span class=\"key\">电话</span>：<span class=\"value\"> "+result.contactWay+" </span></p>"
     							textAll += "<h2>证件编号</h2>"
     							if (result.foodServiceCode != null) {
-    								textAll += "<p> <span class=\"key\">餐饮服务证号</span>：<span class=\"value\">"+result.foodServiceCode+"</span></p>"
+    								textAll += "<p> <span class=\"key\">餐饮服务许可证号</span>：<span class=\"value\">"+result.foodServiceCode+"</span></p>"
     							}
     							if (result.foodCirculationCode != null) {
-    								textAll += "<p> <span class=\"key\">食品经营许可证</span>：<span class=\"value\"> "+result.foodBusinessCode+"</span></p>"
+    								textAll += "<p> <span class=\"key\">食品经营许可证号</span>：<span class=\"value\"> "+result.foodBusinessCode+"</span></p>"
     							}
     							if (result.foodCirculationCode != null) {
-    								textAll += " <p> <span class=\"key\">食品流通证号</span>：<span class=\"value\"> "+result.foodCirculationCode+" </span></p>"
+    								textAll += " <p> <span class=\"key\">食品流通许可证号</span>：<span class=\"value\"> "+result.foodCirculationCode+" </span></p>"
     							}
     							if (result.foodProduceCode != null) {
-    								textAll += "<p> <span class=\"key\">食品生产证号</span>：<span class=\"value\"> "+result.foodProduceCode+" </span></p>"
+    								textAll += "<p> <span class=\"key\">食品生产许可证号</span>：<span class=\"value\"> "+result.foodProduceCode+" </span></p>"
     							}
 								if (result.businessLicense != null) {
-									textAll += "<p> <span class=\"key\">工商执照号</span>：<span class=\"value\"> "+result.businessLicense+"</span></p>"
+									textAll += "<p> <span class=\"key\">工商营业执照号</span>：<span class=\"value\"> "+result.businessLicense+"</span></p>"
     							}
     							textAll += "<div class=\"subbt\">"
     							textAll += "<a style=\"cursor: pointer;\" >关联</a>"
