@@ -86,11 +86,11 @@
 				   <input id="id" name="id" type="hidden" value="${user.id}" />
 					<table class="table table-hover table-condensed">
 						<tr>
-							<th>*姓名</th>
+							<th><font color="red">*</font>姓名</th>
 							<td><input name="name" type="text" id="name"
 								placeholder="请输入姓名" class="easyui-validatebox span2"
 								data-options="required:true"  value="${user.name}"></td>
-							<th>*用户名</th>
+							<th><font color="red">*</font>用户名</th>
 							<td><input name="userAccount" type="text" placeholder="请输入用户名"  id="userAccount"  data-options="required:true"
 								class="easyui-validatebox span2"  value="${user.userAccount}"></td>
 						</tr>
@@ -105,7 +105,7 @@
 						</tr>
 						<c:if test="${user.isAdmin==0}">
 							<tr>
-							<th>*账户权限</th>
+							<th><font color="red">*</font>账户权限</th>
 								
 								<c:if test="${user.userType=='0'}">
 								<td>

@@ -49,7 +49,7 @@ text-align: right;
 		<form id="form" method="post">
 			<table class="table" style="width:400px;">
 				<tr>
-					<th>单位名称:</th>
+					<th><font color="red">*</font>单位名称:</th>
 					<td><input name="supplierName" type="text"
 						class="span2" placeholder="请输入单位名称" data-options="required:true"
 						value="${Corporate.supplierName }" ></td>
@@ -61,15 +61,15 @@ text-align: right;
 						data-options="required:true" value="${Corporate.address }"></td>
 				</tr>
 				<tr>
-					<th>联系人姓名:</th>
+					<th><font color="red">*</font>联系人姓名:</th>
 					<td><input name="corporation" type="text"
-						class="easyui-validatebox span2"
+						class="easyui-validatebox span2" data-options="required:true"
 						value="${Corporate.corporation }"></td>
 				</tr>
 				<tr>
-					<th>联系方式:</th>
+					<th><font color="red">*</font>联系方式:</th>
 					<td><input name="contactWay" type="text"
-						class="easyui-validatebox span2"
+						class="easyui-validatebox span2" data-options="required:true"
 						value="${Corporate.contactWay }"></td>
 				</tr>
 				<tr>
