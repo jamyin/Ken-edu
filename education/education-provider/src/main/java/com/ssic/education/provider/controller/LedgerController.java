@@ -211,8 +211,13 @@ public class LedgerController {
 			ledger.setUpdater(user.getId());
 			ledger.setMasterId(masterId);
 			// 查询采购品是否存在
-			if (ledger.getSpce() == null) {
+			if (StringUtils.isBlank(ledger.getSpce())) {
 				j.setMsg(ledger.getName() + "采购品规格不能为空");
+				j.setSuccess(false);
+				return j;
+			}
+			if(StringUtils.isBlank(ledger.getProductionName())){
+				j.setMsg(ledger.getName() + "生产企业不能为空");
 				j.setSuccess(false);
 				return j;
 			}
@@ -235,29 +240,25 @@ public class LedgerController {
 					}
 				}
 			}
-			if (ledger.getWaresId() == null) {
-				j.setMsg(ledger.getName() + "是错误的采购品");
-				j.setSuccess(false);
-				return j;
-			}
 			String num = ledger.getQuantity();
 			if (!num.matches("^[1-9][0-9]*(\\.)?[0-9]{0,2}$")) {
 				j.setMsg(ledger.getName() + "错误的采购数量");
 				j.setSuccess(false);
 				return j;
 			}
-			String spce = ledger.getSpce();
-			if (!spce.equals(warerDto.getSpec())) {
-				j.setMsg(ledger.getName() + "错误的的采购规格");
+			// 查询供应商
+			if (StringUtils.isBlank(ledger.getSupplierName())) {
+				j.setMsg(ledger.getName() + "采购品供应商不能为空");
 				j.setSuccess(false);
 				return j;
 			}
-			// 查询供应商
 			String supplierId = supplierService
 					.findSupplierIdBySourceId(ledger);
 			ledger.setSupplierId(supplierId);
 			if (ledger.getSupplierId() == null) {
-				ledger.setSupplierName(null);
+				j.setMsg(ledger.getName() + "采购品供应商不存在");
+				j.setSuccess(false);
+				return j;
 			}
 			ledger.setCreateTime(new Date());
 			ledger.setLastUpdateTime(ledger.getCreateTime());
@@ -405,6 +406,11 @@ public class LedgerController {
 				j.setSuccess(false);
 				return j;
 			}
+			if(StringUtils.isBlank(ledger.getProductionName())){
+				j.setMsg(ledger.getName() + "生产企业不能为空");
+				j.setSuccess(false);
+				return j;
+			}
 			ProWaresDto warerDto = waresService.findWaresBySupplierId(ledger);
 			if (warerDto == null) {
 				j.setMsg(ledger.getName() + "不存在的采购品");
@@ -412,11 +418,6 @@ public class LedgerController {
 				return j;
 			}
 			ledger.setWaresId(warerDto.getId());
-			if (ledger.getWaresId() == null) {
-				j.setMsg(ledger.getName() + "是错误的采购品");
-				j.setSuccess(false);
-				return j;
-			}
 			// 生产日期与进货日期
 			if (ledger.getProductionDate() != null) {
 				if (!ledgers.get(0).getActionDate()
@@ -436,11 +437,18 @@ public class LedgerController {
 				j.setSuccess(false);
 				return j;
 			}
+			if (StringUtils.isBlank(ledger.getSupplierName())) {
+				j.setMsg(ledger.getName() + "采购品供应商不能为空");
+				j.setSuccess(false);
+				return j;
+			}
 			String supplierId = supplierService
 					.findSupplierIdBySourceId(ledger);
 			ledger.setSupplierId(supplierId);
 			if (ledger.getSupplierId() == null) {
-				ledger.setSupplierName(null);
+				j.setMsg(ledger.getName() + "采购品供应商不存在");
+				j.setSuccess(false);
+				return j;
 			}
 			ledger.setCreator(user.getId());
 			ledger.setCreateTime(new Date());
@@ -689,18 +697,31 @@ public class LedgerController {
 								}
 							}
 						}
-					} else if (i == 7 && StringUtils.isNotBlank(value)) {
+					} else if (i == 7) {
 						// 供应商名称
+						if(StringUtils.isBlank(value)){
+							errorMsg = "第" + (rowNum + 1)
+									+ "行数据不正确，供应商名称不能为空。";
+							break;
+						}
 						ProSupplier ps = supplierService.getSupplierByName(
 								value, supplierId);
 
-						if (ps != null) {
-							dto.setSupplierId(ps.getId());
-							dto.setSupplierName(ps.getSupplierName());
+						if (ps == null) {
+							errorMsg = "第" + (rowNum + 1)
+									+ "行数据不正确，供应商名称不存在。";
+							break;
 						}
+						dto.setSupplierId(ps.getId());
+						dto.setSupplierName(ps.getSupplierName());
 					} else if (i == 8) {
 						// 生产单位
 						// 查找商品
+						if(StringUtils.isBlank(value)){
+							errorMsg = "第" + (rowNum + 1)
+									+ "行数据不正确，生产单位不能为空。";
+							break;
+						}
 						ProWares pw = waresService.findProWarsByNameSpecManu(
 								name, spec, value, supplierId);
 						if (pw == null) {

@@ -62,7 +62,7 @@
 								</div>
 							</div>
 							<div class="item col-xs-12">
-								<span class="intelligent-label f-fl"><b class="ftx04"></b>联系人：</span>
+								<span class="intelligent-label f-fl"><b class="ftx04"></b>法定代表人：</span>
 								<div class="f-fl item-ifo">
 									<input name="corporation" type="text" maxlength="20" class="txt03 f-r3" tabindex="2" data-valid="isUname" data-error="只能输入中文、字母、数字、下划线，且以中文或字母开头" id="adminNo" /> <span
 										class="ie8 icon-close close hide"></span> <label class="icon-sucessfill blank hide"></label> <label class="focus"><span>中文、字母、数字、下划线的组合，以中文或字母开头</span></label> <label
@@ -101,7 +101,7 @@
 								<div class="" id="committeeList" style="float: right; margin-left: 90px;"></div>
 							</div>
 						<div class="item col-xs-12" style="margin-top:80px;">
-	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>工商营业执照：</span>
+	                        <span class="intelligent-label f-fl"><b class="ftx04">*</b>工商营业执照：</span>
      						<div class="f-fl item-ifo">
 		     						<input type="text" placeholder="输入工商营业执照号" data-valid="between:6-20" class="txt03 f-r3" id="licenseNo1" onkeyup="enterLicenNO(this,1,4,'工商营业执照');"/>
      						</div>	                        
@@ -112,7 +112,7 @@
      						</div>
 	                    </div>
 						<div class="item col-xs-12">
-	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>餐饮服务许可证：</span>
+	                        <span class="intelligent-label f-fl"><b class="ftx04">*</b>餐饮服务许可证：</span>
      						<div class="f-fl item-ifo">
 		     						<input type="text" placeholder="输入餐饮服务许可证号" data-valid="between:6-20" class="txt03 f-r3" id="licenseNo2" onkeyup="enterLicenNO(this,2,0,'餐饮服务许可证');"/>
      						</div>
@@ -122,7 +122,7 @@
 		     					<wf id="license2"></wf>
      						</div>	                        
 	                    </div>
-						<div class="item col-xs-12">
+<!-- 						<div class="item col-xs-12">
 	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>食品流通许可证：</span>
      						<div class="f-fl item-ifo">
 		     						<input type="text" placeholder="输入食品流通许可证号" data-valid="between:6-20" class="txt03 f-r3" id="licenseNo3" onkeyup="enterLicenNO(this,3,2,'食品流通许可证');"/>
@@ -132,8 +132,8 @@
 	      						<input multiple type="file" id="id-input-file-3"/>
 		     					<wf id="license3"></wf>
      						</div>	                        
-	                    </div>
-						<div class="item col-xs-12">
+	                    </div> -->
+<!-- 						<div class="item col-xs-12">
 	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>食品生产许可证：</span>
      						<div class="f-fl item-ifo">
 		     						<input type="text" placeholder="输入食品生产许可证号" data-valid="between:6-20" class="txt03 f-r3" id="licenseNo4" onkeyup="enterLicenNO(this,4,3,'食品生产许可证');"/>
@@ -143,7 +143,7 @@
 	      						<input multiple type="file" id="id-input-file-4"/>
 		     					<wf id="license4"></wf>
      						</div>	                        
-	                    </div>	
+	                    </div>	 -->
 							<div class="item col-xs-12">
 								<span class="intelligent-label f-fl"><b class="ftx04">*</b>用户名：</span>
 								<div class="f-fl item-ifo">
@@ -230,7 +230,7 @@
  								
 								//图片判断 必须上传一个图片
 								var isFiles = 0;
-								for(var i=1;i<5;i++){
+								for(var i=1;i<3;i++){
 									var liceHtml = $("#license"+i).html();
 									if(liceHtml=="" || liceHtml ==null){
 										isFiles++;
@@ -246,8 +246,8 @@
 								        }
 									}
 								}
-								if(isFiles==4){
-									alert("必须上传一份证件");
+								if(isFiles != 0){
+									alert("证件需要全部上传");
 									return false;
 								}
 								//加载

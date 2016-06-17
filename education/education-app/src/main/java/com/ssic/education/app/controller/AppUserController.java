@@ -53,10 +53,9 @@ public class AppUserController extends BaseController {
 		int num = account.getBytes("utf-8").length;
 		if (num >= 4 && num <= 30) {
 			user.setPassword(password);
-			AppEduUserDto userdto = appUserService.eduLogin(user);
-			result.setData(userdto);
-			if (userdto != null) {
-				result = new Response<AppEduUserDto>(DataStatus.HTTP_SUCCESS, "登录成功！", userdto);
+			AppEduUserDto userDto = appUserService.eduLogin(user);
+			if (userDto != null) {
+				result = new Response<AppEduUserDto>(DataStatus.HTTP_SUCCESS, "登录成功！", userDto);
 			} else {
 				result = new Response<AppEduUserDto>(DataStatus.HTTP_FAILE, "登录失败，请检查用户名密码！");
 			}

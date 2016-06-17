@@ -122,7 +122,6 @@
 		<div data-options="region:'north',border:false"    title="<font  style='font-style: normal;font-weight: bolder;font-size:18px;'>查询条件</font>"  style="height: 80px; overflow: hidden;">
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">
-			
 					<tr>
 						<td style='padding-top: 10px;'>名称:
 						<input style='width: 215px;' placeholder="查询名称" class="span2" name="schoolName" />&nbsp;&nbsp;&nbsp;
@@ -139,7 +138,7 @@
 				</style>
 		</div>
 	</div>
-	<div id="toolbar" style="display: none;">
+	<div id="toolbar" style="display: none;padding: 0;border: 0;">
 	
 		
 	</div>
