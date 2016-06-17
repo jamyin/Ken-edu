@@ -126,17 +126,17 @@ public class DrawRandomController {
 			return result;
 		}		
 		
-		if(!CheckSendMsg(redisTemplate, mobilePhone, request)){
-			result.setStatus(DataStatus.HTTP_FAILE);
-			result.setMessage("发送短信过于频繁,请您稍后再试");
-			return result;			
-		}
-
-		if(!CheckSendMsg(redisTemplate, mobilePhone)){
-			result.setStatus(DataStatus.HTTP_FAILE);
-			result.setMessage("超过当天最多的发送次数");
-			return result;
-		}
+//		if(!CheckSendMsg(redisTemplate, mobilePhone, request)){
+//			result.setStatus(DataStatus.HTTP_FAILE);
+//			result.setMessage("发送短信过于频繁,请您稍后再试");
+//			return result;			
+//		}
+//
+//		if(!CheckSendMsg(redisTemplate, mobilePhone)){
+//			result.setStatus(DataStatus.HTTP_FAILE);
+//			result.setMessage("超过当天最多的发送次数");
+//			return result;
+//		}
 		
 		int randomNumber = (int) (Math.random() * 9000 + 1000);
 		String content = "温馨提示，为了保护您的隐私，请您在10分钟内输入" + randomNumber + "验证码。";// 短信内容
