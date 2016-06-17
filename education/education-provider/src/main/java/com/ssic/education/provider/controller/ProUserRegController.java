@@ -109,6 +109,7 @@ public class ProUserRegController extends BaseController{
 					}
 				}
 			}
+			supplierDto.setId(supplierId);
 			supplierDto.setReviewed(Byte.valueOf("0"));
 			supplierDto.setSupplierType(Integer.valueOf(1));//常量  0为不区分，1为成品菜供应商，2为原料供应商  
 			iSupplierService.saveOrUpdateSupplier(supplierDto);
