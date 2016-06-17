@@ -68,7 +68,8 @@
 		b.school_id schoolId,
 		a.address address,
 		a.contacts contacts,
-		b.supplier_id supplierId
+		b.supplier_id supplierId,
+		b.create_time
 		FROM
 		t_edu_school a,t_edu_school_supplier b
 		WHERE
@@ -79,6 +80,7 @@
 			test="ledgerAddress.schoolName!=null and  ledgerAddress.schoolName!=''">
 			AND a.school_name like "%"#{ledgerAddress.schoolName}"%"
 		</if>
+		ORDER BY b.create_time DESC
 		<if test="ph!=null and ph.rows!=0">
 			limit #{ph.beginRow},#{ph.rows}
 		</if>
