@@ -82,7 +82,7 @@ public class LedgerInfoDao {
 		criteria.andStatEqualTo(DataStatus.ENABLED);
 		if (null != page) {
 			if (StringUtils.isNotBlank(proLedgerMaster.getUserId())) {
-				example.setOrderByClause("FIELD(haul_status,1,2,0),action_date desc limit " + page.getStartNum() + "," + page.getPageSize());
+				example.setOrderByClause("FIELD(haul_status,1,0,2),action_date desc limit " + page.getStartNum() + "," + page.getPageSize());
 			}else
 			{
 				example.setOrderByClause("stat desc,action_date desc limit " + page.getStartNum() + "," + page.getPageSize());
