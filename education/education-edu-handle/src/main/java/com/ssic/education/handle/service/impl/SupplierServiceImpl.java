@@ -203,4 +203,10 @@ public class SupplierServiceImpl implements ISupplierService {
 		psrmapper.updateByPrimaryKeySelective(proSupplierReceiver);
 	}
 
+	@Override
+	public void insertSupplier(SupplierDto ps) {
+		ProSupplier proSupplier = BeanUtils.createBeanByTarget(ps,ProSupplier.class);
+		proSupplierDao.insertSelective(proSupplier);
+	}
+
 }

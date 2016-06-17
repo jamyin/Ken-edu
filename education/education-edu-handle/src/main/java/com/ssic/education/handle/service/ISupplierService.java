@@ -87,5 +87,7 @@ public interface ISupplierService {
 
 	void updataProSupplierCode(ProSupplierReceiver proSupplierReceiver);
 
+	void insertSupplier(SupplierDto supplierDto);
+
 
 }
