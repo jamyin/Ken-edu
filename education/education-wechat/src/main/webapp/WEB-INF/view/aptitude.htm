@@ -47,7 +47,7 @@
 							<#list suppliList as suppli>
 								<#if suppli_index lt 3>
 								<li class="break-line">
-									<a href="/wap/supplier/index.htm?companyType=2&relationId=${(suppli.id)!}"></a>
+									<a class="link" href="/wap/supplier/index.htm?companyType=2&relationId=${(suppli.id)!}"></a>
 									<label>${(suppli.supplierName)!}</label>
 									<span>单位地址：${(suppli.address)!}</span>
 								</li>
