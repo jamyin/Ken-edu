@@ -103,6 +103,10 @@
     					alert("标题不能为空");
     					return false;
     				}
+    				if (title.length>70) {
+    					alert("标题不能超过70个字符");
+    					return false;
+    				}
     				
     				var heath = document.getElementById("healthgive").checked;
     				var notice = document.getElementById("notice").checked;
