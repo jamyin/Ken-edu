@@ -40,6 +40,64 @@ public class AppSupplierController {
 	private ProWaresService proWaresService;
 
 	/**
+	 * findSupplierInfo：根据Id查询供应商详细信息
+	 * 包含证书信息 以及采购品供应商
+	 * @param supplier_id
+	 * @return Response<SupplierLicDto>
+	 * @author SeanYoung
+	 * @date 2016年5月23日 下午4:24:30
+	 */
+	@RequestMapping("/findSupplierInfo/{id}")
+	@AccessRequired
+	public @ResponseBody Response<SupplierLicDto> findSupplierInfo(@PathVariable("id") String id, @RequestParam(required = false) String schoolId) {
+		if (StringUtils.isEmpty(id)) {
+			return new Response<SupplierLicDto>(DataStatus.HTTP_FAILE, "查询Id为空");
+		}
+		SupplierLicDto supplier = StringUtils.isNotBlank(schoolId) ? supplierService.findSupplierInfo(id, schoolId) : supplierService.findSupplierInfo(id);
+		if (supplier != null) {
+			return new Response<SupplierLicDto>(DataStatus.HTTP_SUCCESS, "查询成功！", supplier);
+		}
+		return new Response<SupplierLicDto>(DataStatus.HTTP_SUCCESS, "未查到相关记录！");
+	}
+
+	/**
+	 * 
+	 * findSupplierInfo：供应商列表（根据团餐公司id查询）
+	 * @param supplier_id
+	 * @return
+	 * @exception	
+	 * @author SeanYoung
+	 * @date 2016年5月23日 下午4:24:30
+	 */
+	@RequestMapping("/findSupplierList/{id}")
+	@AccessRequired
+	public @ResponseBody Response<PageResult<MaterialSupplierDto>> findSupplierList(@PathVariable("id") String id, ProSupplier supplier, PageQuery query, @RequestParam(required = false) String schoolId) {
+		if (StringUtils.isEmpty(id)) {
+			return new Response<PageResult<MaterialSupplierDto>>(DataStatus.HTTP_FAILE, "查询Id为空");
+		}
+		PageResult<MaterialSupplierDto> PageResult = StringUtils.isNotBlank(schoolId) ? PageResult = this.supplierService.findListByIds(id, schoolId, supplier, query) : this.supplierService.findListByIds(id, supplier, query);
+		if (PageResult != null) {
+			return new Response<PageResult<MaterialSupplierDto>>(DataStatus.HTTP_SUCCESS, "查询成功！", PageResult);
+		}
+		return new Response<PageResult<MaterialSupplierDto>>(DataStatus.HTTP_SUCCESS, "未查到相关记录！");
+	}
+
+	/**
+	 * 根据ID查询学校食堂信息
+	 * @param id
+	 * @return Response<AppCanTeenDto>
+	 */
+	@RequestMapping("/findCantenn/{id}")
+	@AccessRequired
+	public @ResponseBody Response<AppCanTeenDto> findCantennById(@PathVariable("id") String id) {
+		AppCanTeenDto canTeenDto = this.supplierService.findCanteenByid(id);
+		if (canTeenDto != null) {
+			return new Response<AppCanTeenDto>(DataStatus.HTTP_SUCCESS, "查询成功！", canTeenDto);
+		}
+		return new Response<AppCanTeenDto>(DataStatus.HTTP_SUCCESS, "未查到相关记录！");
+	}
+
+	/**
 	 * @Title: findSupplierList
 	 * @Description: 查询所有供应商-带分页
 	 * @author Ken Yin  
@@ -48,6 +106,7 @@ public class AppSupplierController {
 	 */
 	@RequestMapping("/findSupplierList")
 	@AccessRequired
+	@Deprecated
 	public @ResponseBody Response<PageResult<ProSupplierDto>> findSupplierList(ProSupplierDto proSupplierDto, PageQuery query) {
 		Response<PageResult<ProSupplierDto>> result = new Response<PageResult<ProSupplierDto>>();
 		PageResult<ProSupplierDto> supplierList = supplierService.findSupplierList(proSupplierDto, query);
@@ -72,6 +131,7 @@ public class AppSupplierController {
 	 */
 	@RequestMapping("/findSupplierDetail/{id}")
 	@AccessRequired
+	@Deprecated
 	public @ResponseBody Response<ProSupplierDto> findSupplierDetail(@PathVariable("id") String id) {
 		Response<ProSupplierDto> result = new Response<ProSupplierDto>();
 		if (StringUtils.isEmpty(id)) {
@@ -100,6 +160,7 @@ public class AppSupplierController {
 	  */
 	@RequestMapping("/findSupplierWares")
 	@AccessRequired
+	@Deprecated
 	public @ResponseBody Response<PageResult<ProWaresDto>> findSupplierWares(ProWaresDto dto, PageQuery query) {
 		Response<PageResult<ProWaresDto>> result = new Response<PageResult<ProWaresDto>>();
 		if (dto.getId() == null) {
@@ -119,87 +180,4 @@ public class AppSupplierController {
 		return result;
 	}
 
-	/**
-	 * 
-	 * findSupplierInfo：根据Id查询供应商详细信息
-	 * 包含证书信息 以及采购品供应商
-	 * @param supplier_id
-	 * @return
-	 * @exception	
-	 * @author SeanYoung
-	 * @date 2016年5月23日 下午4:24:30
-	 */
-	@RequestMapping("/findSupplierInfo/{id}")
-	@AccessRequired
-	public @ResponseBody Response<SupplierLicDto> findSupplierInfo(@PathVariable("id") String id, @RequestParam(required = false) String schoolId) {
-		Response<SupplierLicDto> result = new Response<SupplierLicDto>();
-		if (StringUtils.isEmpty(id)) {
-			result.setStatus(DataStatus.HTTP_FAILE);
-			result.setMessage("查询Id为空");
-			return result;
-		}
-		SupplierLicDto supplier = new SupplierLicDto();
-		if (StringUtils.isNotBlank(schoolId)) {
-			supplier = supplierService.findSupplierInfo(id, schoolId);
-		} else {
-			supplier = supplierService.findSupplierInfo(id);
-		}
-		if (supplier != null) {
-			result.setStatus(DataStatus.HTTP_SUCCESS);
-			result.setMessage("查询成功！");
-			result.setData(supplier);
-			return result;
-		}
-		result.setStatus(DataStatus.HTTP_SUCCESS);
-		result.setMessage("未查到相关记录！");
-		return result;
-	}
-
-	/**
-	 * 
-	 * findSupplierInfo：供应商列表（根据团餐公司id查询）
-	 * @param supplier_id
-	 * @return
-	 * @exception	
-	 * @author SeanYoung
-	 * @date 2016年5月23日 下午4:24:30
-	 */
-	@RequestMapping("/findSupplierList/{id}")
-	@AccessRequired
-	public @ResponseBody Response<PageResult<MaterialSupplierDto>> findSupplierList(@PathVariable("id") String id, ProSupplier supplier, PageQuery query, @RequestParam(required = false) String schoolId) {
-		Response<PageResult<MaterialSupplierDto>> result = new Response<PageResult<MaterialSupplierDto>>();
-		if (StringUtils.isEmpty(id)) {
-			result.setStatus(DataStatus.HTTP_FAILE);
-			result.setMessage("查询Id为空");
-			return result;
-		}
-		PageResult<MaterialSupplierDto> PageResult = new PageResult<MaterialSupplierDto>();
-		if (StringUtils.isNotBlank(schoolId)) {
-			PageResult = this.supplierService.findListByIds(id,schoolId, supplier, query);
-		} else {
-			PageResult = this.supplierService.findListByIds(id, supplier, query);
-		}
-		if (PageResult != null) {
-			result.setStatus(DataStatus.HTTP_SUCCESS);
-			result.setMessage("查询成功！");
-			result.setData(PageResult);
-			return result;
-		}
-		result.setStatus(DataStatus.HTTP_SUCCESS);
-		result.setMessage("未查到相关记录！");
-		return result;
-	}
-
-	/**
-	 * 根据ID查询食堂信息
-	 * @param id
-	 * @return
-	 */
-	@RequestMapping("/findCantenn/{id}")
-	@AccessRequired
-	public @ResponseBody Response<AppCanTeenDto> findCantennById(@PathVariable("id") String id) {
-		Response<AppCanTeenDto> result = new Response<AppCanTeenDto>();
-		result.setData(this.supplierService.findCanteenByid(id));
-		return result;
-	}
 }
