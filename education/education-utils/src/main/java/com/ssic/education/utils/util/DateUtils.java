@@ -436,12 +436,17 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils
     }
     
     public static String dateToTimestamp(Date date) throws ParseException {
-        String re_time = null;
-        SimpleDateFormat sdf = new SimpleDateFormat(YMD_DASH_DATE_TIME);
-        long l = date.getTime();
-		String str = String.valueOf(l);
-		re_time = str.substring(0, 10);
-        return re_time;
+    	if(date!=null){
+            String re_time = null;
+            SimpleDateFormat sdf = new SimpleDateFormat(YMD_DASH_DATE_TIME);
+            long l = date.getTime();
+    		String str = String.valueOf(l);
+    		re_time = str.substring(0, 10);
+            return re_time;    		
+    	}else{
+    		return "";
+    	}
+
     }
 
 }
