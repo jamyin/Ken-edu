@@ -34,13 +34,13 @@
 			<li><a href="###"></a><label>法定代表/负责人/业主证件</label><span>2012310115320026</span></li>
  -->		</ul>
 	</section>
-	<!-- 当委托经营单位和经营单位都有数据的时候，采购品供应商只显示在委托经营单位下 -->
+	<!-- 当委托学校食堂和学校食堂都有数据的时候，原料供货者只显示在委托学校食堂下 -->
 	<#if companyType==1 && supplierId ??>
 	
 	<#else>
 		<#if suppliList?? && (suppliList?size>0)>
 			<section class="aptitude_c">
-				<h2>采购品供应商</h2>
+				<h2>原料供货者</h2>
 				<section class="tablecell">
 					<ul>
 						<#if suppliList ?? && suppliList?size gt 0>

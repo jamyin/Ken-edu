@@ -21,7 +21,7 @@
 							<#if result.supplierDto ??>
 								${(result.supplierDto.supplierName)!}
 							</#if>
-							<br>采购品：
+							<br>原料：
 							<#if result.getResltList() ??>
 								<#list result.getResltList()  as data>
 									<#if (data_index+1) < result.getResltList()?size>
@@ -44,8 +44,8 @@
 							<i class="end">已配送</i>
 						</#if>												
 					</li>
-<!-- 					<li><a href="dispatching_c.html"></a><p>配送号：20160506001<br>配送日期：2016-05-06</p><p class="oth">出发地：上海天坊食品制造有限公司<br>采购品：黑猪颈背肉、冬瓜</p><i class="end">已配送</i></li>
-					<li><a href="dispatching_c.html"></a><p>配送号：20160506001<br>配送日期：2016-05-06</p><p class="oth">出发地：上海天坊食品制造有限公司<br>采购品：黑猪颈背肉、冬瓜</p><i class="notstart">未配送</i></li>					
+<!-- 					<li><a href="dispatching_c.html"></a><p>配送号：20160506001<br>配送日期：2016-05-06</p><p class="oth">出发地：上海天坊食品制造有限公司<br>原料：黑猪颈背肉、冬瓜</p><i class="end">已配送</i></li>
+					<li><a href="dispatching_c.html"></a><p>配送号：20160506001<br>配送日期：2016-05-06</p><p class="oth">出发地：上海天坊食品制造有限公司<br>原料：黑猪颈背肉、冬瓜</p><i class="notstart">未配送</i></li>					
  -->
  				</#list>
 			</#if>
