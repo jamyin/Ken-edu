@@ -112,7 +112,7 @@ public class ProLedgerController extends BaseController{
 		if(resultDto.getStartTime()!=null){
 			startTime = DateUtils.dateToTimestamp(resultDto.getStartTime());	
 		}
-		if(resultDto.getStartTime()!=null){
+		if(resultDto.getEndTime()!=null){
 			endTime = DateUtils.dateToTimestamp(resultDto.getEndTime());//String.valueOf(resultDto.getEndTime().getTime());	
 		}			
 //		String reqURL = "ak=YN0mfG1VM2jrGV5jBB7RD6lKKmrDZA43&service_id=117192&entity_name=8438B07A-2B4C-49B7-8523-5A177081F602&start_time=1463695529&end_time=1463767529";

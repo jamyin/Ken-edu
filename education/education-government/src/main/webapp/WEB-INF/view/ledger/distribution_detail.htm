@@ -45,7 +45,7 @@
         <p class="driver"><span>${(ledgerDto.driverName)!}</span></p>
         <p>出发点：<span><a style="color: blue;" href="/pro/supplier/detail.htm?id=${(dto.supplierId)!}&source=1">${(dto.supplierName)!}</a></span></p>
         <p>出发时间：<span><#if ledgerDto.startTime??>${ledgerDto.startTime?string("yyyy-MM-dd HH:mm:ss")}</#if></span></p>
-        <p>货物：<span><#if ledgerDtos??><#list ledgerDtos as ledgerDtos>${(ledgerDtos.name)!}&nbsp;</#list>
+        <p>原料：<span><#if ledgerDtos??><#list ledgerDtos as ledgerDtos>${(ledgerDtos.name)!}&nbsp;</#list>
         </#if></span></p>
         <p>目的地：<span>${(ledgerDto.receiverName)!}</span></p>
         <p>到达时间：<span><#if ledgerDto.endTime??>${ledgerDto.endTime?string("yyyy-MM-dd HH:mm:ss")}</#if></span></p>
