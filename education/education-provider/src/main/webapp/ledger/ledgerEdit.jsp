@@ -86,17 +86,17 @@
 		<form id="form" method="post" >
 			<table class="table table-hover table-condensed">
 				<tr>
-					<th style='width:65px;'>配货日期：</th>
+					<th style='width:65px;'><font color="red">*</font>配货日期：</th>
 					<td style='width:104px;'><input name="ledger[0].actionDate" type="text"
 						style='width:104px;cursor:pointer;' class="span2" placeholder="点击选择日期" data-options="required:true"
 						onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})"
 						readonly="readonly"
 						value="<fmt:formatDate value="${LedgerList[0].actionDate}" pattern="yyyy-MM-dd"/>"></td>
-					<th style='width:65px;'>配货点：</th>
+					<th style='width:65px;'><font color="red">*</font>配货点：</th>
 					<td style='width:104px;'><input name="ledger[0].receiverName" type="text"
 						style='width:104px;' placeholder="请输入配货点" class="easyui-validatebox span2"
 						data-options="required:true" value="${LedgerList[0].receiverName}"></td>
-					<th style='width:65px;'>配送号：</th>
+					<th style='width:65px;'><font color="red">*</font>配送号：</th>
 					<td style='width:104px;'><input name="ledger[0].wareBatchNo" type="text"
 						style='width:104px;' class="easyui-validatebox span2" readonly="readonly"
 						value="${LedgerList[0].wareBatchNo}"></td>
@@ -150,11 +150,11 @@
 			</table>
 			<table id="ledgers" class="table table-hover table-condensed">
 					<tr>
-						<th style='width:114px;'>采购品：</th>
-						<th style='width:114px;'>数量：</th>
-						<th style='width:114px;'>规格：</th>
-						<th style='width:114px;'>采购品供应商：</th>
-						<th style='width:114px;'>生产企业：</th>
+						<th style='width:114px;'><font color="red">*</font>采购品：</th>
+						<th style='width:114px;'><font color="red">*</font>数量：</th>
+						<th style='width:114px;'><font color="red">*</font>规格：</th>
+						<th style='width:114px;'><font color="red">*</font>采购品供应商：</th>
+						<th style='width:114px;'><font color="red">*</font>生产企业：</th>
 						<th style='width:114px;'>生产日期：</th>
 						<th ></th>
 					</tr>

@@ -170,6 +170,11 @@ public class WaresController extends BaseController {
 			j.setMsg("商品类型不能为空");
 			return j;
 		}
+		if (pro.getManufacturer() == null || pro.getManufacturer().equals("")) {
+			j.setSuccess(false);
+			j.setMsg("生产企业不能为空");
+			return j;
+		}
 		DataSourceHolderUtil.setToMaster();
 		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
 				ConfigUtil.SESSIONINFONAME);
@@ -273,12 +278,41 @@ public class WaresController extends BaseController {
 		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
 				ConfigUtil.SESSIONINFONAME);
 		pro.setSupplierId(info.getSupplierId());
+		if (pro.getWaresName() == null || pro.getWaresName().equals("")) {
+			json.setMsg("商品名称不能为空");
+			json.setSuccess(false);
+			return json;
+		}
+		
+		if (pro.getSpec() == null || pro.getSpec().equals("")) {
+			json.setSuccess(false);
+			json.setMsg("商品规格不能为空");
+			return json;
+		}
+		
+		if (pro.getWaresType() == null || pro.getWaresType().equals("")) {
+			json.setSuccess(false);
+			json.setMsg("商品类型不能为空");
+			return json;
+		}
+		if (pro.getManufacturer() == null || pro.getManufacturer().equals("")) {
+			json.setSuccess(false);
+			json.setMsg("生产企业不能为空");
+			return json;
+		}
+		ProWares specManu = waresService.findProWarsByNameSpecManu(
+				pro.getWaresName(), pro.getSpec(), pro.getManufacturer(),
+				pro.getSupplierId());
+		if(specManu!=null&&!specManu.getId().equals(pro.getId())){
+			json.setMsg("修改商品失败，数据重复");
+			json.setSuccess(false);
+			return json;
+		}
 		pro.setStat(1);
 
 		pro.setUpdater(info.getId());
 		ProWares proWares = new ProWares();
 		BeanUtils.copyProperties(pro, proWares);
-
 		proWares.setCreateTime(new Date());
 		proWares.setLastUpdateTime(new Date());
 
@@ -588,9 +622,11 @@ public class WaresController extends BaseController {
 						}
 					} else if (i == 3) {
 						// 生产企业
-						if (StringUtils.isNotBlank(value)) {
-							dto.setManufacturer(value);
+						if (StringUtils.isBlank(value)) {
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，生产企业不能为空。";
+							break;
 						}
+						dto.setManufacturer(value);
 						// 检查这个商品是否存在，如果存在不导入
 						ProWares pw = waresService.findProWarsByNameSpecManu(
 								dto.getWaresName(), dto.getSpec(),

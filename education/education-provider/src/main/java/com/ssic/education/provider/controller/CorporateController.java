@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSONArray;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -78,6 +79,21 @@ public class CorporateController {
 		TImsUsersDto user = (TImsUsersDto) session.getAttribute("user");
 		if (user == null) {
 			return null;
+		}
+		if(StringUtils.isBlank(psd.getSupplierName())){
+			j.setMsg("单位名称不能为空");
+			j.setSuccess(false);
+			return j;
+		}
+		if(StringUtils.isBlank(psd.getCorporation())){
+			j.setMsg("联系人姓名不能为空");
+			j.setSuccess(false);
+			return j;
+		}
+		if(StringUtils.isBlank(psd.getContactWay())){
+			j.setMsg("联系方式不能为空");
+			j.setSuccess(false);
+			return j;
 		}
 		psd.setLastUpdateTime(new Date());
 		psd.setUpdater(user.getId());

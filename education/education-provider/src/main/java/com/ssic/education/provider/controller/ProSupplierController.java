@@ -151,6 +151,16 @@ public class ProSupplierController extends BaseController {
 			j.setSuccess(false);
 			return j;
 		}
+		if (ps.getCorporation() == null || ps.getCorporation().equals("")) {
+			j.setMsg("联系人不能为空");
+			j.setSuccess(false);
+			return j;
+		}
+		if (ps.getContactWay() == null || ps.getContactWay().equals("")) {
+			j.setMsg("联系方式不能为空");
+			j.setSuccess(false);
+			return j;
+		}
 		SupplierDto p = supplierService.findProSupplierById(ps.getId());
 		if (p == null) {
 			j.setMsg("不存在的供应商");
@@ -246,6 +256,16 @@ public class ProSupplierController extends BaseController {
 		}
 		if (ps.getAddress() == null || ps.getAddress().equals("")) {
 			j.setMsg("供应商地址不能为空");
+			j.setSuccess(false);
+			return j;
+		}
+		if (ps.getCorporation() == null || ps.getCorporation().equals("")) {
+			j.setMsg("联系人不能为空");
+			j.setSuccess(false);
+			return j;
+		}
+		if (ps.getContactWay() == null || ps.getContactWay().equals("")) {
+			j.setMsg("联系方式不能为空");
 			j.setSuccess(false);
 			return j;
 		}
@@ -769,11 +789,19 @@ public class ProSupplierController extends BaseController {
 						}
 						psr = new ProSupplierReceiver();
 						psr.setSupplierCode(value);
-					} else if (i == 8 && !StringUtils.isBlank(value)) {
+					} else if (i == 8 ) {
 						// 联系人
+						if(StringUtils.isBlank(value)){
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，联系人不能为空。";
+							break;
+						}
 						supplier.setCorporation(value);
-					} else if (i == 9 && !StringUtils.isBlank(value)) {
+					} else if (i == 9) {
 						// 联系方式
+						if(StringUtils.isBlank(value)){
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，电话不能为空。";
+							break;
+						}
 						supplier.setContactWay(value);
 					}
 				}
