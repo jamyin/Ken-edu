@@ -22,20 +22,24 @@
         <li class="head">
           <span class="ct1">原料</span>
           <span class="ct2">数量</span>
+          <span class="ct3">数量单位</span>
           <span class="ct3">规格</span>
+          <span class="ct3">保质期</span>
           <span class="ct4">生产日期</span>
-          <span class="ct5">生产企业</span>
-          <span class="ct6">原料供货商</span>
+          <span class="ct3">生产企业</span>
+          <span class="ct4">供货商</span>
         </li>
         <#if ledgerDtos??>
         <#list ledgerDtos as ledgerDtos>
         	<li>
 	          <span class="ct1"><a style="color: #60ac62;" href="/pro/wares/details.htm?id=${(ledgerDtos.waresId)!}">${(ledgerDtos.name)!}</a></span>
 	          <span class="ct2">${(ledgerDtos.quantity)!}</span>
+	          <span class="ct3">${(ledgerDtos.amountUnit)!}</span>
 	          <span class="ct3">${(ledgerDtos.spce)!}</span>
+	          <span class="ct3">${(ledgerDtos.shelfLife)!}${(ledgerDtos.unit)!}</span>
 	          <span class="ct4"><#if ledgerDtos.productionDate??>${ledgerDtos.productionDate?string("yyyy-MM-dd")}</#if></span>
-	          <span class="ct5">${(ledgerDtos.productionName)!}</span>
-	          <span class="ct6"><a href="/pro/supplier/detail.htm?id=${(ledgerDtos.supplierId)!}&source=1">${(ledgerDtos.supplierName)!}</a></span>
+	          <span class="ct3">${(ledgerDtos.productionName)!}</span>
+	          <span class="ct4"><a href="/pro/supplier/detail.htm?id=${(ledgerDtos.supplierId)!}&source=1">${(ledgerDtos.supplierName)!}</a></span>
 	        </li>
         </#list>
         </#if>
