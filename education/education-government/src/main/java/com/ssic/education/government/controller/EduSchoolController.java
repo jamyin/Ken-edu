@@ -279,7 +279,7 @@ public class EduSchoolController extends BaseController{
 		if (dto.getReviewed() == DataStatus.ENABLED) {//区教委审批通过单位
 			mv.setViewName("/district/dis_edu_checked_list");
 		}
-		if (dto.getReviewed() == DataStatus.EVA_TWO) {//区教委审批通过单位
+		if (dto.getReviewed() == DataStatus.EVA_TWO) {//区教委审批不通过单位
 			mv.setViewName("/district/dis_edu_not_checked_list");
 		}
 		return mv;

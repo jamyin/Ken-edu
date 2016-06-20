@@ -136,7 +136,7 @@ public class AppLedgerDao {
 		ledgerMaster.setHaulStatus(Integer.valueOf(status));
 		if (status.equals("1")) {
 			ledgerMaster.setStartTime(new Date());
-		}
+		} 
 		if (status.equals("2")) {
 			ledgerMaster.setEndTime(new Date());
 		}
