@@ -47,7 +47,7 @@ import com.ssic.education.utils.util.StringUtils;
  * <p>修改备注：</p>
  */
 @Repository
-public class SupplierInfoDao {
+public class AppSupplierDao {
 	@Getter
 	@Autowired
 	private SupplierInfoExMapper mapper;

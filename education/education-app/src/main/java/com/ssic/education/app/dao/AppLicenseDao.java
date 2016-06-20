@@ -21,7 +21,7 @@ import com.ssic.education.handle.pojo.ProLicense;
  * <p>修改备注：</p>
  */
 @Repository
-public class LicDao {
+public class AppLicenseDao {
 	@Getter
 	@Autowired
 	private LicExMapper licExMapper;

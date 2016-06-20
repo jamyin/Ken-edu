@@ -21,7 +21,7 @@ import com.ssic.education.utils.model.PageResult;
  * <p>修改时间：2016年5月16日 上午11:21:41</p>
  * <p>修改备注：</p>
  */
-public interface IWaresInfoService {
+public interface IAppWaresService {
 	//根据供应商ID查询商品列表
 	List<WaresInfoDto> getWaresBySupplierId(String SupplierId);
 

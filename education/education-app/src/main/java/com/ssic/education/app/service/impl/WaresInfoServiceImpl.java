@@ -8,15 +8,15 @@ import org.springframework.stereotype.Service;
 
 import com.ssic.education.app.constants.ProductClass;
 import com.ssic.education.app.dao.AppSchoolWaresDao;
-import com.ssic.education.app.dao.LedgerInfoDao;
-import com.ssic.education.app.dao.LicDao;
-import com.ssic.education.app.dao.SupplierInfoDao;
-import com.ssic.education.app.dao.WaresInfoDao;
+import com.ssic.education.app.dao.AppLedgerDao;
+import com.ssic.education.app.dao.AppLicenseDao;
+import com.ssic.education.app.dao.AppSupplierDao;
+import com.ssic.education.app.dao.AppWaresDao;
 import com.ssic.education.app.dto.AppLicenseDto;
 import com.ssic.education.app.dto.WaresInfoDto;
 import com.ssic.education.app.dto.WaresListDto;
 import com.ssic.education.app.dto.WaresRelatedDto;
-import com.ssic.education.app.service.IWaresInfoService;
+import com.ssic.education.app.service.IAppWaresService;
 import com.ssic.education.app.util.JsonUtil;
 import com.ssic.education.handle.pojo.ProLicense;
 import com.ssic.education.handle.pojo.ProWares;
@@ -39,27 +39,27 @@ import com.ssic.education.utils.util.StringUtils;
  * <p>修改备注：</p>
  */
 @Service
-public class WaresInfoServiceImpl implements IWaresInfoService {
+public class WaresInfoServiceImpl implements IAppWaresService {
 
 	@Autowired
-	private WaresInfoDao waresInfoDao;
+	private AppWaresDao waresInfoDao;
 
 	@Autowired
-	private LicDao licDao;
+	private AppLicenseDao licDao;
 
 	@Autowired
-	private LedgerInfoDao ledgerDao;
+	private AppLedgerDao ledgerDao;
 
 	@Autowired
 	private AppSchoolWaresDao schoolWaresDao;
 
 	@Autowired
-	private SupplierInfoDao supplierInfoDto;
+	private AppSupplierDao supplierInfoDto;
 
 	/**
 	 * 根据供应商ID查询商品列表
 	 * (non-Javadoc)   
-	 * @see com.ssic.education.app.service.IWaresInfoService#getWaresBySupplierId(java.lang.String)
+	 * @see com.ssic.education.app.service.IAppWaresService#getWaresBySupplierId(java.lang.String)
 	 */
 	@Override
 	public List<WaresInfoDto> getWaresBySupplierId(String supplierId) {
@@ -70,7 +70,7 @@ public class WaresInfoServiceImpl implements IWaresInfoService {
 	 * 根据供应商ID查询商品列表 带分页
 	* (non-Javadoc)   
 	 * @throws Exception 
-	* @see com.ssic.education.app.service.IWaresInfoService#getWaresBySupplierId(java.lang.String, com.ssic.education.utils.model.PageQuery)   
+	* @see com.ssic.education.app.service.IAppWaresService#getWaresBySupplierId(java.lang.String, com.ssic.education.utils.model.PageQuery)   
 	*/
 	@Override
 	public PageResult<WaresListDto> getWaresBySchoolId(String schoolId, String json) throws Exception {
@@ -97,7 +97,7 @@ public class WaresInfoServiceImpl implements IWaresInfoService {
 	/** 
 	 * 根据供应商ID查询商品列表 带分页
 	 * @throws Exception 
-	* @see com.ssic.education.app.service.IWaresInfoService#getWaresBySupplierId(java.lang.String, com.ssic.education.utils.model.PageQuery)   
+	* @see com.ssic.education.app.service.IAppWaresService#getWaresBySupplierId(java.lang.String, com.ssic.education.utils.model.PageQuery)   
 	*/
 	@Override
 	public PageResult<WaresListDto> getWaresBySchoolId(String schoolId, ProWares prowares, PageQuery query) {
