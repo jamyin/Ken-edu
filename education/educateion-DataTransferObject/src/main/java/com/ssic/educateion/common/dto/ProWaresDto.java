@@ -86,10 +86,6 @@ public class ProWaresDto implements Serializable {
 	@Setter
 	private String waresTypeName;
 	
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'master' of http://192.168.1.231/group-one/education.git
 	@Getter
 	@Setter
 	 private String updater;
