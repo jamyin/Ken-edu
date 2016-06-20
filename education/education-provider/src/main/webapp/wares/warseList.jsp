@@ -89,9 +89,9 @@ else
 					return "";
 							}
 				}
-			}, {
-				field : 'spec',
-				title : '<font  style="font-style: normal; font-size:18px;">规格</font>',
+			},{
+				field : 'amountUnit',
+				title : '<font  style="font-style: normal; font-size:18px;">数量单位</font>',
 				width : 50,
 				formatter : function(value, row, index) {
 					if(value!=null){
@@ -101,9 +101,9 @@ else
 					return "";
 							}
 				}
-			},{
-				field : 'amountUnit',
-				title : '<font  style="font-style: normal; font-size:18px;">数量单位</font>',
+			}, {
+				field : 'spec',
+				title : '<font  style="font-style: normal; font-size:18px;">规格</font>',
 				width : 50,
 				formatter : function(value, row, index) {
 					if(value!=null){

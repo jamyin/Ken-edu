@@ -99,9 +99,20 @@
 							<td><input name="waresName" type="text" id="waresName"
 								placeholder="请输入商品名称" class="easyui-validatebox span2"
 								data-options="required:true"  value="${wdto.waresName}"></td>
-							<th><font color="red">*</font>规格</th>
+									<th>数量单位</th>
+							<td><input name="amountUnit" type="text" placeholder="请输入数量单位" id="amountUnit"
+								class="easyui-validatebox span2" value="${wdto.amountUnit}"  data-options="required:true" ></td>
+							
+						</tr>
+						<tr>
+						<th><font color="red">*</font>规格</th>
 							<td><input name="spec" type="text" placeholder="请输入规格"  id="spec"
-								class="easyui-validatebox span2"  value="${wdto.spec}"  data-options="required:true" ></td>
+								class="easyui-validatebox span2"  value="${wdto.spec}"  ></td>
+							<th>生产企业</th>
+							<td><input name="manufacturer" type="text" placeholder="请输入生产企业" id="manufacturer"
+								class="easyui-validatebox span2" value="${wdto.manufacturer}"></td>
+							
+							
 						</tr>
 						<tr>
 							<th><font color="red">*</font>保质期</th>
@@ -137,15 +148,7 @@
 							        							  
 							</select></td>
 						</tr>
-						<tr>
-							<th>生产企业</th>
-							<td><input name="manufacturer" type="text" placeholder="请输入生产企业" id="manufacturer"
-								class="easyui-validatebox span2" value="${wdto.manufacturer}"></td>
-								<th>数量单位</th>
-							<td><input name="amountUnit" type="text" placeholder="请输入数量单位" id="amountUnit"
-								class="easyui-validatebox span2" value="${wdto.amountUnit}"></td>
-							
-						</tr>
+						
 					
 						<tr>
 							<th>产地</th>
