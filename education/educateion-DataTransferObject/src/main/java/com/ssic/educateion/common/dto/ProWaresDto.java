@@ -37,7 +37,7 @@ public class ProWaresDto implements Serializable {
 	private String unit;
 	@Getter
 	@Setter
-	private String amountUnit;
+	 private String amountUnit;
 	@Getter
 	@Setter
 	private String supplierId;
@@ -86,6 +86,7 @@ public class ProWaresDto implements Serializable {
 	@Setter
 	private String waresTypeName;
 	
+
 	@Getter
 	@Setter
 	 private String updater;
