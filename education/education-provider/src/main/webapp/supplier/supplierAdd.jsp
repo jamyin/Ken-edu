@@ -54,33 +54,17 @@
 					<tr>					
 					<th><font color="red">*</font>供应商名称</th>
 					<td><input name="supplierName" type="text"  class="easyui-validatebox span2" data-options="required:true" ></td>
-				
-						<th>供应商编码</th>
-						<td><input name="supplierCode" type="text" class="easyui-validatebox span2"  ></td>
+				<th><font color="red">*</font>供应商地址</th>
+					<td><input name="address" type="text" class="easyui-validatebox span2" data-options="required:true"   ></td>
 			
 				<tr>
-					<th><font color="red">*</font>供应商地址</th>
-					<td><input name="address" type="text" class="easyui-validatebox span2" data-options="required:true"   ></td>
+					
 					<th><font color="red">*</font>联系人</th>
 						<td><input name="corporation" type="text"  class="easyui-validatebox span2"  ></td>		
-				</tr>
-				<tr>
-					<th><font color="red">*</font>联系方式</th>
+						<th><font color="red">*</font>联系方式</th>
 						<td><input name="contactWay" type="text"  class="easyui-validatebox span2"  ></td>
-				<th>工商执照号</th>
-					<td><input name="businessLicense" type="text"  class="easyui-validatebox span2"  ></td>
-						
 				</tr>
-			
-				
-		
-				<tr>
-				<th>餐饮服务证号</th>
-						<td><input name="foodServiceCode" type="text" class="easyui-validatebox span2"  ></td>
-				
-					<th>食品经营许可证号</th>
-						<td><input name="foodBusinessCode" type="text" class="easyui-validatebox span2"  ></td>
-					</tr>
+
 				<tr>
 					<th>食品流通证号</th>
 						<td><input name="foodCirculationCode" type="text" class="easyui-validatebox span2"   ></td>
