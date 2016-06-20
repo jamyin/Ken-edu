@@ -30,15 +30,10 @@ public class WaresDao{
 			waresDto.setWaresName("%"+waresDto.getWaresName()+"%");			
 			
 		}
-<<<<<<< HEAD
-		
-		
-=======
 //		if(waresDto.getCustomCode()!=null && waresDto.getCustomCode()!=""){
 //			waresDto.setCustomCode("%"+waresDto.getCustomCode()+"%");
 //		}
 //		
->>>>>>> branch 'master' of http://192.168.1.231/group-one/education.git
 		List<ProWaresDto> list = exmapper.findWares(waresDto,ph);
 		return list;
 	}
