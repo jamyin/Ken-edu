@@ -80,6 +80,19 @@ public class LedgerDto {
 	@Setter
 	@Getter
 	private String batchNo;
+	
+	@Setter
+	@Getter
+	private Integer shelfLife;
+	
+	
+	@Setter
+	@Getter
+	private String unit;
+	
+	@Setter
+	@Getter
+	private String amountUnit;
 
 	@Setter
 	@Getter
