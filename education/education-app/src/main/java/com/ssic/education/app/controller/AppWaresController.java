@@ -95,17 +95,11 @@ public class AppWaresController {
 	 * purchaseList：采购品列表根据学校ID查询 分页类型和商品名称检索
 	 * @author SeanYoung
 	 * @throws Exception 
-	 * @date 2016年5月13日 下午12:00:30
+	 * @date 2016年5月13日 下午12:00:30	
 	 */
 	@RequestMapping(value = "/purchaseList/{schoolId}", method = { RequestMethod.POST, RequestMethod.GET })
-	@AccessRequired
-	@ResponseBody
-	public Response<PageResult<WaresListDto>> purchaseList(@PathVariable("schoolId") String schoolId, ProWares prowares, PageQuery query) throws Exception {
+	public @ResponseBody Response<PageResult<WaresListDto>> purchaseList(@PathVariable("schoolId") String schoolId, ProWares prowares, PageQuery query) throws Exception {
 		Response<PageResult<WaresListDto>> result = new Response<PageResult<WaresListDto>>();
-		System.out.println(schoolId);
-		System.out.println(prowares.getWaresName());
-		System.out.println(prowares.getWaresType());
-
 		if (StringUtils.isEmpty(schoolId)) {
 			result.setStatus(DataStatus.HTTP_FAILE);
 			result.setMessage("查询Id为空");
