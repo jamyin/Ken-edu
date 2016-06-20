@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ssic.educateion.common.dto.ProLicenseDto;
-import com.ssic.educateion.common.dto.ProSupplierDto;
 import com.ssic.educateion.common.dto.ProWaresDto;
 import com.ssic.educateion.common.utils.ProductClass;
 import com.ssic.education.handle.service.IProLicenseService;
@@ -65,6 +64,9 @@ public class WapPurchasesController extends BaseController{
 //				wareDto.setImage(licenseDto.getLicPic());	
 //			}
 //		}
+		for(ProWaresDto wareDto : resultList){
+			wareDto.setWaresTypeStr(ProductClass.getName(wareDto.getWaresType()));
+		}		
 		Map<Integer,String> productClass = ProductClass.getAll();
 		mv.addObject("productClass",mapToList(productClass));
 		mv.addObject("resultList",resultList);
@@ -90,6 +92,9 @@ public class WapPurchasesController extends BaseController{
 		Response<List<ProWaresDto>> result = new Response<List<ProWaresDto>>();
 		//根据学校查询 对应的采购品信息
 		List<ProWaresDto> resultList = proWaresService.searchProWares(schoolId,waresName,waresType);
+		for(ProWaresDto wareDto : resultList){
+			wareDto.setWaresTypeStr(ProductClass.getName(wareDto.getWaresType()));
+		}
 		result.setData(resultList);
 		return result;
 	}
