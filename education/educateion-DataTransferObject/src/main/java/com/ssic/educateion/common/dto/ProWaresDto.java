@@ -3,12 +3,11 @@ package com.ssic.educateion.common.dto;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.ssic.educateion.common.utils.ProductClass;
-import com.ssic.education.utils.constants.WaresMaterialEnum;
-
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+
+import com.ssic.educateion.common.utils.ProductClass;
 
 @Data
 public class ProWaresDto implements Serializable {
@@ -87,7 +86,10 @@ public class ProWaresDto implements Serializable {
 	@Setter
 	private String waresTypeName;
 	
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of http://192.168.1.231/group-one/education.git
 	@Getter
 	@Setter
 	 private String updater;
