@@ -374,7 +374,7 @@ public class TaskController {
 			if(StringUtils.isNotEmpty(schoolName)){ 
 				schoolDto.setSchoolName(schoolName);                //学校名
 			}
-			PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, query);
+			PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, query, null);  //不带分页
 			taskReceiveDto.setSchoolList(schoolList);
 
 			result.setStatus(DataStatus.HTTP_SUCCESS);
