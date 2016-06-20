@@ -435,7 +435,7 @@ public class ProSupplierController extends BaseController {
 			int i = proLicenseServiceImpl.alterImage(license);
 			if (i == 0) {
 				SupplierDto findProSupplierById = supplierService.findProSupplierById(id);				
-				license.setLicNo(findProSupplierById.getBusinessLicense());
+			//license.setLicNo(findProSupplierById.getBusinessLicense());
 				license.setStat(1);
 				license.setLicType(4);
 				license.setCreateTime(new Date());
@@ -457,7 +457,7 @@ public class ProSupplierController extends BaseController {
 			int i = proLicenseServiceImpl.alterImage(license);
 			if (i == 0) {
 				SupplierDto findProSupplierById = supplierService.findProSupplierById(id);				
-				license.setLicNo(findProSupplierById.getOrganizationCode());
+				//license.setLicNo(findProSupplierById.getOrganizationCode());
 				license.setStat(1);
 				license.setLicType(5);
 				license.setCreateTime(new Date());
@@ -544,7 +544,7 @@ public class ProSupplierController extends BaseController {
 			int i = proLicenseServiceImpl.alterImage(license);
 			if (i == 0) {
 				SupplierDto findProSupplierById = supplierService.findProSupplierById(id);				
-				license.setLicNo(findProSupplierById.getFoodServiceCode());
+				//license.setLicNo(findProSupplierById.getFoodServiceCode());
 				license.setStat(1);
 				license.setLicType(0);
 				license.setCreateTime(new Date());
@@ -566,7 +566,7 @@ public class ProSupplierController extends BaseController {
 			int i = proLicenseServiceImpl.alterImage(license);
 			if (i == 0) {
 				SupplierDto findProSupplierById = supplierService.findProSupplierById(id);				
-				license.setLicNo(findProSupplierById.getFoodBusinessCode());
+				//license.setLicNo(findProSupplierById.getFoodBusinessCode());
 				license.setStat(1);
 				license.setLicType(1);
 				license.setCreateTime(new Date());

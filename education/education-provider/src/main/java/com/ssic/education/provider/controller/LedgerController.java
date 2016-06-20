@@ -196,9 +196,9 @@ public class LedgerController {
 				i += 1;
 				continue;
 			}
-			// 采购品
+			// 原料
 			if (ledger.getName() == null) {
-				j.setMsg("采购品不能为空");
+				j.setMsg("原料不能为空");
 				j.setSuccess(false);
 				return j;
 			}
@@ -210,7 +210,7 @@ public class LedgerController {
 			ledger.setCreator(user.getId());
 			ledger.setUpdater(user.getId());
 			ledger.setMasterId(masterId);
-			// 查询采购品是否存在
+			// 查询原料是否存在
 			if (StringUtils.isBlank(ledger.getAmountUnit())) {
 				j.setMsg(ledger.getName() + "数量单位不能为空");
 				j.setSuccess(false);
@@ -223,7 +223,7 @@ public class LedgerController {
 			}
 			ProWares warer = waresService.findProWarsByNameSpecManu(ledger.getName(),ledger.getAmountUnit(),ledger.getProductionName(),sourceId);
 			if (warer == null) {
-				j.setMsg(ledger.getName() + "不存在的采购品");
+				j.setMsg(ledger.getName() + "不存在的原料");
 				j.setSuccess(false);
 				return j;
 			}
@@ -246,9 +246,9 @@ public class LedgerController {
 				j.setSuccess(false);
 				return j;
 			}
-			// 查询供应商
+			// 查询提供者
 			if (StringUtils.isBlank(ledger.getSupplierName())) {
-				j.setMsg(ledger.getName() + "采购品供应商不能为空");
+				j.setMsg(ledger.getName() + "原料提供者不能为空");
 				j.setSuccess(false);
 				return j;
 			}
@@ -256,7 +256,7 @@ public class LedgerController {
 					.findSupplierIdBySourceId(ledger);
 			ledger.setSupplierId(supplierId);
 			if (ledger.getSupplierId() == null) {
-				j.setMsg(ledger.getName() + "采购品供应商不存在");
+				j.setMsg(ledger.getName() + "原料提供者不存在");
 				j.setSuccess(false);
 				return j;
 			}
@@ -274,12 +274,12 @@ public class LedgerController {
 			}
 		}
 		if (ledgers.size() == 0) {
-			j.setMsg("不能没有采购品");
+			j.setMsg("不能没有原料");
 			j.setSuccess(false);
 			return j;
 		}
 		ledgerService.saveLedger(ledgers);
-		j.setMsg("添加供应商成功");
+		j.setMsg("添加配货成功");
 		j.setSuccess(true);
 		return j;
 	}
@@ -388,9 +388,9 @@ public class LedgerController {
 				n += 1;
 				continue;
 			}
-			// 采购品
+			// 原料
 			if (ledger.getName() == null) {
-				j.setMsg("采购品不能为空");
+				j.setMsg("原料不能为空");
 				j.setSuccess(false);
 				return j;
 			}
@@ -401,8 +401,8 @@ public class LedgerController {
 			ledger.setReceiverName(ledgers.get(0).getReceiverName());
 			ledger.setHaulStatus(ledgers.get(0).getHaulStatus());
 			ledger.setSourceId(sourceId);
-			if (StringUtils.isBlank(ledger.getSpce())) {
-				j.setMsg(ledger.getName() + "采购品数量单位不能为空");
+			if (StringUtils.isBlank(ledger.getAmountUnit())) {
+				j.setMsg(ledger.getName() + "原料数量单位不能为空");
 				j.setSuccess(false);
 				return j;
 			}
@@ -411,13 +411,13 @@ public class LedgerController {
 				j.setSuccess(false);
 				return j;
 			}
-			ProWaresDto warerDto = waresService.findWaresBySupplierId(ledger);
-			if (warerDto == null) {
-				j.setMsg(ledger.getName() + "不存在的采购品");
+			ProWares warer = waresService.findProWarsByNameSpecManu(ledger.getName(),ledger.getAmountUnit(),ledger.getProductionName(),sourceId);
+			if (warer == null) {
+				j.setMsg(ledger.getName() + "不存在的原料");
 				j.setSuccess(false);
 				return j;
 			}
-			ledger.setWaresId(warerDto.getId());
+			ledger.setWaresId(warer.getId());
 			// 生产日期与进货日期
 			if (ledger.getProductionDate() != null) {
 				if (!ledgers.get(0).getActionDate()
@@ -438,7 +438,7 @@ public class LedgerController {
 				return j;
 			}
 			if (StringUtils.isBlank(ledger.getSupplierName())) {
-				j.setMsg(ledger.getName() + "采购品供应商不能为空");
+				j.setMsg(ledger.getName() + "原料提供者不能为空");
 				j.setSuccess(false);
 				return j;
 			}
@@ -446,7 +446,7 @@ public class LedgerController {
 					.findSupplierIdBySourceId(ledger);
 			ledger.setSupplierId(supplierId);
 			if (ledger.getSupplierId() == null) {
-				j.setMsg(ledger.getName() + "采购品供应商不存在");
+				j.setMsg(ledger.getName() + "原料提供者不存在");
 				j.setSuccess(false);
 				return j;
 			}
@@ -465,12 +465,12 @@ public class LedgerController {
 			}
 		}
 		if (ledgers.size() == 0) {
-			j.setMsg("不能没有采购品");
+			j.setMsg("不能没有原料");
 			j.setSuccess(false);
 			return j;
 		}
 		ledgerService.updataLedger(ledgers);
-		j.setMsg("修改供应商成功");
+		j.setMsg("修改配货成功");
 		j.setSuccess(true);
 		return j;
 	}
@@ -529,7 +529,7 @@ public class LedgerController {
 		Json j = new Json();
 		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
 				ConfigUtil.SESSIONINFONAME);
-		// 当前登录用户所属供应商的id
+		// 当前登录用户所属提供者的id
 		if(info==null){
 			j.setMsg("尚未登录");
 			j.setSuccess(false);
@@ -561,7 +561,7 @@ public class LedgerController {
 				ProLedger dto = new ProLedger();
 				Row row = sheet.getRow(rowNum);
 				String name = null;
-				String spec = null;
+				String amountUnit = null;
 
 				for (int i = 0; i < row.getLastCellNum(); i++) {
 					if (errorMsg != null) {
@@ -627,7 +627,7 @@ public class LedgerController {
 						}
 					} else if (i == 2) {
 						if (StringUtils.isBlank(value)) {
-							errorMsg = "第" + (rowNum + 1) + "行数据不正确，采购品名称不能为空。";
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，原料名称不能为空。";
 							break;
 						}
 						// 名称
@@ -652,7 +652,7 @@ public class LedgerController {
 							break;
 						}
 						// 数量单位
-						spec = value;
+						amountUnit = value;
 					} else if (i == 5) {
 						// 配货点
 						String receiverId = eduSchoolSupplierService
@@ -698,10 +698,10 @@ public class LedgerController {
 							}
 						}
 					} else if (i == 7) {
-						// 供应商名称
+						// 原料供货者
 						if(StringUtils.isBlank(value)){
 							errorMsg = "第" + (rowNum + 1)
-									+ "行数据不正确，供应商名称不能为空。";
+									+ "行数据不正确，原料供货者不能为空。";
 							break;
 						}
 						ProSupplier ps = supplierService.getSupplierByName(
@@ -709,27 +709,27 @@ public class LedgerController {
 
 						if (ps == null) {
 							errorMsg = "第" + (rowNum + 1)
-									+ "行数据不正确，供应商名称不存在。";
+									+ "行数据不正确，原料供货者不存在。";
 							break;
 						}
 						dto.setSupplierId(ps.getId());
 						dto.setSupplierName(ps.getSupplierName());
 					} else if (i == 8) {
 						// 生产单位
-						// 查找商品
+						// 查找原料
 						if(StringUtils.isBlank(value)){
 							errorMsg = "第" + (rowNum + 1)
 									+ "行数据不正确，生产单位不能为空。";
 							break;
 						}
 						ProWares pw = waresService.findProWarsByNameSpecManu(
-								name, spec, value, supplierId);
+								name, amountUnit, value, supplierId);
 						if (pw == null) {
-							errorMsg = "第" + (rowNum + 1) + "行数据不正确，商品不存在。";
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，原料不存在。";
 							break;
 						} else {
 							dto.setWaresId(pw.getId());
-							dto.setSpce(pw.getSpec());
+							dto.setAmountUnit(pw.getAmountUnit());
 							dto.setProductionName(pw.getManufacturer());
 						}
 					} else if (i == 9 && StringUtils.isNotBlank(value)) {
@@ -792,12 +792,12 @@ public class LedgerController {
 			List<String> titles = new ArrayList<String>();
 			titles.add("配货号");
 			titles.add("配货日期");
-			titles.add("采购品名称");
+			titles.add("原料名称");
 			titles.add("数量");
 			titles.add("数量单位");
 			titles.add("配货点");
 			titles.add("驾驶员");
-			titles.add("供应商名称");
+			titles.add("原料供货者");
 			titles.add("生产单位");
 			titles.add("生产日期");
 			int len = titles.size();

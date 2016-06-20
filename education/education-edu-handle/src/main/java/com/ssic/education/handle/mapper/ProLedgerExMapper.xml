@@ -5,7 +5,7 @@
 	<insert id="insertLedger" parameterType="java.util.List">
 
 		insert into t_pro_ledger (id, master_id,wares_id, name,
-		spce, amount_unit AmountUnit,
+		spce, amount_unit,
 		supplier_id, supplier_code, supplier_name,
 		quantity,
 		production_date,production_Name, batch_no,
@@ -21,7 +21,7 @@
 			(UUID(), #{item.masterId}, #{item.waresId},
 			#{item.name},
 			#{item.spce},
-			#{item.AmountUnit},
+			#{item.amountUnit},
 			#{item.supplierId},
 			#{item.supplierCode},
 			#{item.supplierName},
@@ -39,7 +39,7 @@
 	<select id="findLedgerByMasterId" resultType="com.ssic.educateion.common.dto.LedgerDto">
 		SELECT l.id id,
 		m.id masterId,
-		l.wares_id waresId, l.name, l.spce,
+		l.wares_id waresId, l.name, l.spce,l.amount_unit amountUnit,
 		m.action_date actionDate,
 		l.supplier_id supplierId,
 		l.supplier_code

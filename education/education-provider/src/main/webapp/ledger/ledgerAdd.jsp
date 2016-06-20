@@ -68,7 +68,7 @@
 	});
 	
 	function ledgerTr(){
-		var ltr='<td style="width:95px;"><input name="ledger[0].name" style="width:95px;" type="text" placeholder="请输入采购品" class="easyui-validatebox span2" data-options="required:true"></td><td style="width:95px;"><input name="ledger[0].quantity" style="width:95px;" type="text" placeholder="请输入数量" class="easyui-validatebox span2" data-options="required:true"></td><td style="width:95px;"><input name="ledger[0].amountUnit" style="width:95px;" type="text" placeholder="请输入数量单位" class="easyui-validatebox span2" data-options="required:true"></td><td style="width:95px;"><input name="ledger[0].supplierName" style="width:95px;" type="text" placeholder="请输入供应商" class="easyui-validatebox span2"></td><td style="width:95px;"><input name="ledger[0].productionName" style="width:95px;" type="text" placeholder="请输入生产单位" class="easyui-validatebox span2"></td><td style="width:95px;"><input name="ledger[0].productionDate" style="width:95px;cursor:pointer;" type="text" placeholder="点击选择日期" class="easyui-validatebox span2" onclick="WdatePicker({readOnly:true,dateFmt:\'yyyy-MM-dd\'})" readonly="readonly"></td><td><a></a></td><td><input type="hidden" name="ledger[0].mark" value="1" ></td>';
+		var ltr='<td style="width:95px;"><input name="ledger[0].name" style="width:95px;" type="text" placeholder="请输入原料" class="easyui-validatebox span2" data-options="required:true"></td><td style="width:95px;"><input name="ledger[0].quantity" style="width:95px;" type="text" placeholder="请输入数量" class="easyui-validatebox span2" data-options="required:true"></td><td style="width:95px;"><input name="ledger[0].amountUnit" style="width:95px;" type="text" placeholder="请输入数量单位" class="easyui-validatebox span2" data-options="required:true"></td><td style="width:95px;"><input name="ledger[0].supplierName" style="width:95px;" type="text" placeholder="请输入原料供货者" class="easyui-validatebox span2"></td><td style="width:95px;"><input name="ledger[0].productionName" style="width:95px;" type="text" placeholder="请输入生产单位" class="easyui-validatebox span2"></td><td style="width:95px;"><input name="ledger[0].productionDate" style="width:95px;cursor:pointer;" type="text" placeholder="点击选择日期" class="easyui-validatebox span2" onclick="WdatePicker({readOnly:true,dateFmt:\'yyyy-MM-dd\'})" readonly="readonly"></td><td><a></a></td><td><input type="hidden" name="ledger[0].mark" value="1" ></td>';
 		return ltr;
 	}
 	
@@ -111,17 +111,17 @@
 				</table>
 			<table id="ledgers" class="table table-hover table-condensed">
 				<tr>
-					<th style='width:109px;'><font color="red">*</font>采购品：</th>
+					<th style='width:109px;'><font color="red">*</font>原料：</th>
 					<th style='width:109px;'><font color="red">*</font>数量：</th>
 					<th style='width:109px;'><font color="red">*</font>数量单位：</th>
-					<th style='width:109px;'><font color="red">*</font>采购品供应商：</th>
+					<th style='width:109px;'><font color="red">*</font>原料供货者：</th>
 					<th style='width:109px;'><font color="red">*</font>生产企业：</th>
 					<th style='width:109px;'>生产日期：</th>
 					<th ></th>
 				</tr>
 				<tr id="ledger0">
 					<td style="width:95px;">
-						<input name="ledger[0].name" style="width:95px;" type="text" placeholder="请输入采购品" class="easyui-validatebox span2" data-options="required:true">
+						<input name="ledger[0].name" style="width:95px;" type="text" placeholder="请输入原料" class="easyui-validatebox span2" data-options="required:true">
 					</td>
 					<td style="width:95px;">
 						<input name="ledger[0].quantity" style="width:95px;" type="text" placeholder="请输入数量" class="easyui-validatebox span2" data-options="required:true">
@@ -130,7 +130,7 @@
 						<input name="ledger[0].amountUnit" style="width:95px;" type="text" placeholder="请输入数量单位" class="easyui-validatebox span2" data-options="required:true">
 					</td>
 					<td style="width:95px;">
-						<input name="ledger[0].supplierName" style="width:95px;" type="text" placeholder="请输入供应商" class="easyui-validatebox span2">
+						<input name="ledger[0].supplierName" style="width:95px;" type="text" placeholder="请输入原料供货者" class="easyui-validatebox span2">
 					</td>
 					<td style="width:95px;">
 						<input name="ledger[0].productionName" style="width:95px;" type="text" placeholder="请输入生产单位" class="easyui-validatebox span2">

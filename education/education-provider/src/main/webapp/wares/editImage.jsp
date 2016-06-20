@@ -38,7 +38,7 @@ $(function() {
 			$("#img2").attr("src",list[i].licPic);
 		}
 		
-		if(licName=="生产许可证"){
+		if(licName=="其他"){
 			$("#img3_10").removeAttr("hidden");
 			$("#img3").attr("src",list[i].licPic);
 		}

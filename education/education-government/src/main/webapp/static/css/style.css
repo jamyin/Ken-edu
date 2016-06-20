@@ -21,7 +21,7 @@ body{background:#f3f3f3}
 .index_newsbox.lr_c{width:678px;padding-left:310px;}
 
 .index_row{width:1000px;overflow:hidden;margin-top:30px;}
-.inewbox{width:480px;overflow:hidden;float:left;margin-bottom:20px}
+.inewbox{width:480px;overflow:hidden;float:left;margin-bottom:100px;}
 .inewbox.rl{float:right;}
 .inewbox h3{position:relative;width:470px;height:20px;border-left:3px #eeca5a solid;padding-left:7px;font-size:16px;line-height:20px}
 .inewbox h3.gr{border-color:#68b2e7;}
@@ -29,7 +29,7 @@ body{background:#f3f3f3}
 .inewbox h3 a{position:absolute;right:0;top:0;line-height:20px;color:#9c9c9c;font-size:14px;}
 .inewbox h3 a:hover{color:#60ac62;}
 
-.inewbox ul{width:458px;background:#fff;border:1px #d3d3d3 solid;margin-top:10px;padding:10px;overflow:hidden}
+.inewbox ul{width:458px;background:#fff;border:1px #d3d3d3 solid;margin-top:10px;padding:10px;overflow:hidden;min-height:240px}
 .inewbox ul li{width:448px;height:24px;line-height:24px;overflow:hidden;padding-left:10px;background:url(../img/dot.png) no-repeat 0 center}
 .inewbox ul li a{color:#333}
 .inewbox ul li a:hover{color:#333;text-decoration:underline}

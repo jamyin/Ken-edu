@@ -69,19 +69,6 @@
 			 					return "";
 			 							}
 			 				}
-			 			}, {
-			 				field : 'supplierCode',
-			 				title : '<font  style="font-style: normal; font-size:18px;">供应商编码</font>',
-			 				width : 120,
-			 				
-			 				formatter : function(value, row, index) {
-			 					if(value!=null){
-			 					return '<font style="font-style: normal; font-size:15px;">'
-								+ value + '</font>';
-			 					}else{
-			 					return "";
-			 							}
-			 				}
 			 			},{
 			 				field : 'address',
 			 				title : '<font  style="font-style: normal; font-size:18px;">供应商地址</font>',
@@ -114,46 +101,6 @@
 			 				field : 'contactWay',
 			 				title : '<font  style="font-style: normal; font-size:18px;">联系方式</font>',
 			 				width : 110,
-			 				
-			 				formatter : function(value, row, index) {
-			 					if(value!=null){
-			 					return '<font style="font-style: normal; font-size:15px;">'
-								+ value + '</font>';
-			 					}else{
-			 					return "";
-			 							}
-			 				}
-			 			},
-			 			{
-			 				field : 'businessLicense',
-			 				title : '<font  style="font-style: normal; font-size:18px;">工商执照号</font>',
-			 				width : 120,
-			 				
-			 				formatter : function(value, row, index) {
-			 					if(value!=null){
-			 					return '<font style="font-style: normal; font-size:15px;">'
-								+ value + '</font>';
-			 					}else{
-			 					return "";
-			 							}
-			 				}
-			 			},{
-			 				field : 'foodServiceCode',
-			 				title : '<font  style="font-style: normal; font-size:18px;">餐饮服务证号</font>',
-			 				width : 120,
-			 				
-			 				formatter : function(value, row, index) {
-			 					if(value!=null){
-			 					return '<font style="font-style: normal; font-size:15px;">'
-								+ value + '</font>';
-			 					}else{
-			 					return "";
-			 							}
-			 				}
-			 			},{
-			 				field : 'foodBusinessCode',
-			 				title : '<font  style="font-style: normal; font-size:18px;">食品经营许可证号</font>',
-			 				width : 120,
 			 				
 			 				formatter : function(value, row, index) {
 			 					if(value!=null){

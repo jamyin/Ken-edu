@@ -33,18 +33,18 @@
 		</table>
 			<table id="ledgers" class="table table-hover table-condensed">
 					<tr>
-						<th>采购品</th>
+						<th>原料</th>
 						<th>数量</th>	
-						<th>规格</th>	
+						<th>数量单位</th>	
 						<th>生产日期</th>
 						<th>生产企业</th>
-						<th>采购品供应商</th>
+						<th>原料供货者</th>
 					</tr>
 				<c:forEach var="ledger" items="${LedgerList}" varStatus="status">
 					<tr>
 						<td style='width:100px;'>${ledger.name}</td>
 						<td style='width:100px;'>${ledger.quantity}</td>
-						<td style='width:100px;'>${ledger.spce}</td>
+						<td style='width:100px;'>${ledger.amountUnit}</td>
 						<td style='width:100px;'><fmt:formatDate value="${ledger.productionDate }" pattern="yyyy-MM-dd"/></td>
 						<td style='width:100px;'>${ledger.productionName}</td>
 						<td style='width:100px;'>${ledger.supplierName}</td>
