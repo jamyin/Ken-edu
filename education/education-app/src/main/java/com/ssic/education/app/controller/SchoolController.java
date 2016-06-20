@@ -307,7 +307,7 @@ public class SchoolController {
 				chooseSchoolDto.setLevelList(levelList);
 			}
 			//学校列表
-			PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, query);
+			PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, null); //不分页.查所有
 			chooseSchoolDto.setSchoolDto(schoolList);
 			result.setData(chooseSchoolDto);
 		}

@@ -15,7 +15,7 @@
 	<#include "/common/nav.htm" />
 	<div class="wrapper">
 		
-		<#if pageList??>
+		<#if (pageList.results??) && (pageList.results?size>0)>
 			<#list pageList.results as eduInformationDto>
 			<#if eduInformationDto_index==0>
 				<#if (eduInformationDto.pic??) && (eduInformationDto.pic != '')>
@@ -28,10 +28,14 @@
 					<div class="index_newsbox">
 						<a href="/info/details/${(eduInformationDto.id)!}.htm"><h2>${(eduInformationDto.title)!}</h2></a>
 						<a href="/info/details/${(eduInformationDto.id)!}.htm"><p>${(eduInformationDto.content)!}</p></a>
-					</div>
+					
 				</#if>
 			</#if>
 			</#list>
+		<#else>
+			<div class="index_newsbox" style="text-align: center; line-height: 230px;">
+				暂无数据
+			</div>
 		</#if>
 			<!-- <img src="static/img/index_news.png" border="0">
 			<h2>上海与国家食药监总局战略合作 加强食品药品安全监管</h2>
@@ -40,8 +44,8 @@
 		
 		<div class="index_row">
 			<div class="inewbox">
-				<h3>通告公司<a class="more" href="/info/index/1.htm">更多...</a></h3>
-				<#if pageList1??>
+				<h3>通告公示<a class="more" href="/info/index/1.htm">更多...</a></h3>
+				<#if (pageList1.results??) && (pageList1.results?size>0)>
 					<ul>
 						<#list pageList1.results as eduInformationDto>
 							<li><a href="/info/details/${(eduInformationDto.id)!}.htm">${(eduInformationDto.title)!}         ${eduInformationDto.createTime?string("yyyy-MM-dd")}</a></li>
@@ -62,7 +66,7 @@
 			</div>
 			<div class="inewbox rl">
 				<h3 class="bl">健康宣教<a class="more" href="/info/index/3.htm">更多...</a></h3>
-				<#if pageList3??>
+				<#if (pageList3.results??) && (pageList3.results?size>0)>
 					<ul>
 						<#list pageList3.results as eduInformationDto>
 							<li><a href="/info/details/${(eduInformationDto.id)!}.htm">${(eduInformationDto.title)!}         ${eduInformationDto.createTime?string("yyyy-MM-dd")}</a></li>
