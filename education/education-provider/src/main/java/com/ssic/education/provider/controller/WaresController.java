@@ -154,20 +154,20 @@ public class WaresController extends BaseController {
 	public Json insertWares(ProWaresDto pro, HttpServletRequest request) {
 		Json j = new Json();
 		if (pro.getWaresName() == null || pro.getWaresName().equals("")) {
-			j.setMsg("商品名称不能为空");
+			j.setMsg("原料名称不能为空");
 			j.setSuccess(false);
 			return j;
 		}
 
 		if (pro.getSpec() == null || pro.getSpec().equals("")) {
 			j.setSuccess(false);
-			j.setMsg("商品规格不能为空");
+			j.setMsg("原料规格不能为空");
 			return j;
 		}
 
 		if (pro.getWaresType() == null || pro.getWaresType().equals("")) {
 			j.setSuccess(false);
-			j.setMsg("商品类型不能为空");
+			j.setMsg("原料类型不能为空");
 			return j;
 		}
 		if (pro.getManufacturer() == null || pro.getManufacturer().equals("")) {

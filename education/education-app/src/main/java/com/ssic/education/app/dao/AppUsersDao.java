@@ -18,8 +18,7 @@ import com.ssic.education.utils.util.StringUtils;
 
 /**
  * 用户系统DAO
- * @author Administrator
- *
+ * @author SeanYoung
  */
 @Repository
 public class AppUsersDao {
