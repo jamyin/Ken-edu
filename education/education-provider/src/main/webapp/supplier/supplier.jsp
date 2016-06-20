@@ -407,7 +407,7 @@
 		&nbsp;
 		<a onclick="toExcel();" title="导出到EXCEL"><img src="${pageContext.request.contextPath}/icon/导出.png"></img></a>
 		&nbsp;
-		<a href="${pageContext.request.contextPath}/templates/供应商.xlsx" class="easyui-linkbutton" data-options="plain:true"><img src="${pageContext.request.contextPath}/icon/下载模板.png"></img></a>
+		<a href="${pageContext.request.contextPath}/templates/供货者.xlsx" class="easyui-linkbutton" data-options="plain:true"><img src="${pageContext.request.contextPath}/icon/下载模板.png"></img></a>
 	</div>
 
 	
