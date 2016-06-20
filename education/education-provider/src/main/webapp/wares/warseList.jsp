@@ -507,7 +507,7 @@ else
 			&nbsp;
 			<a onclick="toExcel();" title="导出到EXCEL"><img src="${pageContext.request.contextPath}/icon/导出.png"></img></a>
 			&nbsp;
-			<a href="${pageContext.request.contextPath}/templates/采购品.xlsx" class="easyui-linkbutton" data-options="plain:true"><img src="${pageContext.request.contextPath}/icon/下载模板.png"></img></a>
+			<a href="${pageContext.request.contextPath}/templates/原料.xlsx" class="easyui-linkbutton" data-options="plain:true"><img src="${pageContext.request.contextPath}/icon/下载模板.png"></img></a>
 
 		</div>		
 		<div data-options="region:'center',border:false" id="g">
