@@ -56,7 +56,7 @@
 							<div class="item col-xs-12">
 								<span class="intelligent-label f-fl"><b class="ftx04"></b>地址：</span>
 								<div class="f-fl item-ifo">
-									<input name="address" type="text" maxlength="20" class="txt03 f-r3" tabindex="1" data-valid="isUname" data-error="只能输入中文、字母、数字、下划线，且以中文或字母开头" id="adminNo" /> <span
+									<input name="address" type="text" maxlength="100" class="txt03 f-r3" tabindex="1" data-valid="isUname" data-error="只能输入中文、字母、数字、下划线，且以中文或字母开头" id="adminNo" /> <span
 										class="ie8 icon-close close hide"></span> <label class="icon-sucessfill blank hide"></label> <label class="focus"><span>中文、字母、数字、下划线的组合，以中文或字母开头</span></label> <label
 										class="focus valid"></label>
 								</div>
