@@ -243,7 +243,7 @@ public class SchoolController {
 	 * @return Response<PageResult<EduSchoolDto>>    返回类型
 	 */
 	@RequestMapping("/chooseSchool")
-	@AccessRequired
+	//@AccessRequired
 	@ResponseBody
 	public Response<ChooseSchoolDto> chooseSchool(SchoolDto schoolDto, PageQuery query, Integer type, Integer sourceType) {
 		logger.info("SchoolDto : " + schoolDto + ";type : " + type + ";sourceType : " + sourceType);
@@ -281,6 +281,9 @@ public class SchoolController {
 				chooseSchoolDto.setCommitteeList(committeeList);
 
 				//学校列表
+				if(StringUtils.isNotEmpty(schoolDto.getCommitteeId()) && schoolDto.getCommitteeId().equals("9fa83d14-3691-11e6-b1e8-005056a5ed30")){
+					schoolDto.setCommitteeId(null);
+				}
 				PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, query);
 				chooseSchoolDto.setSchoolDto(schoolList);
 				result.setData(chooseSchoolDto);
