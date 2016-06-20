@@ -107,6 +107,18 @@
 		AND stat=1
 	</select>
 
+<update id="deleteWares" >
+		
+		update t_pro_wares AS a  set
+		
+			
+				a.stat = 0
+			
+			
+		
+		where 
+			a.id = #{warseDto.id}
+	</update>	
 
 
 

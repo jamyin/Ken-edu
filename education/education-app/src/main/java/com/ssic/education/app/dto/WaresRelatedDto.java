@@ -28,6 +28,8 @@ public @Data class WaresRelatedDto {
 	private Integer shelfLife;
 	/**保质期单位*/
 	private String unit;
+	/**数量单位**/
+	private String amountUnit;
 	/**供应商ID*/
 	private String supplierId;
 	/**生成企业*/

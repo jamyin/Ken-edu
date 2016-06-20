@@ -98,6 +98,7 @@ public class AppWaresController {
 	 * @date 2016年5月13日 下午12:00:30	
 	 */
 	@RequestMapping(value = "/purchaseList/{schoolId}", method = { RequestMethod.POST, RequestMethod.GET })
+	@AccessRequired
 	public @ResponseBody Response<PageResult<WaresListDto>> purchaseList(@PathVariable("schoolId") String schoolId, ProWares prowares, PageQuery query) throws Exception {
 		Response<PageResult<WaresListDto>> result = new Response<PageResult<WaresListDto>>();
 		if (StringUtils.isEmpty(schoolId)) {

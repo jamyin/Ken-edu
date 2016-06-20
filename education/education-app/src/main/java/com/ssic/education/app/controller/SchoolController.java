@@ -284,14 +284,14 @@ public class SchoolController {
 				if(StringUtils.isNotEmpty(schoolDto.getCommitteeId()) && schoolDto.getCommitteeId().equals("9fa83d14-3691-11e6-b1e8-005056a5ed30")){
 					schoolDto.setCommitteeId(null);
 				}
-				PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, null); //不分页.查所有
+				PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, query, null);  //传null;不带分页
 				chooseSchoolDto.setSchoolDto(schoolList);
 				result.setData(chooseSchoolDto);
 			} else {
 				//学校列表  -查所有
 				schoolDto.setCommitteeId(null);
 				schoolDto.setLevel(null);
-				PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, null); //不分页.查所有
+				PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, query, null); 
 				chooseSchoolDto.setSchoolDto(schoolList);
 				result.setData(chooseSchoolDto);
 			}
@@ -307,7 +307,7 @@ public class SchoolController {
 				chooseSchoolDto.setLevelList(levelList);
 			}
 			//学校列表
-			PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, query);
+			PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, query, null); 
 			chooseSchoolDto.setSchoolDto(schoolList);
 			result.setData(chooseSchoolDto);
 		}

@@ -26,7 +26,7 @@
         <#if pageList??>
           <#list pageList.results as data>
 	          <a href="/pro/wares/details.htm?id=${(data.id)!}&source=${(params.source)!}&schoolId=${(params.schoolId)!}&sourceId=${(params.sourceId)!}">
-	              <li>
+	              <li style="height: 200px;">
 	              	<#if (data.image??) && (data.image != '')>
 	                	<img src="${(data.image)!}" alt="" />
 	                <#else>

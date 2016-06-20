@@ -165,8 +165,8 @@ $(function() {
 				
 				</tr>
 				<tr>
-					<th>生产许可证</th>
-					<td><input type="file" name="scImgUrl" id="scImgUrl"
+					<th>其他</th>
+					<td><input type="file" name="qtImgUrl" id="qtImgUrl"
 						accept="image/*" /></td>
 				
 				</tr>
