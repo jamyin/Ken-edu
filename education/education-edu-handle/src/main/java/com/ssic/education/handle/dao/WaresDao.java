@@ -30,9 +30,7 @@ public class WaresDao{
 			waresDto.setWaresName("%"+waresDto.getWaresName()+"%");			
 			
 		}
-		if(waresDto.getCustomCode()!=null && waresDto.getCustomCode()!=""){
-			waresDto.setCustomCode("%"+waresDto.getCustomCode()+"%");
-		}
+		
 		
 		List<ProWaresDto> list = exmapper.findWares(waresDto,ph);
 		return list;

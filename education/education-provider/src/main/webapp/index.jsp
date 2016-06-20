@@ -168,11 +168,11 @@
 		<%-- <div data-options="region:'west',href:'${pageContext.request.contextPath}/layout/west.jsp',split:true" title="模块导航" style="width: 200px; overflow: hidden;"></div> --%>
 		<div data-options="region:'center'"  style="overflow: hidden;">
 			<div style="padding:5px;background:#fafafa;width:100%;border:1px solid #ccc">
-				<a onclick="loadUrl(this);" data-src="waresController/manager" data-text="采购品管理" class="easyui-linkbutton" plain="true" iconCls="icon-edit">
-								<font  style="font-style: normal;font-size:18px;">采购品管理</font>
+				<a onclick="loadUrl(this);" data-src="waresController/manager" data-text="原料管理" class="easyui-linkbutton" plain="true" iconCls="icon-edit">
+								<font  style="font-style: normal;font-size:18px;">原料管理</font>
 				</a>
-				<a onclick="loadUrl(this);" data-src="proSupplierController/manager" data-text="供应商管理" class="easyui-linkbutton" plain="true" iconCls="icon-refresh">
-				<font  style="font-style: normal;font-size:18px;">供应商管理</font>
+				<a onclick="loadUrl(this);" data-src="proSupplierController/manager" data-text="供货者管理" class="easyui-linkbutton" plain="true" iconCls="icon-refresh">
+				<font  style="font-style: normal;font-size:18px;">供货者管理</font>
 				</a>
 				<a onclick="loadUrl(this);" data-src="ledgerController/manager" data-text="配货管理" class="easyui-linkbutton" plain="true" iconCls="icon-search">
 				<font  style="font-style: normal;font-size:18px;">配货管理</font>

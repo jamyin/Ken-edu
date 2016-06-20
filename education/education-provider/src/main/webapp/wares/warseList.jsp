@@ -78,7 +78,7 @@ else
 			}]],
 			columns : [[  {
 				field : 'waresName',
-				title : '<font  style="font-style: normal; font-size:18px;">商品名称</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">原料名称</font>',
 				width : 120,
 				
 				formatter : function(value, row, index) {
@@ -92,6 +92,18 @@ else
 			}, {
 				field : 'spec',
 				title : '<font  style="font-style: normal; font-size:18px;">规格</font>',
+				width : 50,
+				formatter : function(value, row, index) {
+					if(value!=null){
+					return '<font style="font-style: normal;  font-size:15px;">'
+							+ value + '</font>';
+					}else{
+					return "";
+							}
+				}
+			},{
+				field : 'amountUnit',
+				title : '<font  style="font-style: normal; font-size:18px;">数量单位</font>',
 				width : 50,
 				formatter : function(value, row, index) {
 					if(value!=null){
@@ -127,7 +139,7 @@ else
 				}
 			},{
 				field : 'unit',
-				title : '<font  style="font-style: normal; font-size:18px;">单位</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">保质期单位</font>',
 				width : 50,
 				formatter : function(value, row, index) {
 					if(value!=null){
@@ -139,47 +151,11 @@ else
 				}
 			}, {
 				field : 'waresTypeName',
-				title : '<font  style="font-style: normal; font-size:18px;">商品分类</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">原料分类</font>',
 				width : 120,
 				formatter : function(value, row, index) {
 					return	'<font style="font-style: normal; word-wrap:break-word;white-space:normal;font-size:15px;">'
 					+ value + '</font>'
-				}
-			},{
-				field : 'customCode',
-				title : '<font  style="font-style: normal; font-size:18px;">产品编码</font>',
-				width : 150,
-				formatter : function(value, row, index) {
-					if(value!=null){
-					return'<font style="font-style: normal;font-size:15px; ">'
-					+ value + '</font>';
-					}else{
-					return "";
-							}
-				}
-			} ,{
-				field : 'barCode',
-				title : '<font  style="font-style: normal; font-size:18px;">产品包装条形码</font>',
-				width : 150,
-				formatter : function(value, row, index) {
-					if(value!=null){
-					return '<font style="font-style: normal;font-size:15px; ">'
-							+ value + '</font>';
-					}else{
-					return "";
-							}
-				}
-			},{
-				field : 'enName',
-				title : '<font  style="font-style: normal; font-size:18px;">英文名</font>',
-				width : 110,
-				formatter : function(value, row, index) {
-					if(value!=null){
-					return'<font style="font-size:15px; ">'
-					+ value + '</font>';
-					}else{
-					return "";
-							}
 				}
 			},{
 				field : 'place',
@@ -494,37 +470,25 @@ else
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">
 					<tr>
-						<td style='padding-top: 10px;'>商品名称:
-						<input id="waresName" name="waresName" placeholder="查询商品名称" class="easyui-validatebox"  style="width: 215px;"/></td>
-						 <td style='padding-top: 10px;'>产品编码:
-					     <input id="customCode" name="customCode" placeholder="查询产品编码" class="easyui-validatebox"  style="width: 215px;"/></td>
-						 
-						 
-						  <td style='padding-top: 10px;'>商品类别:
+						<td style='padding-top: 10px;'>原料名称:
+						<input id="waresName" name="waresName" placeholder="查询原料名称" class="easyui-validatebox"  style="width: 215px;"/></td>
+						
+						  <td style='padding-top: 10px;'>原料类别:
 					    
 					       <select id="waresType" class="easyui-combobox"  name="waresType" data-options="width:210,height:24,editable:false,panelHeight:'auto'"
 								data-options="required:true"  >	
-								<option value="0">请选择商品类别</option>							
-							    <option value="1">畜产品及其制品</option>   
-							    <option value="2">禽及其产品、制品</option>   
-							    <option value="3">蔬菜</option>   
-							    <option value="4">乳及乳制品</option>   
-							    <option value="5">油脂及其制品</option>   
-							    <option value="6">水产及其制品</option>   
-							    <option value="7">冷冻饮品</option>   
-							    <option value="8">水果</option>   
-							    <option value="9">粮食和粮食制品</option>   
-							    <option value="10">豆类及其制品</option>   
-							    <option value="11">食用菌和藻类</option>   
-							    <option value="12">可可和巧克力制品及糖果</option>   
-							    <option value="13">焙烤食品</option>   
-							    <option value="14">甜味料</option>   
-							    <option value="15">调味品</option>   
-							    <option value="16">特殊膳食用食品</option>   
-							    <option value="17">饮料类</option>   
-							    <option value="18">酒类</option>   
-							    <option value="19">添加剂类</option>   
-							    <option value="20">其他类</option>   
+								<option value="0">请选择商品类别</option>										
+							    <option value="1">粮食及其制品</option>   
+							    <option value="2">畜产品及其制品</option>   
+							    <option value="3">禽及其产品、制品</option>   
+							    <option value="4">蔬菜</option>   
+							    <option value="5"> 水果</option>   
+							    <option value="6">水产品</option>   
+							    <option value="7">豆制品</option>   
+							    <option value="8">乳品</option>   
+							    <option value="9">食用油</option>   
+							    <option value="10">其它类别的食品和食用农产品</option>   
+							     
 							</select>
 							&nbsp;&nbsp;&nbsp;
 							<a href="javascript:void(0);"  onclick="searchFun();" ><img src="${pageContext.request.contextPath}/icon/查询.png" ></img></a>
@@ -547,7 +511,7 @@ else
 
 		</div>		
 		<div data-options="region:'center',border:false" id="g">
-							<table id="dataGrid" title="<font  style='font-style: normal;font-weight: bolder;font-size:16px;'>采购品表单</font>" data-options="collapsible:true" >
+							<table id="dataGrid" title="<font  style='font-style: normal;font-weight: bolder;font-size:16px;'>原料表单</font>" data-options="collapsible:true" >
 						
 							</table>
 							<style>

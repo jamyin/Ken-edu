@@ -105,7 +105,7 @@
 		<img src="${pageContext.request.contextPath}/style/images/logo.png"   style="height: 50px"/>
 	</a>
 <div id="sessionInfoDiv" style="position: absolute; right: 0px; top: 0px;" class="alert alert-info">
-	<c:if test="${sessionInfo.id != null}">[<strong>${sessionInfo.userAccount}</strong>]，欢迎你登录:[团餐管理系统]</c:if>
+	<c:if test="${sessionInfo.id != null}">[<strong>${sessionInfo.userAccount}</strong>]，欢迎你登录:[阳光午餐系统]</c:if>
 </div>
 <div style="position: absolute; right: 0px; bottom: 0px;">
 <!-- 	<a href="javascript:void(0);" class="easyui-menubutton" data-options="menu:'#layout_north_pfMenu',iconCls:'cog'">更换皮肤</a> 
