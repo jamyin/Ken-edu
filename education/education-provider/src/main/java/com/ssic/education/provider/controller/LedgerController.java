@@ -211,8 +211,8 @@ public class LedgerController {
 			ledger.setUpdater(user.getId());
 			ledger.setMasterId(masterId);
 			// 查询采购品是否存在
-			if (StringUtils.isBlank(ledger.getSpce())) {
-				j.setMsg(ledger.getName() + "采购品规格不能为空");
+			if (StringUtils.isBlank(ledger.getAmountUnit())) {
+				j.setMsg(ledger.getName() + "数量单位不能为空");
 				j.setSuccess(false);
 				return j;
 			}
@@ -221,13 +221,13 @@ public class LedgerController {
 				j.setSuccess(false);
 				return j;
 			}
-			ProWaresDto warerDto = waresService.findWaresBySupplierId(ledger);
-			if (warerDto == null) {
+			ProWares warer = waresService.findProWarsByNameSpecManu(ledger.getName(),ledger.getAmountUnit(),ledger.getProductionName(),sourceId);
+			if (warer == null) {
 				j.setMsg(ledger.getName() + "不存在的采购品");
 				j.setSuccess(false);
 				return j;
 			}
-			ledger.setWaresId(warerDto.getId());
+			ledger.setWaresId(warer.getId());
 			// 进货与生产日期比较
 			if (ledger.getProductionDate() != null) {
 				if (!ledgers.get(0).getActionDate()
@@ -401,8 +401,8 @@ public class LedgerController {
 			ledger.setReceiverName(ledgers.get(0).getReceiverName());
 			ledger.setHaulStatus(ledgers.get(0).getHaulStatus());
 			ledger.setSourceId(sourceId);
-			if (ledger.getSpce() == null) {
-				j.setMsg(ledger.getName() + "采购品规格不能为空");
+			if (StringUtils.isBlank(ledger.getSpce())) {
+				j.setMsg(ledger.getName() + "采购品数量单位不能为空");
 				j.setSuccess(false);
 				return j;
 			}
@@ -648,10 +648,10 @@ public class LedgerController {
 						}
 					} else if (i == 4) {
 						if (StringUtils.isBlank(value)) {
-							errorMsg = "第" + (rowNum + 1) + "行数据不正确，规格不能为空。";
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，数量单位不能为空。";
 							break;
 						}
-						// 规格
+						// 数量单位
 						spec = value;
 					} else if (i == 5) {
 						// 配货点
@@ -794,7 +794,7 @@ public class LedgerController {
 			titles.add("配货日期");
 			titles.add("采购品名称");
 			titles.add("数量");
-			titles.add("规格");
+			titles.add("数量单位");
 			titles.add("配货点");
 			titles.add("驾驶员");
 			titles.add("供应商名称");

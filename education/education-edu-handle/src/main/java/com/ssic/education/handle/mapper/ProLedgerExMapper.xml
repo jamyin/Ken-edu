@@ -5,7 +5,7 @@
 	<insert id="insertLedger" parameterType="java.util.List">
 
 		insert into t_pro_ledger (id, master_id,wares_id, name,
-		spce, 
+		spce, amount_unit AmountUnit,
 		supplier_id, supplier_code, supplier_name,
 		quantity,
 		production_date,production_Name, batch_no,
@@ -21,6 +21,7 @@
 			(UUID(), #{item.masterId}, #{item.waresId},
 			#{item.name},
 			#{item.spce},
+			#{item.AmountUnit},
 			#{item.supplierId},
 			#{item.supplierCode},
 			#{item.supplierName},
