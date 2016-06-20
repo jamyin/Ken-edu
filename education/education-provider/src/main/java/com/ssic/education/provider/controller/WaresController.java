@@ -182,7 +182,7 @@ public class WaresController extends BaseController {
 		pro.setCreator(info.getId());
 
 		ProWares specManu = waresService.findProWarsByNameSpecManu(
-				pro.getWaresName(), pro.getSpec(), pro.getManufacturer(),
+				pro.getWaresName(), pro.getAmountUnit(), pro.getManufacturer(),
 				pro.getSupplierId());
 		if (specManu == null || specManu.equals("")) {
 			waresService.insertWares(pro);
@@ -301,7 +301,7 @@ public class WaresController extends BaseController {
 			return json;
 		}
 		ProWares specManu = waresService.findProWarsByNameSpecManu(
-				pro.getWaresName(), pro.getSpec(), pro.getManufacturer(),
+				pro.getWaresName(), pro.getAmountUnit(), pro.getManufacturer(),
 				pro.getSupplierId());
 		if(specManu!=null&&!specManu.getId().equals(pro.getId())){
 			json.setMsg("修改商品失败，数据重复");
@@ -331,7 +331,7 @@ public class WaresController extends BaseController {
 	public Json alterImage(String id,
 			@RequestParam(value = "spImgUrl") MultipartFile spImgUrl,
 			@RequestParam(value = "jcImgUrl") MultipartFile jcImgUrl,
-			@RequestParam(value = "scImgUrl") MultipartFile scImgUrl,
+			@RequestParam(value = "qtImgUrl") MultipartFile scImgUrl,
 			ImageInfoDto image, HttpServletRequest request,
 			HttpServletResponse response) {
 		Json json = new Json();
@@ -393,26 +393,27 @@ public class WaresController extends BaseController {
 		}
 		if (imageurl3 != null && imageurl3 != "") {
 
-			license.setUpdater(info.getId());
-			license.setLicName("生产许可证");
+			license.setLicName("其他");
 			license.setRelationId(id);
-			license.setCerSource((short) 2);
+			license.setCerSource((short) 0);
 			license.setLicPic(imageurl3);
 			license.setLastUpdateTime(new Date());
+			license.setUpdater(info.getId());
 			int i = proLicenseServiceImpl.alterImage(license);
 
 			if (i == 0) {
-				license.setCreator(info.getId());
-
-				license.setLicPic(imageurl3);
-				license.setRelationId(id);
+				license.setLicName("其他");				
+				license.setRelationId(id);				
+				license.setCreateTime(new Date());			
 				license.setStat(1);
-				license.setLicType(3);
+				license.setLicPic(imageurl3);
 				license.setCreateTime(new Date());
-				license.setLastUpdateTime(new Date());
 				license.setCerSource((short) 2);
+				license.setLicType(12);
 				String uuid = UUID.randomUUID().toString();
 				license.setId(uuid);
+				license.setCreator(info.getId());
+
 				proLicenseServiceImpl.updateImage(license);
 			}
 		}
