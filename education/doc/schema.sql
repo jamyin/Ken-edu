@@ -278,7 +278,8 @@ CREATE TABLE `t_edu_users` (
   `user_no` varchar(36) DEFAULT NULL COMMENT '用户电话',
   `stat` int(11) NOT NULL DEFAULT '1' COMMENT '是否有效 1 有效 0 无效',
   PRIMARY KEY (`id`),
-  KEY `source_id` (`source_id`)
+  KEY `source_id` (`source_id`),
+  KEY `user_account` (`user_account`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Table structure for table `t_pro_dishes` */
