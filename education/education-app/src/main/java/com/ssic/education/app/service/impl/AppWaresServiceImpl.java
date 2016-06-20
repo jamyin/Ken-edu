@@ -39,7 +39,7 @@ import com.ssic.education.utils.util.StringUtils;
  * <p>修改备注：</p>
  */
 @Service
-public class WaresInfoServiceImpl implements IAppWaresService {
+public class AppWaresServiceImpl implements IAppWaresService {
 
 	@Autowired
 	private AppWaresDao waresInfoDao;

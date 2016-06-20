@@ -27,7 +27,7 @@ import com.ssic.education.utils.util.BeanUtils;
  *
  */
 @Service
-public class SuppliersServiceImpl implements IAppSupplierService {
+public class AppSuppliersServiceImpl implements IAppSupplierService {
 
 	@Autowired
 	private SupplierDao supplierDao;
