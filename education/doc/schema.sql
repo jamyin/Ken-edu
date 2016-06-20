@@ -603,8 +603,8 @@ DROP TABLE IF EXISTS `t_pro_wares`;
 CREATE TABLE `t_pro_wares` (
   `id` varchar(36) NOT NULL COMMENT '商品id',
   `wares_name` varchar(40) NOT NULL COMMENT '名称',
-  `spec` varchar(40) NOT NULL COMMENT '规格',
-  `amount_unit` varchar(30) DEFAULT NULL COMMENT '数量单位',
+  `spec` varchar(40) DEFAULT NULL COMMENT '规格',
+  `amount_unit` varchar(30) NOT NULL COMMENT '数量单位',
   `shelf_life` int(11) DEFAULT NULL COMMENT '保质期',
   `unit` varchar(10) DEFAULT NULL COMMENT '保质期单位',
   `supplier_id` varchar(36) NOT NULL COMMENT '所属供应商id',
