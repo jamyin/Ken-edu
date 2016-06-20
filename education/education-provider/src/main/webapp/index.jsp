@@ -166,7 +166,7 @@
 
 
 		<%-- <div data-options="region:'west',href:'${pageContext.request.contextPath}/layout/west.jsp',split:true" title="模块导航" style="width: 200px; overflow: hidden;"></div> --%>
-		<div data-options="region:'center'" title="<font  style='font-style: normal;font-weight: bolder;font-size:18px;'>欢迎使用团餐供应商系统</font>" style="overflow: hidden;">
+		<div data-options="region:'center'"  style="overflow: hidden;">
 			<div style="padding:5px;background:#fafafa;width:100%;border:1px solid #ccc">
 				<a onclick="loadUrl(this);" data-src="waresController/manager" data-text="采购品管理" class="easyui-linkbutton" plain="true" iconCls="icon-edit">
 								<font  style="font-style: normal;font-size:18px;">采购品管理</font>
