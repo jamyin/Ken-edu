@@ -8,6 +8,7 @@
 		SELECT
 		a.id AS id,
 		a.wares_name AS waresName,
+		a.amount_unit amountUnit,
 		a.spec AS spec,
 		a.shelf_life AS shelfLife,
 		a.unit AS unit,
@@ -87,7 +88,13 @@
 		<if test="warseDto.waresName!=null and  warseDto.waresName!=''">
 			AND a.wares_name  like  #{warseDto.waresName}
 		</if>
+<<<<<<< HEAD
 		
+=======
+		<!-- <if test="warseDto.customCode!=null and warseDto.customCode!='' ">
+			AND a.custom_code  like #{warseDto.customCode}
+		</if> -->
+>>>>>>> branch 'master' of http://192.168.1.231/group-one/education.git
 		<if test="warseDto.waresType!=null and warseDto.waresType!='' ">
 			and a.wares_type = #{warseDto.waresType}
 		</if>	

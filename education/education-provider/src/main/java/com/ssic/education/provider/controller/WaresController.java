@@ -462,12 +462,13 @@ public class WaresController extends BaseController {
 		try {
 			List<String> titles = new ArrayList<String>();
 			titles.add("名称");
+			titles.add("数量单位");
 			titles.add("规格");
 			titles.add("采购品分类");
 			titles.add("生产企业");
-			titles.add("英文名");
-			titles.add("商品包装条码");
-			titles.add("产品编码");
+//			titles.add("英文名");
+//			titles.add("商品包装条码");
+//			titles.add("产品编码");
 			titles.add("保质期");
 			titles.add("保质期单位");
 			titles.add("产地");
@@ -501,16 +502,17 @@ public class WaresController extends BaseController {
 				for (int i = 0; i < expList.size(); i++) {
 					PageData vpd = new PageData();
 					vpd.put("var1", expList.get(i).getWaresName());
-					vpd.put("var2", expList.get(i).getSpec());
-					vpd.put("var3",
+					vpd.put("var2", expList.get(i).getAmountUnit());
+					vpd.put("var3", expList.get(i).getSpec());
+					vpd.put("var4",
 							ProductClass.getName(expList.get(i).getWaresType()));
-					vpd.put("var4", expList.get(i).getManufacturer());
-					vpd.put("var5", expList.get(i).getEnName());
-					vpd.put("var6", expList.get(i).getBarCode());
-					vpd.put("var7", expList.get(i).getCustomCode());
-					vpd.put("var8", expList.get(i).getShelfLife());
-					vpd.put("var9", expList.get(i).getUnit());
-					vpd.put("var10", expList.get(i).getPlace());
+					vpd.put("var5", expList.get(i).getManufacturer());
+//					vpd.put("var5", expList.get(i).getEnName());
+//					vpd.put("var6", expList.get(i).getBarCode());
+//					vpd.put("var7", expList.get(i).getCustomCode());
+					vpd.put("var6", expList.get(i).getShelfLife());
+					vpd.put("var7", expList.get(i).getUnit());
+					vpd.put("var8", expList.get(i).getPlace());
 					varList.add(vpd);
 				}
 			}
@@ -599,12 +601,19 @@ public class WaresController extends BaseController {
 						dto.setWaresName(value);
 					} else if (i == 1) {
 						if (StringUtils.isBlank(value)) {
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，数量单位不能为空。";
+							break;
+						}
+						// 产品规格
+						dto.setAmountUnit(value);
+					}else if (i == 2) {
+						if (StringUtils.isBlank(value)) {
 							errorMsg = "第" + (rowNum + 1) + "行数据不正确，规格不能为空。";
 							break;
 						}
 						// 产品规格
 						dto.setSpec(value);
-					} else if (i == 2) {
+					} else if (i == 3) {
 						if (StringUtils.isBlank(value)) {
 							errorMsg = "第" + (rowNum + 1) + "行数据不正确，分类不能为空。";
 							break;
@@ -620,7 +629,7 @@ public class WaresController extends BaseController {
 							errorMsg = "第" + (rowNum + 1) + "行数据不正确，分类不正确。";
 							break;
 						}
-					} else if (i == 3) {
+					} else if (i == 4) {
 						// 生产企业
 						if (StringUtils.isBlank(value)) {
 							errorMsg = "第" + (rowNum + 1) + "行数据不正确，生产企业不能为空。";
@@ -635,16 +644,16 @@ public class WaresController extends BaseController {
 							errorMsg = "第" + (rowNum + 1) + "行数据不正确，商品已存在。";
 							break;
 						}
-					} else if (i == 4 && StringUtils.isNotBlank(value)) {
-						// 英文名称
-						dto.setEnName(value);
+//					} else if (i == 4 && StringUtils.isNotBlank(value)) {
+//						// 英文名称
+//						dto.setEnName(value);
+//					} else if (i == 5 && StringUtils.isNotBlank(value)) {
+//						// 商品包装条码
+//						dto.setBarCode(value);
+//					} else if (i == 6 && StringUtils.isNotBlank(value)) {
+//						// 企业自定义编码
+//						dto.setCustomCode(value);
 					} else if (i == 5 && StringUtils.isNotBlank(value)) {
-						// 商品包装条码
-						dto.setBarCode(value);
-					} else if (i == 6 && StringUtils.isNotBlank(value)) {
-						// 企业自定义编码
-						dto.setCustomCode(value);
-					} else if (i == 7 && StringUtils.isNotBlank(value)) {
 						// 保质期
 						try {
 							dto.setShelfLife(Integer.parseInt(value));
@@ -652,10 +661,10 @@ public class WaresController extends BaseController {
 							errorMsg = "第" + (rowNum + 1) + "行数据不正确，保质期格式不正确。";
 							break;
 						}
-					} else if (i == 8 && dto.getShelfLife() != null) {
+					} else if (i == 6 && dto.getShelfLife() != null) {
 						// 保质期单位
 						dto.setUnit(value);
-					} else if (i == 9 && StringUtils.isNotBlank(value)) {
+					} else if (i == 7 && StringUtils.isNotBlank(value)) {
 						// 产地
 						dto.setPlace(value);
 					}

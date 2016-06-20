@@ -14,7 +14,7 @@ import com.ssic.education.app.dto.WaresInfoDto;
 import com.ssic.education.app.dto.WaresListDto;
 import com.ssic.education.app.dto.WaresRelatedDto;
 import com.ssic.education.app.interceptor.AccessRequired;
-import com.ssic.education.app.service.IWaresInfoService;
+import com.ssic.education.app.service.IAppWaresService;
 import com.ssic.education.handle.pojo.ProWares;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
@@ -36,9 +36,9 @@ import com.ssic.education.utils.util.StringUtils;
  */
 @Controller
 @RequestMapping(value = "/wares")
-public class WaresInfoController {
+public class AppWaresController {
 	@Autowired
-	private IWaresInfoService waresInfoService;
+	private IAppWaresService waresInfoService;
 
 	/**
 	 * getWaresList： 食品列表：根据供应商id查食品列表 原料列表：根据供应商id查原料列表

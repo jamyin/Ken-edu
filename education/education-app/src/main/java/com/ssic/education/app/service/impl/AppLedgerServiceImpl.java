@@ -7,13 +7,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ssic.education.app.dao.LedgerInfoDao;
-import com.ssic.education.app.dao.SupplierInfoDao;
+import com.ssic.education.app.dao.AppLedgerDao;
+import com.ssic.education.app.dao.AppSupplierDao;
 import com.ssic.education.app.dto.LedgerInfoDto;
 import com.ssic.education.app.dto.LedgerMasterInfoDto;
 import com.ssic.education.app.dto.LedgerMasterListDto;
 import com.ssic.education.app.dto.LedgerDetailDto;
-import com.ssic.education.app.service.ILedgerInfoService;
+import com.ssic.education.app.service.IAppLedgerService;
 import com.ssic.education.handle.dao.ProLedgerMasterDao;
 import com.ssic.education.handle.pojo.ProLedger;
 import com.ssic.education.handle.pojo.ProLedgerMaster;
@@ -34,18 +34,18 @@ import com.ssic.education.utils.util.BeanUtils;
  * <p>修改备注：</p>
  */
 @Service
-public class LedgerInfoServiceImpl implements ILedgerInfoService {
+public class AppLedgerServiceImpl implements IAppLedgerService {
 
 	@Autowired
-	private LedgerInfoDao ledgerInfoDao;
+	private AppLedgerDao ledgerInfoDao;
 	@Autowired
-	private SupplierInfoDao supplierInfoDao;
+	private AppSupplierDao supplierInfoDao;
 	@Autowired
 	private ProLedgerMasterDao proLedgerMasterDao;
 
 	/** 
 	* (non-Javadoc)   
-	* @see com.ssic.education.app.service.ILedgerInfoService#findLedgerByBatchNo(java.lang.String)   
+	* @see com.ssic.education.app.service.IAppLedgerService#findLedgerByBatchNo(java.lang.String)   
 	*/
 	@Override
 	public LedgerInfoDto findLedgerByBatchNo(String batchNo) {

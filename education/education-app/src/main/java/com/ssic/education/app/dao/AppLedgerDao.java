@@ -37,7 +37,7 @@ import com.ssic.education.utils.util.BeanUtils;
  * <p>修改备注：</p>
  */
 @Repository
-public class LedgerInfoDao {
+public class AppLedgerDao {
 
 	@Getter
 	@Autowired

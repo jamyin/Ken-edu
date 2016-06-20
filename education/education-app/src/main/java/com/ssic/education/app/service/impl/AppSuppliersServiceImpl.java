@@ -6,12 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssic.educateion.common.dto.ProSupplierDto;
-import com.ssic.education.app.dao.SupplierInfoDao;
+import com.ssic.education.app.dao.AppSupplierDao;
 import com.ssic.education.app.dto.AppCanTeenDto;
 import com.ssic.education.app.dto.AppLicenseDto;
 import com.ssic.education.app.dto.MaterialSupplierDto;
 import com.ssic.education.app.dto.SupplierLicDto;
-import com.ssic.education.app.service.ISupplierService;
+import com.ssic.education.app.service.IAppSupplierService;
 import com.ssic.education.handle.dao.SupplierDao;
 import com.ssic.education.handle.pojo.EduCanteen;
 import com.ssic.education.handle.pojo.ProLicense;
@@ -27,13 +27,13 @@ import com.ssic.education.utils.util.BeanUtils;
  *
  */
 @Service
-public class SuppliersServiceImpl implements ISupplierService {
+public class AppSuppliersServiceImpl implements IAppSupplierService {
 
 	@Autowired
 	private SupplierDao supplierDao;
 
 	@Autowired
-	private SupplierInfoDao supplierInfoDao;
+	private AppSupplierDao supplierInfoDao;
 
 	@Override
 	public PageResult<ProSupplierDto> findSupplierList(ProSupplierDto proSupplierDto, PageQuery query) {

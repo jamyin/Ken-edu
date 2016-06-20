@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ssic.education.app.dao.AppProUsersDao;
 import com.ssic.education.app.dao.AppUsersDao;
-import com.ssic.education.app.dao.SupplierInfoDao;
+import com.ssic.education.app.dao.AppSupplierDao;
 import com.ssic.education.app.dto.AppEduUserDto;
 import com.ssic.education.app.dto.AppProUserDto;
 import com.ssic.education.app.dto.EduUsersInfoDto;
@@ -30,7 +30,7 @@ public class AppUsersServiceImpl implements IAppUsersService {
 	@Autowired
 	private CommitteeDao committeeDao;
 	@Autowired
-	private SupplierInfoDao supplierDao;
+	private AppSupplierDao supplierDao;
 	@Autowired
 	private WdRedisDao<AppEduUserDto> eduRedisdao;
 	@Autowired
