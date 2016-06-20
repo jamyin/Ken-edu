@@ -105,6 +105,7 @@ public class StockBatchController {
 	 * @date 2016年5月27日 下午2:39:55
 	 */
 	@RequestMapping(value = "/master/{id}", method = RequestMethod.GET)
+	@AccessRequired
 	public @ResponseBody Response<LedgerMasterInfoDto> getMasterInfoById(@PathVariable("id") String id, PageQuery query) {
 		Response<LedgerMasterInfoDto> result = new Response<LedgerMasterInfoDto>();
 		LedgerMasterInfoDto LedgerInfoDto = ledgerInfoService.findMasterById(id, query);
