@@ -86,7 +86,7 @@
 			},
 			{
 				field : 'name',
-				title : '<font  style="font-style: normal; font-size:18px;">采购品</font>',
+				title : '<font  style="font-style: normal; font-size:18px;">原料</font>',
 				width : 150,
 				formatter : function(value, row, index) {
 					if(value!=null){

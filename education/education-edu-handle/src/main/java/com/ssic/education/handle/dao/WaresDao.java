@@ -66,9 +66,8 @@ public class WaresDao{
 
 
 	public void deleteWares(ProWaresDto waresDto) {
-		// TODO Auto-generated method stub
-		String id=	waresDto.getId();
-		mapper.deleteByPrimaryKey(id);
+		exmapper.deleteWares(waresDto);
+		
 	}
 
 

@@ -19,5 +19,6 @@ int findAllWaresCount(@Param("dto")ProWaresDto waresDto);
 
 ProWaresDto findWaresBySupplierId(@Param("ledger")LedgerDto ledger);
 
+void deleteWares(@Param("warseDto") ProWaresDto waresDto);
 
 }

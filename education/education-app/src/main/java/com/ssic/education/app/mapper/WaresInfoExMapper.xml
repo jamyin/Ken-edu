@@ -16,7 +16,8 @@
 		<result column="place" property="place" jdbcType="VARCHAR" />
 		<result column="dishes" property="dishes" jdbcType="BIT" />
 		<result column="crate_time" property="crateTime" jdbcType="TIMESTAMP" />
-		<result column="last_update_time" property="lastUpdateTime" jdbcType="TIMESTAMP" />
+		<result column="last_update_time" property="lastUpdateTime"
+			jdbcType="TIMESTAMP" />
 		<result column="stat" property="stat" jdbcType="INTEGER" />
 		<result column="image" property="image" jdbcType="VARCHAR" />
 		<result column="remark" property="remark" jdbcType="VARCHAR" />
@@ -27,6 +28,7 @@
 		<result column="spec" property="spec" jdbcType="VARCHAR" />
 		<result column="shelf_life" property="shelfLife" jdbcType="INTEGER" />
 		<result column="unit" property="unit" jdbcType="VARCHAR" />
+		<result column="amount_unit" property="amountUnit" jdbcType="VARCHAR" />
 		<result column="supplier_id" property="supplierId" jdbcType="VARCHAR" />
 		<result column="way" property="way" jdbcType="INTEGER" />
 		<result column="wares_type" property="waresType" jdbcType="INTEGER" />
@@ -45,23 +47,31 @@
 		<result column="image" property="image" jdbcType="VARCHAR" />
 	</resultMap>
 
-	<select id="findWarseBySupplier" parameterType="java.lang.String" resultMap="BaseResultMap">
+	<select id="findWarseBySupplier" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
 		select * from t_pro_wares where supplier_id=#{supplierId}
 	</select>
-	<select id="findWarseById" parameterType="java.lang.String" resultMap="WaresRelated">
+	<select id="findWarseById" parameterType="java.lang.String"
+		resultMap="WaresRelated">
 		select * from t_pro_wares where id=#{id}
 	</select>
-	<select id="getSupplierById" parameterType="java.lang.String" resultType="com.ssic.educateion.common.dto.ProSupplierDto">
-		SELECT * from t_pro_supplier where supplier_id=#{supplierId}
+	<select id="getSupplierById" parameterType="java.lang.String"
+		resultType="com.ssic.educateion.common.dto.ProSupplierDto">
+		SELECT * from t_pro_supplier where
+		supplier_id=#{supplierId}
 	</select>
-	<select id="getLedgerById" parameterType="java.lang.String" resultType="com.ssic.education.app.dto.LedgerInfoDto">
-		SELECT * from t_pro_ledger where supplier_id=#{supplierId} and wares_id=#{wares_id}
+	<select id="getLedgerById" parameterType="java.lang.String"
+		resultType="com.ssic.education.app.dto.LedgerInfoDto">
+		SELECT * from t_pro_ledger where supplier_id=#{supplierId}
+		and wares_id=#{wares_id}
 	</select>
-	<select id="findWarseBySchoolId" parameterType="com.ssic.education.app.dto.WaresInfoDto" resultMap="WaresList">
+	<select id="findWarseBySchoolId" parameterType="com.ssic.education.app.dto.WaresInfoDto"
+		resultMap="WaresList">
 		SELECT id,wares_name,spec,custom_code,image FROM t_pro_wares
 		WHERE
 		id IN (
-		SELECT ware_id FROM t_pro_school_ware WHERE school_id = #{schoolId} AND stat = 1
+		SELECT ware_id FROM t_pro_school_ware WHERE school_id =
+		#{schoolId} AND stat = 1
 		)
 		AND stat=1
 	</select>
