@@ -33,11 +33,11 @@ public class WaresServiceImpl implements IWaresService {
 	 * @author zhangjiwei
 	 * @since 2016.5.21
 	 */
-	public ProWares findProWarsByNameSpecManu(String name, String spec, String manufacturer, String supplierId) {
+	public ProWares findProWarsByNameSpecManu(String name, String amountUnit, String manufacturer, String supplierId) {
 		ProWaresExample ex = new ProWaresExample();
 		ProWaresExample.Criteria c = ex.createCriteria();
 		c.andWaresNameEqualTo(name);
-		c.andSpecEqualTo(spec);
+		c.andAmountUnitEqualTo(amountUnit);
 		if(manufacturer!=null && manufacturer!=null){
 		c.andManufacturerEqualTo(manufacturer);}
 		c.andWayEqualTo(0);
