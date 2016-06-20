@@ -114,7 +114,7 @@
 		</div>
 	</div>	
 	<div class="footer">
-		上海市中小学校学生午餐综合管理平台<br>CopyRight© 2016上海市天坊信息技术有限公司
+		阳光午餐综合管理平台<br>CopyRight© 2016上海天坊信息科技有限公司
 	</div>
 	<!--<script src="static/js/footer.js"></script>-->
 <script>
@@ -140,7 +140,7 @@
 			if(_tag == 'add'){
 				var _ind = $(this).closest('ul').find('li').length + 1
 				//alert(_ind)
-				$('.c_type').append('<li name="phoneFile'+ _ind +'"><select class="licType'+  _ind +'" id=""><option value=\"0\">餐饮服务许可证</option><option value=\"1\">食品经营许可证</option><option value=\"2\">食品流通许可证</option><option value=\"3\">食品生产许可证</option><option value=\"4\">工商营业执照</option>></select><input id="licNum" type="text" class="licinputw'+ _ind +'" name="licNum" placeholder="证件编号"><label class="file" for="phoneFile'+ _ind +'">未选择文件<i>浏览</i></label><input id="phoneFile'+ _ind +'"  type="file" name="file" onchange="selectfun(this)"><span class="remove">-</span><a id="phoneQuery'+ _ind +'"></a></li>')
+				$('.c_type').append('<li name="phoneFile'+ _ind +'"><select class="licType'+  _ind +'" id=""><option value=\"0\">餐饮服务许可证</option><option value=\"4\">工商营业执照</option>></select><input id="licNum" type="text" class="licinputw'+ _ind +'" name="licNum" placeholder="证件编号"><label class="file" for="phoneFile'+ _ind +'">未选择文件<i>浏览</i></label><input id="phoneFile'+ _ind +'"  type="file" name="file" onchange="selectfun(this)"><span class="remove">-</span><a id="phoneQuery'+ _ind +'"></a></li>')
 			}else if(_tag == 'remove'){
 				$(this).closest('li').remove()
 				for(var i=0; i<$('.c_type').find('li').length;i++){
