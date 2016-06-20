@@ -36,9 +36,6 @@ public class Token implements Serializable {
 		this.signature = signature;
 	}
 
-	/**
-	 * Returns a string containing the unique signatureentifier assigned to this token.
-	 */
 	public String getSignature() {
 		return signature;
 	}
