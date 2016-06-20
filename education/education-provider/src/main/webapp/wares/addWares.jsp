@@ -71,7 +71,7 @@
 							<td><input name="waresName" type="text" id="waresName"
 								placeholder="请输入商品名称" class="easyui-validatebox span2"
 								data-options="required:true" ></td>
-								<th>数量单位</th>
+							<th><font color="red">*</font>数量单位</th>
 						    <td><input name="amountUnit" type="text" placeholder="数量单位" id="amountUnit"
 								class="easyui-validatebox span2"  data-options="required:true"></td>
 
@@ -79,7 +79,7 @@
 					
 						
 						<tr>
-						<th><font color="red">*</font>规格</th>
+						<th>规格</th>
 							<td><input name="spec" type="text" placeholder="请输入规格"  id="spec"
 								class="easyui-validatebox span2"  ></td>
 						

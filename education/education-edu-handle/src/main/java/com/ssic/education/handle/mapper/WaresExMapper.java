@@ -16,17 +16,9 @@ List<ProWaresDto> findWaresById(@Param("proWaresDto")ProWaresDto proWaresDto);
 
 
 int findAllWaresCount(@Param("dto")ProWaresDto waresDto);
-<<<<<<< HEAD
 
 ProWaresDto findWaresBySupplierId(@Param("ledger")LedgerDto ledger);
 
 void deleteWares(@Param("warseDto") ProWaresDto waresDto);
-=======
-
-ProWaresDto findWaresBySupplierId(@Param("ledger")LedgerDto ledger);
-
-void deleteWares(@Param("warseDto") ProWaresDto waresDto);
->>>>>>> branch 'master' of http://192.168.1.231/group-one/education.git
-
 
 }
