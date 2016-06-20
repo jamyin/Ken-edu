@@ -57,7 +57,7 @@
 
     <div class="menu_box">
       <div class="subbar">
-        <p class="lef">学校食堂：<#if (eduCanteenDto.canteenName??) && (eduCanteenDto.canteenName != '')><a style="cursor: pointer;" href="canteen.htm?schoolId=${(eduSchoolDto.id)!}"><span style="color: blue;">${(eduCanteenDto.canteenName)!}</span></a><#else><span style="color: red;">暂无</span></#if></p><#if (dto.source == 1) && (eduSchoolSupplierDtos.supplierId??)><a style="cursor: pointer;" class="offer_delete">删除</a> </#if><p class="rig">委托学校食堂：<#if (proSupplierDtos??) && (proSupplierDtos?size>0)><#list proSupplierDtos as supplier><a href="/pro/supplier/detail.htm?id=${(supplier.id)!}&source=1"><span style="color: blue;">${(supplier.supplierName)!}</span></a>
+        <p class="lef">学校食堂：<#if (eduCanteenDto.canteenName??) && (eduCanteenDto.canteenName != '')><a style="cursor: pointer;" href="canteen.htm?schoolId=${(eduSchoolDto.id)!}"><span style="color: #60ac62;">${(eduCanteenDto.canteenName)!}</span></a><#else><span style="color: red;">暂无</span></#if></p><#if (dto.source == 1) && (eduSchoolSupplierDtos.supplierId??)><a style="cursor: pointer;" class="offer_delete">删除</a> </#if><p class="rig">委托经营单位：<#if (proSupplierDtos??) && (proSupplierDtos?size>0)><#list proSupplierDtos as supplier><a href="/pro/supplier/detail.htm?id=${(supplier.id)!}&source=1"><span style="color: #60ac62;">${(supplier.supplierName)!}</span></a>
 					</#list>
 				<#else><span style="color: red;">暂无</span>
 				</#if></p>

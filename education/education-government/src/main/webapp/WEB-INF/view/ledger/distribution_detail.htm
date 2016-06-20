@@ -15,7 +15,7 @@
       <div class="dis_info">
         <span class="d_1"><label for="">配送号：</label><span class="d_2">${(ledgerDto.wareBatchNo)!}</span></span>
         <span class="d_1"><label for="">配货日期：</label><span class="d_2"><#if ledgerDto.actionDate??>${ledgerDto.actionDate?string("yyyy-MM-dd")}</#if></span></span>
-        <span class="d_1"><label for="">出发点：</label><span class="d_2"><a style="color: blue;" href="/pro/supplier/detail.htm?id=${(dto.supplierId)!}&source=1">${(dto.supplierName)!}</a></span></span>
+        <span class="d_1"><label for="">出发点：</label><span class="d_2"><a style="color: #60ac62;" href="/pro/supplier/detail.htm?id=${(dto.supplierId)!}&source=1">${(dto.supplierName)!}</a></span></span>
         <span class="d_1"><label for="">状态：</label><span class="d_2"><#if ledgerDto.haulStatus == 0>未配送 </#if><#if ledgerDto.haulStatus == 1>配送中</#if><#if ledgerDto.haulStatus == 2>已配送</#if></span></span>
       </div>
       <ul class="distribution_ul">
@@ -30,7 +30,7 @@
         <#if ledgerDtos??>
         <#list ledgerDtos as ledgerDtos>
         	<li>
-	          <span class="ct1"><a style="color: blue;" href="/pro/wares/details.htm?id=${(ledgerDtos.waresId)!}">${(ledgerDtos.name)!}</a></span>
+	          <span class="ct1"><a style="color: #60ac62;" href="/pro/wares/details.htm?id=${(ledgerDtos.waresId)!}">${(ledgerDtos.name)!}</a></span>
 	          <span class="ct2">${(ledgerDtos.quantity)!}</span>
 	          <span class="ct3">${(ledgerDtos.spce)!}</span>
 	          <span class="ct4"><#if ledgerDtos.productionDate??>${ledgerDtos.productionDate?string("yyyy-MM-dd")}</#if></span>
@@ -43,7 +43,7 @@
 
       <div class="info">
         <p class="driver"><span>${(ledgerDto.driverName)!}</span></p>
-        <p>出发点：<span><a style="color: blue;" href="/pro/supplier/detail.htm?id=${(dto.supplierId)!}&source=1">${(dto.supplierName)!}</a></span></p>
+        <p>出发点：<span><a style="color: #60ac62;" href="/pro/supplier/detail.htm?id=${(dto.supplierId)!}&source=1">${(dto.supplierName)!}</a></span></p>
         <p>出发时间：<span><#if ledgerDto.startTime??>${ledgerDto.startTime?string("yyyy-MM-dd HH:mm:ss")}</#if></span></p>
         <p>原料：<span><#if ledgerDtos??><#list ledgerDtos as ledgerDtos>${(ledgerDtos.name)!}&nbsp;</#list>
         </#if></span></p>

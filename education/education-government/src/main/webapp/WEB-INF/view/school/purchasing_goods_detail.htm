@@ -34,7 +34,7 @@
         <#if proLicenses??>
         	<#list proLicenses as proLicense>
 	        	<#if proLicense.licType != 3>
-	        		<li><label for="">${(proLicense.licName)!}:</label><span>${(proLicense.licNo)!}</span><#if proLicense.licPic??><a class="img_nn" data-value="${(wwwdomain)!}${(proLicense.licPic)!}" href="###" style="color: blue;">查看图片&gt;&gt;</a></#if></li>
+	        		<li><label for="">${(proLicense.licName)!}:</label><span>${(proLicense.licNo)!}</span><#if proLicense.licPic??><a class="img_nn" data-value="${(wwwdomain)!}${(proLicense.licPic)!}" href="###" style="color: #60ac62;">查看图片&gt;&gt;</a></#if></li>
 	        	</#if>
         	</#list>
         </#if>

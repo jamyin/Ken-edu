@@ -41,7 +41,7 @@
                 	<#if pageList ??>
                 		<#list pageList.getResults() as data>
 		                    <li>
-		                        <a style="color: blue;" href="/info/details/${(data.id)!}.htm">${(data.title)!}</a>
+		                        <a style="color: #60ac62;" href="/info/details/${(data.id)!}.htm">${(data.title)!}</a>
 		                        <span class="date">${(data.createTime?string('yyyy-MM-dd'))!}</span>
 		                    </li>                			
                 		</#list>
