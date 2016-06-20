@@ -79,7 +79,7 @@ text-align: right;
 						type="text" placeholder="请输入餐饮服务证号" class="easyui-validatebox span2"
 						value="${Corporate.foodServiceCode }"></td>
 				</tr>
-				<tr>
+<%-- 				<tr>
 					<th></th>
 					<th>食品经营许可证:</th>
 					<td><input name="foodBusinessCode" type="text"
@@ -99,7 +99,7 @@ text-align: right;
 					<td><input name="foodProduceCode" type="text"
 						placeholder="请输入食品生产证号" class="easyui-validatebox span2"
 						value="${Corporate.foodProduceCode }"></td>
-				</tr>
+				</tr> --%>
 				<tr>	
 					<th></th>
 					<th>工商执照号:</th>

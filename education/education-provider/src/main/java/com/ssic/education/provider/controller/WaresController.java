@@ -607,10 +607,6 @@ public class WaresController extends BaseController {
 						// 产品规格
 						dto.setAmountUnit(value);
 					}else if (i == 2) {
-						if (StringUtils.isBlank(value)) {
-							errorMsg = "第" + (rowNum + 1) + "行数据不正确，规格不能为空。";
-							break;
-						}
 						// 产品规格
 						dto.setSpec(value);
 					} else if (i == 3) {
@@ -638,7 +634,7 @@ public class WaresController extends BaseController {
 						dto.setManufacturer(value);
 						// 检查这个商品是否存在，如果存在不导入
 						ProWares pw = waresService.findProWarsByNameSpecManu(
-								dto.getWaresName(), dto.getSpec(),
+								dto.getWaresName(), dto.getAmountUnit(),
 								dto.getManufacturer(), supplierId);
 						if (pw != null) {
 							errorMsg = "第" + (rowNum + 1) + "行数据不正确，商品已存在。";
