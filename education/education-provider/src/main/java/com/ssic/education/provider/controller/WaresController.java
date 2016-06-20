@@ -459,7 +459,7 @@ public class WaresController extends BaseController {
 		response.setHeader("Content-Disposition", "attachment;filename="
 				+ filename + ".xls");
 		Workbook workbook = new HSSFWorkbook();
-		sheet = (HSSFSheet) workbook.createSheet("采购品");
+		sheet = (HSSFSheet) workbook.createSheet("原料");
 		try {
 			List<String> titles = new ArrayList<String>();
 			titles.add("名称");
