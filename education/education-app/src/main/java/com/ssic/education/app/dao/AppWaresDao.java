@@ -33,7 +33,7 @@ import com.ssic.education.utils.mybatis.MyBatisBaseDao;
  * <p>修改备注：</p>
  */
 @Repository
-public class WaresInfoDao extends MyBatisBaseDao<WaresInfoDto> {
+public class AppWaresDao extends MyBatisBaseDao<WaresInfoDto> {
 
 	@Getter
 	@Autowired

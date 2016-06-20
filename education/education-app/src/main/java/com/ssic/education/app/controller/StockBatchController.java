@@ -13,7 +13,7 @@ import com.ssic.education.app.dto.LedgerInfoDto;
 import com.ssic.education.app.dto.LedgerMasterInfoDto;
 import com.ssic.education.app.dto.LedgerMasterListDto;
 import com.ssic.education.app.interceptor.AccessRequired;
-import com.ssic.education.app.service.ILedgerInfoService;
+import com.ssic.education.app.service.IAppLedgerService;
 import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
@@ -36,7 +36,7 @@ import com.ssic.education.utils.model.Response;
 public class StockBatchController {
 
 	@Autowired
-	private ILedgerInfoService ledgerInfoService;
+	private IAppLedgerService ledgerInfoService;
 
 	/**
 	 * 

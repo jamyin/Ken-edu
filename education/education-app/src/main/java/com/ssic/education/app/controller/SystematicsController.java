@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ssic.education.app.constants.ProductClass;
 import com.ssic.education.app.constants.ProductList;
 import com.ssic.education.app.interceptor.AccessRequired;
+import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.Response;
 
 /**		
@@ -39,24 +40,20 @@ public class SystematicsController {
 	@AccessRequired
 	@ResponseBody
 	public Response<Map<Integer, String>> getDishesType() {
-		Response<Map<Integer, String>> result = new Response<Map<Integer, String>>();
-		result.setData(ProductClass.getAll());
-		return result;
+		return new Response<Map<Integer, String>>(DataStatus.HTTP_SUCCESS, "查询成功", ProductClass.getAll());
 	}
 
 	/**
-	 * getDishesType：食品分类列表 原料分类列表
-	 * @return
-	 * @exception	
+	 * getDishesList：食品分类列表 原料分类列表
 	 * @author SeanYoung
 	 * @date 2016年5月16日 上午9:44:23
+	 * @return Response<List<ProductList>> 
 	 */
 	@RequestMapping(value = "/DingTypelist", method = RequestMethod.GET)
 	@AccessRequired
 	@ResponseBody
-	public Response<List<ProductList>> Dinglist() {
-		Response<List<ProductList>> result = new Response<List<ProductList>>();
-		result.setData(ProductClass.getList());
-		return result;
+	public Response<List<ProductList>> getDishesList() {
+		return new Response<List<ProductList>>(DataStatus.HTTP_SUCCESS, "查询成功", ProductClass.getList());
+
 	}
 }

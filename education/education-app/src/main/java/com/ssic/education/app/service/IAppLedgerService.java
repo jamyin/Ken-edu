@@ -20,7 +20,7 @@ import com.ssic.education.utils.model.PageResult;
  * <p>修改时间：2016年5月17日 下午1:21:22</p>
  * <p>修改备注：</p>
  */
-public interface ILedgerInfoService {
+public interface IAppLedgerService {
 	LedgerInfoDto findLedgerByBatchNo(String batchNo);
 
 	PageResult<LedgerMasterListDto> findMasterList(String receiverId, PageQuery page);
