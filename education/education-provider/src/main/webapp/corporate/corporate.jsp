@@ -77,7 +77,7 @@ ul.my_info {
 </head>
 <body>
 <div>
-	<div class="fl" style="width:300px;"><h2>${Corporate.supplierName }</h2></div>
+	<div class="fl" style="width:auto;"><h2>${Corporate.supplierName }</h2></div>
 	<div class="fl fl-a" ><a id="btn" onclick="edit()"><img title="编辑" src="${pageContext.request.contextPath}/icon/编辑.png"></img></a></div>
 	<div class="fl fl-a" ><a id="btn" onclick="editPic()"><img title="编辑图片" src="${pageContext.request.contextPath}/icon/编辑图片.png"></img></a> </div>
 	<%-- <a id="btn" onclick="showPic()"><img title="查看图片" src="${pageContext.request.contextPath}/icon/查看图片.png"></img></a> --%>
@@ -100,7 +100,7 @@ ul.my_info {
 		<li>
 			<span class="cert" style="text-align:left;">餐饮服务证号：	</span><span class="value">${Corporate.foodServiceCode }</span>
 		</li>
-		<li>
+<%-- 		<li>
 			<span class="cert" style="text-align:left;">食品经营许可证：	</span><span class="value">${Corporate.foodBusinessCode }</span>
 		</li>
 		<li>
@@ -108,7 +108,7 @@ ul.my_info {
 		</li>
 		<li>
 			<span class="cert" style="text-align:left;">食品生产证号：	</span><span class="value">${Corporate.foodProduceCode }</span>
-		</li>
+		</li> --%>
 		<li>
 			<span class="cert" style="text-align:left;">工商执照号：	</span><span class="value">${Corporate.businessLicense }</span>
 		</li>
