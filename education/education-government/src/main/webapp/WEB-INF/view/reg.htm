@@ -59,7 +59,7 @@
 				<li><label><i>*</i>短信验证码</label><input id="messageValid" type="text" placeholder="">
 					<input title="请先输入图片验证码" id="sendMessage" type="button" href="javascript:;" style="margin-left:10px;width:150px;line-height:30px;background:#60ac62;color:black;" value="获取短信验证码"></input>
 				</li>
-				<li><label><i>*</i>区教委</label>
+				<li><label><i>*</i>所属区教育局</label>
 				<select name="area"  id="area" panelheight="auto">
 					<option value="">请选择区县</option>
 		          	<#if eduCommitteeDtos??>
@@ -177,12 +177,12 @@
 			}
 			var area = $.trim($("#area").val());
 			if (area.length <= 0) {
-				alert("区教委不能为空~");
+				alert("区教育局不能为空~");
 				return;
 			}
 			var committeeId = $("#area option:selected").attr('data-id');
 			if (committeeId == 'undefined') {
-				alert(" 请选择区教委~");
+				alert(" 请选择区教育局~");
 				return;
 			}
 			var checkStr='';
