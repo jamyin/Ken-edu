@@ -13,7 +13,7 @@ MySQL - 5.5.42-log : Database - edu_test
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`edu_test` /*!40100 DEFAULT CHARACTER SET utf8 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`edu` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
 /*Table structure for table `t_edu_canteen` */
 
@@ -604,6 +604,7 @@ CREATE TABLE `t_pro_wares` (
   `id` varchar(36) NOT NULL COMMENT '商品id',
   `wares_name` varchar(40) NOT NULL COMMENT '名称',
   `spec` varchar(40) NOT NULL COMMENT '规格',
+  `amount_unit` varchar(30) DEFAULT NULL COMMENT '数量单位',
   `shelf_life` int(11) DEFAULT NULL COMMENT '保质期',
   `unit` varchar(10) DEFAULT NULL COMMENT '保质期单位',
   `supplier_id` varchar(36) NOT NULL COMMENT '所属供应商id',
