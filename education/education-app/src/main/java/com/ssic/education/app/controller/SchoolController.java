@@ -243,7 +243,7 @@ public class SchoolController {
 	 * @return Response<PageResult<EduSchoolDto>>    返回类型
 	 */
 	@RequestMapping("/chooseSchool")
-	//@AccessRequired
+	@AccessRequired
 	@ResponseBody
 	public Response<ChooseSchoolDto> chooseSchool(SchoolDto schoolDto, PageQuery query, Integer type, Integer sourceType) {
 		logger.info("SchoolDto : " + schoolDto + ";type : " + type + ";sourceType : " + sourceType);
