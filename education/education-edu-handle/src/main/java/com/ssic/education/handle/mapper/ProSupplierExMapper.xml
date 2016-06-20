@@ -417,7 +417,7 @@ WHERE
 			a.longitude,
 			a.latitude,
 			a.create_time createTime, 
-      		a.last_update_time lastUpdateTime, 
+      		b.last_update_time lastUpdateTime, 
       		a.stat,
 		 	b.committee_id committeeId
 			FROM t_pro_supplier a

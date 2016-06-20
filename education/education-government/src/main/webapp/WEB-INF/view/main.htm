@@ -40,12 +40,17 @@
 		
 		<div class="index_row">
 			<div class="inewbox">
-				<h3>公示栏<a class="more" href="/info/index/1.htm">更多...</a></h3>
-				<ul>
+				<h3>通告公司<a class="more" href="/info/index/1.htm">更多...</a></h3>
 				<#if pageList1??>
-					<#list pageList1.results as eduInformationDto>
-						<li><a href="/info/details/${(eduInformationDto.id)!}.htm">${(eduInformationDto.title)!}         ${eduInformationDto.createTime?string("yyyy-MM-dd")}</a></li>
-					</#list>
+					<ul>
+						<#list pageList1.results as eduInformationDto>
+							<li><a href="/info/details/${(eduInformationDto.id)!}.htm">${(eduInformationDto.title)!}         ${eduInformationDto.createTime?string("yyyy-MM-dd")}</a></li>
+						</#list>
+					</ul>
+				<#else>
+					<ul style="text-align: center; line-height: 240px;">
+						<span>暂无数据</span>
+					</ul>
 				</#if>
 					<!-- <li><a href="###">上海市食品安全信息追溯管理办法（上海市人民政府令第33号）        2016-05-10</a></li>
 					<li><a href="###">水产制品监督抽检信息                                            2016-05-02</a></li>
@@ -53,16 +58,21 @@
 					<li><a href="###">本市集体用餐配送单位（盒饭、桶饭）达标名单                      2016-04-30</a></li>
 					<li><a href="###">级食品安全风险监测情况（2015年12月9日）                         2016-04-26</a></li>
 					<li><a href="###">食品行政处罚信息公告                                            2016-04-20</a></li> -->
-				</ul>
+				
 			</div>
 			<div class="inewbox rl">
 				<h3 class="bl">健康宣教<a class="more" href="/info/index/3.htm">更多...</a></h3>
-				<ul>
-					<#if pageList3??>
+				<#if pageList3??>
+					<ul>
 						<#list pageList3.results as eduInformationDto>
 							<li><a href="/info/details/${(eduInformationDto.id)!}.htm">${(eduInformationDto.title)!}         ${eduInformationDto.createTime?string("yyyy-MM-dd")}</a></li>
 						</#list>
-					</#if>
+					</ul>
+				<#else>
+					<ul style="text-align: center; line-height: 240px;">
+						<span>暂无数据</span>
+					</ul>
+				</#if>
 					<!-- <li><a href="###">上海市食品安全信息追溯管理办法（上海市人民政府令第33号）        2016-05-10</a></li>
 					<li><a href="###">水产制品监督抽检信息                                            2016-05-02</a></li>
 					<li><a href="###">对本市所有中小学学校进行食堂对本市所有中小学学校进行食堂...     2016-04-30</a></li>
@@ -78,7 +88,7 @@
 					<li><a href="###">本市集体用餐配送单位（盒饭、桶饭）达标名单                      2016-04-30</a></li>
 					<li><a href="###">级食品安全风险监测情况（2015年12月9日）                         2016-04-26</a></li>
 					<li><a href="###">食品行政处罚信息公告                                            2016-04-20</a></li> -->
-				</ul>
+				
 			</div>
 			<!-- <div class="inewbox">
 				<h3 class="gr">卫生检查<a class="more" href="###">更多...</a></h3>
