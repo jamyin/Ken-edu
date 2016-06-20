@@ -8,7 +8,7 @@
 <link href="login/css/style.css" rel="stylesheet" />
 </head>
 <body>
-	<h1>欢迎使用团餐供应商系统</h1>
+	<h1>欢迎使用阳光午餐系统</h1>
 	<div class="login_wrap"></div>
 	<div class="login_box">
 		<ul>

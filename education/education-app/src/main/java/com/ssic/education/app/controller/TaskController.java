@@ -345,6 +345,10 @@ public class TaskController {
 			EduCommitteeDto committeeDto = new EduCommitteeDto();
 			committeeDto.setType((short) 2);
 			List<EduCommitteeDto> committeeList = committeeService.findCommitteeListNoPage(committeeDto);
+			if(committeeList != null && committeeList.size() >0){
+				committeeList.get(0).setId("-1");
+				committeeList.get(0).setName("全部");
+			}
 			taskReceiveDto.setEduCommitteeList(committeeList);
 
 			result.setStatus(DataStatus.HTTP_SUCCESS);

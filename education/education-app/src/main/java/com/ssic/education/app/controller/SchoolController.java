@@ -274,6 +274,10 @@ public class SchoolController {
 				//EduCommitteeDto eduCommitteeDto = new EduCommitteeDto();
 				//eduCommitteeDto.setType((short) 2);      //只查区教委列表
 				List<EduCommitteeDto> committeeList = committeeService.findCommitteeListNoPage(new EduCommitteeDto());
+				if(committeeList != null && committeeList.size() >0){
+					committeeList.get(0).setId("-1");
+					committeeList.get(0).setName("全部");
+				}
 				chooseSchoolDto.setCommitteeList(committeeList);
 
 				//学校列表

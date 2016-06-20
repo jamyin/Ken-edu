@@ -22,6 +22,7 @@
 		a.image AS image,
 		a.remark AS remark,
 		a.supplier_id AS supplierId,
+		a.amount_unit AS amountUnit,
 		manufacturer AS manufacturer
 		FROM
 		t_pro_wares a
@@ -67,6 +68,7 @@
 		a.image AS image,
 		a.remark AS remark,
 		a.supplier_id AS supplierId,
+		a.amount_unit AS amountUnit,
 		manufacturer AS manufacturer
 		FROM
 		t_pro_wares a,
@@ -86,9 +88,7 @@
 		<if test="warseDto.waresName!=null and  warseDto.waresName!=''">
 			AND a.wares_name  like  #{warseDto.waresName}
 		</if>
-		<!-- <if test="warseDto.customCode!=null and warseDto.customCode!='' ">
-			AND a.custom_code  like #{warseDto.customCode}
-		</if> -->
+
 		<if test="warseDto.waresType!=null and warseDto.waresType!='' ">
 			and a.wares_type = #{warseDto.waresType}
 		</if>	

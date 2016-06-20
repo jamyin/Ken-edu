@@ -67,7 +67,7 @@
 					<table class="table table-hover table-condensed"  >
 						<tr>
 
-							<th><font color="red">*</font>商品名称</th>
+							<th><font color="red">*</font>原料名称</th>
 							<td><input name="waresName" type="text" id="waresName"
 								placeholder="请输入商品名称" class="easyui-validatebox span2"
 								data-options="required:true" ></td>
@@ -76,71 +76,53 @@
 								class="easyui-validatebox span2"  data-options="required:true"></td>
 
 						</tr>
-						<tr>
-							<th><font color="red">*</font>保质期</th>
-							<td><input name="shelfLife" type="text" placeholder="请输入保质期" id="shelfLife"
-								class="easyui-validatebox span2"  data-options="required:true" ></td>
-							<th><font color="red">*</font>保质期单位</th>
-							<td><select id="unit" class="easyui-combobox" name="unit"  data-options="width:140,height:29,editable:false,panelHeight:'auto'"
-								data-options="required:true">
-							    <option value="年">年</option>   
-							    <option value="月">月</option>   
-							    <option value="日">日</option>   							  
-							    <option value="小时">小时</option>   							  
-							</select></td>
-						</tr>
+					
 						
 						<tr>
-							<th>产品编码</th>
-						    <td><input name="customCode" type="text" placeholder="请输入自定义代码" id="customCode"
+							<th>数量单位</th>
+						    <td><input name="amountUnit" type="text" placeholder="数量单位" id="amountUnit"
 								class="easyui-validatebox span2" ></td>
 							<th>产地</th>
 							<td><input name="place" type="text" id="place"
 								placeholder="请输入产地" class="easyui-validatebox span2"
 								></td>
 						</tr>
+							<tr>
+							<th><font color="red">*</font>保质期</th>
+							<td><input name="shelfLife" type="text" placeholder="请输入保质期" id="shelfLife"
+								class="easyui-validatebox span2"  data-options="required:true" ></td>
+							<th><font color="red">*</font>保质期单位</th>
+							<td><select id="unit" class="easyui-combobox" name="unit"  data-options="width:140,height:29,editable:false,panelHeight:'auto'"
+								data-options="required:true">
+								<option value="">请选择保质期单位</option>
+							    <option value="年">年</option>   
+							    <option value="月">月</option>   
+							    <option value="日">日</option>   							  
+							    <option value="小时">小时</option>   							  
+							</select></td>
+						</tr>
 						<tr>
 						<th><font color="red">*</font>生产企业</th>
 							<td><input name="manufacturer" type="text" placeholder="请输入供应商名称" id="manufacturer"
 								class="easyui-validatebox span2" data-options="required:true" ></td>
-							<th><font color="red">*</font>商品分类</th>
+							<th><font color="red">*</font>原料分类</th>
 							<td><select id="waresType" class="easyui-combobox" name="waresType"  data-options="width:140,height:29,editable:false,panelHeight:'auto'"
 								data-options="required:true">
-								<option value="">请选择商品分类</option>
-							    <option value="1">畜产品及其制品</option>   
-							    <option value="2">禽及其产品、制品</option>   
-							    <option value="3">蔬菜</option>   
-							    <option value="4">乳及乳制品</option>   
-							    <option value="5">油脂及其制品</option>   
-							    <option value="6">水产及其制品</option>   
-							    <option value="7">冷冻饮品</option>   
-							    <option value="8">水果</option>   
-							    <option value="9">粮食和粮食制品</option>   
-							    <option value="10">豆类及其制品</option>   
-							    <option value="11">食用菌和藻类</option>   
-							    <option value="12">可可和巧克力制品及糖果</option>   
-							    <option value="13">焙烤食品</option>   
-							    <option value="14">甜味料</option>   
-							    <option value="15">调味品</option>   
-							    <option value="16">特殊膳食用食品</option>   
-							    <option value="17">饮料类</option>   
-							    <option value="18">酒类</option>   
-							    <option value="19">添加剂类</option>   
-							    <option value="20">其他类</option>   
+								<option value="">请选择原料分类</option>
+							    <option value="1">粮食及其制品</option>   
+							    <option value="2">畜产品及其制品</option>   
+							    <option value="3">禽及其产品、制品</option>   
+							    <option value="4">蔬菜</option>   
+							    <option value="5"> 水果</option>   
+							    <option value="6">水产品</option>   
+							    <option value="7">豆制品</option>   
+							    <option value="8">乳品</option>   
+							    <option value="9">食用油</option>   
+							    <option value="10">其它类别的食品和食用农产品</option>     
 							</select> </td>
 							
 						</tr>
-						<tr>
-							<th>英文名</th>
-							<td>	<input name="enName" type="text" id="enName"
-								placeholder="请输入英文名" class="easyui-validatebox span2"
-								></td>
-							<th>产品包装条形码</th>
-							<td><input name="barCode" type="text" id="barCode"
-								placeholder="请输入条形码" class="easyui-validatebox span2"
-								></td>
-								
-						</tr>					
+										
 					</table>
 			
 				</form>
