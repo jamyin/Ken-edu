@@ -69,7 +69,7 @@
 	});
 	
 	function ledgerTr(){
-		var ltr='<td style="width:100px;"><input name="ledger[0].name" style="width:100px;" type="text" placeholder="请输入采购品" class="easyui-validatebox span2" data-options="required:true"></td><td style="width:100px;"><input name="ledger[0].quantity" style="width:100px;" type="text" placeholder="请输入数量" class="easyui-validatebox span2" data-options="required:true"></td><td style="width:100px;"><input name="ledger[0].spce" style="width:100px;" type="text" placeholder="请输入规格" class="easyui-validatebox span2" data-options="required:true"></td><td style="width:100px;"><input name="ledger[0].supplierName" style="width:100px;" type="text" placeholder="请输入供应商" class="easyui-validatebox span2"></td><td style="width:100px;"><input name="ledger[0].productionName" style="width:100px;" type="text" placeholder="请输入生产单位" class="easyui-validatebox span2"></td><td style="width:100px;"><input name="ledger[0].productionDate" style="width:100px;cursor:pointer;" type="text" placeholder="点击选择日期" class="easyui-validatebox span2" onclick="WdatePicker({readOnly:true,dateFmt:\'yyyy-MM-dd\'})" readonly="readonly"></td><td><a></a></td><td><input type="hidden" name="ledger[0].mark" value="1" ></td>';
+		var ltr='<td style="width:100px;"><input name="ledger[0].name" style="width:100px;" type="text" placeholder="请输入原料" class="easyui-validatebox span2" data-options="required:true"></td><td style="width:100px;"><input name="ledger[0].quantity" style="width:100px;" type="text" placeholder="请输入数量" class="easyui-validatebox span2" data-options="required:true"></td><td style="width:100px;"><input name="ledger[0].amountUnit" style="width:100px;" type="text" placeholder="请输入数量单位" class="easyui-validatebox span2" data-options="required:true"></td><td style="width:100px;"><input name="ledger[0].supplierName" style="width:100px;" type="text" placeholder="请输入原料供货者" class="easyui-validatebox span2"></td><td style="width:100px;"><input name="ledger[0].productionName" style="width:100px;" type="text" placeholder="请输入生产单位" class="easyui-validatebox span2"></td><td style="width:100px;"><input name="ledger[0].productionDate" style="width:100px;cursor:pointer;" type="text" placeholder="点击选择日期" class="easyui-validatebox span2" onclick="WdatePicker({readOnly:true,dateFmt:\'yyyy-MM-dd\'})" readonly="readonly"></td><td><a></a></td><td><input type="hidden" name="ledger[0].mark" value="1" ></td>';
 		return ltr;
 	}
 	
@@ -150,10 +150,10 @@
 			</table>
 			<table id="ledgers" class="table table-hover table-condensed">
 					<tr>
-						<th style='width:114px;'><font color="red">*</font>采购品：</th>
+						<th style='width:114px;'><font color="red">*</font>原料：</th>
 						<th style='width:114px;'><font color="red">*</font>数量：</th>
-						<th style='width:114px;'><font color="red">*</font>规格：</th>
-						<th style='width:114px;'><font color="red">*</font>采购品供应商：</th>
+						<th style='width:114px;'><font color="red">*</font>数量单位：</th>
+						<th style='width:114px;'><font color="red">*</font>原料供货者：</th>
 						<th style='width:114px;'><font color="red">*</font>生产企业：</th>
 						<th style='width:114px;'>生产日期：</th>
 						<th ></th>
@@ -161,16 +161,16 @@
 				<c:forEach var="ledger" items="${LedgerList}" varStatus="status">
 					<tr id="ledger${status.index}">
 						<td><input name="ledger[${status.index }].name" type="text"
-							style='width:100px;' placeholder="请输入采购品" class="easyui-validatebox span2"
+							style='width:100px;' placeholder="请输入原料" class="easyui-validatebox span2"
 							data-options="required:true" value="${ledger.name}"></td>
 						<td><input name="ledger[${status.index }].quantity"
 							style='width:100px;' type="text" placeholder="请输入数量" class="easyui-validatebox span2"
 							data-options="required:true" value="${ledger.quantity}"></td>
-						<td><input name="ledger[${status.index }].spce" type="text"
-							style='width:100px;' placeholder="请输入规格" class="easyui-validatebox span2"
-							data-options="required:true" value="${ledger.spce}"></td>
+						<td><input name="ledger[${status.index }].amountUnit" type="text"
+							style='width:100px;' placeholder="请输入数量单位" class="easyui-validatebox span2"
+							data-options="required:true" value="${ledger.amountUnit}"></td>
 						<td><input name="ledger[${status.index }].supplierName"
-							style='width:100px;' type="text" placeholder="请输入供应商" class="easyui-validatebox span2"
+							style='width:100px;' type="text" placeholder="请输入原料供货者" class="easyui-validatebox span2"
 							value="${ledger.supplierName}"></td>
 						<td><input name="ledger[${status.index }].productionName"
 							type="text" placeholder="请输入生产单位"
