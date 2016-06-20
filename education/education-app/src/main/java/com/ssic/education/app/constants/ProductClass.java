@@ -9,9 +9,17 @@ import lombok.Getter;
 import lombok.Setter;
 
 public enum ProductClass {
-	CHULEIJIQIZHIPIN(1, "畜产品及其制品"), QINLEIJIQIZHIPIN(2, "禽及其产品、制品"), SHUCAI(3, "蔬菜"), RUZHIPIN(4, "乳及乳制品"), YOUZHIJIQIZHIPIN(5, "油脂及其制品"), SHUICHANJIQIZHIPIN(6, "水产及其制品"), LENGDONGYINPIN(7, "冷冻饮品"), SHUIGUO(8, "水果"), LIANGSHIJIQILIANGSHIZHIPIN(9, "粮食和粮食制品"), DOULEIJIQIZHIPIN(10, "豆类及其制品"), SHIYONGJUNHEZAOLEI(11, "食用菌和藻类"), KEKEQIAOKELITANGGUO(12, "可可和巧克力制品及糖果"), BEIKAOSHIPIN(13, "焙烤食品"), TIANWEILIAO(14, "甜味料"), TIAOWEIPIN(15, "调味品"), TESHUSHANSHIYONGSHIPIN(16, "特殊膳食用食品"), YINLIAOLEI(17, "饮料类"), JIULEI(
-			18, "酒类"), TIANJIAJI(19, "添加剂类"), QITALEI(20, "其他类");
-
+    LIANGSHIZHIPIN(1,"粮食及其制品"),
+    CHULEIZHIPIN(2,"畜产品及其制品"),
+    QINLEI(3,"禽及其产品、制品"),
+    SHUCAI(4,"蔬菜"),
+    SHUIGUO(5,"水果"),
+    SHUICHANPIN(6,"水产品") ,
+    DOUZHIPIN(7,"豆制品"),
+    RUPIN(8,"乳品"),
+    SHIYONGYOU(9,"食用油") ,
+    QITA( 10,"其它类别的食品和食用农产品");
+    
 	private static final Map<Integer, String> productClassMap = new LinkedHashMap<Integer, String>();
 	private static final List<ProductList> productClassList = new ArrayList<ProductList>();
 

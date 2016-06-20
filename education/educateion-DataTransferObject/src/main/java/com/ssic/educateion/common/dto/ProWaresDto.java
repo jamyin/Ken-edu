@@ -86,6 +86,7 @@ public class ProWaresDto implements Serializable {
 	@Setter
 	private String waresTypeName;
 	
+
 	@Getter
 	@Setter
 	 private String updater;

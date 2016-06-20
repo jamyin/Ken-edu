@@ -25,6 +25,7 @@
 					<#if companyType ==1>
 						<#list shitangList as shitang>
 						     <#if shitang == result.licType>
+<<<<<<< HEAD
 								<li><a href="#" data-path="${(result.licPic)!}" data-name="${(result.licName)!}" onclick="loadImage(this);"></a><label>${(result.licName)!}</label><span>${(result.licNo)!}</span></li>     	
 						     </#if>
 						</#list>
@@ -42,6 +43,25 @@
 								<#list yuanliaogysList as yuanliaogys>
 								     <#if yuanliaogys == result.licType>
 										<li><a href="#" data-path="${(result.licPic)!}" data-name="${(result.licName)!}" onclick="loadImage(this);"></a><label>${(result.licName)!}</label><span>${(result.licNo)!}</span></li>     	
+=======
+								<li><a class="link" href="#" data-path="${(result.licPic)!}" data-name="${(result.licName)!}" onclick="loadImage(this);"></a><label>${(result.licName)!}</label><span>${(result.licNo)!}</span></li>     	
+						     </#if>
+						</#list>
+					</#if>
+					<#if companyType ==2>
+						<#if proSupplierDto ??>
+							<#if proSupplierDto.supplierType ==1>
+								<#list weituogysList as weituogys>
+								     <#if weituogys == result.licType>
+										<li><a class="link" href="#" data-path="${(result.licPic)!}" data-name="${(result.licName)!}" onclick="loadImage(this);"></a><label>${(result.licName)!}</label><span>${(result.licNo)!}</span></li>     	
+								     </#if>
+								</#list>
+							</#if>
+							<#if proSupplierDto.supplierType ==2> <!-- 原料供应商 -->
+								<#list yuanliaogysList as yuanliaogys>
+								     <#if yuanliaogys == result.licType>
+										<li><a class="link" href="#" data-path="${(result.licPic)!}" data-name="${(result.licName)!}" onclick="loadImage(this);"></a><label>${(result.licName)!}</label><span>${(result.licNo)!}</span></li>     	
+>>>>>>> branch 'master' of http://192.168.1.231/group-one/education.git
 								     </#if>
 								</#list>								
 							</#if>	
