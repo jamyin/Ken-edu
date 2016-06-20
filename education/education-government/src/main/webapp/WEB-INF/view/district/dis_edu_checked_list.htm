@@ -63,7 +63,7 @@
                             	<#if (pageList.results??) && (pageList.results?size>0)>
 	                            	<#list pageList.results as data>
 	                            		 <tr>
-		                                    <td><a href="/edu/school/detailed.htm?id=${(data.id)!}&reviewed=${(data.reviewed)!}&schoolName=${(data.schoolName)!}&supplierName=${(data.supplierName)!}"> <#if data.schoolName??> <span style="color: blue;">${(data.schoolName)!}</span> <#elseif data.supplierName??> <span style="color: blue;">${(data.supplierName)!}</span></#if></a></td>
+		                                    <td><a href="/edu/school/detailed.htm?id=${(data.id)!}&reviewed=${(data.reviewed)!}&schoolName=${(data.schoolName)!}&supplierName=${(data.supplierName)!}"> <#if data.schoolName??> <span style="color: #60ac62;">${(data.schoolName)!}</span> <#elseif data.supplierName??> <span style="color: #60ac62;">${(data.supplierName)!}</span></#if></a></td>
 		                                    <td> ${(data.address)!} </td>
 		                                    <td> <#if data.reviewed==1> 审批通过 </#if></td>
 		                                    <td> ${data.createTime?string("yyyy-MM-dd")}</td>
