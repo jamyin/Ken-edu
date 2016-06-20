@@ -165,7 +165,7 @@
 	                      </#if></span>
 	                      <span class="dis_start ellipsis">${(ledgerDto.supplierName)!}</span>
 	                      <span class="dis_status"><#if ledgerDto.haulStatus == 0>未配送 </#if><#if ledgerDto.haulStatus == 1>配送中</#if><#if ledgerDto.haulStatus == 2>已配送</#if></span>
-	                      <a style="cursor: pointer;" href="/pro/ledger/detail.htm?masterId=${(ledgerDto.masterId)!}&source=${(dto.source)!}&customerId=${(dto.customerId)!}&supplierName=${(ledgerDto.supplierName)!}&supplierId=${(ledgerDto.supplierId)!}"><span style="cursor: pointer;" class="detail">详情</span></a>
+	                      <a style="cursor: pointer;" href="/pro/ledger/detail.htm?masterId=${(ledgerDto.masterId)!}&source=${(dto.source)!}&customerId=${(dto.customerId)!}&supplierName=${(ledgerDto.supplierName)!}&supplierId=${(ledgerDto.supplierId)!}"><span style="cursor: pointer; color: #60ac62;" class="detail">详情</span></a>
 	                    </li>
                   	</#list>
                   </#if>
@@ -253,7 +253,7 @@
 		                    <li>
 		                        <span class="name">${(sup.supplierName)!}</span>
 		                        <span class="place">${(sup.address)!}</span>
-		                        <span class="detail"><a href="/pro/supplier/detail.htm?id=${(sup.id)!}&sourceId=${(eduSchoolSupplierDtos.supplierId)!}&schoolId=${(dto.customerId)!}&source=1">详情</a> &gt;</span>
+		                        <span class="detail"><a href="/pro/supplier/detail.htm?id=${(sup.id)!}&sourceId=${(eduSchoolSupplierDtos.supplierId)!}&schoolId=${(dto.customerId)!}&source=1" style="color: #60ac62;">详情</a> &gt;</span>
 		                    </li>
 		                </#list>
 		            </#if>
