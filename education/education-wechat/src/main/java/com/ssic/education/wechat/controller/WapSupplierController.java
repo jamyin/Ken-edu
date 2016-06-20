@@ -59,6 +59,7 @@ public class WapSupplierController extends BaseController{
 		List<ProLicenseDto> resultList = null;
 		InfoObj infoObj = new InfoObj();
 		String supplierId = null;
+		ProSupplierDto proSupplierDto = null;
 		if(Objects.equal(companyType, 1)){
 			//基本信息
 			EduCanteenDto eduCanteenDto = new EduCanteenDto();
@@ -80,7 +81,7 @@ public class WapSupplierController extends BaseController{
 			}
 		}else if(Objects.equal(companyType, 2)){
 			//基本信息
-			ProSupplierDto proSupplierDto =  iSupplierService.searchProSupplierById(relationId);
+			proSupplierDto =  iSupplierService.searchProSupplierById(relationId);
 			
 			supplierId = proSupplierDto.getId();
 			
@@ -101,6 +102,7 @@ public class WapSupplierController extends BaseController{
 		mv.addObject("resultList", resultList);
 		mv.addObject("suppliList", suppliList);
 		mv.addObject("supplierId", supplierId);
+		mv.addObject("proSupplierDto",proSupplierDto);
 		mv.setViewName("aptitude");
 		return mv;
 	}

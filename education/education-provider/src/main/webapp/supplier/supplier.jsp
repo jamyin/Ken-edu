@@ -58,7 +58,7 @@
 			columns : [ [ 
 			             {
 			 				field : 'supplierName',
-			 				title : '<font  style="font-style: normal; font-size:18px;">供应商名称</font>',
+			 				title : '<font  style="font-style: normal; font-size:18px;">供货者名称</font>',
 			 				width : 180,
 			 				
 			 				formatter : function(value, row, index) {
@@ -71,7 +71,7 @@
 			 				}
 			 			},{
 			 				field : 'address',
-			 				title : '<font  style="font-style: normal; font-size:18px;">供应商地址</font>',
+			 				title : '<font  style="font-style: normal; font-size:18px;">供货者地址</font>',
 			 				width : 180,
 			 				
 			 				formatter : function(value, row, index) {
@@ -394,7 +394,7 @@
 		</div>
 		
 			<div data-options="region:'center',border:false"  id="g">
-				<table id="dataGrid" title="<font  style='font-style: normal;font-weight: bolder;font-size:16px;'>供应商表单</font>" data-options="collapsible:true" ></table>
+				<table id="dataGrid" title="<font  style='font-style: normal;font-weight: bolder;font-size:16px;'>供货者表单</font>" data-options="collapsible:true" ></table>
 						<style>
 						#g .datagrid-btable tr{height: 45px;}
 				</style>

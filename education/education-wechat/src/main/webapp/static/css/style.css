@@ -83,6 +83,7 @@ section.myfollow li .bar{width:100%;height:40px;border-top:1px #e5e5e5 solid;lin
 section.myfollow li .bar a{padding-left:20px;color:#60ac62}
 section.myfollow li .bar a.shower{padding-left:22px;float:left;background:url(../img/select.png) no-repeat 0 center;background-size:16px 16px;color:#999}
 section.myfollow li .bar a.shower.cur{background-image:url(../img/selected.png);color:#60ac62}
+section.myfollow  input.submit{width:90%;overflow:hidden;display:block;color:#fff;background:#60ac62;margin:30px auto;border-radius:3px;font-size:1.6rem;padding:12px;text-align:center}
 
 section.myfollow_c{width:100%;overflow:hidden;}
 section.myfollow_c h2{width:100%;border-left:2px #60ac62 solid;margin-bottom:10px;font-size:1.6rem;padding-left:10px}
@@ -93,7 +94,7 @@ section.myfollow_c ul li label{position:absolute;left:0;width:60px;height:30px;m
 section.myfollow_c ul li:last-child label{word-spacing:0px}
 section.myfollow_c ul li input[type=text], section.myfollow_c ul li p{display:block;width:100%;padding-left:70px;height:30px;font-size:1.4rem;line-height:30px;margin:10px 0;border:0}
 section.myfollow_c ul li p select{width:100%;height:30px;font-size:1.4rem;background-color:transparent;}
-section.myfollow_c  input.submit{width:90%;overflow:hidden;display:block;color:#fff;background:#60ac62;margin:30px auto 0;border-radius:3px;font-size:1.6rem;padding:12px;text-align:center}
+section.myfollow_c  input.submit{width:90%;overflow:hidden;display:block;color:#fff;background:#60ac62;margin:30px auto;border-radius:3px;font-size:1.6rem;padding:12px;text-align:center}
 
 
 /*dp*/

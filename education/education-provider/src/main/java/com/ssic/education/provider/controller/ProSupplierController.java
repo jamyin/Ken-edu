@@ -91,7 +91,7 @@ public class ProSupplierController extends BaseController {
 	}
 
 	/**
-	 * 查询供应商
+	 * 查询提供者
 	 * 
 	 * @param proSupplierDto
 	 * @param ph
@@ -109,7 +109,7 @@ public class ProSupplierController extends BaseController {
 	}
 
 	/**
-	 * 供应商详情
+	 * 提供者详情
 	 * 
 	 * @param proSupplierDto
 	 * @param ph
@@ -123,7 +123,7 @@ public class ProSupplierController extends BaseController {
 	}
 
 	/**
-	 * 修改供应商
+	 * 修改提供者
 	 * 
 	 * @param SupplierDto
 	 * @return ming
@@ -134,7 +134,7 @@ public class ProSupplierController extends BaseController {
 		Json j = new Json();
 		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
 				ConfigUtil.SESSIONINFONAME);
-		// 当前登录用户所属供应商的id
+		// 当前登录用户所属提供者的id
 		String supplierId = info.getSupplierId();
 		if (supplierId == null) {
 			j.setMsg("请登录");
@@ -142,12 +142,12 @@ public class ProSupplierController extends BaseController {
 			return j;
 		}
 		if (ps.getSupplierName() == null || ps.getSupplierName().equals("")) {
-			j.setMsg("供应商名称不能为空");
+			j.setMsg("提供者名称不能为空");
 			j.setSuccess(false);
 			return j;
 		}
 		if (ps.getAddress() == null || ps.getAddress().equals("")) {
-			j.setMsg("供应商地址不能为空");
+			j.setMsg("提供者地址不能为空");
 			j.setSuccess(false);
 			return j;
 		}
@@ -163,11 +163,11 @@ public class ProSupplierController extends BaseController {
 		}
 		SupplierDto p = supplierService.findProSupplierById(ps.getId());
 		if (p == null) {
-			j.setMsg("不存在的供应商");
+			j.setMsg("不存在的提供者");
 			j.setSuccess(false);
 			return j;
 		}
-		// 查找已定义的供应商编码，供应商编码唯一
+		// 查找已定义的提供者编码，提供者编码唯一
 
 		if (ps.getSupplierCode() != null && !ps.getSupplierCode().equals("")) {
 			List<SupplierDto> list = supplierService
@@ -178,7 +178,7 @@ public class ProSupplierController extends BaseController {
 							.equalsIgnoreCase(ps.getSupplierCode());
 					if (falge) {
 						j = new Json();
-						j.setMsg("供应商编码重复");
+						j.setMsg("提供者编码重复");
 						j.setSuccess(false);
 						return j;
 					}
@@ -213,17 +213,17 @@ public class ProSupplierController extends BaseController {
 		String supplierId = info.getSupplierId();
 		int r = supplierService.deleteSupplier(psd.getId(),supplierId);
 		if (r == 0) {
-			j.setMsg("删除供应商失败");
+			j.setMsg("删除提供者失败");
 			j.setSuccess(false);
 			return j;
 		}
-		j.setMsg("删除供应商成功");
+		j.setMsg("删除提供者成功");
 		j.setSuccess(true);
 		return j;
 	}
 
 	/**
-	 * 添加供应商页面
+	 * 添加提供者页面
 	 * 
 	 * @return
 	 */
@@ -233,7 +233,7 @@ public class ProSupplierController extends BaseController {
 	}
 
 	/**
-	 * 添加供应商
+	 * 添加提供者
 	 * 
 	 * @return
 	 */
@@ -250,12 +250,12 @@ public class ProSupplierController extends BaseController {
 		}
 		String supplierId = info.getSupplierId();
 		if (ps.getSupplierName() == null || ps.getSupplierName().equals("")) {
-			j.setMsg("供应商名称不能为空");
+			j.setMsg("提供者名称不能为空");
 			j.setSuccess(false);
 			return j;
 		}
 		if (ps.getAddress() == null || ps.getAddress().equals("")) {
-			j.setMsg("供应商地址不能为空");
+			j.setMsg("提供者地址不能为空");
 			j.setSuccess(false);
 			return j;
 		}
@@ -283,7 +283,7 @@ public class ProSupplierController extends BaseController {
 		ProSupplier rps = supplierService.findProSupplierByName(
 				ps.getSupplierName(), supplierId);
 		if (rps != null) {
-			j.setMsg("供应商已存在");
+			j.setMsg("提供者已存在");
 			j.setSuccess(false);
 			return j;
 		}
@@ -296,7 +296,7 @@ public class ProSupplierController extends BaseController {
 							.equalsIgnoreCase(ps.getSupplierCode());
 					if (falge) {
 						j = new Json();
-						j.setMsg("供应商编码重复");
+						j.setMsg("提供者编码重复");
 						j.setSuccess(false);
 						return j;
 					}
@@ -306,7 +306,7 @@ public class ProSupplierController extends BaseController {
 		supplierService.saveSupplier(ps);
 		supplierService.saveSupplierReceiver(proSupplierReceiver);
 		j = new Json();
-		j.setMsg("添加供应商成功");
+		j.setMsg("添加提供者成功");
 		j.setSuccess(true);
 		return j;
 	}
@@ -315,7 +315,7 @@ public class ProSupplierController extends BaseController {
 	 * 查看关联产品
 	 */
 	/**
-	 * 查看该商品供应商
+	 * 查看该商品提供者
 	 * 
 	 * @param request
 	 * @param id
@@ -366,16 +366,9 @@ public class ProSupplierController extends BaseController {
 	@RequestMapping("/alterImage")
 	@ResponseBody
 	public Json alterImage(String id,
-			@RequestParam(value = "imgUrl1") MultipartFile imgUrl1,
-			@RequestParam(value = "imgUrl2") MultipartFile imgUrl2,
-			@RequestParam(value = "imgUrl3") MultipartFile imgUrl3,
+		
 			@RequestParam(value = "imgUrl4") MultipartFile imgUrl4,
-			@RequestParam(value = "imgUrl5") MultipartFile imgUrl5,
-			@RequestParam(value = "imgUrl6") MultipartFile imgUrl6,
-			@RequestParam(value = "imgUrl7") MultipartFile imgUrl7,
-			@RequestParam(value = "imgUrl8") MultipartFile imgUrl8,
-			@RequestParam(value = "imgUrl9") MultipartFile imgUrl9,
-			@RequestParam(value = "imgUrl10") MultipartFile imgUrl10,
+			@RequestParam(value = "imgUrl5") MultipartFile imgUrl5,			
 			@RequestParam(value = "imgUrl11") MultipartFile imgUrl11,
 			ImageInfoDto image, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -388,107 +381,22 @@ public class ProSupplierController extends BaseController {
 			return json;
 		}
 		ProLicense license = new ProLicense();
-		Map<String, Object> map1 = createImageServiceImpl.createImage(image,
-				imgUrl1, request, response);
-		Map<String, Object> map2 = createImageServiceImpl.createImage(image,
-				imgUrl2, request, response);
-		Map<String, Object> map3 = createImageServiceImpl.createImage(image,
-				imgUrl3, request, response);
+	
 		Map<String, Object> map4 = createImageServiceImpl.createImage(image,
 				imgUrl4, request, response);
 		Map<String, Object> map5 = createImageServiceImpl.createImage(image,
 				imgUrl5, request, response);
-		Map<String, Object> map6 = createImageServiceImpl.createImage(image,
-				imgUrl6, request, response);
-		Map<String, Object> map7 = createImageServiceImpl.createImage(image,
-				imgUrl7, request, response);
-		Map<String, Object> map8 = createImageServiceImpl.createImage(image,
-				imgUrl8, request, response);
-		Map<String, Object> map9 = createImageServiceImpl.createImage(image,
-				imgUrl9, request, response);
-		Map<String, Object> map10 = createImageServiceImpl.createImage(image,
-				imgUrl10, request, response);
+	
 		Map<String, Object> map11 = createImageServiceImpl.createImage(image,
 				imgUrl11, request, response);
 
 		// 如果已经有图片则更新image_url
-		String imageurl1 = (String) map1.get("image_url");
-		String imageurl2 = (String) map2.get("image_url");
-		String imageurl3 = (String) map3.get("image_url");
+	
 		String imageurl4 = (String) map4.get("image_url");
 		String imageurl5 = (String) map5.get("image_url");
-		String imageurl6 = (String) map6.get("image_url");
-		String imageurl7 = (String) map7.get("image_url");
-		String imageurl8 = (String) map8.get("image_url");
-		String imageurl9 = (String) map9.get("image_url");
-		String imageurl10 = (String) map10.get("image_url");
 		String imageurl11 = (String) map11.get("image_url");
 
-		if (imageurl1 != null && imageurl1 != "") {
-			license.setLicName("工商营业执照");
-			license.setRelationId(id);
-			license.setCerSource((short) 0);
-			license.setLicPic(imageurl1);
-			license.setLastUpdateTime(new Date());
-
-			license.setUpdater(info.getId());
-			int i = proLicenseServiceImpl.alterImage(license);
-			if (i == 0) {
-				SupplierDto findProSupplierById = supplierService.findProSupplierById(id);				
-			//license.setLicNo(findProSupplierById.getBusinessLicense());
-				license.setStat(1);
-				license.setLicType(4);
-				license.setCreateTime(new Date());
-				String uuid = UUID.randomUUID().toString();
-				license.setId(uuid);
-				license.setCreator(info.getId());
-
-				proLicenseServiceImpl.updateImage(license);
-			}
-		}
-		if (imageurl2 != null && imageurl2 != "") {
-			license.setLicName("组织机构代码");
-			license.setRelationId(id);
-			license.setCerSource((short) 0);
-			license.setLicPic(imageurl2);
-			license.setLastUpdateTime(new Date());
-
-			license.setUpdater(info.getId());
-			int i = proLicenseServiceImpl.alterImage(license);
-			if (i == 0) {
-				SupplierDto findProSupplierById = supplierService.findProSupplierById(id);				
-				//license.setLicNo(findProSupplierById.getOrganizationCode());
-				license.setStat(1);
-				license.setLicType(5);
-				license.setCreateTime(new Date());
-				String uuid = UUID.randomUUID().toString();
-				license.setId(uuid);
-				license.setCreator(info.getId());
-
-				proLicenseServiceImpl.updateImage(license);
-			}
-		}
-		if (imageurl3 != null && imageurl3 != "") {
-			license.setLicName("税务登记证");
-			license.setRelationId(id);
-			license.setCerSource((short) 0);
-			license.setLicPic(imageurl3);
-			license.setLastUpdateTime(new Date());
-
-			license.setUpdater(info.getId());
-			int i = proLicenseServiceImpl.alterImage(license);
-			if (i == 0) {
-				
-				license.setStat(1);
-				license.setLicType(6);
-				license.setCreateTime(new Date());
-				String uuid = UUID.randomUUID().toString();
-				license.setId(uuid);
-				license.setCreator(info.getId());
-
-				proLicenseServiceImpl.updateImage(license);
-			}
-		}
+	
 		if (imageurl4 != null && imageurl4 != "") {
 			license.setLicName("食品流通许可证");
 			license.setRelationId(id);
@@ -533,110 +441,7 @@ public class ProSupplierController extends BaseController {
 				proLicenseServiceImpl.updateImage(license);
 			}
 		}
-		if (imageurl6 != null && imageurl6 != "") {
-			license.setLicName("餐饮服务许可证");
-			license.setRelationId(id);
-			license.setCerSource((short) 0);
-			license.setLicPic(imageurl6);
-			license.setLastUpdateTime(new Date());
-
-			license.setUpdater(info.getId());
-			int i = proLicenseServiceImpl.alterImage(license);
-			if (i == 0) {
-				SupplierDto findProSupplierById = supplierService.findProSupplierById(id);				
-				//license.setLicNo(findProSupplierById.getFoodServiceCode());
-				license.setStat(1);
-				license.setLicType(0);
-				license.setCreateTime(new Date());
-				String uuid = UUID.randomUUID().toString();
-				license.setId(uuid);
-				license.setCreator(info.getId());
-
-				proLicenseServiceImpl.updateImage(license);
-			}
-		}
-		if (imageurl7 != null && imageurl7 != "") {
-			license.setLicName("食品经营许可证");
-			license.setRelationId(id);
-			license.setCerSource((short) 0);
-			license.setLicPic(imageurl7);
-			license.setLastUpdateTime(new Date());
-
-			license.setUpdater(info.getId());
-			int i = proLicenseServiceImpl.alterImage(license);
-			if (i == 0) {
-				SupplierDto findProSupplierById = supplierService.findProSupplierById(id);				
-				//license.setLicNo(findProSupplierById.getFoodBusinessCode());
-				license.setStat(1);
-				license.setLicType(1);
-				license.setCreateTime(new Date());
-				String uuid = UUID.randomUUID().toString();
-				license.setId(uuid);
-				license.setCreator(info.getId());
-
-				proLicenseServiceImpl.updateImage(license);
-			}
-		}
-		if (imageurl8 != null && imageurl8 != "") {
-			license.setLicName("身份证");
-			license.setRelationId(id);
-			license.setCerSource((short) 0);
-			license.setLicPic(imageurl8);
-			license.setLastUpdateTime(new Date());
-
-			license.setUpdater(info.getId());
-			int i = proLicenseServiceImpl.alterImage(license);
-			if (i == 0) {
-				license.setStat(1);
-				license.setLicType(9);
-				license.setCreateTime(new Date());
-				String uuid = UUID.randomUUID().toString();
-				license.setId(uuid);
-				license.setCreator(info.getId());
-
-				proLicenseServiceImpl.updateImage(license);
-			}
-		}
-		if (imageurl9 != null && imageurl9 != "") {
-			license.setLicName("港澳居民来往内地通行证");
-			license.setRelationId(id);
-			license.setCerSource((short) 0);
-			license.setLicPic(imageurl9);
-			license.setLastUpdateTime(new Date());
-
-			license.setUpdater(info.getId());
-			int i = proLicenseServiceImpl.alterImage(license);
-			if (i == 0) {
-				license.setStat(1);
-				license.setLicType(10);
-				license.setCreateTime(new Date());
-				String uuid = UUID.randomUUID().toString();
-				license.setId(uuid);
-				license.setCreator(info.getId());
-
-				proLicenseServiceImpl.updateImage(license);
-			}
-		}
-		if (imageurl10 != null && imageurl10 != "") {
-			license.setLicName("台湾居民往来内地通行证");
-			license.setRelationId(id);
-			license.setCerSource((short) 0);
-			license.setLicPic(imageurl10);
-			license.setLastUpdateTime(new Date());
-
-			license.setUpdater(info.getId());
-			int i = proLicenseServiceImpl.alterImage(license);
-			if (i == 0) {
-				license.setStat(1);
-				license.setLicType(11);
-				license.setCreateTime(new Date());
-				String uuid = UUID.randomUUID().toString();
-				license.setId(uuid);
-				license.setCreator(info.getId());
-
-				proLicenseServiceImpl.updateImage(license);
-			}
-		}
+		
 		if (imageurl11 != null && imageurl11 != "") {
 			license.setLicName("其他");
 			license.setRelationId(id);
@@ -663,7 +468,7 @@ public class ProSupplierController extends BaseController {
 	}
 
 	/**
-	 * 导入供应商
+	 * 导入提供者
 	 * 
 	 * @param file
 	 * @param request
@@ -679,7 +484,7 @@ public class ProSupplierController extends BaseController {
 		Json j = new Json();
 		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
 				ConfigUtil.SESSIONINFONAME);
-		// 当前登录用户所属供应商的id
+		// 当前登录用户所属提供者的id
 		String supplierId = info.getSupplierId();
 		String errorMsg = null;
 		Map<String, Map<ProSupplierReceiver, ProSupplier>> map = new HashMap();
@@ -710,19 +515,19 @@ public class ProSupplierController extends BaseController {
 						value = value.trim();
 					}
 					if (i == 0) {
-						// 供应商
+						// 提供者
 						if (StringUtils.isBlank(value)) {
-							errorMsg = "第" + (rowNum + 1) + "行数据不正确，供应商名称不能为空。";
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，提供者名称不能为空。";
 							break;
 						}
 						ProSupplier s = supplierService.findProSupplierByName(
 								value, supplierId);
 						if (s != null) {
-							errorMsg = "第" + (rowNum + 1) + "行数据不正确，供应商名称已存在。";
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，提供者名称已存在。";
 							break;
 						}
 						if (map.get(value) != null) {
-							errorMsg = "第" + (rowNum + 1) + "行数据不正确，供应商名称重复。";
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，提供者名称重复。";
 							break;
 						}
 						supplier = new ProSupplier();
@@ -732,71 +537,71 @@ public class ProSupplierController extends BaseController {
 						supplier.setLastUpdateTime(now);
 						supplier.setStat(1);
 					} else if (i == 1) {
-						// 供应商地址
+						// 提供者地址
 						if (StringUtils.isBlank(value)) {
-							errorMsg = "第" + (rowNum + 1) + "行数据不正确，供应商地址不能为空。";
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，提供者地址不能为空。";
 							break;
 						}
 						supplier.setAddress(value);
+//					} else if (i == 2) {
+//						// 证书
+//						if (StringUtils.isBlank(value)) {
+//							n += 1;
+//							break;
+//						}
+//						supplier.setFoodServiceCode(value);
+//					} else if (i == 2) {
+//						if (StringUtils.isBlank(value)) {
+//							n += 1;
+//							break;
+//						}
+//						supplier.setFoodBusinessCode(value);
 					} else if (i == 2) {
-						// 证书
-						if (StringUtils.isBlank(value)) {
-							n += 1;
-							break;
-						}
-						supplier.setFoodServiceCode(value);
-					} else if (i == 3) {
-						if (StringUtils.isBlank(value)) {
-							n += 1;
-							break;
-						}
-						supplier.setFoodBusinessCode(value);
-					} else if (i == 4) {
 						if (StringUtils.isBlank(value)) {
 							n += 1;
 							break;
 						}
 						supplier.setFoodCirculationCode(value);
-					} else if (i == 5) {
+					} else if (i == 3) {
 						if (StringUtils.isBlank(value)) {
 							n += 1;
 							break;
 						}
 						supplier.setFoodProduceCode(value);
-					} else if (i == 6) {
-						if (StringUtils.isBlank(value)) {
-							if (n == 4) {
-								errorMsg = "第" + (rowNum + 1)
-										+ "行数据不正确，证件号至少一个不能为空。";
-							}
-							break;
-						}
-						supplier.setBusinessLicense(value);
-					} else if (i == 7 && !StringUtils.isBlank(value)) {
-						// 供应商编码
-						int x = srService.findBySupplierCode(value, supplierId);
-						if (x != 0) {
-							errorMsg = "第" + (rowNum + 1) + "行数据不正确，供应商编码已存在。";
-							break;
-						}
-						if(value!=null&& !StringUtils.isBlank(value)){
-							int s=set.size();
-							set.add(value);
-							if(s==set.size()){
-								errorMsg = "第" + (rowNum + 1) + "行数据不正确，供应商编码重复。";
-								break;
-							}
-						}
-						psr = new ProSupplierReceiver();
-						psr.setSupplierCode(value);
-					} else if (i == 8 ) {
+//					} else if (i == 6) {
+//						if (StringUtils.isBlank(value)) {
+//							if (n == 4) {
+//								errorMsg = "第" + (rowNum + 1)
+//										+ "行数据不正确，证件号至少一个不能为空。";
+//							}
+//							break;
+//						}
+//						supplier.setBusinessLicense(value);
+//					} else if (i == 7 && !StringUtils.isBlank(value)) {
+//						// 提供者编码
+//						int x = srService.findBySupplierCode(value, supplierId);
+//						if (x != 0) {
+//							errorMsg = "第" + (rowNum + 1) + "行数据不正确，提供者编码已存在。";
+//							break;
+//						}
+//						if(value!=null&& !StringUtils.isBlank(value)){
+//							int s=set.size();
+//							set.add(value);
+//							if(s==set.size()){
+//								errorMsg = "第" + (rowNum + 1) + "行数据不正确，提供者编码重复。";
+//								break;
+//							}
+//						}
+//						psr = new ProSupplierReceiver();
+//						psr.setSupplierCode(value);
+					} else if (i == 4 ) {
 						// 联系人
 						if(StringUtils.isBlank(value)){
 							errorMsg = "第" + (rowNum + 1) + "行数据不正确，联系人不能为空。";
 							break;
 						}
 						supplier.setCorporation(value);
-					} else if (i == 9) {
+					} else if (i == 5) {
 						// 联系方式
 						if(StringUtils.isBlank(value)){
 							errorMsg = "第" + (rowNum + 1) + "行数据不正确，电话不能为空。";
@@ -854,17 +659,17 @@ public class ProSupplierController extends BaseController {
 		response.setHeader("Content-Disposition", "attachment;filename="
 				+ filename + ".xls");
 		Workbook workbook = new HSSFWorkbook();
-		sheet = (HSSFSheet) workbook.createSheet("供货商");
+		sheet = (HSSFSheet) workbook.createSheet("供货者");
 		try {
 			List<String> titles = new ArrayList<String>();
-			titles.add("供应商名称");
-			titles.add("供应商地址");
-			titles.add("餐饮服务证号");
-			titles.add("食品经营许可证号");
+			titles.add("提供者名称");
+			titles.add("提供者地址");
+//			titles.add("餐饮服务证号");
+//			titles.add("食品经营许可证号");
 			titles.add("食品流通证号");
 			titles.add("食品生产证号");
-			titles.add("工商执照号");
-			titles.add("供应商编码");
+//			titles.add("工商执照号");
+//			titles.add("提供者编码");
 			titles.add("联系人");
 			titles.add("电话");
 			int len = titles.size();
@@ -898,14 +703,14 @@ public class ProSupplierController extends BaseController {
 					PageData vpd = new PageData();
 					vpd.put("var1", expList.get(i).getSupplierName());
 					vpd.put("var2", expList.get(i).getAddress());
-					vpd.put("var3", expList.get(i).getFoodServiceCode());
-					vpd.put("var4", expList.get(i).getFoodBusinessCode());
-					vpd.put("var5", expList.get(i).getFoodCirculationCode());
-					vpd.put("var6", expList.get(i).getFoodProduceCode());
-					vpd.put("var7", expList.get(i).getBusinessLicense());
-					vpd.put("var8", expList.get(i).getSupplierCode());
-					vpd.put("var9", expList.get(i).getCorporation());
-					vpd.put("var10", expList.get(i).getContactWay());
+//					vpd.put("var3", expList.get(i).getFoodServiceCode());
+//					vpd.put("var4", expList.get(i).getFoodBusinessCode());
+					vpd.put("var3", expList.get(i).getFoodCirculationCode());
+					vpd.put("var4", expList.get(i).getFoodProduceCode());
+//					vpd.put("var7", expList.get(i).getBusinessLicense());
+//					vpd.put("var8", expList.get(i).getSupplierCode());
+					vpd.put("var5", expList.get(i).getCorporation());
+					vpd.put("var6", expList.get(i).getContactWay());
 					varList.add(vpd);
 				}
 			}

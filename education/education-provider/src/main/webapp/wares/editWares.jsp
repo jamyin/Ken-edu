@@ -14,6 +14,10 @@
 }
 .textbox .textbox-text {
 	 cursor:pointer;
+	 width:165px!important;
+}
+.textbox {
+	width:165px!important;
 }
 </style>
 
@@ -97,27 +101,27 @@
 						<tr>
 							<th><font color="red">*</font>原料名称</th>
 							<td><input name="waresName" type="text" id="waresName"
-								placeholder="请输入商品名称" class="easyui-validatebox span2"
+								placeholder="请输入商品名称" class="easyui-validatebox span2" style="width: 152px;"
 								data-options="required:true"  value="${wdto.waresName}"></td>
 							<th><font color="red">*</font>数量单位</th>
 							<td><input name="amountUnit" type="text" placeholder="请输入数量单位" id="amountUnit"
-								class="easyui-validatebox span2" value="${wdto.amountUnit}"  data-options="required:true" ></td>
+								style="width: 152px;" class="easyui-validatebox span2" value="${wdto.amountUnit}"  data-options="required:true" ></td>
 							
 						</tr>
 						<tr>
 						<th>规格</th>
 							<td><input name="spec" type="text" placeholder="请输入规格"  id="spec"
-								class="easyui-validatebox span2"  value="${wdto.spec}"  ></td>
+								style="width: 152px;" class="easyui-validatebox span2"  value="${wdto.spec}"  ></td>
 							<th>生产企业</th>
 							<td><input name="manufacturer" type="text" placeholder="请输入生产企业" id="manufacturer"
-								class="easyui-validatebox span2" value="${wdto.manufacturer}"></td>
+								style="width: 152px;" class="easyui-validatebox span2" value="${wdto.manufacturer}"></td>
 							
 							
 						</tr>
 						<tr>
 							<th><font color="red">*</font>保质期</th>
 							<td><input name="shelfLife" type="text" placeholder="请输入保质期" id="shelfLife"
-								class="easyui-validatebox span2" data-options="required:true" value="${wdto.shelfLife}"></td>
+								style="width: 152px;" class="easyui-validatebox span2" data-options="required:true" value="${wdto.shelfLife}"></td>
 							<th><font color="red">*</font>保质期单位</th>
 							<td><select id="unit" class="easyui-combobox" name="unit"  data-options="width:140,height:29,editable:false,panelHeight:'auto'"
 								data-options="required:true">
@@ -153,7 +157,7 @@
 						<tr>
 							<th>产地</th>
 							<td><input name="place" type="text" id="place"
-								placeholder="请输入产地" class="easyui-validatebox span2"
+								style="width: 152px;" placeholder="请输入产地" class="easyui-validatebox span2"
 								value="${wdto.place}"></td>
 								<th><font color="red">*</font>原料分类</th>
 						<td><select id="waresType" class="easyui-combobox" name="waresType"  data-options="width:140,height:29,editable:false,panelHeight:'auto'"

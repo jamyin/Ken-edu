@@ -111,17 +111,18 @@ $(function(){
 <div class="easyui-layout" data-options="fit:true,border:false">
 	<div data-options="region:'center',border:false" title=""
 		style="overflow-x: hidden; overflow-y: auto;">
-		<form id="updateImage" method="post" enctype="multipart/form-data">
-		   <input id="id" name="id" type="hidden" value="${id}" />
-			<table class="table table-hover table-condensed">
-				<tr>
+
+			<form id="updateImage" method="post" enctype="multipart/form-data">
+			  <input id="id" name="id" type="hidden" value="${id}" />
+				<table class="table table-hover table-condensed">
+				<%-- <tr>
 					<th colspan="2">企业三证</th>
 				</tr>
 				<tr>
-					<td>工商营业执照</td>
+					<th class="text-license">工商营业执照</th>
 					<td><input type="file" name="imgUrl1" id="imgUrl1"
 						accept="image/*" /></td>
-					<td>组织机构代码</td>
+					<th class="text-license">组织机构代码</th>
 					<td><input type="file" name="imgUrl2" id="imgUrl2"
 						accept="image/*" /></td>
 				</tr>
@@ -130,7 +131,7 @@ $(function(){
 					<td colspan="2"><img id="img2"   width="150px" height="150px" src="${pageContext.request.contextPath}/icon/150x150.png"></img></td>
 				</tr>
 				<tr>
-					<td>税务登记证</td>
+					<th class="text-license">税务登记证</th>
 					<td><input type="file" name="imgUrl3" id="imgUrl3"
 						accept="image/*" /></td>
 				</tr>
@@ -141,10 +142,10 @@ $(function(){
 					<th colspan="2">法定代表人/负责人/业主证件</th>
 				</tr>
 				<tr>
-					<td>身份证</td>
+					<th class="text-license">身份证</th>
 					<td><input type="file" name="imgUrl8" id="imgUrl8"
 						accept="image/*" /></td>
-					<td>港澳居民来往内地通行证</td>
+					<th class="text-license">港澳居民来往内地通行证</th>
 					<td><input type="file" name="imgUrl9" id="imgUrl9"
 						accept="image/*" /></td>
 				</tr>
@@ -153,7 +154,7 @@ $(function(){
 					<td colspan="2"><img id="img9"   width="150px" height="150px" src="${pageContext.request.contextPath}/icon/150x150.png"></img></td>
 				</tr>
 				<tr>
-					<td>台湾居民往来内地通行证</td>
+					<th class="text-license">台湾居民往来内地通行证</th>
 					<td><input type="file" name="imgUrl10" id="imgUrl10"
 						accept="image/*" /></td>
 				</tr>
@@ -165,10 +166,10 @@ $(function(){
 					<th></th>
 				</tr>
 				<tr>
-					<td>食品流通许可证</td>
+					<th class="text-license">食品流通许可证</th>
 					<td><input type="file" name="imgUrl4" id="imgUrl4"
 						accept="image/*" /></td>
-					<td>食品生产许可证</td>
+					<th class="text-license">食品生产许可证</th>
 					<td><input type="file" name="imgUrl5" id="imgUrl5"
 						accept="image/*" /></td>
 				</tr>
@@ -177,10 +178,10 @@ $(function(){
 					<td colspan="2"><img id="img5"  width="150px" height="150px"  src="${pageContext.request.contextPath}/icon/150x150.png"></img></td>
 				</tr>
 				<tr>
-					<td>餐饮服务许可证</td>
+					<th class="text-license">餐饮服务许可证</th>
 					<td><input type="file" name="imgUrl6" id="imgUrl6"
 						accept="image/*" /></td>
-					<td>食品经营许可证</td>
+					<th class="text-license">食品经营许可证</th>
 					<td><input type="file" name="imgUrl7" id="imgUrl7"
 						accept="image/*" /></td>
 				</tr>
@@ -193,15 +194,44 @@ $(function(){
 					<th></th>
 				</tr>
 				<tr>
-					<td>其他</td>
+					<th class="text-license">其他</th>
 					<td><input type="file" name="imgUrl11" id="imgUrl11"
 						accept="image/*" /></td>
 				</tr>
 				<tr>
 					<td colspan="2"><img id="img11"   width="150px" height="150px" src="${pageContext.request.contextPath}/icon/150x150.png"></img></td>
+				</tr> --%>
+				<tr>
+					<th class="text-license">食品流通许可证</th>
+					<td><input type="file" name="imgUrl4" id="imgUrl4"
+						accept="image/*" /></td>
+					
+				</tr>
+				<tr>
+					<td colspan="2"><img id="img4"  width="150px" height="150px" src="${pageContext.request.contextPath}/icon/150x150.png"></img></td>
+					
+				</tr>
+		<tr>
+		<th class="text-license">食品生产许可证</th>
+					<td><input type="file" name="imgUrl5" id="imgUrl5"
+						accept="image/*" /></td>
+		
+		</tr>
+		
+		<tr>
+		<td colspan="2"><img id="img5"  width="150px" height="150px"  src="${pageContext.request.contextPath}/icon/150x150.png"></img></td>
+		</tr>
+	
+				<tr>
+					<th class="text-license">其他</th>
+					<td><input type="file" name="imgUrl11" id="imgUrl11"
+						accept="image/*" /></td>
+				</tr>
+				
+					<tr>
+				<td colspan="2"><img id="img11"   width="150px" height="150px" src="${pageContext.request.contextPath}/icon/150x150.png"></img></td>
 				</tr>
 			</table>
-
 		</form>
 	</div>
 
