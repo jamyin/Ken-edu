@@ -24,7 +24,7 @@
 	<div class="login-box f-mt10 f-pb50">
 		<div class="main bgf">
 			<div style="text-align: center;">
-				<h2>上海市中小学校学生午餐综合管理平台</h2>
+				<h2>阳光午餐综合管理平台</h2>
 			</div>
 
 			<div class="reg-box-pan display-inline">
