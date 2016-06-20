@@ -104,16 +104,20 @@ public class AppWaresServiceImpl implements IAppWaresService {
 		List<String> schoolWares = this.schoolWaresDao.findSchoolWaresBySchoolId(schoolId);
 		if (schoolWares != null && !schoolWares.isEmpty()) {
 			List<ProWares> wares = waresInfoDao.findWarseInSchool(schoolWares, prowares, query);
-			List<ProWares> convert = new ArrayList<ProWares>();
-			for (ProWares pw : wares) {
+			List<WaresListDto> wareListDto = BeanUtils.createBeanListByTarget(wares, WaresListDto.class);
+			List<WaresListDto> convert = new ArrayList<WaresListDto>();
+			for (WaresListDto pw : wareListDto) {
 				if (pw.getImage() != null) {
 					pw.setImage(DataStatus.IMAGE_HOST + pw.getImage());
+				}
+				if (pw.getWaresType() != null) {
+					pw.setTypeName(ProductClass.getName(pw.getWaresType()));
 				}
 				convert.add(pw);
 			}
 			int total = waresInfoDao.findWarseInSchoolCount(schoolWares, prowares);
 			query.setTotal(total);
-			List<WaresListDto> wareListDto = BeanUtils.createBeanListByTarget(convert, WaresListDto.class);
+		
 			return new PageResult<WaresListDto>(query, wareListDto);
 		} else {
 			return null;
