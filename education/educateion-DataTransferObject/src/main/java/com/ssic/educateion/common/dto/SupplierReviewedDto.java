@@ -30,4 +30,5 @@ public class SupplierReviewedDto implements Serializable {
     private Date createTime;
     private Integer source;
     private String updater;
+    private Date lastUpdateTime;
 }

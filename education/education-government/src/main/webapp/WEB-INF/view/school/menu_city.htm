@@ -51,7 +51,7 @@
     <h1 class="con-tt">
       <span class="title">${(eduSchoolDto.schoolName)!}</span>
       <#if dto.source == 1>
-      <a href="addSupplier.htm?source=${(dto.source)!}&schoolId=${(eduSchoolDto.id)!}&supplierId=${(eduSchoolSupplierDtos.supplierId)!}"><span class="offer_add" style="color:#fff;">新增委托学校食堂</span></a>
+      <a href="addSupplier.htm?source=${(dto.source)!}&schoolId=${(eduSchoolDto.id)!}&supplierId=${(eduSchoolSupplierDtos.supplierId)!}"><span class="offer_add" style="color:#fff;">新增委托经营单位</span></a>
       </#if>
     </h1>
 
@@ -215,8 +215,8 @@
 								   	 	<img class="con-img" src="/static/img/default.png" alt="" />
 								     </#if>
 			                        <div class="name">${(wares.waresName)!}</div>
-			                        <div style="font-size: 12px; overflow: hidden;">产品编码:<span>${(wares.customCode)!}</span></div>
-			                        <div>规格:<span>${(wares.spec)!}</span></div>
+			                        <div style="font-size: 12px; overflow: hidden;">原料分类:<span>${(wares.waresTypeStr)!}</span></div>
+			                        <div style="font-size: 14px;">数量单位:<span>${(wares.amountUnit)!}</span></div>
 			                    </li>
 			                </a>
 		                </#list>
