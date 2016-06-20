@@ -32,7 +32,7 @@
 					<#if result.licPic?exists>
 						<#list yuanliaoList as yuanliao>
 						     <#if yuanliao == result.licType>
-								<li><a href="#" data-path="${(result.licPic)!}" data-name="${(result.licName)!}" onclick="loadImage(this);"></a><label>${(result.licName)!}</label><span>${(result.licNo)!}</span></li>     	
+								<li><a class="link" href="#" data-path="${(result.licPic)!}" data-name="${(result.licName)!}" onclick="loadImage(this);"></a><label>${(result.licName)!}</label><span>${(result.licNo)!}</span></li>     	
 						     </#if>
 						</#list>
 					</#if>
