@@ -284,11 +284,7 @@ public class WaresController extends BaseController {
 			return json;
 		}
 		
-		if (pro.getAmountUnit() == null || pro.getAmountUnit().equals("")) {
-			json.setSuccess(false);
-			json.setMsg("原料数量单位不能为空");
-			return json;
-		}
+
 		
 		if (pro.getWaresType() == null || pro.getWaresType().equals("")) {
 			json.setSuccess(false);
