@@ -52,7 +52,7 @@
 			<td>
 				<div><input type="file" name="filename"></div>
 			</td>
-		</tr>
+			</tr>
 			</table>
 	
 		</form>

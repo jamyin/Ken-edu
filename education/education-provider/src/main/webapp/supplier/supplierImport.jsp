@@ -47,7 +47,7 @@
 <table class="table table-hover table-condensed"  >
 		<tr>
 			<th style="width: 120px">
-				<div style="width: 120px">导入供应商：</div>
+				<div style="width: 120px">导入供货者：</div>
 			</th>
 			<td>
 				<input type="file" name="file">
