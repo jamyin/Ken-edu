@@ -17,7 +17,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>供应商管理</title>
+<title>供货者管理</title>
 <jsp:include page="../inc.jsp"></jsp:include>
 
 	<script type="text/javascript">
@@ -196,7 +196,7 @@
 		} else {//点击操作里面的删除图标会触发这个
 			dataGrid.datagrid('unselectAll').datagrid('uncheckAll');
 		}
-		parent.$.messager.confirm('询问', '您是否要删除当前供应商？', function(b) {
+		parent.$.messager.confirm('询问', '您是否要删除当前供货者？', function(b) {
 			if (b) {
 				var currentUserId = '${sessionInfo.id}';/*当前登录用户的ID*/
 				if (currentUserId != id) {
@@ -231,7 +231,7 @@
 			dataGrid.datagrid('unselectAll').datagrid('uncheckAll');
 		}
 		parent.$.modalDialog({
-			title : '编辑供应商',
+			title : '编辑供货者',
 			width : 700,
 			height : 420,
 			href : '${pageContext.request.contextPath}/proSupplierController/editPage?id=' + id,
@@ -249,7 +249,7 @@
 
 	function addFun() {
 		parent.$.modalDialog({
-			title : '添加供应商',
+			title : '添加供货者',
 			width : 700,
 			height : 420,
 			href : '${pageContext.request.contextPath}/proSupplierController/addSupplier',
@@ -349,7 +349,7 @@
 	
 	function importSupplier() {
 		parent.$.modalDialog({
-			title : '导入供应商',
+			title : '导入供货者',
 			width :340,
 			height : 130,
 			href : '${pageContext.request.contextPath}/proSupplierController/importPage',
@@ -381,9 +381,9 @@
 			
 					<tr>
 						<td style="width:414px;padding-top: 10px;">
-						供应商名称:&nbsp;<input id="supplierName" class="span3" name="supplierName" placeholder="查询供应商名称" style="width: 215px;" /></td>
+						供货者名称:&nbsp;<input id="supplierName" class="span3" name="supplierName" placeholder="查询供货者名称" style="width: 215px;" /></td>
 						<td style="width:414px;padding-top: 10px;">
-						供应商地址:&nbsp;<input id="address" class="span2" name="address" placeholder="查询供应商地址" style="width: 215px;" />&nbsp;&nbsp;&nbsp;
+						供货者地址:&nbsp;<input id="address" class="span2" name="address" placeholder="查询供货者地址" style="width: 215px;" />&nbsp;&nbsp;&nbsp;
 						<a href="javascript:void(0);"  onclick="searchFun();" ><img src="${pageContext.request.contextPath}/icon/查询.png" ></img></a>
 						</td>
 						
