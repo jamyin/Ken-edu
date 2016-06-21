@@ -14,7 +14,7 @@
 		<ul>
 			<form id="submit_form">
 				<li><input name="userAccount" type="text" placeholder="请输入登录名"></li>
-				<li><input name="password" type="password" placeholder="请输入密码名"></li>
+				<li><input name="password" type="password" placeholder="请输入密码"></li>
 			</form>
 			<li class="submit"><input id="login" type="button" value="登录"><a href="reg.jsp">注册新用户</a></li>
 		</ul>
