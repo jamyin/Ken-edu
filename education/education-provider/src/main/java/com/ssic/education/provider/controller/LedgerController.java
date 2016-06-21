@@ -216,12 +216,14 @@ public class LedgerController {
 				j.setSuccess(false);
 				return j;
 			}
-			if(StringUtils.isBlank(ledger.getProductionName())){
+			if (StringUtils.isBlank(ledger.getProductionName())) {
 				j.setMsg(ledger.getName() + "生产企业不能为空");
 				j.setSuccess(false);
 				return j;
 			}
-			ProWares warer = waresService.findProWarsByNameSpecManu(ledger.getName(),ledger.getAmountUnit(),ledger.getProductionName(),sourceId);
+			ProWares warer = waresService.findProWarsByNameSpecManu(
+					ledger.getName(), ledger.getAmountUnit(),
+					ledger.getProductionName(), sourceId);
 			if (warer == null) {
 				j.setMsg(ledger.getName() + "不存在的原料");
 				j.setSuccess(false);
@@ -380,6 +382,40 @@ public class LedgerController {
 		}
 		List<LedgerDto> list = ledgerService.findLedgerByMasterId(
 				user.getSourceId(), ledgers.get(0).getMasterId());
+		if (list.get(0).getHaulStatus() == 1&&ledgers.get(0).getHaulStatus() != 0) {
+			if (ledgers.get(0).getUserId() == null
+					|| !ledgers.get(0).getUserId()
+							.equals(list.get(0).getUserId())) {
+				j.setMsg("配送中不能更改驾驶员");
+				j.setSuccess(false);
+				return j;
+			}
+		}
+		if (ledgers.get(0).getUserId() != null) {
+			List<TImsUsersDto> drivers = userService.findAllDriver(user
+					.getSourceId());
+			int z = 0;
+			if (drivers.size() != 0) {
+				for (TImsUsersDto o : drivers) {
+					if (ledgers.get(0).getUserId().equals(o.getId())) {
+						ledgers.get(0).setUserId(o.getId());
+						ledgers.get(0).setUserName(o.getName());
+						z += 1;
+						break;
+					}
+				}
+			}
+			if (z == 0) {
+				ledgers.get(0).setUserId(null);
+			}
+		}
+		if (ledgers.get(0).getHaulStatus() == 1) {
+			if (ledgers.get(0).getUserId() == null) {
+				j.setMsg("不能没有驾驶员");
+				j.setSuccess(false);
+				return j;
+			}
+		}
 		// 标识
 		int n = 0;
 		String str = "";
@@ -407,12 +443,14 @@ public class LedgerController {
 				j.setSuccess(false);
 				return j;
 			}
-			if(StringUtils.isBlank(ledger.getProductionName())){
+			if (StringUtils.isBlank(ledger.getProductionName())) {
 				j.setMsg(ledger.getName() + "生产企业不能为空");
 				j.setSuccess(false);
 				return j;
 			}
-			ProWares warer = waresService.findProWarsByNameSpecManu(ledger.getName(),ledger.getAmountUnit(),ledger.getProductionName(),sourceId);
+			ProWares warer = waresService.findProWarsByNameSpecManu(
+					ledger.getName(), ledger.getAmountUnit(),
+					ledger.getProductionName(), sourceId);
 			if (warer == null) {
 				j.setMsg(ledger.getName() + "不存在的原料");
 				j.setSuccess(false);
@@ -532,7 +570,7 @@ public class LedgerController {
 		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
 				ConfigUtil.SESSIONINFONAME);
 		// 当前登录用户所属提供者的id
-		if(info==null){
+		if (info == null) {
 			j.setMsg("尚未登录");
 			j.setSuccess(false);
 			return j;
@@ -692,7 +730,7 @@ public class LedgerController {
 						} else {
 							for (TImsUsersDto o : drivers) {
 								if (value.equals(o.getName())) {
-									if(!o.getId().equals(master.getUserId())){
+									if (!o.getId().equals(master.getUserId())) {
 										errorMsg = "第" + (rowNum + 1)
 												+ "行数据不正确，驾驶员不正确。";
 										break;
@@ -702,17 +740,15 @@ public class LedgerController {
 						}
 					} else if (i == 7) {
 						// 原料供货者
-						if(StringUtils.isBlank(value)){
-							errorMsg = "第" + (rowNum + 1)
-									+ "行数据不正确，原料供货者不能为空。";
+						if (StringUtils.isBlank(value)) {
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，原料供货者不能为空。";
 							break;
 						}
 						ProSupplier ps = supplierService.getSupplierByName(
 								value, supplierId);
 
 						if (ps == null) {
-							errorMsg = "第" + (rowNum + 1)
-									+ "行数据不正确，原料供货者不存在。";
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，原料供货者不存在。";
 							break;
 						}
 						dto.setSupplierId(ps.getId());
@@ -720,9 +756,8 @@ public class LedgerController {
 					} else if (i == 8) {
 						// 生产单位
 						// 查找原料
-						if(StringUtils.isBlank(value)){
-							errorMsg = "第" + (rowNum + 1)
-									+ "行数据不正确，生产单位不能为空。";
+						if (StringUtils.isBlank(value)) {
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，生产单位不能为空。";
 							break;
 						}
 						ProWares pw = waresService.findProWarsByNameSpecManu(
@@ -738,7 +773,7 @@ public class LedgerController {
 						}
 					} else if (i == 9 && StringUtils.isNotBlank(value)) {
 						// 生产日期
-						if(sdf.parse(value).after(master.getActionDate())){
+						if (sdf.parse(value).after(master.getActionDate())) {
 							errorMsg = "第" + (rowNum + 1) + "行数据不正确，生产日期不正确。";
 							break;
 						}

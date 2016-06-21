@@ -269,7 +269,17 @@ public class ProLedgerDao extends MyBatisBaseDao<ProLedger> {
 		plm.setCreator(null);
 		plm.setCreateTime(null);
 		plm.setWareBatchNo(null);
+		plm.setDriverName(ledgers.get(0).getUserName());
 		lmMapper.updateByPrimaryKeySelective(plm);
+		if (ledgers.get(0).getUserId() == null) {
+			ProLedgerMasterExample plmExample = new ProLedgerMasterExample();
+			ProLedgerMasterExample.Criteria plmCriteria = plmExample
+					.createCriteria();
+			ProLedgerMaster lm = lmMapper.selectByPrimaryKey(plm.getId());
+			lm.setUserId(null);
+			lm.setDriverName(null);
+			lmMapper.updateByPrimaryKey(lm);
+		}
 		ProLedger pl = new ProLedger();
 		pl.setStat(0);
 		ProLedgerExample example = new ProLedgerExample();
