@@ -159,9 +159,9 @@ public class WaresController extends BaseController {
 			return j;
 		}
 
-		if (pro.getSpec() == null || pro.getSpec().equals("")) {
+		if (pro.getAmountUnit() == null || pro.getAmountUnit().equals("")) {
 			j.setSuccess(false);
-			j.setMsg("原料规格不能为空");
+			j.setMsg("原料数量单位不能为空");
 			return j;
 		}
 
@@ -284,9 +284,9 @@ public class WaresController extends BaseController {
 			return json;
 		}
 		
-		if (pro.getSpec() == null || pro.getSpec().equals("")) {
+		if (pro.getAmountUnit() == null || pro.getAmountUnit().equals("")) {
 			json.setSuccess(false);
-			json.setMsg("商品规格不能为空");
+			json.setMsg("原料数量单位不能为空");
 			return json;
 		}
 		
