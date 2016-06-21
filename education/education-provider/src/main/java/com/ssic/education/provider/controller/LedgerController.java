@@ -685,6 +685,7 @@ public class LedgerController {
 							for (TImsUsersDto o : drivers) {
 								if (value.equals(o.getName())) {
 									master.setUserId(o.getId());
+									master.setDriverName(value);
 									break;
 								}
 							}
@@ -747,7 +748,6 @@ public class LedgerController {
 				if (errorMsg != null) {
 					break;
 				}
-				dto.setSupplierId(supplierId);
 				dto.setCreator(info.getId());
 				dto.setCreateTime(now);
 				dto.setUpdater(info.getId());

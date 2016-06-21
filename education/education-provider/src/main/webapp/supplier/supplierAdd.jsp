@@ -52,9 +52,9 @@
 		<form id="form" method="post">
 <table class="table table-hover table-condensed" border="0" >
 					<tr>					
-					<th><font color="red">*</font>供应商名称</th>
+					<th><font color="red">*</font>供货者名称</th>
 					<td><input name="supplierName" type="text"  class="easyui-validatebox span2" data-options="required:true" ></td>
-				<th><font color="red">*</font>供应商地址</th>
+				<th><font color="red">*</font>供货者地址</th>
 					<td><input name="address" type="text" class="easyui-validatebox span2" data-options="required:true"   ></td>
 			
 				<tr>
