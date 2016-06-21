@@ -56,7 +56,14 @@ public class MainController extends BaseController{
 		PageResult<EduInformationDto> pageList1 =  iEduInformationService.searchInfomation(eduInformationDto,pageQuery);
 		eduInformationDto.setType(Integer.valueOf(DataStatus.MANAGERTYPE));
 		PageResult<EduInformationDto> pageList3 =  iEduInformationService.searchInfomation(eduInformationDto,pageQuery);
-		mv.addObject("pageList", pageList);
+		EduInformationDto eduinformationdto = new EduInformationDto();
+		if (null != pageList.getResults() && pageList.getResults().size()>0) {
+			eduinformationdto = pageList.getResults().get(0);
+			eduinformationdto.setContent(eduinformationdto.getContent().replaceAll("</?[^>]+>", ""));
+			eduinformationdto.setContent(eduinformationdto.getContent().replaceAll("<a>\\s*|\t|\r|\n</a>", ""));  
+			eduinformationdto.setContent(eduinformationdto.getContent().substring(0, 410));
+		}		
+		mv.addObject("eduInformationDto", eduinformationdto);
 		mv.addObject("pageList1", pageList1);
 		mv.addObject("pageList3", pageList3);
 		mv.setViewName("main");

@@ -15,23 +15,21 @@
 	<#include "/common/nav.htm" />
 	<div class="wrapper">
 		
-		<#if (pageList.results??) && (pageList.results?size>0)>
-			<#list pageList.results as eduInformationDto>
-			<#if eduInformationDto_index==0>
+			<#if eduInformationDto??>
 				<#if (eduInformationDto.pic??) && (eduInformationDto.pic != '')>
 					<div class="index_newsbox lr_c">
 						<a href="/info/details/${(eduInformationDto.id)!}.htm"><#if (eduInformationDto.pic??) && (eduInformationDto.pic != '')><img src="${(eduInformationDto.pic)!}" border="0"></#if></a>
-						<a href="/info/details/${(eduInformationDto.id)!}.htm"><h2>${(eduInformationDto.title)!}</h2></a>
-						<a href="/info/details/${(eduInformationDto.id)!}.htm"><p>${(eduInformationDto.content)!}</p></a>
+						<a href="/info/details/${(eduInformationDto.id)!}.htm"><h2 style="margin-bottom:13px;">${(eduInformationDto.title)!}</h2></a>
+						<a href="/info/details/${(eduInformationDto.id)!}.htm"><p style="font-size: 13px;">&nbsp;&nbsp;${(eduInformationDto.content)!}……
+						</p></a>
 					</div>
 				<#else>
-					<div class="index_newsbox">
-						<a href="/info/details/${(eduInformationDto.id)!}.htm"><h2>${(eduInformationDto.title)!}</h2></a>
-						<a href="/info/details/${(eduInformationDto.id)!}.htm"><p>${(eduInformationDto.content)!}</p></a>
-					
+					<div class="index_newsbox"  style="text-overflow: ellipsis;">
+						<a href="/info/details/${(eduInformationDto.id)!}.htm"><h2 style="margin-bottom:13px;">${(eduInformationDto.title)!}</h2></a>
+						<a href="/info/details/${(eduInformationDto.id)!}.htm"><p style="font-size: 13px;">&nbsp;&nbsp;${(eduInformationDto.content)!}……
+						</p></a>
+					</div>					
 				</#if>
-			</#if>
-			</#list>
 		<#else>
 			<div class="index_newsbox" style="text-align: center; line-height: 230px;">
 				暂无数据
