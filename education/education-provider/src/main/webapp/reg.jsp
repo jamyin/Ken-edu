@@ -100,17 +100,6 @@
 								<span class="intelligent-label f-fl"><b class="ftx04"></b>区教委：</span>
 								<div class="" id="committeeList" style="float: right; margin-left: 90px;"></div>
 							</div>
-						<div class="item col-xs-12" style="margin-top:80px;">
-	                        <span class="intelligent-label f-fl"><b class="ftx04">*</b>工商营业执照：</span>
-     						<div class="f-fl item-ifo">
-		     						<input type="text" placeholder="输入工商营业执照号" data-valid="between:6-20" class="txt03 f-r3" id="licenseNo1" onkeyup="enterLicenNO(this,1,4,'工商营业执照');"/>
-     						</div>	                        
-	                      <div class="f-fl item-ifo" style="margin-left:5px;">
-	                       		<input id="file-1" name="licenseList" type="checkbox" style="display:none;"/>
-	      						<input multiple type="file" id="id-input-file-1"/>
-		     					<wf id="license1"></wf>
-     						</div>
-	                    </div>
 						<div class="item col-xs-12">
 	                        <span class="intelligent-label f-fl"><b class="ftx04">*</b>餐饮服务许可证：</span>
      						<div class="f-fl item-ifo">
@@ -121,6 +110,17 @@
 	      						<input multiple type="file" id="id-input-file-2"/>
 		     					<wf id="license2"></wf>
      						</div>	                        
+	                    </div>
+						<div class="item col-xs-12" style="margin-top:80px;">
+	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>工商营业执照：</span>
+     						<div class="f-fl item-ifo">
+		     						<input type="text" placeholder="输入工商营业执照号" data-valid="between:6-20" class="txt03 f-r3" id="licenseNo1" onkeyup="enterLicenNO(this,1,4,'工商营业执照');"/>
+     						</div>	                        
+	                      <div class="f-fl item-ifo" style="margin-left:5px;">
+	                       		<input id="file-1" name="licenseList" type="checkbox" style="display:none;"/>
+	      						<input multiple type="file" id="id-input-file-1"/>
+		     					<wf id="license1"></wf>
+     						</div>
 	                    </div>
 <!-- 						<div class="item col-xs-12">
 	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>食品流通许可证：</span>
@@ -230,26 +230,17 @@
  								
 								//图片判断 必须上传一个图片
 								var isFiles = 0;
-								for(var i=1;i<3;i++){
-									var liceHtml = $("#license"+i).html();
+									var liceHtml = $("#license2").html();
 									if(liceHtml=="" || liceHtml ==null){
-										isFiles++;
+										alert("餐饮服务许可证需上传");
+										return false;
 									}
 									
-									var licenseNo = $("#licenseNo"+i).val();
-									if(licenseNo!="" && licenseNo!=null){
-										//进行正则判断
-										//var strExp=/^[A-Za-z0-9]+$/;
-								        //if(!strExp.test(licenseNo)){
-								        //	alert("证件号为数字或字母");
-								        //	return false;
-								       // }
+									var licenseNo = $("#licenseNo2").val();
+									if(licenseNo=="" || licenseNo==null){
+										alert("餐饮服务许可证号需填写");
+										return false;
 									}
-								}
-								if(isFiles != 0){
-									alert("证件需要全部上传");
-									return false;
-								}
 								//加载
  								var dataParam = $("#submit_form").serialize();
 								//console.log("dataParam"+dataParam);
