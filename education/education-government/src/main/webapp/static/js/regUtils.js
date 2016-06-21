@@ -37,7 +37,9 @@ $(function() {
 				if(data.status == 500){
 					layer.alert(data.message, {icon: 2});
 				}else{
-					
+					var obj =  $("#sendMessage");
+					$(obj).attr("disabled","disabled");
+					setMessagetime(obj);
 				}
 			}
 		});
@@ -68,3 +70,19 @@ $(function() {
 		$(this).attr("src","/ajax/drawRandom.htm?"+Math.random());
 	});
 });
+
+
+var countM = 90;
+function setMessagetime(obj) {
+	if (countM == 0) {
+		$(obj).removeAttr("disabled");
+		$(obj).val("获取短信验证码");
+		return false;
+	} else {
+		$(obj).val("获取短信验证码" + countM + "");
+		countM--;
+	}
+	setTimeout(function() {
+		setMessagetime(obj)
+	}, 1000)
+}
