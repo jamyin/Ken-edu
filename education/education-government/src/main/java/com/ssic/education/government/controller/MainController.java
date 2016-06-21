@@ -50,20 +50,17 @@ public class MainController extends BaseController{
 			String content = eduinformationDto.getContent();
 			if (StringUtils.isNotBlank(content)) {
 				eduinformationDto.setContent(content.replace("img","yy"));
+				eduinformationDto = pageList.getResults().get(0);
+				eduinformationDto.setContent(eduinformationDto.getContent().replaceAll("</?[^>]+>", ""));
+				eduinformationDto.setContent(eduinformationDto.getContent().replaceAll("<a>\\s*|\t|\r|\n</a>", ""));  
+				eduinformationDto.setContent(eduinformationDto.getContent().substring(0, 410));
 			}
 		}
 		eduInformationDto.setType(Integer.valueOf(DataStatus.ENABLED));
 		PageResult<EduInformationDto> pageList1 =  iEduInformationService.searchInfomation(eduInformationDto,pageQuery);
 		eduInformationDto.setType(Integer.valueOf(DataStatus.MANAGERTYPE));
 		PageResult<EduInformationDto> pageList3 =  iEduInformationService.searchInfomation(eduInformationDto,pageQuery);
-		EduInformationDto eduinformationdto = new EduInformationDto();
-		if (null != pageList.getResults() && pageList.getResults().size()>0) {
-			eduinformationdto = pageList.getResults().get(0);
-			eduinformationdto.setContent(eduinformationdto.getContent().replaceAll("</?[^>]+>", ""));
-			eduinformationdto.setContent(eduinformationdto.getContent().replaceAll("<a>\\s*|\t|\r|\n</a>", ""));  
-			eduinformationdto.setContent(eduinformationdto.getContent().substring(0, 410));
-		}		
-		mv.addObject("eduInformationDto", eduinformationdto);
+		mv.addObject("eduInformationDto", eduinformationDto);
 		mv.addObject("pageList1", pageList1);
 		mv.addObject("pageList3", pageList3);
 		mv.setViewName("main");
