@@ -227,6 +227,7 @@ public class LedgerController {
 				j.setSuccess(false);
 				return j;
 			}
+			ledger.setSpce(warer.getSpec());
 			ledger.setWaresId(warer.getId());
 			// 进货与生产日期比较
 			if (ledger.getProductionDate() != null) {
@@ -417,6 +418,7 @@ public class LedgerController {
 				j.setSuccess(false);
 				return j;
 			}
+			ledger.setSpce(warer.getSpec());
 			ledger.setWaresId(warer.getId());
 			// 生产日期与进货日期
 			if (ledger.getProductionDate() != null) {
@@ -728,6 +730,7 @@ public class LedgerController {
 							errorMsg = "第" + (rowNum + 1) + "行数据不正确，原料不存在。";
 							break;
 						} else {
+							dto.setSpce(pw.getSpec());
 							dto.setWaresId(pw.getId());
 							dto.setAmountUnit(pw.getAmountUnit());
 							dto.setProductionName(pw.getManufacturer());

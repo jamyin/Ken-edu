@@ -44,7 +44,7 @@ $(function(){
 				if(licName=="工商营业执照"){
 					$("#img1").attr("src",list[i].licPic);
 				}
-				if(licName=="身份证"){
+				/* if(licName=="身份证"){
 					$("#img8").attr("src",list[i].licPic);
 				}
 				if(licName=="组织机构代码"){
@@ -67,13 +67,13 @@ $(function(){
 				}
 				if(licName=="食品生产许可证"){
 					$("#img5").attr("src",list[i].licPic);
-				}
+				} */
 				if(licName=="餐饮服务许可证"){
 					$("#img6").attr("src",list[i].licPic);
 				}
-				if(licName=="食品经营许可证"){
+				/* if(licName=="食品经营许可证"){
 					$("#img7").attr("src",list[i].licPic);
-				}
+				} */
 			}
 		}
 		$('#updateImage')
