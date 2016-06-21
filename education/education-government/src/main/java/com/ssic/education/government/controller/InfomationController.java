@@ -138,6 +138,8 @@ public class InfomationController extends BaseController {
 		EduInformationDto data = iEduInformationService.search(infoId);
 		
 		EduInformationDto eduInformationDto = new EduInformationDto();
+		List<String> sourceIds = packageSourceId();
+		eduInformationDto.setSourceIds(sourceIds);
 		eduInformationDto.setType(data.getType());
 		PageResult<EduInformationDto> pageList =  iEduInformationService.searchInfomation(eduInformationDto,pageQuery);
 		mv.addObject("pageList", pageList);

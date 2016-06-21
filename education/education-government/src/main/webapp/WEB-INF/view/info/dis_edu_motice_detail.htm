@@ -23,7 +23,7 @@
  		</div>
         <div class="main_wrap">
             <div class="content_wrap">
-                <p class="head"><#if data.type == 3> 健康宣教</#if> <#if data.type == 1>通知公告 </#if> </p>
+                <p class="head"><#if data.type == 3> 健康宣教</#if> <#if data.type == 1>通告公示 </#if> </p>
                 <div class="content">
                     <h1>${(data.title)!}</h1>
                     <p class="date"> ${(data.createTime?string('yyyy-MM-dd'))!} </p>
@@ -37,7 +37,7 @@
                 </div>
             </div>
             <div class="sidebar">
-                    <h3 class="head yellow_head"><#if data.type == 3> 健康宣教</#if> <#if data.type == 1>通知公告 </#if><a class="more" href="/info/index/${(data.type)!}.htm">更多>></a></h3>
+                    <h3 class="head yellow_head"><#if data.type == 3> 健康宣教</#if> <#if data.type == 1>通告公示 </#if><a class="more" href="/info/index/${(data.type)!}.htm">更多>></a></h3>
                     <ul class="list">
                     	<#if pageList ??>
                     		<#list pageList.getResults() as data>
@@ -102,9 +102,7 @@
                     </ul> -->
             </div>
         </div>
-        <div class="footer">
-    		上海市中小学校学生午餐综合管理平台<br>CopyRight© 2016上海市天坊信息技术有限公司
-    	</div>
+        <#include "/common/footer.htm" />
     </body>
     <script>
 		$(function(){	

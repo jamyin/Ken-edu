@@ -29,6 +29,10 @@ public class LedgerDto {
 	@Setter
 	@Getter
 	private String spce;
+	
+	@Setter
+	@Getter
+	private String spec;
 
 	@Setter
 	@Getter

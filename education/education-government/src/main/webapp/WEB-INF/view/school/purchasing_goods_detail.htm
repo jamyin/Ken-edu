@@ -23,14 +23,14 @@
       </div>
       <ul>
      	<li><label for="">名称:</label><span>${(proWaresDto.waresName)!}</span></li>
-        <li><label for="">英文名称:</label><span>${(proWaresDto.enName)!}</span></li>
-        <li><label for="">产品编码：</label><span>${(proWaresDto.customCode)!}</span></li>
+       <!--  <li><label for="">英文名称:</label><span>${(proWaresDto.enName)!}</span></li>
+        <li><label for="">产品编码：</label><span>${(proWaresDto.customCode)!}</span></li> -->
         <li><label for="">产品分类：</label><span>${(proWaresDto.waresTypeStr)!}</span></li>
         <li><label for="">规格：</label><span>${(proWaresDto.spec)!}</span></li>
         <li><label for="">保质期:</label><span>${(proWaresDto.shelfLife)!}${(proWaresDto.unit)!}</span></li>
         <li><label for="">生产企业:</label><span>${(proWaresDto.manufacturer)!}</span></li>
         <li><label for="">产地:</label><span>${(proWaresDto.place)!}</span></li>
-        <li><label for="">产品包装条码:</label><span>${(proWaresDto.barCode)!}</span></li>
+        <!-- <li><label for="">产品包装条码:</label><span>${(proWaresDto.barCode)!}</span></li> -->
         <#if proLicenses??>
         	<#list proLicenses as proLicense>
 	        	<#if proLicense.licType != 3>
