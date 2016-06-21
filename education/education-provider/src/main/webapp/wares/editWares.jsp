@@ -35,10 +35,7 @@
 								if(userAccount==''){
 									error_message=error_message + '商品名称不能为空,';
 								}
-								var name = $("#spec").val();
-								if(name==''){
-									error_message = error_message +'商品规格不能为空,'; 
-								}
+						
 								
 								var userNo = $("#shelfLife").val();
 								if(userNo==''){

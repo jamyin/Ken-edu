@@ -170,11 +170,7 @@ public class WaresController extends BaseController {
 			j.setMsg("原料类型不能为空");
 			return j;
 		}
-		if (pro.getManufacturer() == null || pro.getManufacturer().equals("")) {
-			j.setSuccess(false);
-			j.setMsg("生产企业不能为空");
-			return j;
-		}
+
 		DataSourceHolderUtil.setToMaster();
 		SessionInfo info = (SessionInfo) request.getSession().getAttribute(
 				ConfigUtil.SESSIONINFONAME);
@@ -291,11 +287,7 @@ public class WaresController extends BaseController {
 			json.setMsg("商品类型不能为空");
 			return json;
 		}
-		if (pro.getManufacturer() == null || pro.getManufacturer().equals("")) {
-			json.setSuccess(false);
-			json.setMsg("生产企业不能为空");
-			return json;
-		}
+
 		ProWares specManu = waresService.findProWarsByNameSpecManu(
 				pro.getWaresName(), pro.getAmountUnit(), pro.getManufacturer(),
 				pro.getSupplierId());
