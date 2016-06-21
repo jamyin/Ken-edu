@@ -239,11 +239,11 @@
 									var licenseNo = $("#licenseNo"+i).val();
 									if(licenseNo!="" && licenseNo!=null){
 										//进行正则判断
-										var strExp=/^[A-Za-z0-9]+$/;
-								        if(!strExp.test(licenseNo)){
-								        	alert("证件号为数字或字母");
-								        	return false;
-								        }
+										//var strExp=/^[A-Za-z0-9]+$/;
+								        //if(!strExp.test(licenseNo)){
+								        //	alert("证件号为数字或字母");
+								        //	return false;
+								       // }
 									}
 								}
 								if(isFiles != 0){
