@@ -100,7 +100,7 @@
 								<span class="intelligent-label f-fl"><b class="ftx04"></b>区教委：</span>
 								<div class="" id="committeeList" style="float: right; margin-left: 90px;"></div>
 							</div>
-						<div class="item col-xs-12">
+						<div class="item col-xs-12" style="margin-top:80px;">
 	                        <span class="intelligent-label f-fl"><b class="ftx04">*</b>餐饮服务许可证：</span>
      						<div class="f-fl item-ifo">
 		     						<input type="text" placeholder="输入餐饮服务许可证号" data-valid="between:6-20" class="txt03 f-r3" id="licenseNo2" onkeyup="enterLicenNO(this,2,0,'餐饮服务许可证');"/>
@@ -111,8 +111,8 @@
 		     					<wf id="license2"></wf>
      						</div>	                        
 	                    </div>
-						<div class="item col-xs-12" style="margin-top:80px;">
-	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>工商营业执照：</span>
+						<div class="item col-xs-12">
+	                        <span class="intelligent-label f-fl">工商营业执照：</span>
      						<div class="f-fl item-ifo">
 		     						<input type="text" placeholder="输入工商营业执照号" data-valid="between:6-20" class="txt03 f-r3" id="licenseNo1" onkeyup="enterLicenNO(this,1,4,'工商营业执照');"/>
      						</div>	                        
