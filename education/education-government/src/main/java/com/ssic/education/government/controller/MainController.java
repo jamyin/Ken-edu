@@ -53,7 +53,9 @@ public class MainController extends BaseController{
 				eduinformationDto = pageList.getResults().get(0);
 				eduinformationDto.setContent(eduinformationDto.getContent().replaceAll("</?[^>]+>", ""));
 				eduinformationDto.setContent(eduinformationDto.getContent().replaceAll("<a>\\s*|\t|\r|\n</a>", ""));  
-				eduinformationDto.setContent(eduinformationDto.getContent().substring(0, 410));
+				if(eduinformationDto.getContent().length()>411) {
+					eduinformationDto.setContent(eduinformationDto.getContent().substring(0, 410));
+				}				
 			}
 		}
 		eduInformationDto.setType(Integer.valueOf(DataStatus.ENABLED));
