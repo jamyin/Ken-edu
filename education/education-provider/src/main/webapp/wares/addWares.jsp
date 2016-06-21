@@ -108,7 +108,7 @@
 						</tr>
 						<tr>
 						<th><font color="red">*</font>生产企业</th>
-							<td><input name="manufacturer" type="text" placeholder="请输入供应商名称" id="manufacturer"
+							<td><input name="manufacturer" type="text" placeholder="请输入生产企业" id="manufacturer"
 								style="width: 152px;" class="easyui-validatebox span2" data-options="required:true" ></td>
 							<th><font color="red">*</font>原料分类</th>
 							<td><select id="waresType" class="easyui-combobox" name="waresType"  data-options="width:140,height:29,editable:false,panelHeight:'auto'"
