@@ -74,9 +74,9 @@ text-align: right;
 				</tr>
 				<tr>
 					<th>证件类型:</th>
-					<th>餐饮服务证号:</th>
+					<th>餐饮服务许可证号:</th>
 					<td><input name="foodServiceCode"
-						type="text" placeholder="请输入餐饮服务证号" class="easyui-validatebox span2"
+						type="text" placeholder="请输入餐饮服务许可证号" class="easyui-validatebox span2"
 						value="${Corporate.foodServiceCode }"></td>
 				</tr>
 <%-- 				<tr>

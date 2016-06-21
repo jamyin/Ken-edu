@@ -98,7 +98,7 @@ ul.my_info {
 			<span class="name" style="text-align:left;">电话：	</span><span class="value">${Corporate.contactWay }</span>
 		</li>
 		<li>
-			<span class="cert" style="text-align:left;">餐饮服务证号：	</span><span class="value">${Corporate.foodServiceCode }</span>
+			<span class="cert" style="text-align:left;">餐饮服务许可证：	</span><span class="value">${Corporate.foodServiceCode }</span>
 		</li>
 <%-- 		<li>
 			<span class="cert" style="text-align:left;">食品经营许可证：	</span><span class="value">${Corporate.foodBusinessCode }</span>
