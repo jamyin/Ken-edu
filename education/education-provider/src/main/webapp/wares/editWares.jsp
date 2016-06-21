@@ -28,7 +28,7 @@
 		$('#formEdit').form(
 						{																	
 							url : '${pageContext.request.contextPath}/waresController/updateWares',
-							onSubmit : function() {
+							onSubmit : function() { 
 								var isValid = $(this).form('validate');
 								var error_message = '';
 							    var userAccount = $("#waresName").val();
