@@ -41,7 +41,7 @@
         <li><label for="">菜品:</label><span><#if data.proDishesDtos??><#list data.proDishesDtos as proDishesDto>${(proDishesDto.name)!} 
 		          </#list>
 		          </#if></span></li>
-        <li><label for="">营养:</label><span><#if data.proNutritionalDtos??><#list data.proNutritionalDtos as proNutritionalDto>${(proNutritionalDto.name)!}:${(proNutritionalDto.weight)!}${(proNutritionalDto.unit)!}  
+        <li><label for="">营养:</label><span><#if data.proNutritionalDtos??><#list data.proNutritionalDtos as proNutritionalDto>${(proNutritionalDto.name)!}:${(proNutritionalDto.weight)!}${(proNutritionalDto.unit)!}；  
 		          </#list></#if></span></li>
       </ul>
     </div>
