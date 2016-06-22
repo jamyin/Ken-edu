@@ -281,7 +281,7 @@ public class SchoolController {
 				chooseSchoolDto.setCommitteeList(committeeList);
 
 				//学校列表
-				if(StringUtils.isNotEmpty(schoolDto.getCommitteeId()) && schoolDto.getCommitteeId().equals("9fa83d14-3691-11e6-b1e8-005056a5ed30")){
+				if(sourceType == 0){                    //市教委的情况
 					schoolDto.setCommitteeId(null);
 				}
 				PageResult<SchoolDto> schoolList = schoolService.findSchoolList(schoolDto, query);  

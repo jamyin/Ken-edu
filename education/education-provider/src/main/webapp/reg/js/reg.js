@@ -24,3 +24,13 @@ function bindClickFunction(){
 	     $("input[name='committees']").prop("checked",$(this).prop("checked"));
 	});
 }
+
+function clearObject(licenseNo,license,file){
+//	console.log(licenseNo+"----"+file+"===="+license);
+	$("#"+licenseNo).attr("data-path","");
+	$("#"+licenseNo).val('');
+	$("#"+license).html("");
+	$("#"+file).val("");
+	$("#"+file).prop("checked",false);
+	
+}
