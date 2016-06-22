@@ -113,7 +113,7 @@ public class StockBatchController {
 		return result;
 	}
 
-	@RequestMapping(value = "/updateStatus/{id}/{status}", method = RequestMethod.GET)
+	@RequestMapping(value = "/updateStatus/{id}/{status}", method = RequestMethod.POST)
 	@AccessRequired
 	public @ResponseBody Response<Integer> updateStatus(@PathVariable("id") String id, @PathVariable("status") String status) {
 		Response<Integer> result = new Response<Integer>();

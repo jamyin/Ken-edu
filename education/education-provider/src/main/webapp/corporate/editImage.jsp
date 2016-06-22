@@ -205,12 +205,16 @@ $(function(){
 					<th class="text-license">餐饮服务许可证</th>
 					<td><input type="file" name="imgUrl6" id="imgUrl6"
 						accept="image/*" /></td>
+				</tr>
+				<tr>
+					<td colspan="2"><img id="img6"   width="150px" height="150px" src="${pageContext.request.contextPath}/icon/150x150.png"></img></td>
+				</tr>
+				<tr>
 					<th class="text-license">工商营业执照</th>
 					<td><input type="file" name="imgUrl1" id="imgUr1"
 						accept="image/*" /></td>
 				</tr>
 				<tr>
-					<td colspan="2"><img id="img6"   width="150px" height="150px" src="${pageContext.request.contextPath}/icon/150x150.png"></img></td>
 					<td colspan="2"><img id="img1"   width="150px" height="150px" src="${pageContext.request.contextPath}/icon/150x150.png"></img></td>
 				</tr>
 			</table>

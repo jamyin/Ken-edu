@@ -1,5 +1,6 @@
 package com.ssic.education.utils.constants;
 
+import com.ssic.education.utils.util.PropertiesUtils;
 import com.ssic.education.utils.util.RandomCode;
 
 /**
@@ -9,7 +10,7 @@ import com.ssic.education.utils.util.RandomCode;
  *
  */
 public interface DataStatus {
-	final static String IMAGE_HOST = "http://192.168.1.242";
+	final static String IMAGE_HOST = PropertiesUtils.getProperty("upload.look.url");
 
 	final static String _UPLOAD_ = "/upload/";
 

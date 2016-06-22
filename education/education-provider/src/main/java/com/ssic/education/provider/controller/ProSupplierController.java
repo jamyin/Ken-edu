@@ -559,12 +559,15 @@ public class ProSupplierController extends BaseController {
 					} else if (i == 2) {
 						if (StringUtils.isBlank(value)) {
 							n += 1;
-							break;
+							continue;
 						}
 						supplier.setFoodCirculationCode(value);
 					} else if (i == 3) {
 						if (StringUtils.isBlank(value)) {
-							n += 1;
+							if (n == 1) {
+								errorMsg = "第" + (rowNum + 1)
+										+ "行数据不正确，两证必填一项。";
+							}
 							break;
 						}
 						supplier.setFoodProduceCode(value);

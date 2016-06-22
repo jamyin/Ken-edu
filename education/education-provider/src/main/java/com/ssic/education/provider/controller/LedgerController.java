@@ -409,7 +409,7 @@ public class LedgerController {
 				ledgers.get(0).setUserId(null);
 			}
 		}
-		if (ledgers.get(0).getHaulStatus() == 1) {
+		if (ledgers.get(0).getHaulStatus() == 1||ledgers.get(0).getHaulStatus() == 2) {
 			if (ledgers.get(0).getUserId() == null) {
 				j.setMsg("不能没有驾驶员");
 				j.setSuccess(false);

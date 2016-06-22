@@ -16,6 +16,7 @@ import com.ssic.education.handle.dao.SupplierDao;
 import com.ssic.education.handle.pojo.EduCanteen;
 import com.ssic.education.handle.pojo.ProLicense;
 import com.ssic.education.handle.pojo.ProSupplier;
+import com.ssic.education.utils.constants.DataStatus;
 import com.ssic.education.utils.model.PageQuery;
 import com.ssic.education.utils.model.PageResult;
 import com.ssic.education.utils.util.BeanUtils;
@@ -66,7 +67,7 @@ public class AppSuppliersServiceImpl implements IAppSupplierService {
 			if (null != list && !list.isEmpty()) {
 				for (ProLicense proLicense : list) {
 					if (null != proLicense.getLicPic()) {
-						String host = "http://192.168.1.242";
+						String host = DataStatus.IMAGE_HOST;
 						String pic = host + proLicense.getLicPic();
 						proLicense.setLicPic(pic);
 					}
@@ -99,7 +100,7 @@ public class AppSuppliersServiceImpl implements IAppSupplierService {
 			if (null != list && !list.isEmpty()) {
 				for (ProLicense proLicense : list) {
 					if (null != proLicense.getLicPic()) {
-						String host = "http://192.168.1.242";
+						String host = DataStatus.IMAGE_HOST;
 						String pic = host + proLicense.getLicPic();
 						proLicense.setLicPic(pic);
 					}
@@ -152,7 +153,7 @@ public class AppSuppliersServiceImpl implements IAppSupplierService {
 			if (null != list && !list.isEmpty()) {
 				for (ProLicense proLicense : list) {
 					if (null != proLicense.getLicPic()) {
-						String host = "http://192.168.1.242";
+						String host = DataStatus.IMAGE_HOST;
 						String pic = host + proLicense.getLicPic();
 						proLicense.setLicPic(pic);
 					}

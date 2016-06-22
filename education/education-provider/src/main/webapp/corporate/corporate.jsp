@@ -22,7 +22,8 @@ ul.my_info {
 }
 .fl {
 	text-align:center;
-	width:120px;
+	margin-left:10px;
+	width:25px;
 	float:left;
 }
 .fl-a {
