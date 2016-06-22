@@ -5,8 +5,10 @@ import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -557,7 +559,7 @@ public class WaresController extends BaseController {
 		String errorMsg = null;
 		// 转换excel到list
 		List<ProWares> list = new ArrayList();
-
+		Set<String> set=new HashSet();
 		// 读取excel
 		try (Workbook wb = WorkbookFactory.create(file.getInputStream());) {
 			Sheet sheet = wb.getSheetAt(0);
@@ -629,6 +631,13 @@ public class WaresController extends BaseController {
 							errorMsg = "第" + (rowNum + 1) + "行数据不正确，商品已存在。";
 							break;
 						}
+						String mark=dto.getWaresName()+","+dto.getAmountUnit()+","+dto.getManufacturer();
+						int m=set.size();
+						set.add(mark);
+						if(m==set.size()){
+							errorMsg = "第" + (rowNum + 1) + "行数据不正确，商品重复。";
+							break;
+						}
 //					} else if (i == 4 && StringUtils.isNotBlank(value)) {
 //						// 英文名称
 //						dto.setEnName(value);
@@ -646,9 +655,20 @@ public class WaresController extends BaseController {
 							errorMsg = "第" + (rowNum + 1) + "行数据不正确，保质期格式不正确。";
 							break;
 						}
-					} else if (i == 6 && dto.getShelfLife() != null) {
+					} else if (i == 6 ) {
 						// 保质期单位
-						dto.setUnit(value);
+						if(dto.getShelfLife() != null){
+							if(StringUtils.isBlank(value)){
+								errorMsg = "第" + (rowNum + 1) + "行数据不正确，保质期不能为空。";
+								break;
+							}
+							dto.setUnit(value);
+						}else{
+							if(StringUtils.isNotBlank(value)){
+								dto.setShelfLife(0);
+								dto.setUnit(value);
+							}
+						}
 					} else if (i == 7 && StringUtils.isNotBlank(value)) {
 						// 产地
 						dto.setPlace(value);
