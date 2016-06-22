@@ -15,6 +15,7 @@ import com.ssic.educateion.common.dto.ProLedgerDto;
 import com.ssic.educateion.common.dto.ProLedgerMasterDto;
 import com.ssic.educateion.common.dto.ProSupplierDto;
 import com.ssic.educateion.common.dto.ProWaresDto;
+import com.ssic.educateion.common.utils.BaiduMapUtils;
 import com.ssic.education.handle.service.IProLedgerMasterService;
 import com.ssic.education.handle.service.ProLedgerService;
 import com.ssic.education.handle.service.ProSupplierService;
@@ -65,7 +66,8 @@ public class AppMapViewController {
 			}		
 			
 			try {
-				points = ShowMap.getHistory(resultDto).getPoints();
+//				points = ShowMap.getHistory(resultDto).getPoints();
+				points = BaiduMapUtils.getHistory(resultDto).getPoints();
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
