@@ -21,12 +21,21 @@ $(function() {
 		});
 	});
 	$("#sendMessage").on("click",function(){
+		var mobilePhone =  $.trim($("#mobileNo").val());
+		if (mobilePhone.length <= 0 || mobilePhone == 'undefined') {
+			layer.alert("请输入手机号~", {icon: 2});
+			return;
+		}
+		var phone_reg  = /(^13\d{9}$)|(^14)[5,7]\d{8}$|(^15[0,1,2,3,5,6,7,8,9]\d{8}$)|(^17)[6,7,8]\d{8}$|(^18\d{9}$)/g ;  
+		if (!phone_reg.test(mobilePhone)) {
+			layer.alert("手机格式不正确~", {icon: 2});
+			return;
+		}
 		var picCaptcha = $("#picCaptcha").val();
 		if (picCaptcha.length<=0 || picCaptcha == 'undefined') {
 			layer.alert("请输入图片验证码~", {icon: 2});
 			return;
-		}		
-		var mobilePhone = $("#mobileNo").val();
+		}
 		var dataParam = {picCaptcha:picCaptcha,mobilePhone:mobilePhone};
 		$.ajax({
 			url : '/ajax/SMS/send.htm',
@@ -39,6 +48,7 @@ $(function() {
 				}else{
 					var obj =  $("#sendMessage");
 					$(obj).attr("disabled","disabled");
+					$(obj).css("background","#c6c6c6");
 					setMessagetime(obj);
 				}
 			}
@@ -46,7 +56,16 @@ $(function() {
 	});
 	$("#messageValid").on("blur",function(){
 		var validateCode = $("#messageValid").val();
-		var mobilePhone = $("#mobileNo").val();
+		var mobilePhone =  $.trim($("#mobileNo").val());
+		if (mobilePhone.length <= 0 || mobilePhone == 'undefined') {
+			layer.alert("请输入手机号~", {icon: 2});
+			return;
+		}
+		var phone_reg  = /(^13\d{9}$)|(^14)[5,7]\d{8}$|(^15[0,1,2,3,5,6,7,8,9]\d{8}$)|(^17)[6,7,8]\d{8}$|(^18\d{9}$)/g ;  
+		if (!phone_reg.test(mobilePhone)) {
+			layer.alert("手机格式不正确~", {icon: 2});
+			return;
+		}
 		var dataParam = {validateCode:validateCode,mobilePhone:mobilePhone};
 		$.ajax({
 			url : '/ajax/checkMobile.htm',
@@ -76,6 +95,7 @@ var countM = 90;
 function setMessagetime(obj) {
 	if (countM == 0) {
 		$(obj).removeAttr("disabled");
+		$(obj).css("background","#60ac62");
 		$(obj).val("获取短信验证码");
 		return false;
 	} else {

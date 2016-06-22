@@ -55,9 +55,9 @@
 				<li><label><i>*</i>学校名称</label><input id="schoolName" type="text" placeholder=""></li>
 				<li><label><i>*</i>地址</label><input id="address" type="text" placeholder=""></li>
 				<li><label><i>*</i>联系人姓名</label><input id="contacts" type="text" placeholder=""></li>
-				<li><label><i>*</i>手机</label><input id="mobileNo" type="text" placeholder=""></li>
+				<li><label><i>*</i>手机</label><input id="mobileNo" type="text" placeholder="" maxlength='11'></li>
 				<li><label><i>*</i>图片验证码</label><input id="picCaptcha" type="text" placeholder=""><img id="refreshValid" title="点击图片刷新验证码" src="/ajax/drawRandom.htm"/></li>
-				<li><label><i>*</i>短信验证码</label><input id="messageValid" type="text" placeholder="">
+				<li><label><i>*</i>短信验证码</label><input id="messageValid" type="text" placeholder="" >
 					<input title="请先输入图片验证码" id="sendMessage" type="button" href="javascript:;" style="margin-left:10px;width:150px;line-height:30px;background:#60ac62;color:black;" value="获取短信验证码"></input>
 				</li>
 				<li><label><i>*</i>所属区教育局</label>
@@ -153,7 +153,7 @@
 				<li><label><i>*</i>密码</label><input id="password" type="password" style="padding:10px;border:thin double #CCCCCC; height: 8px;width: 190px;" placeholder=""></li>
 				<li><label><i>*</i>确认密码</label><input id="confirmPassword" type="password" style="padding:10px;border:thin double #CCCCCC; height: 8px;width: 190px;" placeholder=""></li>
 			</ul>
-			<input id="sursSubmit" class="submit" type="button" style="background:#c6c6c6;" value="确认提交">
+			<input id="sursSubmit" class="submit" disabled="disabled"  type="button" style="background:#c6c6c6;" value="确认提交">
 		</div>
 	</div>	
 	<div class="footer">
