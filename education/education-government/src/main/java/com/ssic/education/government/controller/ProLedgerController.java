@@ -19,6 +19,7 @@ import com.ssic.educateion.common.dto.LedgerDto;
 import com.ssic.educateion.common.dto.ProLedgerMasterDto;
 import com.ssic.educateion.common.dto.ProPackagesDto;
 import com.ssic.educateion.common.dto.ProSupplierDto;
+import com.ssic.educateion.common.utils.BaiduMapUtils;
 import com.ssic.education.government.controller.supplier.ProSupplierController;
 import com.ssic.education.handle.service.IProLedgerMasterService;
 import com.ssic.education.handle.service.ProLedgerService;
@@ -86,7 +87,7 @@ public class ProLedgerController extends BaseController{
 		//地图展示方法
 		List<BaiduPointsDto> points = new ArrayList<BaiduPointsDto>();
 		try {
-			points = getHistory(resultDto).getPoints();
+			points = BaiduMapUtils.getHistory(resultDto).getPoints();
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -103,22 +104,20 @@ public class ProLedgerController extends BaseController{
 		
 		return mv;
 	}
-	
-	
-	public BaiduHistoryDto getHistory(ProLedgerMasterDto resultDto) throws ParseException{
-		String baidu_getHistory_url = PropertiesUtils.getProperty("baidu.ditu.url");
-		String startTime = "";
-		String endTime = "";
-		if(resultDto.getStartTime()!=null){
-			startTime = DateUtils.dateToTimestamp(resultDto.getStartTime());	
-		}
-		if(resultDto.getEndTime()!=null){
-			endTime = DateUtils.dateToTimestamp(resultDto.getEndTime());//String.valueOf(resultDto.getEndTime().getTime());	
-		}			
-//		String reqURL = "ak=YN0mfG1VM2jrGV5jBB7RD6lKKmrDZA43&service_id=117192&entity_name=8438B07A-2B4C-49B7-8523-5A177081F602&start_time=1463695529&end_time=1463767529";
-		String reqURL = "ak="+PropertiesUtils.getProperty("baidu.ditu.ak")+"&service_id="+PropertiesUtils.getProperty("baidu.ditu.serviceId")+"&entity_name="+resultDto.getId()+"&start_time="+startTime+"&end_time="+endTime+"";
-		String json = HttpClientUtil.sendGetRequest(baidu_getHistory_url+reqURL, null);
-		BaiduHistoryDto history = new Gson().fromJson(json, BaiduHistoryDto.class);
-		return history;
-	}
+//	public BaiduHistoryDto getHistory(ProLedgerMasterDto resultDto) throws ParseException{
+//		String baidu_getHistory_url = PropertiesUtils.getProperty("baidu.ditu.url");
+//		String startTime = "";
+//		String endTime = "";
+//		if(resultDto.getStartTime()!=null){
+//			startTime = DateUtils.dateToTimestamp(resultDto.getStartTime());	
+//		}
+//		if(resultDto.getEndTime()!=null){
+//			endTime = DateUtils.dateToTimestamp(resultDto.getEndTime());//String.valueOf(resultDto.getEndTime().getTime());	
+//		}			
+////		String reqURL = "ak=YN0mfG1VM2jrGV5jBB7RD6lKKmrDZA43&service_id=117192&entity_name=8438B07A-2B4C-49B7-8523-5A177081F602&start_time=1463695529&end_time=1463767529";
+//		String reqURL = "ak="+PropertiesUtils.getProperty("baidu.ditu.ak")+"&service_id="+PropertiesUtils.getProperty("baidu.ditu.serviceId")+"&entity_name="+resultDto.getId()+"&start_time="+startTime+"&end_time="+endTime+"";
+//		String json = HttpClientUtil.sendGetRequest(baidu_getHistory_url+reqURL, null);
+//		BaiduHistoryDto history = new Gson().fromJson(json, BaiduHistoryDto.class);
+//		return history;
+//	}
 }

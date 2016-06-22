@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,user-scalable=no" />
-    <title>供应商资质</title>
     <link href="/static/css/style.css" rel="stylesheet" />
     <script src="/static/js/jquery-2.1.3.min.js"></script>
   </head>
@@ -149,14 +148,14 @@
 					<#list resultDto.getResltList() as data>
 						<li>
 						<span>${(data.name)!}</span><br>
-						数量：${(data.quantity)!}${(data.spce)!}<br>
+						数量：${(data.quantity)!}${(data.amountUnit)!}<br>
 						生产日期：
 						<#if data.productionDate ??>
 							${data.productionDate?string('yyyy-MM-dd')}
 						</#if>
 						<br>
 						生产企业：${(data.productionName)!}<br>
-						原料供货商：${(data.supplierName)!}
+						原料供货者：${(data.supplierName)!}
 						</li>					
 					</#list>
 				</#if>			

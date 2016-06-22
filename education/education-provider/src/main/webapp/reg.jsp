@@ -109,18 +109,24 @@
 	                       		<input id="file-2" name="licenseList" type="checkbox" style="display:none;"/>
 	      						<input multiple type="file" id="id-input-file-2"/>
 		     					<wf id="license2"></wf>
-     						</div>	                        
+     						</div>	  
+							<div class="f-fl" style="margin-left:5px;">
+	      						<input type="button" style="width:50px;height:30px;line-height:20px;margin:0px;" value="清除"  onclick="clearObject('licenseNo2','license2','file-2')"/>
+     						</div>     						                      
 	                    </div>
 						<div class="item col-xs-12">
 	                        <span class="intelligent-label f-fl">工商营业执照：</span>
      						<div class="f-fl item-ifo">
 		     						<input type="text" placeholder="输入工商营业执照号" data-valid="between:6-20" class="txt03 f-r3" id="licenseNo1" onkeyup="enterLicenNO(this,1,4,'工商营业执照');"/>
-     						</div>	                        
+     						</div>	
 	                      <div class="f-fl item-ifo" style="margin-left:5px;">
 	                       		<input id="file-1" name="licenseList" type="checkbox" style="display:none;"/>
 	      						<input multiple type="file" id="id-input-file-1"/>
 		     					<wf id="license1"></wf>
      						</div>
+							<div class="f-fl" style="margin-left:5px;">
+	      						<input type="button" style="width:50px;height:30px;line-height:20px;margin:0px;" value="清除"  onclick="clearObject('licenseNo1','license1','file-1')"/>
+     						</div>   
 	                    </div>
 <!-- 						<div class="item col-xs-12">
 	                        <span class="intelligent-label f-fl"><b class="ftx04"></b>食品流通许可证：</span>
