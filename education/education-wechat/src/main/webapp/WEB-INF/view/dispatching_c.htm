@@ -149,7 +149,7 @@
 					<#list resultDto.getResltList() as data>
 						<li>
 						<span>${(data.name)!}</span><br>
-						数量：${(data.quantity)!}${(data.spce)!}<br>
+						数量：${(data.quantity)!}${(data.amountUnit)!}<br>
 						生产日期：
 						<#if data.productionDate ??>
 							${data.productionDate?string('yyyy-MM-dd')}
