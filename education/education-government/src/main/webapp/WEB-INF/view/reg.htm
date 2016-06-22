@@ -8,8 +8,9 @@
        	<script src="/static/js/phoneReg.upload.js"></script>
        	<script type="text/javascript" src="/static/layer-v2.0/layer/layer.js"></script>
        	<style type="text/css">
-       		.cafeteria > li > ul > li input[type=text]{width: 120px; margin-left:10px;}
-       		.reg_box > ul > li label.file {width: 150px;}
+       		.cafeteria > li > ul > li input[type=text]{ margin-left:10px;}
+       		/* .cafeteria > li > ul > li input[type=text]{width: 120px; margin-left:10px;}
+       		.reg_box > ul > li label.file {width: 150px;} */
        		.reg_box > ul > li > ul > li span.remove{
        			width: 28px;
 			    height: 28px;
@@ -85,14 +86,56 @@
 				<li><label><i></i>联系人姓名</label><input id="canteenContacts" type="text" placeholder=""></li>
 				<li><label><i></i>手机</label><input id="phoneNumber" type="text" placeholder=""></li>
 				<li>
+					<label style="width: 120px; margin:0 0 0 -20px;"><i></i>餐饮服务许可证</label>
+					<ul class="c_type">
+						<li name="phoneFile1">
+						<input type="hidden" class="licType1" name="licType1" placeholder="证件编号" value="0">
+						<input type="hidden" class="licTypeName1" name="licType2" placeholder="证件编号" value="餐饮服务许可证">
+						<input id="licinputw1" type="text" class="licinputw1" name="licNum" placeholder="证件编号">
+						<label class="file" for="phoneFile1">未选择文件<i>浏览</i></label>
+						<input id="phoneFile1" type="file" name="file" onchange="selectfun(this)"><span data-id="1" class="remove" style="font-size: 14px; width: 45px;">清空</span>
+						<a id="phoneQuery1"></a>
+						</li>
+					</ul>				
+				</li>
+				<li>
+					<label style="width: 120px; margin:0 0 0 -20px;"><i></i>食品经营许可证</label>
+					<ul class="c_type">
+						<li name="phoneFile2">
+						<input type="hidden" class="licType2" name="licType2" placeholder="证件编号" value="1">
+						<input type="hidden" class="licTypeName2" name="licType2" placeholder="证件编号" value="食品经营许可证">
+						<input id="licinputw2" type="text" class="licinputw2" name="licNum" placeholder="证件编号">
+						<label class="file" for="phoneFile2">未选择文件<i>浏览</i></label>
+						<input id="phoneFile2" type="file" name="file" onchange="selectfun(this)"><span data-id="2" class="remove" style="font-size: 14px; width: 45px;">清空</span>
+						<a id="phoneQuery2"></a>
+						</li>
+					</ul>				
+				</li>
+				<li>
+					<label style="width: 120px; margin:0 0 0 -20px;"><i></i>工商营业执照</label>
+					<ul class="c_type">
+						<li name="phoneFile3">
+						<input type="hidden" class="licType3" name="licType3" placeholder="证件编号" value="4">
+						<input type="hidden" class="licTypeName3" name="licType2" placeholder="证件编号" value="工商营业执照">
+						<input id="licinputw3" type="text" class="licinputw3" name="licNum" placeholder="证件编号">
+						<label class="file" for="phoneFile3">未选择文件<i>浏览</i></label>
+						<input id="phoneFile3" type="file" name="file" onchange="selectfun(this)"><span data-id="3" class="remove" style="font-size: 14px; width: 45px;">清空</span>
+						<a id="phoneQuery3"></a>
+						</li>
+					</ul>				
+				</li>
+				<li>
+					<span style="color: red;">*注：餐饮服务许可证和食品经营许可证必须二选一输入，工商营业执照可选填</span>
+				</li>
+				<!-- <li>
 					<label><i></i>证件类型</label>
 					<ul class="c_type">
 						<li name="phoneFile1">
 						<select class="licType1">
 							<option value="0">餐饮服务许可证</option>
 							<option value="1">食品经营许可证</option>
-							<!--<option value="2">食品流通许可证</option>-->
-							<!--<option value="3">食品生产许可证</option>-->
+							<option value="2">食品流通许可证</option>
+							<option value="3">食品生产许可证</option>
 							<option value="4">工商营业执照</option>
 						</select>
 						<input id="licNum" type="text" class="licinputw1" name="licNum" placeholder="证件编号">
@@ -101,7 +144,7 @@
 						<a id="phoneQuery1"></a>
 						</li>
 					</ul>				
-				</li>
+				</li> -->
 			</ul>
 			
 			<h4>账号设置</h4>
@@ -110,7 +153,7 @@
 				<li><label><i>*</i>密码</label><input id="password" type="password" style="padding:10px;border:thin double #CCCCCC; height: 8px;width: 190px;" placeholder=""></li>
 				<li><label><i>*</i>确认密码</label><input id="confirmPassword" type="password" style="padding:10px;border:thin double #CCCCCC; height: 8px;width: 190px;" placeholder=""></li>
 			</ul>
-			<input id="sursSubmit" disabled="disabled" class="submit" type="button" style="background:#c6c6c6;" value="确认提交">
+			<input id="sursSubmit" class="submit" type="button" style="background:#c6c6c6;" value="确认提交">
 		</div>
 	</div>	
 	<div class="footer">
@@ -137,6 +180,13 @@
 		
 		$('.c_type').on('click', 'span', function(){
 			var _tag = $(this).attr('class')
+			var dataId = $(this).attr('data-id')
+			if (_tag == 'remove') {
+				$('.licinputw'+dataId+'').val("");
+				$(this).parent().find('.file').html('未选择文件<i>浏览</i>');
+				$('#phoneFile'+dataId+'').attr('value','');
+			}
+			/* var _tag = $(this).attr('class')
 			if(_tag == 'add'){
 				var _ind = $(this).closest('ul').find('li').length + 1
 				//alert(_ind)
@@ -151,7 +201,7 @@
 					$('.c_type li').eq(i).find('a').attr('id','phoneQuery'+(i+1))
 					$('.c_type li').eq(i).attr('name','phoneFile'+(i+1))
 				}
-			}
+			} */
 		})
 		
 		$(".submit").on('click', function(){
@@ -199,16 +249,50 @@
 				return;
             } 
 			var actag= $('.add_cafeteria').attr('tag');
-			var jsonLic;
+			var jsonLic='';
 			var canteenName;
 			var canteenContacts;
 			var phoneNumber;
 			if (actag == 'open') {
+				if ($.trim($('#phoneFile1').attr("value")).length > 0 && $.trim($('.licinputw1').val()).length == 0) {
+					alert("餐饮服务许可证号不能为空");
+					return;
+				}
+				if ($.trim($('#phoneFile1').attr("value")).length == 0 && $.trim($('.licinputw1').val()).length > 0) {
+					alert("餐饮服务许可证照片不能为空");
+					return;
+				}
+				if ($.trim($('#phoneFile2').attr("value")).length > 0 && $.trim($('.licinputw2').val()).length == 0) {
+					alert("食品经营许可证号不能为空");
+					return;
+				}
+				if ($.trim($('#phoneFile2').attr("value")).length == 0 && $.trim($('.licinputw2').val()).length > 0) {
+					alert("食品经营许可证照片不能为空");
+					return;
+				}
+				if ($.trim($('#phoneFile3').attr("value")).length > 0 && $.trim($('.licinputw3').val()).length == 0) {
+					alert("工商营业执照号不能为空");
+					return;
+				}
+				if ($.trim($('#phoneFile3').attr("value")).length == 0 && $.trim($('.licinputw3').val()).length > 0) {
+					alert("工商营业执照照片不能为空");
+					return;
+				}
+				if ($.trim($('#phoneFile1').attr("value")).length == 0 && $.trim($('#phoneFile2').attr("value")).length == 0 && $.trim($('.licinputw1').val()).length == 0 && $.trim($('.licinputw2').val()).length == 0) {
+					alert("餐饮服务许可证和食品经营许可证不能同时为空");
+					return;
+				}
+				if ($.trim($('#phoneFile1').attr("value")).length >0 && $('#phoneFile1').attr("value") != 'undefined' && $.trim($('.licinputw1').val()).length == 0) {
+					if ($.trim($('#phoneFile2').attr("value")).length >0 && $('#phoneFile2').attr("value") != 'undefined' && $.trim($('.licinputw2').val()).length == 0) {
+						alert("餐饮服务许可证和食品经营许可证不能同时为空");
+						return;
+					}
+				}
 				var _ind = $('.c_type').closest('ul').find('li').length;
 				jsonLic = '[';
 				for (i=1; i<=_ind; i++) {
-					if ($.trim($('#phoneFile1').attr("value")).length >0 && $('#phoneFile1').attr("value") != 'undefined') {
-						jsonLic += '{\"licPic\":\"' +$('#phoneFile'+i+'').attr("value")+'\",'+'\"licType\":\"' +$('.licType'+i+'').val()+'\",'+'\"licNo\":\"' +$('.licinputw'+i+'').val()+'\",'+'\"licName\":\"' +$('.licType'+i+'').find("option:selected").text()+'\"},';
+					if ($.trim($('#phoneFile'+i+'').attr("value")).length >0 && $('#phoneFile'+i+'').attr("value") != 'undefined') {
+						jsonLic += '{\"licPic\":\"' +$('#phoneFile'+i+'').attr("value")+'\",'+'\"licType\":\"' +$('.licType'+i+'').val()+'\",'+'\"licNo\":\"' +$('.licinputw'+i+'').val()+'\",'+'\"licName\":\"' +$('.licTypeName'+i+'').val()+'\"},';
 					}				
 				}
 				jsonLic += ']';
@@ -224,7 +308,6 @@
 				} */
 				phoneNumber = $.trim($("#phoneNumber").val());
 			}
-			
 			var userAccount = $.trim($("#userAccount").val());
 			if (userAccount.length <= 0) {
 				alert("用户名不能为空~");
