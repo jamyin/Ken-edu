@@ -82,7 +82,6 @@ public class AppWaresController {
 	 * @date 2016年5月13日 下午12:00:30
 	 */
 	@RequestMapping(value = "/materialInfo/{id}", method = RequestMethod.GET)
-	@AccessRequired
 	@ResponseBody
 	public Response<WaresRelatedDto> getMaterialInfoById(@PathVariable("id") String id) {
 		Response<WaresRelatedDto> result = new Response<WaresRelatedDto>();
